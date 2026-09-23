@@ -209,29 +209,31 @@ de `dist.p12`, de son mot de passe et du `.p8` dans ton gestionnaire de mots de 
 
 ---
 
-## 8. Faire de `main` la branche par défaut
+## 8. Branche à utiliser
 
-La branche `main` existe déjà : je l'ai créée à partir de ma branche de travail. Il reste à en faire
-la branche par défaut (je n'ai pas d'outil pour ça) :
+Le jeu actuel est sur la branche **`claude/busy-hopper-5dgev5`**. La branche `main` contient encore
+l'ancien prototype : **ne lance pas le build depuis `main`** tant qu'elle n'a pas été mise à jour
+(fusion de la branche de travail, par une PR que tu valides).
 
-1. GitHub → dépôt → **Settings** → **General** → section **Default branch**.
-2. Clique sur le bouton ⇄ (Switch to another branch), choisis `main`, puis **Update** et confirme.
-
-Ensuite, je travaille sur une branche et j'ouvre une PR vers `main` : chaque PR produit un build
-TestFlight automatiquement. Le bouton « Run workflow » permet aussi de lancer un build sur n'importe
-quelle branche.
+Plus tard, pour que chaque PR vers `main` produise automatiquement un build TestFlight : fusionne la
+branche de travail dans `main`, puis GitHub → dépôt → **Settings** → **General** → **Default branch**
+→ ⇄ → `main` → **Update**.
 
 ## 9. Lancer le build
 
 1. GitHub → onglet **Actions** → **iOS – Build & TestFlight** → **Run workflow**.
-   Choisis la branche (par ex. celle du jalon en cours), puis **Run workflow**.
-2. Durée : environ 10 à 20 minutes.
+   Choisis la branche **`claude/busy-hopper-5dgev5`**, puis **Run workflow**.
+2. Durée : environ 10 à 20 minutes. Étapes : tests → archive Release signée → export `.ipa` →
+   envoi à App Store Connect → le build apparaît dans TestFlight.
+   Sans les secrets, le même workflow s'arrête après une **archive non signée** : utile pour vérifier
+   que tout compile en Release (le résumé du run affiche bundle ID, version, numéro de build,
+   présence du manifeste de confidentialité).
 3. Le résumé du run affiche le numéro de build envoyé (par ex. `3.1`). Tu peux aussi télécharger
    l'`.ipa` dans la section **Artifacts**.
 
 **Numéros de build** : le workflow utilise `<numéro du run>.<tentative>`, par ex. `12.1`, puis `12.2`
 si tu relances ce run, puis `13.1`. Ils augmentent toujours et ne se répètent jamais, donc TestFlight
-les accepte tous. La version affichée (`0.1.0`) se change dans `Configs/Screenshot.xcconfig`
+les accepte tous. La version affichée (`0.2.0`) se change dans `Configs/Screenshot.xcconfig`
 (`MARKETING_VERSION`).
 
 ---
@@ -241,7 +243,9 @@ les accepte tous. La version affichée (`0.1.0`) se change dans `Configs/Screens
 1. App Store Connect → ton app → **TestFlight**. Le build apparaît « Processing » pendant 5 à
    30 minutes.
 2. La conformité export (chiffrement) est déjà réglée dans l'app (`ITSAppUsesNonExemptEncryption = NO`).
-   Aucune question ne devrait donc t'être posée.
+   Aucune question ne devrait donc t'être posée. Le manifeste de confidentialité
+   (`Screenshot/PrivacyInfo.xcprivacy` : aucun suivi, aucune donnée collectée, `UserDefaults` pour
+   les réglages du jeu) est inclus dans l'app.
 3. **Internal Testing** → **+** → crée un groupe `Équipe` → ajoute-toi comme testeur. Active
    **Automatic distribution** pour recevoir chaque nouveau build automatiquement.
 4. Sur l'iPhone : installe l'app **TestFlight**, connecte-toi avec le même compte Apple, puis
@@ -259,6 +263,8 @@ les accepte tous. La version affichée (`0.1.0`) se change dans `Configs/Screens
 | `No signing certificate "iOS Distribution" found` / `doesn't include signing certificate` | Le profil a été généré avec un autre certificat que celui du .p12 : régénère le profil (étape 5) en cochant le bon certificat. |
 | `The bundle version must be higher than the previously uploaded version` | Ajoute la variable `BUILD_NUMBER_OFFSET` (par ex. `100`). |
 | `Authentication failed` à l'envoi | `ASC_KEY_ID`, `ASC_ISSUER_ID` ou `ASC_KEY_P8` incorrect (le .p8 doit être copié en entier). |
+| `ITMS-90683` / `ITMS-91053` (clé Info.plist ou raison d'API manquante) | Copie-moi le mail d'Apple : il faut compléter `Screenshot/PrivacyInfo.xcprivacy` ou l'Info.plist. |
+| `altool` introuvable ou refusé | Apple a changé l'outil d'envoi : copie-moi le log, je bascule l'envoi sur `xcodebuild -exportArchive` (destination `upload`). |
 | Refus lié au SDK (« built with iOS xx SDK ») | Apple exige un Xcode récent : mets `MACOS_RUNNER` = `macos-26` et/ou `XCODE_VERSION`. |
 
 En cas d'échec, copie-moi les ~30 dernières lignes du log de l'étape en rouge.

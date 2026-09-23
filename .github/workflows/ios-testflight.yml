@@ -16,8 +16,8 @@
 #   XCODE_VERSION         e.g. "16.4" to pin Xcode (default: newest stable on the runner)
 #   BUILD_NUMBER_OFFSET   added to the run number (use it if TestFlight already has higher builds)
 #
-# Without the secrets (e.g. PR from a fork), the job still runs the tests and compiles the
-# app for the simulator, then stops before signing.
+# Without the secrets (e.g. PR from a fork), the job still runs the tests and makes an unsigned
+# Release archive (checks bundle id, version, build number, privacy manifest), then stops.
 name: iOS – Build & TestFlight
 
 on:
@@ -75,14 +75,33 @@ jobs:
             echo "can_sign=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Build for simulator (no signing)
+      - name: Archive without signing (checks the Release archive before the secrets exist)
         if: steps.secrets.outputs.can_sign != 'true'
         run: |
-          xcodebuild build \
-            -project Screenshot.xcodeproj -scheme Screenshot -configuration Debug \
-            -destination 'generic/platform=iOS Simulator' \
-            CODE_SIGNING_ALLOWED=NO | tee "$RUNNER_TEMP/build.log" | grep -E "error:|warning:|BUILD" || true
-          grep -q "BUILD SUCCEEDED" "$RUNNER_TEMP/build.log"
+          set -o pipefail
+          xcodebuild archive \
+            -project Screenshot.xcodeproj -scheme Screenshot -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/Unsigned.xcarchive" \
+            CURRENT_PROJECT_VERSION="$(( ${{ github.run_number }} + ${{ vars.BUILD_NUMBER_OFFSET || 0 }} )).${{ github.run_attempt }}" \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee "$RUNNER_TEMP/archive.log" | grep -E "error:|ARCHIVE" || true
+          grep -q "ARCHIVE SUCCEEDED" "$RUNNER_TEMP/archive.log" || { tail -100 "$RUNNER_TEMP/archive.log"; exit 1; }
+          APP="$RUNNER_TEMP/Unsigned.xcarchive/Products/Applications/Screenshot.app"
+          PLIST="$APP/Info.plist"
+          PB=/usr/libexec/PlistBuddy
+          {
+            echo "### Unsigned Release archive: OK (no signing secrets yet)"
+            echo "| Key | Value |"
+            echo "|---|---|"
+            for key in CFBundleIdentifier CFBundleDisplayName CFBundleShortVersionString CFBundleVersion MinimumOSVersion ITSAppUsesNonExemptEncryption UIRequiresFullScreen; do
+              echo "| $key | $($PB -c "Print :$key" "$PLIST" 2>/dev/null || echo '—') |"
+            done
+            echo "| PrivacyInfo.xcprivacy | $([ -f "$APP/PrivacyInfo.xcprivacy" ] && echo present || echo MISSING) |"
+            echo "| App icon | $(ls "$APP" | grep -c '^AppIcon') file(s) |"
+          } >> "$GITHUB_STEP_SUMMARY"
+          cat "$GITHUB_STEP_SUMMARY"
+          [ -f "$APP/PrivacyInfo.xcprivacy" ] || { echo "::error::PrivacyInfo.xcprivacy is missing from the app bundle"; exit 1; }
 
       - name: Install certificate and provisioning profile
         if: steps.secrets.outputs.can_sign == 'true'
