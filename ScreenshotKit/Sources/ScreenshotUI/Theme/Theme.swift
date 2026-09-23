@@ -1,5 +1,6 @@
 #if os(iOS)
 import SwiftUI
+import CaseEngine
 
 /// Design tokens from the SCREENSHOT handoff (docs/design/README.md §C, §D, §E, §I).
 /// « OS fictif conçu pour une enquête » : stepped blacks, white as action, amber as signal.
