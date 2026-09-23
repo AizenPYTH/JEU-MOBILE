@@ -76,6 +76,9 @@ jobs:
           echo "Simulator: $UDID"
           xcrun simctl list devices | grep "$UDID" || true
           echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          # Boot it now and wait until it is fully up: a cold boot during the test times out the launch.
+          xcrun simctl boot "$UDID" || true
+          xcrun simctl bootstatus "$UDID" -b
 
       - name: UI tests on the simulator (main path)
         run: |
