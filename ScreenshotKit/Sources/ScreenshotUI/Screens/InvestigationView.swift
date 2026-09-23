@@ -619,14 +619,14 @@ struct LinkedChain: View {
                 Text(L10n.t("suspect.stanceHelp")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(Array(entries.enumerated()), id: \.offset) { offset, row in
-                        chainRow(row.entry, item: row.item, last: offset == entries.count - 1, game: game)
+                        chainRow(row.entry, item: row.item, index: offset, last: offset == entries.count - 1, game: game)
                     }
                 }
             }
         }
     }
 
-    private func chainRow(_ entry: NotebookEntry, item: ItemDescriber.Item, last: Bool, game: Investigation) -> some View {
+    private func chainRow(_ entry: NotebookEntry, item: ItemDescriber.Item, index: Int, last: Bool, game: Investigation) -> some View {
         HStack(alignment: .top, spacing: Theme.Spacing.s3) {
             VStack(spacing: 0) {
                 Circle().fill(color(entry.stance)).frame(width: 10, height: 10).padding(.top, 14)
@@ -645,7 +645,9 @@ struct LinkedChain: View {
                 }
                 HStack(spacing: Theme.Spacing.s2) {
                     stanceButton(.incriminates, entry: entry)
+                        .accessibilityIdentifier("suspect.stance.incriminates.\(index)")
                     stanceButton(.clears, entry: entry)
+                        .accessibilityIdentifier("suspect.stance.clears.\(index)")
                 }
             }
             .padding(Theme.Spacing.s3)

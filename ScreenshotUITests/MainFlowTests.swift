@@ -190,6 +190,19 @@ final class MainFlowTests: XCTestCase {
         XCTAssertTrue(element("phone.carnet").label.contains("1"), "Le carnet devrait compter 1 élément")
         snap("09-epingle")
 
+        // Link it to Emma: long press → "Lier à un suspect" → Emma Roussel.
+        _ = element("phone.toast").waitForNonExistence(timeout: 4)
+        alibi.press(forDuration: 1.2)
+        let linkMenu = app.buttons["Lier à un suspect"]
+        wait(linkMenu, 5, "menu « Lier à un suspect »")
+        linkMenu.tap()
+        // The conversation header is also labelled "Emma Roussel": the menu item comes last.
+        let emmaChoices = app.buttons.matching(NSPredicate(format: "label == 'Emma Roussel'"))
+        wait(emmaChoices.firstMatch, 5, "Emma dans le sous-menu")
+        emmaChoices.element(boundBy: emmaChoices.count - 1).tap()
+        sleep(1)
+        snap("09b-lie-a-emma")
+
         // Photos → the photo "at home" → analyse its metadata → pin the analysis.
         openApp("photos")
         snap("10-photos")
@@ -239,6 +252,12 @@ final class MainFlowTests: XCTestCase {
         // A suspect's file: what the phone holds about them, their statement, the linked chain.
         element("notebook.tab.0").tap()
         tap(element("notebook.suspect.s_emma"), "fiche d'Emma", expecting: element("suspect.name"))
+        // The linked message hangs from Emma's file; mark it "L'accuse".
+        let against = element("suspect.stance.incriminates.0")
+        scrollTo(against)
+        against.tap()
+        usleep(600_000)
+        XCTAssertTrue(against.isSelected, "« L'accuse » devrait être sélectionné")
         sleep(1)
         snap("15a3-fiche-suspect")
         app.navigationBars.buttons.firstMatch.tap()
