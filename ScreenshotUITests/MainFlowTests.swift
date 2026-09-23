@@ -114,6 +114,25 @@ final class MainFlowTests: XCTestCase {
         wait(result, 8, "écran de résultat")
     }
 
+    /// Reads the home screen clock and the timer, and checks clock = 10:00 + time spent (±1 min for
+    /// a minute boundary crossed between the two reads).
+    private func assertPhoneClockMatchesTimer(caseDurationSeconds: Int, startMinuteOfDay: Int) {
+        let clock = wait(element("phone.clock"), 5, "horloge du téléphone").label   // "10:02"
+        let timer = element("phone.timer").label                                       // "…06:31"
+        func minutesSeconds(_ text: String) -> (Int, Int)? {
+            let parts = text.suffix(5).split(separator: ":").compactMap { Int($0) }
+            return parts.count == 2 ? (parts[0], parts[1]) : nil
+        }
+        guard let (ch, cm) = minutesSeconds(clock), let (tm, ts) = minutesSeconds(timer) else {
+            return XCTFail("Horloge ou chrono illisible : « \(clock) » / « \(timer) »")
+        }
+        let spent = caseDurationSeconds - (tm * 60 + ts)
+        let expected = startMinuteOfDay + spent / 60
+        let shown = ch * 60 + cm
+        XCTAssertTrue(abs(shown - expected) <= 1, "Horloge \(clock) incohérente avec le chrono \(timer)")
+        if spent >= 90 { XCTAssertNotEqual(clock, "10:00", "L'horloge du téléphone ne devrait plus être à 10:00") }
+    }
+
     private func startCase() {
         app.launch()
         wait(element("home.start"), 20, "Accueil")
@@ -173,8 +192,12 @@ final class MainFlowTests: XCTestCase {
         snap("13-notifications")
         XCTAssertTrue(app.staticTexts["Lucas Ferrand"].firstMatch.exists, "La notification de Lucas devrait être listée")
 
-        // Notebook.
+        // The phone's clock runs with the investigation: start time (10:00) + time spent on the timer.
         goHome()
+        assertPhoneClockMatchesTimer(caseDurationSeconds: 480, startMinuteOfDay: 10 * 60)
+        snap("13b-horloge")
+
+        // Notebook.
         element("phone.carnet").tap()
         sleep(1)
         snap("14-carnet-suspects")

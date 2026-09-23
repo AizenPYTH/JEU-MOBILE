@@ -46,6 +46,9 @@ les points où le handoff contredit le brief ou le moteur — **à trancher par 
 4. **Apps** : Notifications gardée (sert surtout aux événements en direct). Fichiers n'a pas été
    intégrée : elle pourra coexister plus tard.
 5. **Affaire 000 et Mode sans chrono** : reportés.
+6. **Heure du téléphone** : le handoff la montre figée (« 08:12 ») ; décision : elle **avance** avec
+   l'enquête. Source unique `Investigation.phoneNow` = heure de début + temps écoulé du chrono (coûts
+   compris) ; accueil, notifications, messages en direct et heures relatives l'utilisent.
 
 Ordre de travail décidé : 1) compilation réelle sur macOS ; 2) onboarding, reprise d'une enquête,
 recherche globale ; 3) immersion (rail de dates, appel entrant, fiche photo + mini-carte, rangs) ;

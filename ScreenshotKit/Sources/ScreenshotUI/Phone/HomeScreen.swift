@@ -10,13 +10,14 @@ struct HomeScreen: View {
 
     var body: some View {
         let game = session.game
-        let now = game.caseFile.phoneStartTime
+        let now = session.phoneTime
         VStack(spacing: 0) {
             VStack(spacing: Theme.Spacing.s1) {
                 Text(PhoneFormat.longDayCapitalized(now))
                     .font(.custom(Theme.FontName.medium, fixedSize: 15))
                     .foregroundStyle(Theme.Colors.textSecondary)
                 Text(PhoneFormat.time(now))
+                    .accessibilityIdentifier("phone.clock")
                     .font(Theme.Fonts.homeClock)
                     .monospacedDigit()
                     .foregroundStyle(Theme.Colors.textPrimary)

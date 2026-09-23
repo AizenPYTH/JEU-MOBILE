@@ -116,6 +116,23 @@ struct PhoneContentTests {
         #expect(game.visibleMessages(in: "c_lucas").last?.message.at.description == "2026-09-13 10:00:30")
     }
 
+    @Test func thePhoneClockFollowsTheTimer() {
+        let (game, clock) = Fixtures.investigation()
+        game.start()
+        #expect(game.phoneNow == game.caseFile.phoneStartTime)
+        for _ in 0..<50 { clock.advance(by: 1); game.tick() }
+        game.openApp(.photos)
+        game.analyzePhoto("p1") // time costs move the phone's clock too
+        let spent = game.durationSeconds - game.remainingSeconds
+        #expect(game.phoneNow == game.caseFile.phoneStartTime.adding(seconds: Int64(spent)))
+        #expect(game.phoneNow.clockText == "10:01")
+        // Paused: neither the timer nor the phone's clock move.
+        game.pause()
+        let before = game.phoneNow
+        clock.advance(by: 120); game.tick()
+        #expect(game.phoneNow == before)
+    }
+
     @Test func senderDeletionLeavesATombstone() {
         let (game, clock) = Fixtures.investigation()
         game.start()

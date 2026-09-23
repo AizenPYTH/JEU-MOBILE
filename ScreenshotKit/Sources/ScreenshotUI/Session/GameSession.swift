@@ -26,6 +26,10 @@ final class GameSession {
     private(set) var lastCost: TimeCostFlash?
     /// "◆ Ajouté au carnet · n" / "Retiré du carnet".
     private(set) var toast: Toast?
+    /// The phone's clock, to the minute. The only source of phone time is `Investigation.phoneNow`
+    /// (case start + everything spent: the same elapsed time as the timer); it is published here so
+    /// that screens showing the time redraw when the minute changes.
+    private(set) var phoneTime: Moment
 
     private let investigation: Investigation
     @ObservationIgnored private var loop: Task<Void, Never>?
@@ -63,6 +67,7 @@ final class GameSession {
         self.investigation = investigation
         self.remainingSeconds = investigation.remainingSeconds
         self.phase = investigation.phase
+        self.phoneTime = Self.minute(of: investigation.phoneNow)
         self.onFinish = onFinish
     }
 
@@ -134,7 +139,16 @@ final class GameSession {
             changed = true
             if phase != .investigating { loop?.cancel(); loop = nil }
         }
+        let minute = Self.minute(of: investigation.phoneNow)
+        if minute != phoneTime {
+            phoneTime = minute
+            changed = true // relative times ("il y a 2 min") in the apps move too
+        }
         if changed { revision += 1 }
+    }
+
+    private static func minute(of moment: Moment) -> Moment {
+        moment.adding(seconds: -Int64(moment.second))
     }
 
     private func flashCost(_ seconds: Int) {
