@@ -639,7 +639,8 @@ struct LinkedChain: View {
                     Text(item.at.map { PhoneFormat.shortDay($0) + " · " + PhoneFormat.time($0) } ?? "—")
                         .font(Theme.Fonts.dataStrong).foregroundStyle(Theme.Colors.textPrimary)
                 }
-                Text(item.label).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textPrimary).lineLimit(3)
+                Text(Self.withoutName(item.label, name: game.name(of: suspect.contact)))
+                    .font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textPrimary).lineLimit(3)
                 if let place = item.place {
                     Label(place, systemImage: "mappin").font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
                 }
@@ -655,6 +656,11 @@ struct LinkedChain: View {
             .background(RoundedRectangle(cornerRadius: Theme.Radius.sm, style: .continuous).fill(Theme.Colors.bgSurface))
             .padding(.bottom, Theme.Spacing.s3)
         }
+    }
+
+    /// In the suspect's own file, "Emma Roussel · « … »" is just "« … »".
+    static func withoutName(_ label: String, name: String) -> String {
+        label.hasPrefix(name + " · ") ? String(label.dropFirst(name.count + 3)) : label
     }
 
     private func stanceButton(_ stance: NotebookEntry.Stance, entry: NotebookEntry) -> some View {
