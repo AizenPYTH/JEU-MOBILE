@@ -8,6 +8,11 @@ public enum L10n {
         String(localized: String.LocalizationValue(key), bundle: .module)
     }
 
+    /// Localized format string, e.g. `format("table.name", 3)` → "Table 3".
+    public static func format(_ key: String, _ arguments: any CVarArg...) -> String {
+        String(format: string(key), locale: Locale.current, arguments: arguments)
+    }
+
     public static func ingredientName(_ id: IngredientID) -> String { string(LocalizationKey.ingredientName(id)) }
     public static func dishName(_ id: RecipeID) -> String { string(LocalizationKey.dishName(id)) }
     public static func stationName(_ id: StationID) -> String { string(LocalizationKey.stationName(id)) }

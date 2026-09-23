@@ -33,3 +33,18 @@ struct BundledDataTests {
         }
     }
 }
+
+@Suite("Bundled config")
+struct BundledConfigTests {
+    @Test func economyConfigIsCoherentWithContent() throws {
+        let issues = ConfigValidator.validate(try GameData.loadConfig(), content: try GameData.loadContent())
+        #expect(issues.isEmpty, "\(issues.map(\.description).joined(separator: "\n"))")
+    }
+
+    @Test func realDataPlaysTenMinutes() throws {
+        let clock = ManualClock()
+        let game = Game(content: try GameData.loadContent(), config: try GameData.loadConfig(), clock: clock, seed: 1)
+        game.simulate(seconds: 600)
+        #expect(game.state.stats.customersServed > 10)
+    }
+}

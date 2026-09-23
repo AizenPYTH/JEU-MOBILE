@@ -17,14 +17,21 @@ Ne jamais utiliser « Idle » + « Tycoon » dans le nom (marque déposée).
 ## Structure du dépôt
 
 ```
-Bistro.xcodeproj/        Coquille de l'app iOS (ouvre ce fichier dans Xcode)
+Bistro.xcodeproj/        Coquille de l'app iOS (+ schéma partagé « Bistro »)
 Bistro/                  Code de l'app : uniquement BistroApp.swift + Assets.xcassets
+Configs/Bistro.xcconfig  Bundle ID, version, réglages de signature (source unique)
+.github/workflows/       tests-linux.yml (chaque push), ios-testflight.yml (manuel + PR vers main)
+docs/TESTFLIGHT_SETUP.md Mise en place de la signature et de TestFlight
 BistroKit/               Package Swift contenant TOUT le jeu
   Sources/GameCore/      Moteur en Swift pur (Foundation seulement). Testable sous Linux.
+    Engine/              Game (simulation + actions), événements, RNG déterministe
+    State/               GameState (Codable, sauvegardé tel quel)
+    Save/                SaveGame, migrations, FileSaveStore (atomique + .bak)
   Sources/GameData/      Fichiers JSON embarqués (aucune logique)
     Resources/Content/   Contenu : ingredients, stations, recipes, regulars, zones, decorations
     Resources/Config/    Équilibrage : economy, lab, affinity, progression, offline, ads
   Sources/BistroUI/      Présentation SwiftUI + SpriteKit (Apple uniquement, exclu sous Linux)
+    State/               GameStore (@Observable, fait tourner le moteur, sauvegarde)
     Theme/               DesignTokens (couleurs, typo, espacements, rayons, ombres, animations)
     Components/          Composants réutilisables (GameImage + placeholder, boutons, cartes…)
     Screens/             Écrans
@@ -81,11 +88,25 @@ BistroUI et l'app ne compilent que sur Mac avec Xcode 16+.
 - **SpriteKit** (via `SpriteView`) pour la scène vivante du restaurant : actions, atlas de textures,
   particules (pièces, découvertes) et gestion du z-order gratuits. SwiftUI pour tout le reste (HUD, panneaux, popups).
 - **Sauvegarde** : JSON Codable versionné avec migrations, écrit de façon atomique ; structure pensée pour iCloud plus tard.
+  Changer le format = incrémenter `SaveGame.currentSchemaVersion` + ajouter une migration + un test.
+  Une sauvegarde plus récente que l'app n'est jamais écrasée.
+- **Simulation** : pas fixe (`simulationStepSeconds`), RNG SplitMix64 stocké dans l'état → parties
+  reproductibles. Au retour dans l'app, rattrapage limité à `maxCatchUpSeconds` (le vrai hors-ligne = M5).
+- **Actions joueur** : méthodes `throws(GameActionError)` sur `Game` ; l'UI passe par `GameStore`.
+
+## CI / livraison
+
+- `tests-linux.yml` : `swift test` + `BalanceSim` dans l'image Docker `swift:6.0-noble`, à chaque push.
+- `ios-testflight.yml` : macOS, manuel ou PR vers `main`. Tests, archive signée (certificat + profil
+  en secrets), export, envoi TestFlight via clé API. Build = `<run_number + BUILD_NUMBER_OFFSET>.<attempt>`.
+  Sans secrets : compile pour le simulateur seulement.
+- Ne jamais mettre `DEVELOPMENT_TEAM` / `PROVISIONING_PROFILE_SPECIFIER` en ligne de commande
+  (ça casse les cibles du package) : passer par `BISTRO_TEAM_ID` / `BISTRO_PROFILE_SPECIFIER`.
 
 ## Jalons
 
 - [x] M0 – Mise en place (modules, Theme, JSON valides, tests, docs)
-- [ ] M1 – Moteur de base (état, pièces, clients, stations, menu, service, sauvegarde, horloge)
+- [x] M1 – Moteur de base (état, pièces, clients, stations, menu, service, sauvegarde, horloge)
 - [ ] M2 – Scène jouable provisoire (placeholders, tap pour accélérer, HUD, améliorations)
 - [ ] M3 – Labo de recettes (combinaisons, indices, livre de recettes, gestion du menu, ~30 recettes)
 - [ ] M4 – Habitués (fréquences, demandes, affinité, carnet, histoires)

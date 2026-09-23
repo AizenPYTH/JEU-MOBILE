@@ -10,8 +10,42 @@ public protocol ConfigSection: Codable, Sendable {
     var schemaVersion: Int { get }
 }
 
-public struct EconomyConfig: ConfigSection {
+/// `economy.json` – the minute-to-minute restaurant loop.
+public struct EconomyConfig: ConfigSection, Equatable {
     public var schemaVersion: Int
+
+    // New game
+    public var startingCoins: Int
+    public var startingTables: Int
+    public var startingStations: [StationID]
+    public var startingRecipes: [RecipeID]
+    public var startingMenuSlots: Int
+
+    // Customer flow (seconds)
+    public var customerSpawnIntervalSeconds: Double
+    public var customerSpawnJitterSeconds: Double
+    public var orderDelaySeconds: Double
+    public var eatSeconds: Double
+    public var waiterDeliverySeconds: Double
+
+    // Money
+    public var priceMultiplier: Double
+    public var prepTimeMultiplier: Double
+    /// Tip as a fraction of the dish price when served instantly.
+    public var baseTipFraction: Double
+    /// Waiting time after which the tip reaches zero (linear decay).
+    public var tipDecaySeconds: Double
+    /// Coins left on a table are collected automatically after this delay.
+    public var autoCollectDelaySeconds: Double
+    /// Seconds removed from the current preparation when the player taps a station.
+    public var tapBoostSeconds: Double
+
+    // Simulation
+    /// Fixed simulation step. Smaller = more precise, slower.
+    public var simulationStepSeconds: Double
+    /// Longest gap simulated in real time when the app resumes (the rest is offline income, M5).
+    public var maxCatchUpSeconds: Double
+    public var autosaveIntervalSeconds: Double
 }
 
 public struct LabConfig: ConfigSection {

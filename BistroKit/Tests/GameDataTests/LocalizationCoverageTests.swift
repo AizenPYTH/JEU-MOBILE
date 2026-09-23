@@ -48,4 +48,27 @@ struct LocalizationCoverageTests {
         }
         #expect(missing.isEmpty, "Missing translations:\n\(missing.joined(separator: "\n"))")
     }
+
+    /// Every literal key passed to `L10n.string("…")` / `L10n.format("…")` in BistroUI exists in en + fr.
+    @Test func everyUIKeyUsedInCodeIsTranslated() throws {
+        let catalog = try JSONDecoder().decode(Catalog.self, from: Data(contentsOf: Self.catalogURL))
+        let sources = Self.catalogURL.deletingLastPathComponent().deletingLastPathComponent()
+        let files = FileManager.default.enumerator(at: sources, includingPropertiesForKeys: nil)?
+            .compactMap { $0 as? URL }.filter { $0.pathExtension == "swift" } ?? []
+        #expect(!files.isEmpty)
+
+        let regex = try NSRegularExpression(pattern: #"L10n\.(?:string|format)\("([A-Za-z0-9_.]+)""#)
+        var missing: Set<String> = []
+        for file in files {
+            let text = try String(contentsOf: file, encoding: .utf8)
+            for match in regex.matches(in: text, range: NSRange(text.startIndex..., in: text)) {
+                guard let range = Range(match.range(at: 1), in: text) else { continue }
+                let key = String(text[range])
+                for lang in Self.languages where (catalog.strings[key]?.localizations?[lang]?.stringUnit?.value ?? "").isEmpty {
+                    missing.insert("\(key) [\(lang)]")
+                }
+            }
+        }
+        #expect(missing.isEmpty, "Missing UI translations:\n\(missing.sorted().joined(separator: "\n"))")
+    }
 }

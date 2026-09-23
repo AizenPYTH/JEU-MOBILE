@@ -35,6 +35,23 @@
         }
       }
     },
+    "button.collectAll": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collect all coins"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ramasser toutes les pièces"
+          }
+        }
+      }
+    },
     "category.comfort": {
       "extractionState": "manual",
       "localizations": {
@@ -188,36 +205,70 @@
         }
       }
     },
-    "debug.ingredients": {
+    "customer.choosing": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ingredients"
+            "value": "Reading the menu…"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ingrédients"
+            "value": "Lit la carte…"
           }
         }
       }
     },
-    "debug.regulars": {
+    "customer.eating": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Regulars"
+            "value": "Enjoying: %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Habitués"
+            "value": "Savoure : %@"
+          }
+        }
+      }
+    },
+    "customer.waiting": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attend : %@"
+          }
+        }
+      }
+    },
+    "debug.reset": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset game (debug)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réinitialiser la partie (debug)"
           }
         }
       }
@@ -371,6 +422,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Impossible de charger le contenu du jeu."
+          }
+        }
+      }
+    },
+    "error.saveCorrupted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The save could not be read, a new game was started. (%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sauvegarde est illisible, une nouvelle partie a été lancée. (%@)"
+          }
+        }
+      }
+    },
+    "error.saveFailed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not save the game. (%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible d'enregistrer la partie. (%@)"
+          }
+        }
+      }
+    },
+    "error.saveNewer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This save comes from a newer version of the game. Update the app to keep playing it; progress is not saved meanwhile."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette sauvegarde vient d'une version plus récente du jeu. Mettez l'app à jour pour la retrouver ; la progression n'est pas enregistrée en attendant."
+          }
+        }
+      }
+    },
+    "hud.served": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld served"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld servis"
           }
         }
       }
@@ -579,6 +698,23 @@
         }
       }
     },
+    "menu.slots": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld / %ld dishes on the menu"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld / %ld plats à la carte"
+          }
+        }
+      }
+    },
     "regular.leon.name": {
       "extractionState": "manual",
       "localizations": {
@@ -681,6 +817,108 @@
         }
       }
     },
+    "section.debug": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Debug"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Debug"
+          }
+        }
+      }
+    },
+    "section.kitchen": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kitchen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuisine"
+          }
+        }
+      }
+    },
+    "section.menu": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carte"
+          }
+        }
+      }
+    },
+    "section.stats": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stats"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statistiques"
+          }
+        }
+      }
+    },
+    "section.tables": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dining room"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salle"
+          }
+        }
+      }
+    },
+    "station.cooking": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cooking: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prépare : %@"
+          }
+        }
+      }
+    },
     "station.cutting_board.name": {
       "extractionState": "manual",
       "localizations": {
@@ -715,6 +953,23 @@
         }
       }
     },
+    "station.idle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for orders"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En attente de commandes"
+          }
+        }
+      }
+    },
     "station.oven.name": {
       "extractionState": "manual",
       "localizations": {
@@ -732,6 +987,23 @@
         }
       }
     },
+    "station.queue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld waiting"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld en attente"
+          }
+        }
+      }
+    },
     "station.stove.name": {
       "extractionState": "manual",
       "localizations": {
@@ -745,6 +1017,142 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fourneau"
+          }
+        }
+      }
+    },
+    "station.tapHint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a station to speed it up."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez une station pour l'accélérer."
+          }
+        }
+      }
+    },
+    "stats.coinsEarned": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coins earned: %ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièces gagnées : %ld"
+          }
+        }
+      }
+    },
+    "stats.playTime": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Play time: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temps de jeu : %@"
+          }
+        }
+      }
+    },
+    "stats.tips": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tips: %ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pourboires : %ld"
+          }
+        }
+      }
+    },
+    "table.empty": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Libre"
+          }
+        }
+      }
+    },
+    "table.name": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Table %ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Table %ld"
+          }
+        }
+      }
+    },
+    "waiter.delivering": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The waiter brings: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le serveur apporte : %@"
+          }
+        }
+      }
+    },
+    "waiter.idle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The waiter is ready."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le serveur est prêt."
           }
         }
       }

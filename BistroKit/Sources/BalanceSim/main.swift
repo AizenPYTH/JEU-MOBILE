@@ -2,15 +2,15 @@ import Foundation
 import GameCore
 import GameData
 
-// Balance simulator. For now (M0) it only loads and validates the data files.
+// Balance simulator. For now (M1) it validates the data files and runs one idle hour.
 // M6 turns it into a full "typical player" simulation over 1, 7 and 30 days.
 //
 // Usage: swift run BalanceSim
 
 do {
     let content = try GameData.loadContent()
-    _ = try GameData.loadConfig()
-    let issues = ContentValidator.validate(content)
+    let config = try GameData.loadConfig()
+    let issues = ContentValidator.validate(content) + ConfigValidator.validate(config, content: content)
 
     print("Bistro BalanceSim – GameCore \(GameCore.version)")
     print("  ingredients: \(content.ingredients.count)")
@@ -22,6 +22,14 @@ do {
 
     if issues.isEmpty {
         print("Content OK.")
+        let game = Game(content: content, config: config, clock: ManualClock(), seed: 1)
+        game.simulate(seconds: 3_600)
+        let stats = game.state.stats
+        print("\nOne idle hour (no taps, auto-collect only):")
+        print("  customers served: \(stats.customersServed)")
+        print("  coins earned:     \(stats.coinsEarned) (tips \(stats.tipsEarned))")
+        print("  coins per minute: \(stats.coinsEarned / 60)")
+        print("  dishes:           \(stats.dishesServed.sorted { $0.key < $1.key }.map { "\($0.key)×\($0.value)" }.joined(separator: ", "))")
     } else {
         print("Content issues:")
         issues.forEach { print("  - \($0)") }

@@ -68,6 +68,11 @@ Tailles de référence (points, provisoires, à confirmer au M2) :
 | Monnaie | 32 × 32 |
 | Fond de zone | 390 × 844 (plein écran iPhone portrait) |
 
+Icônes d'UI déjà utilisées par le code : `ui_icon_customer`, `ui_icon_table`.
+
+Icône de l'app : un PNG 1024 × 1024, **opaque (sans transparence)**, à remplacer dans
+`Bistro/Assets.xcassets/AppIcon.appiconset/AppIcon.png` (l'actuelle est un placeholder).
+
 ## 4. Identifiants de contenu (partagés code ↔ design)
 
 Source de vérité : `BistroKit/Sources/GameData/Resources/Content/*.json`. Un test vérifie que ces ids existent.
