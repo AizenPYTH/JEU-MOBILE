@@ -258,6 +258,45 @@ final class MainFlowTests: XCTestCase {
         snap("24-dossier-reconstitution")
     }
 
+    // MARK: - Phone-wide search
+
+    func testGlobalSearchAcrossApps() {
+        startCase()
+        let before = secondsLeft()
+        tap(element("phone.search"), "Rechercher", expecting: app.textFields.firstMatch)
+        snap("60-recherche")
+        let field = app.textFields.firstMatch
+        field.tap()
+        field.typeText("Quai 9\n")
+
+        // Results from several apps, grouped, with chips; the search cost time.
+        let calendarResult = element("search.result.calendar:c_quai9")
+        wait(calendarResult, 10, "rendez-vous « P. Quai 9 » dans l'agenda")
+        wait(element("search.chip.calendar"), 5, "puce Agenda")
+        // The browser history too; the deleted message stays out of reach until it is recovered.
+        wait(element("search.result.browser:w15"), 5, "recherche « parking quai 9 » du navigateur")
+        XCTAssertFalse(element("search.result.message:m_emma_del1").exists, "Un message supprimé ne doit pas être trouvé")
+        XCTAssertTrue(before - secondsLeft() >= 8, "Une recherche coûte du temps")
+        snap("61-resultats-quai9")
+
+        // Filter by app, then open the calendar result in its app.
+        element("search.chip.calendar").tap()
+        sleep(1)
+        snap("62-filtre-agenda")
+        XCTAssertFalse(element("search.result.browser:w15").exists, "Le filtre Agenda doit masquer le navigateur")
+        tap(calendarResult, "résultat agenda", expecting: app.staticTexts["P. Quai 9 — E."].firstMatch)
+        snap("63-evenement-ouvert")
+
+        // A date in French: "12 sept" finds that Saturday's items.
+        goHome()
+        tap(element("phone.search"), "Rechercher", expecting: app.textFields.firstMatch)
+        let field2 = app.textFields.firstMatch
+        field2.tap()
+        field2.typeText("12 sept\n")
+        wait(element("search.result.calendar:c_quai9"), 10, "recherche par date")
+        snap("64-recherche-date")
+    }
+
     // MARK: - Leaving the app during an investigation, then resuming it
 
     private func secondsLeft() -> Int {

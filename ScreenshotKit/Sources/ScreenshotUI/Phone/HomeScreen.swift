@@ -38,6 +38,23 @@ struct HomeScreen: View {
 
             Spacer(minLength: 0)
 
+            // Search the whole phone (screen 11), like the system search pill.
+            Button { session.open(.search) } label: {
+                HStack(spacing: Theme.Spacing.s2) {
+                    Image(systemName: "magnifyingglass")
+                    Text(L10n.t("search.pill"))
+                }
+                .font(Theme.Fonts.calloutStrong)
+                .foregroundStyle(Theme.Colors.textPrimary)
+                .padding(.horizontal, Theme.Spacing.s5)
+                .frame(height: 36)
+                .background(Capsule().fill(Theme.Colors.bgRaised.opacity(0.7)))
+                .background(.ultraThinMaterial, in: Capsule())
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("phone.search")
+            .padding(.bottom, Theme.Spacing.s4)
+
             HStack {
                 ForEach(AppID.dock, id: \.self) { app in
                     AppTile(app: app, badge: badge(for: app, in: game), locked: false, showsLabel: false) {

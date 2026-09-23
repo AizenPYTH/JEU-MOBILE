@@ -373,3 +373,48 @@ struct ResumeTests {
         #expect(Investigation(restoring: saved, caseFile: game.caseFile, rules: game.rules, clock: ManualClock()) == nil)
     }
 }
+
+@Suite("Phone-wide search")
+struct PhoneSearchTests {
+    @Test func findsAcrossAppsGroupedByApp() {
+        let (game, _) = Fixtures.investigation()
+        game.start()
+        let results = game.searchPhone("quai")
+        // The calendar entry "P. Quai 9 — E." (and nothing from the locked Notes app).
+        #expect(results.contains { $0.app == .calendar && $0.ref == ItemRef(.calendar, "cal1") })
+        #expect(!results.contains { $0.app == .notes })
+        #expect(game.penaltySeconds == Double(game.rules.timeCosts.search)) // one search, one cost
+        #expect(game.searchCount == 1)
+        // Grouped in the design's order.
+        let order = results.map { PhoneSearch.apps.firstIndex(of: $0.app) ?? 0 }
+        #expect(order == order.sorted())
+    }
+
+    @Test func namesDatesAndWeekdays() {
+        let (game, _) = Fixtures.investigation()
+        game.start()
+        #expect(game.searchPhone("Lucas").contains { $0.app == .contacts && $0.ref == ItemRef(.contact, "lucas") })
+        // 12 Sept 2026 is a Saturday: the calendar entry of that evening is found by its date and by "samedi".
+        #expect(game.searchPhone("12 sept").contains { $0.ref == ItemRef(.calendar, "cal1") })
+        #expect(game.searchPhone("samedi").contains { $0.ref == ItemRef(.calendar, "cal1") })
+        #expect(game.searchPhone("22h").contains { $0.ref == ItemRef(.calendar, "cal1") })
+    }
+
+    @Test func unlockedAppsBecomeSearchable() {
+        let (game, _) = Fixtures.investigation()
+        game.start()
+        #expect(game.searchPhone("300").isEmpty)
+        _ = game.unlock(.notes, code: "1609")
+        let notes = game.searchPhone("300").filter { $0.app == .notes }
+        #expect(notes.map(\.ref) == [ItemRef(.note, "n1")])
+        #expect(game.searchPhone("   ").isEmpty)
+    }
+
+    @Test func weekdayParsing() {
+        #expect(PhoneSearch.parseWeekday("samedi") == 6)
+        #expect(PhoneSearch.parseWeekday("sam.") == 6)
+        #expect(PhoneSearch.parseWeekday("le dimanche") == 7)
+        #expect(PhoneSearch.parseWeekday("sa") == nil)
+        #expect(PhoneSearch.parseWeekday("maison") == nil)
+    }
+}

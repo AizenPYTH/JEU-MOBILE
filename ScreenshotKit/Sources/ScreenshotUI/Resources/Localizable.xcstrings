@@ -4317,6 +4317,23 @@
         }
       }
     },
+    "search.all": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All (%ld)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout (%ld)"
+          }
+        }
+      }
+    },
     "search.emptyMessage": {
       "extractionState": "manual",
       "localizations": {
@@ -4347,6 +4364,91 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucun résultat pour « %@ »."
+          }
+        }
+      }
+    },
+    "search.group": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$ld"
+          }
+        }
+      }
+    },
+    "search.help": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Messages, calendar, notes, mail, browser, contacts. A name, a place, a time (“22h”), a date (“12 sept”, “samedi”)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Messages, agenda, notes, mails, navigateur, contacts. Un nom, un lieu, une heure (« 22h »), une date (« 12 sept », « samedi »)."
+          }
+        }
+      }
+    },
+    "search.pill": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher"
+          }
+        }
+      }
+    },
+    "search.prompt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whole phone · −%ld s"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout le téléphone · −%ld s"
+          }
+        }
+      }
+    },
+    "search.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche"
           }
         }
       }

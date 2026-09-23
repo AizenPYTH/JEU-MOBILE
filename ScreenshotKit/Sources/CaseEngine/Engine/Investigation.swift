@@ -381,10 +381,15 @@ public final class Investigation {
     public func search(_ query: String) -> [SearchHit] {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return [] }
-        searchCount += 1
-        spend(.search, seconds: rules.timeCosts.search)
+        chargeSearch()
         let pool = device.conversations.map { ($0, visibleMessages(in: $0.id)) }
         return MessageSearch.search(trimmed, in: pool, contacts: device.contacts)
+    }
+
+    /// Every search (Messages or the whole phone) costs the same time.
+    func chargeSearch() {
+        searchCount += 1
+        spend(.search, seconds: rules.timeCosts.search)
     }
 
     public func openPhoto(_ id: String) {

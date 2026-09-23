@@ -88,6 +88,7 @@ struct PhoneView: View {
     private func destination(_ route: PhoneRoute) -> some View {
         switch route {
         case .app(let app): AppContainer(app: app, session: session)
+        case .search: GlobalSearchView(session: session)
         case .conversation(let id, let focus): ConversationView(conversationID: id, focus: focus, session: session)
         case .contact(let id): ContactDetailView(contactID: id, session: session)
         case .photo(let id): PhotoDetailView(photoID: id, session: session)

@@ -230,6 +230,7 @@ final class GameSession {
         case .note(let id): investigation.openNote(id)
         case .mail(let id): investigation.openMail(id)
         case .browserEntry(let id): investigation.openBrowserEntry(id)
+        case .search: break // opening the search is free; each query costs time
         }
     }
 
@@ -256,6 +257,27 @@ final class GameSession {
     func perform(_ action: (Investigation) -> Void) {
         action(investigation)
         refresh()
+    }
+
+    /// Phone-wide search (screen 11).
+    func searchPhone(_ query: String) -> [PhoneSearchResult] {
+        let results = investigation.searchPhone(query)
+        refresh()
+        return results
+    }
+
+    /// Opens a search result in its own app (the usual time costs apply).
+    func open(_ result: PhoneSearchResult) {
+        switch result.ref.kind {
+        case .message:
+            if let conversation = result.conversationID { launch(.messages, then: .conversation(conversation, focus: result.ref.id)) }
+        case .calendar: launch(.calendar, then: .calendarEvent(result.ref.id))
+        case .note: launch(.notes, then: .note(result.ref.id))
+        case .mail: launch(.mail, then: .mail(result.ref.id))
+        case .browser: launch(.browser, then: .browserEntry(result.ref.id))
+        case .contact: launch(.contacts, then: .contact(result.ref.id))
+        default: break
+        }
     }
 
     func search(_ query: String) -> [SearchHit] {
