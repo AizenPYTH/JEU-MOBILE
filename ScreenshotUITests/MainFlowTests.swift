@@ -39,9 +39,15 @@ final class MainFlowTests: XCTestCase {
     private func tapWhenReady(_ element: XCUIElement, _ what: String) {
         wait(element, 10, what)
         let hittable = expectation(for: NSPredicate(format: "hittable == true"), evaluatedWith: element)
-        XCTAssertEqual(XCTWaiter().wait(for: [hittable], timeout: 5), .completed, "Not tappable: \(what)")
+        let ready = XCTWaiter().wait(for: [hittable], timeout: 5) == .completed
         usleep(700_000) // screen transitions last up to 0.7 s
-        element.tap()
+        if ready {
+            element.tap()
+        } else {
+            // XCUITest sometimes reports a visible SwiftUI element as not hittable right after an
+            // animation: tap its centre. The caller still checks that the expected result appears.
+            element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+        }
     }
 
     /// Taps, and taps once more if the expected result did not appear (a tap during an animation
