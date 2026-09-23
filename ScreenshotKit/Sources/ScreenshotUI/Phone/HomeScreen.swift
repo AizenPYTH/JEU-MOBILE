@@ -5,6 +5,7 @@ import CaseEngine
 /// Screen 08 — the phone's home screen: date + story time, "periodic table" app tiles, dock.
 struct HomeScreen: View {
     let session: GameSession
+    let zoom: Namespace.ID
 
     private var gridApps: [AppID] { AppID.allCases.filter { !AppID.dock.contains($0) } }
 
@@ -32,6 +33,7 @@ struct HomeScreen: View {
                             calendarDay: app == .calendar ? now : nil) {
                         session.launch(app)
                     }
+                    .appZoomSource(app, in: zoom)
                 }
             }
             .padding(.horizontal, 22)
@@ -60,6 +62,7 @@ struct HomeScreen: View {
                     AppTile(app: app, badge: badge(for: app, in: game), locked: false, showsLabel: false) {
                         session.launch(app)
                     }
+                    .appZoomSource(app, in: zoom)
                     .frame(maxWidth: .infinity)
                 }
             }

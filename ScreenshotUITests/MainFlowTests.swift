@@ -236,9 +236,24 @@ final class MainFlowTests: XCTestCase {
         element("notebook.tab.3").tap()
         sleep(1)
         snap("15a2-carnet-notes")
+        // A suspect's file: what the phone holds about them, their statement, the linked chain.
+        element("notebook.tab.0").tap()
+        tap(element("notebook.suspect.s_emma"), "fiche d'Emma", expecting: element("suspect.name"))
+        sleep(1)
+        snap("15a3-fiche-suspect")
+        app.navigationBars.buttons.firstMatch.tap()
+        wait(element("notebook.suspect.s_emma"), 5, "retour aux suspects")
         element("notebook.close").tap()
         XCTAssertTrue(element("notebook.accuse").waitForNonExistence(timeout: 5), "Le carnet ne se ferme pas")
         snap("15b-carnet-ferme")
+
+        // Help: what each tier gives and costs (score, never time).
+        dismissUrgentBanner()
+        tap(element("phone.hints"), "Aide", expecting: element("hints.close"))
+        sleep(1)
+        snap("15c-aide")
+        element("hints.close").tap()
+        XCTAssertTrue(element("hints.close").waitForNonExistence(timeout: 5), "L'aide ne se ferme pas")
 
         // Timer → "Accuser maintenant ?"
         dismissUrgentBanner()

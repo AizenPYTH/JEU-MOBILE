@@ -227,6 +227,43 @@ struct VerdictTests {
         #expect(game.phase == .finished)
     }
 
+    @Test func stanceIsThePlayersOwnReadingOfALinkedItem() throws {
+        let (game, _) = Fixtures.investigation()
+        game.start()
+        let ref = ItemRef(.message, "l3")
+        game.setStance(.incriminates, for: ref)
+        #expect(game.notebook.isEmpty) // nothing to qualify yet
+        game.togglePin(ref)
+        game.setStance(.incriminates, for: ref)
+        #expect(game.notebook.first?.stance == nil) // only a linked item has a stance
+        game.link(ref, to: "s_lucas")
+        game.setStance(.incriminates, for: ref)
+        #expect(game.linkedEntries(for: "s_lucas").first?.stance == .incriminates)
+        let before = game.remainingSeconds
+        game.setStance(.clears, for: ref)
+        #expect(game.notebook.first?.stance == .clears)
+        #expect(game.remainingSeconds == before) // organising is free
+        game.link(ref, to: "s_emma")
+        #expect(game.notebook.first?.stance == nil) // re-linked to someone else: reset
+        game.setStance(.clears, for: ref)
+        let snapshot = try #require(game.snapshot())
+        let data = try JSONEncoder().encode(snapshot)
+        let decoded = try JSONDecoder().decode(InvestigationSnapshot.self, from: data)
+        #expect(decoded.notebook.first?.stance == .clears) // survives save / resume
+        // The score ignores stances: the same play without them scores the same.
+        let (twin, _) = Fixtures.investigation()
+        twin.start()
+        twin.togglePin(ref)
+        twin.link(ref, to: "s_emma")
+        #expect(try #require(game.accuse("s_emma")).score == (try #require(twin.accuse("s_emma"))).score)
+    }
+
+    @Test func savedNotebooksWithoutStanceStillLoad() throws {
+        let json = #"{"ref":"message:l3","linkedTo":"s_lucas","pinnedAtElapsed":12}"#
+        let entry = try JSONDecoder().decode(NotebookEntry.self, from: Data(json.utf8))
+        #expect(entry.stance == nil && entry.linkedTo == "s_lucas")
+    }
+
     @Test func seeingIsNotFinding() throws {
         let (game, _) = Fixtures.investigation()
         game.start()

@@ -3,10 +3,14 @@ import CaseEngine
 
 /// Human description of any item: for the notebook (EvidenceRow: time · label · source app).
 enum ItemDescriber {
+    /// WHEN · WHAT · WHO · WHERE of an item, as far as the phone shows it (a photo's place only once
+    /// its metadata has been analysed, i.e. for the `photoInfo` item).
     struct Item {
         var at: Moment?
         var label: String
         var app: AppID
+        var person: ContactID? = nil
+        var place: String? = nil
     }
 
     static func describe(_ ref: ItemRef, in game: Investigation) -> Item {
@@ -15,24 +19,30 @@ enum ItemDescriber {
         case .message:
             if let m = index.message(ref.id) {
                 let app: AppID = m.deletedAt != nil ? .trash : .messages
-                return Item(at: m.at, label: "\(game.name(of: m.from)) · « \(m.text ?? L10n.t("item.photo")) »", app: app)
+                return Item(at: m.at, label: "\(game.name(of: m.from)) · « \(m.text ?? L10n.t("item.photo")) »", app: app, person: m.from)
             }
         case .draft:
             if let d = game.device.conversations.compactMap(\.draft).first(where: { $0.id == ref.id }) {
-                return Item(at: d.at, label: "\(L10n.t("messages.draft")) · « \(d.text) »", app: .messages)
+                return Item(at: d.at, label: "\(L10n.t("messages.draft")) · « \(d.text) »", app: .messages, person: ownerContactID)
             }
         case .call:
             if let c = index.call(ref.id) {
-                return Item(at: c.at, label: "\(game.name(of: c.contact)) · \(CallsFormat.label(c))", app: .phone)
+                return Item(at: c.at, label: "\(game.name(of: c.contact)) · \(CallsFormat.label(c))", app: .phone, person: c.contact)
             }
-        case .photo, .photoInfo:
-            if let p = index.photo(ref.id) { return Item(at: p.takenAt, label: p.caption, app: .photos) }
+        case .photo:
+            if let p = index.photo(ref.id) { return Item(at: p.takenAt, label: p.caption, app: .photos, person: p.from) }
+        case .photoInfo:
+            if let p = index.photo(ref.id) {
+                return Item(at: p.takenAt, label: p.caption, app: .photos, person: p.from, place: p.place)
+            }
         case .track:
             if let t = index.track(ref.id) {
-                return Item(at: t.points.map(\.at).max(), label: L10n.f("item.track", game.name(of: t.contact)), app: .location)
+                let last = t.points.max { $0.at < $1.at }
+                return Item(at: last?.at, label: L10n.f("item.track", game.name(of: t.contact)), app: .location,
+                            person: t.contact, place: last.flatMap { index.place($0.place)?.name })
             }
         case .calendar:
-            if let e = index.calendarEvent(ref.id) { return Item(at: e.start, label: e.title, app: .calendar) }
+            if let e = index.calendarEvent(ref.id) { return Item(at: e.start, label: e.title, app: .calendar, place: e.location) }
         case .note:
             if let n = index.note(ref.id) { return Item(at: n.modifiedAt, label: n.title, app: .notes) }
         case .mail:
@@ -40,7 +50,7 @@ enum ItemDescriber {
         case .browser:
             if let b = index.browserEntry(ref.id) { return Item(at: b.at, label: b.kind == .search ? "« \(b.text) »" : b.text, app: .browser) }
         case .contact:
-            return Item(at: nil, label: game.name(of: ref.id), app: .contacts)
+            return Item(at: nil, label: game.name(of: ref.id), app: .contacts, person: ref.id)
         case .app:
             break
         }

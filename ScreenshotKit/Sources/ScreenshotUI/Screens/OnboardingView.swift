@@ -205,6 +205,9 @@ private struct PinDemo: View {
                             onDone()
                         }
                         .accessibilityIdentifier("onboarding.pinTarget")
+                        .overlay(alignment: .bottomTrailing) {
+                            if !pinned { HoldCue().offset(x: -8, y: 22) }
+                        }
                     bubble(L10n.t("onboarding.pin.msg3"), mine: true)
                     HStack(spacing: Theme.Spacing.s3) {
                         Text("◆").foregroundStyle(pinned ? Theme.Colors.signal : Theme.Colors.textTertiary)
@@ -230,13 +233,32 @@ private struct PinDemo: View {
     private func bubble(_ text: String, mine: Bool, pinned: Bool = false) -> some View {
         Text(text)
             .font(Theme.Fonts.body)
-            .foregroundStyle(mine ? Theme.Colors.textOnLight : Theme.Colors.textPrimary)
+            .foregroundStyle(mine ? Theme.Colors.bubbleOutText : Theme.Colors.textPrimary)
             .padding(.horizontal, Theme.Spacing.s4)
             .padding(.vertical, 10)
             .background(RoundedRectangle(cornerRadius: Theme.Radius.bubble, style: .continuous)
-                .fill(mine ? Theme.Colors.textPrimary : Theme.Colors.bgBubbleIn))
+                .fill(mine ? Theme.Colors.bubbleOut : Theme.Colors.bgBubbleIn))
             .pinnedRing(pinned, radius: Theme.Radius.bubble)
             .frame(maxWidth: .infinity, alignment: mine ? .trailing : .leading)
+    }
+}
+
+/// "Maintenez" with a finger that presses, pulsing gently until the gesture is done.
+private struct HoldCue: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        Label(L10n.t("onboarding.pin.cue"), systemImage: "hand.point.up.left.fill")
+            .font(Theme.Fonts.caption)
+            .foregroundStyle(Theme.Colors.signal)
+            .padding(.horizontal, Theme.Spacing.s3)
+            .frame(height: 26)
+            .background(Capsule().fill(Theme.Colors.signalTint))
+            .phaseAnimator(reduceMotion ? [1.0] : [1.0, 0.92]) { view, scale in
+                view.scaleEffect(scale)
+            } animation: { _ in .easeInOut(duration: 0.7) }
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
     }
 }
 
@@ -259,27 +281,35 @@ private struct AccuseDemo: View {
                         TimerPill(remaining: 0, level: .critical)
                         Spacer()
                     }
-                    HStack(spacing: 10) {
+                    Text(L10n.t("accuse.title")).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack(spacing: Theme.Spacing.s3) {
                         ForEach(0..<2, id: \.self) { i in
                             let isSelected = selected == i
+                            let colors = Theme.avatarColor(hue: i == 0 ? 0.08 : 0.6)
                             Button {
                                 selected = i
                                 Haptics.selection()
                             } label: {
-                                VStack(spacing: Theme.Spacing.s2) {
+                                HStack(spacing: Theme.Spacing.s4) {
+                                    Image(systemName: isSelected ? "largecircle.fill.circle" : "circle")
+                                        .font(.system(size: 20))
+                                        .foregroundStyle(isSelected ? Theme.Colors.special : Theme.Colors.textTertiary)
                                     Text(i == 0 ? "A" : "B")
-                                        .font(Theme.Fonts.title)
-                                        .foregroundStyle(Theme.Colors.textSecondary)
-                                        .frame(width: 56, height: 56)
-                                        .background(RoundedRectangle(cornerRadius: Theme.Radius.md).fill(Theme.Colors.bgRaised))
-                                    Text(L10n.f("onboarding.accuse.suspect", i + 1)).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textPrimary)
+                                        .font(Theme.Fonts.headline)
+                                        .foregroundStyle(Theme.Colors.textPrimary)
+                                        .frame(width: 40, height: 44)
+                                        .background(RoundedRectangle(cornerRadius: Theme.Radius.sm, style: .continuous)
+                                            .fill(LinearGradient(colors: [colors.top, colors.bottom], startPoint: .top, endPoint: .bottom)))
+                                    Text(L10n.f("onboarding.accuse.suspect", i + 1)).font(Theme.Fonts.calloutStrong).foregroundStyle(Theme.Colors.textPrimary)
+                                    Spacer()
                                 }
-                                .padding(Theme.Spacing.s4)
-                                .frame(maxWidth: .infinity)
-                                .background(RoundedRectangle(cornerRadius: Theme.Radius.lg).fill(Theme.Colors.bgSurface))
+                                .padding(Theme.Spacing.s3)
+                                .background(RoundedRectangle(cornerRadius: Theme.Radius.lg).fill(isSelected ? Theme.Colors.specialTint : Theme.Colors.bgSurface))
                                 .overlay(RoundedRectangle(cornerRadius: Theme.Radius.lg)
-                                    .strokeBorder(isSelected ? Theme.Colors.textPrimary : Theme.Colors.line1, lineWidth: isSelected ? 2 : 1))
-                                .opacity(selected == nil || isSelected ? 1 : 0.6)
+                                    .strokeBorder(isSelected ? Theme.Colors.special : Theme.Colors.line1, lineWidth: isSelected ? 2 : 1))
+                                .opacity(selected == nil || isSelected ? 1 : 0.65)
+                                .contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
                             .accessibilityAddTraits(isSelected ? .isSelected : [])

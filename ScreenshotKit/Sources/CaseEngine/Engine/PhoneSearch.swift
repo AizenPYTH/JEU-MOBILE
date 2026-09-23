@@ -86,7 +86,7 @@ public enum PhoneSearch {
             }
         }
         if open(.mail) {
-            for mail in device.mails where matches([mail.subject, mail.body, mail.fromName, mail.to], at: mail.at) {
+            for mail in device.mails where matches([mail.subject, mail.body, mail.fromName, mail.to] + (mail.attachments ?? []), at: mail.at) {
                 results.append(PhoneSearchResult(app: .mail, ref: ItemRef(.mail, mail.id), conversationID: nil,
                                                  title: mail.subject, excerpt: "\(mail.fromName) — \(excerpt(of: mail.body, around: needle))",
                                                  at: mail.at))

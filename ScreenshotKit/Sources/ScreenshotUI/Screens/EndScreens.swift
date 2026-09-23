@@ -95,7 +95,9 @@ struct AccusationView: View {
 
     private func suspectRow(_ suspect: Suspect, game: Investigation) -> some View {
         let isSelected = selected == suspect.id
-        let linked = game.linkedEntries(for: suspect.id).count
+        let entries = game.linkedEntries(for: suspect.id)
+        let linked = entries.count
+        let against = entries.filter { $0.stance == .incriminates }.count
         let marks = SuspectMark.allCases.filter { game.marks[suspect.id]?.contains($0) == true }
         return HStack(spacing: 0) {
             Button {
@@ -112,6 +114,9 @@ struct AccusationView: View {
                         Text(suspect.role).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary).lineLimit(2)
                         HStack(spacing: Theme.Spacing.s2) {
                             Chip(text: L10n.f("carnet.linked", linked), color: linked > 0 ? Theme.Colors.special : Theme.Colors.textTertiary)
+                            if against > 0 {
+                                Chip(text: L10n.f("suspect.againstCount", against), color: Theme.Colors.alertText)
+                            }
                             if !marks.isEmpty {
                                 Chip(text: L10n.f("n.notes", marks.count), color: Theme.Colors.signal)
                             }
@@ -147,11 +152,24 @@ struct AccusationView: View {
         .opacity(selected == nil || isSelected ? 1 : 0.65)
     }
 
+    private static func rank(_ stance: NotebookEntry.Stance?) -> Int {
+        switch stance {
+        case .incriminates: 0
+        case nil: 1
+        case .clears: 2
+        }
+    }
+
     /// Bottom panel: who is accused, what the case rests on, then hold to accuse.
     private func decisionPanel(game: Investigation, timeLeft: Bool) -> some View {
         let suspect = selected.flatMap { id in session.caseFile.suspects.first { $0.id == id } }
         let name = suspect.map { game.name(of: $0.contact) } ?? ""
-        let evidence = suspect.map { s in game.linkedEntries(for: s.id).map { ItemDescriber.describe($0.ref, in: game) } } ?? []
+        // What the case rests on: the items marked "against" first.
+        let evidence = suspect.map { s in
+            game.linkedEntries(for: s.id)
+                .sorted { Self.rank($0.stance) < Self.rank($1.stance) }
+                .map { ItemDescriber.describe($0.ref, in: game) }
+        } ?? []
         return VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
             if suspect != nil {
                 Text(L10n.f("accuse.youAccuse", name)).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
@@ -213,9 +231,13 @@ struct ResultView: View {
     var accusedEvidence: [String] = []
     /// The culprit's contact (portrait on the solution).
     var culprit: Contact? = nil
+    /// The accused's contact (the verdict moment).
+    var accused: Contact? = nil
 
     @State private var shownSteps = 0
     @State private var confirmReveal = false
+    @State private var verdictMoment = true
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         let solved = verdict.isCorrect
@@ -243,6 +265,14 @@ struct ResultView: View {
             }
         }
         .onTapGesture { shownSteps = caseFile.solution.reveal.count }
+        .overlay {
+            if verdictMoment && !revealed && !reduceMotion {
+                VerdictMoment(accusedName: names[verdict.accused] ?? "", accused: accused, solved: verdict.isCorrect) {
+                    withAnimation(Theme.Motion.dramatic(0.5)) { verdictMoment = false }
+                }
+                .transition(.opacity)
+            }
+        }
         .confirmationDialog(L10n.t("result.revealConfirmTitle"), isPresented: $confirmReveal, titleVisibility: .visible) {
             Button(L10n.t("result.reveal"), role: .destructive, action: onRevealRequested)
         } message: {
@@ -360,6 +390,71 @@ struct ResultView: View {
                 .accessibilityIdentifier("result.reveal")
                 .buttonStyle(TertiaryButtonStyle())
                 .frame(maxWidth: .infinity)
+        }
+    }
+}
+
+/// The seconds after the hold: the accused, the file being checked, then the stamp —
+/// "AFFAIRE RÉSOLUE" or "NON RÉSOLUE". ~2.5 s, a tap skips it.
+struct VerdictMoment: View {
+    let accusedName: String
+    let accused: Contact?
+    let solved: Bool
+    let onDone: () -> Void
+
+    @State private var step = 0
+    @State private var progress: CGFloat = 0
+
+    var body: some View {
+        let color = solved ? Theme.Colors.clear : Theme.Colors.alertText
+        VStack(spacing: Theme.Spacing.s5) {
+            Spacer()
+            Portrait(contact: accused, width: 96, height: 112)
+                .overlay(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)
+                    .strokeBorder(step >= 2 ? color : Theme.Colors.line2, lineWidth: 2))
+                .scaleEffect(step >= 1 ? 1 : 0.92)
+                .opacity(step >= 1 ? 1 : 0)
+            Text(L10n.t("verdict.youAccused")).overline(Theme.Colors.special)
+                .opacity(step >= 1 ? 1 : 0)
+            Text(accusedName).font(Theme.Fonts.title2).foregroundStyle(Theme.Colors.textPrimary)
+                .opacity(step >= 1 ? 1 : 0)
+            ZStack {
+                VStack(spacing: Theme.Spacing.s3) {
+                    Text(L10n.t("verdict.checking")).font(Theme.Fonts.dataStrong).foregroundStyle(Theme.Colors.textSecondary)
+                    GeometryReader { geo in
+                        Capsule().fill(Theme.Colors.line2)
+                            .overlay(alignment: .leading) { Capsule().fill(Theme.Colors.textPrimary).frame(width: geo.size.width * progress) }
+                    }
+                    .frame(width: 160, height: 2)
+                }
+                .opacity(step == 1 ? 1 : 0)
+                Text(solved ? L10n.t("result.solvedBadge") : L10n.t("result.unsolvedBadge"))
+                    .font(Theme.Fonts.overline)
+                    .tracking(Theme.Tracking.timeUp)
+                    .foregroundStyle(color)
+                    .padding(.horizontal, Theme.Spacing.s5)
+                    .frame(height: 40)
+                    .overlay(RoundedRectangle(cornerRadius: Theme.Radius.xs).strokeBorder(color, lineWidth: 2))
+                    .rotationEffect(.degrees(-4))
+                    .scaleEffect(step >= 2 ? 1 : 1.6)
+                    .opacity(step >= 2 ? 1 : 0)
+            }
+            .frame(height: 60)
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Theme.Colors.ink0.ignoresSafeArea())
+        .contentShape(Rectangle())
+        .onTapGesture(perform: onDone)
+        .accessibilityElement(children: .combine)
+        .task {
+            withAnimation(Theme.Motion.emphasized(0.4)) { step = 1 }
+            withAnimation(.linear(duration: 0.9).delay(0.2)) { progress = 1 }
+            try? await Task.sleep(for: .seconds(1.2))
+            withAnimation(.interpolatingSpring(mass: 1, stiffness: 320, damping: 18)) { step = 2 }
+            if solved { Haptics.success() } else { Haptics.timeUp() }
+            try? await Task.sleep(for: .seconds(1.3))
+            onDone()
         }
     }
 }

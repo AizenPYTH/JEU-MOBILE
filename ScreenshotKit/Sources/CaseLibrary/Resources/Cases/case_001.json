@@ -2177,7 +2177,12 @@
      "to": "alex.moreau@mailo.fr",
      "at": "2026-09-09 17:48",
      "subject": "Collectif Lumen — anomalies sur les comptes 2026",
-     "body": "Bonjour Monsieur Moreau,\n\nEn préparant le bilan du collectif, nous avons relevé trois factures du fournisseur « Studio Nova » (n°112, 114 et 117) pour un total de 4 300 €, sans bon de commande ni justificatif de prestation.\n\nCes factures ont été validées par la trésorière, Mme E. Roussel. Le SIRET indiqué ne correspond à aucune entreprise enregistrée.\n\nEn tant que président, nous vous invitons à clarifier la situation avant la réunion du bureau.\n\nCopies des factures en pièce jointe.\n\nCordialement,\nP. Ferran"
+     "body": "Bonjour Monsieur Moreau,\n\nEn préparant le bilan du collectif, nous avons relevé trois factures du fournisseur « Studio Nova » (n°112, 114 et 117) pour un total de 4 300 €, sans bon de commande ni justificatif de prestation.\n\nCes factures ont été validées par la trésorière, Mme E. Roussel. Le SIRET indiqué ne correspond à aucune entreprise enregistrée.\n\nEn tant que président, nous vous invitons à clarifier la situation avant la réunion du bureau.\n\nCopies des factures en pièce jointe.\n\nCordialement,\nP. Ferran",
+     "attachments": [
+      "Facture_StudioNova_112.pdf",
+      "Facture_StudioNova_114.pdf",
+      "Facture_StudioNova_117.pdf"
+     ]
     },
     {
      "id": "mail_reply",
@@ -2197,7 +2202,10 @@
      "to": "bureau@collectif-lumen.fr",
      "at": "2026-09-03 23:47",
      "subject": "Tableau des dépenses — été",
-     "body": "Voici le tableau des dépenses de l'été. Il manque encore quelques justificatifs, je les ajoute dès que possible.\n\nEmma"
+     "body": "Voici le tableau des dépenses de l'été. Il manque encore quelques justificatifs, je les ajoute dès que possible.\n\nEmma",
+     "attachments": [
+      "Depenses_ete_2026.xlsx"
+     ]
     },
     {
      "id": "mail_bloc",
@@ -2227,7 +2235,10 @@
      "to": "alex.moreau@mailo.fr",
      "at": "2026-09-05 07:00",
      "subject": "Votre relevé d'août est disponible",
-     "body": "Votre relevé de compte est disponible dans votre espace personnel."
+     "body": "Votre relevé de compte est disponible dans votre espace personnel.",
+     "attachments": [
+      "Releve_2026-08.pdf"
+     ]
     },
     {
      "id": "mail_mairie",
@@ -2257,7 +2268,10 @@
      "to": "alex.moreau@mailo.fr",
      "at": "2026-08-29 20:00",
      "subject": "Vos billets",
-     "body": "Merci pour votre commande. 2 billets — 4 octobre."
+     "body": "Merci pour votre commande. 2 billets — 4 octobre.",
+     "attachments": [
+      "Billets_Halcyon_4-oct.pdf"
+     ]
     }
    ],
    "browser": [
@@ -2284,7 +2298,8 @@
      "at": "2026-08-29 19:44",
      "kind": "visit",
      "text": "Billetterie Halcyon — Concerts d'automne",
-     "url": "halcyon.fr/automne"
+     "url": "halcyon.fr/automne",
+     "summary": "Programmation d'automne : 14 concerts, du 26 septembre au 20 décembre. Tarif réduit pour les moins de 26 ans."
     },
     {
      "id": "w05",

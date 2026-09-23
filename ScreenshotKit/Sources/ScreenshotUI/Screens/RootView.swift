@@ -115,7 +115,8 @@ public struct RootView: View {
                            onRevealRequested: { reveal(play) },
                            revealed: play.revealed,
                            accusedEvidence: accusedEvidence(play.session, play.verdict.accused),
-                           culprit: culprit(play.session, play.verdict.culprit))
+                           culprit: culprit(play.session, play.verdict.culprit),
+                           accused: culprit(play.session, play.verdict.accused))
                     .id(play.revealed)
                     .transition(.opacity)
             case .score(let play):
@@ -191,6 +192,7 @@ public struct RootView: View {
         session.game.linkedEntries(for: accused).map { ItemDescriber.describe($0.ref, in: session.game).label }
     }
 
+    /// The contact behind a suspect (the culprit, or whoever was accused).
     private func culprit(_ session: GameSession, _ id: SuspectID) -> Contact? {
         session.game.index.suspect(id).flatMap { session.game.contact($0.contact) }
     }

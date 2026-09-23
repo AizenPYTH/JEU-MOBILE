@@ -2,16 +2,20 @@
 import SwiftUI
 import CaseEngine
 
-/// Photos: the library, sorted by the date *stored in each photo* — like a real phone.
+/// Photos: the library, sorted by the date *stored in each photo* — like a real phone —
+/// with albums (all, camera, received, screenshots). Filtering is free.
 struct PhotosGridView: View {
     let session: GameSession
+    @State private var album: Photo.Source?
 
     var body: some View {
         let game = session.game
-        let byDay = Dictionary(grouping: game.photos, by: { $0.takenAt.dayNumber })
+        let library = game.photos.filter { album == nil || $0.source == album }
+        let byDay = Dictionary(grouping: library, by: { $0.takenAt.dayNumber })
         let days = byDay.keys.sorted(by: >)
         ScrollView {
             LazyVStack(alignment: .leading, spacing: Theme.Spacing.s4, pinnedViews: [.sectionHeaders]) {
+                AlbumChips(photos: game.photos, selection: $album)
                 if days.isEmpty {
                     EmptyStateView(title: L10n.t("empty.photosTitle"), message: L10n.t("empty.photosMessage"))
                 }
@@ -53,6 +57,65 @@ struct PhotosGridView: View {
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
         .appRoot(.photos, subtitle: L10n.f("n.photos", game.photos.count) + " · " + L10n.f("n.days", days.count), session: session)
+    }
+}
+
+/// Album chips: "Toutes 36" · "Appareil photo 28" · "Reçues 6" · "Captures 2" (only non-empty ones).
+struct AlbumChips: View {
+    let photos: [Photo]
+    @Binding var selection: Photo.Source?
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: Theme.Spacing.s3) {
+                chip(nil, symbol: "photo.on.rectangle", count: photos.count)
+                ForEach([Photo.Source.camera, .received, .screenshot], id: \.self) { source in
+                    let count = photos.filter { $0.source == source }.count
+                    if count > 0 {
+                        chip(source, symbol: Self.symbol(source), count: count)
+                    }
+                }
+            }
+            .padding(.horizontal, Theme.Spacing.marginCompact)
+        }
+        .padding(.top, Theme.Spacing.s3)
+    }
+
+    private func chip(_ source: Photo.Source?, symbol: String, count: Int) -> some View {
+        let selected = selection == source
+        return Button {
+            selection = source
+            Haptics.selection()
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: symbol).font(.system(size: 12, weight: .semibold))
+                Text(Self.title(source)).font(Theme.Fonts.calloutStrong)
+                Text("\(count)").font(Theme.Fonts.dataSmall).opacity(0.7)
+            }
+            .foregroundStyle(selected ? Theme.Colors.textOnLight : Theme.Colors.textPrimary)
+            .padding(.horizontal, Theme.Spacing.s4)
+            .frame(height: 34)
+            .background(Capsule().fill(selected ? Theme.appAccent(.photos) : Theme.Colors.bgRaised))
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(selected ? .isSelected : [])
+    }
+
+    static func symbol(_ source: Photo.Source) -> String {
+        switch source {
+        case .camera: "camera.fill"
+        case .received: "arrow.down.circle.fill"
+        case .screenshot: "rectangle.dashed"
+        }
+    }
+
+    static func title(_ source: Photo.Source?) -> String {
+        switch source {
+        case nil: L10n.t("photos.albumAll")
+        case .camera: L10n.t("photos.albumCamera")
+        case .received: L10n.t("photos.albumReceived")
+        case .screenshot: L10n.t("photos.albumScreenshots")
+        }
     }
 }
 

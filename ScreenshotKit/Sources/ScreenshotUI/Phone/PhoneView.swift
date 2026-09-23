@@ -9,6 +9,8 @@ struct PhoneView: View {
     let onNotebook: () -> Void
     let onHints: () -> Void
     let onTimer: () -> Void
+    /// Apps open from (and close back into) their icon, like on iOS.
+    @Namespace private var appZoom
 
     var body: some View {
         ZStack {
@@ -34,7 +36,7 @@ struct PhoneView: View {
                 // extend to the top edge and would otherwise cover the timer.
                 Color.clear.frame(height: Theme.Size.statusBar)
                 NavigationStack(path: Binding(get: { session.path }, set: { session.setPath($0) })) {
-                    HomeScreen(session: session)
+                    HomeScreen(session: session, zoom: appZoom)
                         .navigationDestination(for: PhoneRoute.self) { route in
                             destination(route)
                                 .phoneAppStyle()
@@ -99,7 +101,7 @@ struct PhoneView: View {
     @ViewBuilder
     private func destination(_ route: PhoneRoute) -> some View {
         switch route {
-        case .app(let app): AppContainer(app: app, session: session)
+        case .app(let app): AppContainer(app: app, session: session).appZoomDestination(app, in: appZoom)
         case .search: GlobalSearchView(session: session)
         case .conversation(let id, let focus): ConversationView(conversationID: id, focus: focus, session: session)
         case .contact(let id): ContactDetailView(contactID: id, session: session)
@@ -159,6 +161,25 @@ struct PhoneAppStyle: ViewModifier {
 
 extension View {
     func phoneAppStyle() -> some View { modifier(PhoneAppStyle()) }
+
+    /// The app icon an app zooms out of (iOS 18+; a plain push before).
+    @ViewBuilder
+    func appZoomSource(_ app: AppID, in namespace: Namespace.ID) -> some View {
+        if #available(iOS 18.0, *) {
+            matchedTransitionSource(id: app, in: namespace)
+        } else {
+            self
+        }
+    }
+
+    @ViewBuilder
+    func appZoomDestination(_ app: AppID, in namespace: Namespace.ID) -> some View {
+        if #available(iOS 18.0, *) {
+            navigationTransition(.zoom(sourceID: app, in: namespace))
+        } else {
+            self
+        }
+    }
 }
 
 // MARK: - The device
@@ -420,6 +441,7 @@ struct CarnetBar: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
+            .accessibilityIdentifier("phone.hints")
         }
         .font(Theme.Fonts.calloutStrong)
         .frame(height: Theme.Size.carnetBar)

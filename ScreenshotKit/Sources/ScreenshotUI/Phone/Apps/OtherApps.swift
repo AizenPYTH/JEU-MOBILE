@@ -216,6 +216,12 @@ struct MailRow: View {
                         .foregroundStyle(Theme.Colors.textPrimary)
                         .lineLimit(1)
                     Spacer()
+                    if mail.attachments?.isEmpty == false {
+                        Image(systemName: "paperclip")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundStyle(Theme.Colors.textSecondary)
+                            .accessibilityLabel(Text(L10n.t("mail.hasAttachment")))
+                    }
                     Text(PhoneFormat.relative(mail.at, now: now))
                         .font(Theme.Fonts.caption)
                         .foregroundStyle(unread ? Theme.Colors.info : Theme.Colors.textTertiary)
@@ -238,6 +244,7 @@ struct MailRow: View {
 struct MailView: View {
     let mailID: String
     let session: GameSession
+    @State private var attachmentTapped: String?
 
     var body: some View {
         if let mail = session.game.index.mail(mailID) {
@@ -262,6 +269,16 @@ struct MailView: View {
                     }
                     Rectangle().fill(Theme.Colors.line2).frame(height: 1)
                     Text(mail.body).font(Theme.Fonts.bodyLarge).foregroundStyle(Theme.Colors.textPrimary).lineSpacing(3)
+                    if let attachments = mail.attachments, !attachments.isEmpty {
+                        VStack(alignment: .leading, spacing: Theme.Spacing.s2) {
+                            Label(L10n.f("mail.attachments", attachments.count), systemImage: "paperclip").overline(Theme.appAccent(.mail))
+                            ForEach(attachments, id: \.self) { name in
+                                Button { attachmentTapped = name } label: { AttachmentChip(name: name) }
+                                    .buttonStyle(.plain)
+                            }
+                        }
+                        .padding(.top, Theme.Spacing.s3)
+                    }
                 }
                 .padding(Theme.Spacing.marginList)
                 .padding(.bottom, Theme.Spacing.bottomInset)
@@ -269,7 +286,41 @@ struct MailView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .pinnable(ItemRef(.mail, mail.id), session: session)
+            .alert(L10n.t("mail.attachmentMissingTitle"), isPresented: Binding(get: { attachmentTapped != nil }, set: { if !$0 { attachmentTapped = nil } })) {
+                Button(L10n.t("common.ok"), role: .cancel) {}
+            } message: {
+                Text(L10n.f("mail.attachmentMissing", attachmentTapped ?? ""))
+            }
         }
+    }
+}
+
+/// A mail attachment: file-type badge, name, "not downloaded" (the phone never fetched it).
+struct AttachmentChip: View {
+    let name: String
+
+    private var ext: String { (name.split(separator: ".").last.map(String.init) ?? "").uppercased() }
+
+    var body: some View {
+        HStack(spacing: Theme.Spacing.s3) {
+            Text(ext)
+                .font(.custom(Theme.FontName.monoBold, fixedSize: 9))
+                .foregroundStyle(Theme.Colors.textPrimary)
+                .frame(width: 34, height: 40)
+                .background(RoundedRectangle(cornerRadius: 5, style: .continuous)
+                    .fill(ext == "PDF" ? Theme.Colors.alert.opacity(0.8) : ext == "XLSX" ? Theme.Colors.clear.opacity(0.7) : Theme.Colors.bgSelected))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(name).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textPrimary).lineLimit(1)
+                Label(L10n.t("mail.notDownloaded"), systemImage: "icloud.and.arrow.down")
+                    .font(Theme.Fonts.caption)
+                    .foregroundStyle(Theme.Colors.textTertiary)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(Theme.Spacing.s3)
+        .background(RoundedRectangle(cornerRadius: Theme.Radius.sm, style: .continuous).fill(Theme.Colors.bgSurface))
+        .overlay(RoundedRectangle(cornerRadius: Theme.Radius.sm, style: .continuous).strokeBorder(Theme.Colors.line1))
+        .contentShape(Rectangle())
     }
 }
 

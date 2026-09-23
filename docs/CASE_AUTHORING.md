@@ -49,7 +49,7 @@ indices y font référence.
 | `calls` | `contact`, `direction` (`incoming` / `outgoing` / `missed`), `at`, `durationSeconds`. |
 | `places`, `tracks` | Lieux sur la carte stylisée (`x`, `y` entre 0 et 1) et historiques de position (le propriétaire `"me"` ou un ami qui partage sa position). `sharingStoppedAt` = a coupé le partage. |
 | `photos` | `takenAt` (date des métadonnées), `source` (`camera` / `received` / `screenshot`), `from` + `receivedAt` pour une photo reçue, `place`, `device`, `scene` (ambiance de l'image générée), `caption` (ce qu'on voit), `details` (ce qu'une analyse révèle). |
-| `calendar`, `notes`, `mails`, `browser` | Rendez-vous, notes, e-mails (`inbox` / `sent`), historique web (`search` / `visit`, `summary` = contenu de la page). |
+| `calendar`, `notes`, `mails`, `browser` | Rendez-vous, notes, e-mails (`inbox` / `sent`, `attachments` = noms des pièces jointes, jamais téléchargées), historique web (`search` / `visit`, `summary` = contenu de la page). |
 | `lockedApps` | App protégée par un code (`app`, `code`, `hint`) ; le code doit être déductible ailleurs dans le téléphone. |
 | `liveEvents` | Ce qui arrive **pendant** l'enquête, après `afterSeconds` : `message` (dans `conversation`), `call`, `reminder`, `deletion` (quelqu'un supprime un de ses messages → « Ce message a été supprimé »). `title`/`body` = la notification, `opens` = ce qu'elle ouvre. |
 

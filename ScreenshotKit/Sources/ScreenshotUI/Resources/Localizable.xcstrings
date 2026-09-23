@@ -2148,6 +2148,23 @@
         }
       }
     },
+    "common.ok": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
     "contacts.birthday": {
       "extractionState": "manual",
       "localizations": {
@@ -2596,30 +2613,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "−%ld points"
+            "value": "−%ld pts"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "−%ld points"
-          }
-        }
-      }
-    },
-    "hints.costExplain": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A hint points the way without giving the answer. It costs %ld seconds and lowers your score."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un indice oriente sans donner la réponse. Il coûte %ld secondes et réduit votre score."
+            "value": "−%ld pts"
           }
         }
       }
@@ -2630,13 +2630,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hints point the way without giving the answer. They cost points, never time."
+            "value": "Each help points the way without giving the answer. It costs score points, never time."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les indices orientent sans donner la réponse. Ils coûtent des points, jamais du temps."
+            "value": "Chaque aide oriente sans donner la réponse. Elle coûte des points de score, jamais du temps."
           }
         }
       }
@@ -2664,13 +2664,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reveal the previous hint first"
+            "value": "Reveal the previous help first"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Révélez d'abord l'indice précédent"
+            "value": "Révélez d'abord l'aide précédente"
           }
         }
       }
@@ -2692,36 +2692,36 @@
         }
       }
     },
-    "hints.none": {
+    "hints.maxScore": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No more hints."
+            "value": "Best possible score"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Plus aucun indice disponible."
+            "value": "Score maximal possible"
           }
         }
       }
     },
-    "hints.number": {
+    "hints.overline": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hint %ld"
+            "value": "IF YOU ARE STUCK"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Indice %ld"
+            "value": "SI VOUS BLOQUEZ"
           }
         }
       }
@@ -2743,19 +2743,87 @@
         }
       }
     },
+    "hints.scoreAfter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "max %ld %%"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "max %ld %%"
+          }
+        }
+      }
+    },
     "hints.tier": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "HINT %ld"
+            "value": "HELP %ld"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "INDICE %ld"
+            "value": "AIDE %ld"
+          }
+        }
+      }
+    },
+    "hints.tierName1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lead"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une piste"
+          }
+        }
+      }
+    },
+    "hints.tierName2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where to look"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où chercher"
+          }
+        }
+      }
+    },
+    "hints.tierName3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The evidence"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La preuve"
           }
         }
       }
@@ -2777,19 +2845,53 @@
         }
       }
     },
-    "hints.use": {
+    "hints.what1": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hint %ld · −%ld s"
+            "value": "A direction to think in, with no name or place."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Indice %ld · −%ld s"
+            "value": "Une direction de réflexion, sans nom ni lieu."
+          }
+        }
+      }
+    },
+    "hints.what2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The app or part of the phone to search."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'app ou l'endroit du téléphone à fouiller."
+          }
+        }
+      }
+    },
+    "hints.what3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The exact item that turns the case."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'élément précis qui fait basculer l'affaire."
           }
         }
       }
@@ -3185,6 +3287,81 @@
         }
       }
     },
+    "mail.attachmentMissing": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” was never opened on this phone. Only its name is visible."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » n'a jamais été ouverte sur ce téléphone. Seul son nom est visible."
+          }
+        }
+      }
+    },
+    "mail.attachmentMissingTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attachment unavailable"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièce jointe indisponible"
+          }
+        }
+      }
+    },
+    "mail.attachments": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld ATTACHMENT"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld ATTACHMENTS"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld PIÈCE JOINTE"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld PIÈCES JOINTES"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "mail.emptyMessage": {
       "extractionState": "manual",
       "localizations": {
@@ -3219,6 +3396,23 @@
         }
       }
     },
+    "mail.hasAttachment": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attachment"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièce jointe"
+          }
+        }
+      }
+    },
     "mail.inbox": {
       "extractionState": "manual",
       "localizations": {
@@ -3232,6 +3426,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réception"
+          }
+        }
+      }
+    },
+    "mail.notDownloaded": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not downloaded on this device"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non téléchargée sur cet appareil"
           }
         }
       }
@@ -4452,6 +4663,23 @@
         }
       }
     },
+    "onboarding.pin.cue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press and hold"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenez"
+          }
+        }
+      }
+    },
     "onboarding.pin.hint": {
       "extractionState": "manual",
       "localizations": {
@@ -4635,6 +4863,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Enquête en pause"
+          }
+        }
+      }
+    },
+    "photos.albumAll": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes"
+          }
+        }
+      }
+    },
+    "photos.albumCamera": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Camera"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appareil photo"
+          }
+        }
+      }
+    },
+    "photos.albumReceived": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Received"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reçues"
+          }
+        }
+      }
+    },
+    "photos.albumScreenshots": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Screenshots"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Captures"
           }
         }
       }
@@ -6159,6 +6455,23 @@
         }
       }
     },
+    "suspect.againstCount": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld against"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld contre"
+          }
+        }
+      }
+    },
     "suspect.age": {
       "extractionState": "manual",
       "localizations": {
@@ -6189,6 +6502,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "DÉCLARATION"
+          }
+        }
+      }
+    },
+    "suspect.favourCount": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld in favour"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld en sa faveur"
+          }
+        }
+      }
+    },
+    "suspect.inPhone": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IN THE PHONE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DANS LE TÉLÉPHONE"
           }
         }
       }
@@ -6244,6 +6591,47 @@
         }
       }
     },
+    "suspect.messagesCount": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld message"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld messages"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld message"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld messages"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "suspect.noLinked": {
       "extractionState": "manual",
       "localizations": {
@@ -6257,6 +6645,91 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucun élément lié. Épinglez un élément puis liez-le à ce suspect."
+          }
+        }
+      }
+    },
+    "suspect.overline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SUSPECT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SUSPECT"
+          }
+        }
+      }
+    },
+    "suspect.shortcutHelp": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opening from here costs the same time as in the phone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir depuis ici coûte le même temps que dans le téléphone."
+          }
+        }
+      }
+    },
+    "suspect.stanceAgainst": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incriminates"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accuse"
+          }
+        }
+      }
+    },
+    "suspect.stanceFavour": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clears"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le disculpe"
+          }
+        }
+      }
+    },
+    "suspect.stanceHelp": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For each item, mark whether it incriminates or clears them. The game does not check: it is your reasoning."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour chaque élément, indiquez s'il l'accuse ou le disculpe. Le jeu ne vérifie pas : c'est votre raisonnement."
           }
         }
       }
@@ -6648,6 +7121,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "MESSAGE"
+          }
+        }
+      }
+    },
+    "verdict.checking": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checking the case file…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérification du dossier…"
+          }
+        }
+      }
+    },
+    "verdict.youAccused": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOU ACCUSED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VOUS AVEZ ACCUSÉ"
           }
         }
       }

@@ -453,25 +453,29 @@ mails = [
          body="Bonjour Monsieur Moreau,\n\nEn préparant le bilan du collectif, nous avons relevé trois factures du fournisseur « Studio Nova » "
               "(n°112, 114 et 117) pour un total de 4 300 €, sans bon de commande ni justificatif de prestation.\n\n"
               "Ces factures ont été validées par la trésorière, Mme E. Roussel. Le SIRET indiqué ne correspond à aucune entreprise enregistrée.\n\n"
-              "En tant que président, nous vous invitons à clarifier la situation avant la réunion du bureau.\n\nCopies des factures en pièce jointe.\n\nCordialement,\nP. Ferran"),
+              "En tant que président, nous vous invitons à clarifier la situation avant la réunion du bureau.\n\nCopies des factures en pièce jointe.\n\nCordialement,\nP. Ferran",
+         attachments=["Facture_StudioNova_112.pdf", "Facture_StudioNova_114.pdf", "Facture_StudioNova_117.pdf"]),
     dict(id="mail_reply", folder="sent", fromName="Alex Moreau", fromAddress="alex.moreau@mailo.fr", to="contact@cabinet-ferran.fr",
          at=t(9, "19:02"), subject="Re: Collectif Lumen — anomalies sur les comptes 2026",
          body="Bonjour,\n\nMerci. Je préfère d'abord en parler à la personne concernée. Je reviens vers vous après le bureau de lundi.\n\nAlex"),
     dict(id="mail_expo", folder="inbox", fromName="Emma Roussel", fromAddress="emma.roussel@mailo.fr", to="bureau@collectif-lumen.fr",
          at=t(3, "23:47"), subject="Tableau des dépenses — été",
-         body="Voici le tableau des dépenses de l'été. Il manque encore quelques justificatifs, je les ajoute dès que possible.\n\nEmma"),
+         body="Voici le tableau des dépenses de l'été. Il manque encore quelques justificatifs, je les ajoute dès que possible.\n\nEmma",
+         attachments=["Depenses_ete_2026.xlsx"]),
     dict(id="mail_bloc", folder="inbox", fromName="Bloc Out", fromAddress="news@blocout.fr", to="alex.moreau@mailo.fr",
          at=t(1, "10:00"), subject="Nouvelles voies en septembre 🧗", body="Découvrez les 24 nouvelles voies ouvertes cette semaine."),
     dict(id="mail_colis", folder="inbox", fromName="Colis Express", fromAddress="noreply@colisexpress.fr", to="alex.moreau@mailo.fr",
          at=t(3, "18:30"), subject="Votre colis CX4821 est en route", body="Livraison prévue demain."),
     dict(id="mail_banque", folder="inbox", fromName="Banque Azur", fromAddress="releves@banqueazur.fr", to="alex.moreau@mailo.fr",
-         at=t(5, "07:00"), subject="Votre relevé d'août est disponible", body="Votre relevé de compte est disponible dans votre espace personnel."),
+         at=t(5, "07:00"), subject="Votre relevé d'août est disponible", body="Votre relevé de compte est disponible dans votre espace personnel.",
+         attachments=["Releve_2026-08.pdf"]),
     dict(id="mail_mairie", folder="inbox", fromName="Mairie — Vie associative", fromAddress="asso@mairie.fr", to="bureau@collectif-lumen.fr",
          at=t(26, "09:40", 8), subject="Autorisation buvette — vernissage du 5 septembre", body="Votre demande d'autorisation de buvette temporaire est acceptée."),
     dict(id="mail_varenne", folder="inbox", fromName="Élodie Garnier", fromAddress="e.garnier@agence-varenne.fr", to="alex.moreau@mailo.fr",
          at=t(11, "16:05"), subject="Réunion lundi 11h", body="Je t'envoie l'ordre du jour ce week-end. Bon week-end !"),
     dict(id="mail_concert", folder="inbox", fromName="Billetterie Halcyon", fromAddress="tickets@halcyon.fr", to="alex.moreau@mailo.fr",
-         at=t(29, "20:00", 8), subject="Vos billets", body="Merci pour votre commande. 2 billets — 4 octobre."),
+         at=t(29, "20:00", 8), subject="Vos billets", body="Merci pour votre commande. 2 billets — 4 octobre.",
+         attachments=["Billets_Halcyon_4-oct.pdf"]),
 ]
 
 # ---------------------------------------------------------------- browser
@@ -479,7 +483,8 @@ browser = [
     dict(id="w01", at=t(19, "22:30", 8), kind="search", text="vivian maier exposition 2026"),
     dict(id="w02", at=t(25, "07:50", 8), kind="search", text="régler dérailleur vélo"),
     dict(id="w03", at=t(28, "21:15", 8), kind="search", text="location camion déménagement dimanche"),
-    dict(id="w04", at=t(29, "19:44", 8), kind="visit", text="Billetterie Halcyon — Concerts d'automne", url="halcyon.fr/automne"),
+    dict(id="w04", at=t(29, "19:44", 8), kind="visit", text="Billetterie Halcyon — Concerts d'automne", url="halcyon.fr/automne",
+         summary="Programmation d'automne : 14 concerts, du 26 septembre au 20 décembre. Tarif réduit pour les moins de 26 ans."),
     dict(id="w05", at=t(2, "13:10"), kind="search", text="rembourser dette ami sans se fâcher"),
     dict(id="w06", at=t(27, "22:02", 8), kind="search", text="objectif 35mm argentique occasion"),
     dict(id="w07", at=t(7, "22:20"), kind="search", text="comment s'excuser auprès de son ex"),

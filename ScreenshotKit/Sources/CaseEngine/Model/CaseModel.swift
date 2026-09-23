@@ -226,6 +226,9 @@ public struct Mail: Codable, Sendable, Identifiable, Hashable {
     public var subject: String
     public var body: String
     public var unread: Bool?
+    /// File names of the attachments. The files themselves were never downloaded on the phone:
+    /// only their names are visible (and searchable).
+    public var attachments: [String]? = nil
 }
 
 public struct BrowserEntry: Codable, Sendable, Identifiable, Hashable {

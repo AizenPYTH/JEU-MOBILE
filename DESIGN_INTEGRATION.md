@@ -85,6 +85,31 @@ les points où le handoff contredit le brief ou le moteur — **à trancher par 
      élément épinglé est une vraie preuve ; « important » = ce que le joueur a lié à un suspect.
    - Non ajoutés (hors périmètre, nouvelles apps) : Fichiers, Appareil photo, Calculatrice.
 
+8. **Nuit d'amélioration autonome (après la passe de polish)** — décisions prises sans validation,
+   à relire :
+   - Logo de l'accueil : **TRACE** (même cadre de capture) + une phrase d'accroche narrative.
+   - Barre d'état : la pastille « −N s » passe sous le chrono (l'îlot la cachait) ; la batterie
+     du téléphone saisi affiche un pourcentage qui baisse avec le temps (23 % → 4 %, décoratif).
+   - Retour d'épinglage : toast sur deux lignes (« Ajouté au carnet · 3 » + ce qui a été ajouté),
+     rebond de la capsule Carnet ; lier à un suspect dit où le retrouver.
+   - **Lecture du joueur sur un élément lié** : « L'accuse » / « Le disculpe » dans la fiche du
+     suspect (`NotebookEntry.stance`, `Investigation.setStance`). Gratuit, jamais vérifié par le
+     jeu, sans effet sur le score ; remis à zéro si l'élément est lié à quelqu'un d'autre.
+   - Fiche suspect : « Dans le téléphone » (nombre de messages et d'appels, raccourcis qui ferment
+     le carnet et ouvrent l'app — au coût habituel), déclaration, notes, chaîne des éléments liés
+     (quand · quoi · où) avec la lecture du joueur.
+   - Chronologie du carnet : qui (avatar) et où (lieu, pour une photo analysée, un trajet, un
+     rendez-vous) sous chaque élément.
+   - Aide (ex-« Indices ») : 3 paliers nommés (Une piste · Où chercher · La preuve), ce que chacun
+     apporte, son coût en points et le score maximal qui en résulte.
+   - Moment du verdict (~2,5 s, touchable pour passer) : la personne accusée, « Vérification du
+     dossier… », puis le tampon RÉSOLUE / NON RÉSOLUE.
+   - Ouverture des apps en zoom depuis leur icône (iOS 18+, transition standard avant).
+   - Mail : pièces jointes (noms seulement, « non téléchargée sur cet appareil ») — champ
+     `attachments` facultatif dans l'affaire ; recherche globale sur leurs noms.
+   - Photos : albums Toutes · Appareil photo · Reçues · Captures.
+   - États vides crédibles dans chaque app.
+
 Ordre de travail décidé : 1) compilation réelle sur macOS ; 2) onboarding, reprise d'une enquête,
 recherche globale ; 3) immersion (rail de dates, appel entrant, fiche photo + mini-carte, rangs) ;
 4) polish (sons, animations, micro-interactions). Pas de grosse fonctionnalité avant que le parcours

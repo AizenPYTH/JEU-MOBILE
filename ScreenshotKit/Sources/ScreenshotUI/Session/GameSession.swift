@@ -341,6 +341,13 @@ final class GameSession {
         refresh()
     }
 
+    /// The player's reading of a linked item (against / in favour of the suspect). Free.
+    func setStance(_ stance: NotebookEntry.Stance?, for ref: ItemRef) {
+        investigation.setStance(stance, for: ref)
+        Haptics.selection()
+        refresh()
+    }
+
     private func showToast(_ text: String, detail: String? = nil, kind: Toast.Kind = .neutral) {
         let toast = Toast(id: (self.toast?.id ?? 0) + 1, text: text, detail: detail, kind: kind)
         self.toast = toast

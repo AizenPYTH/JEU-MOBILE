@@ -28,10 +28,21 @@ public enum TimedAction: String, Hashable, Sendable {
 
 /// Something the player pinned to the notebook ("◆ Épinglé"), optionally linked to a suspect.
 public struct NotebookEntry: Codable, Hashable, Sendable, Identifiable {
+    /// How the player reads an item linked to a suspect. Their own reasoning only: the engine
+    /// never checks it and it does not count in the score.
+    public enum Stance: String, Codable, Hashable, Sendable {
+        /// "Contre lui / elle".
+        case incriminates
+        /// "En sa faveur".
+        case clears
+    }
+
     public var ref: ItemRef
     public var linkedTo: SuspectID?
     /// Investigation time when it was pinned.
     public var pinnedAtElapsed: Double
+    /// Set by the player on a linked item (optional in saved games from earlier versions).
+    public var stance: Stance? = nil
 
     public var id: ItemRef { ref }
 }
@@ -475,11 +486,19 @@ public final class Investigation {
     public func link(_ ref: ItemRef, to suspect: SuspectID?) {
         if let suspect, index.suspect(suspect) == nil { return }
         if let i = notebook.firstIndex(where: { $0.ref == ref }) {
+            if notebook[i].linkedTo != suspect { notebook[i].stance = nil } // a new suspect, a new reading
             notebook[i].linkedTo = suspect
         } else {
             notebook.append(NotebookEntry(ref: ref, linkedTo: suspect, pinnedAtElapsed: elapsedSeconds))
             seen.insert(ref)
         }
+    }
+
+    /// Records how the player reads a linked item (against / in favour of the suspect, or nil).
+    /// Ignored for an item that is not linked to a suspect.
+    public func setStance(_ stance: NotebookEntry.Stance?, for ref: ItemRef) {
+        guard let i = notebook.firstIndex(where: { $0.ref == ref }), notebook[i].linkedTo != nil else { return }
+        notebook[i].stance = stance
     }
 
     public func linkedEntries(for suspect: SuspectID) -> [NotebookEntry] {
