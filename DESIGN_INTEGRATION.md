@@ -109,6 +109,16 @@ les points où le handoff contredit le brief ou le moteur — **à trancher par 
      `attachments` facultatif dans l'affaire ; recherche globale sur leurs noms.
    - Photos : albums Toutes · Appareil photo · Reçues · Captures.
    - États vides crédibles dans chaque app.
+   - Accueil du téléphone : widgets Batterie et « À venir » (prochain rendez-vous, ouvre le
+     Calendrier) sur les écrans assez hauts ; alerte système « Batterie faible » à 10 %.
+   - Carte d'affaire (Accueil, Affaires) : l'écran verrouillé du téléphone saisi au lieu du
+     placeholder rayé. Profil : rang (un par affaire résolue) et 4 distinctions.
+   - Couleur par événement dans le Calendrier ; « Distribué » sous le dernier message envoyé ;
+     avatars d'expéditeur dans Mail ; « Tout est lu » au lieu de « 0 non lu ».
+   - « Résoudre l'affaire maintenant ? » / « Désigner le responsable » (panneau du chrono).
+   - Non fait, volontairement : app Fichiers, Appareil photo, Calculatrice (nouvelles apps sans
+     données d'affaire), recherche dans Mail / Carte (une recherche coûte du temps : c'est la
+     recherche globale qui le fait).
 
 Ordre de travail décidé : 1) compilation réelle sur macOS ; 2) onboarding, reprise d'une enquête,
 recherche globale ; 3) immersion (rail de dates, appel entrant, fiche photo + mini-carte, rangs) ;
