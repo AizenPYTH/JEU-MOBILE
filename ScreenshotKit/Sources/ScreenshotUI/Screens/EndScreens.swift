@@ -551,6 +551,7 @@ struct RevealTimeline: View {
 struct ScoreView: View {
     let verdict: Verdict
     let duration: Int
+    var caseTitle: String = ""
     let onReplay: () -> Void
     let onNext: () -> Void
     @State private var displayed = 0
@@ -558,9 +559,17 @@ struct ScoreView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
+            VStack(alignment: .leading, spacing: Theme.Spacing.s2) {
+                Text(verdict.isCorrect ? L10n.t("result.solvedBadge") : L10n.t("result.unsolvedBadge"))
+                    .overline(verdict.isCorrect ? Theme.Colors.clear : Theme.Colors.alertText)
+                if !caseTitle.isEmpty {
+                    Text(caseTitle).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
+                }
+            }
+            .padding(.top, Theme.Spacing.s8)
             Text(verdict.isPerfect ? L10n.t("score.perfect") : L10n.t("score.overline"))
                 .overline(verdict.isPerfect ? Theme.Colors.signal : Theme.Colors.textSecondary)
-                .padding(.top, Theme.Spacing.s8)
+                .padding(.top, Theme.Spacing.s4)
             Text("\(displayed)%")
                 .font(Theme.Fonts.timerScore)
                 .tracking(-5)

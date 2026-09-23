@@ -25,6 +25,7 @@ final class GameSession {
     /// Last time cost, flashed next to the timer ("−8 s").
     private(set) var lastCost: TimeCostFlash?
     /// "◆ Ajouté au carnet · n" / "Retiré du carnet".
+    private var lowBatteryWarned = false
     private(set) var toast: Toast?
     /// The phone's clock, to the minute. The only source of phone time is `Investigation.phoneNow`
     /// (case start + everything spent: the same elapsed time as the timer); it is published here so
@@ -149,6 +150,7 @@ final class GameSession {
     private func tick() {
         investigation.tick()
         refresh(contentChanged: false)
+        warnLowBatteryIfNeeded()
         ticksSinceSave += 1
         if ticksSinceSave >= 20 { save() } // every ~5 s, in case the app is killed without warning
     }
@@ -186,6 +188,16 @@ final class GameSession {
             revision += 1
             save()
         }
+    }
+
+    /// The seized phone's own "Batterie faible" alert, once, when it reaches 10 % (display only:
+    /// not a case notification, not listed in the Notifications app).
+    private func warnLowBatteryIfNeeded() {
+        guard !lowBatteryWarned, phase == .investigating, batteryLevel <= 10 else { return }
+        lowBatteryWarned = true
+        enqueueBanner(PhoneNotification(id: "system.lowBattery", app: .settings, title: L10n.t("system.lowBatteryTitle"),
+                                        body: L10n.f("system.lowBatteryBody", batteryLevel), at: investigation.phoneNow))
+        Haptics.notification()
     }
 
     private static func minute(of moment: Moment) -> Moment {

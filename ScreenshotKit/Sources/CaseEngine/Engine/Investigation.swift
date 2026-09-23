@@ -10,6 +10,17 @@ public struct PhoneNotification: Identifiable, Hashable, Sendable {
     public var at: Moment
     public var opens: ItemRef?
     public var level: LiveEvent.Level = .normal
+
+    public init(id: String, app: AppID, title: String, body: String, at: Moment,
+                opens: ItemRef? = nil, level: LiveEvent.Level = .normal) {
+        self.id = id
+        self.app = app
+        self.title = title
+        self.body = body
+        self.at = at
+        self.opens = opens
+        self.level = level
+    }
 }
 
 /// Something the UI should react to (banner, "-12 s" flash, haptics…). Drained with `drainEvents()`.

@@ -121,6 +121,7 @@ public struct RootView: View {
                     .transition(.opacity)
             case .score(let play):
                 ScoreView(verdict: play.verdict, duration: play.session.caseFile.durationSeconds,
+                          caseTitle: play.session.caseFile.title,
                           onReplay: { start(play.session.caseFile) },
                           onNext: { stage = nextCase(after: play.session.caseFile).map { .intro($0) } ?? .cases })
                     .transition(.opacity)

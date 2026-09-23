@@ -6989,6 +6989,40 @@
         }
       }
     },
+    "system.lowBatteryBody": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld%% battery remaining."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld %% de batterie restante."
+          }
+        }
+      }
+    },
+    "system.lowBatteryTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Low battery"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batterie faible"
+          }
+        }
+      }
+    },
     "timeUp.subtitle": {
       "extractionState": "manual",
       "localizations": {
