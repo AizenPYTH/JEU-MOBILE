@@ -140,13 +140,24 @@ jobs:
             cp "$RUNNER_TEMP/profile.mobileprovision" "$dir/$PROFILE_UUID.mobileprovision"
           done
 
-          # App Store Connect API key (used by the upload).
+          # App Store Connect API key, rebuilt as a clean PEM (secrets pasted with "\n" or CRLF still work).
           mkdir -p "$HOME/.appstoreconnect/private_keys"
-          printf '%s\n' "$ASC_KEY_P8" > "$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8"
+          printf '%s' "$ASC_KEY_P8" > "$RUNNER_TEMP/asc_key_raw.txt"
+          python3 scripts/ci/asc.py normalize-key "$RUNNER_TEMP/asc_key_raw.txt" \
+            "$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8"
+          rm -f "$RUNNER_TEMP/asc_key_raw.txt"
 
           echo "profile_name=$PROFILE_NAME" >> "$GITHUB_OUTPUT"
           echo "team_id=$TEAM_ID" >> "$GITHUB_OUTPUT"
           echo "bundle_id=$BUNDLE_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Check the App Store Connect API key and app (before building)
+        if: steps.secrets.outputs.can_sign == 'true'
+        id: asc
+        run: |
+          export ASC_KEY_FILE="$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8"
+          # Fails (red) with an explicit reason if the key is refused (401) or if no app has this bundle ID.
+          python3 scripts/ci/asc.py check-app "${{ steps.signing.outputs.bundle_id }}"
 
       - name: Compute build number
         if: steps.secrets.outputs.can_sign == 'true'
@@ -200,15 +211,37 @@ jobs:
             -exportPath "$RUNNER_TEMP/export"
           ls -la "$RUNNER_TEMP/export"
 
-      - name: Upload to TestFlight
+      - name: Check the IPA (path, bundle ID, version, build number, signature)
         if: steps.secrets.outputs.can_sign == 'true'
+        id: ipa
         run: |
           set -euo pipefail
-          IPA=$(find "$RUNNER_TEMP/export" -name '*.ipa' | head -1)
-          xcrun altool --upload-app --type ios --file "$IPA" \
-            --apiKey "$ASC_KEY_ID" --apiIssuer "$ASC_ISSUER_ID"
-          echo "### Uploaded build ${{ steps.version.outputs.build_number }} to TestFlight" >> "$GITHUB_STEP_SUMMARY"
-          echo "Processing by Apple usually takes 5–30 minutes before the build appears in TestFlight." >> "$GITHUB_STEP_SUMMARY"
+          IPAS=$(find "$RUNNER_TEMP/export" -maxdepth 1 -name '*.ipa')
+          COUNT=$(printf '%s\n' "$IPAS" | grep -c . || true)
+          [ "$COUNT" = "1" ] || { echo "::error::Expected exactly one .ipa in $RUNNER_TEMP/export, found $COUNT"; exit 1; }
+          IPA="$IPAS"
+          WORK="$RUNNER_TEMP/ipa-check"; rm -rf "$WORK"; mkdir -p "$WORK"
+          unzip -q "$IPA" -d "$WORK"
+          APP=$(find "$WORK/Payload" -maxdepth 1 -name '*.app' | head -1)
+          [ -n "$APP" ] || { echo "::error::No .app inside the IPA"; exit 1; }
+          PB=/usr/libexec/PlistBuddy
+          BUNDLE=$($PB -c 'Print :CFBundleIdentifier' "$APP/Info.plist")
+          BUILD=$($PB -c 'Print :CFBundleVersion' "$APP/Info.plist")
+          VERSION=$($PB -c 'Print :CFBundleShortVersionString' "$APP/Info.plist")
+          NAME=$($PB -c 'Print :CFBundleDisplayName' "$APP/Info.plist")
+          AUTHORITY=$(codesign -dvv "$APP" 2>&1 | grep '^Authority=' | head -1 || true)
+          echo "IPA:            $IPA ($(du -h "$IPA" | cut -f1), sha256 $(shasum -a 256 "$IPA" | cut -c1-16)…)"
+          echo "Bundle ID:      $BUNDLE"
+          echo "Display name:   $NAME"
+          echo "Version:        $VERSION"
+          echo "Build number:   $BUILD"
+          echo "Signature:      $AUTHORITY"
+          [ "$BUNDLE" = "${{ steps.signing.outputs.bundle_id }}" ] || { echo "::error::IPA bundle ID $BUNDLE ≠ ${{ steps.signing.outputs.bundle_id }}"; exit 1; }
+          [ "$BUILD" = "${{ steps.version.outputs.build_number }}" ] || { echo "::error::IPA build number $BUILD ≠ ${{ steps.version.outputs.build_number }}"; exit 1; }
+          echo "$AUTHORITY" | grep -q "Apple Distribution" || { echo "::error::The IPA is not signed with an Apple Distribution certificate"; exit 1; }
+          [ -f "$APP/embedded.mobileprovision" ] || { echo "::error::No embedded provisioning profile in the app"; exit 1; }
+          echo "path=$IPA" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Keep the IPA
         if: steps.secrets.outputs.can_sign == 'true'
@@ -217,6 +250,44 @@ jobs:
           name: Screenshot-${{ steps.version.outputs.build_number }}
           path: ${{ runner.temp }}/export/*.ipa
           retention-days: 14
+
+      - name: Upload to App Store Connect
+        if: steps.secrets.outputs.can_sign == 'true'
+        run: |
+          set -uo pipefail
+          IPA="${{ steps.ipa.outputs.path }}"
+          echo "==> Uploading $IPA"
+          echo "    bundle ${{ steps.signing.outputs.bundle_id }} · version ${{ steps.ipa.outputs.version }} · build ${{ steps.version.outputs.build_number }}"
+          echo "    App Store Connect app id ${{ steps.asc.outputs.app_id }}"
+          ISSUER_ARGS=()
+          [ -n "$ASC_ISSUER_ID" ] && ISSUER_ARGS=(--apiIssuer "$ASC_ISSUER_ID")
+          xcrun altool --upload-app --type ios --file "$IPA" \
+            --apiKey "$ASC_KEY_ID" "${ISSUER_ARGS[@]}" 2>&1 | tee "$RUNNER_TEMP/altool.log"
+          STATUS=${PIPESTATUS[0]}
+          echo "==> altool exit status: $STATUS"
+          # altool can print errors and still exit 0 (it did for build 21.1): read what Apple answered.
+          if [ "$STATUS" -ne 0 ] || grep -qiE "ERROR:|NOT_AUTHORIZED|Unable to (authenticate|upload)|UPLOAD FAILED" "$RUNNER_TEMP/altool.log"; then
+            echo "::error::App Store Connect did not accept the upload (see the altool output above)."
+            exit 1
+          fi
+          if ! grep -qE "UPLOAD SUCCEEDED|No errors uploading" "$RUNNER_TEMP/altool.log"; then
+            echo "::error::altool did not report a successful upload."
+            exit 1
+          fi
+          echo "==> Apple accepted the upload of build ${{ steps.version.outputs.build_number }}."
+
+      - name: Confirm the build is in App Store Connect
+        if: steps.secrets.outputs.can_sign == 'true'
+        run: |
+          export ASC_KEY_FILE="$HOME/.appstoreconnect/private_keys/AuthKey_${ASC_KEY_ID}.p8"
+          # Waits (up to 20 min) until App Store Connect lists the build; fails if it never shows up
+          # or if Apple marks it FAILED / INVALID.
+          python3 scripts/ci/asc.py wait-build "${{ steps.asc.outputs.app_id }}" "${{ steps.version.outputs.build_number }}" 20
+          {
+            echo "### Build ${{ steps.version.outputs.build_number }} received by App Store Connect"
+            echo "Bundle \`${{ steps.signing.outputs.bundle_id }}\` · version ${{ steps.ipa.outputs.version }}."
+            echo "Apple is processing it (usually 5–30 min); it then appears in TestFlight."
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Clean up secrets
         if: always()

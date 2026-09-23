@@ -223,8 +223,10 @@ branche de travail dans `main`, puis GitHub → dépôt → **Settings** → **G
 
 1. GitHub → onglet **Actions** → **iOS – Build & TestFlight** → **Run workflow**.
    Choisis la branche **`claude/busy-hopper-5dgev5`**, puis **Run workflow**.
-2. Durée : environ 10 à 20 minutes. Étapes : tests → archive Release signée → export `.ipa` →
-   envoi à App Store Connect → le build apparaît dans TestFlight.
+2. Durée : environ 15 à 30 minutes. Étapes : tests → vérification de la clé API et de l'app dans
+   App Store Connect → archive Release signée → export `.ipa` → contrôle de l'IPA (bundle ID, version,
+   numéro de build, signature) → envoi → **attente que App Store Connect liste le build**.
+   Le run n'est vert que si Apple a réellement reçu le build ; sinon il est rouge avec la raison.
    Sans les secrets, le même workflow s'arrête après une **archive non signée** : utile pour vérifier
    que tout compile en Release (le résumé du run affiche bundle ID, version, numéro de build,
    présence du manifeste de confidentialité).
@@ -262,7 +264,9 @@ les accepte tous. La version affichée (`0.2.0`) se change dans `Configs/Screens
 | `The provisioning profile is for 'X' but the app bundle id is 'Y'` | Le profil n'est pas pour le bon App ID : corrige le profil ou `Configs/Screenshot.xcconfig`. |
 | `No signing certificate "iOS Distribution" found` / `doesn't include signing certificate` | Le profil a été généré avec un autre certificat que celui du .p12 : régénère le profil (étape 5) en cochant le bon certificat. |
 | `The bundle version must be higher than the previously uploaded version` | Ajoute la variable `BUILD_NUMBER_OFFSET` (par ex. `100`). |
-| `Authentication failed` à l'envoi | `ASC_KEY_ID`, `ASC_ISSUER_ID` ou `ASC_KEY_P8` incorrect (le .p8 doit être copié en entier). |
+| `401 NOT_AUTHORIZED` à l'étape « Check the App Store Connect API key » (ou `Authentication failed`) | Apple refuse la clé API : `ASC_KEY_ID` doit être le **Key ID** de la clé (10 caractères), `ASC_ISSUER_ID` l'**Issuer ID** affiché au-dessus de la liste des clés d'équipe (pas le Team ID), `ASC_KEY_P8` le contenu **complet** du fichier `.p8`. La clé ne doit pas être révoquée. En cas de doute, crée une nouvelle clé (Team Key, rôle App Manager) et remplace les trois secrets. |
+| `App Store Connect has no app with the bundle ID com.aizenpyth.screenshot` | L'app n'existe pas encore dans App Store Connect (ou avec un autre bundle ID) : étape 2. |
+| `Build … never appeared in App Store Connect` / `FAILED` / `INVALID` | Apple a refusé le build : regarde l'e-mail reçu par le titulaire du compte (code ITMS-xxxxx) et copie-le-moi. |
 | `ITMS-90683` / `ITMS-91053` (clé Info.plist ou raison d'API manquante) | Copie-moi le mail d'Apple : il faut compléter `Screenshot/PrivacyInfo.xcprivacy` ou l'Info.plist. |
 | `altool` introuvable ou refusé | Apple a changé l'outil d'envoi : copie-moi le log, je bascule l'envoi sur `xcodebuild -exportArchive` (destination `upload`). |
 | Refus lié au SDK (« built with iOS xx SDK ») | Apple exige un Xcode récent : mets `MACOS_RUNNER` = `macos-26` et/ou `XCODE_VERSION`. |
