@@ -8,8 +8,11 @@ enum L10n {
         String(localized: String.LocalizationValue(key), bundle: .module)
     }
 
+    /// Formatted string. Goes through NSLocalizedString + localizedStringWithFormat so that the
+    /// catalog's plural variations ("1 manquée" / "3 manquées") are chosen from the arguments.
     static func f(_ key: String, _ arguments: any CVarArg...) -> String {
-        String(format: t(key), locale: Locale.current, arguments: arguments)
+        let format = NSLocalizedString(key, bundle: .module, comment: "")
+        return withVaList(arguments) { NSString(format: format, locale: Locale.current, arguments: $0) as String }
     }
 }
 #endif

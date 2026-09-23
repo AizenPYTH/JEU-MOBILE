@@ -14,7 +14,18 @@ struct LocalizationTests {
         struct Entry: Decodable {
             struct Localization: Decodable {
                 struct Unit: Decodable { let value: String }
+                struct Variant: Decodable { let stringUnit: Unit }
+                struct Variations: Decodable { let plural: [String: Variant]? }
                 let stringUnit: Unit?
+                let variations: Variations?
+
+                /// The plain string, or the "other" form of a plural (which must then also have "one").
+                var text: String {
+                    if let plural = variations?.plural {
+                        return plural["one"] == nil ? "" : plural["other"]?.stringUnit.value ?? ""
+                    }
+                    return stringUnit?.value ?? ""
+                }
             }
             let localizations: [String: Localization]?
         }
@@ -38,7 +49,7 @@ struct LocalizationTests {
         }
         var missing: [String] = []
         for key in keys.sorted() {
-            for lang in ["fr", "en"] where (catalog.strings[key]?.localizations?[lang]?.stringUnit?.value ?? "").isEmpty {
+            for lang in ["fr", "en"] where (catalog.strings[key]?.localizations?[lang]?.text ?? "").isEmpty {
                 missing.append("\(key) [\(lang)]")
             }
         }

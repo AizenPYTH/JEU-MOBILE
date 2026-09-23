@@ -182,7 +182,7 @@ final class MainFlowTests: XCTestCase {
         wait(element("notebook.row"), 5, "élément épinglé dans le carnet")
         snap("15-carnet-preuves")
         // Close the sheet by swiping its title down.
-        app.staticTexts["Carnet"].firstMatch.swipeDown(velocity: .fast)
+        element("notebook.title").swipeDown(velocity: .fast)
         XCTAssertTrue(element("notebook.accuse").waitForNonExistence(timeout: 5), "Le carnet ne se ferme pas")
         snap("15b-carnet-ferme")
 

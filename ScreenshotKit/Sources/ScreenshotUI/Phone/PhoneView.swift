@@ -15,7 +15,9 @@ struct PhoneView: View {
             Theme.Colors.bgBase.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                StatusBar(session: session, onTimer: onTimer)
+                // Room for the status bar, which is drawn on top: the phone screens' backgrounds
+                // extend to the top edge and would otherwise cover the timer.
+                Color.clear.frame(height: Theme.Size.statusBar)
                 NavigationStack(path: Binding(get: { session.path }, set: { session.setPath($0) })) {
                     HomeScreen(session: session)
                         .navigationDestination(for: PhoneRoute.self) { route in
@@ -26,6 +28,11 @@ struct PhoneView: View {
                 .tint(Theme.Colors.textPrimary)
             }
             .ignoresSafeArea(edges: .top)
+
+            StatusBar(session: session, onTimer: onTimer)
+                .background(Theme.Colors.bgBase.opacity(0.94))
+                .ignoresSafeArea(edges: .top)
+                .zIndex(1)
 
             // Bottom: scrim gradient 96 pt, capsule, home indicator.
             VStack(spacing: Theme.Spacing.s3) {

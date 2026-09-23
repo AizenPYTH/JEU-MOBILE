@@ -101,6 +101,7 @@ struct NotebookView: View {
         NavigationStack {
             VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
                 Text(L10n.t("carnet.title")).font(Theme.Fonts.titleLarge).foregroundStyle(Theme.Colors.textPrimary)
+                    .accessibilityIdentifier("notebook.title")
                 Segmented(options: [(0, L10n.t("carnet.suspects")),
                                     (1, L10n.f("carnet.evidence", game.notebook.count)),
                                     (2, L10n.t("carnet.timeline"))], selection: $tab)
