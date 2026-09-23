@@ -6,6 +6,7 @@ import CaseLibrary
 /// Home → Affaires → Intro → investigation (phone) → time up / accusation → result → score.
 public struct RootView: View {
     enum Stage {
+        case onboarding
         case home
         case cases
         case archive
@@ -36,6 +37,7 @@ public struct RootView: View {
     public init() {
         AppFonts.register()
         UITestHooks.applyAtLaunch()
+        _stage = State(initialValue: UITestHooks.showsOnboarding(default: !Preferences.onboardingDone) ? .onboarding : .home)
         // Load into locals first: each stored `let` must be initialised exactly once, and a failure
         // in the second load must not re-assign what the first one already set.
         let loaded: (cases: [CaseFile], rules: GameRules?, error: String?)
@@ -87,7 +89,13 @@ public struct RootView: View {
                 ProfileView(attempts: attempts, caseCount: cases.count, onBack: goHome)
                     .transition(.move(edge: .trailing))
             case .settings:
-                GameSettingsView(onBack: goHome)
+                GameSettingsView(onBack: goHome, onReplayOnboarding: { stage = .onboarding })
+                    .transition(.move(edge: .trailing))
+            case .onboarding:
+                OnboardingView {
+                    Preferences.onboardingDone = true
+                    goHome()
+                }
                     .transition(.move(edge: .trailing))
             case .intro(let file):
                 CaseIntroView(caseFile: file, onStart: { start(file) }, onClose: goHome)
@@ -128,6 +136,7 @@ public struct RootView: View {
 
     private var stageKey: String {
         switch stage {
+        case .onboarding: "onboarding"
         case .home: "home"
         case .cases: "cases"
         case .archive: "archive"
@@ -177,8 +186,20 @@ public struct RootView: View {
 }
 
 /// Launch arguments used by the UI tests (Debug builds only; ignored in Release):
-/// `-UITestReset YES` clears the saved attempts, `-UITestDuration <seconds>` shortens every case.
+/// `-UITestReset YES` clears the saved attempts, `-UITestDuration <seconds>` shortens every case,
+/// `-UITestOnboarding show|skip` forces the first-launch onboarding on or off.
 enum UITestHooks {
+    static func showsOnboarding(default value: Bool) -> Bool {
+        #if DEBUG
+        switch UserDefaults.standard.string(forKey: "UITestOnboarding") {
+        case "show": return true
+        case "skip": return false
+        default: break
+        }
+        #endif
+        return value
+    }
+
     static func applyAtLaunch() {
         #if DEBUG
         if UserDefaults.standard.bool(forKey: "UITestReset") { ProgressStore.reset() }

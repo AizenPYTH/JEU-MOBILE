@@ -470,6 +470,7 @@ struct StatCard: View {
 
 struct GameSettingsView: View {
     let onBack: () -> Void
+    let onReplayOnboarding: () -> Void
     @AppStorage(Preferences.vibrationsKey) private var vibrations = true
     @AppStorage(Preferences.reduceMotionKey) private var reduceMotion = false
 
@@ -481,6 +482,18 @@ struct GameSettingsView: View {
             }
             group(L10n.t("settings.accessibilityGroup")) {
                 Toggle(L10n.t("settings.reduceMotion"), isOn: $reduceMotion)
+            }
+            group(L10n.t("settings.helpGroup")) {
+                Button(action: onReplayOnboarding) {
+                    HStack {
+                        Text(L10n.t("settings.replayOnboarding"))
+                        Spacer()
+                        Text("›").foregroundStyle(Theme.Colors.textTertiary)
+                    }
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("settings.replayOnboarding")
             }
             Spacer()
         }

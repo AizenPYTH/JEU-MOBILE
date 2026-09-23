@@ -2916,6 +2916,380 @@
         }
       }
     },
+    "onboarding.accuse.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap the timer to accuse earlier. Choose, then hold to confirm: there is no going back."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez le chrono pour accuser plus tôt. Choisissez, puis maintenez pour confirmer : il n'y a pas de retour en arrière."
+          }
+        }
+      }
+    },
+    "onboarding.accuse.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accusation recorded."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accusation enregistrée."
+          }
+        }
+      }
+    },
+    "onboarding.accuse.overline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ACCUSE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ACCUSER"
+          }
+        }
+      }
+    },
+    "onboarding.accuse.suspect": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suspect %ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suspect %ld"
+          }
+        }
+      }
+    },
+    "onboarding.accuse.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At 00:00, you name a suspect."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À 00:00, vous désignez un suspect."
+          }
+        }
+      }
+    },
+    "onboarding.continue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
+          }
+        }
+      }
+    },
+    "onboarding.explore.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You have a few minutes to search it and name who is lying. Every move costs seconds: open Photos, then analyse the picture."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous avez quelques minutes pour le fouiller et désigner qui ment. Chaque geste coûte des secondes : ouvrez Photos, puis analysez la photo."
+          }
+        }
+      }
+    },
+    "onboarding.explore.hintTap": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap Photos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez Photos."
+          }
+        }
+      }
+    },
+    "onboarding.explore.metadata": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taken at 19:42 · still daylight"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prise à 19:42 · il fait encore jour"
+          }
+        }
+      }
+    },
+    "onboarding.explore.overline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EXPLORE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EXPLORER"
+          }
+        }
+      }
+    },
+    "onboarding.explore.photo": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“In bed since 8 pm”"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Au lit depuis 20h »"
+          }
+        }
+      }
+    },
+    "onboarding.explore.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything is in this phone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout est dans ce téléphone."
+          }
+        }
+      }
+    },
+    "onboarding.pin.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A message, a photo, a call: hold your finger on it to add it to the notebook. When you accuse, these are your evidence."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un message, une photo, un appel : maintenez votre doigt dessus pour l'ajouter au carnet. Au moment d'accuser, ce sont vos preuves."
+          }
+        }
+      }
+    },
+    "onboarding.pin.hint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold to pin to the notebook."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenez pour épingler au carnet."
+          }
+        }
+      }
+    },
+    "onboarding.pin.msg1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight at Inès's, you coming?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir chez Inès t'es là ?"
+          }
+        }
+      }
+    },
+    "onboarding.pin.msg2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Got home. Going to sleep, talk tomorrow."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bien rentré. Je dors, on se capte demain."
+          }
+        }
+      }
+    },
+    "onboarding.pin.msg3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ok."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ok."
+          }
+        }
+      }
+    },
+    "onboarding.pin.overline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HOLD TO PIN"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MAINTENIR POUR ÉPINGLER"
+          }
+        }
+      }
+    },
+    "onboarding.pin.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep what matters."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gardez ce qui compte."
+          }
+        }
+      }
+    },
+    "onboarding.skip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passer"
+          }
+        }
+      }
+    },
+    "onboarding.start": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer"
+          }
+        }
+      }
+    },
+    "onboarding.stepOf": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld / %2$ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld / %2$ld"
+          }
+        }
+      }
+    },
     "pause.overline": {
       "extractionState": "manual",
       "localizations": {
@@ -3977,6 +4351,23 @@
         }
       }
     },
+    "settings.helpGroup": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HELP"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AIDE"
+          }
+        }
+      }
+    },
     "settings.model": {
       "extractionState": "manual",
       "localizations": {
@@ -4007,6 +4398,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Réduire les animations"
+          }
+        }
+      }
+    },
+    "settings.replayOnboarding": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replay the introduction"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revoir l'introduction"
           }
         }
       }

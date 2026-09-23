@@ -11,8 +11,10 @@ final class MainFlowTests: XCTestCase {
     override func setUp() {
         continueAfterFailure = false
         app = XCUIApplication()
-        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR", "-UITestReset", "YES"]
+        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip"]
     }
+
+    private let baseArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR", "-UITestReset", "YES"]
 
     // MARK: - Helpers
 
@@ -248,6 +250,55 @@ final class MainFlowTests: XCTestCase {
         app.buttons.matching(NSPredicate(format: "label CONTAINS[c] 'dernier message'")).firstMatch.tap()
         sleep(1)
         snap("24-dossier-reconstitution")
+    }
+
+    // MARK: - First launch: the three-step onboarding
+
+    func testOnboarding() {
+        app.launchArguments = baseArguments + ["-UITestOnboarding", "show"]
+        app.launch()
+        let next = wait(element("onboarding.next"), 20, "onboarding")
+        XCTAssertFalse(next.isEnabled, "« Continuer » doit attendre que le geste soit fait")
+        snap("40-onboarding-explorer")
+
+        // 1 · Explorer: open Photos, analyse the photo (the demo timer loses 15 s).
+        tap(element("onboarding.app.photos"), "Photos (démo)", expecting: element("onboarding.analyze"))
+        tap(element("onboarding.analyze"), "Analyser (démo)", expecting: element("onboarding.metadata"))
+        snap("41-onboarding-analyse")
+        XCTAssertTrue(next.isEnabled)
+        next.tap()
+
+        // 2 · Épingler: hold the message.
+        let target = wait(element("onboarding.pinTarget"), 5, "message à épingler")
+        snap("42-onboarding-epingler")
+        usleep(700_000)
+        target.press(forDuration: 1.0)
+        let carnet = element("onboarding.carnet")
+        let pinned = expectation(for: NSPredicate(format: "label CONTAINS '1'"), evaluatedWith: carnet)
+        XCTAssertEqual(XCTWaiter().wait(for: [pinned], timeout: 5), .completed, "Le carnet de la démo devrait compter 1")
+        snap("43-onboarding-epingle")
+        next.tap()
+
+        // 3 · Accuser: choose, hold to confirm.
+        let suspect = wait(element("onboarding.suspect.0"), 5, "suspects de la démo")
+        snap("44-onboarding-accuser")
+        choose(suspect)
+        let hold = element("onboarding.hold")
+        usleep(500_000)
+        hold.press(forDuration: 2.0)
+        wait(element("onboarding.accused"), 5, "accusation de la démo")
+        snap("45-onboarding-accuse")
+        next.tap()
+
+        wait(element("home.start"), 10, "Accueil après l'onboarding")
+        snap("46-accueil-apres-onboarding")
+
+        // Shown once: the next launch opens straight on the home screen.
+        app.terminate()
+        app.launchArguments = baseArguments
+        app.launch()
+        wait(element("home.start"), 20, "Accueil au 2e lancement")
+        XCTAssertFalse(element("onboarding.next").exists, "L'onboarding ne doit apparaître qu'au premier lancement")
     }
 
     // MARK: - Time runs out, wrong accusation, reveal

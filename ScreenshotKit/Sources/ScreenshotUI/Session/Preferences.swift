@@ -6,6 +6,14 @@ enum Preferences {
     static let vibrationsKey = "screenshot.vibrations"
     static let reduceMotionKey = "screenshot.reduceMotion"
 
+    static let onboardingDoneKey = "screenshot.onboardingDone"
+
+    /// The three-step onboarding is shown on the first launch only.
+    static var onboardingDone: Bool {
+        get { UserDefaults.standard.bool(forKey: onboardingDoneKey) }
+        set { UserDefaults.standard.set(newValue, forKey: onboardingDoneKey) }
+    }
+
     static var vibrations: Bool {
         UserDefaults.standard.object(forKey: vibrationsKey) as? Bool ?? true
     }
