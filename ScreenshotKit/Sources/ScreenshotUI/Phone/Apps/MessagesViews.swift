@@ -10,9 +10,9 @@ struct MessagesListView: View {
 
     var body: some View {
         let game = session.game
+        let unread = game.conversations.reduce(0) { $0 + $1.unread }
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                AppHeader(title: AppID.messages.title)
                 SearchField(text: $query, prompt: L10n.f("messages.searchPrompt", session.rules.timeCosts.search)) {
                     results = session.search(query)
                 } onClear: {
@@ -52,31 +52,7 @@ struct MessagesListView: View {
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
         .background(Theme.Colors.bgBase)
-        .toolbar(.hidden, for: .navigationBar)
-        .safeAreaInset(edge: .top, spacing: 0) { BackRow(title: L10n.t("nav.home")) { session.goHome() } }
-    }
-}
-
-/// "‹ Parent" row (h 44) used by app roots.
-struct BackRow: View {
-    let title: String
-    let action: () -> Void
-
-    var body: some View {
-        HStack {
-            Button(action: action) {
-                HStack(spacing: 2) {
-                    Image(systemName: "chevron.left").font(.system(size: 17, weight: .semibold))
-                    Text(title).font(Theme.Fonts.bodyLarge)
-                }
-                .foregroundStyle(Theme.Colors.textPrimary)
-                .frame(minHeight: Theme.Size.hit)
-            }
-            .buttonStyle(.plain)
-            Spacer()
-        }
-        .padding(.horizontal, Theme.Spacing.marginCompact)
-        .background(Theme.Colors.bgBase.opacity(0.9))
+        .appRoot(.messages, subtitle: L10n.f("messages.subtitle", game.conversations.count, unread), session: session)
     }
 }
 
@@ -114,7 +90,7 @@ struct SearchField: View {
         .padding(.horizontal, Theme.Spacing.s4)
         .frame(height: Theme.Size.searchField)
         .background(RoundedRectangle(cornerRadius: Theme.Radius.sm).fill(Theme.Colors.bgRaised))
-        .overlay(RoundedRectangle(cornerRadius: Theme.Radius.sm).strokeBorder(focused ? Theme.Colors.line3 : .clear))
+        .overlay(RoundedRectangle(cornerRadius: Theme.Radius.sm).strokeBorder(focused ? Theme.Colors.info : Theme.Colors.line1))
     }
 }
 
@@ -141,7 +117,7 @@ struct ConversationRow: View {
                     if let last = summary.last {
                         Text(PhoneFormat.relative(last.message.at, now: game.phoneNow))
                             .font(Theme.Fonts.data)
-                            .foregroundStyle(unread ? Theme.Colors.signal : Theme.Colors.textTertiary)
+                            .foregroundStyle(unread ? Theme.Colors.info : Theme.Colors.textTertiary)
                     }
                 }
                 Text(preview)
@@ -154,7 +130,7 @@ struct ConversationRow: View {
         .frame(height: Theme.Size.conversationRow)
         .overlay(alignment: .leading) {
             if unread {
-                Circle().fill(Theme.Colors.signal)
+                Circle().fill(Theme.Colors.info)
                     .frame(width: Theme.Size.unreadDot, height: Theme.Size.unreadDot)
                     .padding(.leading, 7)
                     .accessibilityLabel(Text(L10n.t("a11y.unread")))
@@ -348,7 +324,7 @@ struct SystemPill: View {
     }
 }
 
-/// MessageBubble: received (bg.bubbleIn) · sent (white, black text) · deleted (dashed, italic) ·
+/// MessageBubble: received (grey, left) · sent (blue, right) · deleted (dashed, italic) ·
 /// recovered · pinned (amber ring + dot) · photo. Max 76 % width, r 19, 6 on the sender side of the last one.
 struct MessageBubble: View {
     let visible: VisibleMessage
@@ -398,12 +374,12 @@ struct MessageBubble: View {
                         if let text = message.text {
                             Text(text)
                                 .font(Theme.Fonts.body)
-                                .foregroundStyle(mine ? Theme.Colors.textOnLight : Theme.Colors.textPrimary)
+                                .foregroundStyle(mine ? Theme.Colors.bubbleOutText : Theme.Colors.textPrimary)
                         }
                     }
                     .padding(.horizontal, message.text == nil ? 4 : 13)
                     .padding(.vertical, message.text == nil ? 4 : 9)
-                    .background(shape.fill(mine ? Theme.Colors.textPrimary : Theme.Colors.bgBubbleIn))
+                    .background(shape.fill(mine ? Theme.Colors.bubbleOut : Theme.Colors.bgBubbleIn))
                     .overlay(
                         shape.stroke(visible.state == .recovered ? Theme.Colors.signalLine : (highlighted ? Theme.Colors.line3 : .clear),
                                      style: StrokeStyle(lineWidth: 1, dash: visible.state == .recovered ? [4, 3] : []))

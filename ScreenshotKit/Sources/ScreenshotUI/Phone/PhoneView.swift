@@ -11,6 +11,21 @@ struct PhoneView: View {
     let onTimer: () -> Void
 
     var body: some View {
+        ZStack {
+            DeskBackground()
+            PhoneDevice { screen }
+                .padding(.horizontal, Theme.Spacing.s3)
+                .padding(.top, Theme.Spacing.s1)
+                .padding(.bottom, Theme.Spacing.s2)
+        }
+        .environment(\.colorScheme, .dark)
+        .statusBarHidden()
+        .persistentSystemOverlays(.hidden)
+        .defersSystemGestures(on: .bottom)
+    }
+
+    /// Everything shown on the seized phone's glass.
+    private var screen: some View {
         ZStack(alignment: .top) {
             Theme.Colors.bgBase.ignoresSafeArea()
 
@@ -29,8 +44,9 @@ struct PhoneView: View {
             }
             .ignoresSafeArea(edges: .top)
 
+            // On the home screen the wallpaper shows through the status bar, like a real phone.
             StatusBar(session: session, onTimer: onTimer)
-                .background(Theme.Colors.bgBase.opacity(0.94))
+                .background(session.path.isEmpty ? Color.clear : Theme.Colors.bgBase.opacity(0.94))
                 .ignoresSafeArea(edges: .top)
                 .zIndex(1)
 
@@ -78,10 +94,6 @@ struct PhoneView: View {
         }
         .animation(Theme.Motion.springNotification, value: session.banner)
         .animation(Theme.Motion.emphasized(0.2), value: session.toast)
-        .environment(\.colorScheme, .dark)
-        .statusBarHidden()
-        .persistentSystemOverlays(.hidden)
-        .defersSystemGestures(on: .bottom)
     }
 
     @ViewBuilder
@@ -146,6 +158,96 @@ struct PhoneAppStyle: ViewModifier {
 
 extension View {
     func phoneAppStyle() -> some View { modifier(PhoneAppStyle()) }
+}
+
+// MARK: - The device
+
+/// The seized phone as an object: dark metal frame, black bezel, camera island, side buttons,
+/// a faint reflection on the glass and a soft shadow that separates it from the background.
+/// It is the phone being searched, not a marketing mockup: the screen stays the whole game.
+struct PhoneDevice<Content: View>: View {
+    @ViewBuilder let content: Content
+
+    var body: some View {
+        let outer = RoundedRectangle(cornerRadius: Theme.Size.deviceRadius, style: .continuous)
+        let screenRadius = Theme.Size.deviceRadius - Theme.Size.deviceFrame - Theme.Size.deviceBezel
+        let glass = RoundedRectangle(cornerRadius: screenRadius, style: .continuous)
+        content
+            .clipShape(glass)
+            .overlay(alignment: .top) {
+                CameraIsland().padding(.top, 11).allowsHitTesting(false)
+            }
+            .overlay {
+                glass.fill(LinearGradient(colors: [Theme.Colors.deviceGlare, .clear],
+                                          startPoint: .topLeading, endPoint: UnitPoint(x: 0.55, y: 0.3)))
+                    .allowsHitTesting(false)
+            }
+            .padding(Theme.Size.deviceBezel)
+            .background(RoundedRectangle(cornerRadius: screenRadius + Theme.Size.deviceBezel, style: .continuous)
+                .fill(Theme.Colors.deviceBezel))
+            .padding(Theme.Size.deviceFrame)
+            .background(outer.fill(LinearGradient(colors: [Theme.Colors.deviceFrameTop, Theme.Colors.deviceFrameBottom],
+                                                  startPoint: .topLeading, endPoint: .bottomTrailing)))
+            .overlay(outer.strokeBorder(LinearGradient(colors: [Theme.Colors.deviceEdge, Theme.Colors.deviceEdge.opacity(0.15)],
+                                                       startPoint: .top, endPoint: .bottom), lineWidth: 1))
+            .background(alignment: .topLeading) { SideButtons(leading: true) }
+            .background(alignment: .topTrailing) { SideButtons(leading: false) }
+            .shadow(color: .black.opacity(0.6), radius: 24, y: 14)
+    }
+}
+
+/// Pill-shaped camera island at the top of the screen.
+struct CameraIsland: View {
+    var body: some View {
+        Capsule()
+            .fill(Theme.Colors.deviceBezel)
+            .frame(width: Theme.Size.island.width, height: Theme.Size.island.height)
+            .overlay(alignment: .trailing) {
+                Circle()
+                    .fill(Theme.Colors.deskGlow)
+                    .overlay(Circle().strokeBorder(Theme.Colors.line2, lineWidth: 1))
+                    .frame(width: 10, height: 10)
+                    .padding(.trailing, 12)
+            }
+            .accessibilityHidden(true)
+    }
+}
+
+/// Action + volume buttons on the left edge, power on the right.
+struct SideButtons: View {
+    let leading: Bool
+
+    var body: some View {
+        VStack(spacing: Theme.Spacing.s4) {
+            if leading {
+                button(height: 26)
+                button(height: 50)
+                button(height: 50)
+            } else {
+                button(height: 80)
+            }
+        }
+        .padding(.top, leading ? 118 : 170)
+        .offset(x: leading ? -2.5 : 2.5)
+        .accessibilityHidden(true)
+    }
+
+    private func button(height: CGFloat) -> some View {
+        RoundedRectangle(cornerRadius: 1.5)
+            .fill(Theme.Colors.deviceButton)
+            .frame(width: 3, height: height)
+    }
+}
+
+/// Behind the phone: near-black with a cold glow, so the device reads as an object.
+struct DeskBackground: View {
+    var body: some View {
+        ZStack {
+            Theme.Colors.ink0
+            RadialGradient(colors: [Theme.Colors.deskGlow, Theme.Colors.ink0], center: .center, startRadius: 40, endRadius: 520)
+        }
+        .ignoresSafeArea()
+    }
 }
 
 // MARK: - Status bar with the timer
@@ -340,7 +442,7 @@ struct NotificationBanner: View {
                     .overline(Theme.Colors.textOnLight.opacity(0.6))
             }
             HStack(alignment: .top, spacing: Theme.Spacing.s4) {
-                AppTileGlyph(app: notification.app, size: 32, onLight: urgent)
+                AppTileGlyph(app: notification.app, size: 32)
                 VStack(alignment: .leading, spacing: 2) {
                     HStack {
                         Text(notification.title).font(Theme.Fonts.notificationTitle).lineLimit(1)

@@ -45,6 +45,9 @@ struct TimeUpView: View {
 
 // MARK: - 32 · Accusation
 
+/// The decision: "Qui est responsable ?". One suspect is chosen from a clear list; a panel then
+/// states who is accused and on what the player's case rests (the items they linked), and the
+/// accusation is confirmed by holding the button (900 ms).
 struct AccusationView: View {
     let session: GameSession
     @State private var selected: SuspectID?
@@ -53,68 +56,141 @@ struct AccusationView: View {
     var body: some View {
         let game = session.game
         let timeLeft = session.remainingSeconds > 0
-        VStack(alignment: .leading, spacing: Theme.Spacing.s6) {
-            VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
-                Text(timeLeft ? L10n.f("accuse.timeLeft", PhoneFormat.countdown(session.remainingSeconds)) : L10n.t("accuse.timeUp"))
-                    .overline(timeLeft ? Theme.Colors.signal : Theme.Colors.alertText)
-                Text(L10n.t("accuse.title")).font(Theme.Fonts.title2).tracking(-0.8).foregroundStyle(Theme.Colors.textPrimary)
-                Text(session.caseFile.objective).font(Theme.Fonts.narrativeSmall).foregroundStyle(Theme.Colors.textSecondary)
-            }
-            .padding(.top, Theme.Spacing.s7)
-
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible())], spacing: 10) {
-                ForEach(session.caseFile.suspects) { suspect in
-                    let isSelected = selected == suspect.id
-                    let linked = game.linkedEntries(for: suspect.id).count
-                    Button {
-                        if isSelected { fileOpen = suspect.id } else { selected = suspect.id; Haptics.selection() }
-                    } label: {
-                        VStack(spacing: Theme.Spacing.s3) {
-                            Portrait(contact: game.contact(suspect.contact), width: 96, height: 96)
-                            Text(game.name(of: suspect.contact)).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
-                            Text(suspect.role).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary).lineLimit(1)
-                            Text(L10n.f("carnet.linked", linked)).font(Theme.Fonts.data)
-                                .foregroundStyle(linked > 0 ? Theme.Colors.signal : Theme.Colors.textTertiary)
-                        }
-                        .padding(Theme.Spacing.s5)
-                        .frame(maxWidth: .infinity)
-                        .background(RoundedRectangle(cornerRadius: Theme.Radius.lg).fill(Theme.Colors.bgSurface))
-                        .overlay(RoundedRectangle(cornerRadius: Theme.Radius.lg)
-                            .strokeBorder(isSelected ? Theme.Colors.textPrimary : Theme.Colors.line1, lineWidth: isSelected ? 2 : 1))
-                        .overlay(alignment: .topTrailing) {
-                            if isSelected {
-                                Text("✓").font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textOnLight)
-                                    .frame(width: 24, height: 24).background(Circle().fill(Theme.Colors.textPrimary)).padding(Theme.Spacing.s3)
-                            }
-                        }
-                        .opacity(selected == nil || isSelected ? 1 : 0.6)
+        ScrollView {
+            VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
+                VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+                    HStack {
+                        Text(L10n.t("accuse.overline")).overline(Theme.Colors.special)
+                        Spacer()
+                        Text(timeLeft ? L10n.f("accuse.timeLeft", PhoneFormat.countdown(session.remainingSeconds)) : L10n.t("accuse.timeUp"))
+                            .font(Theme.Fonts.dataStrong)
+                            .foregroundStyle(timeLeft ? Theme.Colors.signal : Theme.Colors.alertText)
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityAddTraits(isSelected ? .isSelected : [])
-                    .accessibilityIdentifier("accuse.suspect.\(suspect.id)")
+                    Text(L10n.t("accuse.title")).font(Theme.Fonts.title2).tracking(-0.8).foregroundStyle(Theme.Colors.textPrimary)
+                    Text(L10n.t("accuse.instruction")).font(Theme.Fonts.body).foregroundStyle(Theme.Colors.textSecondary)
+                }
+                .padding(.top, Theme.Spacing.s7)
+
+                ObjectiveCard(objective: session.caseFile.objective)
+
+                VStack(spacing: Theme.Spacing.s3) {
+                    ForEach(session.caseFile.suspects) { suspect in
+                        suspectRow(suspect, game: game)
+                    }
                 }
             }
-
-            Spacer()
-
-            VStack(spacing: Theme.Spacing.s3) {
-                HoldToConfirmButton(title: L10n.t("accuse.hold"), disabledTitle: L10n.t("accuse.select"), enabled: selected != nil) {
-                    if let selected { session.accuse(selected) }
-                }
-                .accessibilityIdentifier("accuse.hold")
-                if timeLeft {
-                    Button(L10n.t("accuse.back")) { session.resumeInvestigation() }
-                        .buttonStyle(TertiaryButtonStyle())
-                }
-            }
+            .padding(.horizontal, Theme.Spacing.marginGame)
+            .padding(.bottom, Theme.Spacing.s5)
         }
-        .padding(.horizontal, Theme.Spacing.marginGame)
-        .padding(.bottom, Theme.Spacing.s5)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            decisionPanel(game: game, timeLeft: timeLeft)
+        }
         .background(Theme.Colors.ink0.ignoresSafeArea())
+        .animation(Theme.Motion.emphasized(0.3), value: selected)
         .sheet(item: Binding(get: { fileOpen.map(SuspectSheetID.init) }, set: { fileOpen = $0?.id })) { item in
             NavigationStack { SuspectFileView(suspectID: item.id, session: session) }
                 .presentationBackground(Theme.Colors.ink0)
         }
+    }
+
+    private func suspectRow(_ suspect: Suspect, game: Investigation) -> some View {
+        let isSelected = selected == suspect.id
+        let linked = game.linkedEntries(for: suspect.id).count
+        let marks = SuspectMark.allCases.filter { game.marks[suspect.id]?.contains($0) == true }
+        return HStack(spacing: 0) {
+            Button {
+                selected = suspect.id
+                Haptics.selection()
+            } label: {
+                HStack(spacing: Theme.Spacing.s4) {
+                    Image(systemName: isSelected ? "largecircle.fill.circle" : "circle")
+                        .font(.system(size: 22))
+                        .foregroundStyle(isSelected ? Theme.Colors.special : Theme.Colors.textTertiary)
+                    Portrait(contact: game.contact(suspect.contact), width: 56, height: 64)
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(game.name(of: suspect.contact)).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
+                        Text(suspect.role).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary).lineLimit(2)
+                        HStack(spacing: Theme.Spacing.s2) {
+                            Chip(text: L10n.f("carnet.linked", linked), color: linked > 0 ? Theme.Colors.special : Theme.Colors.textTertiary)
+                            if !marks.isEmpty {
+                                Chip(text: L10n.f("carnet.marksCount", marks.count), color: Theme.Colors.signal)
+                            }
+                        }
+                    }
+                    Spacer(minLength: 0)
+                }
+                .padding(.vertical, Theme.Spacing.s4)
+                .padding(.leading, Theme.Spacing.s4)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityAddTraits(isSelected ? .isSelected : [])
+            .accessibilityIdentifier("accuse.suspect.\(suspect.id)")
+
+            Button { fileOpen = suspect.id } label: {
+                VStack(spacing: 2) {
+                    Image(systemName: "folder").font(.system(size: 16, weight: .semibold))
+                    Text(L10n.t("accuse.file")).font(Theme.Fonts.caption)
+                }
+                .foregroundStyle(Theme.Colors.textSecondary)
+                .frame(width: 64)
+                .frame(maxHeight: .infinity)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(Text(L10n.f("accuse.fileA11y", game.name(of: suspect.contact))))
+        }
+        .background(RoundedRectangle(cornerRadius: Theme.Radius.lg, style: .continuous)
+            .fill(isSelected ? Theme.Colors.specialTint : Theme.Colors.bgSurface))
+        .overlay(RoundedRectangle(cornerRadius: Theme.Radius.lg, style: .continuous)
+            .strokeBorder(isSelected ? Theme.Colors.special : Theme.Colors.line1, lineWidth: isSelected ? 2 : 1))
+        .opacity(selected == nil || isSelected ? 1 : 0.65)
+    }
+
+    /// Bottom panel: who is accused, what the case rests on, then hold to accuse.
+    private func decisionPanel(game: Investigation, timeLeft: Bool) -> some View {
+        let suspect = selected.flatMap { id in session.caseFile.suspects.first { $0.id == id } }
+        let name = suspect.map { game.name(of: $0.contact) } ?? ""
+        let evidence = suspect.map { s in game.linkedEntries(for: s.id).map { ItemDescriber.describe($0.ref, in: game) } } ?? []
+        return VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+            if suspect != nil {
+                Text(L10n.f("accuse.youAccuse", name)).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
+                    .accessibilityIdentifier("accuse.youAccuse")
+                if evidence.isEmpty {
+                    Label(L10n.t("accuse.noEvidence"), systemImage: "exclamationmark.triangle.fill")
+                        .font(Theme.Fonts.caption)
+                        .foregroundStyle(Theme.Colors.signal)
+                } else {
+                    Text(L10n.f("accuse.basedOn", evidence.count)).overline(Theme.Colors.special)
+                    ForEach(Array(evidence.prefix(3).enumerated()), id: \.offset) { _, item in
+                        HStack(spacing: Theme.Spacing.s3) {
+                            AppTileGlyph(app: item.app, size: 18)
+                            Text(item.label).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textPrimary).lineLimit(1)
+                        }
+                    }
+                    if evidence.count > 3 {
+                        Text(L10n.f("accuse.more", evidence.count - 3)).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
+                    }
+                }
+            } else {
+                Text(L10n.t("accuse.pickFirst")).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
+            }
+            HoldToConfirmButton(title: L10n.f("accuse.holdName", name), disabledTitle: L10n.t("accuse.select"), enabled: selected != nil) {
+                if let selected { session.accuse(selected) }
+            }
+            .accessibilityIdentifier("accuse.hold")
+            if timeLeft {
+                Button(L10n.t("accuse.back")) { session.resumeInvestigation() }
+                    .buttonStyle(TertiaryButtonStyle())
+                    .frame(maxWidth: .infinity)
+            }
+        }
+        .padding(.horizontal, Theme.Spacing.marginGame)
+        .padding(.top, Theme.Spacing.s4)
+        .padding(.bottom, Theme.Spacing.s3)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Theme.Colors.bgSurface.ignoresSafeArea(edges: .bottom))
+        .overlay(alignment: .top) { Rectangle().fill(Theme.Colors.line2).frame(height: 1) }
     }
 }
 
@@ -133,6 +209,10 @@ struct ResultView: View {
     let onRevealRequested: () -> Void
     /// Solution shown after a wrong answer: the attempt is not ranked.
     var revealed = false
+    /// What the player's accusation rested on: the items they linked to the accused.
+    var accusedEvidence: [String] = []
+    /// The culprit's contact (portrait on the solution).
+    var culprit: Contact? = nil
 
     @State private var shownSteps = 0
     @State private var confirmReveal = false
@@ -141,23 +221,11 @@ struct ResultView: View {
         let solved = verdict.isCorrect
         ScrollView {
             VStack(alignment: .leading, spacing: Theme.Spacing.s6) {
-                Text(solved ? L10n.t("result.solvedBadge") : (revealed ? L10n.t("result.revealedBadge") : L10n.t("result.unsolvedBadge")))
-                    .font(Theme.Fonts.overline)
-                    .tracking(Theme.Tracking.overline)
-                    .foregroundStyle(solved ? Theme.Colors.clear : (revealed ? Theme.Colors.textSecondary : Theme.Colors.alertText))
-                    .padding(.horizontal, Theme.Spacing.s4)
-                    .frame(height: 28)
-                    .overlay(Capsule().strokeBorder(solved ? Theme.Colors.clear.opacity(0.5) : Theme.Colors.line3))
+                badge(solved: solved)
                     .padding(.top, Theme.Spacing.s7)
 
                 if solved || revealed {
-                    Text(caseFile.solution.headline).font(Theme.Fonts.title2).tracking(-0.8).foregroundStyle(Theme.Colors.textPrimary)
-                    Text(caseFile.solution.summary).font(Theme.Fonts.narrativeSmall).foregroundStyle(Theme.Colors.textSecondary)
-                    RevealTimeline(steps: caseFile.solution.reveal, found: verdict.foundEvidenceIDs, shown: shownSteps)
-                    Button(revealed ? L10n.t("result.replay") : L10n.t("result.seeScore"), action: revealed ? onReplay : onScore)
-                        .buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
-                        .accessibilityIdentifier("result.primary")
-                        .opacity(shownSteps >= caseFile.solution.reveal.count ? 1 : 0.4)
+                    solution(solved: solved)
                 } else {
                     wrongAnswer
                 }
@@ -182,29 +250,105 @@ struct ResultView: View {
         }
     }
 
+    private func badge(solved: Bool) -> some View {
+        let color = solved ? Theme.Colors.clear : (revealed ? Theme.Colors.textSecondary : Theme.Colors.alertText)
+        return Text(solved ? L10n.t("result.solvedBadge") : (revealed ? L10n.t("result.revealedBadge") : L10n.t("result.unsolvedBadge")))
+            .font(Theme.Fonts.overline)
+            .tracking(Theme.Tracking.overline)
+            .foregroundStyle(color)
+            .padding(.horizontal, Theme.Spacing.s4)
+            .frame(height: 30)
+            .background(Capsule().fill(color.opacity(0.12)))
+            .overlay(Capsule().strokeBorder(color.opacity(0.5)))
+    }
+
+    /// Who did it, why (the key evidence, found ✓ or missed ○, with what each one proves),
+    /// what the player's accusation rested on, then the reconstruction step by step.
+    @ViewBuilder
+    private func solution(solved: Bool) -> some View {
+        let culpritName = names[verdict.culprit] ?? ""
+        let key = caseFile.evidence.filter { $0.importance == .key }
+        HStack(alignment: .center, spacing: Theme.Spacing.s4) {
+            Portrait(contact: culprit, width: 64, height: 76)
+                .overlay(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)
+                    .strokeBorder(solved ? Theme.Colors.clear : Theme.Colors.line3, lineWidth: 2))
+            VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
+                Text(L10n.t("result.culpritOverline")).overline(Theme.Colors.special)
+                Text(L10n.f("result.culpritWas", culpritName))
+                    .font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+            Text(caseFile.solution.headline).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
+            Text(caseFile.solution.summary).font(Theme.Fonts.narrativeSmall).foregroundStyle(Theme.Colors.textSecondary)
+        }
+
+        if !key.isEmpty {
+            VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+                Text(L10n.f("result.keyEvidence", key.count)).overline(Theme.Colors.textPrimary)
+                    .accessibilityIdentifier("result.keyEvidence")
+                ForEach(key) { evidence in
+                    KeyEvidenceRow(evidence: evidence, found: verdict.foundEvidenceIDs.contains(evidence.id))
+                }
+            }
+        }
+
+        if solved {
+            VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+                Text(L10n.t("result.yourCase")).overline(Theme.Colors.special)
+                if accusedEvidence.isEmpty {
+                    Text(L10n.t("result.yourCaseEmpty")).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
+                } else {
+                    ForEach(Array(accusedEvidence.enumerated()), id: \.offset) { _, label in
+                        Text("→ " + label).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textPrimary).lineLimit(2)
+                    }
+                }
+            }
+        }
+
+        VStack(alignment: .leading, spacing: Theme.Spacing.s4) {
+            Text(L10n.t("result.timeline")).overline(Theme.Colors.info)
+            RevealTimeline(steps: caseFile.solution.reveal, found: verdict.foundEvidenceIDs, shown: shownSteps)
+        }
+
+        Button(revealed ? L10n.t("result.replay") : L10n.t("result.seeScore"), action: revealed ? onReplay : onScore)
+            .buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
+            .accessibilityIdentifier("result.primary")
+            .opacity(shownSteps >= caseFile.solution.reveal.count ? 1 : 0.4)
+    }
+
     private var wrongAnswer: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s6) {
-            Text(L10n.f("result.wrongTitle", names[verdict.accused] ?? ""))
-                .font(Theme.Fonts.title2).tracking(-0.8).foregroundStyle(Theme.Colors.textPrimary)
+            VStack(alignment: .leading, spacing: Theme.Spacing.s2) {
+                Text(L10n.f("result.wrongTitle", names[verdict.accused] ?? ""))
+                    .font(Theme.Fonts.title2).tracking(-0.8).foregroundStyle(Theme.Colors.textPrimary)
+                Text(L10n.t("result.wrongSubtitle")).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
+            }
             if let alibi = verdict.alibi {
-                ResultCard(overline: L10n.t("result.alibi"), text: alibi, detail: verdict.alibiEvidence.map { $0.title })
+                ResultCard(overline: L10n.t("result.alibi"), text: alibi, detail: verdict.alibiEvidence.map { $0.title },
+                           symbol: "checkmark.shield.fill", color: Theme.Colors.clear)
             }
             if let trap = verdict.trap {
-                ResultCard(overline: L10n.t("result.trap"), text: trap, detail: nil)
+                ResultCard(overline: L10n.t("result.trap"), text: trap, detail: nil,
+                           symbol: "exclamationmark.triangle.fill", color: Theme.Colors.signal)
             }
             if !verdict.foundAboutAccused.isEmpty {
                 VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
                     Text(L10n.t("result.youFoundRight")).overline(Theme.Colors.clear)
                     ForEach(verdict.foundAboutAccused) { evidence in
-                        Text("● " + evidence.title).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textPrimary)
+                        Label(evidence.title, systemImage: "checkmark.circle.fill")
+                            .font(Theme.Fonts.callout)
+                            .foregroundStyle(Theme.Colors.textPrimary)
                     }
                 }
             }
             VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
                 Text(L10n.f("result.missed", verdict.missed.count)).overline()
                 ForEach(verdict.missedByApp.sorted { $0.value > $1.value }, id: \.key) { app, count in
-                    HStack {
-                        Text("○ " + app.title).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textPrimary)
+                    HStack(spacing: Theme.Spacing.s3) {
+                        AppTileGlyph(app: app, size: 26)
+                        Text(app.title).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textPrimary)
                         Spacer()
                         Text(L10n.f("result.missedCount", count)).font(Theme.Fonts.data).foregroundStyle(Theme.Colors.textSecondary)
                     }
@@ -220,20 +364,53 @@ struct ResultView: View {
     }
 }
 
+/// One decisive piece of evidence: ✓ found / ○ missed, its title, and what it really proves.
+struct KeyEvidenceRow: View {
+    let evidence: Evidence
+    let found: Bool
+
+    var body: some View {
+        HStack(alignment: .top, spacing: Theme.Spacing.s3) {
+            Image(systemName: found ? "checkmark.circle.fill" : "circle.dashed")
+                .font(.system(size: 20))
+                .foregroundStyle(found ? Theme.Colors.clear : Theme.Colors.textTertiary)
+            VStack(alignment: .leading, spacing: 3) {
+                Text(evidence.title).font(Theme.Fonts.calloutStrong).foregroundStyle(Theme.Colors.textPrimary)
+                Text(evidence.meaning).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(found ? L10n.t("result.keyFound") : L10n.t("result.keyMissed"))
+                    .font(Theme.Fonts.dataSmall)
+                    .foregroundStyle(found ? Theme.Colors.clear : Theme.Colors.textTertiary)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(Theme.Spacing.s4)
+        .background(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous).fill(found ? Theme.Colors.clearTint : Theme.Colors.bgSurface))
+        .overlay(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)
+            .strokeBorder(found ? Theme.Colors.clear.opacity(0.4) : Theme.Colors.line1))
+        .accessibilityElement(children: .combine)
+    }
+}
+
 struct ResultCard: View {
     let overline: String
     let text: String
     let detail: String?
+    var symbol: String = "info.circle.fill"
+    var color: Color = Theme.Colors.textSecondary
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
-            Text(overline).overline()
+            Label(overline, systemImage: symbol).overline(color)
             Text(text).font(Theme.Fonts.narrativeSmall).foregroundStyle(Theme.Colors.textPrimary)
             if let detail { Text("◆ " + detail).font(Theme.Fonts.data).foregroundStyle(Theme.Colors.signal) }
         }
         .padding(Theme.Spacing.s5)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(RoundedRectangle(cornerRadius: Theme.Radius.lg).fill(Theme.Colors.bgSurface))
+        .overlay(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 2).fill(color).frame(width: 3).padding(.vertical, Theme.Spacing.s5)
+        }
         .elevation0(Theme.Radius.lg)
     }
 }
@@ -251,8 +428,8 @@ struct RevealTimeline: View {
                 HStack(alignment: .top, spacing: Theme.Spacing.s4) {
                     VStack(spacing: 0) {
                         Circle()
-                            .fill(isFound ? Theme.Colors.textPrimary : .clear)
-                            .overlay(Circle().strokeBorder(Theme.Colors.textPrimary, lineWidth: 1.5))
+                            .fill(isFound ? Theme.Colors.clear : .clear)
+                            .overlay(Circle().strokeBorder(isFound ? Theme.Colors.clear : Theme.Colors.textSecondary, lineWidth: 1.5))
                             .frame(width: 11, height: 11)
                             .padding(.top, 4)
                         if offset < steps.count - 1 {

@@ -17,6 +17,15 @@ enum PhoneFormat {
         "\(weekdays[m.weekday - 1].prefix(3)). \(m.day) \(shortMonths[m.month - 1])".uppercased()
     }
 
+    /// "Septembre 2026"
+    static func monthYear(_ m: Moment) -> String {
+        let name = months[m.month - 1]
+        return name.prefix(1).uppercased() + name.dropFirst() + " \(m.year)"
+    }
+
+    /// Weekday initials of a month grid, Monday first.
+    static let weekdayInitials = ["L", "M", "M", "J", "V", "S", "D"]
+
     /// "22:17"
     static func time(_ m: Moment) -> String { m.clockText }
 

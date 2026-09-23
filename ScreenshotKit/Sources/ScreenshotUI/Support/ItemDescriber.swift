@@ -57,6 +57,15 @@ enum CallsFormat {
         }
     }
 
+    /// SF Symbol of the direction badge on the caller's avatar.
+    static func symbol(_ call: Call) -> String {
+        switch call.direction {
+        case .incoming: "phone.arrow.down.left.fill"
+        case .outgoing: "phone.arrow.up.right.fill"
+        case .missed: "phone.down.fill"
+        }
+    }
+
     /// Direction symbol, never colour alone: ↙ incoming, ↗ outgoing, ↙ missed (red).
     static func arrow(_ call: Call) -> String { call.direction == .outgoing ? "↗" : "↙" }
 }

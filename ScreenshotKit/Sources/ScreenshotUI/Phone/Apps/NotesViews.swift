@@ -15,8 +15,17 @@ struct AppLockView: View {
     var body: some View {
         VStack(spacing: Theme.Spacing.s7) {
             Spacer()
-            Image(systemName: "lock.fill").font(.system(size: 36)).foregroundStyle(Theme.Colors.textSecondary)
-            Text(L10n.f("lock.title", app.title)).font(Theme.Fonts.headline)
+            AppTileGlyph(app: app, size: 64)
+                .overlay(alignment: .bottomTrailing) {
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundStyle(Theme.Colors.textPrimary)
+                        .frame(width: 28, height: 28)
+                        .background(Circle().fill(Theme.Colors.bgSelected))
+                        .overlay(Circle().strokeBorder(Theme.Colors.bgBase, lineWidth: 2))
+                        .offset(x: 8, y: 8)
+                }
+            Text(L10n.f("lock.title", app.title)).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
             if let hint = lock?.hint {
                 Text(L10n.f("lock.hint", hint))
                     .font(Theme.Fonts.callout)
@@ -45,6 +54,7 @@ struct AppLockView: View {
                         } label: {
                             Text(key)
                                 .font(.system(size: 28, weight: .regular))
+                                .foregroundStyle(Theme.Colors.textPrimary)
                                 .frame(width: Theme.Size.keypadKey, height: Theme.Size.keypadKey)
                                 .background(Circle().fill(key == "⌫" ? .clear : Theme.Colors.bgRaised))
                         }
@@ -55,7 +65,7 @@ struct AppLockView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity)
-        .navigationBarTitleDisplayMode(.inline)
+        .appRoot(app, subtitle: L10n.t("lock.subtitle"), session: session)
     }
 
     private func press(_ key: String) {
@@ -86,24 +96,36 @@ struct NotesListView: View {
 
     var body: some View {
         let notes = session.game.device.notes.sorted { $0.modifiedAt > $1.modifiedAt }
-        List(notes) { note in
-            Button {
-                session.open(.note(note.id))
-            } label: {
-                VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
-                    Text(note.title).font(Theme.Fonts.headline).lineLimit(1)
-                    HStack {
-                        Text(PhoneFormat.relative(note.modifiedAt, now: session.game.phoneNow))
-                        Text(note.body.replacingOccurrences(of: "\n", with: " ")).lineLimit(1)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                AppSectionHeader(title: L10n.t("notes.folder"), count: notes.count, color: Theme.appAccent(.notes))
+                CardGroup {
+                    ForEach(Array(notes.enumerated()), id: \.element.id) { offset, note in
+                        Button {
+                            session.open(.note(note.id))
+                        } label: {
+                            VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
+                                Text(note.title).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary).lineLimit(1)
+                                HStack(spacing: Theme.Spacing.s3) {
+                                    Text(PhoneFormat.relative(note.modifiedAt, now: session.game.phoneNow))
+                                        .foregroundStyle(Theme.Colors.textPrimary)
+                                    Text(note.body.replacingOccurrences(of: "\n", with: " ")).lineLimit(1)
+                                        .foregroundStyle(Theme.Colors.textSecondary)
+                                }
+                                .font(Theme.Fonts.callout)
+                            }
+                            .padding(Theme.Spacing.s4)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        if offset < notes.count - 1 { RowDivider() }
                     }
-                    .font(Theme.Fonts.callout)
-                    .foregroundStyle(Theme.Colors.textSecondary)
                 }
-                .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
+            .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .navigationTitle(AppID.notes.title)
+        .appRoot(.notes, subtitle: L10n.f("notes.subtitle", notes.count), session: session)
     }
 }
 
@@ -119,8 +141,9 @@ struct NoteView: View {
                         .font(Theme.Fonts.caption)
                         .foregroundStyle(Theme.Colors.textSecondary)
                         .frame(maxWidth: .infinity)
-                    Text(note.title).font(Theme.Fonts.title)
-                    Text(note.body).font(Theme.Fonts.body)
+                    Text(note.title).font(Theme.Fonts.title2).foregroundStyle(Theme.Colors.textPrimary)
+                    Rectangle().fill(Theme.appAccent(.notes)).frame(width: 40, height: 3)
+                    Text(note.body).font(Theme.Fonts.bodyLarge).foregroundStyle(Theme.Colors.textPrimary).lineSpacing(4)
                     Text(L10n.f("notes.created", PhoneFormat.dayAndTime(note.createdAt)))
                         .font(Theme.Fonts.caption)
                         .foregroundStyle(Theme.Colors.textTertiary)

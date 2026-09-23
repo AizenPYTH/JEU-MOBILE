@@ -31,17 +31,25 @@ struct PhotosGridView: View {
                             }
                         }
                     } header: {
-                        Text(photos.first.map { PhoneFormat.longDayCapitalized($0.takenAt) } ?? "")
-                            .font(Theme.Fonts.headline)
-                            .padding(.horizontal, Theme.Spacing.s4)
-                            .padding(.vertical, Theme.Spacing.s3)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(.ultraThinMaterial)
+                        HStack(alignment: .firstTextBaseline) {
+                            Text(photos.first.map { PhoneFormat.longDayCapitalized($0.takenAt) } ?? "")
+                                .font(Theme.Fonts.headline)
+                                .foregroundStyle(Theme.Colors.textPrimary)
+                            Spacer()
+                            Text(L10n.f("photos.count", photos.count))
+                                .font(Theme.Fonts.caption)
+                                .foregroundStyle(Theme.Colors.textSecondary)
+                        }
+                        .padding(.horizontal, Theme.Spacing.s4)
+                        .padding(.vertical, Theme.Spacing.s3)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Theme.Colors.bgBase.opacity(0.92))
                     }
                 }
             }
+            .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .navigationTitle(AppID.photos.title)
+        .appRoot(.photos, subtitle: L10n.f("photos.subtitle", game.photos.count, days.count), session: session)
     }
 }
 
@@ -89,13 +97,24 @@ struct PhotoDetailView: View {
                         Button {
                             session.perform { $0.analyzePhoto(photo.id) }
                         } label: {
-                            Label(L10n.f("photos.analyze", session.rules.timeCosts.analyzePhoto), systemImage: "info.circle")
-                                .font(Theme.Fonts.headline)
-                                .frame(maxWidth: .infinity, minHeight: Theme.Size.hit)
-                                .background(RoundedRectangle(cornerRadius: Theme.Radius.sm).fill(Theme.Colors.bgRaised))
+                            HStack(spacing: Theme.Spacing.s3) {
+                                Image(systemName: "info.circle.fill").font(.system(size: 20))
+                                VStack(alignment: .leading, spacing: 1) {
+                                    Text(L10n.t("photos.analyzeTitle")).font(Theme.Fonts.headline)
+                                    Text(L10n.t("photos.analyzeHelp")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
+                                }
+                                Spacer()
+                                CostTag(seconds: session.rules.timeCosts.analyzePhoto)
+                            }
+                            .padding(Theme.Spacing.s4)
+                            .frame(maxWidth: .infinity, minHeight: Theme.Size.hit)
+                            .background(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous).fill(Theme.Colors.infoTint))
+                            .overlay(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous).strokeBorder(Theme.Colors.info.opacity(0.4)))
+                            .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
-                        .foregroundStyle(Theme.Colors.signal)
+                        .foregroundStyle(Theme.Colors.info)
+                        .accessibilityLabel(Text(L10n.f("photos.analyze", session.rules.timeCosts.analyzePhoto)))
                         .padding(.horizontal, Theme.Spacing.s5)
                         .accessibilityIdentifier("photo.analyze")
                     }
@@ -114,9 +133,9 @@ struct PhotoInfoPanel: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s4) {
-            Text(L10n.t("photos.metadata"))
+            Label(L10n.t("photos.metadata"), systemImage: "info.circle.fill")
                 .font(Theme.Fonts.overline)
-                .foregroundStyle(Theme.Colors.textSecondary)
+                .foregroundStyle(Theme.Colors.info)
             InfoRow(icon: "camera", label: L10n.t("photos.taken"), value: PhoneFormat.dayAndTime(photo.takenAt))
             if let place = photo.place { InfoRow(icon: "mappin.and.ellipse", label: L10n.t("photos.place"), value: place) }
             if let device = photo.device { InfoRow(icon: "iphone", label: L10n.t("photos.device"), value: device) }
@@ -132,7 +151,8 @@ struct PhotoInfoPanel: View {
                 .font(Theme.Fonts.body)
         }
         .padding(Theme.Spacing.s5)
-        .background(RoundedRectangle(cornerRadius: Theme.Radius.sm).fill(Theme.Colors.bgSurface))
+        .background(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous).fill(Theme.Colors.bgSurface))
+        .overlay(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous).strokeBorder(Theme.Colors.line2))
     }
 }
 

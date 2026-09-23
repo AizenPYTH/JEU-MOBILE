@@ -86,49 +86,26 @@ struct HomeScreen: View {
     }
 }
 
-/// Wallpaper placeholder: a very dark photo (striped placeholder until a real one exists).
+/// Wallpaper: a deep night gradient with two soft, blurred lights — dark, but clearly a phone's
+/// lock/home screen, not an empty black surface.
 struct Wallpaper: View {
     var body: some View {
         ZStack {
-            Theme.Colors.ink0
-            StripedPattern().opacity(0.6)
-            LinearGradient(colors: [Theme.Colors.ink0.opacity(0.2), Theme.Colors.ink0.opacity(0.85)], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [Theme.Colors.wallpaperTop, Theme.Colors.wallpaperBottom], startPoint: .top, endPoint: .bottom)
+            GeometryReader { geo in
+                Circle().fill(Theme.Colors.wallpaperLightA)
+                    .frame(width: geo.size.width * 0.9)
+                    .blur(radius: 70)
+                    .position(x: geo.size.width * 0.15, y: geo.size.height * 0.2)
+                Circle().fill(Theme.Colors.wallpaperLightB)
+                    .frame(width: geo.size.width * 0.8)
+                    .blur(radius: 80)
+                    .position(x: geo.size.width * 0.95, y: geo.size.height * 0.62)
+            }
+            LinearGradient(colors: [.clear, Theme.Colors.wallpaperBottom.opacity(0.7)], startPoint: .center, endPoint: .bottom)
         }
         .ignoresSafeArea()
-    }
-}
-
-/// App tile 62 × 62, r 17, bg.raised + line: two letters (Geist 500 21). The Agenda tile is dynamic.
-struct AppTileGlyph: View {
-    let app: AppID
-    var size: CGFloat = Theme.Size.appTile
-    var calendarDay: Moment? = nil
-    var onLight = false
-
-    var body: some View {
-        RoundedRectangle(cornerRadius: size * Theme.Radius.icon / Theme.Size.appTile, style: .continuous)
-            .fill(onLight ? Theme.Colors.textOnLight : Theme.Colors.bgRaised)
-            .overlay(
-                RoundedRectangle(cornerRadius: size * Theme.Radius.icon / Theme.Size.appTile, style: .continuous)
-                    .strokeBorder(Theme.Colors.line2, lineWidth: 1.5)
-            )
-            .overlay {
-                if let day = calendarDay {
-                    VStack(spacing: 0) {
-                        Text(PhoneFormat.weekdayShort(day))
-                            .font(.custom(Theme.FontName.monoSemibold, fixedSize: size * 0.16))
-                            .foregroundStyle(Theme.Colors.alertText)
-                        Text("\(day.day)")
-                            .font(.custom(Theme.FontName.medium, fixedSize: size * 0.36))
-                            .foregroundStyle(Theme.Colors.textPrimary)
-                    }
-                } else {
-                    Text(Theme.tileLetters(app))
-                        .font(.custom(Theme.FontName.medium, fixedSize: size * 0.34))
-                        .foregroundStyle(Theme.Colors.textPrimary)
-                }
-            }
-            .frame(width: size, height: size)
+        .allowsHitTesting(false)
     }
 }
 
@@ -148,10 +125,11 @@ struct AppTile: View {
                         if badge > 0 {
                             Text("\(badge)")
                                 .font(.custom(Theme.FontName.monoSemibold, fixedSize: 12))
-                                .foregroundStyle(Theme.Colors.textOnLight)
+                                .foregroundStyle(Theme.Colors.textPrimary)
                                 .padding(.horizontal, 5)
                                 .frame(minWidth: Theme.Size.badge, minHeight: Theme.Size.badge)
-                                .background(Capsule().fill(Theme.Colors.signal))
+                                .background(Capsule().fill(Theme.Colors.alert))
+                                .overlay(Capsule().strokeBorder(Theme.Colors.wallpaperBottom.opacity(0.6), lineWidth: 1))
                                 .offset(x: 6, y: -6)
                         }
                     }
@@ -165,12 +143,15 @@ struct AppTile: View {
                                 .offset(x: 4, y: 4)
                         }
                     }
-                    .opacity(locked ? 0.45 : 1)
+                    .saturation(locked ? 0.2 : 1)
+                    .opacity(locked ? 0.6 : 1)
                 if showsLabel {
                     Text(app.title)
                         .font(Theme.Fonts.tabLabel)
-                        .foregroundStyle(Theme.Colors.textPrimary.opacity(locked ? 0.45 : 1))
+                        .foregroundStyle(Theme.Colors.textPrimary.opacity(locked ? 0.6 : 1))
+                        .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.8)
                 }
             }
         }

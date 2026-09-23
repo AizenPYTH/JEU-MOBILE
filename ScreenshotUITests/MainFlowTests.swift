@@ -80,6 +80,14 @@ final class MainFlowTests: XCTestCase {
         wait(element("app.\(id)"), 5, "app tile \(id)").tap()
     }
 
+    /// Opens an app from the home screen and checks it announces itself in its header.
+    private func visitApp(_ id: String, _ title: String, _ shot: String) {
+        openApp(id)
+        let header = wait(element("app.title"), 5, "en-tête de l'app \(id)")
+        XCTAssertEqual(header.label, title, "L'app ouverte devrait s'annoncer « \(title) »")
+        snap(shot)
+    }
+
     private func scrollTo(_ element: XCUIElement, maxSwipes: Int = 12) {
         var swipes = 0
         while !(element.exists && element.isHittable) && swipes < maxSwipes {
@@ -195,10 +203,19 @@ final class MainFlowTests: XCTestCase {
         snap("12-photo-analysee")
 
         // Notifications app: the live events so far.
-        openApp("notifications")
-        sleep(1)
-        snap("13-notifications")
+        visitApp("notifications", "Notifications", "13-notifications")
         XCTAssertTrue(app.staticTexts["Lucas Ferrand"].firstMatch.exists, "La notification de Lucas devrait être listée")
+
+        // Every app says where the player is (icon + name in its header).
+        visitApp("calendar", "Calendrier", "13c-calendrier")
+        visitApp("location", "Carte", "13d-carte")
+        visitApp("phone", "Téléphone", "13e-appels")
+        visitApp("mail", "Mail", "13f-mail")
+        visitApp("browser", "Navigateur", "13g-navigateur")
+        visitApp("contacts", "Contacts", "13h-contacts")
+        visitApp("notes", "Notes", "13i-notes")
+        visitApp("trash", "Corbeille", "13j-corbeille")
+        visitApp("settings", "Réglages", "13k-reglages")
 
         // The phone's clock runs with the investigation: start time (10:00) + time spent on the timer.
         goHome()
@@ -209,9 +226,16 @@ final class MainFlowTests: XCTestCase {
         element("phone.carnet").tap()
         sleep(1)
         snap("14-carnet-suspects")
-        app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Preuves'")).firstMatch.tap()
+        XCTAssertTrue(element("notebook.objective").exists, "Le carnet devrait rappeler l'objectif")
+        element("notebook.tab.1").tap()
         wait(element("notebook.row"), 5, "élément épinglé dans le carnet")
-        snap("15-carnet-preuves")
+        snap("15-carnet-indices")
+        element("notebook.tab.2").tap()
+        sleep(1)
+        snap("15a-carnet-chronologie")
+        element("notebook.tab.3").tap()
+        sleep(1)
+        snap("15a2-carnet-notes")
         element("notebook.close").tap()
         XCTAssertTrue(element("notebook.accuse").waitForNonExistence(timeout: 5), "Le carnet ne se ferme pas")
         snap("15b-carnet-ferme")
@@ -225,12 +249,18 @@ final class MainFlowTests: XCTestCase {
 
         // Accusation: choose Emma, hold to confirm.
         snap("17-accusation")
+        XCTAssertTrue(app.staticTexts["Qui est responsable ?"].exists, "La décision finale doit poser la question")
         choose(emma)
+        let accused = wait(element("accuse.youAccuse"), 5, "panneau « Vous accusez »")
+        XCTAssertTrue(accused.label.contains("Emma"), "Le panneau devrait nommer la personne accusée")
         snap("18-accusation-emma")
         holdToAccuse()
 
-        // Result + reconstruction, step by step.
+        // Result: who was responsible, the decisive evidence, then the reconstruction step by step.
         snap("19-resultat")
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'était responsable'")).firstMatch.exists,
+                      "Le résultat doit dire qui était responsable")
+        XCTAssertTrue(element("result.keyEvidence").exists, "Le résultat doit lister les éléments déterminants")
         sleep(7)
         snap("20-reconstitution")
         // The pinned 22:30 message (with the analysed photo) is officially found: ● in the reconstruction.

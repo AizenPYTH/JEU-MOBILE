@@ -113,7 +113,9 @@ public struct RootView: View {
                            onScore: { stage = .score(play) },
                            onReplay: { start(play.session.caseFile) },
                            onRevealRequested: { reveal(play) },
-                           revealed: play.revealed)
+                           revealed: play.revealed,
+                           accusedEvidence: accusedEvidence(play.session, play.verdict.accused),
+                           culprit: culprit(play.session, play.verdict.culprit))
                     .id(play.revealed)
                     .transition(.opacity)
             case .score(let play):
@@ -182,6 +184,15 @@ public struct RootView: View {
 
     private func names(_ session: GameSession) -> [SuspectID: String] {
         Dictionary(uniqueKeysWithValues: session.caseFile.suspects.map { ($0.id, session.game.name(of: $0.contact)) })
+    }
+
+    /// What the accusation rested on: the notebook items the player linked to the accused.
+    private func accusedEvidence(_ session: GameSession, _ accused: SuspectID) -> [String] {
+        session.game.linkedEntries(for: accused).map { ItemDescriber.describe($0.ref, in: session.game).label }
+    }
+
+    private func culprit(_ session: GameSession, _ id: SuspectID) -> Contact? {
+        session.game.index.suspect(id).flatMap { session.game.contact($0.contact) }
     }
 
     /// A new investigation (replaces any saved one).

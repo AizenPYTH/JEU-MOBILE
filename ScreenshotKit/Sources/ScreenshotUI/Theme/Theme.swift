@@ -51,10 +51,52 @@ public enum Theme {
         public static let line3 = Color(hex: 0xECEAE6, opacity: 0.20)
         public static let scrim = Color.black.opacity(0.55)
 
-        /// Stylised map.
-        public static let mapBackground = Color(hex: 0x0B0D10)
-        public static let mapStreet = Color(hex: 0xECEAE6, opacity: 0.05)
-        public static let mapRiver = Color(hex: 0x14222C)
+        // Functional colours (polish pass): colour carries meaning, never decoration.
+        /// Information, navigation, links, "you are here".
+        public static let info = Color(hex: 0x5AA9F5)
+        public static let infoTint = Color(hex: 0x5AA9F5, opacity: 0.16)
+        /// Confirmed / found.
+        public static let clearTint = Color(hex: 0x63C58E, opacity: 0.16)
+        /// Investigation element: a link between an item and a suspect, the decision.
+        public static let special = Color(hex: 0xB39DFA)
+        public static let specialTint = Color(hex: 0xB39DFA, opacity: 0.16)
+
+        /// Sent message bubbles (the familiar "my messages are coloured" convention).
+        public static let bubbleOut = Color(hex: 0x2F7CF6)
+        public static let bubbleOutText = Color(hex: 0xF5F7FA)
+
+        /// The seized phone's body: brushed dark metal, glass edge, camera island.
+        public static let deviceFrameTop = Color(hex: 0x3A3E45)
+        public static let deviceFrameBottom = Color(hex: 0x1B1D21)
+        public static let deviceEdge = Color(hex: 0x6C717A)
+        public static let deviceBezel = Color(hex: 0x030304)
+        public static let deviceButton = Color(hex: 0x2C2F35)
+        public static let deviceGlare = Color(hex: 0xFFFFFF, opacity: 0.06)
+        /// Behind the phone (the "desk"): a faint cold glow so the device stands out.
+        public static let deskGlow = Color(hex: 0x1C2633)
+
+        /// Wallpaper: deep night gradient with two soft lights.
+        public static let wallpaperTop = Color(hex: 0x141B2E)
+        public static let wallpaperBottom = Color(hex: 0x07080C)
+        public static let wallpaperLightA = Color(hex: 0x3B4E9C, opacity: 0.55)
+        public static let wallpaperLightB = Color(hex: 0x7A3E6E, opacity: 0.40)
+
+        /// Stylised map (reads as a map: land, blocks, main roads, water, parks).
+        public static let mapBackground = Color(hex: 0x1A1F24)
+        public static let mapBlock = Color(hex: 0x21272D)
+        public static let mapStreet = Color(hex: 0x39414A)
+        public static let mapMainRoad = Color(hex: 0x6B6250)
+        public static let mapRiver = Color(hex: 0x1D3A55)
+        public static let mapPark = Color(hex: 0x1F3A2B)
+        public static let mapPin = Color(hex: 0xF0544A)
+        /// App icons: glass sheen, hairline edge, and the little map drawn on the Maps icon.
+        public static let iconSheen = Color(hex: 0xFFFFFF, opacity: 0.22)
+        public static let iconEdge = Color(hex: 0xFFFFFF, opacity: 0.14)
+        public static let iconMapPark = Color(hex: 0x4E8F63)
+        public static let iconMapRiver = Color(hex: 0x5FA8E8)
+        public static let iconMapRoad = Color(hex: 0xF2C14E)
+        public static let iconMapStreet = Color(hex: 0xF5F5F2, opacity: 0.55)
+        public static let mapLabelHalo = Color(hex: 0x0B0D10, opacity: 0.85)
         /// Primary button pressed.
         public static let primaryPressed = Color(hex: 0xC9C7C2)
     }
@@ -148,6 +190,13 @@ public enum Theme {
 
     public enum Size {
         public static let hit: CGFloat = 44
+        /// The seized phone: outer body radius, bezel, frame thickness, camera island.
+        public static let deviceRadius: CGFloat = 50
+        public static let deviceFrame: CGFloat = 4
+        public static let deviceBezel: CGFloat = 5
+        public static let island = CGSize(width: 104, height: 30)
+        /// Icon inside an app header.
+        public static let headerIcon: CGFloat = 30
         public static let statusBar: CGFloat = 54
         public static let timerPill: CGFloat = 26
         public static let timerDot: CGFloat = 6
@@ -201,22 +250,55 @@ public enum Theme {
         public static var springNotification: Animation { .interpolatingSpring(mass: 1, stiffness: 300, damping: 28) }
     }
 
-    /// Two letters of each app tile — the "periodic table" signature of the fictional OS.
-    public static func tileLetters(_ app: AppKind) -> String {
+    /// App icon: background gradient (top, bottom) and glyph colour. Original TRACE icons that
+    /// follow familiar conventions (green handset, blue bubbles, a calendar page, a map with a pin…)
+    /// without copying any real app.
+    public static func iconGradient(_ app: AppKind) -> (top: Color, bottom: Color) {
         switch app {
-        case .messages: "Ms"
-        case .phone: "Ap"
-        case .photos: "Ph"
-        case .location: "Lc"
-        case .calendar: "Ag"
-        case .notes: "Nt"
-        case .browser: "Nv"
-        case .mail: "Ml"
-        case .contacts: "Ct"
-        case .trash: "Cb"
-        case .settings: "Rg"
-        case .notifications: "Nf"
+        case .messages: (top: Color(hex: 0x4C9BFF), bottom: Color(hex: 0x1D5FD1))
+        case .phone: (top: Color(hex: 0x4FD17F), bottom: Color(hex: 0x1C8E4A))
+        case .photos: (top: Color(hex: 0xFFB547), bottom: Color(hex: 0xE2436E))
+        case .location: (top: Color(hex: 0x2F5F4C), bottom: Color(hex: 0x1E3F33))
+        case .calendar: (top: Color(hex: 0xF4F2EE), bottom: Color(hex: 0xDEDBD4))
+        case .notes: (top: Color(hex: 0xF7F1DE), bottom: Color(hex: 0xE6DCC0))
+        case .browser: (top: Color(hex: 0x3CC6D8), bottom: Color(hex: 0x127A93))
+        case .mail: (top: Color(hex: 0x7C8CFF), bottom: Color(hex: 0x3D46C9))
+        case .contacts: (top: Color(hex: 0x9CA1AA), bottom: Color(hex: 0x5E636C))
+        case .trash: (top: Color(hex: 0xE2625A), bottom: Color(hex: 0x9B2C27))
+        case .settings: (top: Color(hex: 0x8E949E), bottom: Color(hex: 0x484D55))
+        case .notifications: (top: Color(hex: 0xB28CFF), bottom: Color(hex: 0x6B45D1))
         }
+    }
+
+    /// Glyph colour on the icon (dark on the two light "paper" icons).
+    public static func iconGlyph(_ app: AppKind) -> Color {
+        switch app {
+        case .calendar, .notes: Color(hex: 0x1C1D20)
+        default: Color(hex: 0xFAFAF8)
+        }
+    }
+
+    /// Accent of an app, readable on the dark screens (headers, section titles, selected states).
+    public static func appAccent(_ app: AppKind) -> Color {
+        switch app {
+        case .messages: Color(hex: 0x5AA9F5)
+        case .phone: Color(hex: 0x5BD48A)
+        case .photos: Color(hex: 0xFFB05C)
+        case .location: Color(hex: 0x6FD3A8)
+        case .calendar: Color(hex: 0xFF6B61)
+        case .notes: Color(hex: 0xE3B158)
+        case .browser: Color(hex: 0x4FD0E0)
+        case .mail: Color(hex: 0x9AA6FF)
+        case .contacts: Color(hex: 0xB9BEC6)
+        case .trash: Color(hex: 0xFF6B61)
+        case .settings: Color(hex: 0xB9BEC6)
+        case .notifications: Color(hex: 0xB39DFA)
+        }
+    }
+
+    /// Avatar disc colour from a contact's hue (muted, dark enough for light initials).
+    public static func avatarColor(hue: Double) -> (top: Color, bottom: Color) {
+        (top: Color(hue: hue, saturation: 0.38, brightness: 0.52), bottom: Color(hue: hue, saturation: 0.45, brightness: 0.34))
     }
 }
 

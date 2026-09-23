@@ -15,7 +15,6 @@ struct GlobalSearchView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                AppHeader(title: L10n.t("search.title"))
                 SearchField(text: $query, prompt: L10n.f("search.prompt", session.rules.timeCosts.search)) {
                     searched = query
                     filter = nil
@@ -35,11 +34,14 @@ struct GlobalSearchView: View {
                     ForEach(PhoneSearch.apps.filter { filter == nil || filter == $0 }, id: \.self) { app in
                         let group = results.filter { $0.app == app }
                         if !group.isEmpty {
-                            Text(L10n.f("search.group", app.title.uppercased(), group.count))
-                                .overline()
-                                .padding(.horizontal, Theme.Spacing.marginList)
-                                .padding(.top, Theme.Spacing.s5)
-                                .padding(.bottom, Theme.Spacing.s2)
+                            HStack(spacing: Theme.Spacing.s3) {
+                                AppTileGlyph(app: app, size: 22)
+                                Text(L10n.f("search.group", app.title.uppercased(), group.count))
+                                    .overline(Theme.appAccent(app))
+                            }
+                            .padding(.horizontal, Theme.Spacing.marginList)
+                            .padding(.top, Theme.Spacing.s5)
+                            .padding(.bottom, Theme.Spacing.s2)
                             ForEach(group) { result in
                                 Button { session.open(result) } label: {
                                     GlobalSearchRow(result: result, query: searched)
@@ -59,8 +61,11 @@ struct GlobalSearchView: View {
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
         .background(Theme.Colors.bgBase)
+        .navigationTitle(L10n.t("search.title"))
         .toolbar(.hidden, for: .navigationBar)
-        .safeAreaInset(edge: .top, spacing: 0) { BackRow(title: L10n.t("nav.home")) { session.goHome() } }
+        .safeAreaInset(edge: .top, spacing: 0) {
+            AppBar(app: nil, title: L10n.t("search.title"), subtitle: L10n.t("search.subtitle"), onHome: { session.goHome() })
+        }
     }
 
     /// "Tout (12)" · "Messages (7)" · … — only apps with results.

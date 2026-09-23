@@ -98,6 +98,8 @@ struct HoldToConfirmButton: View {
 struct Segmented<Value: Hashable>: View {
     let options: [(value: Value, label: String)]
     @Binding var selection: Value
+    /// Accessibility identifier prefix: each segment gets "<prefix>.<index>".
+    var identifier: String? = nil
 
     var body: some View {
         HStack(spacing: 0) {
@@ -109,6 +111,9 @@ struct Segmented<Value: Hashable>: View {
                 } label: {
                     Text(option.label)
                         .font(Theme.Fonts.calloutStrong)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                        .padding(.horizontal, 2)
                         .foregroundStyle(selection == option.value ? Theme.Colors.textPrimary : Theme.Colors.textSecondary)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(
@@ -118,31 +123,12 @@ struct Segmented<Value: Hashable>: View {
                 }
                 .buttonStyle(.plain)
                 .accessibilityAddTraits(selection == option.value ? .isSelected : [])
+                .accessibilityIdentifier(identifier.map { "\($0).\(i)" } ?? "")
             }
         }
         .padding(3)
         .frame(height: Theme.Size.segmented)
         .background(RoundedRectangle(cornerRadius: Theme.Radius.sm, style: .continuous).fill(Theme.Colors.bgRaised))
-    }
-}
-
-/// Large-title header of a phone app (back row 44 + title 34).
-struct AppHeader: View {
-    let title: String
-    var trailing: AnyView? = nil
-
-    var body: some View {
-        HStack(alignment: .firstTextBaseline) {
-            Text(title)
-                .font(Theme.Fonts.titleLarge)
-                .tracking(-1)
-                .foregroundStyle(Theme.Colors.textPrimary)
-                .accessibilityAddTraits(.isHeader)
-            Spacer()
-            if let trailing { trailing }
-        }
-        .padding(.horizontal, Theme.Spacing.marginList)
-        .padding(.top, Theme.Spacing.s3)
     }
 }
 
