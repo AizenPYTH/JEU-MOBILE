@@ -202,6 +202,9 @@ final class MainFlowTests: XCTestCase {
         snap("19-resultat")
         sleep(7)
         snap("20-reconstitution")
+        // The pinned 22:30 message (with the analysed photo) is officially found: ● in the reconstruction.
+        let found = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH 'Trouvé, 22:30'")).firstMatch
+        XCTAssertTrue(found.exists, "La preuve épinglée devrait apparaître comme trouvée dans la reconstitution")
         scrollTo(element("result.primary"))
         element("result.primary").tap()
 

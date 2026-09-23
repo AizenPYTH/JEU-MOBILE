@@ -563,7 +563,7 @@ evidence = [
          refs=["message:m_emma_del1", "message:m_emma_del2"],
          meaning="« Parking du Quai 9. 22h. Viens seul. » — Emma a fixé le rendez-vous, puis a demandé à Alex d'effacer la conversation."),
     dict(id="e_photo_meta", title="La photo « chez moi »", importance="key", suspects=["s_emma"],
-         refs=["photoInfo:p_emma_couch"],
+         refs=["photoInfo:p_emma_couch", "message:m_emma_2230"],
          meaning="Envoyée à 22:30 comme preuve qu'elle était au lit, la photo a en réalité été prise à 19:42 — il faisait encore jour."),
     dict(id="e_calendar", title="Le rendez-vous du calendrier", importance="key", suspects=["s_emma"],
          refs=["calendar:c_quai9"],

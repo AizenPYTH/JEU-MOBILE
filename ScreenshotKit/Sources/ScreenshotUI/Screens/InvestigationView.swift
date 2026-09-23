@@ -30,7 +30,7 @@ struct InvestigationView: View {
                             .presentationDetents([.medium, .large])
                     case .accuseNow:
                         AccuseNowSheet(session: session, onAccuse: { sheet = nil; session.requestAccusation() }, onCancel: { sheet = nil })
-                            .presentationDetents([.height(300)])
+                            .presentationDetents([.height(340), .medium])
                     }
                 }
                 .presentationCornerRadius(Theme.Radius.sheet)
@@ -80,6 +80,7 @@ struct AccuseNowSheet: View {
             Text(L10n.f("accuseNow.overline", PhoneFormat.countdown(session.remainingSeconds))).overline(Theme.Colors.signal)
             Text(L10n.t("accuseNow.title")).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
             Text(L10n.f("accuseNow.bonus", bonus)).font(Theme.Fonts.narrativeSmall).foregroundStyle(Theme.Colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)
             Button(L10n.t("accuseNow.confirm"), action: onAccuse).buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
                 .accessibilityIdentifier("accuseNow.confirm")
