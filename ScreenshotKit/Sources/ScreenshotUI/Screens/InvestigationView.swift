@@ -95,13 +95,27 @@ struct NotebookView: View {
     let session: GameSession
     let onAccuse: () -> Void
     @State private var tab = 0
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         let game = session.game
         NavigationStack {
             VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
-                Text(L10n.t("carnet.title")).font(Theme.Fonts.titleLarge).foregroundStyle(Theme.Colors.textPrimary)
-                    .accessibilityIdentifier("notebook.title")
+                HStack(alignment: .firstTextBaseline) {
+                    Text(L10n.t("carnet.title")).font(Theme.Fonts.titleLarge).foregroundStyle(Theme.Colors.textPrimary)
+                        .accessibilityIdentifier("notebook.title")
+                    Spacer()
+                    Button { dismiss() } label: {
+                        Image(systemName: "xmark")
+                            .font(Theme.Fonts.headline)
+                            .foregroundStyle(Theme.Colors.textSecondary)
+                            .frame(width: Theme.Size.hit, height: Theme.Size.hit)
+                            .background(Circle().fill(Theme.Colors.bgRaised))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(Text(L10n.t("a11y.close")))
+                    .accessibilityIdentifier("notebook.close")
+                }
                 Segmented(options: [(0, L10n.t("carnet.suspects")),
                                     (1, L10n.f("carnet.evidence", game.notebook.count)),
                                     (2, L10n.t("carnet.timeline"))], selection: $tab)

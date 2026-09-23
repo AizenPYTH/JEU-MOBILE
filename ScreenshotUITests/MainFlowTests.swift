@@ -181,8 +181,7 @@ final class MainFlowTests: XCTestCase {
         app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Preuves'")).firstMatch.tap()
         wait(element("notebook.row"), 5, "élément épinglé dans le carnet")
         snap("15-carnet-preuves")
-        // Close the sheet by swiping its title down.
-        element("notebook.title").swipeDown(velocity: .fast)
+        element("notebook.close").tap()
         XCTAssertTrue(element("notebook.accuse").waitForNonExistence(timeout: 5), "Le carnet ne se ferme pas")
         snap("15b-carnet-ferme")
 
