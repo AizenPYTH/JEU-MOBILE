@@ -54,15 +54,24 @@ Scènes de photo disponibles : `sunset`, `sky`, `rain`, `street_day`, `street_ni
 
 - `suspects` : `contact`, `role`, `statement` (déclaration à la police, montrée au briefing),
   `verdict` (texte affiché si le joueur accuse cette personne : pourquoi c'était elle / pourquoi non).
-- `evidence` : ce que le joueur doit **avoir vu** pour « trouver » une information.
+- `evidence` : une information que le joueur doit **voir puis épingler** dans le Carnet (appui long).
+  Une preuve n'est « trouvée » que si tout ce qu'elle exige a été vu **et** qu'au moins un de ses
+  éléments est épinglé (épingler la photo vaut pour son analyse et inversement).
   - `refs` : références `"type:id"` — `message:`, `draft:`, `call:`, `photo:` (ouverte),
     `photoInfo:` (analysée), `track:`, `calendar:`, `note:`, `mail:`, `browser:`, `contact:`.
   - `anyOf: true` = une seule référence suffit.
   - `importance` : `key` (nécessaire), `supporting` (aide, disculpe), `falseLead` (vraie information
     qui mène sur une fausse piste).
   - `meaning` : ce que ça voulait vraiment dire (révélé à la fin).
-- `hints` : `text` (oriente sans donner la réponse), `costSeconds`.
-- `solution` : `culprit`, `headline`, `story` (révélée paragraphe par paragraphe).
+- `suspects` (compléments) : `age`, `address`, `alibi` (pourquoi un innocent ne peut pas l'être —
+  obligatoire pour un innocent), `alibiEvidence` (id de la preuve qui le montre), `trap` (pourquoi il
+  avait l'air coupable).
+- `hints` : `text` (oriente sans donner la réponse), `scoreCost` (points retirés, 0 = gratuit),
+  `unlockAtRemainingSeconds` (optionnel : disponible seulement quand le chrono est descendu jusque-là).
+  Les indices coûtent des points, jamais du temps.
+- `solution` : `culprit`, `headline`, `summary` (une phrase), `reveal` (reconstitution pas à pas :
+  `at`, `text`, `evidence` = id de la preuve affichée ● trouvée / ○ manquée), `story` (paragraphes).
+- `liveEvents[].level` : `normal`, `important` ou `urgent` (bannière inversée qui reste affichée).
 
 ## Règles de conception
 

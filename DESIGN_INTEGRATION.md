@@ -36,29 +36,25 @@ les points où le handoff contredit le brief ou le moteur — **à trancher par 
 | [35] Score (chiffre qui défile, 5 lignes en cascade, formule du handoff) | `ScoreView`, `Verdict.score` |
 | Pause quand l'app passe en arrière-plan (« Enquête en pause ») | `PauseOverlay` |
 
-## 2. Conflits entre le handoff et le brief / le moteur — à trancher
+## 2. Conflits entre le handoff et le brief — décisions du porteur de projet
 
-1. **Contenu de l'affaire #001.** Le handoff décrit une autre histoire (dimanche 20 sept., coupable
-   **Lucas**, noms Lemaire / Benali / Ferrand / Moreau, prêt de 4 000 €, 10 preuves E1–E10, 6 événements
-   en direct). L'affaire livrée suit le brief initial : coupable **Emma**, samedi 12 sept., fausses
-   factures du collectif, 6 preuves clés. Je n'ai pas réécrit l'histoire sans ton accord.
-   → Garder l'affaire actuelle, ou la réécrire selon le handoff (c'est un seul fichier JSON, le moteur
-   ne change pas) ?
-2. **Coût en temps des actions.** Le brief demande que chaque action coûte du temps (ouvrir une
-   conversation 3 s, analyser une photo 15 s…) ; le handoff ne parle que du temps réel et demande de
-   charger l'historique ancien « sans spinner ». Le moteur applique les coûts (réglables dans
-   `rules.json`, mettre 0 pour les supprimer).
-3. **Définition de « trouvée ».** Une preuve est trouvée quand elle a été **vue** (brief). Le handoff
-   laisse penser qu'il faut l'**épingler**. Actuellement : vue = trouvée, et l'épinglage compte dans
-   la « Précision du carnet ».
-4. **Apps.** Le handoff a une app **Fichiers** (vide) et pas d'app Notifications ; le téléphone livré a
-   l'app **Notifications** (historique des notifications, demandé par le brief) et pas Fichiers.
-5. **Affaire 000 « Premier accès »** (tutoriel) et **Mode sans chrono** : présents dans le handoff,
-   absents du brief. Non faits.
+1. **Affaire #001** : on garde l'histoire du brief (coupable **Emma**). L'histoire du handoff (Lucas,
+   20 sept., prêt de 4 000 €) n'est pas utilisée. Seules les données JSON changent, jamais le moteur.
+2. **Coût en temps des actions** : gardé et actif, réglable dans `rules.json` (`timeCosts`).
+3. **Preuve trouvée = vue + épinglée** dans le Carnet (appui long). Voir ne suffit plus. Le joueur
+   peut ensuite lier l'élément épinglé à un suspect.
+4. **Apps** : Notifications gardée (sert surtout aux événements en direct). Fichiers n'a pas été
+   intégrée : elle pourra coexister plus tard.
+5. **Affaire 000 et Mode sans chrono** : reportés.
+
+Ordre de travail décidé : 1) compilation réelle sur macOS ; 2) onboarding, reprise d'une enquête,
+recherche globale ; 3) immersion (rail de dates, appel entrant, fiche photo + mini-carte, rangs) ;
+4) polish (sons, animations, micro-interactions). Pas de grosse fonctionnalité avant que le parcours
+Accueil → Affaires → Intro → Téléphone → enquête → Carnet → accusation → résultat soit stable.
 
 ## 3. Reste à faire (handoff)
 
-- [01] Onboarding en 3 étapes jouables, puis Affaire 000.
+- [01] Onboarding en 3 étapes jouables (l'Affaire 000 est reportée).
 - Reprise d'une partie en cours (« Continuer ») : l'enquête n'est pas encore sauvegardée.
 - Recherche **globale** multi-apps avec chips et reconnaissance des dates en français (aujourd'hui :
   recherche dans Messages uniquement).

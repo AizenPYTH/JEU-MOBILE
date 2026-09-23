@@ -31,7 +31,8 @@ affaire avant que le temps soit écoulé. »
 Screenshot.xcodeproj/     Coquille de l'app iOS (+ schéma partagé « Screenshot »)
 Screenshot/               App : ScreenshotApp.swift, Assets.xcassets (icône), InfoPlist.xcstrings
 Configs/Screenshot.xcconfig  Bundle ID, version, signature (source unique)
-.github/workflows/        tests-linux.yml (chaque push) · ios-testflight.yml (manuel + PR vers main)
+.github/workflows/        ios-build.yml (compilation iOS, chaque push) · tests-linux.yml (chaque push) ·
+                          ios-testflight.yml (manuel + PR vers main). Contenu de référence : docs/CI_WORKFLOWS.md
 docs/TESTFLIGHT_SETUP.md  Signature et TestFlight sans Mac
 docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
 docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — lire README.md
@@ -71,8 +72,9 @@ scripts/                  test.sh, setup-linux-swift.sh
 5. **Modèle de temps** : `écoulé = temps réel d'enquête + coûts des actions`. L'horloge du téléphone
    avance avec. Pause automatique quand l'app passe en arrière-plan.
 6. **La présentation ne contient pas de règle de jeu** : elle appelle `Investigation` via `GameSession`.
-   Ce qui s'affiche à l'écran est signalé gratuitement au moteur (`markSeen`) ; les preuves « trouvées »
-   sont calculées à partir de ce qui a réellement été vu.
+   Ce qui s'affiche à l'écran est signalé gratuitement au moteur (`markSeen`). Une preuve est
+   **trouvée** quand elle a été vue **et épinglée** dans le Carnet (`Investigation.isFound`) : voir ne
+   suffit pas, le joueur doit reconnaître l'indice.
 7. **Aucune couleur / police / taille en dur dans les vues** : `Theme.*`.
 8. Textes d'interface dans le String Catalog (fr par défaut + en) via `L10n.t/f`. Le contenu d'une
    affaire est écrit dans la langue du téléphone saisi.
@@ -109,10 +111,12 @@ cd ScreenshotKit && swift run CaseLint   # rapport sur chaque affaire
 
 Sous Linux (conteneur cloud, pas de Xcode) : `./scripts/setup-linux-swift.sh` puis
 `export PATH=/opt/swift/usr/libexec/swift/bin:$PATH LD_LIBRARY_PATH=/opt/swift/usr/lib/x86_64-linux-gnu`.
-L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est le workflow macOS qui la vérifie.
+L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (macOS) qui la vérifie.
 
 ## CI / livraison
 
+- `ios-build.yml` : compilation de l'app pour le simulateur (sans signature) sur macOS, à chaque push
+  touchant l'app ; erreurs dans le résumé du job, journal complet en artefact.
 - `tests-linux.yml` : `swift test` + `CaseLint` (image Docker `swift:6.0-noble`), à chaque push.
 - `ios-testflight.yml` : macOS, manuel ou PR vers `main`. Tests, archive signée, export, envoi
   TestFlight via clé API. Build = `<run_number + BUILD_NUMBER_OFFSET>.<attempt>`. Sans secrets :

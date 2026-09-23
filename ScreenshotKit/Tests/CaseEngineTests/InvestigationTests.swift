@@ -197,6 +197,7 @@ struct VerdictTests {
         game.openPhoto("p1")
         game.analyzePhoto("p1")
         game.togglePin(ItemRef(.message, "e1"))
+        game.togglePin(ItemRef(.photo, "p1")) // the pinned photo covers its analysis
         let verdict = try #require(game.accuse("s_emma"))
         #expect(verdict.isCorrect)
         // 3 counted items (2 key + 1 supporting); the draft was never seen.
@@ -204,9 +205,24 @@ struct VerdictTests {
         #expect(verdict.missed.map(\.id) == ["ev_draft"])
         #expect(verdict.scoreParts.suspect == 60)
         #expect(verdict.scoreParts.found == 16) // 25 × 2/3, rounded down
-        #expect(verdict.scoreParts.precision == 5) // 1 relevant pin out of 1
+        #expect(verdict.scoreParts.precision == 5) // 2 relevant pins out of 2
         #expect(verdict.score == 60 + 16 + verdict.scoreParts.time + 5)
         #expect(game.phase == .finished)
+    }
+
+    @Test func seeingIsNotFinding() throws {
+        let (game, _) = Fixtures.investigation()
+        game.start()
+        game.recoverMessage("e1")
+        game.openPhoto("p1")
+        game.analyzePhoto("p1")
+        let evidence = try #require(game.caseFile.evidence.first { $0.id == "ev_photo" })
+        #expect(game.isSeen(evidence) && !game.isFound(evidence))
+        game.togglePin(ItemRef(.photoInfo, "p1"))
+        #expect(game.isFound(evidence))
+        game.togglePin(ItemRef(.photoInfo, "p1"))
+        #expect(!game.isFound(evidence)) // un-pinning takes it back
+        #expect(try #require(game.accuse("s_emma")).foundCount == 0)
     }
 
     @Test func wrongAnswerExplainsInsteadOfJudging() throws {

@@ -124,6 +124,15 @@ struct PlaythroughTests {
         #expect(game.notifications.count >= 6)
         #expect(game.phase == .investigating && game.remainingSeconds > 0)
 
+        // Seeing is not finding: nothing counts until it is pinned in the notebook.
+        let photoMeta = try #require(game.caseFile.evidence.first { $0.id == "e_photo_meta" })
+        #expect(game.isSeen(photoMeta) && !game.isFound(photoMeta))
+        for ref in ["message:m_emma_del1", "photoInfo:p_emma_couch", "calendar:c_quai9", "track:t_emma",
+                    "note:n_lumen", "track:t_lucas", "draft:d_sarah"] {
+            game.link(try #require(ItemRef(ref)), to: "s_emma")
+        }
+        #expect(game.isFound(photoMeta))
+
         let verdict = try #require(game.accuse("s_emma"))
         #expect(verdict.isCorrect)
         #expect(!verdict.missed.contains { $0.importance == .key }, "missed: \(verdict.missed.map(\.id))")
@@ -139,6 +148,7 @@ struct PlaythroughTests {
         game.openConversation("c_group")
         game.markSeen(ItemRef(.message, "m_group_lucas_2340")) // …and his lie in the group.
         game.link(ItemRef(.message, "m_group_lucas_2340"), to: "s_lucas")
+        game.togglePin(ItemRef(.track, "t_lucas"))
 
         let events = wait(480, game, clock)
         #expect(events.contains(.timeUp))

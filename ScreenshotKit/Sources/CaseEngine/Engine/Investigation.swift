@@ -502,8 +502,25 @@ public final class Investigation {
 
     // MARK: - Evidence
 
-    public func isFound(_ evidence: Evidence) -> Bool {
+    /// Everything the evidence needs has been on screen (or any one item, for `anyOf`).
+    public func isSeen(_ evidence: Evidence) -> Bool {
         evidence.anyOf == true ? evidence.refs.contains { seen.contains($0) } : evidence.refs.allSatisfy { seen.contains($0) }
+    }
+
+    /// Officially found: seen, and at least one of its items pinned in the notebook.
+    /// Looking at something is not enough — the player has to recognise it as evidence.
+    public func isFound(_ evidence: Evidence) -> Bool {
+        isSeen(evidence) && evidence.refs.contains(where: pinCovers)
+    }
+
+    /// A pinned photo counts for its analysis and the other way round (same picture).
+    private func pinCovers(_ ref: ItemRef) -> Bool {
+        if isPinned(ref) { return true }
+        switch ref.kind {
+        case .photoInfo: return isPinned(ItemRef(.photo, ref.id))
+        case .photo: return isPinned(ItemRef(.photoInfo, ref.id))
+        default: return false
+        }
     }
 
     public var foundEvidence: [Evidence] { caseFile.evidence.filter(isFound) }
