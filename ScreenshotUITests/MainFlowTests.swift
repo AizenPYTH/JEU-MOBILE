@@ -33,6 +33,26 @@ final class MainFlowTests: XCTestCase {
         return element
     }
 
+    /// Waits until the element can be tapped and the screen transition has settled, then taps.
+    private func tapWhenReady(_ element: XCUIElement, _ what: String) {
+        wait(element, 10, what)
+        let hittable = expectation(for: NSPredicate(format: "hittable == true"), evaluatedWith: element)
+        XCTAssertEqual(XCTWaiter().wait(for: [hittable], timeout: 5), .completed, "Not tappable: \(what)")
+        usleep(700_000) // screen transitions last up to 0.7 s
+        element.tap()
+    }
+
+    /// Taps, and taps once more if the expected result did not appear (a tap during an animation
+    /// can be swallowed by SwiftUI).
+    private func tap(_ element: XCUIElement, _ what: String, expecting result: XCUIElement) {
+        tapWhenReady(element, what)
+        if !result.waitForExistence(timeout: 4) {
+            snap("retry-\(what)")
+            element.tap()
+        }
+        wait(result, 6, "après « \(what) »")
+    }
+
     /// An urgent notification covers the phone with a scrim until it is dismissed.
     private func dismissUrgentBanner() {
         if app.buttons["banner.open"].exists {
@@ -69,21 +89,43 @@ final class MainFlowTests: XCTestCase {
         pinButton.tap()
     }
 
+    /// Selects a suspect card on the accusation screen (checked through its "selected" trait).
+    private func choose(_ suspect: XCUIElement) {
+        tapWhenReady(suspect, "suspect")
+        if !suspect.isSelected {
+            usleep(500_000)
+            suspect.tap()
+        }
+        XCTAssertTrue(suspect.isSelected, "Le suspect n'est pas sélectionné")
+    }
+
+    /// "Maintenir pour confirmer" (900 ms): hold well past the threshold, once more if needed.
+    private func holdToAccuse() {
+        let hold = element("accuse.hold")
+        let result = app.descendants(matching: .any).matching(
+            NSPredicate(format: "identifier IN %@", ["result.primary", "result.reveal"])).firstMatch
+        wait(hold, 5, "bouton maintenir")
+        usleep(500_000)
+        hold.press(forDuration: 2.0)
+        if !result.waitForExistence(timeout: 5) {
+            snap("retry-maintenir")
+            hold.press(forDuration: 2.5)
+        }
+        wait(result, 8, "écran de résultat")
+    }
+
     private func startCase() {
         app.launch()
         wait(element("home.start"), 20, "Accueil")
         snap("01-accueil")
 
-        element("menu.cases").tap()
-        let card = wait(element("case.case_001"), 5, "carte de l'affaire 001")
+        let card = element("case.case_001")
+        tap(element("menu.cases"), "Affaires", expecting: card)
         snap("02-affaires")
-        card.tap()
-
-        wait(element("intro.start"), 5, "écran d'introduction")
+        tap(card, "carte de l'affaire 001", expecting: element("intro.start"))
         sleep(3) // let the serif lines fade in
         snap("03-intro")
-        element("intro.start").tap()
-        wait(element("phone.timer"), 10, "téléphone (chrono)")
+        tap(element("intro.start"), "Commencer l'enquête", expecting: element("phone.timer"))
     }
 
     // MARK: - Solving the case, accusing early from the timer
@@ -106,8 +148,8 @@ final class MainFlowTests: XCTestCase {
         openApp("messages")
         wait(element("conversation.c_emma"), 5, "conversation Emma")
         snap("06-messages")
-        element("conversation.c_emma").tap()
-        let alibi = wait(element("message.m_emma_2230"), 10, "message d'Emma 22:30")
+        let alibi = element("message.m_emma_2230")
+        tap(element("conversation.c_emma"), "conversation Emma", expecting: alibi)
         snap("07-conversation")
         pin(alibi, "08-menu-epingler")
         XCTAssertTrue(element("phone.carnet").label.contains("1"), "Le carnet devrait compter 1 élément")
@@ -118,8 +160,8 @@ final class MainFlowTests: XCTestCase {
         snap("10-photos")
         let couch = element("photo.p_emma_couch")
         scrollTo(couch)
-        couch.tap()
-        let analyze = wait(element("photo.analyze"), 5, "bouton Analyser")
+        let analyze = element("photo.analyze")
+        tap(couch, "photo d'Emma", expecting: analyze)
         snap("11-photo")
         analyze.tap()
         sleep(1)
@@ -146,20 +188,18 @@ final class MainFlowTests: XCTestCase {
 
         // Timer → "Accuser maintenant ?"
         dismissUrgentBanner()
-        element("phone.timer").tap()
-        wait(element("accuseNow.confirm"), 5, "Accuser maintenant ?")
+        tap(element("phone.timer"), "chrono", expecting: element("accuseNow.confirm"))
         snap("16-accuser-maintenant")
-        element("accuseNow.confirm").tap()
+        let emma = element("accuse.suspect.s_emma")
+        tap(element("accuseNow.confirm"), "Accuser maintenant", expecting: emma)
 
         // Accusation: choose Emma, hold to confirm.
-        let emma = wait(element("accuse.suspect.s_emma"), 10, "écran d'accusation")
         snap("17-accusation")
-        emma.tap()
+        choose(emma)
         snap("18-accusation-emma")
-        element("accuse.hold").press(forDuration: 1.6)
+        holdToAccuse()
 
         // Result + reconstruction, step by step.
-        wait(element("result.primary"), 10, "résultat")
         snap("19-resultat")
         sleep(7)
         snap("20-reconstitution")
@@ -197,10 +237,10 @@ final class MainFlowTests: XCTestCase {
 
         let lucas = wait(element("accuse.suspect.s_lucas"), 10, "accusation après le temps écoulé")
         snap("32-accusation-forcee")
-        lucas.tap()
-        element("accuse.hold").press(forDuration: 1.6)
+        choose(lucas)
+        holdToAccuse()
 
-        let reveal = wait(element("result.reveal"), 10, "résultat négatif")
+        let reveal = element("result.reveal")
         snap("33-resultat-negatif")
         scrollTo(reveal)
         reveal.tap()
