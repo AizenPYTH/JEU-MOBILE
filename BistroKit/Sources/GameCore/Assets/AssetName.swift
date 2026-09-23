@@ -7,8 +7,13 @@ public enum AssetName {
         case idle, happy, sad, eating, portrait
     }
 
+    /// Staff roles and poses from the design handoff (staff_chef_working, staff_waiter_walking…).
+    public enum StaffRole: String, CaseIterable, Sendable {
+        case chef, waiter
+    }
+
     public enum StaffPose: String, CaseIterable, Sendable {
-        case idle, walking, carrying, cooking
+        case idle, working, walking
     }
 
     public enum Currency: String, CaseIterable, Sendable {
@@ -18,10 +23,14 @@ public enum AssetName {
     public static func ingredient(_ id: IngredientID) -> String { "ing_\(id)" }
     public static func dish(_ id: RecipeID) -> String { "dish_\(id)" }
     public static func character(_ id: RegularID, _ pose: CharacterPose) -> String { "char_\(id)_\(pose.rawValue)" }
-    public static func staff(_ role: String, _ pose: StaffPose) -> String { "staff_\(role)_\(pose.rawValue)" }
+    public static func staff(_ role: StaffRole, _ pose: StaffPose) -> String { "staff_\(role.rawValue)_\(pose.rawValue)" }
     public static func station(_ id: StationID, level: Int) -> String { "station_\(id)_lv\(level)" }
     public static func decoration(_ id: DecorationID) -> String { "deco_\(id)" }
     public static func background(_ zone: ZoneID) -> String { "bg_\(zone)" }
+    /// Illustration of a regular's story page, e.g. `bg_story_margot_2`.
+    public static func story(_ id: RegularID, number: Int) -> String { "bg_story_\(id)_\(number)" }
+    /// Other interface art from the handoff: `ui_lab_pot`, `ui_lab_pot_open`, `ui_bubble_order`…
+    public static func ui(_ name: String) -> String { "ui_\(name)" }
     public static func uiIcon(_ name: String) -> String { "ui_icon_\(name)" }
     public static func currency(_ currency: Currency) -> String { "currency_\(currency.rawValue)" }
 }

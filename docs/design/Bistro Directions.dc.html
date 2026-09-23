@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Nunito:wght@400;600;700;800&family=Fredoka:wght@400;500;600;700&family=Figtree:wght@400;500;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E6E1D8;font-family:Figtree,system-ui,sans-serif;color:#2A2420;-webkit-font-smoothing:antialiased}
+a{color:#8A3B1E}a:hover{color:#5E2512}
+</style>
+</helmet>
+
+<section data-screen-label="Tour 2 — Direction mixte" style="padding:72px 72px 24px;display:flex;flex-direction:column;gap:40px">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="wob" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="2.6"></feDisplacementMap></filter>
+      <pattern id="tBr" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.2" fill="#4A2C20"></circle></pattern>
+      <pattern id="tSg" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.3" fill="#C9533A"></circle></pattern>
+      <pattern id="tOr" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.5" fill="#EBAA2F"></circle></pattern>
+
+      <g id="m2s">
+        <ellipse cx="86" cy="244" rx="14" ry="7" fill="#4A2C20"></ellipse><ellipse cx="114" cy="244" rx="14" ry="7" fill="#4A2C20"></ellipse>
+        <rect x="79" y="205" width="14" height="36" fill="#EFBBA2"></rect><rect x="107" y="205" width="14" height="36" fill="#EFBBA2"></rect>
+        <rect x="44" y="118" width="18" height="60" rx="9" transform="rotate(12 53 118)" fill="#EFBBA2"></rect>
+        <path d="M62 110 Q100 98 138 110 L154 212 Q100 222 46 212 Z" fill="#C9533A"></path>
+        <path d="M77 128 H123 L129 204 Q100 211 71 204 Z" fill="#FBF4E6"></path>
+        <rect x="88" y="168" width="24" height="16" rx="4" fill="#EBAA2F"></rect>
+        <rect x="132" y="92" width="16" height="96" rx="8" transform="rotate(22 140 140)" fill="#EBAA2F"></rect>
+        <path d="M136 108 l8 4 M130 124 l8 4 M124 140 l8 4" transform="rotate(22 140 140)" fill="none"></path>
+        <rect x="136" y="118" width="18" height="56" rx="9" transform="rotate(-18 145 118)" fill="#EFBBA2"></rect>
+        <circle cx="100" cy="72" r="30" fill="#EFBBA2"></circle>
+        <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z" fill="#EDE2CF"></path>
+        <circle cx="100" cy="34" r="13" fill="#EDE2CF"></circle>
+        <circle cx="89" cy="76" r="7" fill="none"></circle><circle cx="111" cy="76" r="7" fill="none"></circle><path d="M96 76 H104" fill="none"></path>
+        <path d="M92 92 Q100 98 108 92" fill="none"></path>
+      </g>
+      <g id="m2k" fill="none" stroke="#4A2C20" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="86" cy="244" rx="14" ry="7"></ellipse><ellipse cx="114" cy="244" rx="14" ry="7"></ellipse>
+        <rect x="79" y="205" width="14" height="36"></rect><rect x="107" y="205" width="14" height="36"></rect>
+        <rect x="44" y="118" width="18" height="60" rx="9" transform="rotate(12 53 118)"></rect>
+        <path d="M62 110 Q100 98 138 110 L154 212 Q100 222 46 212 Z"></path>
+        <path d="M77 128 H123 L129 204 Q100 211 71 204 Z"></path>
+        <rect x="88" y="168" width="24" height="16" rx="4"></rect>
+        <rect x="132" y="92" width="16" height="96" rx="8" transform="rotate(22 140 140)"></rect>
+        <path d="M136 108 l8 4 M130 124 l8 4 M124 140 l8 4" transform="rotate(22 140 140)"></path>
+        <rect x="136" y="118" width="18" height="56" rx="9" transform="rotate(-18 145 118)"></rect>
+        <circle cx="100" cy="72" r="30"></circle>
+        <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z"></path>
+        <circle cx="100" cy="34" r="13"></circle>
+        <circle cx="89" cy="76" r="7"></circle><circle cx="111" cy="76" r="7"></circle><path d="M96 76 H104"></path>
+        <path d="M92 92 Q100 98 108 92"></path>
+      </g>
+      <g id="m2">
+        <use href="#m2s" transform="translate(4 3)"></use>
+        <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z M113 34 a13 13 0 1 1 -26 0 a13 13 0 1 1 26 0" fill="url(#tBr)" opacity=".45" transform="translate(4 3)"></path>
+        <path d="M62 110 Q100 98 138 110 L154 212 Q100 222 46 212 Z" fill="url(#tOr)" opacity=".5" transform="translate(4 3)"></path>
+        <use href="#m2k" fill="none" stroke="#4A2C20" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#wob)"></use>
+        <circle cx="89" cy="76" r="2.3" fill="#4A2C20"></circle><circle cx="111" cy="76" r="2.3" fill="#4A2C20"></circle>
+        <circle cx="84" cy="88" r="5.5" fill="#C9533A" opacity=".55"></circle><circle cx="116" cy="88" r="5.5" fill="#C9533A" opacity=".55"></circle>
+      </g>
+
+      <g id="dBs">
+        <rect x="8" y="64" width="104" height="38" rx="10" fill="#D9A76A"></rect>
+        <circle cx="100" cy="83" r="4" fill="#F4E8D2"></circle>
+        <rect x="16" y="42" width="46" height="30" rx="12" transform="rotate(-8 39 57)" fill="#EBAA2F"></rect>
+        <rect x="56" y="46" width="44" height="30" rx="12" transform="rotate(7 78 61)" fill="#EBAA2F"></rect>
+        <rect x="24" y="44" width="11" height="11" rx="2" fill="#C9533A"></rect><rect x="40" y="48" width="11" height="11" rx="2" fill="#C9533A"></rect>
+        <rect x="64" y="50" width="11" height="11" rx="2" fill="#C9533A"></rect><rect x="82" y="54" width="11" height="11" rx="2" fill="#C9533A"></rect>
+        <ellipse cx="36" cy="60" rx="7" ry="4" transform="rotate(-25 36 60)" fill="#3F7A6E"></ellipse><ellipse cx="78" cy="64" rx="7" ry="4" transform="rotate(20 78 64)" fill="#3F7A6E"></ellipse>
+      </g>
+      <g id="dBk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="8" y="64" width="104" height="38" rx="10"></rect>
+        <circle cx="100" cy="83" r="4"></circle>
+        <rect x="16" y="42" width="46" height="30" rx="12" transform="rotate(-8 39 57)"></rect>
+        <rect x="56" y="46" width="44" height="30" rx="12" transform="rotate(7 78 61)"></rect>
+        <rect x="24" y="44" width="11" height="11" rx="2"></rect><rect x="40" y="48" width="11" height="11" rx="2"></rect>
+        <rect x="64" y="50" width="11" height="11" rx="2"></rect><rect x="82" y="54" width="11" height="11" rx="2"></rect>
+        <ellipse cx="36" cy="60" rx="7" ry="4" transform="rotate(-25 36 60)"></ellipse><ellipse cx="78" cy="64" rx="7" ry="4" transform="rotate(20 78 64)"></ellipse>
+      </g>
+      <g id="dB"><use href="#dBs" transform="translate(3 2)"></use><rect x="11" y="66" width="104" height="38" rx="10" fill="url(#tBr)" opacity=".3"></rect><use href="#dBk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" filter="url(#wob)"></use></g>
+
+      <g id="dOs">
+        <circle cx="60" cy="62" r="50" fill="#FBF4E6"></circle>
+        <circle cx="60" cy="62" r="40" fill="none"></circle>
+        <path d="M22 70 Q58 16 98 66 Q62 90 22 70 Z" fill="#EBAA2F"></path>
+        <path d="M28 70 Q60 60 92 67" fill="none"></path>
+        <circle cx="48" cy="52" r="4" fill="#3F7A6E"></circle><circle cx="62" cy="45" r="4" fill="#3F7A6E"></circle><circle cx="74" cy="54" r="4" fill="#3F7A6E"></circle>
+        <circle cx="86" cy="90" r="9" fill="#C9533A"></circle>
+      </g>
+      <g id="dOk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="60" cy="62" r="50"></circle>
+        <circle cx="60" cy="62" r="40"></circle>
+        <path d="M22 70 Q58 16 98 66 Q62 90 22 70 Z"></path>
+        <path d="M28 70 Q60 60 92 67"></path>
+        <circle cx="48" cy="52" r="4"></circle><circle cx="62" cy="45" r="4"></circle><circle cx="74" cy="54" r="4"></circle>
+        <circle cx="86" cy="90" r="9"></circle>
+      </g>
+      <g id="dO"><use href="#dOs" transform="translate(3 2)"></use><circle cx="63" cy="64" r="50" fill="url(#tBr)" opacity=".12"></circle><use href="#dOk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" filter="url(#wob)"></use></g>
+
+      <g id="dNs">
+        <path d="M14 58 H106 Q102 104 60 106 Q18 104 14 58 Z" fill="#C9533A"></path>
+        <ellipse cx="60" cy="58" rx="46" ry="12" fill="#F2CF8C"></ellipse>
+        <path d="M24 58 q6 -9 12 0 t12 0 t12 0 t12 0 t12 0 t12 0" fill="none" stroke="#EBAA2F" stroke-width="5"></path>
+        <rect x="70" y="42" width="24" height="8" rx="4" transform="rotate(-18 82 46)" fill="#9E3522"></rect>
+        <rect x="44" y="47" width="18" height="7" rx="3.5" transform="rotate(14 53 50)" fill="#9E3522"></rect>
+        <rect x="80" y="4" width="5" height="62" rx="2.5" transform="rotate(22 82 35)" fill="#7A5A48"></rect>
+        <rect x="90" y="6" width="5" height="62" rx="2.5" transform="rotate(28 92 37)" fill="#7A5A48"></rect>
+        <path d="M36 36 q-6 -8 0 -16 M52 32 q-6 -8 0 -16" fill="none"></path>
+      </g>
+      <g id="dNk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 58 H106 Q102 104 60 106 Q18 104 14 58 Z"></path>
+        <ellipse cx="60" cy="58" rx="46" ry="12"></ellipse>
+        
+        <rect x="70" y="42" width="24" height="8" rx="4" transform="rotate(-18 82 46)"></rect>
+        <rect x="44" y="47" width="18" height="7" rx="3.5" transform="rotate(14 53 50)"></rect>
+        <rect x="80" y="4" width="5" height="62" rx="2.5" transform="rotate(22 82 35)"></rect>
+        <rect x="90" y="6" width="5" height="62" rx="2.5" transform="rotate(28 92 37)"></rect>
+        <path d="M36 36 q-6 -8 0 -16 M52 32 q-6 -8 0 -16"></path>
+      </g>
+      <g id="dN"><use href="#dNs" transform="translate(3 2)"></use><path d="M17 62 H109 Q105 108 63 110 Q21 108 17 62 Z" fill="url(#tBr)" opacity=".28"></path><use href="#dNk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" filter="url(#wob)"></use></g>
+
+      <g id="dLs">
+        <path d="M32 28 H88 L82 108 Q60 112 38 108 Z" fill="#FBF4E6"></path>
+        <path d="M35 50 H85 L81 104 Q60 108 39 104 Z" fill="#EBAA2F"></path>
+        <rect x="44" y="60" width="14" height="14" rx="3" transform="rotate(12 51 67)" fill="#FBF4E6"></rect>
+        <rect x="62" y="74" width="12" height="12" rx="3" transform="rotate(-10 68 80)" fill="#FBF4E6"></rect>
+        <rect x="50" y="4" width="7" height="58" rx="3" transform="rotate(10 53 33)" fill="#C9533A"></rect>
+        <circle cx="86" cy="30" r="17" fill="#F4D06A"></circle>
+        <path d="M86 16 V44 M72 30 H100" fill="none"></path>
+      </g>
+      <g id="dLk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 28 H88 L82 108 Q60 112 38 108 Z"></path>
+        <path d="M35 50 H85 L81 104 Q60 108 39 104 Z"></path>
+        <rect x="44" y="60" width="14" height="14" rx="3" transform="rotate(12 51 67)"></rect>
+        <rect x="62" y="74" width="12" height="12" rx="3" transform="rotate(-10 68 80)"></rect>
+        <rect x="50" y="4" width="7" height="58" rx="3" transform="rotate(10 53 33)"></rect>
+        <circle cx="86" cy="30" r="17"></circle>
+        <path d="M86 16 V44 M72 30 H100"></path>
+      </g>
+      <g id="dL"><use href="#dLs" transform="translate(3 2)"></use><path d="M38 52 H88 L84 106 Q63 110 42 106 Z" fill="url(#tSg)" opacity=".22"></path><use href="#dLk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" filter="url(#wob)"></use></g>
+    </defs>
+  </svg>
+
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:1200px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#6B6258">Tour 2 · Direction mixte · Riso chaud</div>
+    <div style="font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1.05">1c comme base, avec le trait et la lumière de 1a.</div>
+  </div>
+
+  <div id="2a" style="width:1480px;background:#F4E8D2;border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:40px;color:#4A2C20">
+    <div style="display:flex;align-items:flex-start;gap:18px">
+      <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;background:#4A2C20;color:#F4E8D2;border-radius:8px;padding:6px 10px">2a</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:42px;line-height:1;letter-spacing:-.02em">Riso chaud</div>
+        <div style="font-size:17px;line-height:1.5;color:#7A5A48;max-width:900px;text-wrap:pretty">On garde les aplats vectoriels, les trames et le papier crème de 1c. L'encre marine est remplacée par un brun chaud, le trait tremble légèrement (déplacement de bruit de 2,5 pt) et l'aplat déborde de 3 à 4 pt comme un calage imparfait. Une 4e encre, l'or, porte la lumière de fin d'après-midi, les récompenses et les pièces.</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">4 encres + papier</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:6px;background:#4A2C20"></div><div style="font-size:14px;font-weight:700">Brun encre</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">#4A2C20 · trait, texte</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:6px;background:#C9533A"></div><div style="font-size:14px;font-weight:700">Sanguine</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">#C9533A · chaleur, alerte douce</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:6px;background:#3F7A6E"></div><div style="font-size:14px;font-weight:700">Vert-de-gris</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">#3F7A6E · végétal, succès, gemmes</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:64px;border-radius:6px;background:#EBAA2F;box-shadow:inset 0 0 0 2px #4A2C20"></div><div style="font-size:14px;font-weight:700">Or · 4e encre</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">#EBAA2F · lumière, pièces, action</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:40px;border-radius:6px;background:#F4E8D2;box-shadow:inset 0 0 0 1.5px #D5C3A4"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">Papier #F4E8D2 · fond</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:40px;border-radius:6px;background:#FBF4E6;box-shadow:inset 0 0 0 1.5px #D5C3A4"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">Papier clair #FBF4E6 · surface</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:40px;border-radius:6px;background:#7A5A48"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">Brun trame #7A5A48 · texte 2</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:40px;border-radius:6px;background-color:#F4E8D2;background-image:radial-gradient(#4A2C20 1.2px,transparent 1.4px);background-size:5px 5px"></div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">Trame brune 25 % · ombres</div></div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7A5A48;margin-top:6px">Surimpressions (multiply) : couleurs gratuites pour les plats</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="position:relative;width:74px;height:48px"><div style="position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:#EBAA2F"></div><div style="position:absolute;left:26px;top:0;width:48px;height:48px;border-radius:50%;background:#C9533A;mix-blend-mode:multiply"></div></div><div style="font-size:12px;font-weight:600">or × sanguine</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="position:relative;width:74px;height:48px"><div style="position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:#EBAA2F"></div><div style="position:absolute;left:26px;top:0;width:48px;height:48px;border-radius:50%;background:#3F7A6E;mix-blend-mode:multiply;opacity:.75"></div></div><div style="font-size:12px;font-weight:600">or × vert-de-gris</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="position:relative;width:74px;height:48px"><div style="position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:#C9533A"></div><div style="position:absolute;left:26px;top:0;width:48px;height:48px;border-radius:50%;background:#3F7A6E;mix-blend-mode:multiply;opacity:.8"></div></div><div style="font-size:12px;font-weight:600">sanguine × vert</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="position:relative;width:74px;height:48px"><div style="position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;background:#EBAA2F;opacity:.45"></div><div style="position:absolute;left:26px;top:0;width:48px;height:48px;border-radius:50%;background:#C9533A;opacity:.35"></div></div><div style="font-size:12px;font-weight:600">tints 40 %</div></div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Contrastes vérifiés (WCAG AA)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:#F4E8D2;box-shadow:inset 0 0 0 1.5px #D5C3A4;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center"><span style="font-weight:700;color:#4A2C20">Brun sur papier</span><span style="font-family:'IBM Plex Mono';font-size:12px">10,3:1</span></div>
+          <div style="background:#F4E8D2;box-shadow:inset 0 0 0 1.5px #D5C3A4;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center"><span style="font-weight:600;color:#7A5A48">Brun trame sur papier</span><span style="font-family:'IBM Plex Mono';font-size:12px">5,1:1</span></div>
+          <div style="background:#EBAA2F;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center"><span style="font-weight:700;color:#4A2C20">Brun sur or</span><span style="font-family:'IBM Plex Mono';font-size:12px">6,2:1</span></div>
+          <div style="background:#3F7A6E;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;color:#FBF4E6"><span style="font-weight:700">Papier sur vert</span><span style="font-family:'IBM Plex Mono';font-size:12px">4,5:1</span></div>
+          <div style="background:#C9533A;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;color:#FBF4E6"><span style="font-weight:800;font-size:18px">Papier sur sanguine</span><span style="font-family:'IBM Plex Mono';font-size:12px">4,0:1 · titres seuls</span></div>
+          <div style="background:#4A2C20;border-radius:8px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;color:#F4E8D2"><span style="font-weight:700">Papier sur brun</span><span style="font-family:'IBM Plex Mono';font-size:12px">10,3:1</span></div>
+        </div>
+        <div style="font-size:14px;line-height:1.5;color:#7A5A48;text-wrap:pretty">Le bouton primaire passe en or avec un texte brun. La sanguine reste réservée aux formes, aux grands titres et aux illustrations, jamais au texte courant.</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) 410px;gap:40px;align-items:start">
+      <div style="display:flex;flex-direction:column;gap:40px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Habituée · margot · char_margot_idle / char_margot_portrait</div>
+          <div style="display:grid;grid-template-columns:260px 1fr;gap:28px;background:#FBF4E6;border-radius:18px;padding:24px">
+            <svg viewBox="0 0 200 260" width="250" height="325"><use href="#m2"></use></svg>
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div style="display:flex;gap:20px;align-items:center">
+                <div style="width:128px;height:128px;border-radius:50%;overflow:hidden;background-color:#EBAA2F;background-image:radial-gradient(#C9533A 1.3px,transparent 1.5px);background-size:6px 6px;box-shadow:inset 0 0 0 3px #4A2C20;display:flex;align-items:center;justify-content:center">
+                  <svg viewBox="52 18 96 110" width="118" height="135" style="margin-top:14px"><use href="#m2"></use></svg>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:28px">Margot</div>
+                  <div style="font-size:15px;line-height:1.45;color:#7A5A48;max-width:280px">Boulangère à la retraite, 71 ans. Adore le sucré. Passe le jeudi.</div>
+                </div>
+              </div>
+              <div style="font-size:15px;line-height:1.5;text-wrap:pretty"><b>Repères de silhouette :</b> chignon haut, corps en cloche, baguette sous le bras. La robe sanguine tramée d'or lui donne une couleur signature que personne d'autre ne porte.</div>
+              <div style="display:flex;gap:28px;align-items:flex-end">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">Ombre chinoise · 64 / 48 / 32 pt</div>
+                  <div style="display:flex;align-items:flex-end;gap:14px">
+                    <svg viewBox="0 0 200 260" width="49" height="64" style="filter:brightness(0)"><use href="#m2"></use></svg>
+                    <svg viewBox="0 0 200 260" width="37" height="48" style="filter:brightness(0)"><use href="#m2"></use></svg>
+                    <svg viewBox="0 0 200 260" width="25" height="32" style="filter:brightness(0)"><use href="#m2"></use></svg>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">Couleur · 48 / 32 pt</div>
+                  <div style="display:flex;align-items:flex-end;gap:14px">
+                    <svg viewBox="0 0 200 260" width="37" height="48"><use href="#m2"></use></svg>
+                    <svg viewBox="0 0 200 260" width="25" height="32"><use href="#m2"></use></svg>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">Palette propre</div>
+                  <div style="display:flex;gap:6px"><div style="width:28px;height:28px;border-radius:50%;background:#C9533A"></div><div style="width:28px;height:28px;border-radius:50%;background:#FBF4E6;box-shadow:inset 0 0 0 1.5px #4A2C20"></div><div style="width:28px;height:28px;border-radius:50%;background:#EDE2CF;background-image:radial-gradient(#4A2C20 1.1px,transparent 1.3px);background-size:4px 4px"></div><div style="width:28px;height:28px;border-radius:50%;background:#EBAA2F"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">4 plats · règle de style pour ~30 plats</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="aspect-ratio:1;border-radius:16px;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 120 120" width="130" height="130"><use href="#dB"></use></svg></div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div style="font-weight:700;font-size:15px;line-height:1.25;flex:1;min-width:0">Bruschetta</div><div style="display:flex;gap:3px"><div style="width:8px;height:8px;border-radius:50%;background:#4A2C20"></div></div></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">dish_bruschetta · planche · commun</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="aspect-ratio:1;border-radius:16px;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20,inset 0 0 0 6px #FBF4E6,inset 0 0 0 8px #4A2C20;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 120 120" width="130" height="130"><use href="#dO"></use></svg></div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div style="font-weight:700;font-size:15px;line-height:1.25;flex:1;min-width:0">Omelette</div><div style="display:flex;gap:3px"><div style="width:8px;height:8px;border-radius:50%;background:#4A2C20"></div><div style="width:8px;height:8px;border-radius:50%;background:#4A2C20"></div></div></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">dish_omelette · assiette · rare</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="aspect-ratio:1;border-radius:16px;background-color:#FBF4E6;background-image:radial-gradient(rgba(63,122,110,.45) 1.3px,transparent 1.5px);background-size:6px 6px;box-shadow:inset 0 0 0 2px #4A2C20,inset 0 0 0 6px #FBF4E6,inset 0 0 0 8px #3F7A6E;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 120 120" width="130" height="130"><use href="#dN"></use></svg></div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div style="font-weight:700;font-size:15px;line-height:1.25;flex:1;min-width:0">Nouilles épicées</div><div style="display:flex;gap:3px"><div style="width:8px;height:8px;border-radius:50%;background:#4A2C20"></div><div style="width:8px;height:8px;border-radius:50%;background:#4A2C20"></div><div style="width:8px;height:8px;border-radius:50%;background:#4A2C20"></div></div></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">dish_spicy_noodles · bol · raffiné</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="aspect-ratio:1;background-color:#F6D27A;background-image:radial-gradient(rgba(201,83,58,.5) 1.3px,transparent 1.5px);background-size:6px 6px;clip-path:polygon(14% 0,86% 0,100% 14%,100% 86%,86% 100%,14% 100%,0 86%,0 14%);display:flex;align-items:center;justify-content:center;position:relative">
+                <div style="position:absolute;inset:0;clip-path:polygon(14% 0,86% 0,100% 14%,100% 86%,86% 100%,14% 100%,0 86%,0 14%,0 14%,2.5% 15%,2.5% 85%,15% 97.5%,85% 97.5%,97.5% 85%,97.5% 15%,85% 2.5%,15% 2.5%,2.5% 15%);background:#4A2C20"></div>
+                <svg viewBox="0 0 120 120" width="130" height="130" style="position:relative"><use href="#dL"></use></svg>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><div style="font-weight:700;font-size:15px;line-height:1.25;flex:1;min-width:0">Limonade au miel</div><div style="display:flex;gap:3px;align-items:center"><div style="width:8px;height:8px;border-radius:50%;background:#4A2C20"></div><div style="width:8px;height:8px;border-radius:50%;background:#4A2C20"></div><div style="width:8px;height:8px;border-radius:50%;background:#4A2C20"></div><div style="width:10px;height:10px;transform:rotate(45deg);background:#4A2C20"></div></div></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7A5A48">dish_honey_lemonade · verre · légendaire</div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:24px;background:#FBF4E6;border-radius:18px;padding:22px 24px">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7A5A48">Test 48 pt · couleur puis niveaux de gris</div>
+              <div style="display:flex;gap:14px;align-items:center">
+                <svg viewBox="0 0 120 120" width="48" height="48"><use href="#dB"></use></svg>
+                <svg viewBox="0 0 120 120" width="48" height="48"><use href="#dO"></use></svg>
+                <svg viewBox="0 0 120 120" width="48" height="48"><use href="#dN"></use></svg>
+                <svg viewBox="0 0 120 120" width="48" height="48"><use href="#dL"></use></svg>
+                <div style="width:1.5px;height:40px;background:#D5C3A4;margin:0 6px"></div>
+                <svg viewBox="0 0 120 120" width="48" height="48" style="filter:grayscale(1)"><use href="#dB"></use></svg>
+                <svg viewBox="0 0 120 120" width="48" height="48" style="filter:grayscale(1)"><use href="#dO"></use></svg>
+                <svg viewBox="0 0 120 120" width="48" height="48" style="filter:grayscale(1)"><use href="#dN"></use></svg>
+                <svg viewBox="0 0 120 120" width="48" height="48" style="filter:grayscale(1)"><use href="#dL"></use></svg>
+              </div>
+              <div style="font-size:14px;line-height:1.5;text-wrap:pretty">En gris, chaque plat reste identifiable grâce à son contenant (planche, assiette, bol, verre) et à sa silhouette. Avec 30 plats, on n'a donc pas besoin de 30 couleurs.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.5">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7A5A48">Règles pour les ~30 plats</div>
+              <div><b>Catégorie = contenant.</b> Planche pour les entrées, assiette pour les plats, bol pour soupes et nouilles, verre pour les boissons, coupelle pour les desserts.</div>
+              <div><b>Un ingrédient = une forme.</b> Tomate en cube, piment en bâtonnet effilé, basilic en feuille ovale. Tomate et piment partagent la sanguine mais pas la forme.</div>
+              <div><b>Vue 3/4 plongeante, même angle pour tous.</b> 3 à 5 éléments maximum par plat, trait brun de 3 pt à 120 pt (il descend à 2 pt en dessous de 64 pt).</div>
+              <div><b>Rareté, sans compter sur la couleur :</b> points sous le nom (1 à 3, plus un losange pour légendaire), puis cadre simple, double, tramé, et enfin octogonal doré.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center;position:sticky;top:20px">
+        <div style="width:390px;height:844px;border:10px solid #2A1C16;border-radius:58px;position:relative;overflow:hidden;background:#F4E8D2;box-shadow:0 30px 60px -30px rgba(74,44,32,.55)">
+          <div style="position:absolute;inset:0;filter:url(#wob)">
+            <div style="position:absolute;left:0;right:0;top:0;height:400px;background:#EFDDBF"></div>
+            <div style="position:absolute;left:0;right:0;top:300px;height:100px;background-image:radial-gradient(#C9533A 1.3px,transparent 1.5px);background-size:7px 7px;opacity:.35"></div>
+            <div style="position:absolute;left:0;right:0;top:400px;bottom:0;background-color:#FBF4E6;background-image:repeating-conic-gradient(rgba(74,44,32,.13) 0 25%,transparent 0 50%);background-size:48px 48px"></div>
+            <div style="position:absolute;left:0;right:0;top:396px;height:8px;background:#4A2C20"></div>
+            <div style="position:absolute;left:32px;top:122px;width:150px;height:172px;border-radius:75px 75px 0 0;background:#EBAA2F;mix-blend-mode:multiply"></div>
+            <div style="position:absolute;left:36px;top:126px;width:150px;height:172px;border-radius:75px 75px 0 0;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:109px;top:128px;width:3.5px;height:170px;background:#4A2C20"></div>
+            <div style="position:absolute;left:30px;top:290px;width:164px;height:12px;background:#7A5A48;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:46px;top:256px;width:38px;height:36px;border-radius:50%;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:136px;top:262px;width:30px;height:30px;border-radius:50%;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:-40px;top:300px;width:330px;height:420px;background:linear-gradient(180deg,rgba(235,170,47,.55),rgba(235,170,47,0));clip-path:polygon(22% 0,52% 0,100% 100%,40% 100%);mix-blend-mode:multiply"></div>
+            <div style="position:absolute;left:212px;top:130px;width:150px;height:6px;background:#4A2C20"></div>
+            <div style="position:absolute;left:222px;top:98px;width:22px;height:32px;border-radius:5px;background:#EBAA2F;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:252px;top:106px;width:22px;height:24px;border-radius:5px;background:#C9533A;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:284px;top:94px;width:22px;height:36px;border-radius:5px;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:314px;top:104px;width:34px;height:26px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:252px;top:250px;width:36px;height:56px;border-radius:18px 18px 0 0;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:256px;top:218px;width:28px;height:28px;border-radius:50%;background:#B97E5C;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:254px;top:198px;width:32px;height:22px;border-radius:9px 9px 2px 2px;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:190px;top:296px;width:204px;height:104px;background:#C9533A;border-top:3.5px solid #4A2C20;border-left:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:196px;top:310px;width:196px;height:90px;background-image:radial-gradient(#4A2C20 1.3px,transparent 1.5px);background-size:6px 6px;opacity:.35"></div>
+            <div style="position:absolute;left:190px;top:296px;width:204px;height:14px;background:#7A5A48;border-bottom:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:212px;top:260px;width:42px;height:30px;border-radius:6px;background:#4A2C20"></div>
+            <div style="position:absolute;left:218px;top:232px;width:8px;height:20px;border-radius:4px;background:#7A5A48;opacity:.45"></div>
+            <div style="position:absolute;left:234px;top:224px;width:8px;height:26px;border-radius:4px;background:#7A5A48;opacity:.35"></div>
+            <div style="position:absolute;left:44px;top:512px;width:92px;height:92px;border-radius:50%;background:#EBAA2F;mix-blend-mode:multiply;opacity:.85"></div>
+            <div style="position:absolute;left:38px;top:506px;width:92px;height:92px;border-radius:50%;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:62px;top:530px;width:40px;height:40px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:230px;top:586px;width:108px;height:108px;border-radius:50%;background:#EBAA2F;mix-blend-mode:multiply;opacity:.85"></div>
+            <div style="position:absolute;left:224px;top:580px;width:108px;height:108px;border-radius:50%;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:318px;top:544px;width:36px;height:60px;border-radius:18px 18px 0 0;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:322px;top:514px;width:28px;height:28px;border-radius:50%;background:#8A5A3A;border:3px solid #4A2C20"></div>
+          </div>
+          <svg viewBox="0 0 200 260" width="60" height="78" style="position:absolute;left:4px;top:436px"><use href="#m2"></use></svg>
+
+          <div style="position:absolute;left:200px;top:178px;display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:14px;padding:4px 12px 4px 5px;font-family:'Bricolage Grotesque';font-weight:800;font-size:13px;color:#4A2C20;box-shadow:3px 3px 0 #3F7A6E">
+            <div style="width:20px;height:20px;border-radius:50%;background:#3F7A6E;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-left:7px solid #FBF4E6;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px"></div></div>{{ t.boost }}</div>
+          <div style="position:absolute;left:58px;top:360px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:16px;padding:8px 12px 8px 8px;display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque';color:#4A2C20;box-shadow:4px 4px 0 #C9533A">
+            <svg viewBox="0 0 120 120" width="38" height="38"><use href="#dO"></use></svg>
+            <div style="display:flex;flex-direction:column;gap:1px;white-space:nowrap;line-height:1.25"><div style="font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#7A5A48">{{ t.special }}</div><div style="font-weight:800;font-size:15px">{{ t.sweet }}</div></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center">♥</div>
+          </div>
+          <div style="position:absolute;left:236px;top:476px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:16px;padding:5px 12px 5px 5px;display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;color:#4A2C20;box-shadow:4px 4px 0 #EBAA2F">
+            <svg viewBox="0 0 120 120" width="34" height="34"><use href="#dN"></use></svg>48<div style="width:14px;height:14px;border-radius:50%;background:#EBAA2F;border:2.5px solid #4A2C20"></div></div>
+          <div style="position:absolute;left:138px;top:650px;display:flex;align-items:center;gap:6px;background:#EBAA2F;border:3px solid #4A2C20;border-radius:20px;padding:4px 12px 4px 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:14px;color:#4A2C20;box-shadow:3px 3px 0 #4A2C20">
+            <div style="width:22px;height:22px;border-radius:50%;background:#F6D27A;border:2.5px solid #4A2C20"></div>+120</div>
+
+          <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div>
+          <div style="position:absolute;left:16px;right:16px;top:58px;display:flex;align-items:center;gap:8px;color:#4A2C20">
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 3px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px"><div style="width:26px;height:26px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>{{ t.coins }}</div>
+            <div style="display:flex;align-items:center;gap:7px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 8px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px"><div style="width:16px;height:16px;transform:rotate(45deg);border-radius:3px;background:#3F7A6E;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>86</div>
+            <div style="flex:1"></div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 3px;font-family:'Bricolage Grotesque';font-weight:800;font-size:14px"><div style="width:26px;height:26px;border-radius:50%;background:#4A2C20;color:#F4E8D2;display:flex;align-items:center;justify-content:center;font-size:14px">7</div>{{ t.rep }}</div>
+            <div style="width:40px;height:40px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:14px;border-radius:50%;border:3px solid #4A2C20"></div></div>
+          </div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:140px;background:#FBF4E6;border-top:3.5px solid #4A2C20;border-radius:26px 26px 0 0;display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;align-items:start;padding:12px 8px 0;font-family:'Bricolage Grotesque';font-weight:800;font-size:12px;color:#4A2C20">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px;position:relative"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 3v18" fill="none"></path></svg>{{ t.book }}<div style="position:absolute;top:0;right:14px;min-width:18px;height:18px;border-radius:9px;background:#C9533A;border:2px solid #FBF4E6;color:#FBF4E6;font-size:11px;display:flex;align-items:center;justify-content:center">1</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M12 4l7 8h-4v8H9v-8H5z"></path></svg>{{ t.up }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:-36px"><div style="width:78px;height:78px;border-radius:50%;background:#EBAA2F;border:3.5px solid #4A2C20;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="#FBF4E6" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path></svg></div><div style="font-size:14px">{{ t.lab }}</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16" fill="none"></path></svg>{{ t.menu }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M8 8a4 4 0 0 1 8 0" fill="none"></path></svg>{{ t.shop }}</div>
+          </div>
+          <div style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#4A2C20"></div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7A5A48;text-align:center;max-width:390px;line-height:1.5">Un faisceau d'or tramé part de la vitrine et traverse le sol. Le décor tremble légèrement, alors que le HUD et les bulles restent nets pour la lisibilité.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Tour 1 — Directions" style="padding:72px;display:flex;flex-direction:column;gap:48px">
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:1200px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#6B6258">Tour 1 · Bistro · 3 directions artistiques</div>
+    <div style="font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1.05">Trois bistrots, une même heure : 17 h, lumière dorée.</div>
+    <div style="font-size:18px;line-height:1.5;color:#4E463E;max-width:860px;text-wrap:pretty">Chaque piste montre une planche d'ambiance, sa palette, sa typographie, Margot dessinée dans le style, avec un test de silhouette à petite taille, et un écran principal rapide. Les illustrations sont des croquis en formes simples : ils fixent silhouettes, proportions et lumière, pas le rendu final.</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#6B6258">5 idées de nom final</div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px">
+      <div style="background:#FBF8F3;border-radius:14px;padding:20px 24px;width:220px;display:flex;flex-direction:column;gap:6px"><div style="font-size:26px;font-weight:800">Mijote</div><div style="font-size:14px;line-height:1.45;color:#5A5148">Verbe du feu doux. Se prononce en anglais sans accent.</div></div>
+      <div style="background:#FBF8F3;border-radius:14px;padding:20px 24px;width:220px;display:flex;flex-direction:column;gap:6px"><div style="font-size:26px;font-weight:800">Le Zinc</div><div style="font-size:14px;line-height:1.45;color:#5A5148">Le comptoir de bistrot. Court, très français, icône évidente.</div></div>
+      <div style="background:#FBF8F3;border-radius:14px;padding:20px 24px;width:220px;display:flex;flex-direction:column;gap:6px"><div style="font-size:26px;font-weight:800">Miette</div><div style="font-size:14px;line-height:1.45;color:#5A5148">Petit, tendre, lié au pain de Margot. Mémorisable.</div></div>
+      <div style="background:#FBF8F3;border-radius:14px;padding:20px 24px;width:220px;display:flex;flex-direction:column;gap:6px"><div style="font-size:26px;font-weight:800">Petit Comptoir</div><div style="font-size:14px;line-height:1.45;color:#5A5148">Dit le lieu et l'échelle. Plus long, mais clair dans les deux langues.</div></div>
+      <div style="background:#FBF8F3;border-radius:14px;padding:20px 24px;width:220px;display:flex;flex-direction:column;gap:6px"><div style="font-size:26px;font-weight:800">Bouillon</div><div style="font-size:14px;line-height:1.45;color:#5A5148">Les cantines populaires parisiennes. Chaleur, soupe, habitués.</div></div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B6258">À vérifier : disponibilité App Store et marques déposées avant de choisir.</div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start">
+
+    <!-- ============ 1a ============ -->
+    <div id="1a" style="width:1080px;background:#F7EFDF;border-radius:24px;padding:44px;display:grid;grid-template-columns:600px 410px;gap:26px 26px;box-shadow:0 2px 0 rgba(0,0,0,.04)">
+      <div style="grid-column:1 / -1;display:flex;align-items:flex-start;gap:18px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;background:#33261D;color:#F7EFDF;border-radius:8px;padding:6px 10px">1a</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'Young Serif',serif;font-size:40px;color:#33261D;line-height:1">Carnet aquarelle</div>
+          <div style="font-size:17px;line-height:1.5;color:#6B5645;max-width:760px">Un livre illustré qu'on feuillette le soir. Trait d'encre brun, lavis qui déborde légèrement du trait, papier visible. Tout semble dessiné à la main dans un carnet de cuisine.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:26px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6B5645">Planche d'ambiance</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:130px 130px;gap:8px">
+            <div style="grid-column:span 2;border-radius:10px;background:repeating-linear-gradient(135deg,#EFD9B0 0 10px,#F3E3C4 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5A4636">réf. photo · vitrine de bistrot à 17 h, reflets dorés sur le zinc</div>
+            <div style="border-radius:10px;background:repeating-linear-gradient(135deg,#C7D3BC 0 10px,#D5DECB 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3F4E36">réf. · pothos et basilic en pot</div>
+            <div style="border-radius:10px;background:repeating-linear-gradient(135deg,#CBD8DF 0 10px,#DAE3E8 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#34505E">réf. · carrelage métro bleu passé</div>
+            <div style="border-radius:10px;background:#F2E6CF;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5A4636">
+              <div style="position:absolute;left:24px;top:18px;width:70px;height:70px;border-radius:50%;background:#E0A43A;opacity:.55;transform:translate(6px,4px)"></div>
+              <div style="position:absolute;left:24px;top:18px;width:70px;height:70px;border-radius:50%;border:2.5px solid #33261D"></div>
+              <div style="position:absolute;left:92px;top:40px;width:60px;height:44px;border-radius:14px;background:#B8552F;opacity:.5;transform:translate(5px,5px)"></div>
+              <div style="position:absolute;left:92px;top:40px;width:60px;height:44px;border-radius:14px;border:2.5px solid #33261D"></div>
+              <span style="position:relative">règle : lavis décalé de 3–6 pt</span>
+            </div>
+            <div style="border-radius:10px;background:repeating-linear-gradient(135deg,#E9C9B6 0 10px,#F0D8CA 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A3A24">réf. · albums jeunesse à l'encre et aquarelle</div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6B5645">Palette</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:8px;background:#F7EFDF;border:1.5px solid #D8C9AE"></div><div style="font-size:13px;font-weight:700;color:#33261D">Papier</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">#F7EFDF · fond</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:8px;background:#EFE2C8"></div><div style="font-size:13px;font-weight:700;color:#33261D">Lin</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">#EFE2C8 · surface</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:8px;background:#33261D"></div><div style="font-size:13px;font-weight:700;color:#33261D">Encre</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">#33261D · texte, trait</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:8px;background:#6B5645"></div><div style="font-size:13px;font-weight:700;color:#33261D">Encre douce</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">#6B5645 · texte 2</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:8px;background:#B8552F"></div><div style="font-size:13px;font-weight:700;color:#33261D">Terracotta</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">#B8552F · action</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:8px;background:#7E9A6B"></div><div style="font-size:13px;font-weight:700;color:#33261D">Sauge</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">#7E9A6B · succès</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:8px;background:#E0A43A"></div><div style="font-size:13px;font-weight:700;color:#33261D">Miel</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">#E0A43A · pièces</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:8px;background:#4E7489"></div><div style="font-size:13px;font-weight:700;color:#33261D">Faïence</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">#4E7489 · gemmes</div></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6B5645">Typographie</div>
+          <div style="background:#EFE2C8;border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;color:#33261D">
+            <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:'Young Serif',serif;font-size:30px;line-height:1.1">Omelette aux fines herbes</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">Young Serif 30</div></div>
+            <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Nunito,sans-serif;font-size:17px;line-height:1.45;max-width:420px">Margot passe tous les jeudis. Elle dit que ta brioche lui rappelle sa boutique.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">Nunito 17 / 600</div></div>
+            <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Nunito,sans-serif;font-weight:800;font-size:22px;font-variant-numeric:tabular-nums">12,4 k · 1,2 M · 45,7 Md</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">Nunito 22 / 800 tab.</div></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6B5645">Habituée · margot</div>
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:18px;background:#EFE2C8;border-radius:12px;padding:16px">
+            <svg viewBox="0 0 200 260" width="200" height="260">
+              <g id="mA">
+                <g opacity=".8" transform="translate(5 4)">
+                  <ellipse cx="86" cy="244" rx="14" ry="7" fill="#6B5645"></ellipse><ellipse cx="114" cy="244" rx="14" ry="7" fill="#6B5645"></ellipse>
+                  <rect x="79" y="205" width="14" height="40" fill="#E8B894"></rect><rect x="107" y="205" width="14" height="40" fill="#E8B894"></rect>
+                  <rect x="44" y="118" width="18" height="60" rx="9" fill="#E8B894" transform="rotate(12 53 118)"></rect>
+                  <path d="M62 112 Q100 98 138 112 L154 212 Q100 226 46 212 Z" fill="#8C6BA0"></path>
+                  <path d="M76 128 H124 L130 204 Q100 212 70 204 Z" fill="#FBF6EC"></path>
+                  <rect x="132" y="92" width="16" height="96" rx="8" fill="#E0A43A" transform="rotate(22 140 140)"></rect>
+                  <rect x="136" y="118" width="18" height="56" rx="9" fill="#E8B894" transform="rotate(-18 145 118)"></rect>
+                  <circle cx="100" cy="72" r="30" fill="#E8B894"></circle>
+                  <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z" fill="#D9D3CC"></path>
+                  <circle cx="100" cy="34" r="13" fill="#D9D3CC"></circle>
+                  <circle cx="84" cy="86" r="6" fill="#D9826A"></circle><circle cx="116" cy="86" r="6" fill="#D9826A"></circle>
+                </g>
+                <g fill="none" stroke="#33261D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <ellipse cx="86" cy="244" rx="14" ry="7"></ellipse><ellipse cx="114" cy="244" rx="14" ry="7"></ellipse>
+                  <rect x="79" y="205" width="14" height="36"></rect><rect x="107" y="205" width="14" height="36"></rect>
+                  <rect x="44" y="118" width="18" height="60" rx="9" transform="rotate(12 53 118)"></rect>
+                  <path d="M62 112 Q100 98 138 112 L154 212 Q100 226 46 212 Z" fill="#F7EFDF" fill-opacity=".01"></path>
+                  <path d="M76 128 H124 L130 204 Q100 212 70 204 Z"></path>
+                  <rect x="88" y="170" width="24" height="16" rx="4"></rect>
+                  <rect x="132" y="92" width="16" height="96" rx="8" transform="rotate(22 140 140)"></rect>
+                  <path d="M140 108 l8 4 M134 124 l8 4 M128 140 l8 4" transform="rotate(22 140 140) translate(-4 0)"></path>
+                  <rect x="136" y="118" width="18" height="56" rx="9" transform="rotate(-18 145 118)"></rect>
+                  <circle cx="100" cy="72" r="30"></circle>
+                  <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z"></path>
+                  <circle cx="100" cy="34" r="13"></circle>
+                  <circle cx="89" cy="76" r="7"></circle><circle cx="111" cy="76" r="7"></circle><path d="M96 76 H104"></path>
+                  <path d="M92 92 Q100 98 108 92"></path>
+                </g>
+                <circle cx="89" cy="76" r="2.2" fill="#33261D"></circle><circle cx="111" cy="76" r="2.2" fill="#33261D"></circle>
+              </g>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.45;color:#33261D">
+              <div><b>Silhouette :</b> chignon haut, corps en cloche, baguette sous le bras. Trois repères lisibles même en ombre chinoise.</div>
+              <div style="display:flex;gap:6px"><div style="width:26px;height:26px;border-radius:50%;background:#8C6BA0"></div><div style="width:26px;height:26px;border-radius:50%;background:#FBF6EC;border:1.5px solid #CDBFA6"></div><div style="width:26px;height:26px;border-radius:50%;background:#D9D3CC"></div><div style="width:26px;height:26px;border-radius:50%;background:#E0A43A"></div></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B5645">Test de silhouette · 64 / 48 / 32 pt</div>
+              <div style="display:flex;align-items:flex-end;gap:14px">
+                <svg viewBox="0 0 200 260" width="49" height="64" style="filter:brightness(0)"><use href="#mA"></use></svg>
+                <svg viewBox="0 0 200 260" width="37" height="48" style="filter:brightness(0)"><use href="#mA"></use></svg>
+                <svg viewBox="0 0 200 260" width="25" height="32" style="filter:brightness(0)"><use href="#mA"></use></svg>
+                <svg viewBox="0 0 200 260" width="37" height="48"><use href="#mA"></use></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:14px;line-height:1.45;color:#33261D">
+          <div style="background:#E4EBDD;border-radius:10px;padding:14px"><b>Atouts</b><br>Le plus chaleureux et nostalgique. Les plats restent très lisibles grâce au trait. Personnages expressifs.</div>
+          <div style="background:#F3DCD0;border-radius:10px;padding:14px"><b>Risques</b><br>Textures aquarelle en raster, donc des assets plus lourds. Le trait doit rester d'épaisseur constante quelle que soit l'échelle.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+        <div style="width:390px;height:844px;border:10px solid #1D1A18;border-radius:58px;position:relative;overflow:hidden;background:#F7EFDF;box-shadow:0 30px 60px -30px rgba(51,38,29,.5)">
+          <div style="position:absolute;left:0;right:0;top:0;height:400px;background:#EBDDC2"></div>
+          <div style="position:absolute;left:0;right:0;top:392px;height:10px;background:#B8552F;opacity:.35"></div>
+          <div style="position:absolute;left:0;right:0;top:400px;bottom:0;background-color:#F4EAD6;background-image:repeating-conic-gradient(#DCE5E8 0 25%,transparent 0 50%);background-size:52px 52px"></div>
+          <div style="position:absolute;left:34px;top:130px;width:130px;height:160px;border-radius:65px 65px 6px 6px;border:3px solid #33261D;background:linear-gradient(180deg,#F6D58E,#EDB45A)"></div>
+          <div style="position:absolute;left:97px;top:133px;width:3px;height:154px;background:#33261D"></div>
+          <div style="position:absolute;left:30px;top:282px;width:140px;height:12px;border-radius:4px;border:3px solid #33261D;background:#C79566"></div>
+          <div style="position:absolute;left:44px;top:250px;width:34px;height:34px;border-radius:50%;background:#7E9A6B;border:2.5px solid #33261D"></div>
+          <div style="position:absolute;left:120px;top:258px;width:28px;height:26px;border-radius:50%;background:#94AD80;border:2.5px solid #33261D"></div>
+          <div style="position:absolute;left:216px;top:170px;width:150px;height:8px;border-radius:3px;background:#8A5A3A"></div>
+          <div style="position:absolute;left:226px;top:138px;width:22px;height:32px;border-radius:5px;border:2.5px solid #33261D;background:#E0A43A"></div>
+          <div style="position:absolute;left:256px;top:146px;width:22px;height:24px;border-radius:5px;border:2.5px solid #33261D;background:#B8552F"></div>
+          <div style="position:absolute;left:288px;top:134px;width:22px;height:36px;border-radius:5px;border:2.5px solid #33261D;background:#7E9A6B"></div>
+          <div style="position:absolute;left:250px;top:250px;width:38px;height:54px;border-radius:19px 19px 8px 8px;border:3px solid #33261D;background:#FBF6EC"></div>
+          <div style="position:absolute;left:254px;top:218px;width:30px;height:30px;border-radius:50%;border:3px solid #33261D;background:#C98E6A"></div>
+          <div style="position:absolute;left:254px;top:200px;width:30px;height:22px;border-radius:8px 8px 3px 3px;border:3px solid #33261D;background:#FFFFFF"></div>
+          <div style="position:absolute;left:196px;top:296px;width:194px;height:104px;border-radius:10px 0 0 0;border:3px solid #33261D;border-right:none;background:#B98256"></div>
+          <div style="position:absolute;left:196px;top:296px;width:194px;height:16px;border-radius:10px 0 0 0;background:#8A5A3A"></div>
+          <div style="position:absolute;left:222px;top:250px;width:38px;height:28px;border-radius:6px;border:3px solid #33261D;background:#6B5645"></div>
+          <div style="position:absolute;left:228px;top:226px;width:8px;height:18px;border-radius:4px;background:#FFFFFF;opacity:.8"></div>
+          <div style="position:absolute;left:244px;top:218px;width:8px;height:24px;border-radius:4px;background:#FFFFFF;opacity:.7"></div>
+          <div style="position:absolute;left:210px;top:196px;display:flex;align-items:center;gap:6px;background:#FBF6EC;border:2.5px solid #33261D;border-radius:14px;padding:4px 10px 4px 6px;font-family:Nunito;font-weight:800;font-size:13px;color:#33261D">
+            <div style="width:18px;height:18px;border-radius:50%;background:#7E9A6B;border:2px solid #33261D"></div>{{ t.boost }}</div>
+          <div style="position:absolute;left:40px;top:500px;width:96px;height:96px;border-radius:50%;border:3px solid #33261D;background:#D9A774"></div>
+          <div style="position:absolute;left:70px;top:530px;width:36px;height:36px;border-radius:50%;background:#FBF6EC;border:2px solid #33261D"></div>
+          <div style="position:absolute;left:16px;top:470px;width:36px;height:60px;border-radius:18px 18px 8px 8px;border:3px solid #33261D;background:#8C6BA0"></div>
+          <div style="position:absolute;left:20px;top:440px;width:28px;height:28px;border-radius:50%;border:3px solid #33261D;background:#E8B894"></div>
+          <div style="position:absolute;left:26px;top:426px;width:16px;height:16px;border-radius:50%;border:3px solid #33261D;background:#D9D3CC"></div>
+          <div style="position:absolute;left:52px;top:372px;background:#FBF6EC;border:3px solid #33261D;border-radius:16px;padding:8px 12px;display:flex;flex-direction:column;gap:2px;font-family:Nunito;color:#33261D">
+            <div style="font-weight:800;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#B8552F">{{ t.special }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px"><div style="width:26px;height:26px;border-radius:50%;background:#F4D9A0;border:2px solid #33261D"></div>{{ t.sweet }}</div>
+          </div>
+          <div style="position:absolute;left:224px;top:580px;width:110px;height:110px;border-radius:50%;border:3px solid #33261D;background:#D9A774"></div>
+          <div style="position:absolute;left:316px;top:540px;width:36px;height:60px;border-radius:18px 18px 8px 8px;border:3px solid #33261D;background:#4E7489"></div>
+          <div style="position:absolute;left:320px;top:510px;width:28px;height:28px;border-radius:50%;border:3px solid #33261D;background:#8A5A3A"></div>
+          <div style="position:absolute;left:250px;top:470px;background:#FBF6EC;border:3px solid #33261D;border-radius:16px;padding:6px 10px 6px 6px;display:flex;align-items:center;gap:8px;font-family:Nunito;font-weight:800;font-size:15px;color:#33261D">
+            <div style="width:30px;height:30px;border-radius:50%;background:#FBF6EC;border:2px solid #33261D;position:relative"><div style="position:absolute;left:5px;top:6px;width:16px;height:12px;border-radius:50%;background:#F2CE5A"></div></div>
+            <div style="font-variant-numeric:tabular-nums">48</div><div style="width:14px;height:14px;border-radius:50%;background:#E0A43A;border:2px solid #33261D"></div>
+          </div>
+          <div style="position:absolute;left:130px;top:640px;display:flex;align-items:center;gap:6px;background:#E0A43A;border:3px solid #33261D;border-radius:20px;padding:4px 12px 4px 4px;font-family:Nunito;font-weight:800;font-size:14px;color:#33261D;box-shadow:3px 3px 0 #33261D">
+            <div style="width:22px;height:22px;border-radius:50%;background:#F6D58E;border:2px solid #33261D"></div>+120</div>
+
+          <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div>
+          <div style="position:absolute;left:16px;right:16px;top:58px;display:flex;align-items:center;gap:8px;font-family:Nunito;font-weight:800;color:#33261D">
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF6EC;border:2.5px solid #33261D;border-radius:22px;padding:4px 12px 4px 4px;font-size:16px;font-variant-numeric:tabular-nums"><div style="width:26px;height:26px;border-radius:50%;background:#E0A43A;border:2px solid #33261D"></div>{{ t.coins }}</div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF6EC;border:2.5px solid #33261D;border-radius:22px;padding:4px 12px 4px 6px;font-size:16px"><div style="width:18px;height:18px;transform:rotate(45deg);border-radius:3px;background:#4E7489;border:2px solid #33261D"></div>86</div>
+            <div style="flex:1"></div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF6EC;border:2.5px solid #33261D;border-radius:22px;padding:4px 12px 4px 4px;font-size:14px"><div style="width:26px;height:26px;border-radius:50%;background:#7E9A6B;border:2px solid #33261D;color:#FBF6EC;display:flex;align-items:center;justify-content:center;font-size:13px">7</div>{{ t.rep }}</div>
+            <div style="width:40px;height:40px;border-radius:50%;background:#FBF6EC;border:2.5px solid #33261D;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:14px;border-radius:50%;border:3px solid #33261D"></div></div>
+          </div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:140px;background:#FBF6EC;border-top:3px solid #33261D;border-radius:26px 26px 0 0;display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;align-items:start;padding:12px 8px 0;font-family:Nunito;font-weight:800;font-size:12px;color:#33261D">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#33261D" stroke-width="2.2" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 3v18"></path></svg>{{ t.book }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#33261D" stroke-width="2.2" stroke-linejoin="round"><path d="M12 4l7 8h-4v8H9v-8H5z"></path></svg>{{ t.up }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:-34px"><div style="width:76px;height:76px;border-radius:50%;background:#B8552F;border:3px solid #33261D;box-shadow:0 4px 0 #33261D;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FBF6EC" stroke-width="2.2" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path></svg></div><div style="font-size:14px">{{ t.lab }}</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#33261D" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16"></path></svg>{{ t.menu }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#33261D" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M8 8a4 4 0 0 1 8 0"></path></svg>{{ t.shop }}</div>
+          </div>
+          <div style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#33261D"></div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B5645;text-align:center;max-width:380px">Vue frontale, comme une page d'album. Actions fréquentes en bas, Labo au centre.</div>
+      </div>
+    </div>
+
+    <!-- ============ 1b ============ -->
+    <div id="1b" style="width:1080px;background:#EADBC8;border-radius:24px;padding:44px;display:grid;grid-template-columns:600px 410px;gap:26px 26px">
+      <div style="grid-column:1 / -1;display:flex;align-items:flex-start;gap:18px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;background:#2A1F22;color:#FFF8EE;border-radius:8px;padding:6px 10px">1b</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:40px;color:#2A1F22;line-height:1">Maquette d'argile</div>
+          <div style="font-size:17px;line-height:1.5;color:#6A5552;max-width:760px">Un diorama en pâte à modeler, vu en légère plongée. Volumes ronds, ombres douces et portées, lumière rasante qui entre par la vitrine. On a envie de toucher chaque objet.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:26px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6A5552">Planche d'ambiance</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:130px 130px;gap:8px">
+            <div style="grid-column:span 2;border-radius:14px;background:repeating-linear-gradient(135deg,#E3C7A6 0 10px,#EBD5BA 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5A3F2E">réf. photo · maquettes miniatures éclairées latéralement, faible profondeur de champ</div>
+            <div style="border-radius:14px;background:repeating-linear-gradient(135deg,#BFD5D2 0 10px,#CEDFDC 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#244F4C">réf. · céramique émaillée vert d'eau</div>
+            <div style="border-radius:14px;background:repeating-linear-gradient(135deg,#E6B9A8 0 10px,#EDCABD 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6E2E1E">réf. · pâte à modeler, empreintes de doigts</div>
+            <div style="border-radius:14px;background:#F3E5D2;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5A3F2E">
+              <div style="position:absolute;left:30px;top:74px;width:80px;height:18px;border-radius:50%;background:rgba(80,40,30,.22);filter:blur(3px)"></div>
+              <div style="position:absolute;left:34px;top:14px;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F7D27D,#D99A32 70%)"></div>
+              <div style="position:absolute;left:112px;top:78px;width:56px;height:14px;border-radius:50%;background:rgba(80,40,30,.22);filter:blur(3px)"></div>
+              <div style="position:absolute;left:114px;top:36px;width:52px;height:48px;border-radius:16px;background:radial-gradient(circle at 35% 25%,#E88A6E,#B8412C 75%)"></div>
+              <span style="position:relative">règle : lumière haut-gauche, ombre au sol</span>
+            </div>
+            <div style="border-radius:14px;background:repeating-linear-gradient(135deg,#D6BFA0 0 10px,#E0CDB2 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#57402A">réf. · parquet chêne clair, tabourets en bois</div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6A5552">Palette</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:12px;background:#EADBC8;border:1.5px solid #CDB9A1"></div><div style="font-size:13px;font-weight:700">Argile</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">#EADBC8 · fond</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:12px;background:#FFF8EE"></div><div style="font-size:13px;font-weight:700">Crème</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">#FFF8EE · surface</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:12px;background:#2A1F22"></div><div style="font-size:13px;font-weight:700">Cacao</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">#2A1F22 · texte</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:12px;background:#9B6A45"></div><div style="font-size:13px;font-weight:700">Chêne</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">#9B6A45 · bois</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:12px;background:#C94A34"></div><div style="font-size:13px;font-weight:700">Tomate</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">#C94A34 · action</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:12px;background:#2E7470"></div><div style="font-size:13px;font-weight:700">Émail</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">#2E7470 · succès</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:12px;background:#F0BE55"></div><div style="font-size:13px;font-weight:700">Beurre</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">#F0BE55 · pièces</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:12px;background:#7C5AA6"></div><div style="font-size:13px;font-weight:700">Prune</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">#7C5AA6 · gemmes</div></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6A5552">Typographie</div>
+          <div style="background:#FFF8EE;border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;color:#2A1F22">
+            <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:30px;line-height:1.1">Omelette aux fines herbes</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">Fredoka 30 / 600</div></div>
+            <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Figtree,sans-serif;font-size:17px;line-height:1.45;max-width:420px">Margot passe tous les jeudis. Elle dit que ta brioche lui rappelle sa boutique.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">Figtree 17 / 500</div></div>
+            <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:Fredoka,sans-serif;font-weight:600;font-size:22px;font-variant-numeric:tabular-nums">12,4 k · 1,2 M · 45,7 Md</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">Fredoka 22 / 600</div></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#6A5552">Habituée · margot</div>
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:18px;background:#FFF8EE;border-radius:16px;padding:16px">
+            <svg viewBox="0 0 200 260" width="200" height="260">
+              <defs>
+                <radialGradient id="bSkin" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#F6D3B6"></stop><stop offset="1" stop-color="#CF9470"></stop></radialGradient>
+                <radialGradient id="bDress" cx=".35" cy=".25" r=".9"><stop offset="0" stop-color="#4E9C96"></stop><stop offset="1" stop-color="#245A57"></stop></radialGradient>
+                <radialGradient id="bApron" cx=".35" cy=".25" r=".9"><stop offset="0" stop-color="#FFFBF4"></stop><stop offset="1" stop-color="#E2D2BD"></stop></radialGradient>
+                <radialGradient id="bHair" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#F2EEEA"></stop><stop offset="1" stop-color="#ADA59E"></stop></radialGradient>
+                <linearGradient id="bBread" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F1C27A"></stop><stop offset="1" stop-color="#B8773A"></stop></linearGradient>
+              </defs>
+              <g id="mB">
+                <ellipse cx="100" cy="248" rx="62" ry="9" fill="#5A3A2A" opacity=".22"></ellipse>
+                <ellipse cx="86" cy="242" rx="15" ry="9" fill="#5B4034"></ellipse><ellipse cx="114" cy="242" rx="15" ry="9" fill="#5B4034"></ellipse>
+                <rect x="79" y="200" width="15" height="42" rx="7" fill="url(#bSkin)"></rect><rect x="106" y="200" width="15" height="42" rx="7" fill="url(#bSkin)"></rect>
+                <rect x="42" y="116" width="20" height="62" rx="10" fill="url(#bSkin)" transform="rotate(12 52 116)"></rect>
+                <path d="M62 110 Q100 94 138 110 Q156 170 152 208 Q100 228 48 208 Q44 170 62 110 Z" fill="url(#bDress)"></path>
+                <path d="M78 126 H122 Q130 170 128 202 Q100 212 72 202 Q70 170 78 126 Z" fill="url(#bApron)"></path>
+                <rect x="131" y="90" width="18" height="98" rx="9" fill="url(#bBread)" transform="rotate(22 140 140)"></rect>
+                <rect x="136" y="116" width="20" height="58" rx="10" fill="url(#bSkin)" transform="rotate(-18 146 116)"></rect>
+                <circle cx="100" cy="70" r="32" fill="url(#bSkin)"></circle>
+                <path d="M68 70 Q70 36 100 36 Q130 36 132 70 Q120 54 100 56 Q80 54 68 70 Z" fill="url(#bHair)"></path>
+                <circle cx="100" cy="30" r="15" fill="url(#bHair)"></circle>
+                <circle cx="82" cy="84" r="7" fill="#E88A74" opacity=".6"></circle><circle cx="118" cy="84" r="7" fill="#E88A74" opacity=".6"></circle>
+                <ellipse cx="89" cy="74" rx="3" ry="4" fill="#2A1F22"></ellipse><ellipse cx="111" cy="74" rx="3" ry="4" fill="#2A1F22"></ellipse>
+                <circle cx="88" cy="72.5" r="1" fill="#fff"></circle><circle cx="110" cy="72.5" r="1" fill="#fff"></circle>
+                <path d="M93 90 Q100 95 107 90" fill="none" stroke="#7A3F30" stroke-width="3" stroke-linecap="round"></path>
+                <circle cx="89" cy="74" r="8" fill="none" stroke="#9B6A45" stroke-width="2.5"></circle><circle cx="111" cy="74" r="8" fill="none" stroke="#9B6A45" stroke-width="2.5"></circle>
+              </g>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.45;color:#2A1F22">
+              <div><b>Silhouette :</b> mêmes repères (chignon, cloche, baguette), mais volumes gonflés et tête plus grosse. Pas de contour : ce sont la lumière et l'ombre au sol qui détachent la figure.</div>
+              <div style="display:flex;gap:6px"><div style="width:26px;height:26px;border-radius:50%;background:#2E7470"></div><div style="width:26px;height:26px;border-radius:50%;background:#FFFBF4;border:1.5px solid #D8C6AE"></div><div style="width:26px;height:26px;border-radius:50%;background:#D8D1CA"></div><div style="width:26px;height:26px;border-radius:50%;background:#E0A45A"></div></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6A5552">Test de silhouette · 64 / 48 / 32 pt</div>
+              <div style="display:flex;align-items:flex-end;gap:14px">
+                <svg viewBox="0 0 200 260" width="49" height="64" style="filter:brightness(0)"><use href="#mB"></use></svg>
+                <svg viewBox="0 0 200 260" width="37" height="48" style="filter:brightness(0)"><use href="#mB"></use></svg>
+                <svg viewBox="0 0 200 260" width="25" height="32" style="filter:brightness(0)"><use href="#mB"></use></svg>
+                <svg viewBox="0 0 200 260" width="37" height="48"><use href="#mB"></use></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:14px;line-height:1.45;color:#2A1F22">
+          <div style="background:#D7E6E2;border-radius:12px;padding:14px"><b>Atouts</b><br>Rendu le plus « premium », idéal pour montrer le bistrot qui s'agrandit. Les stations lv1 à lv3 se lisent par le volume.</div>
+          <div style="background:#F2D3C9;border-radius:12px;padding:14px"><b>Risques</b><br>Production 3D ou pré-rendus : coût le plus élevé. Sans contour, un plat en 48 pt se lit moins bien, il faut des silhouettes très franches.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+        <div style="width:390px;height:844px;border:10px solid #1D1A18;border-radius:58px;position:relative;overflow:hidden;background:#D9C3A8;box-shadow:0 30px 60px -30px rgba(42,31,34,.55)">
+          <div style="position:absolute;left:0;right:0;top:0;height:420px;background:linear-gradient(180deg,#C9E0DB 0,#B7D3CD 100%)"></div>
+          <div style="position:absolute;left:-30px;top:120px;width:260px;height:520px;background:linear-gradient(115deg,rgba(255,214,140,.55),rgba(255,214,140,0) 70%);transform:skewX(-18deg);z-index:2;pointer-events:none"></div>
+          <div style="position:absolute;left:30px;top:130px;width:150px;height:170px;border-radius:18px;background:linear-gradient(160deg,#FFE3A6,#F3B764);box-shadow:inset 0 -8px 0 rgba(0,0,0,.08),0 6px 0 #8C5E3C"></div>
+          <div style="position:absolute;left:30px;top:206px;width:150px;height:8px;background:#8C5E3C"></div>
+          <div style="position:absolute;left:101px;top:130px;width:8px;height:170px;background:#8C5E3C"></div>
+          <div style="position:absolute;left:40px;top:262px;width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8FC08A,#3F7A4E)"></div>
+          <div style="position:absolute;left:130px;top:268px;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9BC98E,#467F52)"></div>
+          <div style="position:absolute;left:0;right:0;top:400px;bottom:0;perspective:700px;overflow:hidden">
+            <div style="position:absolute;left:-120px;right:-120px;top:0;height:900px;transform-origin:top center;transform:rotateX(52deg);background-color:#C99A6C;background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 2px,transparent 2px 60px)"></div>
+          </div>
+          <div style="position:absolute;left:0;right:0;top:396px;height:14px;background:linear-gradient(#9B6A45,#7B5033)"></div>
+          <div style="position:absolute;left:206px;top:246px;width:40px;height:58px;border-radius:20px 20px 10px 10px;background:radial-gradient(circle at 35% 25%,#FFFFFF,#DCCFBF)"></div>
+          <div style="position:absolute;left:210px;top:212px;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8A5A40,#553222)"></div>
+          <div style="position:absolute;left:190px;top:318px;width:220px;height:22px;border-radius:50%;background:rgba(60,30,20,.25);filter:blur(4px)"></div>
+          <div style="position:absolute;left:190px;top:290px;width:210px;height:110px;border-radius:22px 0 0 0;background:linear-gradient(180deg,#B47D52,#8E5A36);box-shadow:inset 0 10px 0 #C9925F"></div>
+          <div style="position:absolute;left:262px;top:258px;width:52px;height:34px;border-radius:12px;background:radial-gradient(circle at 35% 25%,#5C6770,#2E353B)"></div>
+          <div style="position:absolute;left:274px;top:228px;width:10px;height:22px;border-radius:5px;background:#fff;opacity:.75;filter:blur(1.5px)"></div>
+          <div style="position:absolute;left:292px;top:220px;width:10px;height:28px;border-radius:5px;background:#fff;opacity:.6;filter:blur(1.5px)"></div>
+          <div style="position:absolute;left:254px;top:188px;display:flex;align-items:center;gap:6px;background:#FFF8EE;border-radius:16px;padding:5px 12px 5px 6px;font-family:Fredoka;font-weight:600;font-size:13px;color:#2A1F22;box-shadow:0 4px 10px rgba(42,31,34,.2)">
+            <div style="width:20px;height:20px;border-radius:50%;background:#2E7470"></div>{{ t.boost }}</div>
+          <div style="position:absolute;left:30px;top:588px;width:124px;height:26px;border-radius:50%;background:rgba(60,30,20,.28);filter:blur(5px)"></div>
+          <div style="position:absolute;left:36px;top:520px;width:112px;height:76px;border-radius:50%;background:radial-gradient(ellipse at 40% 30%,#F5E6D0,#D8C1A2)"></div>
+          <div style="position:absolute;left:74px;top:540px;width:36px;height:24px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#FFFFFF,#E4DACB)"></div>
+          <div style="position:absolute;left:14px;top:478px;width:40px;height:64px;border-radius:20px 20px 10px 10px;background:radial-gradient(circle at 35% 25%,#4E9C96,#245A57)"></div>
+          <div style="position:absolute;left:18px;top:446px;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F6D3B6,#CF9470)"></div>
+          <div style="position:absolute;left:25px;top:430px;width:18px;height:18px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F2EEEA,#ADA59E)"></div>
+          <div style="position:absolute;left:54px;top:370px;background:#FFF8EE;border-radius:18px;padding:8px 12px;display:flex;flex-direction:column;gap:2px;font-family:Fredoka;color:#2A1F22;box-shadow:0 6px 14px rgba(42,31,34,.22)">
+            <div style="font-weight:600;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:#B03E2A">{{ t.special }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px"><div style="width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FBE2AE,#E2A95A)"></div>{{ t.sweet }}</div>
+          </div>
+          <div style="position:absolute;left:214px;top:672px;width:140px;height:28px;border-radius:50%;background:rgba(60,30,20,.28);filter:blur(5px)"></div>
+          <div style="position:absolute;left:220px;top:600px;width:128px;height:84px;border-radius:50%;background:radial-gradient(ellipse at 40% 30%,#F5E6D0,#D8C1A2)"></div>
+          <div style="position:absolute;left:330px;top:556px;width:40px;height:64px;border-radius:20px 20px 10px 10px;background:radial-gradient(circle at 35% 25%,#E87D5E,#A83C27)"></div>
+          <div style="position:absolute;left:334px;top:524px;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#B57A55,#6E4228)"></div>
+          <div style="position:absolute;left:238px;top:484px;background:#FFF8EE;border-radius:18px;padding:6px 12px 6px 6px;display:flex;align-items:center;gap:8px;font-family:Fredoka;font-weight:600;font-size:15px;color:#2A1F22;box-shadow:0 6px 14px rgba(42,31,34,.22)">
+            <div style="width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 40% 30%,#FFFFFF,#E4DACB);display:flex;align-items:center;justify-content:center"><div style="width:18px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FBE08A,#E6B23E)"></div></div>
+            48<div style="width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFE08E,#D9A032)"></div>
+          </div>
+          <div style="position:absolute;left:136px;top:648px;display:flex;align-items:center;gap:6px;background:radial-gradient(circle at 35% 25%,#FFDC85,#E8AE3A);border-radius:22px;padding:4px 12px 4px 4px;font-family:Fredoka;font-weight:600;font-size:14px;color:#2A1F22;box-shadow:0 6px 12px rgba(120,70,20,.35)">
+            <div style="width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFF1C4,#E8B24A)"></div>+120</div>
+
+          <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div>
+          <div style="position:absolute;left:16px;right:16px;top:58px;display:flex;align-items:center;gap:8px;font-family:Fredoka;font-weight:600;color:#2A1F22;z-index:3">
+            <div style="display:flex;align-items:center;gap:6px;background:#FFF8EE;border-radius:22px;padding:4px 12px 4px 4px;font-size:16px;box-shadow:0 4px 10px rgba(42,31,34,.15);font-variant-numeric:tabular-nums"><div style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFE08E,#D9A032)"></div>{{ t.coins }}</div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FFF8EE;border-radius:22px;padding:4px 12px 4px 8px;font-size:16px;box-shadow:0 4px 10px rgba(42,31,34,.15)"><div style="width:18px;height:18px;transform:rotate(45deg);border-radius:4px;background:radial-gradient(circle at 35% 30%,#B79AD8,#5E3F8A)"></div>86</div>
+            <div style="flex:1"></div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FFF8EE;border-radius:22px;padding:4px 12px 4px 4px;font-size:14px;box-shadow:0 4px 10px rgba(42,31,34,.15)"><div style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#4E9C96,#245A57);color:#FFF8EE;display:flex;align-items:center;justify-content:center;font-size:14px">7</div>{{ t.rep }}</div>
+            <div style="width:40px;height:40px;border-radius:50%;background:#FFF8EE;box-shadow:0 4px 10px rgba(42,31,34,.15);display:flex;align-items:center;justify-content:center"><div style="width:14px;height:14px;border-radius:50%;border:3px solid #2A1F22"></div></div>
+          </div>
+          <div style="position:absolute;left:10px;right:10px;bottom:26px;height:104px;background:#FFF8EE;border-radius:30px;box-shadow:0 10px 24px rgba(42,31,34,.28);display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;align-items:start;padding:12px 4px 0;font-family:Fredoka;font-weight:600;font-size:12px;color:#2A1F22;z-index:3">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#E7D8C4" stroke="#2A1F22" stroke-width="2" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="3"></rect><path d="M9 3v18" fill="none"></path></svg>{{ t.book }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#E7D8C4" stroke="#2A1F22" stroke-width="2" stroke-linejoin="round"><path d="M12 4l7 8h-4v8H9v-8H5z"></path></svg>{{ t.up }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:-40px"><div style="width:80px;height:80px;border-radius:50%;background:radial-gradient(circle at 35% 25%,#E8765C,#A93A26);box-shadow:0 8px 16px rgba(169,58,38,.45),inset 0 -6px 0 rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FFF8EE" stroke-width="2.2" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path></svg></div><div style="font-size:14px">{{ t.lab }}</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#E7D8C4" stroke="#2A1F22" stroke-width="2" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="3"></rect><path d="M4 10h16" fill="none"></path></svg>{{ t.menu }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#E7D8C4" stroke="#2A1F22" stroke-width="2" stroke-linejoin="round"><rect x="4" y="8" width="16" height="13" rx="3"></rect><path d="M8 8a4 4 0 0 1 8 0" fill="none"></path></svg>{{ t.shop }}</div>
+          </div>
+          <div style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#2A1F22;z-index:3"></div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6A5552;text-align:center;max-width:380px">Sol en perspective (plongée d'environ 30°), barre d'actions flottante façon plateau.</div>
+      </div>
+    </div>
+
+    <!-- ============ 1c ============ -->
+    <div id="1c" style="width:1080px;background:#F2E7D3;border-radius:24px;padding:44px;display:grid;grid-template-columns:600px 410px;gap:26px 26px">
+      <div style="grid-column:1 / -1;display:flex;align-items:flex-start;gap:18px">
+        <div style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;background:#1E3558;color:#F2E7D3;border-radius:8px;padding:6px 10px">1c</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:40px;color:#1E3558;line-height:1;letter-spacing:-.02em">Riso du soir</div>
+          <div style="font-size:17px;line-height:1.5;color:#44587A;max-width:760px">Une affiche de quartier imprimée en risographie : trois encres (marine, sanguine, moutarde) sur papier crème, formes plates, trames de points, léger décalage de calage. Graphique, calme, très lisible.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:26px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#44587A">Planche d'ambiance</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:130px 130px;gap:8px">
+            <div style="grid-column:span 2;border-radius:4px;background:repeating-linear-gradient(135deg,#D9DDE3 0 10px,#E5E6E6 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1E3558">réf. · affiches de cantine des années 60, menus imprimés deux couleurs</div>
+            <div style="border-radius:4px;background:repeating-linear-gradient(135deg,#F0D2BF 0 10px,#F2DDCB 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8A2E1B">réf. · tirages riso, superpositions</div>
+            <div style="border-radius:4px;background:repeating-linear-gradient(135deg,#F0DDAE 0 10px,#F2E3C2 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#6B4A0E">réf. · enseignes peintes à la main</div>
+            <div style="border-radius:4px;background:#F2E7D3;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1E3558">
+              <div style="position:absolute;left:28px;top:14px;width:70px;height:70px;border-radius:50%;background:#E6AE35;mix-blend-mode:multiply"></div>
+              <div style="position:absolute;left:52px;top:30px;width:70px;height:70px;border-radius:50%;background:#D9553A;mix-blend-mode:multiply;opacity:.85"></div>
+              <div style="position:absolute;left:100px;top:22px;width:62px;height:62px;border-radius:50%;background-image:radial-gradient(#1E3558 1.6px,transparent 1.8px);background-size:6px 6px"></div>
+              <span style="position:relative;background:#F2E7D3;padding:0 3px">règle : 3 encres, trames, calage ±2 pt</span>
+            </div>
+            <div style="border-radius:4px;background:repeating-linear-gradient(135deg,#D6DBE4 0 10px,#E3E5E8 10px 20px);display:flex;align-items:flex-end;padding:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1E3558">réf. · carrelage en damier noir et crème</div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#44587A">Palette · 3 encres + papier</div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;color:#1E3558">
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:4px;background:#F2E7D3;border:1.5px solid #D6C8AE"></div><div style="font-size:13px;font-weight:700">Papier</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">#F2E7D3 · fond</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:4px;background:#FBF6EC"></div><div style="font-size:13px;font-weight:700">Papier clair</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">#FBF6EC · surface</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:4px;background:#1E3558"></div><div style="font-size:13px;font-weight:700">Marine</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">#1E3558 · texte</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:4px;background:#44587A"></div><div style="font-size:13px;font-weight:700">Marine trame</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">#44587A · texte 2</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:4px;background:#D9553A"></div><div style="font-size:13px;font-weight:700">Sanguine</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">#D9553A · accent</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:4px;background:#E6AE35"></div><div style="font-size:13px;font-weight:700">Moutarde</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">#E6AE35 · action, pièces</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:4px;background:#3E7D5A"></div><div style="font-size:13px;font-weight:700">Vert bouteille</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">#3E7D5A · succès</div></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><div style="height:54px;border-radius:4px;background:#3A6FB0"></div><div style="font-size:13px;font-weight:700">Bleu azur</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">#3A6FB0 · gemmes</div></div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">Sanguine sur papier : 3,3:1, donc réservée aux titres et aux formes. Les boutons utilisent marine sur moutarde (6:1).</div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#44587A">Typographie</div>
+          <div style="background:#FBF6EC;border-radius:4px;padding:18px 20px;display:flex;flex-direction:column;gap:10px;color:#1E3558">
+            <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;line-height:1.1;letter-spacing:-.01em">Omelette aux fines herbes</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">Bricolage 30 / 800</div></div>
+            <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:17px;line-height:1.45;max-width:420px">Margot passe tous les jeudis. Elle dit que ta brioche lui rappelle sa boutique.</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">Bricolage 17 / 400</div></div>
+            <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:22px">12,4 k · 1,2 M · 45,7 Md</div><div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">Plex Mono 22 / 600</div></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#44587A">Habituée · margot</div>
+          <div style="display:grid;grid-template-columns:220px 1fr;gap:18px;background:#FBF6EC;border-radius:4px;padding:16px">
+            <svg viewBox="0 0 200 260" width="200" height="260">
+              <defs>
+                <pattern id="cDots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.5" fill="#1E3558"></circle></pattern>
+              </defs>
+              <g id="mC">
+                <rect x="40" y="236" width="120" height="8" fill="#1E3558"></rect>
+                <rect x="79" y="200" width="14" height="38" fill="#1E3558"></rect><rect x="107" y="200" width="14" height="38" fill="#1E3558"></rect>
+                <g style="mix-blend-mode:multiply">
+                  <path d="M60 112 L140 112 L156 214 L44 214 Z" fill="#1E3558"></path>
+                </g>
+                <rect x="42" y="116" width="18" height="62" rx="9" fill="#F0B39E" transform="rotate(12 51 116)"></rect>
+                <path d="M78 128 H122 L128 206 H72 Z" fill="#FBF6EC"></path>
+                <path d="M78 128 H122 L128 206 H72 Z" fill="url(#cDots)" opacity=".18"></path>
+                <rect x="88" y="168" width="24" height="16" fill="#D9553A" transform="translate(2 2)" style="mix-blend-mode:multiply"></rect>
+                <rect x="131" y="90" width="18" height="98" rx="9" fill="#E6AE35" transform="rotate(22 140 140)"></rect>
+                <path d="M136 104 l10 4 M131 120 l10 4 M126 136 l10 4" stroke="#D9553A" stroke-width="3" transform="rotate(22 140 140) translate(0 0)"></path>
+                <rect x="136" y="116" width="18" height="58" rx="9" fill="#F0B39E" transform="rotate(-18 145 116)"></rect>
+                <circle cx="100" cy="72" r="30" fill="#F0B39E"></circle>
+                <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z" fill="url(#cDots)"></path>
+                <circle cx="100" cy="34" r="13" fill="url(#cDots)"></circle>
+                <circle cx="84" cy="86" r="6" fill="#D9553A" opacity=".7" transform="translate(2 1)"></circle><circle cx="116" cy="86" r="6" fill="#D9553A" opacity=".7" transform="translate(2 1)"></circle>
+                <rect x="82" y="70" width="14" height="10" rx="5" fill="none" stroke="#1E3558" stroke-width="3"></rect><rect x="104" y="70" width="14" height="10" rx="5" fill="none" stroke="#1E3558" stroke-width="3"></rect>
+                <path d="M96 75 H104" stroke="#1E3558" stroke-width="3"></path>
+                <path d="M92 90 Q100 97 108 90" fill="none" stroke="#1E3558" stroke-width="3.5" stroke-linecap="round"></path>
+              </g>
+            </svg>
+            <div style="display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.45;color:#1E3558">
+              <div><b>Silhouette :</b> formes géométriques franches, robe en trapèze plein, cheveux gris rendus par une trame de points. La lecture passe par l'aplat et la forme, pas par le détail.</div>
+              <div style="display:flex;gap:6px"><div style="width:26px;height:26px;border-radius:50%;background:#1E3558"></div><div style="width:26px;height:26px;border-radius:50%;background:#FBF6EC;border:1.5px solid #D6C8AE"></div><div style="width:26px;height:26px;border-radius:50%;background-image:radial-gradient(#1E3558 1.5px,transparent 1.7px);background-size:5px 5px;border:1.5px solid #D6C8AE"></div><div style="width:26px;height:26px;border-radius:50%;background:#E6AE35"></div></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#44587A">Test de silhouette · 64 / 48 / 32 pt</div>
+              <div style="display:flex;align-items:flex-end;gap:14px">
+                <svg viewBox="0 0 200 260" width="49" height="64" style="filter:brightness(0)"><use href="#mC"></use></svg>
+                <svg viewBox="0 0 200 260" width="37" height="48" style="filter:brightness(0)"><use href="#mC"></use></svg>
+                <svg viewBox="0 0 200 260" width="25" height="32" style="filter:brightness(0)"><use href="#mC"></use></svg>
+                <svg viewBox="0 0 200 260" width="37" height="48"><use href="#mC"></use></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:14px;line-height:1.45;color:#1E3558">
+          <div style="background:#DCE6DC;border-radius:4px;padding:14px"><b>Atouts</b><br>Tout en vectoriel, donc la production est la plus rapide et les fichiers les plus légers. Lisibilité à 48 pt excellente. Identité très singulière sur l'App Store.</div>
+          <div style="background:#F4D8CC;border-radius:4px;padding:14px"><b>Risques</b><br>Moins de chaleur « lumière dorée » que 1a et 1b. La lumière doit passer par des aplats moutarde. Palette serrée à tenir sur 30 plats.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center">
+        <div style="width:390px;height:844px;border:10px solid #1D1A18;border-radius:58px;position:relative;overflow:hidden;background:#F2E7D3;box-shadow:0 30px 60px -30px rgba(30,53,88,.5)">
+          <div style="position:absolute;left:0;right:0;top:0;height:400px;background:#F2E7D3"></div>
+          <div style="position:absolute;left:0;right:0;top:320px;height:80px;background-image:radial-gradient(#1E3558 1.4px,transparent 1.6px);background-size:7px 7px;opacity:.35"></div>
+          <div style="position:absolute;left:30px;top:120px;width:150px;height:170px;background:#E6AE35;mix-blend-mode:multiply"></div>
+          <div style="position:absolute;left:36px;top:126px;width:150px;height:170px;border:4px solid #1E3558"></div>
+          <div style="position:absolute;left:109px;top:126px;width:4px;height:170px;background:#1E3558"></div>
+          <div style="position:absolute;left:36px;top:208px;width:150px;height:4px;background:#1E3558"></div>
+          <div style="position:absolute;left:44px;top:254px;width:38px;height:38px;border-radius:50%;background:#3E7D5A"></div>
+          <div style="position:absolute;left:134px;top:262px;width:30px;height:30px;border-radius:50%;background:#3E7D5A"></div>
+          <div style="position:absolute;left:0;right:0;top:400px;bottom:0;background-color:#FBF6EC;background-image:repeating-conic-gradient(#1E3558 0 25%,transparent 0 50%);background-size:48px 48px;opacity:.14"></div>
+          <div style="position:absolute;left:0;right:0;top:396px;height:8px;background:#D9553A"></div>
+          <div style="position:absolute;left:226px;top:54px;font-family:'Bricolage Grotesque';font-weight:800;font-size:1px;color:transparent">.</div>
+          <div style="position:absolute;left:214px;top:130px;width:150px;height:40px;background:#1E3558;display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';font-weight:800;font-size:20px;color:#F2E7D3;letter-spacing:.08em">BISTRO</div>
+          <div style="position:absolute;left:252px;top:250px;width:36px;height:56px;border-radius:18px 18px 0 0;background:#FBF6EC;border:3px solid #1E3558"></div>
+          <div style="position:absolute;left:256px;top:218px;width:28px;height:28px;border-radius:50%;background:#F0B39E"></div>
+          <div style="position:absolute;left:254px;top:198px;width:32px;height:22px;border-radius:8px 8px 0 0;background:#1E3558"></div>
+          <div style="position:absolute;left:190px;top:296px;width:200px;height:104px;background:#D9553A"></div>
+          <div style="position:absolute;left:196px;top:302px;width:200px;height:104px;background-image:radial-gradient(#1E3558 1.4px,transparent 1.6px);background-size:6px 6px;opacity:.5"></div>
+          <div style="position:absolute;left:190px;top:296px;width:200px;height:12px;background:#1E3558"></div>
+          <div style="position:absolute;left:214px;top:258px;width:40px;height:30px;background:#1E3558"></div>
+          <div style="position:absolute;left:220px;top:230px;width:8px;height:20px;border-radius:4px;background:#44587A;opacity:.5"></div>
+          <div style="position:absolute;left:236px;top:222px;width:8px;height:26px;border-radius:4px;background:#44587A;opacity:.4"></div>
+          <div style="position:absolute;left:200px;top:180px;display:flex;align-items:center;gap:6px;background:#FBF6EC;border:3px solid #1E3558;padding:3px 10px 3px 4px;font-family:'Bricolage Grotesque';font-weight:800;font-size:13px;color:#1E3558">
+            <div style="width:18px;height:18px;background:#3E7D5A"></div>{{ t.boost }}</div>
+          <div style="position:absolute;left:44px;top:510px;width:92px;height:92px;border-radius:50%;background:#E6AE35;mix-blend-mode:multiply"></div>
+          <div style="position:absolute;left:38px;top:504px;width:92px;height:92px;border-radius:50%;border:4px solid #1E3558"></div>
+          <div style="position:absolute;left:18px;top:470px;width:36px;height:60px;border-radius:18px 18px 0 0;background:#1E3558"></div>
+          <div style="position:absolute;left:22px;top:440px;width:28px;height:28px;border-radius:50%;background:#F0B39E"></div>
+          <div style="position:absolute;left:28px;top:426px;width:16px;height:16px;border-radius:50%;background-image:radial-gradient(#1E3558 1.4px,transparent 1.6px);background-size:4px 4px;background-color:#FBF6EC"></div>
+          <div style="position:absolute;left:54px;top:368px;background:#FBF6EC;border:3px solid #1E3558;padding:8px 12px;display:flex;flex-direction:column;gap:2px;font-family:'Bricolage Grotesque';color:#1E3558;box-shadow:5px 5px 0 #D9553A">
+            <div style="font-weight:800;font-size:11px;letter-spacing:.06em;text-transform:uppercase">{{ t.special }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px"><div style="width:24px;height:24px;border-radius:50%;background:#E6AE35"></div>{{ t.sweet }}</div>
+          </div>
+          <div style="position:absolute;left:230px;top:584px;width:108px;height:108px;border-radius:50%;background:#E6AE35;mix-blend-mode:multiply"></div>
+          <div style="position:absolute;left:224px;top:578px;width:108px;height:108px;border-radius:50%;border:4px solid #1E3558"></div>
+          <div style="position:absolute;left:318px;top:540px;width:36px;height:60px;border-radius:18px 18px 0 0;background:#D9553A"></div>
+          <div style="position:absolute;left:322px;top:510px;width:28px;height:28px;border-radius:50%;background:#1E3558"></div>
+          <div style="position:absolute;left:244px;top:470px;background:#FBF6EC;border:3px solid #1E3558;padding:5px 10px 5px 5px;display:flex;align-items:center;gap:8px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;color:#1E3558;box-shadow:5px 5px 0 #E6AE35">
+            <div style="width:28px;height:28px;border-radius:50%;border:3px solid #1E3558;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:10px;border-radius:50%;background:#E6AE35"></div></div>48</div>
+          <div style="position:absolute;left:132px;top:646px;display:flex;align-items:center;gap:6px;background:#E6AE35;border:3px solid #1E3558;padding:4px 12px 4px 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:14px;color:#1E3558">
+            <div style="width:22px;height:22px;border-radius:50%;background:#FBF6EC;border:3px solid #1E3558"></div>+120</div>
+
+          <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div>
+          <div style="position:absolute;left:16px;right:16px;top:58px;display:flex;align-items:center;gap:8px;color:#1E3558">
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF6EC;border:3px solid #1E3558;padding:3px 10px 3px 3px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px"><div style="width:26px;height:26px;border-radius:50%;background:#E6AE35"></div>{{ t.coins }}</div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF6EC;border:3px solid #1E3558;padding:3px 10px 3px 7px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px"><div style="width:16px;height:16px;transform:rotate(45deg);background:#3A6FB0"></div>86</div>
+            <div style="flex:1"></div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF6EC;border:3px solid #1E3558;padding:3px 10px 3px 3px;font-family:'Bricolage Grotesque';font-weight:800;font-size:14px"><div style="width:26px;height:26px;background:#1E3558;color:#F2E7D3;display:flex;align-items:center;justify-content:center;font-size:14px">7</div>{{ t.rep }}</div>
+            <div style="width:38px;height:38px;background:#FBF6EC;border:3px solid #1E3558;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:14px;border-radius:50%;border:3px solid #1E3558"></div></div>
+          </div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:140px;background:#1E3558;display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;align-items:start;padding:14px 8px 0;font-family:'Bricolage Grotesque';font-weight:800;font-size:12px;color:#F2E7D3">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F2E7D3" stroke-width="2.4" stroke-linejoin="miter"><rect x="5" y="3" width="14" height="18"></rect><path d="M9 3v18"></path></svg>{{ t.book }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F2E7D3" stroke-width="2.4"><path d="M12 4l7 8h-4v8H9v-8H5z"></path></svg>{{ t.up }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:-38px"><div style="width:78px;height:78px;border-radius:50%;background:#E6AE35;border:4px solid #1E3558;box-shadow:5px 5px 0 #D9553A;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#1E3558" stroke-width="2.4" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path></svg></div><div style="font-size:14px">{{ t.lab }}</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F2E7D3" stroke-width="2.4"><rect x="4" y="5" width="16" height="15"></rect><path d="M4 10h16"></path></svg>{{ t.menu }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F2E7D3" stroke-width="2.4"><rect x="4" y="8" width="16" height="13"></rect><path d="M8 8a4 4 0 0 1 8 0"></path></svg>{{ t.shop }}</div>
+          </div>
+          <div style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#F2E7D3"></div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#44587A;text-align:center;max-width:380px">Vue frontale à plat, ombres remplacées par des décalages d'encre. Barre d'actions pleine en marine.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="max-width:1100px;display:flex;flex-direction:column;gap:10px;font-size:16px;line-height:1.55;color:#4E463E">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#6B6258">Remarques sur le brief</div>
+    <div>Barre du bas : j'ai ajouté « Menu » à côté des quatre accès demandés, parce que composer le menu est une action fréquente qui mérite la zone du pouce. Les réglages passent en haut à droite, car on y va rarement.</div>
+    <div>Chaque bulle associe une icône et un nombre ou un mot. La couleur seule ne porte jamais l'information.</div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;fr&quot;,&quot;en&quot;],&quot;default&quot;:&quot;fr&quot;,&quot;tsType&quot;:&quot;'fr' | 'en'&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const en = (this.props.lang ?? 'fr') === 'en';
+    const t = en
+      ? { lab: 'Lab', book: 'Regulars', up: 'Upgrades', shop: 'Shop', menu: 'Menu', rep: 'Rep.', special: 'Special request', sweet: 'Something sweet', boost: 'Speed up', coins: '12.4K' }
+      : { lab: 'Labo', book: 'Habitués', up: 'Améliorer', shop: 'Boutique', menu: 'Menu', rep: 'Réput.', special: 'Demande spéciale', sweet: 'Un truc sucré', boost: 'Accélérer', coins: '12,4 k' };
+    return { t };
+  }
+}
+</script>
+</body>
+</html>

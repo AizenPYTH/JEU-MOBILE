@@ -13,6 +13,11 @@ public enum L10n {
         String(format: string(key), locale: Locale.current, arguments: arguments)
     }
 
+    /// Number style matching the language the app is displayed in (not just the device region).
+    public static var numberStyle: CompactNumber.Style {
+        Bundle.module.preferredLocalizations.first?.hasPrefix("fr") == true ? .french : .english
+    }
+
     public static func ingredientName(_ id: IngredientID) -> String { string(LocalizationKey.ingredientName(id)) }
     public static func dishName(_ id: RecipeID) -> String { string(LocalizationKey.dishName(id)) }
     public static func stationName(_ id: StationID) -> String { string(LocalizationKey.stationName(id)) }

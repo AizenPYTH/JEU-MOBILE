@@ -1,36 +1,19 @@
 {
   "sourceLanguage": "en",
   "strings": {
-    "app.tagline": {
+    "a11y.tip": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your cozy neighbourhood bistro."
+            "value": "Tip, %ld coins, tap to collect"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Votre petit bistrot de quartier."
-          }
-        }
-      }
-    },
-    "app.title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bistro"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bistro"
+            "value": "Pourboire, %ld pièces, toucher pour récolter"
           }
         }
       }
@@ -41,13 +24,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Collect all coins"
+            "value": "Collect everything"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ramasser toutes les pièces"
+            "value": "Tout récolter"
           }
         }
       }
@@ -201,6 +184,193 @@
           "stringUnit": {
             "state": "translated",
             "value": "Végétarien"
+          }
+        }
+      }
+    },
+    "coming.lab.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The pot is warming up. The recipe lab opens soon."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La marmite chauffe. Le labo de recettes ouvre bientôt."
+          }
+        }
+      }
+    },
+    "coming.lab.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lab"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Labo"
+          }
+        }
+      }
+    },
+    "coming.regulars.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nobody yet. Regulars arrive as your reputation grows. The first one is often a baker from the neighbourhood…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personne pour l'instant. Les habitués arrivent quand ta réputation grandit. Le premier, c'est souvent une boulangère du quartier…"
+          }
+        }
+      }
+    },
+    "coming.regulars.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regulars' notebook"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carnet des habitués"
+          }
+        }
+      }
+    },
+    "coming.shop.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing to buy for now. Your game continues normally."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien à acheter pour l'instant. Ton jeu continue normalement."
+          }
+        }
+      }
+    },
+    "coming.shop.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shop"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boutique"
+          }
+        }
+      }
+    },
+    "coming.upgrades.body": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upgrades open in a coming update. Your bistro keeps running meanwhile."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les améliorations arrivent dans une prochaine mise à jour. Ton bistrot continue de tourner."
+          }
+        }
+      }
+    },
+    "coming.upgrades.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upgrades"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Améliorations"
+          }
+        }
+      }
+    },
+    "common.back": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to the bistro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour au bistrot"
+          }
+        }
+      }
+    },
+    "common.close": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        }
+      }
+    },
+    "common.loading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement"
           }
         }
       }
@@ -698,19 +868,138 @@
         }
       }
     },
-    "menu.slots": {
+    "menu.add": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%ld / %ld dishes on the menu"
+            "value": "Add %@ to the menu"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%ld / %ld plats à la carte"
+            "value": "Ajouter %@ à la carte"
+          }
+        }
+      }
+    },
+    "menu.available": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Available dishes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plats disponibles"
+          }
+        }
+      }
+    },
+    "menu.freeSlot": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free slot"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Emplacement libre"
+          }
+        }
+      }
+    },
+    "menu.full": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu full. Remove a dish to add another one."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu complet. Retire un plat pour en ajouter un autre."
+          }
+        }
+      }
+    },
+    "menu.noneAvailable": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Discover new dishes in the lab."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Découvre de nouveaux plats au labo."
+          }
+        }
+      }
+    },
+    "menu.onMenu": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On the menu"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À la carte"
+          }
+        }
+      }
+    },
+    "menu.remove": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove %@ from the menu"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer %@ de la carte"
+          }
+        }
+      }
+    },
+    "menu.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's menu"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu du jour"
           }
         }
       }
@@ -817,23 +1106,6 @@
         }
       }
     },
-    "section.debug": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Debug"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Debug"
-          }
-        }
-      }
-    },
     "section.kitchen": {
       "extractionState": "manual",
       "localizations": {
@@ -851,24 +1123,41 @@
         }
       }
     },
-    "section.menu": {
+    "section.tables": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Menu"
+            "value": "Dining room"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Carte"
+            "value": "Salle"
           }
         }
       }
     },
-    "section.stats": {
+    "settings.debug": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Debug"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Debug"
+          }
+        }
+      }
+    },
+    "settings.stats": {
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -885,19 +1174,36 @@
         }
       }
     },
-    "section.tables": {
+    "settings.title": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dining room"
+            "value": "Settings"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Salle"
+            "value": "Réglages"
+          }
+        }
+      }
+    },
+    "settings.version": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bistro · v%@ (%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bistro · v%@ (%@)"
           }
         }
       }
@@ -1033,7 +1339,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Touchez une station pour l'accélérer."
+            "value": "Touche une station pour l'accélérer."
           }
         }
       }
@@ -1085,6 +1391,108 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pourboires : %ld"
+          }
+        }
+      }
+    },
+    "tab.lab": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lab"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Labo"
+          }
+        }
+      }
+    },
+    "tab.menu": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu"
+          }
+        }
+      }
+    },
+    "tab.regulars": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regulars"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Habitués"
+          }
+        }
+      }
+    },
+    "tab.shop": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shop"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boutique"
+          }
+        }
+      }
+    },
+    "tab.upgrades": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upgrades"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Améliorer"
+          }
+        }
+      }
+    },
+    "table.coinsWaiting": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coins waiting on the table"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des pièces attendent sur la table"
           }
         }
       }
@@ -1191,19 +1599,19 @@
         }
       }
     },
-    "zone.main_hall.name": {
+    "zone.main_room.name": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Main Hall"
+            "value": "Dining room"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Salle principale"
+            "value": "Salle"
           }
         }
       }

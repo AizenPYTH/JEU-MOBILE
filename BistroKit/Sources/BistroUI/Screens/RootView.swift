@@ -1,4 +1,5 @@
 import SwiftUI
+import GameCore
 
 /// App entry screen: loads the game, runs it while the app is active, saves when it is not.
 public struct RootView: View {
@@ -6,28 +7,31 @@ public struct RootView: View {
     @State private var loadError: String?
     @Environment(\.scenePhase) private var scenePhase
 
-    public init() {}
+    public init() {
+        BistroFonts.register()
+    }
 
     public var body: some View {
         Group {
             if let store {
-                DashboardView(store: store)
+                MainView(store: store)
             } else if let loadError {
-                VStack(spacing: Theme.Spacing.md) {
+                VStack(spacing: Theme.Spacing.s3) {
                     Text(L10n.string("error.content"))
-                        .font(Theme.Typography.headline)
-                        .foregroundStyle(Theme.Colors.danger)
+                        .typography(Theme.Typography.titleS)
+                        .foregroundStyle(Theme.Colors.stateAlert)
                     Text(verbatim: loadError)
-                        .font(Theme.Typography.caption)
-                        .foregroundStyle(Theme.Colors.textSecondary)
+                        .typography(Theme.Typography.caption)
+                        .foregroundStyle(Theme.Colors.inkSecondary)
                 }
-                .padding(Theme.Spacing.xl)
+                .padding(Theme.Spacing.s6)
             } else {
-                ProgressView()
+                GameImage(AssetName.ui("lab_pot"))
+                    .frame(width: Theme.Size.labPot.width, height: Theme.Size.labPot.height)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Theme.Colors.background.ignoresSafeArea())
+        .background(Theme.Colors.bgPaper.ignoresSafeArea())
         .task { load() }
         .onChange(of: scenePhase) { _, phase in
             switch phase {

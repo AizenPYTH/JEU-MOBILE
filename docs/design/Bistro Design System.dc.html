@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F4E8D2;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#4A2C20;-webkit-font-smoothing:antialiased}
+a{color:#A33A24}a:hover{color:#4A2C20}
+</style>
+</helmet>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="wob" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="2.6"></feDisplacementMap></filter>
+      <pattern id="tBr" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.2" fill="#4A2C20"></circle></pattern>
+      <pattern id="tSg" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.3" fill="#C9533A"></circle></pattern>
+      <pattern id="tOr" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.5" fill="#EBAA2F"></circle></pattern>
+
+      <g id="m2s">
+        <ellipse cx="86" cy="244" rx="14" ry="7" fill="#4A2C20"></ellipse><ellipse cx="114" cy="244" rx="14" ry="7" fill="#4A2C20"></ellipse>
+        <rect x="79" y="205" width="14" height="36" fill="#EFBBA2"></rect><rect x="107" y="205" width="14" height="36" fill="#EFBBA2"></rect>
+        <rect x="44" y="118" width="18" height="60" rx="9" transform="rotate(12 53 118)" fill="#EFBBA2"></rect>
+        <path d="M62 110 Q100 98 138 110 L154 212 Q100 222 46 212 Z" fill="#C9533A"></path>
+        <path d="M77 128 H123 L129 204 Q100 211 71 204 Z" fill="#FBF4E6"></path>
+        <rect x="88" y="168" width="24" height="16" rx="4" fill="#EBAA2F"></rect>
+        <rect x="132" y="92" width="16" height="96" rx="8" transform="rotate(22 140 140)" fill="#EBAA2F"></rect>
+        <path d="M136 108 l8 4 M130 124 l8 4 M124 140 l8 4" transform="rotate(22 140 140)" fill="none"></path>
+        <rect x="136" y="118" width="18" height="56" rx="9" transform="rotate(-18 145 118)" fill="#EFBBA2"></rect>
+        <circle cx="100" cy="72" r="30" fill="#EFBBA2"></circle>
+        <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z" fill="#EDE2CF"></path>
+        <circle cx="100" cy="34" r="13" fill="#EDE2CF"></circle>
+        <circle cx="89" cy="76" r="7" fill="none"></circle><circle cx="111" cy="76" r="7" fill="none"></circle><path d="M96 76 H104" fill="none"></path>
+        <path d="M92 92 Q100 98 108 92" fill="none"></path>
+      </g>
+      <g id="m2k" fill="none" stroke="#4A2C20" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="86" cy="244" rx="14" ry="7"></ellipse><ellipse cx="114" cy="244" rx="14" ry="7"></ellipse>
+        <rect x="79" y="205" width="14" height="36"></rect><rect x="107" y="205" width="14" height="36"></rect>
+        <rect x="44" y="118" width="18" height="60" rx="9" transform="rotate(12 53 118)"></rect>
+        <path d="M62 110 Q100 98 138 110 L154 212 Q100 222 46 212 Z"></path>
+        <path d="M77 128 H123 L129 204 Q100 211 71 204 Z"></path>
+        <rect x="88" y="168" width="24" height="16" rx="4"></rect>
+        <rect x="132" y="92" width="16" height="96" rx="8" transform="rotate(22 140 140)"></rect>
+        <path d="M136 108 l8 4 M130 124 l8 4 M124 140 l8 4" transform="rotate(22 140 140)"></path>
+        <rect x="136" y="118" width="18" height="56" rx="9" transform="rotate(-18 145 118)"></rect>
+        <circle cx="100" cy="72" r="30"></circle>
+        <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z"></path>
+        <circle cx="100" cy="34" r="13"></circle>
+        <circle cx="89" cy="76" r="7"></circle><circle cx="111" cy="76" r="7"></circle><path d="M96 76 H104"></path>
+        <path d="M92 92 Q100 98 108 92"></path>
+      </g>
+      <g id="m2">
+        <use href="#m2s" transform="translate(4 3)"></use>
+        <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z M113 34 a13 13 0 1 1 -26 0 a13 13 0 1 1 26 0" fill="url(#tBr)" opacity=".45" transform="translate(4 3)"></path>
+        <path d="M62 110 Q100 98 138 110 L154 212 Q100 222 46 212 Z" fill="url(#tOr)" opacity=".5" transform="translate(4 3)"></path>
+        <use href="#m2k" fill="none" stroke="#4A2C20" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#wob)"></use>
+        <circle cx="89" cy="76" r="2.3" fill="#4A2C20"></circle><circle cx="111" cy="76" r="2.3" fill="#4A2C20"></circle>
+        <circle cx="84" cy="88" r="5.5" fill="#C9533A" opacity=".55"></circle><circle cx="116" cy="88" r="5.5" fill="#C9533A" opacity=".55"></circle>
+      </g>
+
+      <g id="dBs">
+        <rect x="8" y="64" width="104" height="38" rx="10" fill="#D9A76A"></rect>
+        <circle cx="100" cy="83" r="4" fill="#F4E8D2"></circle>
+        <rect x="16" y="42" width="46" height="30" rx="12" transform="rotate(-8 39 57)" fill="#EBAA2F"></rect>
+        <rect x="56" y="46" width="44" height="30" rx="12" transform="rotate(7 78 61)" fill="#EBAA2F"></rect>
+        <rect x="24" y="44" width="11" height="11" rx="2" fill="#C9533A"></rect><rect x="40" y="48" width="11" height="11" rx="2" fill="#C9533A"></rect>
+        <rect x="64" y="50" width="11" height="11" rx="2" fill="#C9533A"></rect><rect x="82" y="54" width="11" height="11" rx="2" fill="#C9533A"></rect>
+        <ellipse cx="36" cy="60" rx="7" ry="4" transform="rotate(-25 36 60)" fill="#3F7A6E"></ellipse><ellipse cx="78" cy="64" rx="7" ry="4" transform="rotate(20 78 64)" fill="#3F7A6E"></ellipse>
+      </g>
+      <g id="dBk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="8" y="64" width="104" height="38" rx="10"></rect>
+        <circle cx="100" cy="83" r="4"></circle>
+        <rect x="16" y="42" width="46" height="30" rx="12" transform="rotate(-8 39 57)"></rect>
+        <rect x="56" y="46" width="44" height="30" rx="12" transform="rotate(7 78 61)"></rect>
+        <rect x="24" y="44" width="11" height="11" rx="2"></rect><rect x="40" y="48" width="11" height="11" rx="2"></rect>
+        <rect x="64" y="50" width="11" height="11" rx="2"></rect><rect x="82" y="54" width="11" height="11" rx="2"></rect>
+        <ellipse cx="36" cy="60" rx="7" ry="4" transform="rotate(-25 36 60)"></ellipse><ellipse cx="78" cy="64" rx="7" ry="4" transform="rotate(20 78 64)"></ellipse>
+      </g>
+      <g id="dB"><use href="#dBs" transform="translate(3 2)"></use><rect x="11" y="66" width="104" height="38" rx="10" fill="url(#tBr)" opacity=".3"></rect><use href="#dBk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" filter="url(#wob)"></use></g>
+
+      <g id="dOs">
+        <circle cx="60" cy="62" r="50" fill="#FBF4E6"></circle>
+        <circle cx="60" cy="62" r="40" fill="none"></circle>
+        <path d="M22 70 Q58 16 98 66 Q62 90 22 70 Z" fill="#EBAA2F"></path>
+        <path d="M28 70 Q60 60 92 67" fill="none"></path>
+        <circle cx="48" cy="52" r="4" fill="#3F7A6E"></circle><circle cx="62" cy="45" r="4" fill="#3F7A6E"></circle><circle cx="74" cy="54" r="4" fill="#3F7A6E"></circle>
+        <circle cx="86" cy="90" r="9" fill="#C9533A"></circle>
+      </g>
+      <g id="dOk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="60" cy="62" r="50"></circle>
+        <circle cx="60" cy="62" r="40"></circle>
+        <path d="M22 70 Q58 16 98 66 Q62 90 22 70 Z"></path>
+        <path d="M28 70 Q60 60 92 67"></path>
+        <circle cx="48" cy="52" r="4"></circle><circle cx="62" cy="45" r="4"></circle><circle cx="74" cy="54" r="4"></circle>
+        <circle cx="86" cy="90" r="9"></circle>
+      </g>
+      <g id="dO"><use href="#dOs" transform="translate(3 2)"></use><circle cx="63" cy="64" r="50" fill="url(#tBr)" opacity=".12"></circle><use href="#dOk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" filter="url(#wob)"></use></g>
+
+      <g id="dNs">
+        <path d="M14 58 H106 Q102 104 60 106 Q18 104 14 58 Z" fill="#C9533A"></path>
+        <ellipse cx="60" cy="58" rx="46" ry="12" fill="#F2CF8C"></ellipse>
+        <path d="M24 58 q6 -9 12 0 t12 0 t12 0 t12 0 t12 0 t12 0" fill="none" stroke="#EBAA2F" stroke-width="5"></path>
+        <rect x="70" y="42" width="24" height="8" rx="4" transform="rotate(-18 82 46)" fill="#9E3522"></rect>
+        <rect x="44" y="47" width="18" height="7" rx="3.5" transform="rotate(14 53 50)" fill="#9E3522"></rect>
+        <rect x="80" y="4" width="5" height="62" rx="2.5" transform="rotate(22 82 35)" fill="#7A5A48"></rect>
+        <rect x="90" y="6" width="5" height="62" rx="2.5" transform="rotate(28 92 37)" fill="#7A5A48"></rect>
+        <path d="M36 36 q-6 -8 0 -16 M52 32 q-6 -8 0 -16" fill="none"></path>
+      </g>
+      <g id="dNk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 58 H106 Q102 104 60 106 Q18 104 14 58 Z"></path>
+        <ellipse cx="60" cy="58" rx="46" ry="12"></ellipse>
+        
+        <rect x="70" y="42" width="24" height="8" rx="4" transform="rotate(-18 82 46)"></rect>
+        <rect x="44" y="47" width="18" height="7" rx="3.5" transform="rotate(14 53 50)"></rect>
+        <rect x="80" y="4" width="5" height="62" rx="2.5" transform="rotate(22 82 35)"></rect>
+        <rect x="90" y="6" width="5" height="62" rx="2.5" transform="rotate(28 92 37)"></rect>
+        <path d="M36 36 q-6 -8 0 -16 M52 32 q-6 -8 0 -16"></path>
+      </g>
+      <g id="dN"><use href="#dNs" transform="translate(3 2)"></use><path d="M17 62 H109 Q105 108 63 110 Q21 108 17 62 Z" fill="url(#tBr)" opacity=".28"></path><use href="#dNk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" filter="url(#wob)"></use></g>
+
+      <g id="dLs">
+        <path d="M32 28 H88 L82 108 Q60 112 38 108 Z" fill="#FBF4E6"></path>
+        <path d="M35 50 H85 L81 104 Q60 108 39 104 Z" fill="#EBAA2F"></path>
+        <rect x="44" y="60" width="14" height="14" rx="3" transform="rotate(12 51 67)" fill="#FBF4E6"></rect>
+        <rect x="62" y="74" width="12" height="12" rx="3" transform="rotate(-10 68 80)" fill="#FBF4E6"></rect>
+        <rect x="50" y="4" width="7" height="58" rx="3" transform="rotate(10 53 33)" fill="#C9533A"></rect>
+        <circle cx="86" cy="30" r="17" fill="#F4D06A"></circle>
+        <path d="M86 16 V44 M72 30 H100" fill="none"></path>
+      </g>
+      <g id="dLk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 28 H88 L82 108 Q60 112 38 108 Z"></path>
+        <path d="M35 50 H85 L81 104 Q60 108 39 104 Z"></path>
+        <rect x="44" y="60" width="14" height="14" rx="3" transform="rotate(12 51 67)"></rect>
+        <rect x="62" y="74" width="12" height="12" rx="3" transform="rotate(-10 68 80)"></rect>
+        <rect x="50" y="4" width="7" height="58" rx="3" transform="rotate(10 53 33)"></rect>
+        <circle cx="86" cy="30" r="17"></circle>
+        <path d="M86 16 V44 M72 30 H100"></path>
+      </g>
+      <g id="dL"><use href="#dLs" transform="translate(3 2)"></use><path d="M38 52 H88 L84 106 Q63 110 42 106 Z" fill="url(#tSg)" opacity=".22"></path><use href="#dLk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" filter="url(#wob)"></use></g>
+    </defs>
+  </svg>
+<div style="max-width:1360px;margin:0 auto;padding:64px 48px 120px;display:flex;flex-direction:column;gap:72px">
+
+  <header style="display:flex;flex-direction:column;gap:14px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Bistro · Système de design · v0.1 · Direction « Riso chaud »</div>
+    <div style="font-size:56px;font-weight:800;letter-spacing:-.025em;line-height:1">Tokens et composants</div>
+    <div style="font-size:18px;line-height:1.55;color:#7A5A48;max-width:820px;text-wrap:pretty">Toutes les valeurs sont en points iOS. Les noms de tokens sont stables et partagés avec le code : en SwiftUI, <span style="font-family:'IBM Plex Mono';font-size:15px">color.bg.paper</span> devient <span style="font-family:'IBM Plex Mono';font-size:15px">Color.bgPaper</span>. Tous les composants de cette page sont interactifs : on peut les presser pour voir l'état pressé.</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:14px;font-weight:700">
+      <a href="#couleurs" style="padding:6px 12px;border:2px solid #4A2C20;border-radius:999px;text-decoration:none;color:#4A2C20">1 Couleurs</a>
+      <a href="#typo" style="padding:6px 12px;border:2px solid #4A2C20;border-radius:999px;text-decoration:none;color:#4A2C20">2 Typographie</a>
+      <a href="#espace" style="padding:6px 12px;border:2px solid #4A2C20;border-radius:999px;text-decoration:none;color:#4A2C20">3 Espace, rayons, bordures, ombres</a>
+      <a href="#motion" style="padding:6px 12px;border:2px solid #4A2C20;border-radius:999px;text-decoration:none;color:#4A2C20">4 Animation et haptique</a>
+      <a href="#composants" style="padding:6px 12px;border:2px solid #4A2C20;border-radius:999px;text-decoration:none;color:#4A2C20">5 Composants</a>
+    </div>
+  </header>
+
+  <!-- 1 COULEURS -->
+  <section id="couleurs" data-screen-label="01 Couleurs" style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:'IBM Plex Mono';font-size:14px;color:#7A5A48">01</div><div style="font-size:34px;font-weight:800;letter-spacing:-.015em">Couleurs</div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Fonds et surfaces</div>
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:10px 12px;align-items:center;font-size:14px">
+          <div style="width:44px;height:44px;border-radius:10px;background:#F4E8D2;box-shadow:inset 0 0 0 1.5px #D5C3A4"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.bg.paper · #F4E8D2</div><div style="color:#7A5A48">Fond des écrans</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#EFDDBF"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.bg.scene · #EFDDBF</div><div style="color:#7A5A48">Murs, fond de scène</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#FBF4E6;box-shadow:inset 0 0 0 1.5px #D5C3A4"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.surface.card · #FBF4E6</div><div style="color:#7A5A48">Cartes, bulles, panneaux</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#EADBC0"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.surface.sunk · #EADBC0</div><div style="color:#7A5A48">Creux, désactivé, emplacement vide</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#4A2C20"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.surface.inverse · #4A2C20</div><div style="color:#7A5A48">Tooltip tutoriel, toast</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:rgba(42,24,16,.55)"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.scrim · #2A1810 @ 55 %</div><div style="color:#7A5A48">Derrière popups et sheets</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Texte et traits</div>
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:10px 12px;align-items:center;font-size:14px">
+          <div style="width:44px;height:44px;border-radius:10px;background:#4A2C20"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.ink.primary · #4A2C20</div><div style="color:#7A5A48">Texte, trait d'illustration · 10,3:1</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#7A5A48"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.ink.secondary · #7A5A48</div><div style="color:#7A5A48">Texte secondaire · 5,1:1</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#9C8570"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.ink.disabled · #9C8570</div><div style="color:#7A5A48">Désactivé, toujours doublé d'une icône</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#FBF4E6;box-shadow:inset 0 0 0 1.5px #D5C3A4"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.ink.inverse · #FBF4E6</div><div style="color:#7A5A48">Texte sur brun ou sur vert</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#D5C3A4"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.line.soft · #D5C3A4</div><div style="color:#7A5A48">Séparateurs, bordures secondaires</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Encres d'accent et états</div>
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:10px 12px;align-items:center;font-size:14px">
+          <div style="width:44px;height:44px;border-radius:10px;background:#EBAA2F"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.accent.gold · #EBAA2F</div><div style="color:#7A5A48">Action primaire, lumière · brun dessus 6,2:1</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#F6D27A"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.accent.goldSoft · #F6D27A</div><div style="color:#7A5A48">Remplissage d'icônes, halo</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#C9533A"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.accent.sanguine · #C9533A</div><div style="color:#7A5A48">Formes, badges, ombres décalées. Pas de texte courant</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#3F7A6E"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.accent.verdigris · #3F7A6E</div><div style="color:#7A5A48">Pub récompensée, végétal · papier dessus 4,5:1</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#33665B"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.state.success · #33665B</div><div style="color:#7A5A48">Texte « Prêt », gains · 5,4:1</div></div>
+          <div style="width:44px;height:44px;border-radius:10px;background:#A33A24"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.state.alert · #A33A24</div><div style="color:#7A5A48">Fonds insuffisants, erreur douce · 5,4:1</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Monnaies</div>
+        <div style="display:grid;grid-template-columns:44px 1fr;gap:10px 12px;align-items:center;font-size:14px">
+          <div style="width:44px;height:44px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 3px #4A2C20"></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.currency.coin · #EBAA2F</div><div style="color:#7A5A48">Pièces · forme ronde</div></div>
+          <div style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><div style="width:30px;height:30px;transform:rotate(45deg);border-radius:5px;background:#3F7A6E;box-shadow:inset 0 0 0 3px #4A2C20"></div></div><div><div style="font-family:'IBM Plex Mono';font-weight:600">color.currency.gem · #3F7A6E</div><div style="color:#7A5A48">Gemmes · forme losange</div></div>
+        </div>
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48;margin-top:10px">Raretés · couleur + cadre + points</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;font-size:13px">
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:56px;height:56px;border-radius:12px;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20"></div><div style="font-weight:700">Commun</div><div style="display:flex;gap:3px"><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div></div><div style="font-family:'IBM Plex Mono';font-size:10px;color:#7A5A48">rarity.common</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:56px;height:56px;border-radius:12px;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20,inset 0 0 0 5px #FBF4E6,inset 0 0 0 7px #4A2C20"></div><div style="font-weight:700">Rare</div><div style="display:flex;gap:3px"><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div></div><div style="font-family:'IBM Plex Mono';font-size:10px;color:#7A5A48">rarity.rare</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:56px;height:56px;border-radius:12px;background-color:#FBF4E6;background-image:radial-gradient(rgba(63,122,110,.5) 1.2px,transparent 1.4px);background-size:5px 5px;box-shadow:inset 0 0 0 2px #4A2C20,inset 0 0 0 5px #FBF4E6,inset 0 0 0 7px #3F7A6E"></div><div style="font-weight:700">Raffiné</div><div style="display:flex;gap:3px"><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div></div><div style="font-family:'IBM Plex Mono';font-size:10px;color:#7A5A48">rarity.refined</div></div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:56px;height:56px;background:#4A2C20;clip-path:polygon(14% 0,86% 0,100% 14%,100% 86%,86% 100%,14% 100%,0 86%,0 14%);display:flex;align-items:center;justify-content:center"><div style="width:51px;height:51px;background-color:#F6D27A;background-image:radial-gradient(rgba(201,83,58,.5) 1.2px,transparent 1.4px);background-size:5px 5px;clip-path:polygon(14% 0,86% 0,100% 14%,100% 86%,86% 100%,14% 100%,0 86%,0 14%)"></div></div><div style="font-weight:700">Légendaire</div><div style="display:flex;gap:3px;align-items:center"><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div><div style="width:8px;height:8px;transform:rotate(45deg);background:#4A2C20"></div></div><div style="font-family:'IBM Plex Mono';font-size:10px;color:#7A5A48">rarity.legendary</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 TYPO -->
+  <section id="typo" data-screen-label="02 Typographie" style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:'IBM Plex Mono';font-size:14px;color:#7A5A48">02</div><div style="font-size:34px;font-weight:800;letter-spacing:-.015em">Typographie</div></div>
+    <div style="font-size:15px;line-height:1.55;color:#7A5A48;max-width:900px;text-wrap:pretty">Deux familles. Bricolage Grotesque (OFL, variable avec axe optique) pour tout le texte, et IBM Plex Mono (OFL) pour les chiffres, qui restent chasse fixe et ne sautent pas quand ils défilent. La colonne « Dynamic Type » indique le style iOS sur lequel chaque token se cale.</div>
+    <div style="background:#FBF4E6;border-radius:18px;padding:8px 24px;display:flex;flex-direction:column">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:12px 0;border-bottom:1.5px solid #D5C3A4;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7A5A48"><div>Exemple</div><div>Token</div><div>Taille / interl. / graisse</div><div>Dynamic Type</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-size:34px;line-height:40px;font-weight:800;letter-spacing:-.01em">Nouvelle recette !</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.display</div><div style="font-family:'IBM Plex Mono';font-size:13px">34 / 40 / 800</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.largeTitle · max xxxL</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-size:26px;line-height:32px;font-weight:800">Carnet des habitués</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.title.l</div><div style="font-family:'IBM Plex Mono';font-size:13px">26 / 32 / 800</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.title · max xxxL</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-size:21px;line-height:26px;font-weight:700">Omelette aux fines herbes</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.title.m</div><div style="font-family:'IBM Plex Mono';font-size:13px">21 / 26 / 700</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.title2</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-size:17px;line-height:22px;font-weight:700">Margot · Palier 3</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.title.s</div><div style="font-family:'IBM Plex Mono';font-size:13px">17 / 22 / 700</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.headline</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-size:17px;line-height:24px;font-weight:400;max-width:520px;text-wrap:pretty">Margot passe tous les jeudis. Elle dit que ta brioche lui rappelle l'odeur de sa boutique, rue des Tanneurs.</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.body.l</div><div style="font-family:'IBM Plex Mono';font-size:13px">17 / 24 / 400</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.body · jusqu'à AX3</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-size:15px;line-height:21px;font-weight:500">Aime : sucré, beurre, miel · N'aime pas : piment</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.body.m</div><div style="font-family:'IBM Plex Mono';font-size:13px">15 / 21 / 500</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.callout · jusqu'à AX3</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-size:13px;line-height:18px;font-weight:500;color:#7A5A48">Débloqué au palier 4 · il y a 2 h</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.caption</div><div style="font-family:'IBM Plex Mono';font-size:13px">13 / 18 / 500</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.footnote</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-size:17px;line-height:20px;font-weight:800">Préparer</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.label.button</div><div style="font-family:'IBM Plex Mono';font-size:13px">17 / 20 / 800</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.headline · max xxL</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-size:12px;line-height:14px;font-weight:800">Habitués</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.label.tab</div><div style="font-family:'IBM Plex Mono';font-size:13px">12 / 14 / 800</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.caption2 · max xL</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-family:'IBM Plex Mono';font-size:15px;line-height:18px;font-weight:600">12,4 k · 1,2 M · 45,7 Md</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.number.hud</div><div style="font-family:'IBM Plex Mono';font-size:13px">15 / 18 / 600 mono</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">fixe (HUD)</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;border-bottom:1.5px solid #EADBC0;align-items:center"><div style="font-family:'IBM Plex Mono';font-size:22px;line-height:26px;font-weight:600">4,99 € · 0:42</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.number.l</div><div style="font-family:'IBM Plex Mono';font-size:13px">22 / 26 / 600 mono</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.title2</div></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 180px 150px 150px;gap:16px;padding:16px 0;align-items:center"><div style="font-family:'IBM Plex Mono';font-size:40px;line-height:44px;font-weight:600">+ 45,7 Md</div><div style="font-family:'IBM Plex Mono';font-size:13px">type.number.xl</div><div style="font-family:'IBM Plex Mono';font-size:13px">40 / 44 / 600 mono</div><div style="font-family:'IBM Plex Mono';font-size:13px;color:#7A5A48">.largeTitle</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;font-size:14px;line-height:1.5">
+      <div style="background:#FBF4E6;border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:6px"><div style="font-weight:800">Format des nombres</div><div>Moins de 10 000 : entier avec espace fine (9 850). Au-delà : 3 chiffres significatifs, puis <b>k</b>, <b>M</b>, <b>Md</b>, <b>Bn</b>, <b>Tn</b> en français, et K, M, B, T, Qa en anglais. Virgule décimale en FR, point en EN. Exemples : 12,4 k · 1,2 M · 45,7 Md.</div></div>
+      <div style="background:#FBF4E6;border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:6px"><div style="font-weight:800">Texte long et Dynamic Type</div><div>Le français est environ 25 % plus long que l'anglais. Les boutons passent sur 2 lignes avant de tronquer. Les titres de carte sont limités à 2 lignes avec ellipse. Au-delà de la taille AX1, les listes passent de 2 colonnes à 1.</div></div>
+    </div>
+  </section>
+
+  <!-- 3 ESPACE -->
+  <section id="espace" data-screen-label="03 Espace" style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:'IBM Plex Mono';font-size:14px;color:#7A5A48">03</div><div style="font-size:34px;font-weight:800;letter-spacing:-.015em">Espacements, rayons, bordures, ombres</div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px">
+      <div style="background:#FBF4E6;border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Espacement · base 4 pt</div>
+        <div style="display:grid;grid-template-columns:90px 36px 1fr;gap:8px 10px;align-items:center;font-family:'IBM Plex Mono';font-size:12px">
+          <div>space.1</div><div>4</div><div style="height:12px;width:4px;background:#C9533A"></div>
+          <div>space.2</div><div>8</div><div style="height:12px;width:8px;background:#C9533A"></div>
+          <div>space.3</div><div>12</div><div style="height:12px;width:12px;background:#C9533A"></div>
+          <div>space.4</div><div>16</div><div style="height:12px;width:16px;background:#C9533A"></div>
+          <div>space.5</div><div>20</div><div style="height:12px;width:20px;background:#C9533A"></div>
+          <div>space.6</div><div>24</div><div style="height:12px;width:24px;background:#C9533A"></div>
+          <div>space.8</div><div>32</div><div style="height:12px;width:32px;background:#C9533A"></div>
+          <div>space.10</div><div>40</div><div style="height:12px;width:40px;background:#C9533A"></div>
+          <div>space.12</div><div>48</div><div style="height:12px;width:48px;background:#C9533A"></div>
+          <div>space.16</div><div>64</div><div style="height:12px;width:64px;background:#C9533A"></div>
+        </div>
+        <div style="font-size:13px;line-height:1.5;color:#7A5A48">Marge d'écran : 16 (SE) / 20 (≥ 390 pt). Zone tactile minimale : 44 × 44.</div>
+      </div>
+      <div style="background:#FBF4E6;border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Rayons</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;font-family:'IBM Plex Mono';font-size:11px">
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:56px;border:2.5px solid #4A2C20;border-radius:6px"></div>radius.s · 6<br>chips, badges</div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:56px;border:2.5px solid #4A2C20;border-radius:12px"></div>radius.m · 12<br>cartes plat</div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:56px;border:2.5px solid #4A2C20;border-radius:16px"></div>radius.l · 16<br>boutons, bulles</div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:56px;border:2.5px solid #4A2C20;border-radius:24px"></div>radius.xl · 24<br>popups</div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:56px;border:2.5px solid #4A2C20;border-radius:28px 28px 0 0"></div>radius.sheet · 28<br>haut des sheets</div>
+          <div style="display:flex;flex-direction:column;gap:6px"><div style="height:56px;border:2.5px solid #4A2C20;border-radius:999px"></div>radius.pill · 999<br>compteurs</div>
+        </div>
+      </div>
+      <div style="background:#FBF4E6;border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Bordures</div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-family:'IBM Plex Mono';font-size:12px">
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:80px;height:0;border-top:1.5px solid #D5C3A4"></div>border.hair · 1,5 · line.soft · séparateurs</div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:80px;height:0;border-top:2.5px solid #4A2C20"></div>border.ui · 2,5 · cartes, pills, bulles</div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:80px;height:0;border-top:3.5px solid #4A2C20"></div>border.strong · 3,5 · boutons, popups</div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="width:80px;height:0;border-top:3px solid #4A2C20"></div>stroke.art · 3 à 120 pt, 2 sous 64 pt</div>
+        </div>
+      </div>
+      <div style="background:#FBF4E6;border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Ombres · décalage d'encre, sans flou</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px;font-family:'IBM Plex Mono';font-size:11px">
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="height:48px;border:2.5px solid #4A2C20;border-radius:12px;background:#FBF4E6;box-shadow:2px 2px 0 #4A2C20"></div>shadow.s · 2,2 · ink</div>
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="height:48px;border:3px solid #4A2C20;border-radius:12px;background:#FBF4E6;box-shadow:4px 4px 0 #C9533A"></div>shadow.m · 4,4 · sanguine</div>
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="height:48px;border:3px solid #4A2C20;border-radius:12px;background:#FBF4E6;box-shadow:4px 4px 0 #EBAA2F"></div>shadow.reward · 4,4 · gold</div>
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="height:48px;border-radius:12px;background:#FBF4E6;box-shadow:0 -8px 24px rgba(74,44,32,.18)"></div>shadow.sheet · 0,-8 · flou 24 · 18 %</div>
+        </div>
+        <div style="font-size:13px;line-height:1.5;color:#7A5A48">Pressé = l'élément glisse de la valeur de son ombre et celle-ci passe à 0. On a l'impression d'appuyer sur un tampon.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 MOTION -->
+  <section id="motion" data-screen-label="04 Animation" style="display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:'IBM Plex Mono';font-size:14px;color:#7A5A48">04</div><div style="font-size:34px;font-weight:800;letter-spacing:-.015em">Animation et haptique</div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px">
+      <div style="background:#FBF4E6;border-radius:14px;padding:16px 18px;font-family:'IBM Plex Mono';font-size:12px;line-height:1.7"><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;margin-bottom:4px">Durées</div>motion.instant · 100 ms<br>motion.fast · 160 ms<br>motion.base · 240 ms<br>motion.slow · 400 ms<br>motion.celebrate · 900 ms</div>
+      <div style="background:#FBF4E6;border-radius:14px;padding:16px 18px;font-family:'IBM Plex Mono';font-size:12px;line-height:1.7"><div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:15px;margin-bottom:4px">Courbes</div>ease.out · (0.2, 0.8, 0.2, 1)<br>ease.in · (0.4, 0, 1, 1)<br>ease.inOut · (0.45, 0, 0.25, 1)<br>spring.pop · réponse 0,35 · amort. 0,68<br>spring.soft · réponse 0,5 · amort. 0,86</div>
+      <div style="background:#FBF4E6;border-radius:14px;padding:16px 18px;font-size:13px;line-height:1.5"><div style="font-weight:800;font-size:15px;margin-bottom:4px">Réduire les animations</div>Si l'option iOS est activée, les ressorts deviennent des fondus de 160 ms, les particules sont supprimées et la découverte passe de 3,2 s à 1,2 s.</div>
+    </div>
+    <div style="background:#FBF4E6;border-radius:18px;padding:8px 24px">
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:12px 0;border-bottom:1.5px solid #D5C3A4;font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7A5A48"><div>Moment</div><div>Mouvement</div><div>Timing</div><div>Haptique</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;border-bottom:1.5px solid #EADBC0;font-size:14px;line-height:1.45"><div style="font-weight:800">Pression bouton</div><div>Glisse de 3 pt, l'ombre passe à 0</div><div style="font-family:'IBM Plex Mono';font-size:12px">instant · ease.out</div><div style="font-family:'IBM Plex Mono';font-size:12px">selection</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;border-bottom:1.5px solid #EADBC0;font-size:14px;line-height:1.45"><div style="font-weight:800">Popup · apparition</div><div>Scrim en fondu, carte de 0,92 à 1 et de +24 pt à 0</div><div style="font-family:'IBM Plex Mono';font-size:12px">280 ms · spring.pop</div><div style="font-family:'IBM Plex Mono';font-size:12px">—</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;border-bottom:1.5px solid #EADBC0;font-size:14px;line-height:1.45"><div style="font-weight:800">Popup · sortie</div><div>Fondu, carte de 1 à 0,96</div><div style="font-family:'IBM Plex Mono';font-size:12px">fast · ease.in</div><div style="font-family:'IBM Plex Mono';font-size:12px">—</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;border-bottom:1.5px solid #EADBC0;font-size:14px;line-height:1.45"><div style="font-weight:800">Collecte de pièces</div><div>Au plus 8 pièces en arc vers le compteur, 40 ms d'écart entre elles. Le compteur rebondit (1 → 1,12 → 1) et les chiffres défilent</div><div style="font-family:'IBM Plex Mono';font-size:12px">520 ms · ease.inOut</div><div style="font-family:'IBM Plex Mono';font-size:12px">impact light × 1 à l'arrivée</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;border-bottom:1.5px solid #EADBC0;font-size:14px;line-height:1.45"><div style="font-weight:800">Station prête</div><div>La bulle monte de 6 pt puis flotte en boucle (amplitude 3 pt, 2 s)</div><div style="font-family:'IBM Plex Mono';font-size:12px">base · spring.soft</div><div style="font-family:'IBM Plex Mono';font-size:12px">—</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;border-bottom:1.5px solid #EADBC0;font-size:14px;line-height:1.45"><div style="font-weight:800">Découverte</div><div>Séquence en 6 temps, storyboardée avec le labo</div><div style="font-family:'IBM Plex Mono';font-size:12px">3,2 s au total</div><div style="font-family:'IBM Plex Mono';font-size:12px">soft, puis rigid, puis success</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;border-bottom:1.5px solid #EADBC0;font-size:14px;line-height:1.45"><div style="font-weight:800">Échec doux</div><div>La marmite fait un « pouf » de vapeur, puis la carte indice glisse vers le haut. Aucune secousse</div><div style="font-family:'IBM Plex Mono';font-size:12px">slow · spring.soft</div><div style="font-family:'IBM Plex Mono';font-size:12px">impact soft × 1</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;border-bottom:1.5px solid #EADBC0;font-size:14px;line-height:1.45"><div style="font-weight:800">Level up réputation</div><div>Médaille qui tamponne (de 1,4 à 1, avec une rotation de −6°), confettis de papier en 4 encres</div><div style="font-family:'IBM Plex Mono';font-size:12px">celebrate · spring.pop</div><div style="font-family:'IBM Plex Mono';font-size:12px">notification success</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;border-bottom:1.5px solid #EADBC0;font-size:14px;line-height:1.45"><div style="font-weight:800">Palier d'affinité</div><div>Le segment se remplit, puis le cœur du palier bat 2 fois</div><div style="font-family:'IBM Plex Mono';font-size:12px">slow + 2 × 160 ms</div><div style="font-family:'IBM Plex Mono';font-size:12px">impact soft × 2</div></div>
+      <div style="display:grid;grid-template-columns:170px minmax(0,1fr) 160px 200px;gap:16px;padding:14px 0;font-size:14px;line-height:1.45"><div style="font-weight:800">Fonds insuffisants</div><div>Le compteur tremble 3 fois (± 3 pt) et le texte passe en state.alert</div><div style="font-family:'IBM Plex Mono';font-size:12px">240 ms</div><div style="font-family:'IBM Plex Mono';font-size:12px">notification warning</div></div>
+    </div>
+    <div style="font-size:14px;color:#7A5A48">Toute vibration est désactivable dans les réglages. Il n'y a jamais de vibration en boucle ni pendant la production passive.</div>
+  </section>
+
+  <!-- 5 COMPOSANTS -->
+  <section id="composants" data-screen-label="05 Composants" style="display:flex;flex-direction:column;gap:40px">
+    <div style="display:flex;align-items:baseline;gap:14px"><div style="font-family:'IBM Plex Mono';font-size:14px;color:#7A5A48">05</div><div style="font-size:34px;font-weight:800;letter-spacing:-.015em">Composants</div></div>
+
+    <!-- Boutons -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Bouton primaire</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">btn.primary · h 56 · px 24 · radius.l · border.strong · shadow.m · type.label.button</div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;background:#FBF4E6;border-radius:18px;padding:28px">
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="height:56px;padding:0 24px;border-radius:16px;border:3.5px solid #4A2C20;background:#EBAA2F;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800;cursor:pointer;user-select:none" style-active="transform:translate(3px,3px);box-shadow:1px 1px 0 #C9533A">Préparer</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">normal</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="height:56px;padding:0 24px;border-radius:16px;border:3.5px solid #4A2C20;background:#E09E26;box-shadow:1px 1px 0 #C9533A;transform:translate(3px,3px);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800">Préparer</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">pressé</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="height:56px;padding:0 24px;border-radius:16px;border:3.5px dashed #9C8570;background:#EADBC0;display:flex;align-items:center;gap:8px;font-size:17px;font-weight:800;color:#7A5A48"><svg width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="#7A5A48" stroke-width="2.4"><rect x="2" y="8" width="12" height="9" rx="2"></rect><path d="M5 8V5a3 3 0 0 1 6 0v3"></path></svg>Préparer</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">désactivé · cadenas + tirets</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="height:56px;padding:0 24px;border-radius:16px;border:3.5px solid #4A2C20;background:#EBAA2F;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800"><div style="display:flex;gap:4px"><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20"></div><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20;opacity:.55"></div><div style="width:7px;height:7px;border-radius:50%;background:#4A2C20;opacity:.25"></div></div>Ça mijote…</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">en attente</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="position:relative;height:56px;padding:0 24px;border-radius:16px;border:3.5px solid #4A2C20;background:#EBAA2F;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800">Voir le carnet<div style="position:absolute;top:-12px;right:-12px;padding:2px 8px;height:22px;border-radius:11px;background:#C9533A;border:2.5px solid #FBF4E6;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center">Nouveau</div></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">nouveau / badge</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;width:220px"><div style="min-height:56px;padding:8px 20px;border-radius:16px;border:3.5px solid #4A2C20;background:#EBAA2F;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center;text-align:center;font-size:17px;line-height:20px;font-weight:800;box-sizing:border-box;width:100%">Récupérer les gains de la nuit</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">texte long · 2 lignes, h auto</div></div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Bouton secondaire</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">btn.secondary · h 48 · px 20 · radius.l · border.ui · shadow.s</div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;background:#FBF4E6;border-radius:18px;padding:28px">
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="height:48px;padding:0 20px;border-radius:16px;border:2.5px solid #4A2C20;background:#FBF4E6;box-shadow:2px 2px 0 #4A2C20;display:flex;align-items:center;font-size:16px;font-weight:800;cursor:pointer;user-select:none" style-active="transform:translate(2px,2px);box-shadow:0 0 0 #4A2C20;background:#F4E8D2">Plus tard</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">normal</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="height:48px;padding:0 20px;border-radius:16px;border:2.5px solid #4A2C20;background:#F4E8D2;transform:translate(2px,2px);display:flex;align-items:center;font-size:16px;font-weight:800">Plus tard</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">pressé</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="height:48px;padding:0 20px;border-radius:16px;border:2.5px dashed #9C8570;background:#EADBC0;display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800;color:#7A5A48"><svg width="14" height="16" viewBox="0 0 16 18" fill="none" stroke="#7A5A48" stroke-width="2.4"><rect x="2" y="8" width="12" height="9" rx="2"></rect><path d="M5 8V5a3 3 0 0 1 6 0v3"></path></svg>Plus tard</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">désactivé</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="height:48px;padding:0 20px;border-radius:16px;border:2.5px solid #4A2C20;background:#FBF4E6;box-shadow:2px 2px 0 #4A2C20;display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800;color:#7A5A48"><div style="width:16px;height:16px;border-radius:50%;border:2.5px solid #D5C3A4;border-top-color:#4A2C20"></div>Chargement</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">en attente</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="height:48px;padding:0 20px;border-radius:16px;border:2.5px solid #4A2C20;background:#FBF4E6;box-shadow:2px 2px 0 #4A2C20;display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800">Recettes<div style="min-width:22px;height:22px;border-radius:11px;background:#C9533A;color:#FBF4E6;font-size:12px;display:flex;align-items:center;justify-content:center;padding:0 5px;box-sizing:border-box">3</div></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">badge compteur</div></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(560px,1fr));gap:28px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Bouton pub récompensée</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">btn.rewardedAd · h 56 · verdigris</div></div>
+        <div style="display:flex;flex-direction:column;gap:18px;background:#FBF4E6;border-radius:18px;padding:28px">
+          <div style="display:flex;align-items:center;gap:16px"><div style="height:56px;padding:0 8px 0 16px;border-radius:16px;border:3.5px solid #4A2C20;background:#3F7A6E;box-shadow:4px 4px 0 #EBAA2F;display:flex;align-items:center;gap:10px;color:#FBF4E6;font-size:17px;font-weight:800;cursor:pointer;user-select:none" style-active="transform:translate(3px,3px);box-shadow:1px 1px 0 #EBAA2F"><svg width="26" height="20" viewBox="0 0 26 20"><rect x="1.5" y="1.5" width="23" height="17" rx="4" fill="none" stroke="#FBF4E6" stroke-width="2.5"></rect><path d="M10 6 L17 10 L10 14 Z" fill="#FBF4E6"></path></svg>Doubler<div style="height:38px;padding:0 10px;border-radius:10px;background:#FBF4E6;color:#4A2C20;display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px"><div style="width:16px;height:16px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2px #4A2C20"></div>+ 2,4 k</div></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">disponible · icône vidéo + gain exact</div></div>
+          <div style="display:flex;align-items:center;gap:16px"><div style="height:56px;padding:0 16px;border-radius:16px;border:3.5px solid #4A2C20;background:#3F7A6E;box-shadow:4px 4px 0 #EBAA2F;display:flex;align-items:center;gap:10px;color:#FBF4E6;font-size:17px;font-weight:800"><div style="width:18px;height:18px;border-radius:50%;border:3px solid rgba(251,244,230,.35);border-top-color:#FBF4E6"></div>Chargement de la vidéo…</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">en attente</div></div>
+          <div style="display:flex;align-items:center;gap:16px"><div style="height:56px;padding:0 16px;border-radius:16px;border:3.5px dashed #9C8570;background:#EADBC0;display:flex;align-items:center;gap:10px;color:#7A5A48;font-size:16px;font-weight:800"><svg width="26" height="20" viewBox="0 0 26 20"><rect x="1.5" y="1.5" width="23" height="17" rx="4" fill="none" stroke="#7A5A48" stroke-width="2.5"></rect><path d="M4 18 L22 2" stroke="#7A5A48" stroke-width="2.5"></path></svg>Pas de vidéo pour l'instant</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">indisponible · jamais masqué</div></div>
+          <div style="display:flex;align-items:center;gap:16px"><div style="height:56px;padding:0 16px;border-radius:16px;border:3.5px dashed #9C8570;background:#EADBC0;display:flex;align-items:center;gap:10px;color:#7A5A48;font-size:16px;font-weight:800"><div style="width:18px;height:18px;border-radius:50%;border:2.5px solid #7A5A48;position:relative"><div style="position:absolute;left:6px;top:2px;width:2.5px;height:7px;background:#7A5A48"></div></div>Encore dans <span style="font-family:'IBM Plex Mono';font-weight:600">12:40</span></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">recharge · limite 5 / jour</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Bouton achat</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">btn.purchase · h 52 · min-w 120 · prix StoreKit localisé</div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;background:#FBF4E6;border-radius:18px;padding:28px">
+          <div style="display:flex;flex-direction:column;gap:10px"><div style="height:52px;min-width:120px;padding:0 18px;box-sizing:border-box;border-radius:16px;border:3.5px solid #4A2C20;background:#EBAA2F;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono';font-weight:600;font-size:18px;cursor:pointer;user-select:none" style-active="transform:translate(3px,3px);box-shadow:1px 1px 0 #C9533A">4,99 €</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">normal</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px"><div style="height:52px;min-width:120px;padding:0 18px;box-sizing:border-box;border-radius:16px;border:3.5px solid #4A2C20;background:#E09E26;transform:translate(3px,3px);box-shadow:1px 1px 0 #C9533A;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono';font-weight:600;font-size:18px">4,99 €</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">pressé</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px"><div style="height:52px;min-width:120px;padding:0 18px;box-sizing:border-box;border-radius:16px;border:3.5px solid #4A2C20;background:#EBAA2F;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:800"><div style="width:16px;height:16px;border-radius:50%;border:2.5px solid rgba(74,44,32,.3);border-top-color:#4A2C20"></div>Achat…</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">en attente</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px"><div style="height:52px;min-width:120px;padding:0 18px;box-sizing:border-box;border-radius:16px;border:2.5px solid #33665B;background:#FBF4E6;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:800;color:#33665B"><svg width="16" height="14" viewBox="0 0 16 14" fill="none" stroke="#33665B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l4 4 8-9"></path></svg>Acheté</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">possédé</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px"><div style="height:52px;min-width:120px;padding:0 18px;box-sizing:border-box;border-radius:16px;border:3.5px dashed #9C8570;background:#EADBC0;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#7A5A48">Indisponible</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">désactivé</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px"><div style="height:52px;min-width:120px;padding:0 14px;box-sizing:border-box;border-radius:16px;border:3.5px solid #4A2C20;background:#FBF4E6;box-shadow:4px 4px 0 #3F7A6E;display:flex;align-items:center;justify-content:center;gap:6px;font-family:'IBM Plex Mono';font-weight:600;font-size:18px"><div style="width:14px;height:14px;transform:rotate(45deg);border-radius:3px;background:#3F7A6E;box-shadow:inset 0 0 0 2px #4A2C20"></div>120</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">prix en gemmes</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cartes -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Carte de plat</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">card.dish · w 112 · visuel 88 · radius.m · nom 2 lignes max · cadre selon la rareté</div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;background:#FBF4E6;border-radius:18px;padding:28px">
+        <div style="display:flex;flex-direction:column;gap:10px;width:112px"><div style="width:112px;height:112px;border-radius:12px;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20,inset 0 0 0 5px #FBF4E6,inset 0 0 0 7px #4A2C20;display:flex;align-items:center;justify-content:center;cursor:pointer" style-active="transform:scale(.96)"><svg viewBox="0 0 120 120" width="88" height="88"><use href="#dO"></use></svg></div><div style="font-size:15px;font-weight:700;line-height:1.2">Omelette</div><div style="display:flex;gap:10px;font-family:'IBM Plex Mono';font-size:12px;font-weight:600"><span style="display:flex;align-items:center;gap:3px"><span style="width:11px;height:11px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2px #4A2C20"></span>36</span><span>0:20</span></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">normal</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;width:112px"><div style="width:112px;height:112px;border-radius:12px;background:#F6D27A;box-shadow:inset 0 0 0 3.5px #4A2C20,5px 5px 0 #C9533A;display:flex;align-items:center;justify-content:center;position:relative"><svg viewBox="0 0 120 120" width="88" height="88"><use href="#dO"></use></svg><div style="position:absolute;top:-8px;right:-8px;width:26px;height:26px;border-radius:50%;background:#4A2C20;display:flex;align-items:center;justify-content:center"><svg width="13" height="11" viewBox="0 0 16 14" fill="none" stroke="#FBF4E6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l4 4 8-9"></path></svg></div></div><div style="font-size:15px;font-weight:700;line-height:1.2">Omelette</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">sélectionné · coche + ombre</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;width:112px"><div style="width:112px;height:112px;border-radius:12px;background:#EADBC0;box-shadow:inset 0 0 0 2px #9C8570;display:flex;align-items:center;justify-content:center;position:relative"><svg viewBox="0 0 120 120" width="88" height="88" style="filter:brightness(0);opacity:.28"><use href="#dN"></use></svg><div style="position:absolute;font-size:30px;font-weight:800;color:#7A5A48">?</div></div><div style="font-size:15px;font-weight:700;line-height:1.2;color:#7A5A48">???</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">non découvert · silhouette</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;width:112px"><div style="width:112px;height:112px;border-radius:12px;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20;display:flex;align-items:center;justify-content:center;position:relative"><svg viewBox="0 0 120 120" width="88" height="88"><use href="#dB"></use></svg><div style="position:absolute;top:-10px;left:-6px;padding:2px 8px;height:22px;border-radius:6px;background:#C9533A;border:2.5px solid #FBF4E6;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center">Nouveau</div></div><div style="font-size:15px;font-weight:700;line-height:1.2">Bruschetta</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">nouveau</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;width:112px"><div style="width:112px;height:112px;border-radius:12px;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20;display:flex;align-items:center;justify-content:center;position:relative;opacity:.55"><svg viewBox="0 0 120 120" width="88" height="88"><use href="#dB"></use></svg></div><div style="font-size:15px;font-weight:700;line-height:1.2;display:flex;align-items:center;gap:5px"><svg width="12" height="12" viewBox="0 0 16 16" fill="#4A2C20"><rect x="1" y="3" width="14" height="11" rx="2"></rect></svg>Au menu</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">déjà au menu · estompé + libellé</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;width:112px"><div style="width:112px;height:112px;border-radius:12px;background:#EADBC0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(251,244,230,.8) 50%,transparent 70%)"></div></div><div style="height:14px;width:80px;border-radius:4px;background:#EADBC0"></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">chargement · reflet 1,2 s</div></div>
+        <div style="display:flex;flex-direction:column;gap:10px;width:112px"><div style="width:112px;height:112px;border-radius:12px;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20,inset 0 0 0 5px #FBF4E6,inset 0 0 0 7px #3F7A6E;background-image:radial-gradient(rgba(63,122,110,.45) 1.3px,transparent 1.5px);background-size:6px 6px;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 120 120" width="88" height="88"><use href="#dN"></use></svg></div><div style="font-size:15px;font-weight:700;line-height:1.2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Nouilles sautées épicées du marché de nuit</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">texte long · ellipse à 2 lignes</div></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(560px,1fr));gap:28px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Carte d'habitué</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">card.regular · h 88 · portrait 64 · radius.l</div></div>
+        <div style="display:flex;flex-direction:column;gap:14px;background:#FBF4E6;border-radius:18px;padding:24px">
+          <div style="display:flex;align-items:center;gap:14px;padding:12px;border-radius:16px;border:2.5px solid #4A2C20;background:#FBF4E6;box-shadow:2px 2px 0 #4A2C20;cursor:pointer" style-active="transform:translate(2px,2px);box-shadow:0 0 0 #4A2C20">
+            <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;background-color:#EBAA2F;background-image:radial-gradient(#C9533A 1.2px,transparent 1.4px);background-size:5px 5px;box-shadow:inset 0 0 0 2.5px #4A2C20;display:flex;justify-content:center;flex-shrink:0"><svg viewBox="52 18 96 110" width="60" height="69" style="margin-top:7px"><use href="#m2"></use></svg></div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;align-items:baseline"><div style="font-size:17px;font-weight:700">Margot</div><div style="font-size:13px;font-weight:500;color:#7A5A48">Palier 3 · Habituée</div></div>
+              <div style="display:flex;gap:4px"><div style="flex:1;height:10px;border-radius:5px;background:#C9533A;box-shadow:inset 0 0 0 2px #4A2C20"></div><div style="flex:1;height:10px;border-radius:5px;background:#C9533A;box-shadow:inset 0 0 0 2px #4A2C20"></div><div style="flex:1;height:10px;border-radius:5px;background:linear-gradient(90deg,#C9533A 60%,#EADBC0 60%);box-shadow:inset 0 0 0 2px #4A2C20"></div><div style="flex:1;height:10px;border-radius:5px;background:#EADBC0;box-shadow:inset 0 0 0 2px #9C8570"></div><div style="flex:1;height:10px;border-radius:5px;background:#EADBC0;box-shadow:inset 0 0 0 2px #9C8570"></div></div>
+              <div style="font-size:13px;color:#7A5A48">Aime : sucré · miel · ?</div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:12px;border-radius:16px;border:2.5px solid #4A2C20;background:#FBF4E6;box-shadow:4px 4px 0 #C9533A;position:relative">
+            <div style="width:64px;height:64px;border-radius:50%;overflow:hidden;background-color:#EBAA2F;background-image:radial-gradient(#C9533A 1.2px,transparent 1.4px);background-size:5px 5px;box-shadow:inset 0 0 0 2.5px #4A2C20;display:flex;justify-content:center;flex-shrink:0"><svg viewBox="52 18 96 110" width="60" height="69" style="margin-top:7px"><use href="#m2"></use></svg></div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><div style="font-size:17px;font-weight:700">Margot</div><div style="font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px"><svg width="14" height="16" viewBox="0 0 14 16" fill="#C9533A"><rect x="1" y="1" width="12" height="14" rx="2"></rect></svg>Nouvelle histoire à lire</div></div>
+            <div style="position:absolute;top:-8px;right:-8px;width:20px;height:20px;border-radius:50%;background:#C9533A;border:2.5px solid #FBF4E6"></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:12px;border-radius:16px;border:2.5px dashed #9C8570;background:#EADBC0">
+            <div style="width:64px;height:64px;border-radius:50%;background:#D5C3A4;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#7A5A48;flex-shrink:0">?</div>
+            <div style="display:flex;flex-direction:column;gap:4px"><div style="font-size:17px;font-weight:700;color:#7A5A48">Client mystère</div><div style="font-size:13px;color:#7A5A48">Arrive avec la terrasse</div></div>
+          </div>
+          <div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">normal · nouvelle histoire (pastille + ligne explicite) · verrouillé</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Jauge d'affinité · 5 paliers</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">gauge.affinity · h 14 · 5 segments, gap 4</div></div>
+        <div style="display:flex;flex-direction:column;gap:20px;background:#FBF4E6;border-radius:18px;padding:24px">
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;text-align:center;font-size:12px;font-weight:700">
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:26px;height:26px;border-radius:50%;border:2.5px solid #4A2C20;box-sizing:border-box"></div>1 Inconnu</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:26px;height:26px;border-radius:50%;border:2.5px solid #4A2C20;background:linear-gradient(90deg,#C9533A 50%,transparent 50%);box-sizing:border-box"></div>2 Visage connu</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:26px;height:26px;border-radius:50%;border:2.5px solid #4A2C20;background:#C9533A;box-sizing:border-box"></div>3 Habitué</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:26px;height:26px;transform:rotate(45deg);border-radius:4px;border:2.5px solid #4A2C20;background:#C9533A;box-sizing:border-box"></div>4 Ami</div>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:center"><div style="width:28px;height:28px;background:#4A2C20;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)"></div>5 De la famille</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:4px"><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div><div style="flex:1;height:14px;border-radius:7px;background:linear-gradient(90deg,#C9533A 60%,#EADBC0 60%);box-shadow:inset 0 0 0 2.5px #4A2C20"></div><div style="flex:1;height:14px;border-radius:7px;background:#EADBC0;box-shadow:inset 0 0 0 2px #9C8570"></div><div style="flex:1;height:14px;border-radius:7px;background:#EADBC0;box-shadow:inset 0 0 0 2px #9C8570"></div></div><div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Palier 3 · Habituée</span><span style="font-family:'IBM Plex Mono';color:#7A5A48">6 / 10 visites</span></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">en progression</div></div>
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:4px"><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20,0 0 0 4px #F6D27A"></div><div style="flex:1;height:14px;border-radius:7px;background:#EADBC0;box-shadow:inset 0 0 0 2px #9C8570"></div><div style="flex:1;height:14px;border-radius:7px;background:#EADBC0;box-shadow:inset 0 0 0 2px #9C8570"></div></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">palier atteint · halo or 4 pt pendant 1,2 s</div></div>
+          <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:4px"><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div><div style="flex:1;height:14px;border-radius:7px;background:#C9533A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div></div><div style="display:flex;justify-content:space-between;font-size:13px"><span style="font-weight:700">Palier 5 · De la famille</span><span style="font-family:'IBM Plex Mono';color:#33665B;font-weight:600">MAX</span></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">maximum</div></div>
+          <div style="font-size:13px;line-height:1.5;color:#7A5A48">Chaque palier a son propre symbole de forme (cercle vide, demi-cercle, cercle plein, losange, étoile), donc la progression se lit aussi sans la couleur.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(560px,1fr));gap:28px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Progression / minuteur</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">gauge.progress · h 12 · radius.pill · remplissage or tramé</div></div>
+        <div style="display:flex;flex-direction:column;gap:18px;background:#FBF4E6;border-radius:18px;padding:24px">
+          <div style="display:flex;align-items:center;gap:12px"><div style="flex:1;height:12px;border-radius:6px;background:#EADBC0;box-shadow:inset 0 0 0 2px #4A2C20;overflow:hidden"><div style="width:62%;height:100%;background-color:#EBAA2F;background-image:radial-gradient(rgba(74,44,32,.35) 1.1px,transparent 1.3px);background-size:4px 4px;box-shadow:inset 0 0 0 2px #4A2C20"></div></div><div style="font-family:'IBM Plex Mono';font-size:14px;font-weight:600;width:48px">0:42</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48;width:110px">en cours</div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="flex:1;height:12px;border-radius:6px;background:#EADBC0;box-shadow:inset 0 0 0 2px #4A2C20;overflow:hidden"><div style="width:62%;height:100%;background-color:#3F7A6E;background-image:repeating-linear-gradient(-45deg,rgba(251,244,230,.35) 0 4px,transparent 4px 8px);box-shadow:inset 0 0 0 2px #4A2C20"></div></div><div style="font-family:'IBM Plex Mono';font-size:14px;font-weight:600;width:48px;display:flex;gap:2px;align-items:center">×2</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48;width:110px">accéléré · rayures</div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="flex:1;height:12px;border-radius:6px;background:#EBAA2F;box-shadow:inset 0 0 0 2px #4A2C20"></div><div style="font-size:14px;font-weight:800;width:48px;color:#33665B;display:flex;align-items:center;gap:3px"><svg width="12" height="10" viewBox="0 0 16 14" fill="none" stroke="#33665B" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l4 4 8-9"></path></svg>Prêt</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48;width:110px">terminé</div></div>
+          <div style="display:flex;align-items:center;gap:12px"><div style="flex:1;height:12px;border-radius:6px;background:#EADBC0;box-shadow:inset 0 0 0 2px #9C8570;overflow:hidden"><div style="width:30%;height:100%;background:#D5C3A4"></div></div><div style="font-family:'IBM Plex Mono';font-size:14px;font-weight:600;width:48px;color:#7A5A48">II</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48;width:110px">en pause (pas d'ingrédient)</div></div>
+          <div style="display:flex;align-items:center;gap:14px"><div style="width:48px;height:48px;border-radius:50%;background:conic-gradient(#EBAA2F 0 62%,#EADBC0 62% 100%);box-shadow:inset 0 0 0 2.5px #4A2C20;display:flex;align-items:center;justify-content:center"><div style="width:32px;height:32px;border-radius:50%;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono';font-size:11px;font-weight:600">42</div></div><div style="font-size:14px;line-height:1.45">Version <b>anneau</b> (48 pt) au-dessus des stations dans la scène.</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Compteur de monnaie</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">hud.currency · h 38 · radius.pill · icône 26 · type.number.hud</div></div>
+        <div style="display:flex;flex-direction:column;gap:18px;background:#FBF4E6;border-radius:18px;padding:24px">
+          <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:center">
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:6px;height:38px;box-sizing:border-box;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:19px;padding:0 12px 0 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px"><div style="width:26px;height:26px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>12,4 k</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">normal</div></div>
+            <div style="display:flex;flex-direction:column;gap:8px;position:relative"><div style="position:absolute;top:-24px;left:40px;font-family:'IBM Plex Mono';font-weight:600;font-size:14px;color:#33665B">+120</div><div style="display:flex;align-items:center;gap:6px;height:38px;box-sizing:border-box;background:#F6D27A;border:2.5px solid #4A2C20;border-radius:19px;padding:0 12px 0 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;transform:scale(1.08)"><div style="width:26px;height:26px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>12,5 k</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">gain · rebond</div></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:6px;height:38px;box-sizing:border-box;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:19px;padding:0 12px 0 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px"><div style="width:26px;height:26px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>45,7 Md</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">très grand · max 6 car.</div></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:6px;height:38px;box-sizing:border-box;background:#FBF4E6;border:2.5px solid #A33A24;border-radius:19px;padding:0 12px 0 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;color:#A33A24"><div style="width:26px;height:26px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>80<span style="font-family:'Bricolage Grotesque';font-size:13px;font-weight:700">/ 120</span></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">insuffisant · chiffre cible</div></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:7px;height:38px;box-sizing:border-box;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:19px;padding:0 6px 0 9px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px"><div style="width:16px;height:16px;transform:rotate(45deg);border-radius:3px;background:#3F7A6E;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>86<div style="width:24px;height:24px;border-radius:50%;background:#4A2C20;color:#FBF4E6;font-family:'Bricolage Grotesque';font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center">+</div></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">gemmes · raccourci boutique</div></div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:8px"><div style="font-size:22px;font-weight:800">Badge de notification</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">badge · sanguine, contour papier 2,5</div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:26px;align-items:center;background:#FBF4E6;border-radius:18px;padding:24px;font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:center"><div style="width:14px;height:14px;border-radius:50%;background:#C9533A;border:2.5px solid #FBF4E6;box-shadow:0 0 0 1.5px #4A2C20"></div>point · 14</div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:center"><div style="min-width:22px;height:22px;box-sizing:border-box;padding:0 6px;border-radius:11px;background:#C9533A;border:2.5px solid #FBF4E6;box-shadow:0 0 0 1.5px #4A2C20;color:#FBF4E6;font-family:'Bricolage Grotesque';font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center">3</div>compteur · 22</div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:center"><div style="min-width:22px;height:22px;box-sizing:border-box;padding:0 6px;border-radius:11px;background:#C9533A;border:2.5px solid #FBF4E6;box-shadow:0 0 0 1.5px #4A2C20;color:#FBF4E6;font-family:'Bricolage Grotesque';font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center">99+</div>plafond 99+</div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:center"><div style="height:22px;box-sizing:border-box;padding:0 8px;border-radius:6px;background:#C9533A;border:2.5px solid #FBF4E6;box-shadow:0 0 0 1.5px #4A2C20;color:#FBF4E6;font-family:'Bricolage Grotesque';font-size:12px;font-weight:800;display:flex;align-items:center">Nouveau</div>étiquette</div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:center"><div style="height:22px;box-sizing:border-box;padding:0 8px;border-radius:6px;background:#EBAA2F;border:2.5px solid #4A2C20;color:#4A2C20;font-family:'Bricolage Grotesque';font-size:12px;font-weight:800;display:flex;align-items:center">Gratuit</div>récompense</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Onglets -->
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Onglets</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">tabs.segmented · h 40 · filtres et catégories · tabs.bar · barre du bas 5 entrées</div></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:24px">
+        <div style="display:flex;flex-direction:column;gap:14px;background:#FBF4E6;border-radius:18px;padding:24px">
+          <div style="display:flex;gap:4px;padding:4px;border-radius:14px;background:#EADBC0;box-shadow:inset 0 0 0 2px #4A2C20">
+            <div style="flex:1;height:40px;border-radius:10px;background:#FBF4E6;box-shadow:inset 0 0 0 2.5px #4A2C20,2px 2px 0 #4A2C20;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800">Tout</div>
+            <div style="flex:1;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#7A5A48;cursor:pointer" style-hover="background:#F4E8D2">Entrées</div>
+            <div style="flex:1;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:14px;font-weight:700;color:#7A5A48">Plats<div style="width:8px;height:8px;border-radius:50%;background:#C9533A"></div></div>
+            <div style="flex:1;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#9C8570;gap:5px"><svg width="10" height="12" viewBox="0 0 16 18" fill="none" stroke="#9C8570" stroke-width="2.6"><rect x="2" y="8" width="12" height="9" rx="2"></rect><path d="M5 8V5a3 3 0 0 1 6 0v3"></path></svg>Desserts</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">actif (surface + ombre + gras) · inactif · avec badge · verrouillé</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;background:#FBF4E6;border-radius:18px;padding:24px">
+          <div style="display:flex;gap:8px;align-items:flex-end">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;font-weight:800;padding:6px 0;border-radius:12px;background:#F6D27A;box-shadow:inset 0 0 0 2.5px #4A2C20"><svg width="26" height="26" viewBox="0 0 24 24" fill="#FBF4E6" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 3v18" fill="none"></path></svg>Habitués</div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;font-weight:800;padding:6px 0"><svg width="26" height="26" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M12 4l7 8h-4v8H9v-8H5z"></path></svg>Améliorer</div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;font-weight:800;padding:6px 0;position:relative"><svg width="26" height="26" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16" fill="none"></path></svg>Menu<div style="position:absolute;top:0;right:18px;width:14px;height:14px;border-radius:50%;background:#C9533A;border:2.5px solid #FBF4E6"></div></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;font-weight:800;padding:6px 0;color:#9C8570"><svg width="26" height="26" viewBox="0 0 24 24" fill="#EADBC0" stroke="#9C8570" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M8 8a4 4 0 0 1 8 0" fill="none"></path></svg>Boutique</div>
+          </div>
+          <div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">actif (pastille or) · normal · badge · désactivé (tutoriel)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sheet + popup -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(400px,1fr));gap:28px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Panneau / bottom sheet</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">sheet · détentes 50 % / 92 % · radius.sheet · shadow.sheet</div></div>
+        <div style="position:relative;height:440px;border-radius:18px;overflow:hidden;background:#EFDDBF">
+          <div style="position:absolute;inset:0;background:rgba(42,24,16,.55)"></div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:300px;background:#FBF4E6;border-top:3.5px solid #4A2C20;border-radius:28px 28px 0 0;box-shadow:0 -8px 24px rgba(74,44,32,.18);display:flex;flex-direction:column;padding:10px 20px 20px;gap:14px;box-sizing:border-box">
+            <div style="align-self:center;width:40px;height:5px;border-radius:3px;background:#D5C3A4"></div>
+            <div style="display:flex;align-items:center;justify-content:space-between"><div style="font-size:21px;font-weight:700">Four · niveau 2</div><div style="width:36px;height:36px;border-radius:50%;border:2.5px solid #4A2C20;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px">✕</div></div>
+            <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+              <div style="display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1.5px solid #EADBC0"><span>Vitesse</span><span style="font-family:'IBM Plex Mono';font-weight:600">0:30 → <span style="color:#33665B">0:22</span></span></div>
+              <div style="display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1.5px solid #EADBC0"><span>Plats en parallèle</span><span style="font-family:'IBM Plex Mono';font-weight:600">2 → <span style="color:#33665B">3</span></span></div>
+            </div>
+            <div style="margin-top:auto;height:56px;border-radius:16px;border:3.5px solid #4A2C20;background:#EBAA2F;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center;gap:8px;font-size:17px;font-weight:800">Améliorer<span style="font-family:'IBM Plex Mono';font-weight:600;display:flex;align-items:center;gap:4px"><span style="width:16px;height:16px;border-radius:50%;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20"></span>2,4 k</span></div>
+          </div>
+        </div>
+        <div style="font-size:13px;line-height:1.5;color:#7A5A48">On le glisse vers le bas pour fermer, et le scrim le ferme aussi. Le bouton d'action reste collé en bas, au-dessus de la zone de sécurité.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Popup</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">popup · w écran − 40 (max 360) · radius.xl · border.strong</div></div>
+        <div style="position:relative;height:440px;border-radius:18px;overflow:hidden;background:#EFDDBF;display:flex;align-items:center;justify-content:center">
+          <div style="position:absolute;inset:0;background:rgba(42,24,16,.55)"></div>
+          <div style="position:relative;width:320px;background:#FBF4E6;border:3.5px solid #4A2C20;border-radius:24px;box-shadow:6px 6px 0 #EBAA2F;padding:22px;display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center;box-sizing:border-box">
+            <div style="width:110px;height:110px;margin-top:-66px;border-radius:50%;background-color:#F6D27A;background-image:radial-gradient(rgba(201,83,58,.5) 1.3px,transparent 1.5px);background-size:6px 6px;box-shadow:inset 0 0 0 3.5px #4A2C20;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 120 120" width="84" height="84"><use href="#dL"></use></svg></div>
+            <div style="font-size:26px;line-height:30px;font-weight:800">Nouvel ingrédient</div>
+            <div style="font-size:15px;line-height:21px;color:#7A5A48">Le citron rejoint ton garde-manger. Essaie-le avec du miel.</div>
+            <div style="display:flex;flex-direction:column;gap:10px;width:100%">
+              <div style="height:56px;border-radius:16px;border:3.5px solid #4A2C20;background:#EBAA2F;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:800">Aller au labo</div>
+              <div style="height:44px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;text-decoration:underline;text-underline-offset:3px">Plus tard</div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:13px;line-height:1.5;color:#7A5A48">Le visuel déborde en haut de 60 %. Une seule action primaire, la secondaire est en lien texte. Jamais plus d'un popup à la fois : une file d'attente les espace de 400 ms.</div>
+      </div>
+    </div>
+
+    <!-- Bulle + tooltip -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:28px">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Bulle de dialogue / événement</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">bubble · radius.l · border.ui · queue 12 · zone tactile ≥ 44</div></div>
+        <div style="display:flex;flex-wrap:wrap;gap:30px 26px;align-items:flex-end;background:#FBF4E6;border-radius:18px;padding:30px 24px">
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="position:relative;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:16px;padding:5px 12px 5px 5px;display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;box-shadow:3px 3px 0 #EBAA2F"><svg viewBox="0 0 120 120" width="34" height="34"><use href="#dO"></use></svg>36<div style="position:absolute;left:14px;bottom:-11px;width:14px;height:14px;background:#FBF4E6;border-right:2.5px solid #4A2C20;border-bottom:2.5px solid #4A2C20;transform:rotate(45deg)"></div></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">commande</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="position:relative;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:16px;padding:6px 12px 6px 6px;display:flex;align-items:center;gap:8px;box-shadow:3px 3px 0 #C9533A"><svg viewBox="0 0 120 120" width="34" height="34"><use href="#dL"></use></svg><div style="display:flex;flex-direction:column;white-space:nowrap;line-height:1.2"><div style="font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#7A5A48">Demande spéciale</div><div style="font-size:14px;font-weight:800">Un truc sucré</div></div><div style="width:18px;height:18px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:11px;display:flex;align-items:center;justify-content:center">♥</div><div style="position:absolute;left:14px;bottom:-11px;width:14px;height:14px;background:#FBF4E6;border-right:2.5px solid #4A2C20;border-bottom:2.5px solid #4A2C20;transform:rotate(45deg)"></div></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">demande d'habitué · cœur</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="display:flex;align-items:center;gap:6px;background:#EBAA2F;border:2.5px solid #4A2C20;border-radius:20px;padding:4px 12px 4px 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:14px;box-shadow:3px 3px 0 #4A2C20;cursor:pointer" style-active="transform:translate(3px,3px);box-shadow:0 0 0 #4A2C20"><div style="width:22px;height:22px;border-radius:50%;background:#F6D27A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>+120</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">pourboire · toucher pour récolter</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start"><div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:14px;padding:4px 12px 4px 5px;font-weight:800;font-size:13px;box-shadow:3px 3px 0 #3F7A6E"><div style="width:20px;height:20px;border-radius:50%;background:#3F7A6E;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-left:7px solid #FBF4E6;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px"></div></div>Accélérer</div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">station accélérable · pub</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start;max-width:240px"><div style="position:relative;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:16px;padding:10px 14px;font-size:15px;line-height:21px">Tu as fait des brioches ? Comme à la boutique, dis donc.<div style="position:absolute;left:18px;bottom:-11px;width:14px;height:14px;background:#FBF4E6;border-right:2.5px solid #4A2C20;border-bottom:2.5px solid #4A2C20;transform:rotate(45deg)"></div></div><div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">réplique · max 90 car. · 3 lignes</div></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap"><div style="font-size:22px;font-weight:800">Tooltip du tutoriel</div><div style="font-family:'IBM Plex Mono';font-size:12px;color:#7A5A48">tooltip.tutorial · inverse · max 2 lignes · halo + main</div></div>
+        <div style="position:relative;height:300px;border-radius:18px;overflow:hidden;background:#EFDDBF">
+          <div style="position:absolute;left:50%;top:190px;width:92px;height:92px;margin-left:-46px;border-radius:50%;box-shadow:0 0 0 999px rgba(42,24,16,.6),0 0 0 6px #EBAA2F inset"></div>
+          <div style="position:absolute;left:50%;top:204px;width:64px;height:64px;margin-left:-32px;border-radius:50%;background:#EBAA2F;border:3.5px solid #4A2C20;box-sizing:border-box;display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="#FBF4E6" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path></svg></div>
+          <div style="position:absolute;left:calc(50% + 18px);top:236px;width:34px;height:44px;border-radius:17px 17px 12px 12px;background:#FBF4E6;border:3px solid #4A2C20;transform:rotate(-20deg)"></div>
+          <div style="position:absolute;left:calc(50% + 22px);top:224px;width:12px;height:26px;border-radius:6px;background:#FBF4E6;border:3px solid #4A2C20;transform:rotate(-20deg)"></div>
+          <div style="position:absolute;left:50%;top:60px;transform:translateX(-50%);width:260px;background:#4A2C20;border-radius:16px;padding:14px 16px;color:#FBF4E6;display:flex;flex-direction:column;gap:10px;box-shadow:4px 4px 0 #EBAA2F">
+            <div style="font-size:17px;line-height:22px;font-weight:700">Ouvre le labo pour ta première recette.</div>
+            <div style="display:flex;justify-content:space-between;align-items:center"><div style="display:flex;gap:5px"><div style="width:8px;height:8px;border-radius:50%;background:#FBF4E6"></div><div style="width:8px;height:8px;border-radius:50%;background:#FBF4E6"></div><div style="width:8px;height:8px;border-radius:50%;background:#EBAA2F;box-shadow:0 0 0 2px #FBF4E6"></div><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid #FBF4E6;box-sizing:border-box"></div><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid #FBF4E6;box-sizing:border-box"></div></div><div style="font-family:'IBM Plex Mono';font-size:12px">3 / 5</div></div>
+            <div style="position:absolute;left:50%;bottom:-9px;margin-left:-8px;width:16px;height:16px;background:#4A2C20;transform:rotate(45deg)"></div>
+          </div>
+        </div>
+        <div style="font-size:13px;line-height:1.5;color:#7A5A48">Seule la zone mise en lumière reçoit les touches. La main fait un geste de tapotement en boucle (1,4 s), et la progression 1 à 5 est lisible par le remplissage des points.</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:12px;max-width:900px">
+    <div style="font-size:22px;font-weight:800">Décisions prises dans ce système</div>
+    <div style="font-size:15px;line-height:1.6;display:flex;flex-direction:column;gap:8px">
+      <div>La sanguine ne porte jamais de texte courant (4,0:1). Les textes d'alerte utilisent <span style="font-family:'IBM Plex Mono'">state.alert #A33A24</span>, et les succès <span style="font-family:'IBM Plex Mono'">state.success #33665B</span>.</div>
+      <div>Un état désactivé combine toujours trois signaux : bordure en tirets, cadenas et teinte creuse. Il ne repose jamais sur l'opacité seule.</div>
+      <div>La pub récompensée reste toujours optionnelle, avec son gain exact affiché. Quand aucune vidéo n'est disponible, le bouton reste visible et l'explique.</div>
+    </div>
+  </section>
+</div>
+</x-dc>
+</body>
+</html>

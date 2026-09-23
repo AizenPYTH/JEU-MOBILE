@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9DCC4;font-family:'Bricolage Grotesque',system-ui,sans-serif;color:#4A2C20;-webkit-font-smoothing:antialiased}
+a{color:#A33A24}a:hover{color:#4A2C20}
+</style>
+</helmet>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="wob" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7"></feTurbulence><feDisplacementMap in="SourceGraphic" scale="2.6"></feDisplacementMap></filter>
+      <pattern id="tBr" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.2" fill="#4A2C20"></circle></pattern>
+      <pattern id="tSg" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.3" fill="#C9533A"></circle></pattern>
+      <pattern id="tOr" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="2.5" cy="2.5" r="1.5" fill="#EBAA2F"></circle></pattern>
+
+      <g id="m2s">
+        <ellipse cx="86" cy="244" rx="14" ry="7" fill="#4A2C20"></ellipse><ellipse cx="114" cy="244" rx="14" ry="7" fill="#4A2C20"></ellipse>
+        <rect x="79" y="205" width="14" height="36" fill="#EFBBA2"></rect><rect x="107" y="205" width="14" height="36" fill="#EFBBA2"></rect>
+        <rect x="44" y="118" width="18" height="60" rx="9" transform="rotate(12 53 118)" fill="#EFBBA2"></rect>
+        <path d="M62 110 Q100 98 138 110 L154 212 Q100 222 46 212 Z" fill="#C9533A"></path>
+        <path d="M77 128 H123 L129 204 Q100 211 71 204 Z" fill="#FBF4E6"></path>
+        <rect x="88" y="168" width="24" height="16" rx="4" fill="#EBAA2F"></rect>
+        <rect x="132" y="92" width="16" height="96" rx="8" transform="rotate(22 140 140)" fill="#EBAA2F"></rect>
+        <path d="M136 108 l8 4 M130 124 l8 4 M124 140 l8 4" transform="rotate(22 140 140)" fill="none"></path>
+        <rect x="136" y="118" width="18" height="56" rx="9" transform="rotate(-18 145 118)" fill="#EFBBA2"></rect>
+        <circle cx="100" cy="72" r="30" fill="#EFBBA2"></circle>
+        <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z" fill="#EDE2CF"></path>
+        <circle cx="100" cy="34" r="13" fill="#EDE2CF"></circle>
+        <circle cx="89" cy="76" r="7" fill="none"></circle><circle cx="111" cy="76" r="7" fill="none"></circle><path d="M96 76 H104" fill="none"></path>
+        <path d="M92 92 Q100 98 108 92" fill="none"></path>
+      </g>
+      <g id="m2k" fill="none" stroke="#4A2C20" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="86" cy="244" rx="14" ry="7"></ellipse><ellipse cx="114" cy="244" rx="14" ry="7"></ellipse>
+        <rect x="79" y="205" width="14" height="36"></rect><rect x="107" y="205" width="14" height="36"></rect>
+        <rect x="44" y="118" width="18" height="60" rx="9" transform="rotate(12 53 118)"></rect>
+        <path d="M62 110 Q100 98 138 110 L154 212 Q100 222 46 212 Z"></path>
+        <path d="M77 128 H123 L129 204 Q100 211 71 204 Z"></path>
+        <rect x="88" y="168" width="24" height="16" rx="4"></rect>
+        <rect x="132" y="92" width="16" height="96" rx="8" transform="rotate(22 140 140)"></rect>
+        <path d="M136 108 l8 4 M130 124 l8 4 M124 140 l8 4" transform="rotate(22 140 140)"></path>
+        <rect x="136" y="118" width="18" height="56" rx="9" transform="rotate(-18 145 118)"></rect>
+        <circle cx="100" cy="72" r="30"></circle>
+        <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z"></path>
+        <circle cx="100" cy="34" r="13"></circle>
+        <circle cx="89" cy="76" r="7"></circle><circle cx="111" cy="76" r="7"></circle><path d="M96 76 H104"></path>
+        <path d="M92 92 Q100 98 108 92"></path>
+      </g>
+      <g id="m2">
+        <use href="#m2s" transform="translate(4 3)"></use>
+        <path d="M70 70 Q72 40 100 40 Q128 40 130 70 Q118 56 100 58 Q82 56 70 70 Z M113 34 a13 13 0 1 1 -26 0 a13 13 0 1 1 26 0" fill="url(#tBr)" opacity=".45" transform="translate(4 3)"></path>
+        <path d="M62 110 Q100 98 138 110 L154 212 Q100 222 46 212 Z" fill="url(#tOr)" opacity=".5" transform="translate(4 3)"></path>
+        <use href="#m2k" fill="none" stroke="#4A2C20" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#wob)"></use>
+        <circle cx="89" cy="76" r="2.3" fill="#4A2C20"></circle><circle cx="111" cy="76" r="2.3" fill="#4A2C20"></circle>
+        <circle cx="84" cy="88" r="5.5" fill="#C9533A" opacity=".55"></circle><circle cx="116" cy="88" r="5.5" fill="#C9533A" opacity=".55"></circle>
+      </g>
+
+      <g id="dBs">
+        <rect x="8" y="64" width="104" height="38" rx="10" fill="#D9A76A"></rect>
+        <circle cx="100" cy="83" r="4" fill="#F4E8D2"></circle>
+        <rect x="16" y="42" width="46" height="30" rx="12" transform="rotate(-8 39 57)" fill="#EBAA2F"></rect>
+        <rect x="56" y="46" width="44" height="30" rx="12" transform="rotate(7 78 61)" fill="#EBAA2F"></rect>
+        <rect x="24" y="44" width="11" height="11" rx="2" fill="#C9533A"></rect><rect x="40" y="48" width="11" height="11" rx="2" fill="#C9533A"></rect>
+        <rect x="64" y="50" width="11" height="11" rx="2" fill="#C9533A"></rect><rect x="82" y="54" width="11" height="11" rx="2" fill="#C9533A"></rect>
+        <ellipse cx="36" cy="60" rx="7" ry="4" transform="rotate(-25 36 60)" fill="#3F7A6E"></ellipse><ellipse cx="78" cy="64" rx="7" ry="4" transform="rotate(20 78 64)" fill="#3F7A6E"></ellipse>
+      </g>
+      <g id="dBk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="8" y="64" width="104" height="38" rx="10"></rect>
+        <circle cx="100" cy="83" r="4"></circle>
+        <rect x="16" y="42" width="46" height="30" rx="12" transform="rotate(-8 39 57)"></rect>
+        <rect x="56" y="46" width="44" height="30" rx="12" transform="rotate(7 78 61)"></rect>
+        <rect x="24" y="44" width="11" height="11" rx="2"></rect><rect x="40" y="48" width="11" height="11" rx="2"></rect>
+        <rect x="64" y="50" width="11" height="11" rx="2"></rect><rect x="82" y="54" width="11" height="11" rx="2"></rect>
+        <ellipse cx="36" cy="60" rx="7" ry="4" transform="rotate(-25 36 60)"></ellipse><ellipse cx="78" cy="64" rx="7" ry="4" transform="rotate(20 78 64)"></ellipse>
+      </g>
+      <g id="dB"><use href="#dBs" transform="translate(3 2)"></use><rect x="11" y="66" width="104" height="38" rx="10" fill="url(#tBr)" opacity=".3"></rect><use href="#dBk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" filter="url(#wob)"></use></g>
+
+      <g id="dOs">
+        <circle cx="60" cy="62" r="50" fill="#FBF4E6"></circle>
+        <circle cx="60" cy="62" r="40" fill="none"></circle>
+        <path d="M22 70 Q58 16 98 66 Q62 90 22 70 Z" fill="#EBAA2F"></path>
+        <path d="M28 70 Q60 60 92 67" fill="none"></path>
+        <circle cx="48" cy="52" r="4" fill="#3F7A6E"></circle><circle cx="62" cy="45" r="4" fill="#3F7A6E"></circle><circle cx="74" cy="54" r="4" fill="#3F7A6E"></circle>
+        <circle cx="86" cy="90" r="9" fill="#C9533A"></circle>
+      </g>
+      <g id="dOk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="60" cy="62" r="50"></circle>
+        <circle cx="60" cy="62" r="40"></circle>
+        <path d="M22 70 Q58 16 98 66 Q62 90 22 70 Z"></path>
+        <path d="M28 70 Q60 60 92 67"></path>
+        <circle cx="48" cy="52" r="4"></circle><circle cx="62" cy="45" r="4"></circle><circle cx="74" cy="54" r="4"></circle>
+        <circle cx="86" cy="90" r="9"></circle>
+      </g>
+      <g id="dO"><use href="#dOs" transform="translate(3 2)"></use><circle cx="63" cy="64" r="50" fill="url(#tBr)" opacity=".12"></circle><use href="#dOk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" filter="url(#wob)"></use></g>
+
+      <g id="dNs">
+        <path d="M14 58 H106 Q102 104 60 106 Q18 104 14 58 Z" fill="#C9533A"></path>
+        <ellipse cx="60" cy="58" rx="46" ry="12" fill="#F2CF8C"></ellipse>
+        <path d="M24 58 q6 -9 12 0 t12 0 t12 0 t12 0 t12 0 t12 0" fill="none" stroke="#EBAA2F" stroke-width="5"></path>
+        <rect x="70" y="42" width="24" height="8" rx="4" transform="rotate(-18 82 46)" fill="#9E3522"></rect>
+        <rect x="44" y="47" width="18" height="7" rx="3.5" transform="rotate(14 53 50)" fill="#9E3522"></rect>
+        <rect x="80" y="4" width="5" height="62" rx="2.5" transform="rotate(22 82 35)" fill="#7A5A48"></rect>
+        <rect x="90" y="6" width="5" height="62" rx="2.5" transform="rotate(28 92 37)" fill="#7A5A48"></rect>
+        <path d="M36 36 q-6 -8 0 -16 M52 32 q-6 -8 0 -16" fill="none"></path>
+      </g>
+      <g id="dNk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 58 H106 Q102 104 60 106 Q18 104 14 58 Z"></path>
+        <ellipse cx="60" cy="58" rx="46" ry="12"></ellipse>
+        
+        <rect x="70" y="42" width="24" height="8" rx="4" transform="rotate(-18 82 46)"></rect>
+        <rect x="44" y="47" width="18" height="7" rx="3.5" transform="rotate(14 53 50)"></rect>
+        <rect x="80" y="4" width="5" height="62" rx="2.5" transform="rotate(22 82 35)"></rect>
+        <rect x="90" y="6" width="5" height="62" rx="2.5" transform="rotate(28 92 37)"></rect>
+        <path d="M36 36 q-6 -8 0 -16 M52 32 q-6 -8 0 -16"></path>
+      </g>
+      <g id="dN"><use href="#dNs" transform="translate(3 2)"></use><path d="M17 62 H109 Q105 108 63 110 Q21 108 17 62 Z" fill="url(#tBr)" opacity=".28"></path><use href="#dNk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" filter="url(#wob)"></use></g>
+
+      <g id="dLs">
+        <path d="M32 28 H88 L82 108 Q60 112 38 108 Z" fill="#FBF4E6"></path>
+        <path d="M35 50 H85 L81 104 Q60 108 39 104 Z" fill="#EBAA2F"></path>
+        <rect x="44" y="60" width="14" height="14" rx="3" transform="rotate(12 51 67)" fill="#FBF4E6"></rect>
+        <rect x="62" y="74" width="12" height="12" rx="3" transform="rotate(-10 68 80)" fill="#FBF4E6"></rect>
+        <rect x="50" y="4" width="7" height="58" rx="3" transform="rotate(10 53 33)" fill="#C9533A"></rect>
+        <circle cx="86" cy="30" r="17" fill="#F4D06A"></circle>
+        <path d="M86 16 V44 M72 30 H100" fill="none"></path>
+      </g>
+      <g id="dLk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M32 28 H88 L82 108 Q60 112 38 108 Z"></path>
+        <path d="M35 50 H85 L81 104 Q60 108 39 104 Z"></path>
+        <rect x="44" y="60" width="14" height="14" rx="3" transform="rotate(12 51 67)"></rect>
+        <rect x="62" y="74" width="12" height="12" rx="3" transform="rotate(-10 68 80)"></rect>
+        <rect x="50" y="4" width="7" height="58" rx="3" transform="rotate(10 53 33)"></rect>
+        <circle cx="86" cy="30" r="17"></circle>
+        <path d="M86 16 V44 M72 30 H100"></path>
+      </g>
+      <g id="dL"><use href="#dLs" transform="translate(3 2)"></use><path d="M38 52 H88 L84 106 Q63 110 42 106 Z" fill="url(#tSg)" opacity=".22"></path><use href="#dLk" fill="none" stroke="#4A2C20" stroke-width="3" stroke-linejoin="round" filter="url(#wob)"></use></g>
+    </defs>
+  </svg>
+
+<section data-screen-label="01 Écran principal" style="padding:72px;display:flex;flex-direction:column;gap:40px">
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:1100px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Écran 1 · Principal · bg_main_room</div>
+    <div style="font-size:48px;font-weight:800;letter-spacing:-.02em;line-height:1.05">Le bistrot tourne, le pouce décide.</div>
+    <div style="font-size:17px;line-height:1.55;color:#7A5A48;max-width:860px;text-wrap:pretty">La scène occupe tout l'écran. Le HUD et la barre d'actions flottent par-dessus. Les actions fréquentes (labo, menu, habitués, améliorer) sont en bas, dans la zone du pouce. En haut, on trouve seulement la lecture (monnaies, réputation) et les réglages.</div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start">
+    <div id="1a" style="display:flex;gap:32px;align-items:flex-start">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;gap:10px;align-items:center"><div style="font-family:'IBM Plex Mono';font-weight:600;font-size:13px;background:#4A2C20;color:#F4E8D2;border-radius:6px;padding:4px 8px">1a</div><div style="font-weight:800;font-size:18px">iPhone 15 · 390 × 844 · annoté</div></div>
+        <div style="position:relative;width:410px;height:864px">
+          <div style="width:390px;height:844px;border:10px solid #2A1C16;border-radius:58px;position:relative;overflow:hidden;background:#F4E8D2;box-shadow:0 30px 60px -30px rgba(74,44,32,.55)">
+          <div style="position:absolute;inset:0;filter:url(#wob)">
+            <div style="position:absolute;left:0;right:0;top:0;height:400px;background:#EFDDBF"></div>
+            <div style="position:absolute;left:0;right:0;top:300px;height:100px;background-image:radial-gradient(#C9533A 1.3px,transparent 1.5px);background-size:7px 7px;opacity:.35"></div>
+            <div style="position:absolute;left:0;right:0;top:400px;bottom:0;background-color:#FBF4E6;background-image:repeating-conic-gradient(rgba(74,44,32,.13) 0 25%,transparent 0 50%);background-size:48px 48px"></div>
+            <div style="position:absolute;left:0;right:0;top:396px;height:8px;background:#4A2C20"></div>
+            <div style="position:absolute;left:32px;top:122px;width:150px;height:172px;border-radius:75px 75px 0 0;background:#EBAA2F;mix-blend-mode:multiply"></div>
+            <div style="position:absolute;left:36px;top:126px;width:150px;height:172px;border-radius:75px 75px 0 0;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:109px;top:128px;width:3.5px;height:170px;background:#4A2C20"></div>
+            <div style="position:absolute;left:30px;top:290px;width:164px;height:12px;background:#7A5A48;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:46px;top:256px;width:38px;height:36px;border-radius:50%;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:136px;top:262px;width:30px;height:30px;border-radius:50%;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:-40px;top:300px;width:330px;height:420px;background:linear-gradient(180deg,rgba(235,170,47,.55),rgba(235,170,47,0));clip-path:polygon(22% 0,52% 0,100% 100%,40% 100%);mix-blend-mode:multiply"></div>
+            <div style="position:absolute;left:212px;top:130px;width:150px;height:6px;background:#4A2C20"></div>
+            <div style="position:absolute;left:222px;top:98px;width:22px;height:32px;border-radius:5px;background:#EBAA2F;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:252px;top:106px;width:22px;height:24px;border-radius:5px;background:#C9533A;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:284px;top:94px;width:22px;height:36px;border-radius:5px;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:314px;top:104px;width:34px;height:26px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:252px;top:250px;width:36px;height:56px;border-radius:18px 18px 0 0;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:256px;top:218px;width:28px;height:28px;border-radius:50%;background:#B97E5C;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:254px;top:198px;width:32px;height:22px;border-radius:9px 9px 2px 2px;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:190px;top:296px;width:204px;height:104px;background:#C9533A;border-top:3.5px solid #4A2C20;border-left:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:196px;top:310px;width:196px;height:90px;background-image:radial-gradient(#4A2C20 1.3px,transparent 1.5px);background-size:6px 6px;opacity:.35"></div>
+            <div style="position:absolute;left:190px;top:296px;width:204px;height:14px;background:#7A5A48;border-bottom:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:212px;top:260px;width:42px;height:30px;border-radius:6px;background:#4A2C20"></div>
+            <div style="position:absolute;left:218px;top:232px;width:8px;height:20px;border-radius:4px;background:#7A5A48;opacity:.45"></div>
+            <div style="position:absolute;left:234px;top:224px;width:8px;height:26px;border-radius:4px;background:#7A5A48;opacity:.35"></div>
+            <div style="position:absolute;left:44px;top:512px;width:92px;height:92px;border-radius:50%;background:#EBAA2F;mix-blend-mode:multiply;opacity:.85"></div>
+            <div style="position:absolute;left:38px;top:506px;width:92px;height:92px;border-radius:50%;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:62px;top:530px;width:40px;height:40px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:230px;top:586px;width:108px;height:108px;border-radius:50%;background:#EBAA2F;mix-blend-mode:multiply;opacity:.85"></div>
+            <div style="position:absolute;left:224px;top:580px;width:108px;height:108px;border-radius:50%;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:318px;top:544px;width:36px;height:60px;border-radius:18px 18px 0 0;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:322px;top:514px;width:28px;height:28px;border-radius:50%;background:#8A5A3A;border:3px solid #4A2C20"></div>
+          </div>
+          <svg viewBox="0 0 200 260" width="60" height="78" style="position:absolute;left:4px;top:436px"><use href="#m2"></use></svg>
+
+          <div style="position:absolute;left:200px;top:178px;display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:14px;padding:4px 12px 4px 5px;font-family:'Bricolage Grotesque';font-weight:800;font-size:13px;color:#4A2C20;box-shadow:3px 3px 0 #3F7A6E">
+            <div style="width:20px;height:20px;border-radius:50%;background:#3F7A6E;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-left:7px solid #FBF4E6;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px"></div></div>{{ t.boost }}</div>
+          <div style="position:absolute;left:58px;top:360px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:16px;padding:8px 12px 8px 8px;display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque';color:#4A2C20;box-shadow:4px 4px 0 #C9533A">
+            <svg viewBox="0 0 120 120" width="38" height="38"><use href="#dO"></use></svg>
+            <div style="display:flex;flex-direction:column;gap:1px;white-space:nowrap;line-height:1.25"><div style="font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#7A5A48">{{ t.special }}</div><div style="font-weight:800;font-size:15px">{{ t.sweet }}</div></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center">♥</div>
+          </div>
+          <div style="position:absolute;left:236px;top:476px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:16px;padding:5px 12px 5px 5px;display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;color:#4A2C20;box-shadow:4px 4px 0 #EBAA2F">
+            <svg viewBox="0 0 120 120" width="34" height="34"><use href="#dN"></use></svg>48<div style="width:14px;height:14px;border-radius:50%;background:#EBAA2F;border:2.5px solid #4A2C20"></div></div>
+          <div style="position:absolute;left:138px;top:650px;display:flex;align-items:center;gap:6px;background:#EBAA2F;border:3px solid #4A2C20;border-radius:20px;padding:4px 12px 4px 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:14px;color:#4A2C20;box-shadow:3px 3px 0 #4A2C20">
+            <div style="width:22px;height:22px;border-radius:50%;background:#F6D27A;border:2.5px solid #4A2C20"></div>+120</div>
+
+          <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div>
+          <div style="position:absolute;left:16px;right:16px;top:58px;display:flex;align-items:center;gap:8px;color:#4A2C20">
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 3px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;white-space:nowrap;flex-shrink:0"><div style="width:26px;height:26px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>{{ t.coins }}</div>
+            <div style="display:flex;align-items:center;gap:7px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 8px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;white-space:nowrap;flex-shrink:0"><div style="width:16px;height:16px;transform:rotate(45deg);border-radius:3px;background:#3F7A6E;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>86</div>
+            <div style="flex:1"></div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 3px;font-family:'Bricolage Grotesque';font-weight:800;font-size:14px;white-space:nowrap;flex-shrink:0"><div style="width:26px;height:26px;border-radius:50%;background:#4A2C20;color:#F4E8D2;display:flex;align-items:center;justify-content:center;font-size:14px">7</div>{{ t.rep }}</div>
+            <div style="width:40px;flex-shrink:0;height:40px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:14px;border-radius:50%;border:3px solid #4A2C20"></div></div>
+          </div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:140px;background:#FBF4E6;border-top:3.5px solid #4A2C20;border-radius:26px 26px 0 0;display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;align-items:start;padding:12px 8px 0;font-family:'Bricolage Grotesque';font-weight:800;font-size:12px;color:#4A2C20">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px;position:relative"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 3v18" fill="none"></path></svg>{{ t.book }}<div style="position:absolute;top:0;right:14px;min-width:18px;height:18px;border-radius:9px;background:#C9533A;border:2px solid #FBF4E6;color:#FBF4E6;font-size:11px;display:flex;align-items:center;justify-content:center">1</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M12 4l7 8h-4v8H9v-8H5z"></path></svg>{{ t.up }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:-36px"><div style="width:78px;height:78px;border-radius:50%;background:#EBAA2F;border:3.5px solid #4A2C20;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="#FBF4E6" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path></svg></div><div style="font-size:14px">{{ t.lab }}</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16" fill="none"></path></svg>{{ t.menu }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M8 8a4 4 0 0 1 8 0" fill="none"></path></svg>{{ t.shop }}</div>
+          </div>
+          <div style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#4A2C20"></div>
+        </div>
+          <sc-if value="{{ showThumb }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;left:10px;right:10px;bottom:10px;height:360px;border-radius:0 0 48px 48px;background:radial-gradient(ellipse 120% 100% at 70% 100%,rgba(63,122,110,.45),rgba(63,122,110,0) 70%);pointer-events:none"></div>
+            <div style="position:absolute;right:24px;bottom:330px;font-family:'IBM Plex Mono';font-size:11px;font-weight:600;background:#3F7A6E;color:#FBF4E6;padding:3px 8px;border-radius:6px">zone du pouce</div>
+          </sc-if>
+          <sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;left:0;top:0;right:0;height:69px;border-bottom:1.5px dashed #A33A24;pointer-events:none"></div>
+            <div style="position:absolute;left:0;bottom:44px;right:0;border-top:1.5px dashed #A33A24;pointer-events:none"></div>
+            <div style="position:absolute;left:24px;top:52px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">1</div>
+            <div style="position:absolute;left:130px;top:52px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">2</div>
+            <div style="position:absolute;left:268px;top:52px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">3</div>
+            <div style="position:absolute;left:376px;top:52px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">4</div>
+            <div style="position:absolute;left:200px;top:172px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">5</div>
+            <div style="position:absolute;left:56px;top:354px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">6</div>
+            <div style="position:absolute;left:234px;top:470px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">7</div>
+            <div style="position:absolute;left:136px;top:644px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">8</div>
+            <div style="position:absolute;left:16px;top:734px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">9</div>
+            <div style="position:absolute;left:246px;top:684px;width:22px;height:22px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #FBF4E6">10</div>
+          </sc-if>
+        </div>
+      </div>
+      <div style="width:380px;display:flex;flex-direction:column;gap:14px;padding-top:40px;font-size:14px;line-height:1.5">
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Annotations</div>
+        <div style="display:grid;grid-template-columns:26px 1fr;gap:12px 10px">
+          <div style="font-weight:800;color:#A33A24">1</div><div><b>Pièces</b> · hud.currency, à 16 du bord, y 58. Toucher ouvre le détail « revenus / min ». Les chiffres défilent en 520 ms quand on gagne.</div>
+          <div style="font-weight:800;color:#A33A24">2</div><div><b>Gemmes</b> · gap 8 après les pièces. Le « + » ouvre la boutique, onglet Gemmes.</div>
+          <div style="font-weight:800;color:#A33A24">3</div><div><b>Réputation</b> · médaille avec le niveau, sous forme de pill poussée à droite par un spacer. Toucher ouvre la progression vers le niveau suivant.</div>
+          <div style="font-weight:800;color:#A33A24">4</div><div><b>Réglages</b> · 40 pt visibles, 44 pt de zone tactile. C'est la seule action rare en haut.</div>
+          <div style="font-weight:800;color:#A33A24">5</div><div><b>Station accélérable</b> · s'affiche quand une préparation dure plus de 20 s. Au toucher : pub optionnelle ×2 ou 5 gemmes.</div>
+          <div style="font-weight:800;color:#A33A24">6</div><div><b>Demande spéciale</b> · au-dessus de l'habitué, avec le plat souhaité et un cœur. Toucher ouvre une mini-fiche avec le bouton « Préparer ».</div>
+          <div style="font-weight:800;color:#A33A24">7</div><div><b>Commande</b> · plat et prix. Le service est automatique ; toucher affiche simplement l'info.</div>
+          <div style="font-weight:800;color:#A33A24">8</div><div><b>Pourboire</b> · toucher pour le récolter. Il est récolté automatiquement après 60 s : rien n'est jamais perdu.</div>
+          <div style="font-weight:800;color:#A33A24">9</div><div><b>Barre d'actions</b> · h 106 + 34 de zone de sécurité, radius.sheet en haut. 5 entrées, libellé toujours visible.</div>
+          <div style="font-weight:800;color:#A33A24">10</div><div><b>Labo</b> · bouton de 78 pt qui dépasse de 36 pt, l'action la plus fréquente. Un badge apparaît quand un nouvel ingrédient est disponible.</div>
+        </div>
+        <div style="height:1.5px;background:#D5C3A4;margin:6px 0"></div>
+        <div style="font-family:'IBM Plex Mono';font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Comportements de la scène</div>
+        <div>Glisser horizontalement déplace la caméra entre les zones débloquées. Pincer zoome entre 0,85 et 1,3. Double-toucher recentre.</div>
+        <div>Les bulles restent entre y 110 et y 690 et s'écartent des boutons de la barre. Il y en a au plus 4 à la fois ; les suivantes attendent en file.</div>
+        <div>Le décor tremble légèrement (trait vivant), alors que le HUD, les bulles et la barre restent nets.</div>
+      </div>
+    </div>
+
+    <div id="1b" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><div style="font-family:'IBM Plex Mono';font-weight:600;font-size:13px;background:#4A2C20;color:#F4E8D2;border-radius:6px;padding:4px 8px">1b</div><div style="font-weight:800;font-size:18px">iPhone SE · 375 × 667</div></div>
+      <div style="width:375px;height:667px;border:10px solid #2A1C16;border-radius:36px;position:relative;overflow:hidden;background:#F4E8D2;box-shadow:0 30px 60px -30px rgba(74,44,32,.55)"><div style="position:absolute;left:0;top:0;width:390px;height:844px;transform:translate(-10px,-72px)">
+          <div style="position:absolute;inset:0;filter:url(#wob)">
+            <div style="position:absolute;left:0;right:0;top:0;height:400px;background:#EFDDBF"></div>
+            <div style="position:absolute;left:0;right:0;top:300px;height:100px;background-image:radial-gradient(#C9533A 1.3px,transparent 1.5px);background-size:7px 7px;opacity:.35"></div>
+            <div style="position:absolute;left:0;right:0;top:400px;bottom:0;background-color:#FBF4E6;background-image:repeating-conic-gradient(rgba(74,44,32,.13) 0 25%,transparent 0 50%);background-size:48px 48px"></div>
+            <div style="position:absolute;left:0;right:0;top:396px;height:8px;background:#4A2C20"></div>
+            <div style="position:absolute;left:32px;top:122px;width:150px;height:172px;border-radius:75px 75px 0 0;background:#EBAA2F;mix-blend-mode:multiply"></div>
+            <div style="position:absolute;left:36px;top:126px;width:150px;height:172px;border-radius:75px 75px 0 0;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:109px;top:128px;width:3.5px;height:170px;background:#4A2C20"></div>
+            <div style="position:absolute;left:30px;top:290px;width:164px;height:12px;background:#7A5A48;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:46px;top:256px;width:38px;height:36px;border-radius:50%;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:136px;top:262px;width:30px;height:30px;border-radius:50%;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:-40px;top:300px;width:330px;height:420px;background:linear-gradient(180deg,rgba(235,170,47,.55),rgba(235,170,47,0));clip-path:polygon(22% 0,52% 0,100% 100%,40% 100%);mix-blend-mode:multiply"></div>
+            <div style="position:absolute;left:212px;top:130px;width:150px;height:6px;background:#4A2C20"></div>
+            <div style="position:absolute;left:222px;top:98px;width:22px;height:32px;border-radius:5px;background:#EBAA2F;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:252px;top:106px;width:22px;height:24px;border-radius:5px;background:#C9533A;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:284px;top:94px;width:22px;height:36px;border-radius:5px;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:314px;top:104px;width:34px;height:26px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:252px;top:250px;width:36px;height:56px;border-radius:18px 18px 0 0;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:256px;top:218px;width:28px;height:28px;border-radius:50%;background:#B97E5C;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:254px;top:198px;width:32px;height:22px;border-radius:9px 9px 2px 2px;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:190px;top:296px;width:204px;height:104px;background:#C9533A;border-top:3.5px solid #4A2C20;border-left:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:196px;top:310px;width:196px;height:90px;background-image:radial-gradient(#4A2C20 1.3px,transparent 1.5px);background-size:6px 6px;opacity:.35"></div>
+            <div style="position:absolute;left:190px;top:296px;width:204px;height:14px;background:#7A5A48;border-bottom:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:212px;top:260px;width:42px;height:30px;border-radius:6px;background:#4A2C20"></div>
+            <div style="position:absolute;left:218px;top:232px;width:8px;height:20px;border-radius:4px;background:#7A5A48;opacity:.45"></div>
+            <div style="position:absolute;left:234px;top:224px;width:8px;height:26px;border-radius:4px;background:#7A5A48;opacity:.35"></div>
+            <div style="position:absolute;left:44px;top:512px;width:92px;height:92px;border-radius:50%;background:#EBAA2F;mix-blend-mode:multiply;opacity:.85"></div>
+            <div style="position:absolute;left:38px;top:506px;width:92px;height:92px;border-radius:50%;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:62px;top:530px;width:40px;height:40px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:230px;top:586px;width:108px;height:108px;border-radius:50%;background:#EBAA2F;mix-blend-mode:multiply;opacity:.85"></div>
+            <div style="position:absolute;left:224px;top:580px;width:108px;height:108px;border-radius:50%;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:318px;top:544px;width:36px;height:60px;border-radius:18px 18px 0 0;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:322px;top:514px;width:28px;height:28px;border-radius:50%;background:#8A5A3A;border:3px solid #4A2C20"></div>
+          </div>
+          <svg viewBox="0 0 200 260" width="60" height="78" style="position:absolute;left:4px;top:436px"><use href="#m2"></use></svg>
+
+          <div style="position:absolute;left:200px;top:178px;display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:14px;padding:4px 12px 4px 5px;font-family:'Bricolage Grotesque';font-weight:800;font-size:13px;color:#4A2C20;box-shadow:3px 3px 0 #3F7A6E">
+            <div style="width:20px;height:20px;border-radius:50%;background:#3F7A6E;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-left:7px solid #FBF4E6;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px"></div></div>{{ t.boost }}</div>
+          <div style="position:absolute;left:58px;top:360px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:16px;padding:8px 12px 8px 8px;display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque';color:#4A2C20;box-shadow:4px 4px 0 #C9533A">
+            <svg viewBox="0 0 120 120" width="38" height="38"><use href="#dO"></use></svg>
+            <div style="display:flex;flex-direction:column;gap:1px;white-space:nowrap;line-height:1.25"><div style="font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#7A5A48">{{ t.special }}</div><div style="font-weight:800;font-size:15px">{{ t.sweet }}</div></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center">♥</div>
+          </div>
+          <div style="position:absolute;left:236px;top:476px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:16px;padding:5px 12px 5px 5px;display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;color:#4A2C20;box-shadow:4px 4px 0 #EBAA2F">
+            <svg viewBox="0 0 120 120" width="34" height="34"><use href="#dN"></use></svg>48<div style="width:14px;height:14px;border-radius:50%;background:#EBAA2F;border:2.5px solid #4A2C20"></div></div>
+          <div style="position:absolute;left:150px;top:560px;display:flex;align-items:center;gap:6px;background:#EBAA2F;border:3px solid #4A2C20;border-radius:20px;padding:4px 12px 4px 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:14px;color:#4A2C20;box-shadow:3px 3px 0 #4A2C20">
+            <div style="width:22px;height:22px;border-radius:50%;background:#F6D27A;border:2.5px solid #4A2C20"></div>+120</div>
+
+          </div><div style="position:absolute;left:0;top:0;width:375px;height:20px;background:#EFDDBF"></div>
+          <div style="position:absolute;left:16px;right:16px;top:28px;display:flex;align-items:center;gap:8px;color:#4A2C20">
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 3px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;white-space:nowrap;flex-shrink:0"><div style="width:26px;height:26px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>{{ t.coins }}</div>
+            <div style="display:flex;align-items:center;gap:7px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 8px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;white-space:nowrap;flex-shrink:0"><div style="width:16px;height:16px;transform:rotate(45deg);border-radius:3px;background:#3F7A6E;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>86</div>
+            <div style="flex:1"></div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 3px;font-family:'Bricolage Grotesque';font-weight:800;font-size:14px;white-space:nowrap;flex-shrink:0"><div style="width:26px;height:26px;border-radius:50%;background:#4A2C20;color:#F4E8D2;display:flex;align-items:center;justify-content:center;font-size:14px">7</div>{{ t.rep }}</div>
+            <div style="width:40px;flex-shrink:0;height:40px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:14px;border-radius:50%;border:3px solid #4A2C20"></div></div>
+          </div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:96px;background:#FBF4E6;border-top:3.5px solid #4A2C20;border-radius:26px 26px 0 0;display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;align-items:start;padding:12px 8px 0;font-family:'Bricolage Grotesque';font-weight:800;font-size:12px;color:#4A2C20">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px;position:relative"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 3v18" fill="none"></path></svg>{{ t.book }}<div style="position:absolute;top:0;right:14px;min-width:18px;height:18px;border-radius:9px;background:#C9533A;border:2px solid #FBF4E6;color:#FBF4E6;font-size:11px;display:flex;align-items:center;justify-content:center">1</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M12 4l7 8h-4v8H9v-8H5z"></path></svg>{{ t.up }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:-36px"><div style="width:78px;height:78px;border-radius:50%;background:#EBAA2F;border:3.5px solid #4A2C20;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="#FBF4E6" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path></svg></div><div style="font-size:14px">{{ t.lab }}</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16" fill="none"></path></svg>{{ t.menu }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M8 8a4 4 0 0 1 8 0" fill="none"></path></svg>{{ t.shop }}</div>
+          </div>
+          
+        </div>
+      <div style="width:395px;font-size:14px;line-height:1.5;color:#7A5A48;text-wrap:pretty">Pas de Dynamic Island : le HUD monte à y 28 et la scène descend de 48 pt pour rester sous le HUD. La barre descend à 96 pt (pas de zone de sécurité en bas). La caméra recadre sur le comptoir et les tables, et le mur du haut est rogné.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start">
+    <div id="1c" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><div style="font-family:'IBM Plex Mono';font-weight:600;font-size:13px;background:#4A2C20;color:#F4E8D2;border-radius:6px;padding:4px 8px">1c</div><div style="font-weight:800;font-size:18px">Chargement</div></div>
+      <div style="width:390px;height:844px;border:10px solid #2A1C16;border-radius:58px;position:relative;overflow:hidden;background:#F4E8D2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px">
+        <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div>
+        <div style="position:relative;width:180px;height:170px;filter:url(#wob)">
+          <div style="position:absolute;left:62px;top:0;width:14px;height:40px;border-radius:7px;border:3px solid #7A5A48;opacity:.5"></div>
+          <div style="position:absolute;left:96px;top:10px;width:14px;height:32px;border-radius:7px;border:3px solid #7A5A48;opacity:.4"></div>
+          <div style="position:absolute;left:30px;top:56px;width:120px;height:14px;border-radius:7px;background:#4A2C20"></div>
+          <div style="position:absolute;left:84px;top:46px;width:12px;height:12px;border-radius:50%;background:#4A2C20"></div>
+          <div style="position:absolute;left:24px;top:72px;width:132px;height:84px;border-radius:0 0 40px 40px;background:#C9533A;border:3.5px solid #4A2C20;box-sizing:border-box"></div>
+          <div style="position:absolute;left:30px;top:80px;width:120px;height:70px;border-radius:0 0 36px 36px;background-image:radial-gradient(#4A2C20 1.3px,transparent 1.5px);background-size:6px 6px;opacity:.3"></div>
+          <div style="position:absolute;left:6px;top:88px;width:22px;height:12px;border-radius:6px;border:3px solid #4A2C20"></div>
+          <div style="position:absolute;right:6px;top:88px;width:22px;height:12px;border-radius:6px;border:3px solid #4A2C20"></div>
+          <div style="position:absolute;left:10px;top:158px;width:160px;height:8px;border-radius:4px;background:#EBAA2F"></div>
+        </div>
+        <div style="font-size:40px;font-weight:800;letter-spacing:-.02em">Bistro</div>
+        <div style="width:220px;display:flex;flex-direction:column;gap:10px;align-items:center">
+          <div style="width:100%;height:12px;border-radius:6px;background:#EADBC0;box-shadow:inset 0 0 0 2px #4A2C20;overflow:hidden"><div style="width:58%;height:100%;background-color:#EBAA2F;background-image:radial-gradient(rgba(74,44,32,.35) 1.1px,transparent 1.3px);background-size:4px 4px;box-shadow:inset 0 0 0 2px #4A2C20"></div></div>
+          <div style="font-size:14px;font-weight:600;color:#7A5A48">{{ t.loading }}</div>
+        </div>
+        <div style="position:absolute;left:32px;right:32px;bottom:64px;text-align:center;font-size:15px;line-height:21px;color:#7A5A48;text-wrap:pretty">{{ t.hint }}</div>
+      </div>
+      <div style="width:395px;font-size:14px;line-height:1.5;color:#7A5A48">La vapeur monte en boucle. La barre suit le chargement réel, sans fausse progression. Une astuce aléatoire s'affiche en bas. Si le chargement dépasse 8 s, un bouton « Réessayer » apparaît.</div>
+    </div>
+
+    <div id="1d" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><div style="font-family:'IBM Plex Mono';font-weight:600;font-size:13px;background:#4A2C20;color:#F4E8D2;border-radius:6px;padding:4px 8px">1d</div><div style="font-weight:800;font-size:18px">État vide · jour 1, avant ouverture</div></div>
+      <div style="width:390px;height:844px;border:10px solid #2A1C16;border-radius:58px;position:relative;overflow:hidden;background:#F4E8D2">
+        <div style="position:absolute;inset:0;filter:url(#wob)">
+          <div style="position:absolute;left:0;right:0;top:0;height:400px;background:#EFDDBF"></div>
+          <div style="position:absolute;left:0;right:0;top:400px;bottom:0;background-color:#FBF4E6;background-image:repeating-conic-gradient(rgba(74,44,32,.13) 0 25%,transparent 0 50%);background-size:48px 48px"></div>
+          <div style="position:absolute;left:0;right:0;top:396px;height:8px;background:#4A2C20"></div>
+          <div style="position:absolute;left:32px;top:122px;width:150px;height:172px;border-radius:75px 75px 0 0;background:#EBAA2F;mix-blend-mode:multiply;opacity:.6"></div>
+          <div style="position:absolute;left:36px;top:126px;width:150px;height:172px;border-radius:75px 75px 0 0;border:3.5px solid #4A2C20"></div>
+          <div style="position:absolute;left:109px;top:128px;width:3.5px;height:170px;background:#4A2C20"></div>
+          <div style="position:absolute;left:30px;top:290px;width:164px;height:12px;background:#7A5A48;border:3px solid #4A2C20"></div>
+          <div style="position:absolute;left:190px;top:296px;width:204px;height:104px;background:#C9533A;border-top:3.5px solid #4A2C20;border-left:3.5px solid #4A2C20"></div>
+          <div style="position:absolute;left:190px;top:296px;width:204px;height:14px;background:#7A5A48;border-bottom:3px solid #4A2C20"></div>
+          <div style="position:absolute;left:252px;top:250px;width:36px;height:56px;border-radius:18px 18px 0 0;background:#FBF4E6;border:3px solid #4A2C20"></div>
+          <div style="position:absolute;left:256px;top:218px;width:28px;height:28px;border-radius:50%;background:#B97E5C;border:3px solid #4A2C20"></div>
+          <div style="position:absolute;left:254px;top:198px;width:32px;height:22px;border-radius:9px 9px 2px 2px;background:#FBF4E6;border:3px solid #4A2C20"></div>
+          <div style="position:absolute;left:44px;top:520px;width:92px;height:92px;border-radius:50%;background:#EBAA2F;mix-blend-mode:multiply;opacity:.85"></div>
+          <div style="position:absolute;left:38px;top:514px;width:92px;height:92px;border-radius:50%;border:3.5px solid #4A2C20"></div>
+          <div style="position:absolute;left:226px;top:590px;width:108px;height:108px;border-radius:50%;border:3px dashed #9C8570"></div>
+          <div style="position:absolute;left:30px;top:170px;width:66px;height:40px;background:#FBF4E6;border:3px solid #4A2C20;transform:rotate(-6deg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px">{{ t.closed }}</div>
+        </div>
+        <div style="position:absolute;left:245px;top:630px;font-size:13px;font-weight:700;color:#7A5A48;background:#FBF4E6;padding:2px 8px;border-radius:6px">{{ t.emptyTable }}</div>
+        <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div>
+        <div style="position:absolute;left:16px;right:16px;top:58px;display:flex;align-items:center;gap:8px">
+          <div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 3px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;white-space:nowrap;flex-shrink:0"><div style="width:26px;height:26px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>50</div>
+          <div style="display:flex;align-items:center;gap:7px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 8px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;white-space:nowrap;flex-shrink:0"><div style="width:16px;height:16px;transform:rotate(45deg);border-radius:3px;background:#3F7A6E;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>0</div>
+          <div style="flex:1"></div>
+          <div style="width:40px;flex-shrink:0;height:40px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:14px;border-radius:50%;border:3px solid #4A2C20"></div></div>
+        </div>
+        <div style="position:absolute;left:20px;right:20px;bottom:150px;display:flex;flex-direction:column;align-items:center;gap:12px">
+          <div style="background:#4A2C20;color:#FBF4E6;border-radius:16px;padding:12px 16px;font-size:17px;line-height:22px;font-weight:700;text-align:center;box-shadow:4px 4px 0 #EBAA2F;position:relative">{{ t.open }}<div style="position:absolute;left:50%;bottom:-8px;margin-left:-8px;width:16px;height:16px;background:#4A2C20;transform:rotate(45deg)"></div></div>
+        </div>
+        <div style="position:absolute;left:20px;right:20px;bottom:56px;height:60px;border-radius:16px;border:3.5px solid #4A2C20;background:#EBAA2F;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;box-sizing:border-box">{{ t.openBtn }}</div>
+        <div style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#4A2C20"></div>
+      </div>
+      <div style="width:395px;font-size:14px;line-height:1.5;color:#7A5A48;text-wrap:pretty">Avant le premier service, la barre d'actions est remplacée par un seul bouton. Elle apparaît au pas 1 du tutoriel. Les emplacements vides (table en pointillés) annoncent les futures améliorations.</div>
+    </div>
+
+    <div id="1e" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:10px;align-items:center"><div style="font-family:'IBM Plex Mono';font-weight:600;font-size:13px;background:#4A2C20;color:#F4E8D2;border-radius:6px;padding:4px 8px">1e</div><div style="font-weight:800;font-size:18px">Cas limites · grands nombres, texte long</div></div>
+      <div style="width:390px;height:844px;border:10px solid #2A1C16;border-radius:58px;position:relative;overflow:hidden;background:#F4E8D2;box-shadow:0 30px 60px -30px rgba(74,44,32,.55)">
+          <div style="position:absolute;inset:0;filter:url(#wob)">
+            <div style="position:absolute;left:0;right:0;top:0;height:400px;background:#EFDDBF"></div>
+            <div style="position:absolute;left:0;right:0;top:300px;height:100px;background-image:radial-gradient(#C9533A 1.3px,transparent 1.5px);background-size:7px 7px;opacity:.35"></div>
+            <div style="position:absolute;left:0;right:0;top:400px;bottom:0;background-color:#FBF4E6;background-image:repeating-conic-gradient(rgba(74,44,32,.13) 0 25%,transparent 0 50%);background-size:48px 48px"></div>
+            <div style="position:absolute;left:0;right:0;top:396px;height:8px;background:#4A2C20"></div>
+            <div style="position:absolute;left:32px;top:122px;width:150px;height:172px;border-radius:75px 75px 0 0;background:#EBAA2F;mix-blend-mode:multiply"></div>
+            <div style="position:absolute;left:36px;top:126px;width:150px;height:172px;border-radius:75px 75px 0 0;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:109px;top:128px;width:3.5px;height:170px;background:#4A2C20"></div>
+            <div style="position:absolute;left:30px;top:290px;width:164px;height:12px;background:#7A5A48;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:46px;top:256px;width:38px;height:36px;border-radius:50%;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:136px;top:262px;width:30px;height:30px;border-radius:50%;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:-40px;top:300px;width:330px;height:420px;background:linear-gradient(180deg,rgba(235,170,47,.55),rgba(235,170,47,0));clip-path:polygon(22% 0,52% 0,100% 100%,40% 100%);mix-blend-mode:multiply"></div>
+            <div style="position:absolute;left:212px;top:130px;width:150px;height:6px;background:#4A2C20"></div>
+            <div style="position:absolute;left:222px;top:98px;width:22px;height:32px;border-radius:5px;background:#EBAA2F;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:252px;top:106px;width:22px;height:24px;border-radius:5px;background:#C9533A;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:284px;top:94px;width:22px;height:36px;border-radius:5px;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:314px;top:104px;width:34px;height:26px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:252px;top:250px;width:36px;height:56px;border-radius:18px 18px 0 0;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:256px;top:218px;width:28px;height:28px;border-radius:50%;background:#B97E5C;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:254px;top:198px;width:32px;height:22px;border-radius:9px 9px 2px 2px;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:190px;top:296px;width:204px;height:104px;background:#C9533A;border-top:3.5px solid #4A2C20;border-left:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:196px;top:310px;width:196px;height:90px;background-image:radial-gradient(#4A2C20 1.3px,transparent 1.5px);background-size:6px 6px;opacity:.35"></div>
+            <div style="position:absolute;left:190px;top:296px;width:204px;height:14px;background:#7A5A48;border-bottom:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:212px;top:260px;width:42px;height:30px;border-radius:6px;background:#4A2C20"></div>
+            <div style="position:absolute;left:218px;top:232px;width:8px;height:20px;border-radius:4px;background:#7A5A48;opacity:.45"></div>
+            <div style="position:absolute;left:234px;top:224px;width:8px;height:26px;border-radius:4px;background:#7A5A48;opacity:.35"></div>
+            <div style="position:absolute;left:44px;top:512px;width:92px;height:92px;border-radius:50%;background:#EBAA2F;mix-blend-mode:multiply;opacity:.85"></div>
+            <div style="position:absolute;left:38px;top:506px;width:92px;height:92px;border-radius:50%;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:62px;top:530px;width:40px;height:40px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:230px;top:586px;width:108px;height:108px;border-radius:50%;background:#EBAA2F;mix-blend-mode:multiply;opacity:.85"></div>
+            <div style="position:absolute;left:224px;top:580px;width:108px;height:108px;border-radius:50%;border:3.5px solid #4A2C20"></div>
+            <div style="position:absolute;left:318px;top:544px;width:36px;height:60px;border-radius:18px 18px 0 0;background:#3F7A6E;border:3px solid #4A2C20"></div>
+            <div style="position:absolute;left:322px;top:514px;width:28px;height:28px;border-radius:50%;background:#8A5A3A;border:3px solid #4A2C20"></div>
+          </div>
+          <svg viewBox="0 0 200 260" width="60" height="78" style="position:absolute;left:4px;top:436px"><use href="#m2"></use></svg>
+
+          <div style="position:absolute;left:200px;top:178px;display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:14px;padding:4px 12px 4px 5px;font-family:'Bricolage Grotesque';font-weight:800;font-size:13px;color:#4A2C20;box-shadow:3px 3px 0 #3F7A6E">
+            <div style="width:20px;height:20px;border-radius:50%;background:#3F7A6E;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-left:7px solid #FBF4E6;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px"></div></div>{{ t.boost }}</div>
+          <div style="position:absolute;left:58px;top:360px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:16px;padding:8px 12px 8px 8px;display:flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque';color:#4A2C20;box-shadow:4px 4px 0 #C9533A">
+            <svg viewBox="0 0 120 120" width="38" height="38"><use href="#dO"></use></svg>
+            <div style="display:flex;flex-direction:column;gap:1px;white-space:nowrap;line-height:1.25"><div style="font-weight:800;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#7A5A48">{{ t.special }}</div><div style="font-weight:800;font-size:15px">{{ t.sweet }}</div></div>
+            <div style="width:18px;height:18px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center">♥</div>
+          </div>
+          <div style="position:absolute;left:236px;top:476px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:16px;padding:5px 12px 5px 5px;display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;color:#4A2C20;box-shadow:4px 4px 0 #EBAA2F">
+            <svg viewBox="0 0 120 120" width="34" height="34"><use href="#dN"></use></svg>48<div style="width:14px;height:14px;border-radius:50%;background:#EBAA2F;border:2.5px solid #4A2C20"></div></div>
+          <div style="position:absolute;left:138px;top:650px;display:flex;align-items:center;gap:6px;background:#EBAA2F;border:3px solid #4A2C20;border-radius:20px;padding:4px 12px 4px 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:14px;color:#4A2C20;box-shadow:3px 3px 0 #4A2C20">
+            <div style="width:22px;height:22px;border-radius:50%;background:#F6D27A;border:2.5px solid #4A2C20"></div>+120</div>
+
+          <div style="position:absolute;left:50%;top:11px;transform:translateX(-50%);width:120px;height:34px;border-radius:20px;background:#000"></div><div style="position:absolute;left:16px;right:16px;top:108px;background:#4A2C20;color:#FBF4E6;border-radius:14px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:19px;font-weight:600;box-shadow:3px 3px 0 #EBAA2F"><div style="width:22px;height:22px;flex-shrink:0;border-radius:50%;background:#FBF4E6;color:#4A2C20;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center">i</div><div>{{ t.toast }}</div></div>
+          <div style="position:absolute;left:16px;right:16px;top:58px;display:flex;align-items:center;gap:8px;color:#4A2C20">
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 3px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;white-space:nowrap;flex-shrink:0"><div style="width:26px;height:26px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>45,7 Md</div>
+            <div style="display:flex;align-items:center;gap:7px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 8px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;white-space:nowrap;flex-shrink:0"><div style="width:16px;height:16px;transform:rotate(45deg);border-radius:3px;background:#3F7A6E;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>9 999</div>
+            <div style="flex:1;min-width:0"></div>
+            <div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:3px solid #4A2C20;border-radius:22px;padding:3px 12px 3px 3px;font-family:'Bricolage Grotesque';font-weight:800;font-size:14px;white-space:nowrap;flex-shrink:0"><div style="width:26px;height:26px;border-radius:50%;background:#4A2C20;color:#F4E8D2;display:flex;align-items:center;justify-content:center;font-size:12px">128</div></div>
+            <div style="width:40px;flex-shrink:0;height:40px;border-radius:50%;background:#FBF4E6;border:3px solid #4A2C20;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:14px;border-radius:50%;border:3px solid #4A2C20"></div></div>
+          </div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:140px;background:#FBF4E6;border-top:3.5px solid #4A2C20;border-radius:26px 26px 0 0;display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr 1fr;align-items:start;padding:12px 8px 0;font-family:'Bricolage Grotesque';font-weight:800;font-size:12px;color:#4A2C20">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px;position:relative"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M9 3v18" fill="none"></path></svg>{{ t.book }}<div style="position:absolute;top:0;right:14px;min-width:18px;height:18px;border-radius:9px;background:#C9533A;border:2px solid #FBF4E6;color:#FBF4E6;font-size:11px;display:flex;align-items:center;justify-content:center">1</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M12 4l7 8h-4v8H9v-8H5z"></path></svg>{{ t.up }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:-36px"><div style="width:78px;height:78px;border-radius:50%;background:#EBAA2F;border:3.5px solid #4A2C20;box-shadow:4px 4px 0 #C9533A;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="#FBF4E6" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"></path></svg></div><div style="font-size:14px">{{ t.lab }}</div></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16" fill="none"></path></svg>{{ t.menu }}</div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:6px"><svg width="30" height="30" viewBox="0 0 24 24" fill="#F6D27A" stroke="#4A2C20" stroke-width="2.2" stroke-linejoin="round"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M8 8a4 4 0 0 1 8 0" fill="none"></path></svg>{{ t.shop }}</div>
+          </div>
+          <div style="position:absolute;left:50%;bottom:8px;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#4A2C20"></div>
+        </div>
+      <div style="width:395px;font-size:14px;line-height:1.5;color:#7A5A48;text-wrap:pretty">Les compteurs ne dépassent jamais 6 caractères grâce aux unités (45,7 Md). À partir du niveau 100, la réputation masque son libellé « Réput. » et garde seulement la médaille, pour que la rangée tienne en 358 pt. Le toast d'information pleine largeur passe sur 2 lignes sans se tronquer, avec un ton neutre, jamais culpabilisant.</div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="02 Bulles et événements" style="padding:24px 72px 96px;display:flex;flex-direction:column;gap:32px">
+  <div style="display:flex;flex-direction:column;gap:10px;max-width:1100px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#7A5A48">Écran 2 · Bulles et événements en jeu</div>
+    <div style="font-size:40px;font-weight:800;letter-spacing:-.02em;line-height:1.05">Quatre bulles, quatre formes d'ombre.</div>
+    <div style="font-size:17px;line-height:1.55;color:#7A5A48;max-width:860px;text-wrap:pretty">Chaque type a son pictogramme, sa couleur d'ombre et son contenu. On les distingue donc même sans voir les couleurs. Aucune bulle ne punit : rien n'expire en faisant perdre quelque chose au joueur.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(4,300px);gap:24px">
+    <div id="2a" style="background:#FBF4E6;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:8px;align-items:center"><div style="font-family:'IBM Plex Mono';font-weight:600;font-size:12px;background:#4A2C20;color:#F4E8D2;border-radius:6px;padding:3px 7px">2a</div><div style="font-weight:800;font-size:18px">Commande</div></div>
+      <div style="height:110px;display:flex;align-items:center;justify-content:center"><div style="position:relative;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:16px;padding:5px 12px 5px 5px;display:flex;align-items:center;gap:6px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;box-shadow:3px 3px 0 #EBAA2F"><svg viewBox="0 0 120 120" width="34" height="34"><use href="#dO"></use></svg>36<div style="width:13px;height:13px;border-radius:50%;background:#EBAA2F;box-shadow:inset 0 0 0 2px #4A2C20"></div><div style="position:absolute;left:14px;bottom:-11px;width:14px;height:14px;background:#FBF4E6;border-right:2.5px solid #4A2C20;border-bottom:2.5px solid #4A2C20;transform:rotate(45deg)"></div></div></div>
+      <div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">ui_bubble_order · h 46 · plat 34 · ombre or</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:11px;font-weight:700;text-align:center">
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center"><div style="width:100%;height:44px;border-radius:8px;background:#F4E8D2;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:10px;border-radius:5px;background:#FBF4E6;border:2px solid #4A2C20;transform:scale(.6)"></div></div>apparaît</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center"><div style="width:100%;height:44px;border-radius:8px;background:#F4E8D2;display:flex;align-items:center;justify-content:center"><div style="width:34px;height:20px;border-radius:8px;background:#FBF4E6;border:2px solid #4A2C20"></div></div>attend</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center"><div style="width:100%;height:44px;border-radius:8px;background:#F4E8D2;display:flex;align-items:center;justify-content:center"><div style="width:34px;height:20px;border-radius:8px;background:#EBAA2F;border:2px solid #4A2C20"></div></div>servi</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center"><div style="width:100%;height:44px;border-radius:8px;background:#F4E8D2;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono';font-size:12px;color:#33665B">+36</div>payé</div>
+      </div>
+      <div style="font-size:14px;line-height:1.5">Apparaît quand le client s'assoit (spring.pop, 240 ms). Le service est automatique dès que le plat est prêt. Si le plat n'est pas au menu, le client en choisit un autre : il n'y a pas d'échec.</div>
+    </div>
+    <div id="2b" style="background:#FBF4E6;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:8px;align-items:center"><div style="font-family:'IBM Plex Mono';font-weight:600;font-size:12px;background:#4A2C20;color:#F4E8D2;border-radius:6px;padding:3px 7px">2b</div><div style="font-weight:800;font-size:18px">Demande spéciale</div></div>
+      <div style="height:110px;display:flex;align-items:center;justify-content:center"><div style="position:relative;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:16px;padding:6px 12px 6px 6px;display:flex;align-items:center;gap:8px;box-shadow:3px 3px 0 #C9533A"><svg viewBox="0 0 120 120" width="36" height="36"><use href="#dL"></use></svg><div style="display:flex;flex-direction:column;white-space:nowrap;line-height:1.2"><div style="font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#7A5A48">Demande spéciale</div><div style="font-size:14px;font-weight:800">Limonade au miel</div></div><div style="width:18px;height:18px;border-radius:50%;background:#C9533A;color:#FBF4E6;font-size:11px;display:flex;align-items:center;justify-content:center">♥</div><div style="position:absolute;left:14px;bottom:-11px;width:14px;height:14px;background:#FBF4E6;border-right:2.5px solid #4A2C20;border-bottom:2.5px solid #4A2C20;transform:rotate(45deg)"></div></div></div>
+      <div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">ui_bubble_special · h 50 · cœur + titre · ombre sanguine</div>
+      <div style="background:#F4E8D2;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;flex-shrink:0;border-radius:50%;overflow:hidden;background:#EBAA2F;box-shadow:inset 0 0 0 2px #4A2C20;display:flex;justify-content:center"><svg viewBox="52 18 96 110" width="38" height="44" style="margin-top:4px"><use href="#m2"></use></svg></div><div style="font-size:14px;font-weight:700;line-height:1.3">Margot aimerait une limonade au miel.</div></div>
+        <div style="display:flex;gap:6px;font-size:12px;font-weight:700"><div style="flex:1;height:36px;border-radius:10px;border:2.5px solid #4A2C20;background:#EBAA2F;display:flex;align-items:center;justify-content:center">Préparer</div><div style="height:36px;padding:0 10px;display:flex;align-items:center;text-decoration:underline">Pas ce soir</div></div>
+      </div>
+      <div style="font-size:14px;line-height:1.5">Toucher ouvre une mini-fiche. Réussir donne +1 affinité et un pourboire ×3. « Pas ce soir » ne coûte rien, et la demande revient à la prochaine visite. Si le plat est inconnu, la fiche ouvre le labo avec un indice.</div>
+    </div>
+    <div id="2c" style="background:#FBF4E6;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:8px;align-items:center"><div style="font-family:'IBM Plex Mono';font-weight:600;font-size:12px;background:#4A2C20;color:#F4E8D2;border-radius:6px;padding:3px 7px">2c</div><div style="font-weight:800;font-size:18px">Pourboire</div></div>
+      <div style="height:110px;display:flex;align-items:center;justify-content:center"><div style="display:flex;align-items:center;gap:6px;background:#EBAA2F;border:2.5px solid #4A2C20;border-radius:20px;padding:4px 12px 4px 4px;font-family:'IBM Plex Mono';font-weight:600;font-size:15px;box-shadow:3px 3px 0 #4A2C20;cursor:pointer" style-active="transform:translate(3px,3px);box-shadow:0 0 0 #4A2C20"><div style="width:24px;height:24px;border-radius:50%;background:#F6D27A;box-shadow:inset 0 0 0 2.5px #4A2C20"></div>+120</div></div>
+      <div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">ui_bubble_tip · h 38 · zone tactile 56 · pièce seule, sans queue</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:11px;font-weight:700;text-align:center">
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center"><div style="width:100%;height:44px;border-radius:8px;background:#F4E8D2;display:flex;align-items:center;justify-content:center"><div style="width:16px;height:16px;border-radius:50%;background:#EBAA2F;border:2px solid #4A2C20"></div></div>posé</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center"><div style="width:100%;height:44px;border-radius:8px;background:#F4E8D2;display:flex;align-items:center;justify-content:center"><div style="width:16px;height:16px;border-radius:50%;background:#EBAA2F;border:2px solid #4A2C20;box-shadow:0 0 0 4px #F6D27A"></div></div>brille</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center"><div style="width:100%;height:44px;border-radius:8px;background:#F4E8D2;position:relative"><div style="position:absolute;left:8px;bottom:8px;width:10px;height:10px;border-radius:50%;background:#EBAA2F;border:2px solid #4A2C20"></div><div style="position:absolute;left:24px;bottom:18px;width:10px;height:10px;border-radius:50%;background:#EBAA2F;border:2px solid #4A2C20"></div><div style="position:absolute;right:10px;top:6px;width:10px;height:10px;border-radius:50%;background:#EBAA2F;border:2px solid #4A2C20"></div></div>vole</div>
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:center"><div style="width:100%;height:44px;border-radius:8px;background:#F4E8D2;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono';font-size:12px;color:#33665B">12,5 k</div>compteur</div>
+      </div>
+      <div style="font-size:14px;line-height:1.5">Toucher déclenche l'arc de pièces (520 ms, impact léger). Il est récolté automatiquement après 60 s : le joueur qui ne touche rien ne perd rien. On peut aussi les récolter en chaîne en glissant le doigt sur plusieurs pourboires.</div>
+    </div>
+    <div id="2d" style="background:#FBF4E6;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;gap:8px;align-items:center"><div style="font-family:'IBM Plex Mono';font-weight:600;font-size:12px;background:#4A2C20;color:#F4E8D2;border-radius:6px;padding:3px 7px">2d</div><div style="font-weight:800;font-size:18px">Station accélérable</div></div>
+      <div style="height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px"><div style="display:flex;align-items:center;gap:6px;background:#FBF4E6;border:2.5px solid #4A2C20;border-radius:14px;padding:4px 12px 4px 5px;font-weight:800;font-size:13px;box-shadow:3px 3px 0 #3F7A6E"><div style="width:20px;height:20px;border-radius:50%;background:#3F7A6E;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-left:7px solid #FBF4E6;border-top:5px solid transparent;border-bottom:5px solid transparent;margin-left:2px"></div></div>{{ t.boost }}</div><div style="width:48px;height:48px;border-radius:50%;background:conic-gradient(#EBAA2F 0 35%,#EADBC0 35% 100%);box-shadow:inset 0 0 0 2.5px #4A2C20;display:flex;align-items:center;justify-content:center"><div style="width:32px;height:32px;border-radius:50%;background:#FBF4E6;box-shadow:inset 0 0 0 2px #4A2C20;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono';font-size:10px;font-weight:600">1:24</div></div></div>
+      <div style="font-family:'IBM Plex Mono';font-size:11px;color:#7A5A48">ui_bubble_boost · au-dessus de l'anneau de progression · ombre vert-de-gris</div>
+      <div style="background:#F4E8D2;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px">
+        <div style="font-size:14px;font-weight:700">Four · encore 1:24</div>
+        <div style="display:flex;gap:6px;font-size:12px;font-weight:800">
+          <div style="flex:1;height:40px;border-radius:10px;border:2.5px solid #4A2C20;background:#3F7A6E;color:#FBF4E6;display:flex;align-items:center;justify-content:center;gap:5px"><svg width="16" height="12" viewBox="0 0 26 20"><rect x="1.5" y="1.5" width="23" height="17" rx="4" fill="none" stroke="#FBF4E6" stroke-width="3"></rect><path d="M10 6 L17 10 L10 14 Z" fill="#FBF4E6"></path></svg>×2 vitesse</div>
+          <div style="flex:1;height:40px;border-radius:10px;border:2.5px solid #4A2C20;background:#FBF4E6;display:flex;align-items:center;justify-content:center;gap:5px;font-family:'IBM Plex Mono';font-weight:600"><div style="width:11px;height:11px;transform:rotate(45deg);background:#3F7A6E;box-shadow:inset 0 0 0 2px #4A2C20"></div>5 · finir</div>
+        </div>
+      </div>
+      <div style="font-size:14px;line-height:1.5">S'affiche seulement si la préparation dure plus de 20 s. Au plus une bulle d'accélération à l'écran, et une pub par station toutes les 10 min. Sans pub disponible, seule l'option gemmes reste.</div>
+    </div>
+  </div>
+  <div style="max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:24px;font-size:15px;line-height:1.55">
+    <div style="background:#FBF4E6;border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:6px"><div style="font-weight:800">Priorité d'affichage</div><div>1 Demande spéciale · 2 Pourboire · 3 Accélérer · 4 Commande. Si la scène est encombrée, les commandes se réduisent à une pastille de 24 pt qui ne montre que le plat.</div></div>
+    <div style="background:#FBF4E6;border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:6px"><div style="font-weight:800">Accessibilité</div><div>Chaque bulle est un élément VoiceOver avec un libellé complet, par exemple « Pourboire, 120 pièces, toucher pour récolter ». Avec « Réduire les animations », il n'y a plus de flottement : la bulle apparaît et disparaît en fondu.</div></div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;fr&quot;,&quot;en&quot;],&quot;default&quot;:&quot;fr&quot;,&quot;tsType&quot;:&quot;'fr' | 'en'&quot;},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showThumb&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const en = (this.props.lang ?? 'fr') === 'en';
+    const t = en
+      ? { lab: 'Lab', book: 'Regulars', up: 'Upgrades', shop: 'Shop', menu: 'Menu', rep: 'Rep.', special: 'Special request', sweet: 'Something sweet', boost: 'Speed up', coins: '12.4K', loading: 'Warming up the ovens…', hint: 'Tip: regulars come back more often when their favourite dish is on the menu.', closed: 'CLOSED', emptyTable: 'Table · lv 2', open: 'Your bistro is ready. Shall we open?', openBtn: 'Open the doors', toast: 'Léon left without ordering: there was no fish on the menu tonight.' }
+      : { lab: 'Labo', book: 'Habitués', up: 'Améliorer', shop: 'Boutique', menu: 'Menu', rep: 'Réput.', special: 'Demande spéciale', sweet: 'Un truc sucré', boost: 'Accélérer', coins: '12,4 k', loading: 'On allume les fourneaux…', hint: 'Astuce : les habitués reviennent plus souvent quand leur plat préféré est au menu.', closed: 'FERMÉ', emptyTable: 'Table · niv. 2', open: 'Ton bistrot est prêt. On ouvre ?', openBtn: 'Ouvrir les portes', toast: "Léon est reparti sans commander : il n'y avait pas de poisson au menu ce soir." };
+    return { t, showNotes: this.props.showNotes ?? true, showThumb: this.props.showThumb ?? false };
+  }
+}
+</script>
+</body>
+</html>

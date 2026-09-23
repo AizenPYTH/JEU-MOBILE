@@ -22,6 +22,7 @@ Bistro/                  Code de l'app : uniquement BistroApp.swift + Assets.xca
 Configs/Bistro.xcconfig  Bundle ID, version, réglages de signature (source unique)
 .github/workflows/       tests-linux.yml (chaque push), ios-testflight.yml (manuel + PR vers main)
 docs/TESTFLIGHT_SETUP.md Mise en place de la signature et de TestFlight
+docs/design/             Handoff Claude Design v1.0 (NE PAS MODIFIER) — ouvrir « Bistro Handoff.dc.html »
 BistroKit/               Package Swift contenant TOUT le jeu
   Sources/GameCore/      Moteur en Swift pur (Foundation seulement). Testable sous Linux.
     Engine/              Game (simulation + actions), événements, RNG déterministe
@@ -33,13 +34,13 @@ BistroKit/               Package Swift contenant TOUT le jeu
   Sources/BistroUI/      Présentation SwiftUI + SpriteKit (Apple uniquement, exclu sous Linux)
     State/               GameStore (@Observable, fait tourner le moteur, sauvegarde)
     Theme/               DesignTokens (couleurs, typo, espacements, rayons, ombres, animations)
-    Components/          Composants réutilisables (GameImage + placeholder, boutons, cartes…)
-    Screens/             Écrans
+    Components/          Composants du design system (boutons, hud.currency, badge, jauges, Panel…)
+    Screens/             Écrans (Main/ = HUD + scène provisoire + barre d'actions)
     Localization/        L10n (accès au String Catalog)
-    Resources/           Localizable.xcstrings (en + fr)
+    Resources/           Localizable.xcstrings (en + fr), Fonts/ (OFL), Sketches.xcassets (croquis du handoff)
   Sources/BalanceSim/    Outil CLI de simulation d'équilibrage (`swift run BalanceSim`)
   Tests/                 GameCoreTests, GameDataTests (Swift Testing)
-scripts/                 test.sh, setup-linux-swift.sh
+scripts/                 test.sh, setup-linux-swift.sh, design/export-sketches.sh
 HANDOFF_INTEGRATION.md   Ce que l'on attend du design (tokens, composants, assets)
 ```
 
@@ -59,6 +60,22 @@ HANDOFF_INTEGRATION.md   Ce que l'on attend du design (tokens, composants, asset
 8. La présentation lit l'état du moteur et lui envoie des actions ; elle ne contient pas de règles de jeu.
 9. Pas de dépendance tierce sans accord explicite du porteur de projet.
 10. Services externes (pubs, analytics, achats) derrière des protocoles avec implémentation factice.
+
+## Design (handoff Claude Design, direction « Riso chaud »)
+
+- Source de vérité visuelle : `docs/design/` (lecture seule). État de l'intégration et questions
+  ouvertes : `HANDOFF_INTEGRATION.md` (à tenir à jour à chaque jalon).
+- **Chaque nouvel écran est construit directement selon sa maquette annotée** (dimensions, états,
+  cas limites, animations, haptiques). Si la maquette contredit le moteur ou manque d'info :
+  le noter dans HANDOFF_INTEGRATION.md §4 et demander, ne pas improviser.
+- Tokens = noms du handoff (`color.bg.paper` → `Theme.Colors.bgPaper`, `type.title.m` →
+  `Theme.Typography.titleM` via `.typography(...)`). Ombres = décalage d'encre sans flou (`inkShadow`),
+  seule la sheet a une ombre floue. Jamais de noir pur, jamais de sanguine pour du texte courant,
+  un état désactivé = tirets + cadenas + teinte creuse (jamais l'opacité seule).
+- Nombres affichés : toujours `CompactNumber.format(_, style: L10n.numberStyle)`.
+- Images : `GameImage(AssetName.…)` → finaux (`Bistro/Assets.xcassets`) > croquis > SF Symbol > placeholder.
+- Navigation : la scène est l'écran principal ; HUD en haut (lecture + réglages) ; barre d'actions
+  en bas (Habitués · Améliorer · Labo · Menu · Boutique) qui ouvre chaque page en sheet 92 %.
 
 ## Conventions
 
@@ -107,6 +124,7 @@ BistroUI et l'app ne compilent que sur Mac avec Xcode 16+.
 
 - [x] M0 – Mise en place (modules, Theme, JSON valides, tests, docs)
 - [x] M1 – Moteur de base (état, pièces, clients, stations, menu, service, sauvegarde, horloge)
+- [x] Design – tokens, polices, composants de base, navigation, croquis en placeholders (handoff v1.0)
 - [ ] M2 – Scène jouable provisoire (placeholders, tap pour accélérer, HUD, améliorations)
 - [ ] M3 – Labo de recettes (combinaisons, indices, livre de recettes, gestion du menu, ~30 recettes)
 - [ ] M4 – Habitués (fréquences, demandes, affinité, carnet, histoires)
@@ -114,4 +132,4 @@ BistroUI et l'app ne compilent que sur Mac avec Xcode 16+.
 - [ ] M6 – Simulateur d'équilibrage + premier rapport
 - [ ] M7 – Monétisation derrière interfaces (mock pubs, StoreKit 2) + analytics
 - [ ] M8 – Tutoriel + localisation FR/EN complète + réglages
-- [ ] M9 – (à préciser)
+- [ ] M9 – Intégration des illustrations finales (liste : HANDOFF_INTEGRATION.md §3)

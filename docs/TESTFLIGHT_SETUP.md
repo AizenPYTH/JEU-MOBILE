@@ -210,20 +210,17 @@ de `dist.p12`, de son mot de passe et du `.p8` dans ton gestionnaire de mots de 
 
 ---
 
-## 8. Créer la branche `main`
+## 8. Faire de `main` la branche par défaut
 
-Pour l'instant, le dépôt n'a qu'une branche : `claude/busy-hopper-5dgev5`. Le workflow macOS se
-lance sur les pull requests **vers `main`**, et le bouton « Run workflow » apparaît pour la branche
-par défaut.
+La branche `main` existe déjà : je l'ai créée à partir de ma branche de travail. Il reste à en faire
+la branche par défaut (je n'ai pas d'outil pour ça) :
 
-1. GitHub → dépôt → **Code** → menu des branches → **View all branches** → **New branch**.
-2. Nom : `main`, source : `claude/busy-hopper-5dgev5` → **Create branch**.
-3. **Settings** → **General** → **Default branch** → bouton ⇄ → choisis `main` → **Update**.
+1. GitHub → dépôt → **Settings** → **General** → section **Default branch**.
+2. Clique sur le bouton ⇄ (Switch to another branch), choisis `main`, puis **Update** et confirme.
 
-Désormais, je travaille sur une branche et j'ouvre une PR vers `main` : chaque PR produit
-automatiquement un build TestFlight.
-
----
+Ensuite, je travaille sur une branche et j'ouvre une PR vers `main` : chaque PR produit un build
+TestFlight automatiquement. Le bouton « Run workflow » permet aussi de lancer un build sur n'importe
+quelle branche.
 
 ## 9. Lancer le build
 
