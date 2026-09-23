@@ -24,18 +24,39 @@ final class GameSession {
     private(set) var banner: PhoneNotification?
     /// Last time cost, flashed next to the timer ("−8 s").
     private(set) var lastCost: TimeCostFlash?
+    /// "◆ Ajouté au carnet · n" / "Retiré du carnet".
+    private(set) var toast: Toast?
 
     @ObservationIgnored private let investigation: Investigation
     @ObservationIgnored private var loop: Task<Void, Never>?
     @ObservationIgnored private var bannerTask: Task<Void, Never>?
     @ObservationIgnored private var bannerQueue: [PhoneNotification] = []
     @ObservationIgnored private var costTask: Task<Void, Never>?
+    @ObservationIgnored private var toastTask: Task<Void, Never>?
     @ObservationIgnored private let onFinish: (Verdict) -> Void
 
     struct TimeCostFlash: Equatable, Identifiable {
         let id: Int
         let seconds: Int
     }
+
+    struct Toast: Equatable, Identifiable {
+        let id: Int
+        let text: String
+    }
+
+    enum TimerLevel: Equatable {
+        case normal, low, critical
+    }
+
+    var timerLevel: TimerLevel {
+        if remainingSeconds <= Double(rules.criticalTimeSeconds) { return .critical }
+        if remainingSeconds <= Double(rules.lowTimeWarningSeconds) { return .low }
+        return .normal
+    }
+
+    /// 0…1 of the case duration still available (status bar track).
+    var timeProgress: Double { investigation.durationSeconds > 0 ? remainingSeconds / investigation.durationSeconds : 0 }
 
     init(caseFile: CaseFile, rules: GameRules, clock: any GameClock = SystemClock(), onFinish: @escaping (Verdict) -> Void) {
         let investigation = Investigation(caseFile: caseFile, rules: rules, clock: clock)
@@ -218,6 +239,37 @@ final class GameSession {
         return hint
     }
 
+    // MARK: Notebook
+
+    func isPinned(_ ref: ItemRef) -> Bool { game.isPinned(ref) }
+
+    func togglePin(_ ref: ItemRef) {
+        let pinned = investigation.togglePin(ref)
+        Haptics.pin()
+        showToast(pinned ? L10n.f("toast.pinned", investigation.notebook.count) : L10n.t("toast.unpinned"))
+        refresh()
+    }
+
+    func link(_ ref: ItemRef, to suspect: SuspectID?) {
+        investigation.link(ref, to: suspect)
+        Haptics.pin()
+        if let suspect, let s = investigation.index.suspect(suspect) {
+            showToast(L10n.f("toast.linked", investigation.name(of: s.contact)))
+        }
+        refresh()
+    }
+
+    private func showToast(_ text: String) {
+        let toast = Toast(id: (self.toast?.id ?? 0) + 1, text: text)
+        self.toast = toast
+        toastTask?.cancel()
+        toastTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(2))
+            guard !Task.isCancelled, self?.toast == toast else { return }
+            self?.toast = nil
+        }
+    }
+
     func requestAccusation() {
         investigation.requestAccusation()
         refresh()
@@ -236,16 +288,26 @@ final class GameSession {
         onFinish(verdict)
     }
 
-    // MARK: Banners
+    // MARK: Banners (1 visible, up to 3 waiting, urgent > important > normal)
 
     private func enqueueBanner(_ n: PhoneNotification) {
-        if banner == nil { show(n) } else { bannerQueue.append(n) }
+        if n.level == .urgent { Haptics.urgent() }
+        guard let current = banner else { show(n); return }
+        if n.level > current.level && current.level != .urgent {
+            bannerQueue.insert(current, at: 0)
+            show(n)
+        } else {
+            bannerQueue.append(n)
+            bannerQueue.sort { $0.level > $1.level }
+            if bannerQueue.count > 3 { bannerQueue.removeLast() }
+        }
     }
 
     private func show(_ n: PhoneNotification) {
         banner = n
         bannerTask?.cancel()
-        let seconds = rules.bannerSeconds
+        guard n.level != .urgent else { return } // urgent stays until the player acts
+        let seconds = n.level == .important ? rules.bannerSeconds + 1.5 : rules.bannerSeconds
         bannerTask = Task { [weak self] in
             try? await Task.sleep(for: .seconds(seconds))
             guard !Task.isCancelled else { return }
@@ -258,29 +320,53 @@ final class GameSession {
         banner = nil
         if !bannerQueue.isEmpty { show(bannerQueue.removeFirst()) }
     }
-}
 
 /// Light, meaningful haptics only: a notification, the last minute, the end.
 enum Haptics {
     static func notification() {
+        guard Preferences.vibrations else { return }
         #if canImport(UIKit)
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         #endif
     }
 
     static func warning() {
+        guard Preferences.vibrations else { return }
         #if canImport(UIKit)
         UINotificationFeedbackGenerator().notificationOccurred(.warning)
         #endif
     }
 
     static func timeUp() {
+        guard Preferences.vibrations else { return }
         #if canImport(UIKit)
         UINotificationFeedbackGenerator().notificationOccurred(.error)
         #endif
     }
 
+    static func pin() {
+        guard Preferences.vibrations else { return }
+        #if canImport(UIKit)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        #endif
+    }
+
+    static func urgent() {
+        guard Preferences.vibrations else { return }
+        #if canImport(UIKit)
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        #endif
+    }
+
+    static func success() {
+        guard Preferences.vibrations else { return }
+        #if canImport(UIKit)
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        #endif
+    }
+
     static func selection() {
+        guard Preferences.vibrations else { return }
         #if canImport(UIKit)
         UISelectionFeedbackGenerator().selectionChanged()
         #endif

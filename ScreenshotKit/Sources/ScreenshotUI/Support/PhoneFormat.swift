@@ -9,6 +9,14 @@ enum PhoneFormat {
     private static let shortMonths = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août",
                                       "sept.", "oct.", "nov.", "déc."]
 
+    /// "SAM"
+    static func weekdayShort(_ m: Moment) -> String { String(weekdays[m.weekday - 1].prefix(3)).uppercased() }
+
+    /// "SAM. 19 SEPT." — date separators (mono 11, caps).
+    static func separatorCaps(_ m: Moment) -> String {
+        "\(weekdays[m.weekday - 1].prefix(3)). \(m.day) \(shortMonths[m.month - 1])".uppercased()
+    }
+
     /// "22:17"
     static func time(_ m: Moment) -> String { m.clockText }
 

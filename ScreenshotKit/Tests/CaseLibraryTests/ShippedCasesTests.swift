@@ -126,8 +126,8 @@ struct PlaythroughTests {
 
         let verdict = try #require(game.accuse("s_emma"))
         #expect(verdict.isCorrect)
-        #expect(verdict.foundKeyCount == verdict.totalKeyCount, "missed: \(verdict.missedKey.map(\.id))")
-        #expect(verdict.score >= 70)
+        #expect(!verdict.missed.contains { $0.importance == .key }, "missed: \(verdict.missed.map(\.id))")
+        #expect(verdict.score >= 75)
     }
 
     @Test func runningOutOfTimeThenAccusingTheWrongPerson() throws {
@@ -138,7 +138,7 @@ struct PlaythroughTests {
         game.openApp(.messages)
         game.openConversation("c_group")
         game.markSeen(ItemRef(.message, "m_group_lucas_2340")) // …and his lie in the group.
-        game.pin(ItemRef(.message, "m_group_lucas_2340"), to: "s_lucas")
+        game.link(ItemRef(.message, "m_group_lucas_2340"), to: "s_lucas")
 
         let events = wait(480, game, clock)
         #expect(events.contains(.timeUp))
@@ -150,7 +150,9 @@ struct PlaythroughTests {
         // What they got right about Lucas is acknowledged…
         #expect(Set(verdict.foundAboutAccused.map(\.id)).isSuperset(of: ["e_lucas_route", "f_lucas_lie"]))
         // …and what they missed is listed, to make them want to replay.
-        #expect(verdict.missedKey.contains { $0.id == "e_photo_meta" })
-        #expect(verdict.score < 50)
+        #expect(verdict.missed.contains { $0.id == "e_photo_meta" })
+        #expect(verdict.alibi?.contains("rocade") == true && verdict.trap != nil)
+        #expect((verdict.missedByApp[.photos] ?? 0) >= 1 && (verdict.missedByApp[.trash] ?? 0) >= 1)
+        #expect(verdict.score < 40)
     }
 }

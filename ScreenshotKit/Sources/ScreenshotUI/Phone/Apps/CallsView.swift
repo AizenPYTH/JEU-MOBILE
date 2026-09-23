@@ -26,12 +26,8 @@ struct CallsView: View {
         .navigationTitle(L10n.t("calls.title"))
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Picker("", selection: $missedOnly) {
-                    Text(L10n.t("calls.all")).tag(false)
-                    Text(L10n.t("calls.missed")).tag(true)
-                }
-                .pickerStyle(.segmented)
-                .frame(width: 200)
+                Segmented(options: [(false, L10n.t("calls.all")), (true, L10n.t("calls.missed"))], selection: $missedOnly)
+                    .frame(width: 220)
             }
         }
     }
@@ -42,44 +38,31 @@ struct CallRow: View {
     let game: Investigation
 
     var body: some View {
-        HStack(spacing: Theme.Spacing.m) {
-            Image(systemName: icon)
-                .foregroundStyle(call.direction == .missed ? Theme.Colors.missed : Theme.Colors.textSecondary)
-                .frame(width: 22)
-            VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+        let missed = call.direction == .missed
+        HStack(spacing: Theme.Spacing.s4) {
+            Text(CallsFormat.arrow(call))
+                .font(Theme.Fonts.headline)
+                .foregroundStyle(missed ? Theme.Colors.alertText : Theme.Colors.textSecondary)
+                .frame(width: 20)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                 Text(game.name(of: call.contact))
                     .font(Theme.Fonts.headline)
-                    .foregroundStyle(call.direction == .missed ? Theme.Colors.missed : Theme.Colors.textPrimary)
-                Text(label)
-                    .font(Theme.Fonts.subheadline)
+                    .foregroundStyle(missed ? Theme.Colors.alertText : Theme.Colors.textPrimary)
+                Text(CallsFormat.label(call))
+                    .font(Theme.Fonts.data)
                     .foregroundStyle(Theme.Colors.textSecondary)
             }
             Spacer()
-            VStack(alignment: .trailing, spacing: Theme.Spacing.xxs) {
-                Text(PhoneFormat.relative(call.at, now: game.phoneNow))
-                Text(PhoneFormat.time(call.at)).monospacedDigit()
+            VStack(alignment: .trailing, spacing: Theme.Spacing.s1) {
+                Text(PhoneFormat.relative(call.at, now: game.phoneNow)).font(Theme.Fonts.caption)
+                Text(PhoneFormat.time(call.at)).font(Theme.Fonts.data)
             }
-            .font(Theme.Fonts.subheadline)
-            .foregroundStyle(Theme.Colors.textSecondary)
+            .foregroundStyle(Theme.Colors.textTertiary)
         }
-        .padding(.vertical, Theme.Spacing.xxs)
+        .frame(minHeight: Theme.Size.callRow)
         .contentShape(Rectangle())
-    }
-
-    private var icon: String {
-        switch call.direction {
-        case .incoming: "phone.arrow.down.left"
-        case .outgoing: "phone.arrow.up.right"
-        case .missed: "phone.down.fill"
-        }
-    }
-
-    private var label: String {
-        switch call.direction {
-        case .incoming: L10n.f("calls.incoming", PhoneFormat.duration(call.durationSeconds))
-        case .outgoing: call.durationSeconds > 0 ? L10n.f("calls.outgoing", PhoneFormat.duration(call.durationSeconds)) : L10n.t("calls.noAnswer")
-        case .missed: L10n.t("calls.missedLabel")
-        }
+        .accessibilityElement(children: .combine)
     }
 }
 #endif

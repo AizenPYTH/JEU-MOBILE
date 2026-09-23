@@ -2374,7 +2374,8 @@
       "at": "2026-09-13 10:00",
       "text": "Alex réponds stp, faut que je te parle d'hier soir"
      },
-     "opens": "message:m_lv01"
+     "opens": "message:m_lv01",
+     "level": "normal"
     },
     {
      "id": "lv02",
@@ -2390,7 +2391,8 @@
       "at": "2026-09-13 10:01",
       "durationSeconds": 0
      },
-     "opens": "call:k_lv02"
+     "opens": "call:k_lv02",
+     "level": "important"
     },
     {
      "id": "lv03",
@@ -2406,7 +2408,8 @@
       "at": "2026-09-13 10:00",
       "text": "La police a son téléphone ?? Quelqu'un sait où il allait après le Levant ?"
      },
-     "opens": "message:m_lv03"
+     "opens": "message:m_lv03",
+     "level": "normal"
     },
     {
      "id": "lv04",
@@ -2422,7 +2425,8 @@
       "at": "2026-09-13 10:00",
       "text": "Je te jure que j'ai rien à voir avec ça. J'étais au boulot toute la nuit."
      },
-     "opens": "message:m_lv04"
+     "opens": "message:m_lv04",
+     "level": "important"
     },
     {
      "id": "lv05",
@@ -2431,7 +2435,8 @@
      "app": "calendar",
      "title": "Demain 09:00",
      "body": "Bureau Lumen — comptes · Local du collectif",
-     "opens": "calendar:c_ev09"
+     "opens": "calendar:c_ev09",
+     "level": "important"
     },
     {
      "id": "lv06",
@@ -2442,7 +2447,8 @@
      "body": "Emma a supprimé un message",
      "conversation": "c_group",
      "deletesMessage": "m_group_emma_2234",
-     "opens": "message:m_group_emma_2234"
+     "opens": "message:m_group_emma_2234",
+     "level": "important"
     },
     {
      "id": "lv07",
@@ -2458,7 +2464,8 @@
       "at": "2026-09-13 10:00",
       "text": "Si quelqu'un lit ces messages : Alex allait bien quand je l'ai quitté."
      },
-     "opens": "message:m_live_emma_quit"
+     "opens": "message:m_live_emma_quit",
+     "level": "urgent"
     },
     {
      "id": "lv08",
@@ -2474,7 +2481,8 @@
       "at": "2026-09-13 10:00",
       "text": "J'ai pas tout dit à la police. J'ai déposé quelqu'un au port hier soir. Je peux pas dire qui."
      },
-     "opens": "message:m_live_lucas_port"
+     "opens": "message:m_live_lucas_port",
+     "level": "urgent"
     },
     {
      "id": "lv09",
@@ -2490,7 +2498,8 @@
       "at": "2026-09-13 10:00",
       "text": "Mon « je sais ce que tu as fait », c'était pour Hugo et Lyon. Rien d'autre. Je m'en veux."
      },
-     "opens": "message:m_live_sarah_hugo"
+     "opens": "message:m_live_sarah_hugo",
+     "level": "normal"
     }
    ]
   }
@@ -2500,6 +2509,11 @@
    "id": "s_sarah",
    "contact": "sarah",
    "role": "Ex d'Alex",
+   "age": 27,
+   "address": "Rue des Lilas",
+   "alibi": "À 22:19, Sarah photographiait l'anniversaire de sa sœur Jade, rue des Lilas — sa position partagée l'y place de 21:29 à minuit.",
+   "alibiEvidence": "e_sarah_alibi",
+   "trap": "« Je sais ce que tu as fait » sonnait comme une menace. C'était une histoire de famille : Alex savait avant elle que son frère partait à Lyon.",
    "statement": "« J'ai quitté le Levant vers 21h pour l'anniversaire de ma sœur. Je n'ai pas revu Alex. »",
    "verdict": "Sarah n'était pas impliquée. Son « Je sais ce que tu as fait » visait une histoire de famille : Alex savait que son frère Hugo partait à Lyon. À 22:19, elle photographiait l'anniversaire de sa sœur, rue des Lilas, à l'autre bout de la ville."
   },
@@ -2507,6 +2521,11 @@
    "id": "s_karim",
    "contact": "karim",
    "role": "Ami — Alex lui doit 1 200 €",
+   "age": 30,
+   "address": "Quartier de la Gare",
+   "alibi": "Karim était à l'accueil de l'hôtel Le Cygne de 20:48 au matin : sa position et sa photo du comptoir de 22:47 le confirment.",
+   "alibiEvidence": "e_karim_alibi",
+   "trap": "Une dette, des messages menaçants, une note « Ne jamais faire confiance à K. » : un mobile parfait, mais aucune occasion.",
    "statement": "« J'ai pris mon service à l'hôtel Le Cygne à 21h. Je n'ai pas bougé de la nuit. »",
    "verdict": "Karim avait un mobile — une dette de 1 200 € et des messages menaçants — mais pas l'occasion. Sa position le place à l'hôtel Le Cygne de 20:48 au matin, et sa photo du comptoir est bien prise à 22:47."
   },
@@ -2514,6 +2533,11 @@
    "id": "s_lucas",
    "contact": "lucas",
    "role": "Meilleur ami d'Alex",
+   "age": 27,
+   "address": "Avenue des Chênes",
+   "alibi": "À 22:24, Lucas roulait déjà sur la rocade Nord, et Alex écrivait encore à 22:26. Il avait seulement déposé quelqu'un au port.",
+   "alibiEvidence": "e_draft",
+   "trap": "Il a menti sur sa soirée et sa voiture était au port à 22:17. Mais il protégeait quelqu'un, pas lui-même.",
    "statement": "« Je suis rentré directement chez moi après le Levant. J'étais au lit vers 22h. »",
    "verdict": "Lucas a menti, mais pas pour se couvrir lui-même. Il a déposé quelqu'un au port à 22:17 puis il est reparti : à 22:24 il roulait sur la rocade Nord, et Alex était encore en train d'écrire à 22:26."
   },
@@ -2521,6 +2545,8 @@
    "id": "s_emma",
    "contact": "emma",
    "role": "Co-fondatrice du collectif Lumen",
+   "age": 28,
+   "address": "Rue Paradis",
    "statement": "« J'avais la migraine. Je suis restée chez moi toute la soirée. »",
    "verdict": "Emma Roussel a menti sur toute sa soirée. Elle a donné rendez-vous à Alex au parking du Quai 9 à 22h, s'est fait conduire au port par Lucas, puis s'est fabriqué un alibi avec une photo prise à 19:42."
   }
@@ -2735,23 +2761,67 @@
  "hints": [
   {
    "id": "h1",
-   "text": "Regardez où se trouvait chacun entre 21h et 23h. Et qui a cessé d'être visible.",
-   "costSeconds": 40
+   "text": "Comparez ce que chacun affirme avec les positions partagées entre 21h et 23h. Et regardez qui a cessé d'être visible.",
+   "scoreCost": 0
   },
   {
    "id": "h2",
    "text": "Une photo n'est pas toujours prise au moment où elle est envoyée.",
-   "costSeconds": 40
+   "scoreCost": 8
   },
   {
    "id": "h3",
-   "text": "Ce qui a été effacé n'a pas forcément disparu. Pensez à la corbeille.",
-   "costSeconds": 40
+   "text": "Ce qui a été effacé n'a pas forcément disparu : la corbeille garde les messages de 21:40.",
+   "scoreCost": 15,
+   "unlockAtRemainingSeconds": 120
   }
  ],
  "solution": {
   "culprit": "s_emma",
   "headline": "Emma Roussel a attiré Alex au Quai 9 pour le faire taire.",
+  "summary": "Elle disait être restée au lit. Elle était au port, et elle avait tout à perdre lundi matin.",
+  "reveal": [
+   {
+    "at": "2026-09-09 17:48",
+    "text": "Le comptable signale 4 300 € de fausses factures validées par Emma",
+    "evidence": "e_motive"
+   },
+   {
+    "at": "2026-09-12 21:31",
+    "text": "Emma coupe le partage de sa position",
+    "evidence": "e_sharing"
+   },
+   {
+    "at": "2026-09-12 21:40",
+    "text": "« Parking du Quai 9. 22h. Viens seul. » — puis « efface cette conversation »",
+    "evidence": "e_rdv"
+   },
+   {
+    "at": "2026-09-12 21:44",
+    "text": "Alex note le rendez-vous : « P. Quai 9 — E. »",
+    "evidence": "e_calendar"
+   },
+   {
+    "at": "2026-09-12 21:58",
+    "text": "Lucas s'arrête rue Paradis, chez Emma, puis la dépose au port à 22:17",
+    "evidence": "e_lucas_route"
+   },
+   {
+    "at": "2026-09-12 22:26",
+    "text": "Alex commence à écrire : « Si il m'arrive un truc, c'est à cause de… »",
+    "evidence": "e_draft"
+   },
+   {
+    "at": "2026-09-12 22:30",
+    "text": "Emma envoie une photo « chez moi », prise en réalité à 19:42",
+    "evidence": "e_photo_meta"
+   },
+   {
+    "at": "2026-09-13 10:05",
+    "text": "« Alex allait bien quand je l'ai quitté » : elle admet l'avoir vu",
+    "evidence": "e_quit"
+   }
+  ],
   "story": [
    "Mercredi 9 septembre, le cabinet comptable prévient Alex : trois factures « Studio Nova », 4 300 €, validées par la trésorière du collectif Lumen. Studio Nova n'existe pas. Son adresse : la rue Paradis, chez Emma.",
    "Alex décide de lui en parler avant la réunion du bureau, lundi 9h. Emma, elle, le supplie de ne rien dire aux autres.",

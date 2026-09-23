@@ -10,8 +10,8 @@ enum Fixtures {
         timeCosts: .init(openApp: 1, openConversation: 3, loadOlderMessages: 6, search: 8, openPhoto: 2, analyzePhoto: 15,
                          openTrack: 8, openCalendarEvent: 3, openNote: 5, openMail: 5, openBrowserEntry: 3, openContact: 2,
                          recoverMessage: 12, unlockAttempt: 5),
-        messagesPageSize: 3, lowTimeWarningSeconds: 60, bannerSeconds: 4,
-        scoring: .init(correctSuspect: 50, keyEvidence: 25, timeLeft: 15, supportingEvidence: 10, hintPenalty: 5, falseLeadPenalty: 3))
+        messagesPageSize: 3, lowTimeWarningSeconds: 60, criticalTimeSeconds: 10, bannerSeconds: 4,
+        scoring: .init(correctSuspect: 60, found: 25, timeLeft: 10, notebookPrecision: 5))
 
     static var caseFile: CaseFile {
         let contacts = [
@@ -61,7 +61,8 @@ enum Fixtures {
             schemaVersion: 1, id: "case_test", number: 99, title: "TEST", tagline: "", synopsis: ["…"], objective: "…",
             difficulty: 1, durationSeconds: 300, phoneStartTime: m("2026-09-13 10:00"), devices: [device],
             suspects: [
-                Suspect(id: "s_lucas", contact: "lucas", role: "Ami", statement: "Chez moi.", verdict: "Lucas n'y est pour rien."),
+                Suspect(id: "s_lucas", contact: "lucas", role: "Ami", statement: "Chez moi.", verdict: "Lucas n'y est pour rien.",
+                        alibi: "Il était reparti.", alibiEvidence: "ev_draft", trap: "Il était au port."),
                 Suspect(id: "s_emma", contact: "emma", role: "Asso", statement: "Chez moi.", verdict: "Emma a menti."),
             ],
             evidence: [
@@ -74,8 +75,11 @@ enum Fixtures {
                 Evidence(id: "ev_draft", title: "Brouillon", meaning: "Vivant à 22:26.", refs: [ItemRef(.draft, "d1")],
                          anyOf: nil, importance: .supporting, suspects: ["s_lucas"]),
             ],
-            hints: [Hint(id: "h1", text: "La corbeille.", costSeconds: 40)],
-            solution: Solution(culprit: "s_emma", headline: "Emma", story: ["…"]))
+            hints: [Hint(id: "h1", text: "La corbeille.", scoreCost: 0),
+                    Hint(id: "h2", text: "La photo.", scoreCost: 8),
+                    Hint(id: "h3", text: "Le calendrier.", scoreCost: 15, unlockAtRemainingSeconds: 120)],
+            solution: Solution(culprit: "s_emma", headline: "Emma", summary: "…",
+                               reveal: [RevealStep(at: m("2026-09-12 21:40"), text: "RDV", evidence: "ev_rdv")], story: ["…"]))
     }
 
     static func investigation() -> (Investigation, ManualClock) {

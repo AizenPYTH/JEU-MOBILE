@@ -10,25 +10,25 @@ struct LocationView: View {
         let game = session.game
         let tracks = game.device.tracks
         ScrollView {
-            VStack(spacing: Theme.Spacing.l) {
+            VStack(spacing: Theme.Spacing.s5) {
                 CityMap(places: game.device.places, tracks: [], highlight: nil)
                     .frame(height: Theme.Size.mapHeight)
-                    .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.m))
-                    .padding(.horizontal, Theme.Spacing.l)
+                    .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
+                    .padding(.horizontal, Theme.Spacing.s5)
 
                 VStack(spacing: 0) {
                     ForEach(tracks) { track in
                         Button {
                             session.open(.track(track.id))
                         } label: {
-                            HStack(spacing: Theme.Spacing.m) {
+                            HStack(spacing: Theme.Spacing.s4) {
                                 Avatar(contact: game.contact(track.contact))
-                                VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+                                VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                                     Text(track.contact == ownerContactID ? L10n.t("location.me") : game.name(of: track.contact))
                                         .font(Theme.Fonts.headline)
                                     Text(subtitle(track, game))
-                                        .font(Theme.Fonts.subheadline)
-                                        .foregroundStyle(track.sharingStoppedAt != nil ? Theme.Colors.warning : Theme.Colors.textSecondary)
+                                        .font(Theme.Fonts.callout)
+                                        .foregroundStyle(track.sharingStoppedAt != nil ? Theme.Colors.signal : Theme.Colors.textSecondary)
                                 }
                                 Spacer()
                                 Text(L10n.f("common.cost", session.rules.timeCosts.openTrack))
@@ -36,16 +36,16 @@ struct LocationView: View {
                                     .foregroundStyle(Theme.Colors.textTertiary)
                                 Image(systemName: "chevron.right").foregroundStyle(Theme.Colors.textTertiary)
                             }
-                            .padding(.vertical, Theme.Spacing.m)
+                            .padding(.vertical, Theme.Spacing.s4)
                             .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
-                        Divider().overlay(Theme.Colors.separator)
+                        Divider().overlay(Theme.Colors.line2)
                     }
                 }
-                .padding(.horizontal, Theme.Spacing.l)
+                .padding(.horizontal, Theme.Spacing.s5)
             }
-            .padding(.vertical, Theme.Spacing.m)
+            .padding(.vertical, Theme.Spacing.s4)
         }
         .navigationTitle(AppID.location.title)
     }
@@ -67,49 +67,49 @@ struct TrackView: View {
         if let track = game.index.track(trackID) {
             let points = track.points.sorted { $0.at < $1.at }
             ScrollView {
-                VStack(alignment: .leading, spacing: Theme.Spacing.l) {
+                VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
                     CityMap(places: game.device.places, tracks: [track], highlight: nil)
                         .frame(height: Theme.Size.mapHeight)
-                        .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.m))
+                        .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
 
                     if let stopped = track.sharingStoppedAt {
                         Label(L10n.f("location.stoppedAt", game.name(of: track.contact), PhoneFormat.dayAndTime(stopped)),
                               systemImage: "location.slash.fill")
-                            .font(Theme.Fonts.subheadline.weight(.medium))
-                            .foregroundStyle(Theme.Colors.warning)
+                            .font(Theme.Fonts.callout.weight(.medium))
+                            .foregroundStyle(Theme.Colors.signal)
                     }
 
                     VStack(alignment: .leading, spacing: 0) {
                         ForEach(Array(points.enumerated()), id: \.element.id) { offset, point in
-                            HStack(alignment: .top, spacing: Theme.Spacing.m) {
+                            HStack(alignment: .top, spacing: Theme.Spacing.s4) {
                                 VStack(spacing: 0) {
                                     Text("\(offset + 1)")
-                                        .font(Theme.Fonts.caption2.weight(.bold))
+                                        .font(Theme.Fonts.dataSmall.weight(.bold))
                                         .foregroundStyle(.black)
                                         .frame(width: 20, height: 20)
-                                        .background(Circle().fill(Theme.Colors.accent))
+                                        .background(Circle().fill(Theme.Colors.signal))
                                     if offset < points.count - 1 {
-                                        Rectangle().fill(Theme.Colors.separator).frame(width: 2).frame(minHeight: 28)
+                                        Rectangle().fill(Theme.Colors.line2).frame(width: 2).frame(minHeight: 28)
                                     }
                                 }
-                                VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+                                VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                                     Text("\(PhoneFormat.shortDay(point.at)) · \(PhoneFormat.time(point.at))")
-                                        .font(Theme.Fonts.subheadline.weight(.semibold))
+                                        .font(Theme.Fonts.callout.weight(.semibold))
                                         .monospacedDigit()
                                     Text(game.index.place(point.place)?.name ?? point.place)
-                                        .font(Theme.Fonts.subheadline)
+                                        .font(Theme.Fonts.callout)
                                     if let note = point.note {
                                         Text(note)
                                             .font(Theme.Fonts.caption)
                                             .foregroundStyle(Theme.Colors.textSecondary)
                                     }
                                 }
-                                .padding(.bottom, Theme.Spacing.m)
+                                .padding(.bottom, Theme.Spacing.s4)
                             }
                         }
                     }
                 }
-                .padding(Theme.Spacing.l)
+                .padding(Theme.Spacing.s5)
             }
             .navigationTitle(track.contact == ownerContactID ? L10n.t("location.me") : game.name(of: track.contact))
             .navigationBarTitleDisplayMode(.inline)
@@ -151,7 +151,7 @@ struct CityMap: View {
                         var route = Path()
                         route.move(to: first)
                         points.dropFirst().forEach { route.addLine(to: $0) }
-                        context.stroke(route, with: .color(Theme.Colors.accent.opacity(0.8)),
+                        context.stroke(route, with: .color(Theme.Colors.signal.opacity(0.8)),
                                        style: StrokeStyle(lineWidth: 2.5, lineCap: .round, dash: [6, 4]))
                     }
                 }
@@ -159,7 +159,7 @@ struct CityMap: View {
                     let visited = tracks.contains { $0.points.contains { $0.place == place.id } }
                     VStack(spacing: 2) {
                         Circle()
-                            .fill(visited ? Theme.Colors.accent : Theme.Colors.textTertiary)
+                            .fill(visited ? Theme.Colors.signal : Theme.Colors.textTertiary)
                             .frame(width: visited ? 10 : 6, height: visited ? 10 : 6)
                         Text(place.name)
                             .font(.system(size: 9, weight: visited ? .semibold : .regular))

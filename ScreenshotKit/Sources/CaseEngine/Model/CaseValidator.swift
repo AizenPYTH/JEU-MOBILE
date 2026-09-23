@@ -134,7 +134,19 @@ public enum CaseValidator {
         if keyAboutCulprit.count < 2 { fail("the culprit needs at least 2 key pieces of evidence (found \(keyAboutCulprit.count))") }
         if !file.evidence.contains(where: { $0.importance == .falseLead }) { fail("a case needs at least one false lead") }
 
-        for hint in file.hints { register(hint.id, "hint") }
+        for hint in file.hints {
+            register(hint.id, "hint")
+            if hint.scoreCost < 0 { fail("hint '\(hint.id)' has a negative cost") }
+        }
+        let evidenceIDs = Set(file.evidence.map(\.id))
+        for step in file.solution.reveal {
+            if let e = step.evidence, !evidenceIDs.contains(e) { fail("reveal step references unknown evidence '\(e)'") }
+        }
+        if file.solution.reveal.isEmpty { fail("the solution needs reveal steps") }
+        for suspect in file.suspects {
+            if let e = suspect.alibiEvidence, !evidenceIDs.contains(e) { fail("suspect '\(suspect.id)' alibi references unknown evidence '\(e)'") }
+            if suspect.id != file.solution.culprit && suspect.alibi == nil { fail("innocent suspect '\(suspect.id)' needs an alibi") }
+        }
         for device in file.devices {
             for event in device.liveEvents {
                 if let ref = event.opens, !known.contains(ref) { fail("live event '\(event.id)' opens unknown '\(ref)'") }

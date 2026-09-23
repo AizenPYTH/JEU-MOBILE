@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#121417;color:#ECEAE6;font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#E3B158;text-decoration:none}a:hover{color:#F0C87A}
+</style>
+</helmet>
+<section style="padding:72px 80px 96px;display:flex;flex-direction:column;gap:48px">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;max-width:1960px">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.18em;color:#E3B158">SCREENSHOT · AFFAIRE 001</span>
+      <h1 style="margin:0;font-size:44px;font-weight:600;letter-spacing:-0.03em">2 — Le téléphone d'Alex</h1>
+      <p style="margin:0;max-width:680px;font-size:16px;line-height:1.55;color:#A3A29D;text-wrap:pretty">Écrans affichés dans l'ordre d'une partie réelle : le chrono (barre d'état) descend d'écran en écran, le carnet se remplit. Deux éléments de jeu seulement se superposent à l'OS fictif : le chrono en haut à gauche et la capsule « Carnet · Indice » au pouce.</p>
+    </div>
+    <div style="display:flex;gap:24px;font-family:'JetBrains Mono',monospace;font-size:12px">
+      <a href="Screenshot — 1 Jeu.dc.html">← 1 · Jeu</a>
+      <a href="Screenshot — 3 Enquête.dc.html">3 · Enquête →</a>
+      <a href="Screenshot — Design System.dc.html">Design system →</a>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:72px 56px;align-items:flex-start">
+
+    <!-- 08 HOME PHONE -->
+    <div id="08" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">08</span><span style="font-size:14px;font-weight:500">Écran d'accueil du téléphone</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(135deg,#0C0E11 0 14px,#0A0C0E 14px 28px)"></div>
+        <span style="position:absolute;left:24px;bottom:210px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#3E403E">fond d'écran — photo d'Alex et Emma, plage, très sombre</span>
+        <div style="position:relative;display:flex;flex-direction:column;height:100%">
+          <dc-import name="StatusBar" time="07:48" progress="97.5%" hint-size="100%,54px"></dc-import>
+          <div style="padding:26px 28px 30px;display:flex;flex-direction:column;gap:2px">
+            <span style="font-size:15px;color:#A3A29D">Dimanche 20 septembre</span>
+            <span style="font-size:64px;font-weight:300;letter-spacing:-0.04em;line-height:1">08:12</span>
+          </div>
+          <div style="padding:0 22px;display:grid;grid-template-columns:repeat(4,1fr);row-gap:22px">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="position:relative;width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Ms<span style="position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;border-radius:10px;background:#E3B158;color:#0B0C0E;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #0A0C0E">3</span></div><span style="font-size:11px;color:#ECEAE6">Messages</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="position:relative;width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Ap<span style="position:absolute;top:-5px;right:-5px;min-width:20px;height:20px;border-radius:10px;background:#E3B158;color:#0B0C0E;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px #0A0C0E">2</span></div><span style="font-size:11px;color:#ECEAE6">Appels</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Ph</div><span style="font-size:11px;color:#ECEAE6">Photos</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Lc</div><span style="font-size:11px;color:#ECEAE6">Localisation</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#E5534B;font-weight:600;letter-spacing:0.08em">SAM</span><span style="font-size:22px;font-weight:500;line-height:1.05">19</span></div><span style="font-size:11px;color:#ECEAE6">Agenda</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Nt</div><span style="font-size:11px;color:#ECEAE6">Notes</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Nv</div><span style="font-size:11px;color:#ECEAE6">Navigateur</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Ml</div><span style="font-size:11px;color:#ECEAE6">Mail</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Fi</div><span style="font-size:11px;color:#ECEAE6">Fichiers</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px"><div style="width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Cb</div><span style="font-size:11px;color:#ECEAE6">Corbeille</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:7px;opacity:0.45"><div style="width:62px;height:62px;border-radius:17px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500;letter-spacing:-0.02em">Rg</div><span style="font-size:11px;color:#ECEAE6">Réglages</span></div>
+          </div>
+          <div style="flex:1"></div>
+          <div style="display:flex;justify-content:center;gap:6px;padding-bottom:14px"><span style="width:6px;height:6px;border-radius:3px;background:#ECEAE6"></span><span style="width:6px;height:6px;border-radius:3px;background:rgba(236,234,230,0.25)"></span></div>
+          <div style="margin:0 14px 104px;padding:14px 18px;border-radius:30px;background:rgba(28,31,36,0.6);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:inset 0 0 0 1px rgba(236,234,230,0.07);display:grid;grid-template-columns:repeat(4,1fr);justify-items:center">
+            <div style="width:62px;height:62px;border-radius:17px;background:#1E2227;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500">Ct</div>
+            <div style="width:62px;height:62px;border-radius:17px;background:#1E2227;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500">Ap</div>
+            <div style="width:62px;height:62px;border-radius:17px;background:#1E2227;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500">Ms</div>
+            <div style="width:62px;height:62px;border-radius:17px;background:#1E2227;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.09);display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:500">Ph</div>
+          </div>
+        </div>
+        <dc-import name="CarnetBar" count="0" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Icônes « tableau périodique » : 2 lettres, monochromes, propres à l'OS fictif. Badges ambre = non lu. Réglages grisé = verrouillé (hors enquête). Swipe gauche : page 2 (Galerie des apps secondaires : Météo, Horloge, Banque — décor).</p>
+    </div>
+
+    <!-- 09 MESSAGES LIST -->
+    <div id="09" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">09</span><span style="font-size:14px;font-weight:500">Messages · liste</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="07:31" progress="94%" hint-size="100%,54px"></dc-import>
+        <div style="padding:8px 16px 0;display:flex;align-items:center;justify-content:space-between;height:44px"><span style="font-size:17px;color:#A3A29D;display:flex;gap:4px;align-items:center"><span style="font-size:24px;line-height:1">‹</span>Accueil</span><span style="font-size:15px;color:#A3A29D">Modifier</span></div>
+        <div style="padding:2px 20px 12px;display:flex;flex-direction:column;gap:14px">
+          <h2 style="margin:0;font-size:34px;font-weight:600;letter-spacing:-0.03em">Messages</h2>
+          <div style="height:40px;border-radius:12px;background:#16191D;display:flex;align-items:center;gap:8px;padding:0 12px"><span style="width:12px;height:12px;border-radius:6px;box-shadow:inset 0 0 0 1.5px #6B6B67"></span><span style="font-size:16px;color:#6B6B67">Rechercher un nom, un mot, une date</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;padding:0 0 0 20px">
+          <div style="display:flex;gap:12px;align-items:center;height:78px;padding-right:20px;border-bottom:1px solid rgba(236,234,230,0.06);position:relative">
+            <span style="position:absolute;left:-13px;width:7px;height:7px;border-radius:4px;background:#E3B158"></span>
+            <span style="flex:none;width:48px;height:48px;border-radius:24px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">EM</span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between"><span style="font-size:16px;font-weight:600">Emma</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#E3B158">08:09</span></div><span style="font-size:14px;color:#ECEAE6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Pourquoi tu me demandes ça ?</span></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;height:78px;padding-right:20px;border-bottom:1px solid rgba(236,234,230,0.06);position:relative">
+            <span style="position:absolute;left:-13px;width:7px;height:7px;border-radius:4px;background:#E3B158"></span>
+            <span style="flex:none;width:48px;height:48px;border-radius:24px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">KA</span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between"><span style="font-size:16px;font-weight:600">Karim</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D">Hier</span></div><span style="font-size:14px;color:#ECEAE6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Réponds. Tu me dois toujours 300 €.</span></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;height:78px;padding-right:20px;border-bottom:1px solid rgba(236,234,230,0.06)">
+            <span style="flex:none;width:48px;height:48px;border-radius:24px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">LU</span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between"><span style="font-size:16px;font-weight:500">Lucas</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B67">Hier</span></div><span style="font-size:14px;color:#A3A29D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Bien rentré. Je dors, on se capte demain.</span></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;height:78px;padding-right:20px;border-bottom:1px solid rgba(236,234,230,0.06)">
+            <span style="flex:none;width:48px;height:48px;border-radius:24px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">SA</span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between"><span style="font-size:16px;font-weight:500">Sarah</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B67">Hier</span></div><span style="font-size:14px;color:#A3A29D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Je veux plus en parler, Alex.</span></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;height:78px;padding-right:20px;border-bottom:1px solid rgba(236,234,230,0.06)">
+            <span style="flex:none;width:48px;height:48px;border-radius:24px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#A3A29D">5</span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between"><span style="font-size:16px;font-weight:500">Soirée chez Inès</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B67">Hier</span></div><span style="font-size:14px;color:#A3A29D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Inès : Merci d'être venus, trop bien !</span></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;height:78px;padding-right:20px;border-bottom:1px solid rgba(236,234,230,0.06)">
+            <span style="flex:none;width:48px;height:48px;border-radius:24px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">MA</span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between"><span style="font-size:16px;font-weight:500">Maman</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B67">Jeu.</span></div><span style="font-size:14px;color:#A3A29D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Tu passes dimanche ? Bisous mon grand</span></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;height:78px;padding-right:20px">
+            <span style="flex:none;width:48px;height:48px;border-radius:24px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.08);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#6B6B67">BA</span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between"><span style="font-size:16px;font-weight:500">Banque Alterne</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B67">17/09</span></div><span style="font-size:14px;color:#A3A29D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Virement émis : 4 000,00 € — L. FERRAND</span></div>
+          </div>
+        </div>
+        <dc-import name="CarnetBar" count="0" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Non lu = point ambre + nom en 600 + aperçu en blanc. Swipe gauche sur une ligne : « Épingler au carnet ». Tirer vers le bas = barre de recherche focus (<a href="#11">11</a>).</p>
+    </div>
+
+    <!-- 10 CONVERSATION -->
+    <div id="10" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">10</span><span style="font-size:14px;font-weight:500">Conversation · Lucas (historique long)</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <div style="position:relative;z-index:2;background:rgba(8,9,11,0.86);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(236,234,230,0.06)">
+          <dc-import name="StatusBar" time="07:02" progress="88%" hint-size="100%,54px"></dc-import>
+          <div style="height:60px;padding:0 16px;display:flex;align-items:center;gap:10px">
+            <span style="font-size:24px;color:#A3A29D;width:24px">‹</span>
+            <span style="width:36px;height:36px;border-radius:18px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600">LU</span>
+            <div style="flex:1;display:flex;flex-direction:column"><span style="font-size:16px;font-weight:600">Lucas Ferrand</span><span style="font-size:12px;color:#6B6B67">Ami · 1 214 messages depuis 2021</span></div>
+            <span style="width:36px;height:36px;border-radius:18px;background:#16191D;display:flex;align-items:center;justify-content:center"><span style="width:11px;height:11px;border-radius:6px;box-shadow:inset 0 0 0 1.5px #A3A29D"></span></span>
+          </div>
+        </div>
+        <div style="flex:1;overflow:hidden;padding:10px 38px 0 14px;display:flex;flex-direction:column;gap:6px;position:relative">
+          <div style="align-self:center;margin:4px 0 6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67;letter-spacing:0.06em">MER. 17 SEPT. · 19:40</div>
+          <div style="align-self:flex-end;max-width:76%;padding:9px 13px;border-radius:19px 19px 6px 19px;background:#ECEAE6;color:#0B0C0E;font-size:15px;line-height:1.38">Virement fait. 4 000. Tu me rends ça quand tu peux mais pas dans 6 mois stp</div>
+          <div style="align-self:flex-start;max-width:76%;padding:9px 13px;border-radius:19px 19px 19px 6px;background:#1C1F24;font-size:15px;line-height:1.38">Merci frère, je te dois une vie 🙏</div>
+          <div style="align-self:center;margin:10px 0 6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67;letter-spacing:0.06em">SAM. 19 SEPT. · 18:02</div>
+          <div style="align-self:flex-start;max-width:76%;padding:9px 13px;border-radius:19px 19px 19px 6px;background:#1C1F24;font-size:15px;line-height:1.38">Ce soir chez Inès t'es là ?</div>
+          <div style="align-self:flex-end;max-width:76%;padding:9px 13px;border-radius:19px 19px 6px 19px;background:#ECEAE6;color:#0B0C0E;font-size:15px;line-height:1.38">Ouais. Faut qu'on parle de l'argent.</div>
+          <div style="align-self:flex-end;max-width:76%;padding:9px 13px;border-radius:19px 6px 6px 19px;background:#ECEAE6;color:#0B0C0E;font-size:15px;line-height:1.38">Après la soirée. Parking Central, 22h.</div>
+          <div style="align-self:flex-start;max-width:76%;padding:9px 13px;border-radius:19px 19px 19px 6px;border:1px dashed rgba(236,234,230,0.18);font-size:14px;font-style:italic;color:#6B6B67">Ce message a été supprimé</div>
+          <div style="align-self:flex-start;display:flex;gap:8px;align-items:center;max-width:76%;padding:8px 10px 8px 8px;border-radius:16px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.06)">
+            <span style="width:38px;height:38px;border-radius:10px;background:repeating-linear-gradient(135deg,#23272C 0 5px,#1C1F24 5px 10px)"></span>
+            <div style="display:flex;flex-direction:column;gap:1px"><span style="font-size:13px;font-weight:500">parkings-metropole.fr</span><span style="font-size:12px;color:#6B6B67">Parking Central · Horaires</span></div>
+          </div>
+          <div style="align-self:center;margin:10px 0 6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67;letter-spacing:0.06em">21:52</div>
+          <div style="align-self:flex-start;position:relative;max-width:76%;padding:9px 13px;border-radius:19px 19px 19px 6px;background:#1C1F24;font-size:15px;line-height:1.38;box-shadow:inset 0 0 0 1px rgba(227,177,88,0.55)">Bien rentré. Je dors, on se capte demain.<span style="position:absolute;top:-5px;right:-5px;width:10px;height:10px;border-radius:5px;background:#E3B158;box-shadow:0 0 0 3px #08090B"></span></div>
+          <div style="align-self:flex-start;font-family:'JetBrains Mono',monospace;font-size:10px;color:#E3B158;padding-left:6px">◆ Épinglé · Lucas</div>
+          <div style="align-self:center;margin:8px 0 0;padding:6px 12px;border-radius:12px;background:rgba(236,234,230,0.05);font-size:12px;color:#A3A29D">Lucas a cessé de partager sa position · 21:50</div>
+          <div style="position:absolute;right:8px;top:10px;bottom:120px;width:22px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B6B67">
+            <span>2021</span><span>2023</span><span>JUIN</span><span>AOÛT</span><span style="color:#ECEAE6">SEPT</span>
+          </div>
+          <div style="position:absolute;right:36px;top:60px;padding:6px 10px;border-radius:10px;background:#2A2E34;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;box-shadow:0 8px 20px rgba(0,0,0,0.5)">17 sept.</div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:96px;display:flex;justify-content:center;z-index:2"><span style="padding:7px 14px;border-radius:16px;background:rgba(28,31,36,0.9);box-shadow:inset 0 0 0 1px rgba(236,234,230,0.08);font-size:12px;color:#A3A29D">Aller à une date</span></div>
+        <dc-import name="CarnetBar" count="1" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Pas de champ de saisie : on lit, on n'écrit pas. Défilement long : rail d'années/mois à droite (drag = scrub, bulle de date), bouton « Aller à une date ». Messages groupés par 5 min (un seul horodatage). Supprimé = bulle en pointillés. Messages système = pastille centrée.</p>
+    </div>
+
+    <!-- 11 SEARCH -->
+    <div id="11" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">11</span><span style="font-size:14px;font-weight:500">Recherche · « parking »</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="06:42" progress="84%" hint-size="100%,54px"></dc-import>
+        <div style="padding:10px 16px 0;display:flex;gap:10px;align-items:center">
+          <div style="flex:1;height:40px;border-radius:12px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.14);display:flex;align-items:center;gap:8px;padding:0 12px"><span style="width:12px;height:12px;border-radius:6px;box-shadow:inset 0 0 0 1.5px #A3A29D"></span><span style="font-size:16px">parking</span><span style="width:1.5px;height:18px;background:#E3B158"></span><span style="margin-left:auto;width:18px;height:18px;border-radius:9px;background:#3A3E44;color:#0B0C0E;font-size:11px;display:flex;align-items:center;justify-content:center">×</span></div>
+          <span style="font-size:16px;color:#A3A29D">Annuler</span>
+        </div>
+        <div style="padding:14px 16px 8px;display:flex;gap:8px;overflow:hidden">
+          <span style="flex:none;height:32px;padding:0 13px;border-radius:16px;background:#ECEAE6;color:#0B0C0E;font-size:13px;font-weight:600;display:flex;align-items:center">Tout · 7</span>
+          <span style="flex:none;height:32px;padding:0 13px;border-radius:16px;background:#16191D;font-size:13px;color:#A3A29D;display:flex;align-items:center">Messages · 4</span>
+          <span style="flex:none;height:32px;padding:0 13px;border-radius:16px;background:#16191D;font-size:13px;color:#A3A29D;display:flex;align-items:center">Agenda · 1</span>
+          <span style="flex:none;height:32px;padding:0 13px;border-radius:16px;background:#16191D;font-size:13px;color:#A3A29D;display:flex;align-items:center">Web · 2</span>
+        </div>
+        <div style="padding:6px 20px 0;display:flex;flex-direction:column">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6B6B67;padding:10px 0 6px">MESSAGES</span>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid rgba(236,234,230,0.06)"><div style="display:flex;justify-content:space-between"><span style="font-size:15px;font-weight:600">Sarah</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D">12 sept.</span></div><span style="font-size:14px;color:#A3A29D;line-height:1.4">…je t'attends au <span style="background:rgba(227,177,88,0.22);color:#ECEAE6;border-radius:3px;padding:0 2px">parking</span> du ciné, dépêche</span></div>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid rgba(236,234,230,0.06)"><div style="display:flex;justify-content:space-between"><span style="font-size:15px;font-weight:600">Lucas</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D">14 sept.</span></div><span style="font-size:14px;color:#A3A29D;line-height:1.4">Le <span style="background:rgba(227,177,88,0.22);color:#ECEAE6;border-radius:3px;padding:0 2px">parking</span> Central ferme à minuit maintenant</span></div>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid rgba(236,234,230,0.06)"><div style="display:flex;justify-content:space-between"><span style="font-size:15px;font-weight:600">Emma</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D">15 sept.</span></div><span style="font-size:14px;color:#A3A29D;line-height:1.4">Laisse la voiture au <span style="background:rgba(227,177,88,0.22);color:#ECEAE6;border-radius:3px;padding:0 2px">parking</span>, je passe la prendre</span></div>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:12px 0;border-bottom:1px solid rgba(236,234,230,0.06)"><div style="display:flex;justify-content:space-between"><span style="font-size:15px;font-weight:600">Lucas <span style="font-weight:400;color:#6B6B67">· vous</span></span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D">19 sept.</span></div><span style="font-size:14px;color:#A3A29D;line-height:1.4">Après la soirée. <span style="background:rgba(227,177,88,0.22);color:#ECEAE6;border-radius:3px;padding:0 2px">Parking</span> Central, 22h.</span></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6B6B67;padding:18px 0 6px">AGENDA</span>
+          <div style="display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;width:46px">22:00</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">Rendez-vous</span><span style="font-size:13px;color:#A3A29D"><span style="background:rgba(227,177,88,0.22);color:#ECEAE6;border-radius:3px;padding:0 2px">Parking</span> Central · 19 sept.</span></div></div>
+        </div>
+        <dc-import name="CarnetBar" count="2" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Recherche globale au téléphone : nom, mot, date (« 19 sept », « samedi ») ou lieu. Résultats groupés par app puis par date ASC, terme surligné ambre. Tap = ouvre la conversation centrée sur le message, surligné 2 s.</p>
+    </div>
+
+    <!-- 12 APPELS -->
+    <div id="12" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">12</span><span style="font-size:14px;font-weight:500">Appels · journal</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="06:10" progress="77%" hint-size="100%,54px"></dc-import>
+        <div style="padding:8px 16px 0;display:flex;align-items:center;height:44px"><span style="font-size:17px;color:#A3A29D;display:flex;gap:4px;align-items:center"><span style="font-size:24px;line-height:1">‹</span>Accueil</span></div>
+        <div style="padding:2px 20px 14px;display:flex;flex-direction:column;gap:14px">
+          <h2 style="margin:0;font-size:34px;font-weight:600;letter-spacing:-0.03em">Appels</h2>
+          <div style="display:flex;padding:3px;border-radius:12px;background:#16191D;gap:2px"><span style="flex:1;height:32px;border-radius:9px;background:#2A2E34;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600">Tous</span><span style="flex:1;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#A3A29D">Manqués · 3</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;padding:0 20px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6B6B67;padding:4px 0 4px">AUJOURD'HUI</span>
+          <div style="display:flex;align-items:center;gap:12px;height:62px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="width:20px;font-size:15px;color:#FF6B61;text-align:center">↙</span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:500;color:#FF6B61">Emma</span><span style="font-size:13px;color:#6B6B67">Manqué</span></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#A3A29D">07:58</span><span style="width:24px;height:24px;border-radius:12px;box-shadow:inset 0 0 0 1.5px #6B6B67;display:flex;align-items:center;justify-content:center;font-size:12px;font-style:italic;color:#A3A29D;font-family:'Instrument Serif',serif">i</span></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6B6B67;padding:18px 0 4px">SAMEDI 19 SEPT.</span>
+          <div style="display:flex;align-items:center;gap:12px;height:62px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="width:20px;font-size:15px;color:#FF6B61;text-align:center">↙</span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:500;color:#FF6B61">Karim (2)</span><span style="font-size:13px;color:#6B6B67">Manqué</span></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#A3A29D">23:40</span><span style="width:24px;height:24px;border-radius:12px;box-shadow:inset 0 0 0 1.5px #6B6B67;display:flex;align-items:center;justify-content:center;font-size:12px;font-style:italic;color:#A3A29D;font-family:'Instrument Serif',serif">i</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:62px;border-bottom:1px solid rgba(236,234,230,0.06);margin:0 -20px;padding:0 20px;background:rgba(227,177,88,0.05)"><span style="width:20px;font-size:15px;color:#A3A29D;text-align:center">↙</span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:500">Lucas</span><span style="font-size:13px;color:#6B6B67">Entrant · <span style="font-family:'JetBrains Mono',monospace;color:#A3A29D">02:31</span></span></div><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#E3B158">◆</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#ECEAE6">22:19</span><span style="width:24px;height:24px;border-radius:12px;box-shadow:inset 0 0 0 1.5px #6B6B67;display:flex;align-items:center;justify-content:center;font-size:12px;font-style:italic;color:#A3A29D;font-family:'Instrument Serif',serif">i</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:62px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="width:20px;font-size:15px;color:#A3A29D;text-align:center">↗</span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:500">Emma</span><span style="font-size:13px;color:#6B6B67">Sortant · <span style="font-family:'JetBrains Mono',monospace;color:#A3A29D">00:48</span></span></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#A3A29D">21:58</span><span style="width:24px;height:24px;border-radius:12px;box-shadow:inset 0 0 0 1.5px #6B6B67;display:flex;align-items:center;justify-content:center;font-size:12px;font-style:italic;color:#A3A29D;font-family:'Instrument Serif',serif">i</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:62px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="width:20px;font-size:15px;color:#A3A29D;text-align:center">↙</span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:500">Sarah</span><span style="font-size:13px;color:#6B6B67">Entrant · <span style="font-family:'JetBrains Mono',monospace;color:#A3A29D">06:05</span></span></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#A3A29D">20:12</span><span style="width:24px;height:24px;border-radius:12px;box-shadow:inset 0 0 0 1.5px #6B6B67;display:flex;align-items:center;justify-content:center;font-size:12px;font-style:italic;color:#A3A29D;font-family:'Instrument Serif',serif">i</span></div>
+          <div style="display:flex;align-items:center;gap:12px;height:62px"><span style="width:20px;font-size:15px;color:#A3A29D;text-align:center">↗</span><div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:500">Maman</span><span style="font-size:13px;color:#6B6B67">Sortant · <span style="font-family:'JetBrains Mono',monospace;color:#A3A29D">11:20</span></span></div><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#A3A29D">12:31</span><span style="width:24px;height:24px;border-radius:12px;box-shadow:inset 0 0 0 1.5px #6B6B67;display:flex;align-items:center;justify-content:center;font-size:12px;font-style:italic;color:#A3A29D;font-family:'Instrument Serif',serif">i</span></div>
+        </div>
+        <dc-import name="CarnetBar" count="3" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Direction toujours doublée d'une flèche + libellé (Entrant / Sortant / Manqué). Durées en mono. « i » ouvre le détail : numéro, antenne relais approximative (« Zone industrielle Nord »), liens vers la fiche contact.</p>
+    </div>
+
+    <!-- 13 PHOTOS -->
+    <div id="13" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">13</span><span style="font-size:14px;font-weight:500">Photos · grille</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="05:51" progress="73%" hint-size="100%,54px"></dc-import>
+        <div style="padding:8px 16px 0;display:flex;align-items:center;justify-content:space-between;height:44px"><span style="font-size:17px;color:#A3A29D;display:flex;gap:4px;align-items:center"><span style="font-size:24px;line-height:1">‹</span>Accueil</span><span style="font-size:15px;color:#A3A29D">Albums</span></div>
+        <div style="padding:2px 20px 14px;display:flex;justify-content:space-between;align-items:baseline"><h2 style="margin:0;font-size:34px;font-weight:600;letter-spacing:-0.03em">Photos</h2><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B67">1 284</span></div>
+        <div style="display:flex;flex-direction:column;gap:2px;position:relative">
+          <div style="padding:8px 20px;display:flex;justify-content:space-between"><span style="font-size:15px;font-weight:600">Samedi 19 sept.</span><span style="font-size:13px;color:#6B6B67">Parking Central · Rue Vauban</span></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px">
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#1A1D21 0 6px,#15181B 6px 12px);position:relative"><span style="position:absolute;left:6px;bottom:5px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B6B67">soirée · groupe</span></div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#1C1F22 0 6px,#16181B 6px 12px);position:relative"><span style="position:absolute;left:6px;bottom:5px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B6B67">selfie Inès</span></div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#171A1E 0 6px,#121417 6px 12px);position:relative"><span style="position:absolute;left:6px;bottom:5px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B6B67">verres, table</span></div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#15171A 0 6px,#101215 6px 12px);position:relative;box-shadow:inset 0 0 0 2px #E3B158"><span style="position:absolute;left:6px;bottom:5px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#A3A29D">parking · nuit</span><span style="position:absolute;right:5px;top:5px;width:8px;height:8px;border-radius:4px;background:#E3B158"></span></div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#1A1D21 0 6px,#15181B 6px 12px);position:relative"><span style="position:absolute;left:6px;bottom:5px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B6B67">capture d'écran</span></div>
+            <div style="aspect-ratio:1;background:#0D0F11;position:relative;display:flex;align-items:center;justify-content:center"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6B6B67">▶ 0:07</span></div>
+          </div>
+          <div style="padding:14px 20px 8px;display:flex;justify-content:space-between"><span style="font-size:15px;font-weight:600">Vendredi 18 sept.</span><span style="font-size:13px;color:#6B6B67">Domicile</span></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px">
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#1A1D21 0 6px,#15181B 6px 12px)"></div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#1C1F22 0 6px,#16181B 6px 12px)"></div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#171A1E 0 6px,#121417 6px 12px)"></div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#15171A 0 6px,#101215 6px 12px)"></div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#1A1D21 0 6px,#15181B 6px 12px)"></div>
+            <div style="aspect-ratio:1;background:repeating-linear-gradient(135deg,#1C1F22 0 6px,#16181B 6px 12px)"></div>
+          </div>
+          <div style="position:absolute;right:6px;top:40px;padding:6px 8px;border-radius:10px;background:rgba(28,31,36,0.9);font-family:'JetBrains Mono',monospace;font-size:10px;color:#A3A29D">SEPT ▾</div>
+        </div>
+        <dc-import name="CarnetBar" count="3" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Groupes par jour avec lieu résumé. Pincer = 3 ↔ 5 ↔ 7 colonnes (100+ photos). Rail de mois à droite. Le contour ambre signale une photo déjà épinglée — jamais un indice non trouvé.</p>
+    </div>
+
+    <!-- 14 PHOTO FULL -->
+    <div id="14" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">14</span><span style="font-size:14px;font-weight:500">Photo · plein écran + informations</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#000;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="05:40" progress="71%" hint-size="100%,54px"></dc-import>
+        <div style="height:48px;padding:0 16px;display:flex;align-items:center;gap:12px"><span style="font-size:24px;color:#ECEAE6">‹</span><div style="flex:1;display:flex;flex-direction:column;align-items:center"><span style="font-size:15px;font-weight:600">Samedi 19 sept.</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#A3A29D">22:08</span></div><span style="width:24px"></span></div>
+        <div style="height:330px;position:relative;background:repeating-linear-gradient(135deg,#15171A 0 12px,#101215 12px 24px);display:flex;align-items:center;justify-content:center">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67;text-align:center;line-height:1.6;max-width:240px">photo — parking souterrain de nuit, Golf grise au fond, plaque partielle « ··-482-·· »</span>
+          <span style="position:absolute;right:12px;top:12px;padding:4px 8px;border-radius:8px;background:rgba(0,0,0,0.6);font-family:'JetBrains Mono',monospace;font-size:11px">2,4×</span>
+          <div style="position:absolute;right:12px;bottom:12px;width:56px;height:40px;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.4);background:rgba(0,0,0,0.4)"><div style="position:absolute;left:28px;top:14px;width:22px;height:16px;box-shadow:inset 0 0 0 1.5px #ECEAE6"></div></div>
+        </div>
+        <div style="flex:1;margin-top:16px;border-radius:24px 24px 0 0;background:#0F1114;box-shadow:inset 0 1px 0 rgba(236,234,230,0.08);padding:10px 20px 0;display:flex;flex-direction:column;gap:14px">
+          <span style="align-self:center;width:36px;height:5px;border-radius:3px;background:rgba(236,234,230,0.2)"></span>
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:17px;font-weight:600">IMG_2318</span><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D">HEIC · 12 Mpx · 3,1 Mo · non modifiée</span></div>
+          <div style="display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;background:#16191D">
+            <div style="width:56px;height:56px;border-radius:10px;background:#0D1013;position:relative;overflow:hidden"><span style="position:absolute;left:-10px;top:24px;width:80px;height:2px;background:rgba(236,234,230,0.12);transform:rotate(-20deg)"></span><span style="position:absolute;left:23px;top:23px;width:10px;height:10px;border-radius:5px;background:#7AB4DB;box-shadow:0 0 0 3px rgba(122,180,219,0.25)"></span></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">Parking Central, niveau −2</span><span style="font-size:13px;color:#6B6B67">Centre-ville · précision 12 m</span></div>
+            <span style="font-size:18px;color:#6B6B67">›</span>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:0 24px 34px;display:flex;justify-content:space-between;align-items:center;background:#0F1114">
+          <span style="height:44px;padding:0 18px;border-radius:22px;background:rgba(227,177,88,0.14);box-shadow:inset 0 0 0 1px rgba(227,177,88,0.45);display:flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:#E3B158">◆ Épinglée</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B67">4 / 6</span>
+        </div>
+        <div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#ECEAE6;opacity:0.9"></div>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Pincer/double-tap = zoom (1–5×, mini-carte de position). Swipe haut = infos (EXIF, lieu → ouvre Localisation au bon horaire). Swipe bas = fermer (retour à la vignette). Le carnet est remplacé par le bouton Épingler.</p>
+    </div>
+
+    <!-- 15 LOCALISATION -->
+    <div id="15" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">15</span><span style="font-size:14px;font-weight:500">Localisation · historique</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#0B0D10;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <div style="position:absolute;left:0;right:0;top:0;height:470px;overflow:hidden;background:#0C0F12">
+          <div style="position:absolute;left:-40px;top:300px;width:520px;height:46px;background:rgba(122,180,219,0.07);transform:rotate(-14deg)"></div>
+          <div style="position:absolute;left:-20px;top:170px;width:460px;height:3px;background:rgba(236,234,230,0.09);transform:rotate(-8deg)"></div>
+          <div style="position:absolute;left:-20px;top:260px;width:460px;height:2px;background:rgba(236,234,230,0.06);transform:rotate(12deg)"></div>
+          <div style="position:absolute;left:140px;top:40px;width:3px;height:460px;background:rgba(236,234,230,0.08);transform:rotate(10deg)"></div>
+          <div style="position:absolute;left:280px;top:40px;width:2px;height:460px;background:rgba(236,234,230,0.05);transform:rotate(-6deg)"></div>
+          <div style="position:absolute;left:236px;top:70px;width:140px;height:96px;border-radius:6px;border:1px dashed rgba(236,234,230,0.14)"></div>
+          <span style="position:absolute;left:246px;top:78px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B6B67;letter-spacing:0.1em">ZONE INDUSTRIELLE N.</span>
+          <span style="position:absolute;left:120px;top:210px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B6B67;letter-spacing:0.1em">CENTRE-VILLE</span>
+          <span style="position:absolute;left:30px;top:350px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#4A6A80;letter-spacing:0.1em">LA SÈVRE</span>
+          <svg width="390" height="470" style="position:absolute;left:0;top:0"><polyline points="66,300 168,186 304,122 250,332" fill="none" stroke="#ECEAE6" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="4 4"></polyline></svg>
+          <span style="position:absolute;left:55px;top:289px;width:22px;height:22px;border-radius:11px;background:#1E2227;box-shadow:inset 0 0 0 1.5px #ECEAE6;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700">1</span>
+          <span style="position:absolute;left:157px;top:175px;width:22px;height:22px;border-radius:11px;background:#1E2227;box-shadow:inset 0 0 0 1.5px #ECEAE6;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700">2</span>
+          <span style="position:absolute;left:291px;top:109px;width:26px;height:26px;border-radius:13px;background:#7AB4DB;color:#0B0C0E;box-shadow:0 0 0 6px rgba(122,180,219,0.2);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700">3</span>
+          <span style="position:absolute;left:239px;top:321px;width:22px;height:22px;border-radius:11px;background:#1E2227;box-shadow:inset 0 0 0 1.5px #ECEAE6;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700">4</span>
+        </div>
+        <div style="position:relative;z-index:1;background:linear-gradient(to bottom, rgba(12,15,18,0.95), rgba(12,15,18,0))">
+          <dc-import name="StatusBar" time="05:12" progress="65%" hint-size="100%,54px"></dc-import>
+          <div style="padding:8px 16px 14px;display:flex;align-items:center;gap:8px">
+            <span style="width:40px;height:40px;border-radius:20px;background:rgba(28,31,36,0.9);display:flex;align-items:center;justify-content:center;font-size:22px;color:#ECEAE6">‹</span>
+            <span style="height:36px;padding:0 14px;border-radius:18px;background:#ECEAE6;color:#0B0C0E;font-size:13px;font-weight:600;display:flex;align-items:center">Alex · ce téléphone</span>
+            <span style="height:36px;padding:0 14px;border-radius:18px;background:rgba(28,31,36,0.9);font-size:13px;color:#A3A29D;display:flex;align-items:center">Lucas · partagé</span>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:420px;border-radius:26px 26px 0 0;background:#0F1114;box-shadow:0 -1px 0 rgba(236,234,230,0.08),0 -20px 40px rgba(0,0,0,0.5);padding:10px 20px 0;display:flex;flex-direction:column;gap:14px">
+          <span style="align-self:center;width:36px;height:5px;border-radius:3px;background:rgba(236,234,230,0.2)"></span>
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><span style="font-size:20px;font-weight:600;letter-spacing:-0.02em">Samedi 19 sept.</span><span style="font-size:13px;color:#A3A29D">‹ &nbsp; Jour &nbsp; ›</span></div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="position:relative;height:4px;border-radius:2px;background:rgba(236,234,230,0.08)"><div style="position:absolute;left:0;width:58%;height:100%;border-radius:2px;background:#7AB4DB"></div><span style="position:absolute;left:58%;top:50%;width:18px;height:18px;border-radius:9px;background:#ECEAE6;transform:translate(-50%,-50%)"></span></div>
+            <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;color:#6B6B67"><span>21:30</span><span style="color:#ECEAE6">22:17</span><span>23:30</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;gap:12px;align-items:center;height:46px"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;width:44px;color:#A3A29D">21:43</span><span style="width:20px;height:20px;border-radius:10px;box-shadow:inset 0 0 0 1.5px #6B6B67;font-family:'JetBrains Mono',monospace;font-size:10px;display:flex;align-items:center;justify-content:center;color:#A3A29D">1</span><span style="font-size:15px;color:#A3A29D">Chez Inès · Rue Vauban</span></div>
+            <div style="display:flex;gap:12px;align-items:center;height:46px"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;width:44px;color:#A3A29D">22:04</span><span style="width:20px;height:20px;border-radius:10px;box-shadow:inset 0 0 0 1.5px #6B6B67;font-family:'JetBrains Mono',monospace;font-size:10px;display:flex;align-items:center;justify-content:center;color:#A3A29D">2</span><span style="font-size:15px;color:#A3A29D">Parking Central · Centre-ville</span></div>
+            <div style="display:flex;gap:12px;align-items:center;height:46px;margin:0 -12px;padding:0 12px;border-radius:12px;background:rgba(122,180,219,0.10)"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;width:44px;font-weight:600">22:17</span><span style="width:20px;height:20px;border-radius:10px;background:#7AB4DB;color:#0B0C0E;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center">3</span><span style="font-size:15px;font-weight:500">Zone industrielle Nord</span><span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:#A3A29D">24 min</span></div>
+            <div style="display:flex;gap:12px;align-items:center;height:46px"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;width:44px;color:#A3A29D">22:41</span><span style="width:20px;height:20px;border-radius:10px;box-shadow:inset 0 0 0 1.5px #6B6B67;font-family:'JetBrains Mono',monospace;font-size:10px;display:flex;align-items:center;justify-content:center;color:#A3A29D">4</span><span style="font-size:15px;color:#A3A29D">14 rue des Tanneurs</span></div>
+            <div style="display:flex;gap:12px;align-items:center;height:46px"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;width:44px;color:#6B6B67">23:02</span><span style="width:20px;height:20px;border-radius:10px;border:1.5px dashed #6B6B67;box-sizing:border-box"></span><span style="font-size:14px;font-style:italic;color:#6B6B67">Historique interrompu</span></div>
+          </div>
+        </div>
+        <dc-import name="CarnetBar" count="4" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Carte fictive stylisée (pas de fond cartographique réel). Points numérotés = ordre chronologique, lisible sans couleur. Curseur temporel ↔ liste ↔ carte synchronisés. Sheet 3 crans : 120 / 420 / plein. Une trace interrompue est montrée, jamais expliquée.</p>
+    </div>
+
+    <!-- 16 AGENDA -->
+    <div id="16" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">16</span><span style="font-size:14px;font-weight:500">Agenda · jour</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="04:48" progress="60%" hint-size="100%,54px"></dc-import>
+        <div style="padding:8px 16px 0;display:flex;align-items:center;justify-content:space-between;height:44px"><span style="font-size:17px;color:#A3A29D;display:flex;gap:4px;align-items:center"><span style="font-size:24px;line-height:1">‹</span>Septembre</span><span style="font-size:15px;color:#A3A29D">Liste</span></div>
+        <div style="padding:6px 16px 14px;display:grid;grid-template-columns:repeat(7,1fr);gap:4px;border-bottom:1px solid rgba(236,234,230,0.06)">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:11px;color:#6B6B67">L</span><span style="width:38px;height:38px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#A3A29D">14</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:11px;color:#6B6B67">M</span><span style="width:38px;height:38px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#A3A29D">15</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:11px;color:#6B6B67">M</span><span style="width:38px;height:38px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#A3A29D;position:relative">16<span style="position:absolute;bottom:3px;width:4px;height:4px;border-radius:2px;background:#6B6B67"></span></span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:11px;color:#6B6B67">J</span><span style="width:38px;height:38px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#A3A29D;position:relative">17<span style="position:absolute;bottom:3px;width:4px;height:4px;border-radius:2px;background:#6B6B67"></span></span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:11px;color:#6B6B67">V</span><span style="width:38px;height:38px;border-radius:19px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#A3A29D">18</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:11px;color:#ECEAE6">S</span><span style="width:38px;height:38px;border-radius:19px;background:#ECEAE6;color:#0B0C0E;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:600">19</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="font-size:11px;color:#6B6B67">D</span><span style="width:38px;height:38px;border-radius:19px;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;color:#A3A29D">20</span></div>
+        </div>
+        <div style="padding:16px 20px 0;display:flex;flex-direction:column;gap:2px"><span style="font-size:22px;font-weight:600;letter-spacing:-0.02em">Samedi 19 septembre</span><span style="font-size:13px;color:#6B6B67">2 événements · 1 rappel</span></div>
+        <div style="padding:16px 20px 0;display:flex;flex-direction:column;gap:0;position:relative">
+          <div style="display:flex;gap:14px;min-height:64px"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B67;width:40px;padding-top:2px">18:00</span><div style="flex:1;border-top:1px solid rgba(236,234,230,0.06)"></div></div>
+          <div style="display:flex;gap:14px"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D;width:40px;padding-top:14px">19:30</span>
+            <div style="flex:1;padding:12px 14px;border-radius:14px;background:#16191D;display:flex;flex-direction:column;gap:4px"><span style="font-size:15px;font-weight:600">Soirée chez Inès</span><span style="font-size:13px;color:#A3A29D">Rue Vauban · 19:30 – 23:00</span><div style="display:flex;gap:4px;margin-top:4px"><span style="font-size:11px;padding:2px 7px;border-radius:6px;background:#1E2227;color:#A3A29D">Inès</span><span style="font-size:11px;padding:2px 7px;border-radius:6px;background:#1E2227;color:#A3A29D">Lucas</span><span style="font-size:11px;padding:2px 7px;border-radius:6px;background:#1E2227;color:#A3A29D">Sarah</span><span style="font-size:11px;padding:2px 7px;border-radius:6px;background:#1E2227;color:#A3A29D">+2</span></div></div>
+          </div>
+          <div style="display:flex;gap:14px;margin-top:18px"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;width:40px;padding-top:16px">22:00</span>
+            <div style="flex:1;padding:14px;border-radius:14px;background:#1C1F24;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.14);display:flex;flex-direction:column;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A3A29D">RENDEZ-VOUS</span><span style="font-size:17px;font-weight:600">Parking Central</span><span style="font-size:13px;color:#A3A29D">avec L. · « Ramener les relevés »</span></div>
+          </div>
+          <div style="display:flex;gap:14px;margin-top:18px;align-items:center"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D;width:40px">23:30</span>
+            <div style="flex:1;height:44px;padding:0 14px;border-radius:14px;border:1px dashed rgba(236,234,230,0.16);display:flex;align-items:center;gap:10px"><span style="width:14px;height:14px;border-radius:7px;box-shadow:inset 0 0 0 1.5px #A3A29D"></span><span style="font-size:14px;color:#A3A29D">Rappel · Appeler Emma</span><span style="margin-left:auto;font-size:12px;color:#6B6B67">non fait</span></div>
+          </div>
+        </div>
+        <dc-import name="CarnetBar" count="5" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Vue jour par défaut (la plus utile au gameplay) ; semaine en bandeau. Événement = carte pleine, rappel = pointillés + case. Personnes en chips (tap → fiche contact). Points sous les jours = activité.</p>
+    </div>
+
+    <!-- 17 NOTES -->
+    <div id="17" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">17</span><span style="font-size:14px;font-weight:500">Notes</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="04:20" progress="54%" hint-size="100%,54px"></dc-import>
+        <div style="padding:8px 16px 0;display:flex;align-items:center;height:44px"><span style="font-size:17px;color:#A3A29D;display:flex;gap:4px;align-items:center"><span style="font-size:24px;line-height:1">‹</span>Accueil</span></div>
+        <div style="padding:2px 20px 16px;display:flex;justify-content:space-between;align-items:baseline"><h2 style="margin:0;font-size:34px;font-weight:600;letter-spacing:-0.03em">Notes</h2><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B6B67">23</span></div>
+        <div style="padding:0 16px;display:flex;flex-direction:column;gap:10px">
+          <div style="padding:16px;border-radius:18px;background:#16191D;display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#A3A29D">ÉPINGLÉE PAR ALEX</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67">18 sept.</span></div>
+            <span style="font-size:16px;font-weight:600">À dire à Sarah</span>
+            <span style="font-size:14px;line-height:1.45;color:#A3A29D">Que c'est pas elle. Que j'ai juste besoin de régler un truc avec L. d'abord. Je crois que</span>
+          </div>
+          <div style="padding:16px;border-radius:18px;background:#0F1114;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.06);display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between"><span style="font-size:16px;font-weight:600">Sans titre</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67">2 mars 2024</span></div>
+            <span style="font-family:'Instrument Serif',serif;font-size:22px;line-height:1.25">Ne jamais faire confiance à K.</span>
+          </div>
+          <div style="padding:16px;border-radius:18px;background:#0F1114;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.06);display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;justify-content:space-between"><span style="font-size:16px;font-weight:600">Code</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67">11 sept.</span></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:15px;color:#A3A29D">casier 3 — 1 — ·</span>
+          </div>
+          <div style="padding:14px 16px;border-radius:18px;background:#0F1114;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.06);display:flex;justify-content:space-between;align-items:center">
+            <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:15px;font-weight:500">Courses</span><span style="font-size:13px;color:#6B6B67">Lait, piles, sacs poubelle…</span></div><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67">16 sept.</span>
+          </div>
+          <div style="padding:14px 16px;border-radius:18px;background:#0F1114;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.06);display:flex;justify-content:space-between;align-items:center">
+            <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:15px;font-weight:500">Idées cadeau Emma</span><span style="font-size:13px;color:#6B6B67">Vinyle ? Week-end Lisbonne</span></div><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67">3 sept.</span>
+          </div>
+        </div>
+        <dc-import name="CarnetBar" count="5" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Typologies sans étiquette « indice » : épinglée (fond plein), ancienne (date lointaine), incomplète (phrase coupée sans ponctuation), mystérieuse (serif manuscrit). Tap = note plein écran, lecture seule, texte 17 px.</p>
+    </div>
+
+    <!-- 18 NAVIGATEUR -->
+    <div id="18" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">18</span><span style="font-size:14px;font-weight:500">Navigateur · historique</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="03:55" progress="49%" hint-size="100%,54px"></dc-import>
+        <div style="padding:14px 20px 0;display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6B6B67">FAVORIS</span>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:52px;height:52px;border-radius:14px;background:#16191D;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Lm</span><span style="font-size:11px;color:#A3A29D">Le Matin</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:52px;height:52px;border-radius:14px;background:#16191D;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Ba</span><span style="font-size:11px;color:#A3A29D">Alterne</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:52px;height:52px;border-radius:14px;background:#16191D;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Pm</span><span style="font-size:11px;color:#A3A29D">Parkings</span></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span style="width:52px;height:52px;border-radius:14px;background:#16191D;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600">Tv</span><span style="font-size:11px;color:#A3A29D">Trajets</span></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6B6B67;padding-bottom:4px">HISTORIQUE · SAMEDI 19 SEPT.</span>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#ECEAE6;width:40px;padding-top:2px">23:04</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">« effacer localisation définitivement »</span><span style="font-size:12px;color:#6B6B67">Recherche</span></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#ECEAE6;width:40px;padding-top:2px">23:02</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;font-weight:500">« comment supprimer historique localisation »</span><span style="font-size:12px;color:#6B6B67">Recherche</span></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D;width:40px;padding-top:2px">21:36</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;color:#A3A29D">Parking Central — Horaires</span><span style="font-size:12px;color:#6B6B67">parkings-metropole.fr</span></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D;width:40px;padding-top:2px">21:35</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;color:#A3A29D">« parking centre ville »</span><span style="font-size:12px;color:#6B6B67">Recherche</span></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0"><span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#A3A29D;width:40px;padding-top:2px">17:10</span><div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:15px;color:#A3A29D">Alterne — Mes virements</span><span style="font-size:12px;color:#6B6B67">alterne.bank</span></div></div>
+          </div>
+        </div>
+        <div style="position:absolute;left:16px;right:16px;bottom:100px;height:48px;border-radius:16px;background:#1C1F24;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.10),0 10px 30px rgba(0,0,0,0.5);display:flex;align-items:center;gap:10px;padding:0 14px"><span style="width:12px;height:12px;border-radius:6px;box-shadow:inset 0 0 0 1.5px #6B6B67"></span><span style="font-size:15px;color:#6B6B67">Rechercher dans l'historique</span></div>
+        <dc-import name="CarnetBar" count="6" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Barre d'adresse en bas (pouce). Pas de web réel : l'historique et les pages visitées sont des contenus figés. Recherches entre guillemets, pages en titre + domaine. Les heures postérieures à 22:41 sont en blanc : incohérence visible, non commentée.</p>
+    </div>
+
+    <!-- 19 CONTACTS LIST -->
+    <div id="19" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">19</span><span style="font-size:14px;font-weight:500">Contacts · liste</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="03:31" progress="44%" hint-size="100%,54px"></dc-import>
+        <div style="padding:8px 16px 0;display:flex;align-items:center;height:44px"><span style="font-size:17px;color:#A3A29D;display:flex;gap:4px;align-items:center"><span style="font-size:24px;line-height:1">‹</span>Accueil</span></div>
+        <div style="padding:2px 20px 14px;display:flex;flex-direction:column;gap:14px">
+          <h2 style="margin:0;font-size:34px;font-weight:600;letter-spacing:-0.03em">Contacts</h2>
+          <div style="height:40px;border-radius:12px;background:#16191D;display:flex;align-items:center;gap:8px;padding:0 12px"><span style="width:12px;height:12px;border-radius:6px;box-shadow:inset 0 0 0 1.5px #6B6B67"></span><span style="font-size:16px;color:#6B6B67">Rechercher</span></div>
+        </div>
+        <div style="padding:0 20px;display:flex;flex-direction:column">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6B6B67;padding:4px 0">PERSONNES DE L'AFFAIRE</span>
+          <div style="display:flex;gap:12px;align-items:center;height:60px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="width:40px;height:40px;border-radius:20px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600">EM</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:16px;font-weight:500">Emma Moreau</span><span style="font-size:13px;color:#6B6B67">Sœur</span></div></div>
+          <div style="display:flex;gap:12px;align-items:center;height:60px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="width:40px;height:40px;border-radius:20px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600">KA</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:16px;font-weight:500">Karim Benali</span><span style="font-size:13px;color:#6B6B67">Collègue</span></div></div>
+          <div style="display:flex;gap:12px;align-items:center;height:60px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="width:40px;height:40px;border-radius:20px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600">LU</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:16px;font-weight:500">Lucas Ferrand</span><span style="font-size:13px;color:#6B6B67">Ami</span></div></div>
+          <div style="display:flex;gap:12px;align-items:center;height:60px"><span style="width:40px;height:40px;border-radius:20px;background:#1E2227;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600">SA</span><div style="flex:1;display:flex;flex-direction:column"><span style="font-size:16px;font-weight:500">Sarah Lemaire</span><span style="font-size:13px;color:#6B6B67">Compagne</span></div></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6B6B67;padding:18px 0 4px">A</span>
+          <div style="display:flex;gap:12px;align-items:center;height:52px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-size:16px">Agence Alterne</span></div>
+          <div style="display:flex;gap:12px;align-items:center;height:52px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-size:16px">Antoine Garage</span></div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#6B6B67;padding:18px 0 4px">B</span>
+          <div style="display:flex;gap:12px;align-items:center;height:52px"><span style="font-size:16px">Bastien Roux</span></div>
+        </div>
+        <div style="position:absolute;right:6px;top:220px;display:flex;flex-direction:column;gap:3px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#A3A29D;align-items:center"><span>A</span><span>B</span><span>C</span><span>E</span><span>I</span><span>K</span><span>L</span><span>M</span><span>S</span><span>#</span></div>
+        <dc-import name="CarnetBar" count="6" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Les suspects sont regroupés en tête (« Personnes de l'affaire ») : réduit la charge sans révéler de hiérarchie. Index alphabétique à droite (scrub + haptique sélection).</p>
+    </div>
+
+    <!-- 20 CONTACT DETAIL -->
+    <div id="20" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">20</span><span style="font-size:14px;font-weight:500">Contact · fiche (hub inter-apps)</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="03:20" progress="42%" hint-size="100%,54px"></dc-import>
+        <div style="padding:8px 16px 0;display:flex;align-items:center;height:44px"><span style="font-size:17px;color:#A3A29D;display:flex;gap:4px;align-items:center"><span style="font-size:24px;line-height:1">‹</span>Contacts</span></div>
+        <div style="padding:10px 20px 20px;display:flex;flex-direction:column;align-items:center;gap:10px">
+          <span style="width:96px;height:96px;border-radius:48px;background:repeating-linear-gradient(135deg,#1E2227 0 6px,#1A1D21 6px 12px);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:600">LU</span>
+          <span style="font-size:26px;font-weight:600;letter-spacing:-0.025em">Lucas Ferrand</span>
+          <span style="font-size:14px;color:#A3A29D">Ami · depuis 2014</span>
+        </div>
+        <div style="padding:0 16px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          <div style="height:68px;border-radius:14px;background:#16191D;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600">1 214</span><span style="font-size:11px;color:#A3A29D">Messages</span></div>
+          <div style="height:68px;border-radius:14px;background:#16191D;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600">38</span><span style="font-size:11px;color:#A3A29D">Appels</span></div>
+          <div style="height:68px;border-radius:14px;background:#16191D;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600">12</span><span style="font-size:11px;color:#A3A29D">Photos</span></div>
+          <div style="height:68px;border-radius:14px;background:#16191D;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600">1</span><span style="font-size:11px;color:#A3A29D">Agenda</span></div>
+        </div>
+        <div style="margin:16px 16px 0;border-radius:18px;background:#0F1114;box-shadow:inset 0 0 0 1px rgba(236,234,230,0.06)">
+          <div style="padding:12px 16px;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-size:12px;color:#6B6B67">mobile</span><span style="font-family:'JetBrains Mono',monospace;font-size:15px">06 12 48 73 09</span></div>
+          <div style="padding:12px 16px;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-size:12px;color:#6B6B67">domicile</span><span style="font-size:15px;color:#7AB4DB">14 rue des Tanneurs</span></div>
+          <div style="padding:12px 16px;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid rgba(236,234,230,0.06)"><span style="font-size:12px;color:#6B6B67">véhicule</span><span style="font-size:15px">Golf grise</span></div>
+          <div style="padding:12px 16px;display:flex;flex-direction:column;gap:2px"><span style="font-size:12px;color:#6B6B67">anniversaire</span><span style="font-size:15px">3 mars</span></div>
+        </div>
+        <dc-import name="CarnetBar" count="7" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">La fiche contact est le hub de navigation : chaque compteur ouvre l'app filtrée sur la personne. Adresses en bleu « trace » = lien vers Localisation. Retour = revient toujours à l'écran d'origine (pile par app).</p>
+    </div>
+
+    <!-- 21 CORBEILLE -->
+    <div id="21" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:3px 7px;border-radius:5px;background:#ECEAE6;color:#0B0C0E">21</span><span style="font-size:14px;font-weight:500">Corbeille</span></div>
+      <div style="width:390px;height:844px;border-radius:52px;background:#08090B;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 0 0 1px rgba(236,234,230,0.10),0 0 0 9px #1A1C1F,0 0 0 10px rgba(236,234,230,0.07),0 40px 80px rgba(0,0,0,0.55)">
+        <dc-import name="StatusBar" time="02:58" progress="37%" hint-size="100%,54px"></dc-import>
+        <div style="padding:8px 16px 0;display:flex;align-items:center;height:44px"><span style="font-size:17px;color:#A3A29D;display:flex;gap:4px;align-items:center"><span style="font-size:24px;line-height:1">‹</span>Accueil</span></div>
+        <div style="padding:2px 20px 14px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><h2 style="margin:0;font-size:34px;font-weight:600;letter-spacing:-0.03em">Corbeille</h2><span style="font-size:13px;color:#6B6B67">Vidée auto. après 30 j</span></div>
+          <div style="display:flex;gap:8px"><span style="height:32px;padding:0 13px;border-radius:16px;background:#ECEAE6;color:#0B0C0E;font-size:13px;font-weight:600;display:flex;align-items:center">Tout · 4</span><span style="height:32px;padding:0 13px;border-radius:16px;background:#16191D;font-size:13px;color:#A3A29D;display:flex;align-items:center">Messages</span><span style="height:32px;padding:0 13px;border-radius:16px;background:#16191D;font-size:13px;color:#A3A29D;display:flex;align-items:center">Photos</span><span style="height:32px;padding:0 13px;border-radius:16px;background:#16191D;font-size:13px;color:#A3A29D;display:flex;align-items:center">Notes</span></div>
+        </div>
+        <div style="padding:0 16px;display:flex;flex-direction:column;gap:10px">
+          <div style="padding:14px 16px;border-radius:18px;border:1px dashed rgba(236,234,230,0.16);display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#A3A29D">NOTE</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ECEAE6">Suppr. sam. 23:05</span></div>
+            <span style="font-size:15px;line-height:1.4">L. me rembourse samedi. 4 000 €. S'il recule encore j'en parle à Emma.</span>
+          </div>
+          <div style="padding:12px;border-radius:18px;border:1px dashed rgba(236,234,230,0.16);display:flex;gap:12px;align-items:center">
+            <span style="flex:none;width:64px;height:64px;border-radius:10px;background:repeating-linear-gradient(135deg,#1A1D21 0 5px,#131518 5px 10px);display:flex;align-items:flex-end;padding:4px;box-sizing:border-box;font-family:'JetBrains Mono',monospace;font-size:8px;color:#6B6B67">floue</span>
+            <div style="flex:1;display:flex;flex-direction:column;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#A3A29D">PHOTO · IMG_2319</span><span style="font-size:14px;color:#A3A29D">Prise sam. 22:09</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ECEAE6">Suppr. sam. 23:06</span></div>
+          </div>
+          <div style="padding:14px 16px;border-radius:18px;border:1px dashed rgba(236,234,230,0.16);display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#A3A29D">MESSAGE · LUCAS</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67">Envoyé sam. 18:14</span></div>
+            <span style="font-size:15px;line-height:1.4">Viens seul.</span>
+          </div>
+          <div style="padding:14px 16px;border-radius:18px;border:1px dashed rgba(236,234,230,0.16);display:flex;justify-content:space-between;align-items:center">
+            <div style="display:flex;flex-direction:column;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#A3A29D">FICHIER</span><span style="font-size:15px">releve_juin.pdf</span></div><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6B6B67">12 juin</span>
+          </div>
+        </div>
+        <dc-import name="CarnetBar" count="7" hint-size="100%,96px"></dc-import>
+      </div>
+      <p style="margin:0;width:390px;font-size:13px;line-height:1.5;color:#6B6B67">Tout élément supprimé = contour pointillé (langage commun avec les messages supprimés). Type + date de suppression toujours visibles : c'est la date qui parle. Lecture directe, pas de « restaurer » (friction inutile).</p>
+    </div>
+
+  </div>
+</section>
+</x-dc>
+</body>
+</html>

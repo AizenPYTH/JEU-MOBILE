@@ -43,7 +43,11 @@ struct GeneratedPhoto: View {
                 }
             }
             LinearGradient(colors: [.clear, .black.opacity(0.25)], startPoint: .center, endPoint: .bottom)
+            // Handoff grading: realistic, dark, cold and desaturated.
+            Color(hex: 0x1B2A38).opacity(0.28).blendMode(.overlay)
         }
+        .saturation(0.55)
+        .brightness(-0.06)
         .drawingGroup()
         .clipped()
         .accessibilityHidden(true)

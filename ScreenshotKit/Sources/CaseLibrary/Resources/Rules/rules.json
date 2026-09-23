@@ -1,6 +1,5 @@
 {
   "schemaVersion": 1,
-
   "timeCosts": {
     "openApp": 1,
     "openConversation": 3,
@@ -17,17 +16,14 @@
     "recoverMessage": 12,
     "unlockAttempt": 5
   },
-
   "messagesPageSize": 18,
   "lowTimeWarningSeconds": 60,
+  "criticalTimeSeconds": 10,
   "bannerSeconds": 4.5,
-
   "scoring": {
-    "correctSuspect": 50,
-    "keyEvidence": 25,
-    "supportingEvidence": 10,
-    "timeLeft": 15,
-    "hintPenalty": 5,
-    "falseLeadPenalty": 3
+    "correctSuspect": 60,
+    "found": 25,
+    "timeLeft": 10,
+    "notebookPrecision": 5
   }
 }

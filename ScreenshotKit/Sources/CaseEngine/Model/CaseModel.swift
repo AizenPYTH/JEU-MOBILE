@@ -258,7 +258,16 @@ public struct LiveEvent: Codable, Sendable, Identifiable {
         case deletion
     }
 
+    /// Banner priority: normal (4 s), important (6 s, outlined), urgent (inverted, stays until acted on).
+    public enum Level: String, Codable, Sendable, Comparable {
+        case normal, important, urgent
+
+        private var rank: Int { self == .normal ? 0 : self == .important ? 1 : 2 }
+        public static func < (a: Level, b: Level) -> Bool { a.rank < b.rank }
+    }
+
     public var id: String
+    public var level: Level?
     /// Seconds of investigation (real time + time costs) after which the event happens.
     public var afterSeconds: Int
     public var kind: Kind
@@ -284,6 +293,14 @@ public struct Suspect: Codable, Sendable, Identifiable, Hashable {
     public var statement: String
     /// Shown on the result screen when the player accuses this suspect.
     public var verdict: String
+    public var age: Int?
+    public var address: String?
+    /// Why this person is innocent (the alibi card of a wrong accusation) — nil for the culprit.
+    public var alibi: String?
+    /// Evidence that proves the alibi.
+    public var alibiEvidence: String?
+    /// "Le piège": why this person looked guilty.
+    public var trap: String?
 }
 
 public struct Evidence: Codable, Sendable, Identifiable, Hashable {
@@ -308,16 +325,31 @@ public struct Evidence: Codable, Sendable, Identifiable, Hashable {
     public var suspects: [SuspectID]
 }
 
+/// Hints come in tiers (clue, place, evidence). They cost score points, never the answer.
 public struct Hint: Codable, Sendable, Identifiable, Hashable {
     public var id: String
     public var text: String
-    public var costSeconds: Int
+    /// Points removed from the final score (0 = free).
+    public var scoreCost: Int
+    /// Only available once the timer is at or below this many seconds.
+    public var unlockAtRemainingSeconds: Int?
 }
 
 public struct Solution: Codable, Sendable, Hashable {
     public var culprit: SuspectID
     /// Short title of what happened.
     public var headline: String
+    /// One sentence under the headline (narrative voice).
+    public var summary: String
+    /// The reconstruction, step by step (revealed every 700 ms on the result screen).
+    public var reveal: [RevealStep]
     /// The full story, revealed paragraph by paragraph.
     public var story: [String]
+}
+
+public struct RevealStep: Codable, Sendable, Hashable {
+    public var at: Moment
+    public var text: String
+    /// Evidence this step relies on: shown as found (●) or missed (○).
+    public var evidence: String?
 }

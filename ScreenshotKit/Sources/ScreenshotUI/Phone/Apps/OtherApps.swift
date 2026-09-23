@@ -18,18 +18,18 @@ struct BrowserHistoryView: View {
                         Button {
                             session.open(.browserEntry(entry.id))
                         } label: {
-                            HStack(spacing: Theme.Spacing.m) {
+                            HStack(spacing: Theme.Spacing.s4) {
                                 Image(systemName: entry.kind == .search ? "magnifyingglass" : "globe")
                                     .foregroundStyle(Theme.Colors.textSecondary)
                                     .frame(width: 22)
-                                VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+                                VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                                     Text(entry.text).font(Theme.Fonts.body).lineLimit(2)
                                     if let url = entry.url {
                                         Text(url).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary).lineLimit(1)
                                     }
                                 }
                                 Spacer()
-                                Text(PhoneFormat.time(entry.at)).font(Theme.Fonts.subheadline).monospacedDigit()
+                                Text(PhoneFormat.time(entry.at)).font(Theme.Fonts.callout).monospacedDigit()
                                     .foregroundStyle(Theme.Colors.textSecondary)
                             }
                             .contentShape(Rectangle())
@@ -51,16 +51,16 @@ struct BrowserPageView: View {
 
     var body: some View {
         if let entry = session.game.index.browserEntry(entryID) {
-            VStack(alignment: .leading, spacing: Theme.Spacing.l) {
+            VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
                 HStack {
                     Image(systemName: "lock.fill").font(Theme.Fonts.caption)
                     Text(entry.url ?? L10n.f("browser.searchURL", entry.text)).lineLimit(1)
                 }
-                .font(Theme.Fonts.footnote)
+                .font(Theme.Fonts.caption)
                 .foregroundStyle(Theme.Colors.textSecondary)
-                .padding(Theme.Spacing.s)
+                .padding(Theme.Spacing.s3)
                 .frame(maxWidth: .infinity)
-                .background(RoundedRectangle(cornerRadius: Theme.Radius.s).fill(Theme.Colors.surfaceElevated))
+                .background(RoundedRectangle(cornerRadius: Theme.Radius.xs).fill(Theme.Colors.bgRaised))
                 Text(entry.kind == .search ? L10n.f("browser.resultsFor", entry.text) : entry.text)
                     .font(Theme.Fonts.title)
                 Text(entry.summary ?? L10n.t("browser.noPreview"))
@@ -71,7 +71,7 @@ struct BrowserPageView: View {
                     .foregroundStyle(Theme.Colors.textTertiary)
                 Spacer()
             }
-            .padding(Theme.Spacing.l)
+            .padding(Theme.Spacing.s5)
             .navigationBarTitleDisplayMode(.inline)
         }
     }
@@ -89,16 +89,16 @@ struct MailListView: View {
             Button {
                 session.open(.mail(mail.id))
             } label: {
-                VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+                VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                     HStack {
                         Text(folder == .sent ? mail.to : mail.fromName).font(Theme.Fonts.headline).lineLimit(1)
                         Spacer()
                         Text(PhoneFormat.relative(mail.at, now: session.game.phoneNow))
-                            .font(Theme.Fonts.subheadline).foregroundStyle(Theme.Colors.textSecondary)
+                            .font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
                     }
-                    Text(mail.subject).font(Theme.Fonts.subheadline).lineLimit(1)
+                    Text(mail.subject).font(Theme.Fonts.callout).lineLimit(1)
                     Text(mail.body.replacingOccurrences(of: "\n", with: " "))
-                        .font(Theme.Fonts.subheadline).foregroundStyle(Theme.Colors.textSecondary).lineLimit(2)
+                        .font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary).lineLimit(2)
                 }
                 .contentShape(Rectangle())
             }
@@ -124,17 +124,17 @@ struct MailView: View {
     var body: some View {
         if let mail = session.game.index.mail(mailID) {
             ScrollView {
-                VStack(alignment: .leading, spacing: Theme.Spacing.m) {
+                VStack(alignment: .leading, spacing: Theme.Spacing.s4) {
                     Text(mail.subject).font(Theme.Fonts.title)
-                    VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
-                        Text("\(mail.fromName) <\(mail.fromAddress)>").font(Theme.Fonts.subheadline.weight(.semibold))
+                    VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
+                        Text("\(mail.fromName) <\(mail.fromAddress)>").font(Theme.Fonts.callout.weight(.semibold))
                         Text(L10n.f("mail.to", mail.to)).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
                         Text(PhoneFormat.dayAndTime(mail.at)).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
                     }
-                    Divider().overlay(Theme.Colors.separator)
+                    Divider().overlay(Theme.Colors.line2)
                     Text(mail.body).font(Theme.Fonts.body)
                 }
-                .padding(Theme.Spacing.l)
+                .padding(Theme.Spacing.s5)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -151,16 +151,36 @@ struct ContactsListView: View {
     var body: some View {
         let game = session.game
         let owner = game.device.contacts.first { $0.isOwner == true }
-        let others = game.device.contacts.filter { $0.isOwner != true }.sorted { $0.name < $1.name }
+        let suspectContacts = Set(game.caseFile.suspects.map(\.contact))
+        let caseContacts = game.device.contacts.filter { suspectContacts.contains($0.id) }
+        let others = game.device.contacts.filter { $0.isOwner != true && !suspectContacts.contains($0.id) }.sorted { $0.name < $1.name }
         List {
+            Section(L10n.t("contacts.casePeople")) {
+                ForEach(caseContacts) { contact in
+                    Button { session.open(.contact(contact.id)) } label: {
+                        HStack(spacing: Theme.Spacing.s4) {
+                            Avatar(contact: contact, size: Theme.Size.avatarS)
+                            VStack(alignment: .leading) {
+                                Text(contact.name).font(Theme.Fonts.headline)
+                                if let relation = contact.relation {
+                                    Text(relation).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
+                                }
+                            }
+                            Spacer()
+                        }
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
             if let owner {
                 Section {
                     Button { session.open(.contact(owner.id)) } label: {
-                        HStack(spacing: Theme.Spacing.m) {
+                        HStack(spacing: Theme.Spacing.s4) {
                             Avatar(contact: owner, size: Theme.Size.avatarM + 8)
                             VStack(alignment: .leading) {
                                 Text(owner.name).font(Theme.Fonts.headline)
-                                Text(L10n.t("contacts.myCard")).font(Theme.Fonts.subheadline).foregroundStyle(Theme.Colors.textSecondary)
+                                Text(L10n.t("contacts.myCard")).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
                             }
                         }
                         .contentShape(Rectangle())
@@ -171,7 +191,7 @@ struct ContactsListView: View {
             Section {
                 ForEach(others) { contact in
                     Button { session.open(.contact(contact.id)) } label: {
-                        HStack(spacing: Theme.Spacing.m) {
+                        HStack(spacing: Theme.Spacing.s4) {
                             Avatar(contact: contact, size: Theme.Size.avatarS)
                             Text(contact.name).font(Theme.Fonts.body)
                             Spacer()
@@ -196,28 +216,28 @@ struct ContactDetailView: View {
             let conversation = game.device.conversations.first { !$0.isGroup && $0.participants == [contact.id] }
             List {
                 Section {
-                    VStack(spacing: Theme.Spacing.s) {
+                    VStack(spacing: Theme.Spacing.s3) {
                         Avatar(contact: contact, size: Theme.Size.avatarL)
                         Text(contact.name).font(Theme.Fonts.title)
                         if let relation = contact.relation {
-                            Text(relation).font(Theme.Fonts.subheadline).foregroundStyle(Theme.Colors.textSecondary)
+                            Text(relation).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
                         }
                         if let conversation {
                             Button {
                                 session.open(.conversation(conversation.id))
                             } label: {
                                 Label(L10n.t("contacts.message"), systemImage: "message.fill")
-                                    .font(Theme.Fonts.subheadline.weight(.semibold))
-                                    .padding(.horizontal, Theme.Spacing.l)
-                                    .padding(.vertical, Theme.Spacing.s)
-                                    .background(Capsule().fill(Theme.Colors.surfaceElevated))
+                                    .font(Theme.Fonts.callout.weight(.semibold))
+                                    .padding(.horizontal, Theme.Spacing.s5)
+                                    .padding(.vertical, Theme.Spacing.s3)
+                                    .background(Capsule().fill(Theme.Colors.bgRaised))
                             }
                             .buttonStyle(.plain)
-                            .foregroundStyle(Theme.Colors.link)
+                            .foregroundStyle(Theme.Colors.trace)
                         }
                     }
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, Theme.Spacing.s)
+                    .padding(.vertical, Theme.Spacing.s3)
                 }
                 Section {
                     InfoRow(icon: "phone", label: L10n.t("contacts.phone"), value: contact.phone)
@@ -251,7 +271,8 @@ struct TrashView: View {
         List {
             Section {
                 ForEach(game.trash) { item in
-                    VStack(alignment: .leading, spacing: Theme.Spacing.s) {
+                    VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+                        Text(L10n.t("trash.typeMessage")).overline()
                         HStack {
                             Text(game.name(of: item.message.from)).font(Theme.Fonts.headline)
                             Spacer()
@@ -259,7 +280,7 @@ struct TrashView: View {
                         }
                         if item.isRecovered {
                             Text(item.message.text ?? L10n.t("item.photo")).font(Theme.Fonts.body)
-                            Text(L10n.t("trash.recovered")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.recovered)
+                            Text(L10n.t("trash.recovered")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.signal)
                         } else {
                             Text(L10n.t("trash.hidden"))
                                 .font(Theme.Fonts.body)
@@ -269,17 +290,20 @@ struct TrashView: View {
                                 session.perform { $0.recoverMessage(item.message.id) }
                             } label: {
                                 Label(L10n.f("trash.recover", session.rules.timeCosts.recoverMessage), systemImage: "arrow.uturn.backward")
-                                    .font(Theme.Fonts.subheadline.weight(.semibold))
+                                    .font(Theme.Fonts.callout.weight(.semibold))
                             }
                             .buttonStyle(.borderless)
-                            .foregroundStyle(Theme.Colors.accent)
+                            .foregroundStyle(Theme.Colors.signal)
                         }
                         Text(L10n.f("trash.deletedAt", PhoneFormat.dayAndTime(item.deletedAt)))
-                            .font(Theme.Fonts.caption2)
+                            .font(Theme.Fonts.dataSmall)
                             .foregroundStyle(Theme.Colors.textTertiary)
                     }
-                    .padding(.vertical, Theme.Spacing.xs)
-                    .pinnable(ItemRef(.message, item.message.id), session: session)
+                    .padding(Theme.Spacing.s4)
+                    .overlay(RoundedRectangle(cornerRadius: Theme.Radius.sm).stroke(Theme.Colors.line3, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .pinnable(ItemRef(.message, item.message.id), session: session, radius: Theme.Radius.sm)
                 }
             } footer: {
                 Text(L10n.t("trash.footer"))
@@ -299,11 +323,11 @@ struct SettingsView: View {
         let owner = game.device.contacts.first { $0.isOwner == true }
         List {
             Section {
-                HStack(spacing: Theme.Spacing.m) {
+                HStack(spacing: Theme.Spacing.s4) {
                     Avatar(contact: owner, size: Theme.Size.avatarM + 12)
                     VStack(alignment: .leading) {
                         Text(owner?.name ?? "").font(Theme.Fonts.headline)
-                        Text(owner?.email ?? "").font(Theme.Fonts.subheadline).foregroundStyle(Theme.Colors.textSecondary)
+                        Text(owner?.email ?? "").font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
                     }
                 }
             }
@@ -343,15 +367,15 @@ struct NotificationsView: View {
                 Button {
                     session.open(notification)
                 } label: {
-                    HStack(alignment: .top, spacing: Theme.Spacing.m) {
+                    HStack(alignment: .top, spacing: Theme.Spacing.s4) {
                         AppIconGlyph(app: notification.app, size: Theme.Size.avatarS)
-                        VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+                        VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                             HStack {
-                                Text(notification.title).font(Theme.Fonts.subheadline.weight(.semibold))
+                                Text(notification.title).font(Theme.Fonts.callout.weight(.semibold))
                                 Spacer()
                                 Text(PhoneFormat.time(notification.at)).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
                             }
-                            Text(notification.body).font(Theme.Fonts.subheadline)
+                            Text(notification.body).font(Theme.Fonts.callout)
                         }
                     }
                     .contentShape(Rectangle())

@@ -13,16 +13,16 @@ struct AppLockView: View {
     private var length: Int { lock?.code.count ?? 4 }
 
     var body: some View {
-        VStack(spacing: Theme.Spacing.xl) {
+        VStack(spacing: Theme.Spacing.s7) {
             Spacer()
             Image(systemName: "lock.fill").font(.system(size: 36)).foregroundStyle(Theme.Colors.textSecondary)
             Text(L10n.f("lock.title", app.title)).font(Theme.Fonts.headline)
             if let hint = lock?.hint {
                 Text(L10n.f("lock.hint", hint))
-                    .font(Theme.Fonts.subheadline)
+                    .font(Theme.Fonts.callout)
                     .foregroundStyle(Theme.Colors.textSecondary)
             }
-            HStack(spacing: Theme.Spacing.l) {
+            HStack(spacing: Theme.Spacing.s5) {
                 ForEach(0..<length, id: \.self) { i in
                     Circle()
                         .strokeBorder(Theme.Colors.textPrimary, lineWidth: 1.5)
@@ -34,8 +34,8 @@ struct AppLockView: View {
             Text(L10n.f("lock.cost", session.rules.timeCosts.unlockAttempt))
                 .font(Theme.Fonts.caption)
                 .foregroundStyle(Theme.Colors.textTertiary)
-            LazyVGrid(columns: Array(repeating: GridItem(.fixed(Theme.Size.keypadKey), spacing: Theme.Spacing.l), count: 3),
-                      spacing: Theme.Spacing.m) {
+            LazyVGrid(columns: Array(repeating: GridItem(.fixed(Theme.Size.keypadKey), spacing: Theme.Spacing.s5), count: 3),
+                      spacing: Theme.Spacing.s4) {
                 ForEach(["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "⌫"], id: \.self) { key in
                     if key.isEmpty {
                         Color.clear.frame(width: Theme.Size.keypadKey, height: Theme.Size.keypadKey)
@@ -46,7 +46,7 @@ struct AppLockView: View {
                             Text(key)
                                 .font(.system(size: 28, weight: .regular))
                                 .frame(width: Theme.Size.keypadKey, height: Theme.Size.keypadKey)
-                                .background(Circle().fill(key == "⌫" ? .clear : Theme.Colors.surfaceElevated))
+                                .background(Circle().fill(key == "⌫" ? .clear : Theme.Colors.bgRaised))
                         }
                         .buttonStyle(.plain)
                     }
@@ -90,13 +90,13 @@ struct NotesListView: View {
             Button {
                 session.open(.note(note.id))
             } label: {
-                VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+                VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                     Text(note.title).font(Theme.Fonts.headline).lineLimit(1)
                     HStack {
                         Text(PhoneFormat.relative(note.modifiedAt, now: session.game.phoneNow))
                         Text(note.body.replacingOccurrences(of: "\n", with: " ")).lineLimit(1)
                     }
-                    .font(Theme.Fonts.subheadline)
+                    .font(Theme.Fonts.callout)
                     .foregroundStyle(Theme.Colors.textSecondary)
                 }
                 .contentShape(Rectangle())
@@ -114,7 +114,7 @@ struct NoteView: View {
     var body: some View {
         if let note = session.game.index.note(noteID) {
             ScrollView {
-                VStack(alignment: .leading, spacing: Theme.Spacing.m) {
+                VStack(alignment: .leading, spacing: Theme.Spacing.s4) {
                     Text(L10n.f("notes.modified", PhoneFormat.dayAndTime(note.modifiedAt)))
                         .font(Theme.Fonts.caption)
                         .foregroundStyle(Theme.Colors.textSecondary)
@@ -125,7 +125,7 @@ struct NoteView: View {
                         .font(Theme.Fonts.caption)
                         .foregroundStyle(Theme.Colors.textTertiary)
                 }
-                .padding(Theme.Spacing.l)
+                .padding(Theme.Spacing.s5)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .navigationBarTitleDisplayMode(.inline)

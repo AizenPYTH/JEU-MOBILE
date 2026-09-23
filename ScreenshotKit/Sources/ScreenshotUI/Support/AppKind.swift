@@ -34,7 +34,7 @@ extension AppID {
 
     var title: String { L10n.t("app.\(rawValue)") }
 
-    /// Apps pinned to the dock, like a real phone.
-    static let dock: [AppID] = [.phone, .messages, .browser, .photos]
+    /// Apps pinned to the dock (handoff: Ct, Ap, Ms, Ph).
+    static let dock: [AppID] = [.contacts, .phone, .messages, .photos]
 }
 #endif

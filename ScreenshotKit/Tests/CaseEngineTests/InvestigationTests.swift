@@ -196,12 +196,16 @@ struct VerdictTests {
         game.recoverMessage("e1")
         game.openPhoto("p1")
         game.analyzePhoto("p1")
+        game.togglePin(ItemRef(.message, "e1"))
         let verdict = try #require(game.accuse("s_emma"))
         #expect(verdict.isCorrect)
-        #expect(verdict.foundKeyCount == 2 && verdict.totalKeyCount == 2)
-        #expect(verdict.missedKey.isEmpty)
-        #expect(verdict.scoreParts.suspect == 50 && verdict.scoreParts.keyEvidence == 25)
-        #expect(verdict.score > 80)
+        // 3 counted items (2 key + 1 supporting); the draft was never seen.
+        #expect(verdict.foundCount == 2 && verdict.totalCount == 3)
+        #expect(verdict.missed.map(\.id) == ["ev_draft"])
+        #expect(verdict.scoreParts.suspect == 60)
+        #expect(verdict.scoreParts.found == 16) // 25 × 2/3, rounded down
+        #expect(verdict.scoreParts.precision == 5) // 1 relevant pin out of 1
+        #expect(verdict.score == 60 + 16 + verdict.scoreParts.time + 5)
         #expect(game.phase == .finished)
     }
 
@@ -210,35 +214,43 @@ struct VerdictTests {
         game.start()
         game.openConversation("c_lucas")
         game.markSeen(ItemRef(.message, "l3"))
-        game.pin(ItemRef(.message, "l3"), to: "s_lucas")
+        game.link(ItemRef(.message, "l3"), to: "s_lucas")
         let verdict = try #require(game.accuse("s_lucas"))
         #expect(!verdict.isCorrect)
         #expect(verdict.accusedText == "Lucas n'y est pour rien.")
+        #expect(verdict.alibi == "Il était reparti." && verdict.trap == "Il était au port.")
+        #expect(verdict.alibiEvidence?.id == "ev_draft")
         #expect(verdict.foundAboutAccused.map(\.id) == ["ev_lucas"]) // what they did get right
-        #expect(Set(verdict.missedKey.map(\.id)) == ["ev_rdv", "ev_photo"]) // what they missed
+        #expect(verdict.missedByApp[.trash] == 1 && verdict.missedByApp[.photos] == 1 && verdict.missedByApp[.messages] == 1)
         #expect(verdict.scoreParts.time == 0) // guessing fast must not pay
-        #expect(verdict.scoreParts.falseLeadPenalty == 3)
+        #expect(verdict.scoreParts.precision == 0) // the only pin was a false lead
     }
 
-    @Test func hintsCostTimeAndScore() throws {
-        let (game, _) = Fixtures.investigation()
+    @Test func hintsAreTieredAndCostScoreNotTime() throws {
+        let (game, clock) = Fixtures.investigation()
         game.start()
-        #expect(game.useHint()?.text == "La corbeille.")
-        #expect(game.useHint() == nil)
-        #expect(game.remainingSeconds == 260)
-        #expect(try #require(game.accuse("s_emma")).scoreParts.hintPenalty == 5)
+        #expect(game.useHint()?.id == "h1")
+        #expect(game.useHint()?.id == "h2")
+        #expect(game.useHint() == nil) // h3 unlocks at 02:00
+        #expect(game.remainingSeconds == 300) // hints never cost time
+        for _ in 0..<(181 * 4) { clock.advance(by: 0.25); game.tick() }
+        #expect(game.state(of: game.caseFile.hints[2]) == .available)
+        #expect(game.useHint()?.id == "h3")
+        #expect(try #require(game.accuse("s_emma")).scoreParts.hintCost == 23)
     }
 
-    @Test func suspectFilesArePlayerOrganised() {
+    @Test func theNotebookPinsAndLinks() {
         let (game, _) = Fixtures.investigation()
-        game.pin(ItemRef(.photoInfo, "p1"), to: "s_emma")
-        game.pin(ItemRef(.photoInfo, "p1"), to: "s_emma")
+        #expect(game.togglePin(ItemRef(.photoInfo, "p1")))
+        #expect(game.isPinned(ItemRef(.photoInfo, "p1")))
+        game.link(ItemRef(.photoInfo, "p1"), to: "s_emma")
+        game.link(ItemRef(.message, "l3"), to: "s_lucas") // linking pins too
+        #expect(game.notebook.count == 2)
+        #expect(game.linkedEntries(for: "s_emma").map(\.ref) == [ItemRef(.photoInfo, "p1")])
+        #expect(!game.togglePin(ItemRef(.photoInfo, "p1")))
+        #expect(game.linkedEntries(for: "s_emma").isEmpty)
         game.toggle(.liedAboutAlibi, for: "s_emma")
-        #expect(game.pins["s_emma"] == [ItemRef(.photoInfo, "p1")])
         #expect(game.marks["s_emma"] == [.liedAboutAlibi])
-        game.toggle(.liedAboutAlibi, for: "s_emma")
-        game.unpin(ItemRef(.photoInfo, "p1"), from: "s_emma")
-        #expect(game.marks["s_emma"]?.isEmpty == true && game.pins["s_emma"]?.isEmpty == true)
     }
 }
 

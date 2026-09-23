@@ -2,7 +2,7 @@
 import SwiftUI
 import CaseEngine
 
-/// Messages: conversation list + search across every message (search costs time).
+/// Screen 09 — conversation list + search in every message (search costs time).
 struct MessagesListView: View {
     let session: GameSession
     @State private var query = ""
@@ -10,46 +10,110 @@ struct MessagesListView: View {
 
     var body: some View {
         let game = session.game
-        List {
-            if let results {
-                Section {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                AppHeader(title: AppID.messages.title)
+                SearchField(text: $query, prompt: L10n.f("messages.searchPrompt", session.rules.timeCosts.search)) {
+                    results = session.search(query)
+                } onClear: {
+                    results = nil
+                }
+                .padding(.horizontal, Theme.Spacing.marginList)
+                .padding(.vertical, Theme.Spacing.s4)
+
+                if let results {
+                    Text(L10n.f("messages.results", results.count))
+                        .overline()
+                        .padding(.horizontal, Theme.Spacing.marginList)
+                        .padding(.bottom, Theme.Spacing.s3)
                     if results.isEmpty {
-                        Text(L10n.t("messages.noResult"))
-                            .foregroundStyle(Theme.Colors.textSecondary)
+                        EmptyStateView(title: L10n.f("search.emptyTitle", query), message: L10n.t("search.emptyMessage"))
                     }
                     ForEach(results) { hit in
                         Button {
                             session.open(.conversation(hit.conversationID, focus: hit.message.id))
                         } label: {
-                            SearchHitRow(hit: hit, game: game)
+                            SearchHitRow(hit: hit, query: query, game: game)
                         }
                         .buttonStyle(.plain)
                     }
-                } header: {
-                    Text(L10n.f("messages.results", results.count))
-                }
-            } else {
-                ForEach(game.conversations) { summary in
-                    Button {
-                        session.open(.conversation(summary.id))
-                    } label: {
-                        ConversationRow(summary: summary, game: game)
+                } else {
+                    ForEach(game.conversations) { summary in
+                        Button {
+                            session.open(.conversation(summary.id))
+                        } label: {
+                            ConversationRow(summary: summary, game: game)
+                        }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
-                    .listRowBackground(Theme.Colors.background)
                 }
             }
+            .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .navigationTitle(AppID.messages.title)
-        .searchable(text: $query, prompt: Text(L10n.f("messages.searchPrompt", session.rules.timeCosts.search)))
-        .onSubmit(of: .search) {
-            results = session.search(query)
+        .background(Theme.Colors.bgBase)
+        .toolbar(.hidden, for: .navigationBar)
+        .safeAreaInset(edge: .top, spacing: 0) { BackRow(title: L10n.t("nav.home")) { session.goHome() } }
+    }
+}
+
+/// "‹ Parent" row (h 44) used by app roots.
+struct BackRow: View {
+    let title: String
+    let action: () -> Void
+
+    var body: some View {
+        HStack {
+            Button(action: action) {
+                HStack(spacing: 2) {
+                    Image(systemName: "chevron.left").font(.system(size: 17, weight: .semibold))
+                    Text(title).font(Theme.Fonts.bodyLarge)
+                }
+                .foregroundStyle(Theme.Colors.textPrimary)
+                .frame(minHeight: Theme.Size.hit)
+            }
+            .buttonStyle(.plain)
+            Spacer()
         }
-        .onChange(of: query) { _, newValue in
-            if newValue.isEmpty { results = nil }
+        .padding(.horizontal, Theme.Spacing.marginCompact)
+        .background(Theme.Colors.bgBase.opacity(0.9))
+    }
+}
+
+/// SearchField: h 40, r 12; submit = search (costs time).
+struct SearchField: View {
+    @Binding var text: String
+    let prompt: String
+    let onSubmit: () -> Void
+    let onClear: () -> Void
+    @FocusState private var focused: Bool
+
+    var body: some View {
+        HStack(spacing: Theme.Spacing.s3) {
+            Image(systemName: "magnifyingglass").foregroundStyle(Theme.Colors.textTertiary)
+            TextField("", text: $text, prompt: Text(prompt).foregroundStyle(Theme.Colors.textTertiary))
+                .font(Theme.Fonts.body)
+                .foregroundStyle(Theme.Colors.textPrimary)
+                .tint(Theme.Colors.signal)
+                .focused($focused)
+                .submitLabel(.search)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
+                .onSubmit { if !text.trimmingCharacters(in: .whitespaces).isEmpty { onSubmit() } }
+            if !text.isEmpty {
+                Button {
+                    text = ""
+                    onClear()
+                } label: {
+                    Image(systemName: "xmark.circle.fill").foregroundStyle(Theme.Colors.textTertiary)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text(L10n.t("a11y.clear")))
+            }
         }
+        .padding(.horizontal, Theme.Spacing.s4)
+        .frame(height: Theme.Size.searchField)
+        .background(RoundedRectangle(cornerRadius: Theme.Radius.sm).fill(Theme.Colors.bgRaised))
+        .overlay(RoundedRectangle(cornerRadius: Theme.Radius.sm).strokeBorder(focused ? Theme.Colors.line3 : .clear))
     }
 }
 
@@ -59,34 +123,45 @@ struct ConversationRow: View {
 
     var body: some View {
         let conversation = summary.conversation
-        HStack(spacing: Theme.Spacing.m) {
-            Circle()
-                .fill(summary.unread > 0 ? Theme.Colors.link : .clear)
-                .frame(width: 9, height: 9)
+        let unread = summary.unread > 0
+        HStack(spacing: Theme.Spacing.s4) {
             if conversation.isGroup {
-                GroupAvatar(contacts: conversation.participants.compactMap { game.contact($0) })
+                GroupAvatar(count: conversation.participants.count + 1)
             } else {
                 Avatar(contact: game.contact(conversation.participants[0]))
             }
-            VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
-                HStack {
+            VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
+                HStack(alignment: .firstTextBaseline) {
                     Text(game.title(of: conversation))
-                        .font(Theme.Fonts.headline)
+                        .font(unread ? Theme.Fonts.headline : Theme.Fonts.bodyLarge)
+                        .foregroundStyle(Theme.Colors.textPrimary)
                         .lineLimit(1)
                     Spacer()
                     if let last = summary.last {
                         Text(PhoneFormat.relative(last.message.at, now: game.phoneNow))
-                            .font(Theme.Fonts.subheadline)
-                            .foregroundStyle(Theme.Colors.textSecondary)
+                            .font(Theme.Fonts.data)
+                            .foregroundStyle(unread ? Theme.Colors.signal : Theme.Colors.textTertiary)
                     }
                 }
                 Text(preview)
-                    .font(Theme.Fonts.subheadline)
-                    .foregroundStyle(Theme.Colors.textSecondary)
-                    .lineLimit(2)
+                    .font(Theme.Fonts.callout)
+                    .foregroundStyle(unread ? Theme.Colors.textPrimary : Theme.Colors.textSecondary)
+                    .lineLimit(1)
             }
         }
-        .padding(.vertical, Theme.Spacing.xs)
+        .padding(.horizontal, Theme.Spacing.marginList)
+        .frame(height: Theme.Size.conversationRow)
+        .overlay(alignment: .leading) {
+            if unread {
+                Circle().fill(Theme.Colors.signal)
+                    .frame(width: Theme.Size.unreadDot, height: Theme.Size.unreadDot)
+                    .padding(.leading, 7)
+                    .accessibilityLabel(Text(L10n.t("a11y.unread")))
+            }
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(Theme.Colors.line1).frame(height: 1).padding(.leading, 88)
+        }
         .contentShape(Rectangle())
     }
 
@@ -100,72 +175,110 @@ struct ConversationRow: View {
 
 struct SearchHitRow: View {
     let hit: SearchHit
+    let query: String
     let game: Investigation
 
     var body: some View {
         let message = hit.message.message
-        VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+        VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
             HStack {
                 Text(game.index.conversation(hit.conversationID).map { game.title(of: $0) } ?? "")
-                    .font(Theme.Fonts.subheadline.weight(.semibold))
+                    .font(Theme.Fonts.headline)
                 Spacer()
-                Text(PhoneFormat.dayAndTime(message.at))
-                    .font(Theme.Fonts.caption)
-                    .foregroundStyle(Theme.Colors.textSecondary)
+                Text(PhoneFormat.shortDay(message.at) + " · " + PhoneFormat.time(message.at))
+                    .font(Theme.Fonts.data)
+                    .foregroundStyle(Theme.Colors.textTertiary)
             }
-            Text("\(game.name(of: message.from)) : \(message.text ?? L10n.t("item.photo"))")
-                .font(Theme.Fonts.subheadline)
+            Text(Highlighter.attributed("\(game.name(of: message.from)) : \(message.text ?? L10n.t("item.photo"))", query: query))
+                .font(Theme.Fonts.callout)
                 .foregroundStyle(Theme.Colors.textSecondary)
-                .lineLimit(3)
+                .lineLimit(2)
         }
-        .padding(.vertical, Theme.Spacing.xxs)
+        .padding(.horizontal, Theme.Spacing.marginList)
+        .padding(.vertical, Theme.Spacing.s4)
+        .overlay(alignment: .bottom) { Rectangle().fill(Theme.Colors.line1).frame(height: 1) }
         .contentShape(Rectangle())
     }
 }
 
-/// One conversation: bubbles, day separators, exact times, older pages, draft.
+/// Highlights the searched term (amber 22 % background).
+enum Highlighter {
+    static func attributed(_ text: String, query: String) -> AttributedString {
+        var result = AttributedString(text)
+        let needle = query.trimmingCharacters(in: .whitespaces)
+        guard !needle.isEmpty,
+              let range = text.range(of: needle, options: [.caseInsensitive, .diacriticInsensitive]),
+              let attributed = Range(range, in: result) else { return result }
+        result[attributed].backgroundColor = Theme.Colors.signal.opacity(0.22)
+        result[attributed].foregroundColor = Theme.Colors.textPrimary
+        return result
+    }
+}
+
+/// Screen 10 — one conversation. You read, you don't write: no input field.
 struct ConversationView: View {
     let conversationID: String
     let focus: String?
     let session: GameSession
 
+    /// Messages closer than this share one centered timestamp.
+    private let groupGap: Int64 = 5 * 60
+
     var body: some View {
         let game = session.game
         let conversation = game.index.conversation(conversationID)
         let messages = game.loadedMessages(in: conversationID)
+        let other = conversation.flatMap { $0.isGroup ? nil : game.contact($0.participants[0]) }
+        let stopped = other.flatMap { contact in game.device.tracks.first { $0.contact == contact.id }?.sharingStoppedAt }
+
         ScrollViewReader { proxy in
             ScrollView {
-                LazyVStack(spacing: Theme.Spacing.xs) {
+                LazyVStack(spacing: 2) {
                     if game.hasOlderMessages(in: conversationID) {
                         Button {
                             session.perform { $0.loadOlderMessages(in: conversationID) }
                         } label: {
-                            Label(L10n.f("messages.loadOlder", session.rules.timeCosts.loadOlderMessages), systemImage: "clock.arrow.circlepath")
-                                .font(Theme.Fonts.footnote.weight(.medium))
-                                .padding(.vertical, Theme.Spacing.s)
-                                .padding(.horizontal, Theme.Spacing.l)
-                                .background(Capsule().fill(Theme.Colors.surfaceElevated))
+                            Text(L10n.f("messages.loadOlder", session.rules.timeCosts.loadOlderMessages))
+                                .font(Theme.Fonts.dataStrong)
+                                .foregroundStyle(Theme.Colors.textPrimary)
+                                .padding(.horizontal, Theme.Spacing.s5)
+                                .frame(height: 32)
+                                .background(Capsule().fill(Theme.Colors.line1))
+                                .overlay(Capsule().strokeBorder(Theme.Colors.line2))
                         }
                         .buttonStyle(.plain)
-                        .foregroundStyle(Theme.Colors.accent)
-                        .padding(.vertical, Theme.Spacing.m)
+                        .padding(.vertical, Theme.Spacing.s5)
                     } else {
-                        Text(L10n.t("messages.start"))
-                            .font(Theme.Fonts.caption)
-                            .foregroundStyle(Theme.Colors.textTertiary)
-                            .padding(.vertical, Theme.Spacing.m)
+                        SystemPill(text: L10n.t("messages.start"))
+                            .padding(.vertical, Theme.Spacing.s5)
                     }
                     ForEach(Array(messages.enumerated()), id: \.element.id) { offset, visible in
                         let previous = offset > 0 ? messages[offset - 1].message : nil
-                        if previous == nil || visible.message.at.seconds - (previous?.at.seconds ?? 0) > 3_600 {
-                            Text(PhoneFormat.separator(visible.message.at, now: game.phoneNow))
-                                .font(Theme.Fonts.caption.weight(.medium))
-                                .foregroundStyle(Theme.Colors.textSecondary)
-                                .padding(.top, Theme.Spacing.m)
+                        let next = offset + 1 < messages.count ? messages[offset + 1].message : nil
+                        let at = visible.message.at
+                        if previous == nil || !(previous?.at.isSameDay(as: at) ?? false) {
+                            Text(PhoneFormat.separatorCaps(at) + " · " + PhoneFormat.time(at))
+                                .font(Theme.Fonts.dataSmall)
+                                .tracking(0.7)
+                                .foregroundStyle(Theme.Colors.textTertiary)
+                                .padding(.top, Theme.Spacing.s6)
+                                .padding(.bottom, Theme.Spacing.s3)
+                        } else if let previous, at.seconds - previous.at.seconds > groupGap {
+                            Text(PhoneFormat.time(at))
+                                .font(Theme.Fonts.dataSmall)
+                                .foregroundStyle(Theme.Colors.textTertiary)
+                                .padding(.top, Theme.Spacing.s4)
+                                .padding(.bottom, Theme.Spacing.s2)
                         }
+                        if let stopped, let previous, previous.at < stopped, stopped <= at {
+                            SystemPill(text: L10n.f("messages.stoppedSharing", other?.name ?? "", PhoneFormat.time(stopped)))
+                                .padding(.vertical, Theme.Spacing.s3)
+                        }
+                        let lastOfGroup = next == nil || next?.from != visible.message.from || (next.map { $0.at.seconds - at.seconds > groupGap } ?? true)
                         MessageBubble(visible: visible,
-                                      senderName: conversation?.isGroup == true && previous?.from != visible.message.from
+                                      senderName: conversation?.isGroup == true && (previous?.from != visible.message.from) && !visible.message.isFromOwner
                                           ? game.name(of: visible.message.from) : nil,
+                                      lastOfGroup: lastOfGroup,
                                       highlighted: visible.id == focus,
                                       session: session)
                             .id(visible.id)
@@ -174,125 +287,166 @@ struct ConversationView: View {
                     if let draft = conversation?.draft {
                         DraftBubble(draft: draft)
                             .onAppear { session.markSeen(ItemRef(.draft, draft.id)) }
-                            .pinnable(ItemRef(.draft, draft.id), session: session)
+                            .pinnable(ItemRef(.draft, draft.id), session: session, radius: Theme.Radius.bubble)
                             .id(draft.id)
                     }
                 }
-                .padding(.horizontal, Theme.Spacing.m)
-                .padding(.bottom, Theme.Spacing.l)
+                .padding(.horizontal, Theme.Spacing.marginCompact)
+                .padding(.bottom, Theme.Spacing.bottomInset)
             }
             .defaultScrollAnchor(.bottom)
             .onAppear {
                 if let focus { proxy.scrollTo(focus, anchor: .center) }
             }
         }
-        .background(Theme.Colors.background)
-        .navigationTitle(conversation.map { game.title(of: $0) } ?? "")
+        .background(Theme.Colors.bgBase)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            if let conversation, !conversation.isGroup {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        session.open(.contact(conversation.participants[0]))
-                    } label: {
-                        Avatar(contact: game.contact(conversation.participants[0]), size: Theme.Size.avatarS)
+            ToolbarItem(placement: .principal) {
+                Button {
+                    if let other { session.open(.contact(other.id)) }
+                } label: {
+                    HStack(spacing: Theme.Spacing.s3) {
+                        if let other { Avatar(contact: other, size: Theme.Size.avatarS) } else { GroupAvatar(count: (conversation?.participants.count ?? 0) + 1, size: Theme.Size.avatarS) }
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(conversation.map { game.title(of: $0) } ?? "").font(Theme.Fonts.headline).lineLimit(1)
+                            Text(meta(conversation, other: other, game: game))
+                                .font(Theme.Fonts.caption)
+                                .foregroundStyle(Theme.Colors.textSecondary)
+                                .lineLimit(1)
+                        }
                     }
-                    .accessibilityLabel(Text(L10n.t("a11y.openContact")))
                 }
+                .buttonStyle(.plain)
+                .accessibilityHint(Text(L10n.t("a11y.openContact")))
             }
         }
     }
+
+    private func meta(_ conversation: Conversation?, other: Contact?, game: Investigation) -> String {
+        guard let conversation else { return "" }
+        let count = game.visibleMessages(in: conversation.id).count
+        if let relation = other?.relation { return L10n.f("messages.meta", relation, count) }
+        return L10n.f("messages.metaGroup", conversation.participants.count + 1, count)
+    }
 }
 
+/// Centered pill for system messages ("Début de la conversation", "X a cessé de partager…").
+struct SystemPill: View {
+    let text: String
+
+    var body: some View {
+        Text(text)
+            .font(Theme.Fonts.caption)
+            .foregroundStyle(Theme.Colors.textSecondary)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, Theme.Spacing.s4)
+            .padding(.vertical, 6)
+            .background(Capsule().fill(Theme.Colors.line1))
+            .frame(maxWidth: .infinity)
+    }
+}
+
+/// MessageBubble: received (bg.bubbleIn) · sent (white, black text) · deleted (dashed, italic) ·
+/// recovered · pinned (amber ring + dot) · photo. Max 76 % width, r 19, 6 on the sender side of the last one.
 struct MessageBubble: View {
     let visible: VisibleMessage
     let senderName: String?
+    let lastOfGroup: Bool
     let highlighted: Bool
     let session: GameSession
 
     var body: some View {
         let message = visible.message
         let mine = message.isFromOwner
-        VStack(alignment: mine ? .trailing : .leading, spacing: Theme.Spacing.xxs) {
+        let shape = UnevenRoundedRectangle(
+            topLeadingRadius: Theme.Radius.bubble,
+            bottomLeadingRadius: !mine && lastOfGroup ? Theme.Radius.bubbleTail : Theme.Radius.bubble,
+            bottomTrailingRadius: mine && lastOfGroup ? Theme.Radius.bubbleTail : Theme.Radius.bubble,
+            topTrailingRadius: Theme.Radius.bubble,
+            style: .continuous)
+        VStack(alignment: mine ? .trailing : .leading, spacing: 3) {
             if let senderName {
                 Text(senderName)
                     .font(Theme.Fonts.caption)
-                    .foregroundStyle(Theme.Colors.textSecondary)
-                    .padding(.horizontal, Theme.Spacing.m)
+                    .foregroundStyle(Theme.Colors.textTertiary)
+                    .padding(.horizontal, 13)
+                    .padding(.top, Theme.Spacing.s3)
             }
-            if visible.state == .removedBySender {
-                Label(L10n.t("messages.removed"), systemImage: "nosign")
-                    .font(Theme.Fonts.subheadline.italic())
-                    .foregroundStyle(Theme.Colors.textSecondary)
-                    .padding(.horizontal, Theme.Spacing.m)
-                    .padding(.vertical, Theme.Spacing.s)
-                    .overlay(RoundedRectangle(cornerRadius: Theme.Radius.bubble).strokeBorder(Theme.Colors.separator))
-            } else {
-                if let photoID = message.photo, let photo = session.game.index.photo(photoID) {
-                    Button {
-                        session.open(.photo(photoID))
-                    } label: {
-                        GeneratedPhoto(scene: photo.scene, seed: photo.id)
-                            .frame(width: 200, height: 150)
-                            .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.bubble))
+            Group {
+                if visible.state == .removedBySender {
+                    Text(L10n.t("messages.removed"))
+                        .font(Theme.Fonts.body.italic())
+                        .foregroundStyle(Theme.Colors.textSecondary)
+                        .padding(.horizontal, 13)
+                        .padding(.vertical, 9)
+                        .overlay(shape.stroke(Theme.Colors.line3, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
+                } else {
+                    VStack(alignment: .leading, spacing: 6) {
+                        if let photoID = message.photo, let photo = session.game.index.photo(photoID) {
+                            Button {
+                                session.open(.photo(photoID))
+                            } label: {
+                                GeneratedPhoto(scene: photo.scene, seed: photo.id)
+                                    .frame(width: Theme.Size.photoBubble, height: Theme.Size.photoBubble * 0.75)
+                                    .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm, style: .continuous))
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(Text(photo.caption))
+                        }
+                        if let text = message.text {
+                            Text(text)
+                                .font(Theme.Fonts.body)
+                                .foregroundStyle(mine ? Theme.Colors.textOnLight : Theme.Colors.textPrimary)
+                        }
                     }
-                    .buttonStyle(.plain)
-                }
-                if let text = message.text {
-                    Text(text)
-                        .font(Theme.Fonts.body)
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, Theme.Spacing.m)
-                        .padding(.vertical, Theme.Spacing.s)
-                        .background(
-                            RoundedRectangle(cornerRadius: Theme.Radius.bubble, style: .continuous)
-                                .fill(mine ? Theme.Colors.bubbleOwner : Theme.Colors.bubbleOther)
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: Theme.Radius.bubble, style: .continuous)
-                                .strokeBorder(highlighted ? Theme.Colors.warning : (visible.state == .recovered ? Theme.Colors.recovered : .clear),
-                                              lineWidth: highlighted || visible.state == .recovered ? 2 : 0)
-                        )
+                    .padding(.horizontal, message.text == nil ? 4 : 13)
+                    .padding(.vertical, message.text == nil ? 4 : 9)
+                    .background(shape.fill(mine ? Theme.Colors.textPrimary : Theme.Colors.bgBubbleIn))
+                    .overlay(
+                        shape.stroke(visible.state == .recovered ? Theme.Colors.signalLine : (highlighted ? Theme.Colors.line3 : .clear),
+                                     style: StrokeStyle(lineWidth: 1, dash: visible.state == .recovered ? [4, 3] : []))
+                    )
                 }
             }
-            HStack(spacing: Theme.Spacing.xs) {
-                if visible.state == .recovered {
-                    Text(L10n.t("messages.recovered"))
-                        .foregroundStyle(Theme.Colors.recovered)
-                }
-                Text(PhoneFormat.time(message.at))
+            .pinnable(ItemRef(.message, message.id), session: session, radius: Theme.Radius.bubble)
+            if visible.state == .recovered {
+                Text(L10n.t("messages.recovered"))
+                    .font(Theme.Fonts.dataSmall)
+                    .foregroundStyle(Theme.Colors.signal)
+                    .padding(.horizontal, Theme.Spacing.s2)
             }
-            .font(Theme.Fonts.caption2)
-            .foregroundStyle(Theme.Colors.textTertiary)
-            .padding(.horizontal, Theme.Spacing.xs)
         }
         .frame(maxWidth: .infinity, alignment: mine ? .trailing : .leading)
-        .padding(mine ? .leading : .trailing, Theme.Spacing.xxl + Theme.Spacing.l)
-        .pinnable(ItemRef(.message, message.id), session: session)
+        .padding(mine ? .leading : .trailing, Theme.Spacing.s10)
+        .padding(.bottom, lastOfGroup ? 6 : 0)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(Text("\(session.game.name(of: message.from)), \(PhoneFormat.time(message.at)) : \(message.text ?? L10n.t("item.photo"))"))
     }
 }
 
+/// An unsent draft: dashed outline on the owner's side.
 struct DraftBubble: View {
     let draft: Draft
 
     var body: some View {
-        VStack(alignment: .trailing, spacing: Theme.Spacing.xxs) {
+        VStack(alignment: .trailing, spacing: 3) {
             Text(draft.text)
                 .font(Theme.Fonts.body)
-                .foregroundStyle(Theme.Colors.textPrimary.opacity(0.8))
-                .padding(.horizontal, Theme.Spacing.m)
-                .padding(.vertical, Theme.Spacing.s)
+                .foregroundStyle(Theme.Colors.textPrimary)
+                .padding(.horizontal, 13)
+                .padding(.vertical, 9)
                 .overlay(
                     RoundedRectangle(cornerRadius: Theme.Radius.bubble, style: .continuous)
-                        .strokeBorder(Theme.Colors.bubbleOwner, style: StrokeStyle(lineWidth: 1.5, dash: [5, 4]))
+                        .stroke(Theme.Colors.line3, style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
                 )
             Text(L10n.f("messages.draftAt", PhoneFormat.dayAndTime(draft.at)))
-                .font(Theme.Fonts.caption2)
+                .font(Theme.Fonts.dataSmall)
                 .foregroundStyle(Theme.Colors.textTertiary)
         }
         .frame(maxWidth: .infinity, alignment: .trailing)
-        .padding(.leading, Theme.Spacing.xxl + Theme.Spacing.l)
-        .padding(.top, Theme.Spacing.m)
+        .padding(.leading, Theme.Spacing.s10)
+        .padding(.top, Theme.Spacing.s5)
     }
 }
 #endif

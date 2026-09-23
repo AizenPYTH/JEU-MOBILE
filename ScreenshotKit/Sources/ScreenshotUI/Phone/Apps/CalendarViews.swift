@@ -18,17 +18,17 @@ struct CalendarListView: View {
                         Button {
                             session.open(.calendarEvent(event.id))
                         } label: {
-                            HStack(spacing: Theme.Spacing.m) {
+                            HStack(spacing: Theme.Spacing.s4) {
                                 RoundedRectangle(cornerRadius: 2).fill(Theme.Colors.alert).frame(width: 4)
-                                VStack(alignment: .leading, spacing: Theme.Spacing.xxs) {
+                                VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                                     Text(event.title).font(Theme.Fonts.headline)
                                     if let location = event.location {
-                                        Text(location).font(Theme.Fonts.subheadline).foregroundStyle(Theme.Colors.textSecondary)
+                                        Text(location).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
                                     }
                                 }
                                 Spacer()
                                 Text(event.allDay == true ? L10n.t("calendar.allDay") : PhoneFormat.time(event.start))
-                                    .font(Theme.Fonts.subheadline)
+                                    .font(Theme.Fonts.callout)
                                     .monospacedDigit()
                                     .foregroundStyle(Theme.Colors.textSecondary)
                             }
@@ -52,13 +52,13 @@ struct CalendarEventView: View {
         if let event = game.index.calendarEvent(eventID) {
             List {
                 Section {
-                    VStack(alignment: .leading, spacing: Theme.Spacing.s) {
+                    VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
                         Text(event.title).font(Theme.Fonts.title)
                         if let location = event.location {
                             Text(location).foregroundStyle(Theme.Colors.textSecondary)
                         }
                     }
-                    .padding(.vertical, Theme.Spacing.s)
+                    .padding(.vertical, Theme.Spacing.s3)
                 }
                 Section {
                     InfoRow(icon: "calendar", label: L10n.t("calendar.date"), value: PhoneFormat.longDayCapitalized(event.start))

@@ -9,6 +9,7 @@ public struct PhoneNotification: Identifiable, Hashable, Sendable {
     /// Phone time when it arrived.
     public var at: Moment
     public var opens: ItemRef?
+    public var level: LiveEvent.Level = .normal
 }
 
 /// Something the UI should react to (banner, "-12 s" flash, haptics…). Drained with `drainEvents()`.
@@ -22,7 +23,17 @@ public enum InvestigationEvent: Hashable, Sendable {
 /// Actions that cost investigation time (amounts in `rules.json`).
 public enum TimedAction: String, Hashable, Sendable {
     case openApp, openConversation, loadOlderMessages, search, openPhoto, analyzePhoto, openTrack,
-         openCalendarEvent, openNote, openMail, openBrowserEntry, openContact, recoverMessage, unlockAttempt, hint
+         openCalendarEvent, openNote, openMail, openBrowserEntry, openContact, recoverMessage, unlockAttempt
+}
+
+/// Something the player pinned to the notebook ("◆ Épinglé"), optionally linked to a suspect.
+public struct NotebookEntry: Hashable, Sendable, Identifiable {
+    public var ref: ItemRef
+    public var linkedTo: SuspectID?
+    /// Investigation time when it was pinned.
+    public var pinnedAtElapsed: Double
+
+    public var id: ItemRef { ref }
 }
 
 /// Manual marks the player can tick on a suspect's file.
@@ -66,7 +77,8 @@ public final class Investigation {
     public private(set) var loadedPages: [String: Int] = [:]
     public private(set) var deliveredEvents: [LiveEvent] = []
     public private(set) var notifications: [PhoneNotification] = []
-    public private(set) var pins: [SuspectID: [ItemRef]] = [:]
+    /// The notebook, in pinning order.
+    public private(set) var notebook: [NotebookEntry] = []
     public private(set) var marks: [SuspectID: Set<SuspectMark>] = [:]
     public private(set) var usedHints: [Hint] = []
     public private(set) var searchCount = 0
@@ -178,7 +190,7 @@ public final class Investigation {
             event.call?.at = at
             deliveredEvents.append(event)
             let notification = PhoneNotification(id: event.id, app: event.app, title: event.title,
-                                                 body: event.body, at: at, opens: event.opens)
+                                                 body: event.body, at: at, opens: event.opens, level: event.level ?? .normal)
             notifications.insert(notification, at: 0)
             pendingEvents.append(.notification(notification))
         }
@@ -407,15 +419,35 @@ public final class Investigation {
         for n in notifications { readNotifications.insert(n.id) }
     }
 
-    // MARK: - Suspect files
+    // MARK: - Notebook (free: organising is not investigating)
 
-    public func pin(_ ref: ItemRef, to suspect: SuspectID) {
-        guard index.suspect(suspect) != nil, !(pins[suspect] ?? []).contains(ref) else { return }
-        pins[suspect, default: []].append(ref)
+    public func isPinned(_ ref: ItemRef) -> Bool { notebook.contains { $0.ref == ref } }
+
+    /// Pins an item to the notebook, or removes it if already pinned. Returns the new state.
+    @discardableResult
+    public func togglePin(_ ref: ItemRef) -> Bool {
+        if let i = notebook.firstIndex(where: { $0.ref == ref }) {
+            notebook.remove(at: i)
+            return false
+        }
+        notebook.append(NotebookEntry(ref: ref, linkedTo: nil, pinnedAtElapsed: elapsedSeconds))
+        seen.insert(ref)
+        return true
     }
 
-    public func unpin(_ ref: ItemRef, from suspect: SuspectID) {
-        pins[suspect]?.removeAll { $0 == ref }
+    /// Links an item to a suspect (pins it if needed); `nil` unlinks it.
+    public func link(_ ref: ItemRef, to suspect: SuspectID?) {
+        if let suspect, index.suspect(suspect) == nil { return }
+        if let i = notebook.firstIndex(where: { $0.ref == ref }) {
+            notebook[i].linkedTo = suspect
+        } else {
+            notebook.append(NotebookEntry(ref: ref, linkedTo: suspect, pinnedAtElapsed: elapsedSeconds))
+            seen.insert(ref)
+        }
+    }
+
+    public func linkedEntries(for suspect: SuspectID) -> [NotebookEntry] {
+        notebook.filter { $0.linkedTo == suspect }
     }
 
     public func toggle(_ mark: SuspectMark, for suspect: SuspectID) {
@@ -426,20 +458,34 @@ public final class Investigation {
         }
     }
 
-    // MARK: - Hints
+    // MARK: - Hints (tiers; they cost score, never the answer)
 
-    public var nextHint: Hint? {
-        caseFile.hints.first { hint in !usedHints.contains { $0.id == hint.id } }
+    public enum HintState: Equatable, Sendable {
+        case revealed, available, locked(untilRemaining: Int)
     }
 
-    /// Reveals the next hint, paid in investigation time.
+    public func state(of hint: Hint) -> HintState {
+        if usedHints.contains(where: { $0.id == hint.id }) { return .revealed }
+        if let unlock = hint.unlockAtRemainingSeconds, remainingSeconds > Double(unlock) { return .locked(untilRemaining: unlock) }
+        // Tiers are revealed in order.
+        let position = caseFile.hints.firstIndex { $0.id == hint.id } ?? 0
+        let previous = caseFile.hints.prefix(position)
+        return previous.allSatisfy { p in usedHints.contains { $0.id == p.id } } ? .available : .locked(untilRemaining: hint.unlockAtRemainingSeconds ?? 0)
+    }
+
+    public var nextHint: Hint? {
+        caseFile.hints.first { state(of: $0) == .available }
+    }
+
+    /// Reveals the next available hint (its cost is taken from the final score).
     @discardableResult
     public func useHint() -> Hint? {
         guard phase == .investigating, let hint = nextHint else { return nil }
         usedHints.append(hint)
-        spend(.hint, seconds: hint.costSeconds)
         return hint
     }
+
+    public var hintScoreCost: Int { usedHints.reduce(0) { $0 + $1.scoreCost } }
 
     // MARK: - Accusation
 

@@ -34,6 +34,8 @@ Configs/Screenshot.xcconfig  Bundle ID, version, signature (source unique)
 .github/workflows/        tests-linux.yml (chaque push) · ios-testflight.yml (manuel + PR vers main)
 docs/TESTFLIGHT_SETUP.md  Signature et TestFlight sans Mac
 docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
+docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — lire README.md
+DESIGN_INTEGRATION.md     État de l'intégration du handoff + conflits à trancher
 ScreenshotKit/            Package Swift contenant tout le jeu
   Sources/CaseEngine/     Moteur en Swift pur (Foundation). Testable sous Linux.
     Model/                CaseFile (affaire), Moment (heure murale), ItemRef, GameRules, loader, validateur
@@ -42,12 +44,16 @@ ScreenshotKit/            Package Swift contenant tout le jeu
     Support/              GameClock (SystemClock / ManualClock)
   Sources/CaseLibrary/    Données : Resources/Cases/case_XXX.json + Resources/Rules/rules.json
   Sources/ScreenshotUI/   Interface SwiftUI (iOS uniquement, fichiers entourés de #if os(iOS))
-    Session/              GameSession (fait tourner le moteur, navigation, bannières), ProgressStore
+    Session/              GameSession (moteur, navigation, bannières, haptiques), ProgressStore (tentatives),
+                          Preferences (réglages)
     Phone/                Le téléphone : barre d'état, accueil, bannières, et chaque app (Apps/)
-    Screens/              Titre, briefing, enquête (barre + téléphone), dossier, indices, accusation, résultat
-    Components/           Avatar (initiales), GeneratedPhoto (photo générée), PinMenu
-    Theme/, Support/      Tokens visuels, L10n, formats de date du téléphone
-    Resources/            Localizable.xcstrings (fr + en)
+    Screens/              RootView (flux), MetaScreens (Accueil, Affaires, Intro, Dossiers, Profil, Paramètres),
+                          InvestigationView (téléphone + Carnet + Indices), EndScreens (temps écoulé,
+                          accusation, résultat, score)
+    Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (épingler / lier), Controls (boutons,
+                          maintien pour confirmer, segments, en-têtes, état vide)
+    Theme/, Support/      Tokens du handoff (Theme.swift), polices (Fonts.swift), L10n, formats de date
+    Resources/            Localizable.xcstrings (fr + en), Fonts/ (Geist, JetBrains Mono, Instrument Serif — OFL)
   Sources/CaseLint/       CLI : valide chaque affaire et vérifie qu'elle est résolvable dans le temps
   Tests/                  CaseEngineTests (moteur), CaseLibraryTests (affaires, parties complètes,
                           traductions, absence de vocabulaire de l'ancien prototype)
@@ -71,6 +77,20 @@ scripts/                  test.sh, setup-linux-swift.sh
 8. Textes d'interface dans le String Catalog (fr par défaut + en) via `L10n.t/f`. Le contenu d'une
    affaire est écrit dans la langue du téléphone saisi.
 9. Pas de dépendance tierce sans accord du porteur de projet.
+
+## Design (handoff SCREENSHOT v1.0)
+
+- Source de vérité visuelle : `docs/design/` (lecture seule). État et conflits : `DESIGN_INTEGRATION.md`
+  (à tenir à jour). Si la maquette contredit le brief ou le moteur : noter le conflit et demander.
+- Tokens = noms du handoff dans `Theme` : 6 noirs étagés (`ink0` → `bgSelected`), le blanc cassé
+  `textPrimary` est la couleur d'action, ambre `signal` = épinglé / important, `alert` = urgence et chrono
+  critique, `trace` = liens, `clear` = disculpé / réussi. Jamais de noir pur ni de blanc pur.
+- Polices : Geist (interface), JetBrains Mono (données, heures, chrono), Instrument Serif italique
+  (voix narrative). Toujours `Theme.Fonts.*`.
+- Apps en « tableau périodique » (2 lettres) ; barre d'état = pastille du chrono (normal / ≤ 60 s /
+  ≤ 10 s) ; capsule Carnet en bas ; tout contenu s'épingle par appui long et se lie à un suspect.
+- Accusation = maintenir 900 ms. Score = 60 · bon suspect + 25 · trouvées/total + 10 · temps restant/durée
+  + 5 · épingles pertinentes/épingles − coût des indices (valeurs dans `rules.json` et l'affaire).
 
 ## Conventions
 
@@ -105,6 +125,8 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est le workflow macOS qu
 - [x] Prototype jouable : accueil, téléphone (12 apps), timer + coûts, notifications en direct,
       recherche, corbeille, app verrouillée, dossier des suspects, indices payants, accusation,
       résultat narratif + score. Affaire #001 « LE DERNIER MESSAGE ».
+- [x] Intégration du handoff v1.0 : tokens, polices, composants, écrans méta, carnet, fin de partie
+      (reste : voir DESIGN_INTEGRATION.md §3)
 - [ ] Recherche globale (toutes apps, filtres par date / contact / app)
 - [ ] Affaires #002–#005 (4 suspects, 5 min) puis #006–#015 (6 suspects, 8–10 min)
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
