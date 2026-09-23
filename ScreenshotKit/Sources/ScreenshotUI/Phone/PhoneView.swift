@@ -309,7 +309,7 @@ struct HomeIndicator: View {
             .accessibilityElement()
             .accessibilityLabel(Text(L10n.t("a11y.home")))
             .accessibilityAddTraits(.isButton)
-            .accessibilityAction(action)
+            .accessibilityAction { action() }
     }
 }
 

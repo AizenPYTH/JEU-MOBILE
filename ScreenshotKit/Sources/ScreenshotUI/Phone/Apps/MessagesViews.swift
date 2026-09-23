@@ -274,10 +274,10 @@ struct ConversationView: View {
                             SystemPill(text: L10n.f("messages.stoppedSharing", other?.name ?? "", PhoneFormat.time(stopped)))
                                 .padding(.vertical, Theme.Spacing.s3)
                         }
-                        let lastOfGroup = next == nil || next?.from != visible.message.from || (next.map { $0.at.seconds - at.seconds > groupGap } ?? true)
+                        let lastOfGroup: Bool = next.map { $0.from != visible.message.from || $0.at.seconds - at.seconds > groupGap } ?? true
+                        let showsSender: Bool = conversation?.isGroup == true && previous?.from != visible.message.from && !visible.message.isFromOwner
                         MessageBubble(visible: visible,
-                                      senderName: conversation?.isGroup == true && (previous?.from != visible.message.from) && !visible.message.isFromOwner
-                                          ? game.name(of: visible.message.from) : nil,
+                                      senderName: showsSender ? game.name(of: visible.message.from) : nil,
                                       lastOfGroup: lastOfGroup,
                                       highlighted: visible.id == focus,
                                       session: session)

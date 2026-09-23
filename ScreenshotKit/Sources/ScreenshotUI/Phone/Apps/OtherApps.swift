@@ -368,7 +368,7 @@ struct NotificationsView: View {
                     session.open(notification)
                 } label: {
                     HStack(alignment: .top, spacing: Theme.Spacing.s4) {
-                        AppIconGlyph(app: notification.app, size: Theme.Size.avatarS)
+                        AppTileGlyph(app: notification.app, size: Theme.Size.avatarS)
                         VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                             HStack {
                                 Text(notification.title).font(Theme.Fonts.callout.weight(.semibold))

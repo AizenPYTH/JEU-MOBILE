@@ -27,13 +27,13 @@ final class GameSession {
     /// "◆ Ajouté au carnet · n" / "Retiré du carnet".
     private(set) var toast: Toast?
 
-    @ObservationIgnored private let investigation: Investigation
+    private let investigation: Investigation
     @ObservationIgnored private var loop: Task<Void, Never>?
     @ObservationIgnored private var bannerTask: Task<Void, Never>?
     @ObservationIgnored private var bannerQueue: [PhoneNotification] = []
     @ObservationIgnored private var costTask: Task<Void, Never>?
     @ObservationIgnored private var toastTask: Task<Void, Never>?
-    @ObservationIgnored private let onFinish: (Verdict) -> Void
+    private let onFinish: (Verdict) -> Void
 
     struct TimeCostFlash: Equatable, Identifiable {
         let id: Int
@@ -320,8 +320,11 @@ final class GameSession {
         banner = nil
         if !bannerQueue.isEmpty { show(bannerQueue.removeFirst()) }
     }
+}
 
 /// Light, meaningful haptics only: a notification, the last minute, the end.
+/// UIKit feedback generators are main-actor isolated.
+@MainActor
 enum Haptics {
     static func notification() {
         guard Preferences.vibrations else { return }

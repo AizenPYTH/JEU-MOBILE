@@ -82,7 +82,7 @@ public struct RootView: View {
                 ProfileView(attempts: attempts, caseCount: cases.count, onBack: goHome)
                     .transition(.move(edge: .trailing))
             case .settings:
-                SettingsView(onBack: goHome)
+                GameSettingsView(onBack: goHome)
                     .transition(.move(edge: .trailing))
             case .intro(let file):
                 CaseIntroView(caseFile: file, onStart: { start(file) }, onClose: goHome)

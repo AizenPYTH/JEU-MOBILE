@@ -464,7 +464,7 @@ struct StatCard: View {
 
 // MARK: - 07 · Settings
 
-struct SettingsView: View {
+struct GameSettingsView: View {
     let onBack: () -> Void
     @AppStorage(Preferences.vibrationsKey) private var vibrations = true
     @AppStorage(Preferences.reduceMotionKey) private var reduceMotion = false
