@@ -30,6 +30,7 @@ affaire avant que le temps soit écoulé. »
 ```
 Screenshot.xcodeproj/     Coquille de l'app iOS (+ schéma partagé « Screenshot »)
 Screenshot/               App : ScreenshotApp.swift, Assets.xcassets (icône), InfoPlist.xcstrings
+ScreenshotUITests/        Tests d'interface (XCUITest) : parcours principal joué sur simulateur
 Configs/Screenshot.xcconfig  Bundle ID, version, signature (source unique)
 .github/workflows/        ios-build.yml (compilation iOS, chaque push) · tests-linux.yml (chaque push) ·
                           ios-testflight.yml (manuel + PR vers main). Contenu de référence : docs/CI_WORKFLOWS.md
@@ -115,8 +116,10 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
 
 ## CI / livraison
 
-- `ios-build.yml` : compilation de l'app pour le simulateur (sans signature) sur macOS, à chaque push
-  touchant l'app ; erreurs dans le résumé du job, journal complet en artefact.
+- `ios-build.yml` : compilation de l'app pour le simulateur (sans signature) sur macOS, puis tests
+  d'interface `ScreenshotUITests` (parcours complet) sur simulateur, à chaque push touchant l'app.
+  Captures de chaque étape publiées sur la branche `ci/ui-screenshots` (+ `results.txt`).
+  Options de lancement Debug pour les tests : `-UITestReset YES`, `-UITestDuration <s>`.
 - `tests-linux.yml` : `swift test` + `CaseLint` (image Docker `swift:6.0-noble`), à chaque push.
 - `ios-testflight.yml` : macOS, manuel ou PR vers `main`. Tests, archive signée, export, envoi
   TestFlight via clé API. Build = `<run_number + BUILD_NUMBER_OFFSET>.<attempt>`. Sans secrets :

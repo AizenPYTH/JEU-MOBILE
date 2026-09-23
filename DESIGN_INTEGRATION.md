@@ -71,7 +71,19 @@ Accueil → Affaires → Intro → Téléphone → enquête → Carnet → accus
 
 - Moteur, affaire, traductions fr/en et absence de vocabulaire de l'ancien prototype : `swift test`
   (38 tests) et `swift run CaseLint` passent sous Linux.
-- **Compilation iOS : OK** (workflow `ios-build.yml`, Xcode 26.3, SDK iOS 26.2, cible iOS 17,
-  simulateur arm64 + x86_64) — `BUILD SUCCEEDED`, 0 erreur, 0 avertissement Swift.
-- Pas encore vérifié : exécution de l'app sur simulateur ou appareil (aucun test d'interface, aucune
-  capture), rendu visuel, animations, haptiques, polices chargées à l'exécution.
+- **Compilation iOS : OK** (`ios-build.yml`, Xcode 26.3, SDK iOS 26.2, cible iOS 17).
+- **Parcours principal validé sur simulateur** (`ScreenshotUITests`, joués à chaque push par
+  `ios-build.yml` ; une capture par étape publiée sur la branche `ci/ui-screenshots`) :
+  1. résolution anticipée : Accueil → Affaires → Intro → téléphone (chrono qui tourne) →
+     notification en direct → Messages → conversation → épinglage (appui long) → Photos → photo →
+     analyse → app Notifications → Carnet (Suspects, Preuves) → chrono → « Accuser maintenant ? » →
+     accusation (maintenir) → résultat → reconstitution (la preuve épinglée apparaît « trouvée ») →
+     score → Dossiers → reconstitution archivée ;
+  2. temps écoulé (durée raccourcie en Debug) → écran 00:00 → accusation forcée → mauvais suspect →
+     résultat négatif (alibi, piège, manqués par app) → révéler la solution → reconstitution.
+- Défauts trouvés et corrigés grâce à ces passages : chrono invisible dans le téléphone (masqué par
+  les fonds des écrans), Carnet sans bouton de fermeture, pluriels (« 1 manquées »), texte tronqué
+  de « Accuser maintenant ? », message-alibi d'Emma épinglé non compté comme preuve.
+- Reste à vérifier sur un vrai iPhone : sensation tactile (appui long, maintien 900 ms, glissements),
+  vibrations, lisibilité réelle, performances, mise en arrière-plan / pause, VoiceOver, écran plus
+  petit ou plus grand, notifications urgentes (lv07/lv08, non atteintes dans les tests).
