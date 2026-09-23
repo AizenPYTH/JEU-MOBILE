@@ -17,7 +17,7 @@ les points où le handoff contredit le brief ou le moteur — **à trancher par 
 | [05] Dossiers (tentatives ✓/✕ + score, « non classé », reconstitution si résolue ou révélée) | `ArchiveView`, `ArchivedCaseView` |
 | [06] Profil (4 `StatCard`) | `ProfileView` |
 | [07] Paramètres (Vibrations, Réduire les animations) | `SettingsView`, `Preferences` |
-| [08] Accueil du téléphone : tuiles « tableau périodique » 2 lettres, dock, badges, app verrouillée à .45 | `HomeScreen.swift` |
+| [08] Accueil du téléphone : icônes d'apps (voir §2.7, remplacent les tuiles 2 lettres), dock, badges, app verrouillée désaturée | `HomeScreen.swift`, `AppIcon.swift` |
 | Barre d'état : pastille du chrono (normal / ≤ 60 s / ≤ 10 s), flash du coût, fine barre de progression, vignette critique | `PhoneView.swift` |
 | Capsule Carnet + home indicator | `PhoneView.swift` |
 | [09–10] Messages : lignes 78, séparateurs de date en capitales, groupes < 5 min, bulles envoyées blanches, pas de champ de saisie, brouillon, « a cessé de partager sa position » | `MessagesViews.swift` |
@@ -52,6 +52,38 @@ les points où le handoff contredit le brief ou le moteur — **à trancher par 
 6. **Heure du téléphone** : le handoff la montre figée (« 08:12 ») ; décision : elle **avance** avec
    l'enquête. Source unique `Investigation.phoneNow` = heure de début + temps écoulé du chrono (coûts
    compris) ; accueil, notifications, messages en direct et heures relatives l'utilisent.
+
+7. **Passe de polish UX/UI (lisibilité, reconnaissance)** — décision du porteur de projet, qui prime
+   sur le handoff sur ces points :
+   - **Téléphone dessiné comme un objet** : cadre métal, bordure noire, îlot caméra, boutons latéraux,
+     reflet léger, ombre sur un fond sombre (`PhoneDevice`, `CameraIsland`, `DeskBackground`).
+   - **Icônes d'apps** : les tuiles « tableau périodique » (2 lettres) sont remplacées par des icônes
+     originales qui reprennent les conventions connues (combiné vert, bulles bleues, page de
+     calendrier avec le jour, carte avec une épingle, note lignée…) — sans copier d'icône réelle
+     (`Components/AppIcon.swift`). Fond d'écran nuit avec deux halos au lieu du placeholder rayé.
+   - **Chaque app s'annonce** : en-tête commun (‹ Accueil, icône, nom, ligne de contexte)
+     (`Phone/AppChrome.swift`). L'app « Localisation » s'appelle désormais **Carte**.
+   - **Conventions d'usage** : bulles envoyées bleues (le handoff les voulait blanches), grille du mois
+     dans le Calendrier, carte lisible (îlots, routes, fleuve, parcs, épingles rouges, trajet bleu) avec
+     une carte « Positions partagées » en bas, Mail avec Réception/Envoyés et non-lus, Contacts par
+     lettre, barre d'adresse du Navigateur, Réglages en lignes à icônes, centre de notifications en cartes.
+   - **Couleurs fonctionnelles** ajoutées au thème : `info` (bleu, navigation / information),
+     `clear` (vert, confirmé / trouvé), `signal` (ambre, épinglé / attention), `alert` (rouge),
+     `special` (violet, enquête : liens vers un suspect, décision). Avatars teintés selon le contact.
+   - **Carnet** : objectif rappelé, progression (épinglés · liés · apps fouillées — uniquement les
+     actions du joueur), onglets Suspects · Indices (liés / à classer) · Chronologie (par jour) · Notes
+     (les cases cochées de chaque suspect). Le bouton d'aide de la capsule s'appelle « Aide » (le mot
+     « Indices » désigne maintenant les éléments épinglés).
+   - **Décision finale** : « Résoudre l'affaire — Qui est responsable ? », liste des suspects avec ce
+     que le joueur leur a lié, panneau « Vous accusez X » + les éléments sur lesquels repose
+     l'accusation, puis maintien 900 ms (inchangé).
+   - **Résultat** : « X était responsable », les éléments déterminants (preuves `key` de l'affaire,
+     ✓ trouvé / ○ manqué, avec ce que chacune prouve), « Votre dossier » (ce que le joueur avait lié),
+     puis la chronologie. Une mauvaise réponse garde la règle : alibi, piège, trouvé de juste, manqué
+     par app, solution seulement sur demande.
+   - Le jeu ne conclut toujours pas à la place du joueur : rien n'indique pendant l'enquête si un
+     élément épinglé est une vraie preuve ; « important » = ce que le joueur a lié à un suspect.
+   - Non ajoutés (hors périmètre, nouvelles apps) : Fichiers, Appareil photo, Calculatrice.
 
 Ordre de travail décidé : 1) compilation réelle sur macOS ; 2) onboarding, reprise d'une enquête,
 recherche globale ; 3) immersion (rail de dates, appel entrant, fiche photo + mini-carte, rangs) ;

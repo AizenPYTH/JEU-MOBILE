@@ -90,8 +90,11 @@ scripts/                  test.sh, setup-linux-swift.sh
   critique, `trace` = liens, `clear` = disculpé / réussi. Jamais de noir pur ni de blanc pur.
 - Polices : Geist (interface), JetBrains Mono (données, heures, chrono), Instrument Serif italique
   (voix narrative). Toujours `Theme.Fonts.*`.
-- Apps en « tableau périodique » (2 lettres) ; barre d'état = pastille du chrono (normal / ≤ 60 s /
-  ≤ 10 s) ; capsule Carnet en bas ; tout contenu s'épingle par appui long et se lie à un suspect.
+- Téléphone dessiné comme un objet (cadre, îlot caméra) ; icônes d'apps originales aux conventions
+  connues (plus de tuiles 2 lettres) ; chaque app a un en-tête icône + nom (`AppBar`) ; couleurs
+  fonctionnelles `info` / `clear` / `signal` / `alert` / `special` (voir DESIGN_INTEGRATION.md §2.7) ;
+  barre d'état = pastille du chrono (normal / ≤ 60 s / ≤ 10 s) ; capsule Carnet en bas ; tout contenu
+  s'épingle par appui long et se lie à un suspect.
 - Accusation = maintenir 900 ms. Score = 60 · bon suspect + 25 · trouvées/total + 10 · temps restant/durée
   + 5 · épingles pertinentes/épingles − coût des indices (valeurs dans `rules.json` et l'affaire).
 
