@@ -35,15 +35,19 @@ public struct RootView: View {
 
     public init() {
         AppFonts.register()
+        // Load into locals first: each stored `let` must be initialised exactly once, and a failure
+        // in the second load must not re-assign what the first one already set.
+        let loaded: (cases: [CaseFile], rules: GameRules?, error: String?)
         do {
-            cases = try CaseLibrary.loadCases().sorted { $0.number < $1.number }
-            rules = try CaseLibrary.loadRules()
-            loadError = nil
+            let cases = try CaseLibrary.loadCases().sorted { $0.number < $1.number }
+            let rules = try CaseLibrary.loadRules()
+            loaded = (cases, rules, nil)
         } catch {
-            cases = []
-            rules = nil
-            loadError = String(describing: error)
+            loaded = ([], nil, String(describing: error))
         }
+        cases = loaded.cases
+        rules = loaded.rules
+        loadError = loaded.error
     }
 
     public var body: some View {
