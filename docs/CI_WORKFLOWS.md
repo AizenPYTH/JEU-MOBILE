@@ -1,16 +1,10 @@
-# Workflows GitHub Actions à créer
+# Workflows GitHub Actions
 
-L'application GitHub utilisée par Claude n'a pas le droit `workflow` : elle ne peut pas créer de fichier
-dans `.github/workflows/`. Crée ces trois fichiers toi-même, **sur la branche
-`claude/busy-hopper-5dgev5`** (et plus tard sur `main`) :
-
-1. Sur GitHub, ouvre le dépôt, choisis la branche `claude/busy-hopper-5dgev5` dans le sélecteur de branche.
-2. **Add file → Create new file**, nom : `.github/workflows/ios-build.yml` (le chemin crée les dossiers).
-3. Colle le contenu ci-dessous, puis **Commit changes** (directement sur la branche).
-4. Recommence pour `tests-linux.yml` et `ios-testflight.yml`.
-
-Dès que `ios-build.yml` existe sur la branche, chaque push de Claude qui touche l'app lance la
-compilation sur macOS ; Claude lit le journal et corrige jusqu'à une compilation propre.
+Les trois workflows sont dans `.github/workflows/` (branche `claude/busy-hopper-5dgev5`). Ce document
+garde leur contenu de référence. Pour que Claude puisse les modifier, la connexion GitHub
+(https://claude.ai/connect-github) doit avoir l'accès aux workflows ; sinon le push est refusé
+(« refusing to allow an OAuth App to create or update workflow … without `workflow` scope ») et il
+faut les modifier à la main sur GitHub.
 
 | Fichier | Rôle | Déclencheur |
 |---|---|---|
