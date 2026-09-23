@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Lance les tests du moteur (GameCore + données JSON) puis le simulateur.
-# Fonctionne sur macOS (Xcode installé) et sur Linux (voir setup-linux-swift.sh).
+# Runs the engine and case tests, then validates every case with CaseLint.
+# Works on macOS (Xcode installed) and on Linux (see setup-linux-swift.sh).
 set -euo pipefail
-cd "$(dirname "$0")/../BistroKit"
+cd "$(dirname "$0")/../ScreenshotKit"
 swift test
-swift run BalanceSim
+swift run CaseLint

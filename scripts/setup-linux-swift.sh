@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Installe une toolchain Swift 6.0 dans /opt/swift sur Ubuntu 24.04 (conteneurs cloud sans Xcode),
-# à partir des paquets Ubuntu officiels. Ne sert qu'à compiler/tester GameCore, GameData et BalanceSim ;
-# l'app iOS (BistroUI) nécessite Xcode sur un Mac.
+# à partir des paquets Ubuntu officiels. Ne sert qu'à compiler/tester CaseEngine, CaseLibrary et CaseLint ;
+# l'app iOS (ScreenshotUI) nécessite Xcode (ou le workflow macOS).
 #
 # Ensuite :  export PATH=/opt/swift/usr/libexec/swift/bin:$PATH
 #            export LD_LIBRARY_PATH=/opt/swift/usr/lib/x86_64-linux-gnu

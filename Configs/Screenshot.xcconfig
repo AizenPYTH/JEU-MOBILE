@@ -1,0 +1,22 @@
+// Identity and signing of the SCREENSHOT app target.
+// Edit these values here (not in Xcode's Build Settings UI) so CI and local builds agree.
+
+// Must match the App ID created on developer.apple.com and the app in App Store Connect.
+PRODUCT_BUNDLE_IDENTIFIER = com.aizenpyth.screenshot
+
+// Version shown on the App Store. The build number (CURRENT_PROJECT_VERSION) is set by CI.
+MARKETING_VERSION = 0.2.0
+CURRENT_PROJECT_VERSION = 1
+
+// Signing.
+// - Debug / Simulator: automatic signing (for anyone building locally with Xcode).
+// - Release on device (CI → TestFlight): manual signing with the Apple Distribution
+//   certificate and App Store profile installed by the workflow, which passes
+//   APP_TEAM_ID and APP_PROFILE_SPECIFIER on the command line. Using these custom
+//   variables (instead of overriding DEVELOPMENT_TEAM / PROVISIONING_PROFILE_SPECIFIER
+//   directly) keeps the settings off the Swift package targets, which cannot take a profile.
+DEVELOPMENT_TEAM = $(APP_TEAM_ID)
+CODE_SIGN_STYLE = Automatic
+CODE_SIGN_STYLE[config=Release][sdk=iphoneos*] = Manual
+CODE_SIGN_IDENTITY[config=Release][sdk=iphoneos*] = Apple Distribution
+PROVISIONING_PROFILE_SPECIFIER[config=Release][sdk=iphoneos*] = $(APP_PROFILE_SPECIFIER)

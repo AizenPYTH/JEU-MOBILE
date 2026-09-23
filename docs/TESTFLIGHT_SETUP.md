@@ -21,16 +21,16 @@ certificat et le profil, à renouveler chaque année).
 
 ## 0. Le bundle ID
 
-Bundle ID proposé : **`com.aizenpyth.bistro`**
+Bundle ID proposé : **`com.aizenpyth.screenshot`**
 
 - Si tu utilises déjà un préfixe pour tes autres jeux (par ex. `com.monstudio.`), prends plutôt
-  `com.monstudio.bistro`.
-- Il se définit à **un seul endroit** du code : `Configs/Bistro.xcconfig`, ligne
+  `com.monstudio.screenshot`.
+- Il se définit à **un seul endroit** du code : `Configs/Screenshot.xcconfig`, ligne
   `PRODUCT_BUNDLE_IDENTIFIER = …`. Si tu en choisis un autre, dis-le-moi (ou modifie cette ligne).
 - Le bundle ID ne peut plus être changé une fois l'app publiée. Le nom affiché sur l'App Store, lui,
   peut changer quand tu veux.
 
-Dans la suite, remplace `com.aizenpyth.bistro` par ton choix si besoin.
+Dans la suite, remplace `com.aizenpyth.screenshot` par ton choix si besoin.
 
 ---
 
@@ -40,8 +40,8 @@ Dans la suite, remplace `com.aizenpyth.bistro` par ton choix si besoin.
 2. Clique sur le **+** bleu.
 3. Choisis **App IDs** → **Continue** → type **App** → **Continue**.
 4. Remplis :
-   - **Description** : `Bistro`
-   - **Bundle ID** : **Explicit**, `com.aizenpyth.bistro`
+   - **Description** : `SCREENSHOT`
+   - **Bundle ID** : **Explicit**, `com.aizenpyth.screenshot`
    - **Capabilities** : ne coche rien de plus. *In-App Purchase* est déjà incluse par défaut. On
      ajoutera Game Center ou iCloud plus tard si besoin, en régénérant le profil.
 5. **Continue** → **Register**.
@@ -53,12 +53,11 @@ Dans la suite, remplace `com.aizenpyth.bistro` par ton choix si besoin.
 1. Va sur <https://appstoreconnect.apple.com> → **Apps** → **+** → **New App**.
 2. Remplis :
    - **Platforms** : iOS
-   - **Name** : un nom provisoire unique sur l'App Store, par ex. `Bistro de quartier (beta)`.
+   - **Name** : un nom provisoire unique sur l'App Store, par ex. `SCREENSHOT (beta)`.
      Si le nom est déjà pris, essaie une variante. Tu pourras le changer avant la sortie.
-     Rappel : n'utilise jamais « Idle » + « Tycoon » ensemble.
    - **Primary Language** : French (ou English (U.S.)).
-   - **Bundle ID** : sélectionne `Bistro - com.aizenpyth.bistro` (créé à l'étape 1).
-   - **SKU** : `bistro-001` (référence interne, jamais visible).
+   - **Bundle ID** : sélectionne `SCREENSHOT - com.aizenpyth.screenshot` (créé à l'étape 1).
+   - **SKU** : `screenshot-001` (référence interne, jamais visible).
    - **User Access** : Full Access.
 3. **Create**.
 
@@ -72,7 +71,7 @@ Dans la suite, remplace `com.aizenpyth.bistro` par ton choix si besoin.
 2. Note l'**Issuer ID** affiché en haut de la page (format `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`).
    → secret **`ASC_ISSUER_ID`**
 3. Clique sur **+** (Generate API Key) :
-   - **Name** : `GitHub Actions Bistro`
+   - **Name** : `GitHub Actions SCREENSHOT`
    - **Access** : **App Manager**. C'est suffisant pour envoyer des builds ; n'utilise pas Admin
      sans raison.
 4. **Generate**. Dans la liste, note le **Key ID** (10 caractères). → secret **`ASC_KEY_ID`**
@@ -145,12 +144,12 @@ openssl pkcs12 -export -inkey dist.key -in distribution.pem -out dist.p12 \
 
 1. <https://developer.apple.com/account> → **Profiles** → **+**.
 2. Section **Distribution** → **App Store Connect** → **Continue**.
-3. **App ID** : `Bistro (com.aizenpyth.bistro)` → **Continue**.
+3. **App ID** : `SCREENSHOT (com.aizenpyth.screenshot)` → **Continue**.
 4. Choisis le certificat Apple Distribution (celui de l'étape 4, ou ton certificat existant) →
    **Continue**.
-5. **Provisioning Profile Name** : `Bistro App Store`. Le workflow lit le nom lui-même, donc un autre
+5. **Provisioning Profile Name** : `Screenshot App Store`. Le workflow lit le nom lui-même, donc un autre
    nom fonctionne aussi.
-6. **Generate** → **Download**. Tu obtiens `Bistro_App_Store.mobileprovision`.
+6. **Generate** → **Download**. Tu obtiens `Screenshot_App_Store.mobileprovision`.
 
 Le profil expire en même temps que le certificat, au bout d'un an. Il faudra alors refaire les
 étapes 4 et 5 puis mettre à jour les secrets.
@@ -165,7 +164,7 @@ Les secrets GitHub ne contiennent que du texte : on encode les deux fichiers bin
 
 ```bash
 base64 -w0 dist.p12 > dist.p12.b64
-base64 -w0 Bistro_App_Store.mobileprovision > profile.b64
+base64 -w0 Screenshot_App_Store.mobileprovision > profile.b64
 ```
 
 (Si `-w0` n'est pas reconnu, utilise `base64 dist.p12 | tr -d '\n' > dist.p12.b64`.)
@@ -174,7 +173,7 @@ base64 -w0 Bistro_App_Store.mobileprovision > profile.b64
 
 ```powershell
 [Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\chemin\dist.p12")) | Set-Content dist.p12.b64
-[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\chemin\Bistro_App_Store.mobileprovision")) | Set-Content profile.b64
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("C:\chemin\Screenshot_App_Store.mobileprovision")) | Set-Content profile.b64
 ```
 
 Ouvre chaque fichier `.b64` et copie son contenu (une seule longue ligne).
@@ -232,7 +231,7 @@ quelle branche.
 
 **Numéros de build** : le workflow utilise `<numéro du run>.<tentative>`, par ex. `12.1`, puis `12.2`
 si tu relances ce run, puis `13.1`. Ils augmentent toujours et ne se répètent jamais, donc TestFlight
-les accepte tous. La version affichée (`0.1.0`) se change dans `Configs/Bistro.xcconfig`
+les accepte tous. La version affichée (`0.1.0`) se change dans `Configs/Screenshot.xcconfig`
 (`MARKETING_VERSION`).
 
 ---
@@ -246,7 +245,7 @@ les accepte tous. La version affichée (`0.1.0`) se change dans `Configs/Bistro.
 3. **Internal Testing** → **+** → crée un groupe `Équipe` → ajoute-toi comme testeur. Active
    **Automatic distribution** pour recevoir chaque nouveau build automatiquement.
 4. Sur l'iPhone : installe l'app **TestFlight**, connecte-toi avec le même compte Apple, puis
-   installe **Bistro**.
+   installe **SCREENSHOT**.
 
 ---
 
@@ -256,7 +255,7 @@ les accepte tous. La version affichée (`0.1.0`) se change dans `Configs/Bistro.
 |---|---|
 | `Missing secrets: …` (avertissement) | Un secret est absent ou mal nommé : le workflow compile seulement pour le simulateur. |
 | `MAC verification failed` / `security: SecKeychainItemImport` | .p12 créé sans les options `PBE-SHA1-3DES` (étape 4c), ou mauvais mot de passe. |
-| `The provisioning profile is for 'X' but the app bundle id is 'Y'` | Le profil n'est pas pour le bon App ID : corrige le profil ou `Configs/Bistro.xcconfig`. |
+| `The provisioning profile is for 'X' but the app bundle id is 'Y'` | Le profil n'est pas pour le bon App ID : corrige le profil ou `Configs/Screenshot.xcconfig`. |
 | `No signing certificate "iOS Distribution" found` / `doesn't include signing certificate` | Le profil a été généré avec un autre certificat que celui du .p12 : régénère le profil (étape 5) en cochant le bon certificat. |
 | `The bundle version must be higher than the previously uploaded version` | Ajoute la variable `BUILD_NUMBER_OFFSET` (par ex. `100`). |
 | `Authentication failed` à l'envoi | `ASC_KEY_ID`, `ASC_ISSUER_ID` ou `ASC_KEY_P8` incorrect (le .p8 doit être copié en entier). |

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+
+  "timeCosts": {
+    "openApp": 1,
+    "openConversation": 3,
+    "loadOlderMessages": 6,
+    "search": 8,
+    "openPhoto": 2,
+    "analyzePhoto": 15,
+    "openTrack": 8,
+    "openCalendarEvent": 3,
+    "openNote": 5,
+    "openMail": 5,
+    "openBrowserEntry": 3,
+    "openContact": 2,
+    "recoverMessage": 12,
+    "unlockAttempt": 5
+  },
+
+  "messagesPageSize": 18,
+  "lowTimeWarningSeconds": 60,
+  "bannerSeconds": 4.5,
+
+  "scoring": {
+    "correctSuspect": 50,
+    "keyEvidence": 25,
+    "supportingEvidence": 10,
+    "timeLeft": 15,
+    "hintPenalty": 5,
+    "falseLeadPenalty": 3
+  }
+}

@@ -1,0 +1,2765 @@
+{
+ "schemaVersion": 1,
+ "id": "case_001",
+ "number": 1,
+ "title": "LE DERNIER MESSAGE",
+ "tagline": "Alex ne donne plus signe de vie depuis samedi soir.",
+ "synopsis": [
+  "Samedi 12 septembre, Alex Moreau, 26 ans, quitte ses amis au bar Le Levant vers 21h30. Il n'est jamais rentré chez lui.",
+  "Son téléphone a été retrouvé ce matin, au sol, dans un parking de la zone portuaire. Vous avez accès à son contenu pendant quelques minutes.",
+  "Quatre personnes l'ont côtoyé ce soir-là. L'une d'elles ment."
+ ],
+ "objective": "Identifier le suspect qui ment sur sa soirée et qui a vu Alex en dernier.",
+ "difficulty": 1,
+ "durationSeconds": 480,
+ "phoneStartTime": "2026-09-13 10:00",
+ "devices": [
+  {
+   "id": "dev_alex",
+   "label": "Téléphone d'Alex",
+   "model": "iPhone 13",
+   "lockedApps": [
+    {
+     "app": "notes",
+     "code": "1609",
+     "hint": "Mon anniversaire (JJMM)"
+    }
+   ],
+   "contacts": [
+    {
+     "id": "me",
+     "name": "Alex Moreau",
+     "phone": "+33 6 41 22 87 90",
+     "relation": "Moi",
+     "email": "alex.moreau@mailo.fr",
+     "birthday": "16/09/1999",
+     "avatarHue": 0.58,
+     "isOwner": true
+    },
+    {
+     "id": "emma",
+     "name": "Emma Roussel",
+     "phone": "+33 6 72 10 45 33",
+     "relation": "Collectif Lumen (trésorière)",
+     "email": "emma.roussel@mailo.fr",
+     "avatarHue": 0.93
+    },
+    {
+     "id": "lucas",
+     "name": "Lucas Ferrand",
+     "phone": "+33 6 18 64 02 71",
+     "relation": "Meilleur ami",
+     "avatarHue": 0.08
+    },
+    {
+     "id": "sarah",
+     "name": "Sarah Benali",
+     "phone": "+33 7 81 40 12 56",
+     "relation": "Ex",
+     "avatarHue": 0.78
+    },
+    {
+     "id": "karim",
+     "name": "Karim Haddad",
+     "phone": "+33 6 55 90 31 08",
+     "relation": "Ami",
+     "avatarHue": 0.13
+    },
+    {
+     "id": "ines",
+     "name": "Inès Carpentier",
+     "phone": "+33 6 03 77 61 24",
+     "relation": "Amie",
+     "avatarHue": 0.45
+    },
+    {
+     "id": "tom",
+     "name": "Tom Delorme",
+     "phone": "+33 7 69 25 13 80",
+     "relation": "Escalade",
+     "avatarHue": 0.3
+    },
+    {
+     "id": "maman",
+     "name": "Maman",
+     "phone": "+33 6 80 11 42 07",
+     "relation": "Mère",
+     "avatarHue": 0.02
+    },
+    {
+     "id": "elodie",
+     "name": "Élodie Garnier",
+     "phone": "+33 6 91 52 38 14",
+     "relation": "Collègue — Agence Varenne",
+     "email": "e.garnier@agence-varenne.fr",
+     "avatarHue": 0.52
+    },
+    {
+     "id": "hugo",
+     "name": "Hugo Benali",
+     "phone": "+33 6 27 48 90 65",
+     "relation": "Frère de Sarah",
+     "avatarHue": 0.7
+    },
+    {
+     "id": "banque",
+     "name": "Banque Azur",
+     "phone": "38 21",
+     "avatarHue": 0.6
+    },
+    {
+     "id": "colis",
+     "name": "Colis Express",
+     "phone": "36 44",
+     "avatarHue": 0.1
+    }
+   ],
+   "conversations": [
+    {
+     "id": "c_emma",
+     "participants": [
+      "emma"
+     ],
+     "messages": [
+      {
+       "id": "m_c_emma_000",
+       "from": "emma",
+       "at": "2026-08-17 10:12",
+       "text": "Hello ! Tu as toujours les clés du local ?"
+      },
+      {
+       "id": "m_c_emma_001",
+       "from": "me",
+       "at": "2026-08-17 10:40",
+       "text": "Oui, je passe les déposer jeudi"
+      },
+      {
+       "id": "m_c_emma_002",
+       "from": "emma",
+       "at": "2026-08-17 10:41",
+       "text": "Parfait merci 🙏"
+      },
+      {
+       "id": "m_c_emma_003",
+       "from": "emma",
+       "at": "2026-08-20 18:05",
+       "text": "Les tirages pour l'expo sont prêts. 14 au total"
+      },
+      {
+       "id": "m_c_emma_004",
+       "from": "me",
+       "at": "2026-08-20 18:30",
+       "text": "Top. On met quoi comme cadres ?"
+      },
+      {
+       "id": "m_c_emma_005",
+       "from": "emma",
+       "at": "2026-08-20 18:31",
+       "text": "Bois clair, comme l'an dernier. Je m'occupe de la commande"
+      },
+      {
+       "id": "m_c_emma_006",
+       "from": "me",
+       "at": "2026-08-20 18:32",
+       "text": "Ok, tu me dis combien je te dois"
+      },
+      {
+       "id": "m_c_emma_007",
+       "from": "emma",
+       "at": "2026-08-20 18:40",
+       "text": "C'est l'asso qui paie, t'inquiète 😉"
+      },
+      {
+       "id": "m_c_emma_008",
+       "from": "emma",
+       "at": "2026-08-26 21:02",
+       "text": "Tu as vu le mail de la mairie pour la salle ?"
+      },
+      {
+       "id": "m_c_emma_009",
+       "from": "me",
+       "at": "2026-08-26 21:30",
+       "text": "Oui, le 5 septembre c'est bon pour eux"
+      },
+      {
+       "id": "m_c_emma_010",
+       "from": "emma",
+       "at": "2026-08-26 21:31",
+       "text": "Génial"
+      },
+      {
+       "id": "m_c_emma_011",
+       "from": "emma",
+       "at": "2026-09-01 09:15",
+       "text": "Je t'envoie le tableau des dépenses de l'été ce soir"
+      },
+      {
+       "id": "m_c_emma_012",
+       "from": "me",
+       "at": "2026-09-01 12:02",
+       "text": "Merci. Le comptable veut tout pour le 8"
+      },
+      {
+       "id": "m_c_emma_013",
+       "from": "emma",
+       "at": "2026-09-01 12:10",
+       "text": "Oui oui je sais"
+      },
+      {
+       "id": "m_c_emma_014",
+       "from": "emma",
+       "at": "2026-09-03 23:48",
+       "text": "Tableau envoyé. Il manque 2-3 justificatifs, je les retrouve"
+      },
+      {
+       "id": "m_c_emma_015",
+       "from": "me",
+       "at": "2026-09-04 08:30",
+       "text": "Ok merci"
+      },
+      {
+       "id": "m_c_emma_016",
+       "from": "emma",
+       "at": "2026-09-05 23:58",
+       "text": "Merci pour ce soir ✨ le vernissage était parfait"
+      },
+      {
+       "id": "m_c_emma_017",
+       "from": "me",
+       "at": "2026-09-06 10:21",
+       "text": "Merci à toi ! Belle équipe"
+      },
+      {
+       "id": "m_c_emma_018",
+       "from": "emma",
+       "at": "2026-09-08 19:04",
+       "text": "Tu passes au local demain ?"
+      },
+      {
+       "id": "m_c_emma_019",
+       "from": "me",
+       "at": "2026-09-08 19:40",
+       "text": "Non, grosse journée au boulot"
+      },
+      {
+       "id": "m_c_emma_020",
+       "from": "emma",
+       "at": "2026-09-09 19:20",
+       "text": "Le comptable t'a écrit à toi aussi ?"
+      },
+      {
+       "id": "m_c_emma_021",
+       "from": "me",
+       "at": "2026-09-09 19:52",
+       "text": "Oui."
+      },
+      {
+       "id": "m_c_emma_022",
+       "from": "emma",
+       "at": "2026-09-09 19:53",
+       "text": "On en parle ?"
+      },
+      {
+       "id": "m_c_emma_023",
+       "from": "me",
+       "at": "2026-09-09 20:15",
+       "text": "Pas par message."
+      },
+      {
+       "id": "m_c_emma_024",
+       "from": "emma",
+       "at": "2026-09-10 22:40",
+       "text": "Tu m'en veux ?"
+      },
+      {
+       "id": "m_c_emma_025",
+       "from": "me",
+       "at": "2026-09-11 08:02",
+       "text": "Je veux juste comprendre."
+      },
+      {
+       "id": "m_c_emma_026",
+       "from": "emma",
+       "at": "2026-09-12 16:12",
+       "text": "Tu as dit quelque chose aux autres ?"
+      },
+      {
+       "id": "m_c_emma_027",
+       "from": "me",
+       "at": "2026-09-12 16:40",
+       "text": "Non."
+      },
+      {
+       "id": "m_c_emma_028",
+       "from": "emma",
+       "at": "2026-09-12 16:41",
+       "text": "Ok. Merci."
+      },
+      {
+       "id": "m_emma_del1",
+       "from": "emma",
+       "at": "2026-09-12 21:40",
+       "text": "Parking du Quai 9. 22h. Viens seul.",
+       "deletedAt": "2026-09-12 21:44"
+      },
+      {
+       "id": "m_emma_del2",
+       "from": "emma",
+       "at": "2026-09-12 21:41",
+       "text": "Et efface cette conversation stp.",
+       "deletedAt": "2026-09-12 21:44"
+      },
+      {
+       "id": "m_emma_2230",
+       "from": "emma",
+       "at": "2026-09-12 22:30",
+       "text": "T'es où ? Moi je suis restée chez moi toute la soirée, regarde l'état 😩",
+       "photo": "p_emma_couch"
+      },
+      {
+       "id": "m_emma_0112",
+       "from": "emma",
+       "at": "2026-09-13 01:12",
+       "text": "Alex ???",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_lucas",
+     "participants": [
+      "lucas"
+     ],
+     "messages": [
+      {
+       "id": "m_c_lucas_000",
+       "from": "lucas",
+       "at": "2026-08-16 14:03",
+       "text": "Tu viens jouer ce soir ?"
+      },
+      {
+       "id": "m_c_lucas_001",
+       "from": "me",
+       "at": "2026-08-16 14:20",
+       "text": "Vers 21h ok"
+      },
+      {
+       "id": "m_c_lucas_002",
+       "from": "lucas",
+       "at": "2026-08-16 23:58",
+       "text": "Gg pour la dernière partie 😂"
+      },
+      {
+       "id": "m_c_lucas_003",
+       "from": "lucas",
+       "at": "2026-08-23 11:45",
+       "text": "Ma Clio est ENFIN sortie du garage",
+       "photo": "p_lucas_car"
+      },
+      {
+       "id": "m_c_lucas_004",
+       "from": "me",
+       "at": "2026-08-23 11:50",
+       "text": "Elle a jamais été aussi propre"
+      },
+      {
+       "id": "m_c_lucas_005",
+       "from": "lucas",
+       "at": "2026-08-23 11:51",
+       "text": "400 balles le parallélisme, je pleure"
+      },
+      {
+       "id": "m_c_lucas_006",
+       "from": "lucas",
+       "at": "2026-08-28 19:10",
+       "text": "Tu peux m'aider à monter le canapé dimanche ?"
+      },
+      {
+       "id": "m_c_lucas_007",
+       "from": "me",
+       "at": "2026-08-28 19:30",
+       "text": "Ouais. 14h ?"
+      },
+      {
+       "id": "m_c_lucas_008",
+       "from": "lucas",
+       "at": "2026-08-28 19:31",
+       "text": "Parfait, je te dois une bière"
+      },
+      {
+       "id": "m_c_lucas_009",
+       "from": "lucas",
+       "at": "2026-08-30 17:22",
+       "text": "Merci mec, sans toi il serait encore dans l'escalier"
+      },
+      {
+       "id": "m_c_lucas_010",
+       "from": "lucas",
+       "at": "2026-09-02 20:44",
+       "text": "T'as vu le match ??"
+      },
+      {
+       "id": "m_c_lucas_011",
+       "from": "me",
+       "at": "2026-09-02 21:10",
+       "text": "La fin était folle"
+      },
+      {
+       "id": "m_c_lucas_012",
+       "from": "lucas",
+       "at": "2026-09-04 18:02",
+       "text": "Vendredi soir Levant ?"
+      },
+      {
+       "id": "m_c_lucas_013",
+       "from": "me",
+       "at": "2026-09-04 18:20",
+       "text": "Samedi plutôt, vendredi y a le vernissage demain à préparer"
+      },
+      {
+       "id": "m_c_lucas_014",
+       "from": "lucas",
+       "at": "2026-09-07 12:30",
+       "text": "Tu me prêtes ton pied photo ce week-end ?"
+      },
+      {
+       "id": "m_c_lucas_015",
+       "from": "me",
+       "at": "2026-09-07 12:45",
+       "text": "Pas de souci, passe le prendre"
+      },
+      {
+       "id": "m_c_lucas_016",
+       "from": "lucas",
+       "at": "2026-09-10 20:14",
+       "text": "Emma est bizarre en ce moment non ?"
+      },
+      {
+       "id": "m_c_lucas_017",
+       "from": "me",
+       "at": "2026-09-10 20:40",
+       "text": "Pourquoi tu dis ça"
+      },
+      {
+       "id": "m_c_lucas_018",
+       "from": "lucas",
+       "at": "2026-09-10 20:41",
+       "text": "Je sais pas, elle répond plus sur le groupe"
+      },
+      {
+       "id": "m_c_lucas_019",
+       "from": "me",
+       "at": "2026-09-10 20:52",
+       "text": "Elle est débordée avec l'asso"
+      },
+      {
+       "id": "m_c_lucas_020",
+       "from": "lucas",
+       "at": "2026-09-12 17:30",
+       "text": "Ce soir 19h30 au Levant, t'es chaud ?"
+      },
+      {
+       "id": "m_c_lucas_021",
+       "from": "me",
+       "at": "2026-09-12 17:33",
+       "text": "Oui"
+      },
+      {
+       "id": "m_c_lucas_022",
+       "from": "lucas",
+       "at": "2026-09-12 21:38",
+       "text": "T'es parti où ?"
+      },
+      {
+       "id": "m_c_lucas_023",
+       "from": "me",
+       "at": "2026-09-12 21:39",
+       "text": "Truc à régler. Je t'explique demain."
+      },
+      {
+       "id": "m_lucas_2209",
+       "from": "lucas",
+       "at": "2026-09-12 22:09",
+       "text": "Je conduis, je te rappelle"
+      },
+      {
+       "id": "m_c_lucas_025",
+       "from": "lucas",
+       "at": "2026-09-13 09:14",
+       "text": "Mec la police m'a appelé. T'es où ???",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_sarah",
+     "participants": [
+      "sarah"
+     ],
+     "messages": [
+      {
+       "id": "m_c_sarah_000",
+       "from": "sarah",
+       "at": "2026-08-19 20:02",
+       "text": "Tu as toujours mon livre sur Vivian Maier ?"
+      },
+      {
+       "id": "m_c_sarah_001",
+       "from": "me",
+       "at": "2026-08-19 20:30",
+       "text": "Oui, je te le rends samedi"
+      },
+      {
+       "id": "m_c_sarah_002",
+       "from": "sarah",
+       "at": "2026-08-19 20:31",
+       "text": "Pas de stress"
+      },
+      {
+       "id": "m_c_sarah_003",
+       "from": "sarah",
+       "at": "2026-08-27 13:15",
+       "text": "Hugo part à Lyon en octobre, il te l'a dit ?"
+      },
+      {
+       "id": "m_c_sarah_004",
+       "from": "me",
+       "at": "2026-08-27 13:40",
+       "text": "Oui il m'en a parlé"
+      },
+      {
+       "id": "m_c_sarah_005",
+       "from": "sarah",
+       "at": "2026-08-27 13:41",
+       "text": "Ne dis rien à mes parents surtout, c'est à lui de le faire"
+      },
+      {
+       "id": "m_c_sarah_006",
+       "from": "me",
+       "at": "2026-08-27 13:45",
+       "text": "Promis"
+      },
+      {
+       "id": "m_c_sarah_007",
+       "from": "sarah",
+       "at": "2026-09-03 08:55",
+       "text": "Merci pour le livre ❤️"
+      },
+      {
+       "id": "m_sarah_0907",
+       "from": "sarah",
+       "at": "2026-09-07 22:03",
+       "text": "Je sais ce que tu as fait."
+      },
+      {
+       "id": "m_c_sarah_009",
+       "from": "me",
+       "at": "2026-09-07 22:10",
+       "text": "Sarah…"
+      },
+      {
+       "id": "m_c_sarah_010",
+       "from": "sarah",
+       "at": "2026-09-07 22:11",
+       "text": "Ne m'appelle pas."
+      },
+      {
+       "id": "m_c_sarah_011",
+       "from": "sarah",
+       "at": "2026-09-11 21:14",
+       "text": "Il faut vraiment qu'on parle."
+      },
+      {
+       "id": "m_c_sarah_012",
+       "from": "me",
+       "at": "2026-09-11 21:30",
+       "text": "Demain au Levant ?"
+      },
+      {
+       "id": "m_c_sarah_013",
+       "from": "sarah",
+       "at": "2026-09-11 21:31",
+       "text": "Ok"
+      },
+      {
+       "id": "m_c_sarah_014",
+       "from": "sarah",
+       "at": "2026-09-12 18:32",
+       "text": "Tu viens ce soir ?"
+      },
+      {
+       "id": "m_c_sarah_015",
+       "from": "me",
+       "at": "2026-09-12 18:40",
+       "text": "Oui mais je pars tôt"
+      },
+      {
+       "id": "m_c_sarah_016",
+       "from": "sarah",
+       "at": "2026-09-12 21:06",
+       "text": "Je file à l'anniv de Jade, on finit la discussion demain"
+      },
+      {
+       "id": "m_c_sarah_017",
+       "from": "sarah",
+       "at": "2026-09-12 23:05",
+       "text": "T'es rentré ?",
+       "unread": true
+      }
+     ],
+     "draft": {
+      "id": "d_sarah",
+      "text": "Si il m'arrive un truc, c'est à cause de",
+      "at": "2026-09-12 22:26"
+     }
+    },
+    {
+     "id": "c_karim",
+     "participants": [
+      "karim"
+     ],
+     "messages": [
+      {
+       "id": "m_c_karim_000",
+       "from": "karim",
+       "at": "2026-08-15 12:20",
+       "text": "Bien arrivé ?"
+      },
+      {
+       "id": "m_c_karim_001",
+       "from": "me",
+       "at": "2026-08-15 13:01",
+       "text": "Oui merci pour le trajet"
+      },
+      {
+       "id": "m_c_karim_002",
+       "from": "karim",
+       "at": "2026-09-01 18:47",
+       "text": "Tu me dois toujours 1 200 €. Ça fait 4 mois."
+      },
+      {
+       "id": "m_c_karim_003",
+       "from": "me",
+       "at": "2026-09-01 19:30",
+       "text": "Je sais. Fin du mois, promis."
+      },
+      {
+       "id": "m_c_karim_004",
+       "from": "karim",
+       "at": "2026-09-01 19:31",
+       "text": "Tu disais pareil en juin."
+      },
+      {
+       "id": "m_karim_0910",
+       "from": "karim",
+       "at": "2026-09-10 23:12",
+       "text": "Samedi dernier délai. Sinon je passe chez toi."
+      },
+      {
+       "id": "m_c_karim_006",
+       "from": "me",
+       "at": "2026-09-10 23:40",
+       "text": "Ok ok. Samedi je te fais un virement."
+      },
+      {
+       "id": "m_c_karim_007",
+       "from": "me",
+       "at": "2026-09-12 20:31",
+       "text": "Virement de 600 fait. Le reste fin septembre."
+      },
+      {
+       "id": "m_c_karim_008",
+       "from": "karim",
+       "at": "2026-09-12 20:44",
+       "text": "C'est pas ce qu'on avait dit."
+      },
+      {
+       "id": "m_c_karim_009",
+       "from": "karim",
+       "at": "2026-09-12 22:48",
+       "text": "Je suis de nuit à l'hôtel. On en reparle demain.",
+       "photo": "p_karim_desk"
+      },
+      {
+       "id": "m_c_karim_010",
+       "from": "karim",
+       "at": "2026-09-13 08:40",
+       "text": "Alex réponds. Laisse tomber pour l'argent, sérieux. T'es où ?",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_group",
+     "participants": [
+      "sarah",
+      "karim",
+      "lucas",
+      "emma",
+      "ines",
+      "tom"
+     ],
+     "messages": [
+      {
+       "id": "m_c_group_000",
+       "from": "ines",
+       "at": "2026-08-21 18:02",
+       "text": "Qui est chaud pour le Levant samedi ?"
+      },
+      {
+       "id": "m_c_group_001",
+       "from": "tom",
+       "at": "2026-08-21 18:05",
+       "text": "Moi !"
+      },
+      {
+       "id": "m_c_group_002",
+       "from": "lucas",
+       "at": "2026-08-21 18:10",
+       "text": "Présent"
+      },
+      {
+       "id": "m_c_group_003",
+       "from": "emma",
+       "at": "2026-08-21 18:30",
+       "text": "Ok pour moi"
+      },
+      {
+       "id": "m_c_group_004",
+       "from": "karim",
+       "at": "2026-08-21 19:02",
+       "text": "Je bosse à 21h mais je passe avant"
+      },
+      {
+       "id": "m_c_group_005",
+       "from": "me",
+       "at": "2026-08-21 19:20",
+       "text": "Go"
+      },
+      {
+       "id": "m_c_group_006",
+       "from": "sarah",
+       "at": "2026-08-22 23:51",
+       "text": "Merci pour la soirée les gens 🫶"
+      },
+      {
+       "id": "m_c_group_007",
+       "from": "tom",
+       "at": "2026-08-24 09:12",
+       "text": "Quelqu'un a retrouvé une écharpe verte ?"
+      },
+      {
+       "id": "m_c_group_008",
+       "from": "ines",
+       "at": "2026-08-24 09:30",
+       "text": "C'est la mienne 🙈"
+      },
+      {
+       "id": "m_c_group_009",
+       "from": "lucas",
+       "at": "2026-08-29 20:02",
+       "text": "Qui veut des places pour le match le 20 ?"
+      },
+      {
+       "id": "m_c_group_010",
+       "from": "karim",
+       "at": "2026-08-29 20:15",
+       "text": "Moi si c'est pas trop cher"
+      },
+      {
+       "id": "m_c_group_011",
+       "from": "lucas",
+       "at": "2026-08-29 20:16",
+       "text": "18 balles"
+      },
+      {
+       "id": "m_c_group_012",
+       "from": "karim",
+       "at": "2026-08-29 20:17",
+       "text": "Ok"
+      },
+      {
+       "id": "m_c_group_013",
+       "from": "emma",
+       "at": "2026-09-02 12:02",
+       "text": "Rappel : vernissage Lumen samedi 5, 19h, venez nombreux !"
+      },
+      {
+       "id": "m_c_group_014",
+       "from": "ines",
+       "at": "2026-09-02 12:10",
+       "text": "J'y serai"
+      },
+      {
+       "id": "m_c_group_015",
+       "from": "tom",
+       "at": "2026-09-02 12:30",
+       "text": "Moi aussi"
+      },
+      {
+       "id": "m_c_group_016",
+       "from": "sarah",
+       "at": "2026-09-02 13:05",
+       "text": "Je passerai plus tard"
+      },
+      {
+       "id": "m_c_group_017",
+       "from": "karim",
+       "at": "2026-09-05 22:41",
+       "text": "Bravo pour l'expo, vraiment"
+      },
+      {
+       "id": "m_c_group_018",
+       "from": "emma",
+       "at": "2026-09-05 22:50",
+       "text": "Merci ❤️"
+      },
+      {
+       "id": "m_c_group_019",
+       "from": "ines",
+       "at": "2026-09-06 11:02",
+       "text": "J'ai des photos du vernissage, je vous les envoie"
+      },
+      {
+       "id": "m_c_group_020",
+       "from": "tom",
+       "at": "2026-09-08 19:40",
+       "text": "Bloc jeudi 19h ?"
+      },
+      {
+       "id": "m_c_group_021",
+       "from": "me",
+       "at": "2026-09-08 19:52",
+       "text": "Ok"
+      },
+      {
+       "id": "m_c_group_022",
+       "from": "ines",
+       "at": "2026-09-10 13:03",
+       "text": "Quelqu'un a un chargeur USB-C à prêter demain ?"
+      },
+      {
+       "id": "m_c_group_023",
+       "from": "lucas",
+       "at": "2026-09-10 13:10",
+       "text": "Moi"
+      },
+      {
+       "id": "m_c_group_024",
+       "from": "lucas",
+       "at": "2026-09-11 18:30",
+       "text": "Levant demain 19h30 ?"
+      },
+      {
+       "id": "m_c_group_025",
+       "from": "tom",
+       "at": "2026-09-11 18:33",
+       "text": "Yes"
+      },
+      {
+       "id": "m_c_group_026",
+       "from": "sarah",
+       "at": "2026-09-11 18:40",
+       "text": "Je passe mais je pars tôt, anniv de Jade"
+      },
+      {
+       "id": "m_c_group_027",
+       "from": "ines",
+       "at": "2026-09-11 18:41",
+       "text": "Ok !"
+      },
+      {
+       "id": "m_c_group_028",
+       "from": "emma",
+       "at": "2026-09-11 19:02",
+       "text": "Je sais pas encore"
+      },
+      {
+       "id": "m_c_group_029",
+       "from": "karim",
+       "at": "2026-09-12 18:50",
+       "text": "Je passe vite fait avant le boulot"
+      },
+      {
+       "id": "m_group_emma_1958",
+       "from": "emma",
+       "at": "2026-09-12 19:58",
+       "text": "Je vais pas venir, migraine 🤕 amusez-vous"
+      },
+      {
+       "id": "m_c_group_031",
+       "from": "ines",
+       "at": "2026-09-12 19:59",
+       "text": "Repose-toi !"
+      },
+      {
+       "id": "m_c_group_032",
+       "from": "tom",
+       "at": "2026-09-12 20:14",
+       "text": "On est en terrasse au fond"
+      },
+      {
+       "id": "m_c_group_033",
+       "from": "sarah",
+       "at": "2026-09-12 22:21",
+       "text": "L'anniv de Jade 🎈",
+       "photo": "p_sarah_jade"
+      },
+      {
+       "id": "m_c_group_034",
+       "from": "ines",
+       "at": "2026-09-12 22:22",
+       "text": "Trop mignon"
+      },
+      {
+       "id": "m_group_emma_2234",
+       "from": "emma",
+       "at": "2026-09-12 22:34",
+       "text": "Désolée pour ce soir, je suis au lit depuis 20h 😴"
+      },
+      {
+       "id": "m_group_lucas_2340",
+       "from": "lucas",
+       "at": "2026-09-12 23:40",
+       "text": "Rentré direct après le Levant, au lit à 22h 😴 bonne nuit"
+      },
+      {
+       "id": "m_c_group_037",
+       "from": "ines",
+       "at": "2026-09-13 09:02",
+       "text": "Quelqu'un a des nouvelles d'Alex ? Sa mère m'a appelée",
+       "unread": true
+      },
+      {
+       "id": "m_c_group_038",
+       "from": "tom",
+       "at": "2026-09-13 09:05",
+       "text": "Non… il est parti tôt hier",
+       "unread": true
+      }
+     ],
+     "title": "Les Levantins"
+    },
+    {
+     "id": "c_maman",
+     "participants": [
+      "maman"
+     ],
+     "messages": [
+      {
+       "id": "m_c_maman_000",
+       "from": "maman",
+       "at": "2026-08-24 19:03",
+       "text": "Tu as pensé à appeler ta grand-mère ?"
+      },
+      {
+       "id": "m_c_maman_001",
+       "from": "me",
+       "at": "2026-08-24 20:10",
+       "text": "Oui ce midi"
+      },
+      {
+       "id": "m_c_maman_002",
+       "from": "maman",
+       "at": "2026-08-31 08:20",
+       "text": "Bonne rentrée mon chéri"
+      },
+      {
+       "id": "m_c_maman_003",
+       "from": "me",
+       "at": "2026-08-31 08:50",
+       "text": "Merci maman"
+      },
+      {
+       "id": "m_c_maman_004",
+       "from": "maman",
+       "at": "2026-09-06 17:44",
+       "text": "Tu as l'air fatigué ces temps-ci"
+      },
+      {
+       "id": "m_c_maman_005",
+       "from": "me",
+       "at": "2026-09-06 18:02",
+       "text": "Beaucoup de boulot, ça va"
+      },
+      {
+       "id": "m_c_maman_006",
+       "from": "maman",
+       "at": "2026-09-10 12:15",
+       "text": "Mercredi c'est le 16 ! Tu passes à la maison ?"
+      },
+      {
+       "id": "m_c_maman_007",
+       "from": "me",
+       "at": "2026-09-10 12:40",
+       "text": "Oui, vers 19h"
+      },
+      {
+       "id": "m_c_maman_008",
+       "from": "maman",
+       "at": "2026-09-10 12:41",
+       "text": "Super. 27 ans déjà…"
+      },
+      {
+       "id": "m_c_maman_009",
+       "from": "maman",
+       "at": "2026-09-13 08:31",
+       "text": "Alex rappelle-moi s'il te plaît",
+       "unread": true
+      },
+      {
+       "id": "m_c_maman_010",
+       "from": "maman",
+       "at": "2026-09-13 09:31",
+       "text": "Je suis très inquiète",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_elodie",
+     "participants": [
+      "elodie"
+     ],
+     "messages": [
+      {
+       "id": "m_c_elodie_000",
+       "from": "elodie",
+       "at": "2026-09-02 09:02",
+       "text": "Tu as la dernière version de la maquette Varenne ?"
+      },
+      {
+       "id": "m_c_elodie_001",
+       "from": "me",
+       "at": "2026-09-02 09:10",
+       "text": "Je te l'envoie"
+      },
+      {
+       "id": "m_c_elodie_002",
+       "from": "elodie",
+       "at": "2026-09-04 17:40",
+       "text": "Varenne valide la maquette 🎉"
+      },
+      {
+       "id": "m_c_elodie_003",
+       "from": "me",
+       "at": "2026-09-04 17:45",
+       "text": "Enfin !"
+      },
+      {
+       "id": "m_c_elodie_004",
+       "from": "elodie",
+       "at": "2026-09-09 10:22",
+       "text": "Réunion déplacée à lundi 9h30, ça te va ?"
+      },
+      {
+       "id": "m_c_elodie_005",
+       "from": "me",
+       "at": "2026-09-09 10:30",
+       "text": "Impossible lundi 9h, j'ai le bureau de l'asso. 11h ?"
+      },
+      {
+       "id": "m_c_elodie_006",
+       "from": "elodie",
+       "at": "2026-09-09 10:31",
+       "text": "Ok 11h"
+      },
+      {
+       "id": "m_c_elodie_007",
+       "from": "elodie",
+       "at": "2026-09-11 18:12",
+       "text": "Bon week-end !"
+      },
+      {
+       "id": "m_c_elodie_008",
+       "from": "me",
+       "at": "2026-09-11 18:20",
+       "text": "Toi aussi"
+      }
+     ]
+    },
+    {
+     "id": "c_tom",
+     "participants": [
+      "tom"
+     ],
+     "messages": [
+      {
+       "id": "m_c_tom_000",
+       "from": "tom",
+       "at": "2026-08-18 18:00",
+       "text": "Salle ce soir ?"
+      },
+      {
+       "id": "m_c_tom_001",
+       "from": "me",
+       "at": "2026-08-18 18:10",
+       "text": "Go 19h"
+      },
+      {
+       "id": "m_c_tom_002",
+       "from": "tom",
+       "at": "2026-08-25 21:05",
+       "text": "Ta voie jaune tu l'as enfin passée ?"
+      },
+      {
+       "id": "m_c_tom_003",
+       "from": "me",
+       "at": "2026-08-25 21:20",
+       "text": "Presque 😅"
+      },
+      {
+       "id": "m_c_tom_004",
+       "from": "tom",
+       "at": "2026-09-03 08:12",
+       "text": "Tu me rends la perceuse quand tu peux"
+      },
+      {
+       "id": "m_c_tom_005",
+       "from": "me",
+       "at": "2026-09-03 08:40",
+       "text": "Ce week-end promis"
+      },
+      {
+       "id": "m_c_tom_006",
+       "from": "tom",
+       "at": "2026-09-10 22:02",
+       "text": "Bloc super hier, à refaire"
+      }
+     ]
+    },
+    {
+     "id": "c_ines",
+     "participants": [
+      "ines"
+     ],
+     "messages": [
+      {
+       "id": "m_c_ines_000",
+       "from": "ines",
+       "at": "2026-09-06 11:05",
+       "text": "Tiens, les photos du vernissage",
+       "photo": "p_vernissage"
+      },
+      {
+       "id": "m_c_ines_001",
+       "from": "me",
+       "at": "2026-09-06 11:30",
+       "text": "Merci ! Elles sont top"
+      },
+      {
+       "id": "m_c_ines_002",
+       "from": "ines",
+       "at": "2026-09-09 20:40",
+       "text": "Tu as l'air soucieux en ce moment, tout va bien ?"
+      },
+      {
+       "id": "m_c_ines_003",
+       "from": "me",
+       "at": "2026-09-09 21:02",
+       "text": "Une histoire avec l'asso. Je t'en parlerai"
+      }
+     ]
+    },
+    {
+     "id": "c_hugo",
+     "participants": [
+      "hugo"
+     ],
+     "messages": [
+      {
+       "id": "m_c_hugo_000",
+       "from": "hugo",
+       "at": "2026-09-06 16:20",
+       "text": "J'ai dit à Sarah que tu étais au courant pour Lyon… désolé"
+      },
+      {
+       "id": "m_c_hugo_001",
+       "from": "me",
+       "at": "2026-09-06 16:45",
+       "text": "Pas grave. Elle va m'en vouloir"
+      },
+      {
+       "id": "m_c_hugo_002",
+       "from": "hugo",
+       "at": "2026-09-06 16:46",
+       "text": "Elle t'en veut déjà 😬"
+      }
+     ]
+    },
+    {
+     "id": "c_banque",
+     "participants": [
+      "banque"
+     ],
+     "messages": [
+      {
+       "id": "m_c_banque_000",
+       "from": "banque",
+       "at": "2026-08-28 10:00",
+       "text": "Banque Azur : votre carte a été utilisée pour un paiement de 42,90 € chez LIBRAIRIE DU PORT."
+      },
+      {
+       "id": "m_c_banque_001",
+       "from": "banque",
+       "at": "2026-09-12 20:30",
+       "text": "Banque Azur : virement de 600,00 € vers K. HADDAD effectué."
+      }
+     ]
+    },
+    {
+     "id": "c_colis",
+     "participants": [
+      "colis"
+     ],
+     "messages": [
+      {
+       "id": "m_c_colis_000",
+       "from": "colis",
+       "at": "2026-09-04 08:02",
+       "text": "Colis Express : votre colis n°CX4821 sera livré aujourd'hui entre 12h et 14h."
+      },
+      {
+       "id": "m_c_colis_001",
+       "from": "colis",
+       "at": "2026-09-04 13:20",
+       "text": "Colis Express : votre colis a été livré dans votre boîte aux lettres."
+      }
+     ]
+    }
+   ],
+   "calls": [
+    {
+     "id": "k01",
+     "contact": "maman",
+     "direction": "incoming",
+     "at": "2026-08-24 18:40",
+     "durationSeconds": 912
+    },
+    {
+     "id": "k02",
+     "contact": "lucas",
+     "direction": "outgoing",
+     "at": "2026-08-28 19:05",
+     "durationSeconds": 124
+    },
+    {
+     "id": "k03",
+     "contact": "elodie",
+     "direction": "incoming",
+     "at": "2026-09-01 09:30",
+     "durationSeconds": 302
+    },
+    {
+     "id": "k04",
+     "contact": "karim",
+     "direction": "missed",
+     "at": "2026-09-01 18:45",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k05",
+     "contact": "tom",
+     "direction": "outgoing",
+     "at": "2026-09-03 18:02",
+     "durationSeconds": 45
+    },
+    {
+     "id": "k06",
+     "contact": "emma",
+     "direction": "outgoing",
+     "at": "2026-09-05 17:20",
+     "durationSeconds": 188
+    },
+    {
+     "id": "k07",
+     "contact": "maman",
+     "direction": "outgoing",
+     "at": "2026-09-06 18:10",
+     "durationSeconds": 1420
+    },
+    {
+     "id": "k08",
+     "contact": "sarah",
+     "direction": "missed",
+     "at": "2026-09-07 22:30",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k09",
+     "contact": "hugo",
+     "direction": "incoming",
+     "at": "2026-09-08 12:02",
+     "durationSeconds": 214
+    },
+    {
+     "id": "k10",
+     "contact": "emma",
+     "direction": "missed",
+     "at": "2026-09-09 19:40",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k11",
+     "contact": "karim",
+     "direction": "missed",
+     "at": "2026-09-10 23:05",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k12",
+     "contact": "emma",
+     "direction": "incoming",
+     "at": "2026-09-11 20:05",
+     "durationSeconds": 252
+    },
+    {
+     "id": "k13",
+     "contact": "elodie",
+     "direction": "outgoing",
+     "at": "2026-09-11 17:30",
+     "durationSeconds": 96
+    },
+    {
+     "id": "k14",
+     "contact": "lucas",
+     "direction": "incoming",
+     "at": "2026-09-12 17:20",
+     "durationSeconds": 71
+    },
+    {
+     "id": "k15",
+     "contact": "emma",
+     "direction": "incoming",
+     "at": "2026-09-12 21:47",
+     "durationSeconds": 38
+    },
+    {
+     "id": "k16",
+     "contact": "lucas",
+     "direction": "outgoing",
+     "at": "2026-09-12 22:08",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k17",
+     "contact": "karim",
+     "direction": "missed",
+     "at": "2026-09-12 22:52",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k18",
+     "contact": "sarah",
+     "direction": "missed",
+     "at": "2026-09-12 23:07",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k19",
+     "contact": "maman",
+     "direction": "missed",
+     "at": "2026-09-13 08:29",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k20",
+     "contact": "lucas",
+     "direction": "missed",
+     "at": "2026-09-13 09:15",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k21",
+     "contact": "maman",
+     "direction": "missed",
+     "at": "2026-09-13 09:30",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k22",
+     "contact": "ines",
+     "direction": "missed",
+     "at": "2026-09-13 09:40",
+     "durationSeconds": 0
+    }
+   ],
+   "places": [
+    {
+     "id": "pl_home_alex",
+     "name": "Domicile d'Alex — rue Vauban",
+     "kind": "home",
+     "x": 0.36,
+     "y": 0.46
+    },
+    {
+     "id": "pl_levant",
+     "name": "Le Levant (bar)",
+     "kind": "bar",
+     "x": 0.47,
+     "y": 0.38
+    },
+    {
+     "id": "pl_home_emma",
+     "name": "Rue Paradis",
+     "kind": "street",
+     "x": 0.6,
+     "y": 0.27
+    },
+    {
+     "id": "pl_home_lucas",
+     "name": "Avenue des Chênes",
+     "kind": "home",
+     "x": 0.18,
+     "y": 0.24
+    },
+    {
+     "id": "pl_quai9",
+     "name": "Parking du Quai 9 — zone portuaire",
+     "kind": "parking",
+     "x": 0.84,
+     "y": 0.8
+    },
+    {
+     "id": "pl_rocade",
+     "name": "Rocade Nord — sortie 4",
+     "kind": "road",
+     "x": 0.46,
+     "y": 0.6
+    },
+    {
+     "id": "pl_lilas",
+     "name": "Rue des Lilas",
+     "kind": "street",
+     "x": 0.14,
+     "y": 0.72
+    },
+    {
+     "id": "pl_hotel",
+     "name": "Hôtel Le Cygne",
+     "kind": "work",
+     "x": 0.72,
+     "y": 0.16
+    },
+    {
+     "id": "pl_varenne",
+     "name": "Agence Varenne",
+     "kind": "work",
+     "x": 0.4,
+     "y": 0.64
+    },
+    {
+     "id": "pl_bloc",
+     "name": "Salle d'escalade Bloc Out",
+     "kind": "park",
+     "x": 0.26,
+     "y": 0.88
+    },
+    {
+     "id": "pl_gare",
+     "name": "Gare centrale",
+     "kind": "station",
+     "x": 0.58,
+     "y": 0.52
+    },
+    {
+     "id": "pl_local",
+     "name": "Local du collectif Lumen",
+     "kind": "shop",
+     "x": 0.52,
+     "y": 0.72
+    }
+   ],
+   "tracks": [
+    {
+     "id": "t_me",
+     "contact": "me",
+     "points": [
+      {
+       "id": "tp_me_1",
+       "at": "2026-09-11 08:52",
+       "place": "pl_varenne"
+      },
+      {
+       "id": "tp_me_2",
+       "at": "2026-09-11 18:41",
+       "place": "pl_bloc"
+      },
+      {
+       "id": "tp_me_3",
+       "at": "2026-09-11 21:12",
+       "place": "pl_home_alex"
+      },
+      {
+       "id": "tp_me_4",
+       "at": "2026-09-12 14:05",
+       "place": "pl_local"
+      },
+      {
+       "id": "tp_me_5",
+       "at": "2026-09-12 18:50",
+       "place": "pl_home_alex"
+      },
+      {
+       "id": "tp_me_6",
+       "at": "2026-09-12 19:34",
+       "place": "pl_levant"
+      },
+      {
+       "id": "tp_me_7",
+       "at": "2026-09-12 21:36",
+       "place": "pl_levant",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_me_8",
+       "at": "2026-09-12 21:49",
+       "place": "pl_gare"
+      },
+      {
+       "id": "tp_me_9",
+       "at": "2026-09-12 22:02",
+       "place": "pl_quai9"
+      },
+      {
+       "id": "tp_me_10",
+       "at": "2026-09-12 22:36",
+       "place": "pl_quai9",
+       "note": "Dernière position connue"
+      }
+     ]
+    },
+    {
+     "id": "t_lucas",
+     "contact": "lucas",
+     "points": [
+      {
+       "id": "tp_lu_1",
+       "at": "2026-09-12 18:40",
+       "place": "pl_home_lucas"
+      },
+      {
+       "id": "tp_lu_2",
+       "at": "2026-09-12 19:28",
+       "place": "pl_levant"
+      },
+      {
+       "id": "tp_lu_3",
+       "at": "2026-09-12 21:52",
+       "place": "pl_levant",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_lu_4",
+       "at": "2026-09-12 21:58",
+       "place": "pl_home_emma",
+       "note": "Arrêt 3 min"
+      },
+      {
+       "id": "tp_lu_5",
+       "at": "2026-09-12 22:17",
+       "place": "pl_quai9"
+      },
+      {
+       "id": "tp_lu_6",
+       "at": "2026-09-12 22:24",
+       "place": "pl_rocade"
+      },
+      {
+       "id": "tp_lu_7",
+       "at": "2026-09-12 22:41",
+       "place": "pl_home_lucas"
+      }
+     ]
+    },
+    {
+     "id": "t_sarah",
+     "contact": "sarah",
+     "points": [
+      {
+       "id": "tp_sa_1",
+       "at": "2026-09-12 19:31",
+       "place": "pl_levant"
+      },
+      {
+       "id": "tp_sa_2",
+       "at": "2026-09-12 21:08",
+       "place": "pl_levant",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_sa_3",
+       "at": "2026-09-12 21:29",
+       "place": "pl_lilas"
+      },
+      {
+       "id": "tp_sa_4",
+       "at": "2026-09-12 23:52",
+       "place": "pl_lilas"
+      }
+     ]
+    },
+    {
+     "id": "t_karim",
+     "contact": "karim",
+     "points": [
+      {
+       "id": "tp_ka_1",
+       "at": "2026-09-12 19:40",
+       "place": "pl_levant"
+      },
+      {
+       "id": "tp_ka_2",
+       "at": "2026-09-12 20:48",
+       "place": "pl_hotel"
+      },
+      {
+       "id": "tp_ka_3",
+       "at": "2026-09-12 23:59",
+       "place": "pl_hotel"
+      },
+      {
+       "id": "tp_ka_4",
+       "at": "2026-09-13 07:05",
+       "place": "pl_hotel"
+      }
+     ]
+    },
+    {
+     "id": "t_ines",
+     "contact": "ines",
+     "points": [
+      {
+       "id": "tp_in_1",
+       "at": "2026-09-12 19:35",
+       "place": "pl_levant"
+      },
+      {
+       "id": "tp_in_2",
+       "at": "2026-09-12 23:10",
+       "place": "pl_levant"
+      }
+     ]
+    },
+    {
+     "id": "t_emma",
+     "contact": "emma",
+     "points": [
+      {
+       "id": "tp_em_1",
+       "at": "2026-09-12 18:05",
+       "place": "pl_home_emma"
+      },
+      {
+       "id": "tp_em_2",
+       "at": "2026-09-12 19:40",
+       "place": "pl_home_emma"
+      }
+     ],
+     "sharingStoppedAt": "2026-09-12 21:31"
+    }
+   ],
+   "photos": [
+    {
+     "id": "p_b01",
+     "takenAt": "2026-08-17 19:58",
+     "source": "camera",
+     "scene": "sunset",
+     "caption": "Coucher de soleil sur le port.",
+     "details": "Des grues au loin, un ferry à quai. Rien de particulier.",
+     "place": "Quai des Arts",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b02",
+     "takenAt": "2026-08-18 20:31",
+     "source": "camera",
+     "scene": "climbing",
+     "caption": "Tom dans une voie jaune.",
+     "details": "La salle est presque vide. Tom porte un t-shirt rouge.",
+     "place": "Salle d'escalade Bloc Out",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b03",
+     "takenAt": "2026-08-19 08:15",
+     "source": "camera",
+     "scene": "rain",
+     "caption": "Pluie sur la fenêtre du bureau.",
+     "details": "Des gouttes sur la vitre, la rue floue derrière.",
+     "place": "Agence Varenne",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b04",
+     "takenAt": "2026-08-20 13:02",
+     "source": "camera",
+     "scene": "street_day",
+     "caption": "Une rue du centre, en plein soleil.",
+     "details": "Des passants, une vitrine de disquaire.",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b05",
+     "takenAt": "2026-08-21 22:10",
+     "source": "camera",
+     "scene": "concert",
+     "caption": "Concert au parc — lumières violettes.",
+     "details": "La scène est loin, la photo est floue.",
+     "place": "Parc de la Tête d'Or",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b06",
+     "takenAt": "2026-08-22 23:15",
+     "source": "camera",
+     "scene": "bar",
+     "caption": "Le Levant, terrasse du fond.",
+     "details": "Des verres sur la table, Inès rit.",
+     "place": "Le Levant",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b07",
+     "takenAt": "2026-08-24 17:40",
+     "source": "camera",
+     "scene": "cat",
+     "caption": "Le chat de la voisine sur le palier.",
+     "details": "Un chat roux qui dort sur le paillasson.",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b08",
+     "takenAt": "2026-08-25 12:12",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : horaires de la salle d'escalade.",
+     "details": "Lun–Ven 10h–23h, Sam–Dim 9h–21h.",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b09",
+     "takenAt": "2026-08-26 18:44",
+     "source": "camera",
+     "scene": "books",
+     "caption": "Étagère de livres photo.",
+     "details": "Vivian Maier, Saul Leiter, Martin Parr…",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b10",
+     "takenAt": "2026-08-28 09:30",
+     "source": "camera",
+     "scene": "sky",
+     "caption": "Ciel très bleu, une traînée d'avion.",
+     "details": "Rien d'autre.",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b12",
+     "takenAt": "2026-08-30 15:20",
+     "source": "camera",
+     "scene": "interior_warm",
+     "caption": "Le canapé de Lucas, enfin monté.",
+     "details": "Lucas fait un pouce levé au fond. Des cartons partout.",
+     "place": "Avenue des Chênes",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b13",
+     "takenAt": "2026-09-01 08:47",
+     "source": "camera",
+     "scene": "station",
+     "caption": "Gare centrale, le matin.",
+     "details": "Le panneau affiche un retard de 10 minutes.",
+     "place": "Gare centrale",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b14",
+     "takenAt": "2026-09-02 19:05",
+     "source": "camera",
+     "scene": "laptop",
+     "caption": "Maquette Varenne à l'écran.",
+     "details": "Une affiche bleue et orange sur l'écran.",
+     "place": "Agence Varenne",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b15",
+     "takenAt": "2026-09-03 21:40",
+     "source": "camera",
+     "scene": "street_night",
+     "caption": "La rue Vauban sous les réverbères.",
+     "details": "Une rue calme, une voiture garée.",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b16",
+     "takenAt": "2026-09-04 13:25",
+     "source": "camera",
+     "scene": "document",
+     "caption": "Colis reçu : une nouvelle optique 35 mm.",
+     "details": "La boîte est ouverte sur le bureau.",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b17",
+     "takenAt": "2026-09-05 18:40",
+     "source": "camera",
+     "scene": "gallery",
+     "caption": "Montage de l'expo Lumen au local.",
+     "details": "Les cadres en bois clair sont posés contre le mur.",
+     "place": "Local du collectif Lumen",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b19",
+     "takenAt": "2026-09-05 22:15",
+     "source": "camera",
+     "scene": "gallery",
+     "caption": "Des visiteurs devant les tirages.",
+     "details": "Une dizaine de personnes, lumière chaude.",
+     "place": "Local du collectif Lumen",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b20",
+     "takenAt": "2026-09-06 12:30",
+     "source": "camera",
+     "scene": "park",
+     "caption": "Balade au parc le lendemain.",
+     "details": "Des feuilles qui commencent à jaunir.",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b21",
+     "takenAt": "2026-09-07 08:05",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : météo de la semaine.",
+     "details": "Soleil jusqu'à samedi, orages dimanche.",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b22",
+     "takenAt": "2026-09-08 19:10",
+     "source": "camera",
+     "scene": "climbing",
+     "caption": "Mur de bloc, voie bleue.",
+     "details": "Des traces de magnésie sur les prises.",
+     "place": "Salle d'escalade Bloc Out",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b23",
+     "takenAt": "2026-09-09 07:55",
+     "source": "camera",
+     "scene": "sky",
+     "caption": "Lever de soleil depuis la fenêtre.",
+     "details": "Rose et orange au-dessus des toits.",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b24",
+     "takenAt": "2026-09-10 12:44",
+     "source": "camera",
+     "scene": "street_day",
+     "caption": "Travaux devant l'agence.",
+     "details": "Une pelleteuse bloque le trottoir.",
+     "place": "Agence Varenne",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b25",
+     "takenAt": "2026-09-10 21:30",
+     "source": "camera",
+     "scene": "plant",
+     "caption": "Le pothos du salon a doublé de taille.",
+     "details": "Une plante verte près de la fenêtre.",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b26",
+     "takenAt": "2026-09-11 18:55",
+     "source": "camera",
+     "scene": "climbing",
+     "caption": "Tom en haut du mur.",
+     "details": "Photo prise d'en bas, contre-jour.",
+     "place": "Salle d'escalade Bloc Out",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b27",
+     "takenAt": "2026-09-12 14:10",
+     "source": "camera",
+     "scene": "gallery",
+     "caption": "Le local Lumen, rangé après l'expo.",
+     "details": "Les cartons d'archives de l'asso sont empilés dans un coin.",
+     "place": "Local du collectif Lumen",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b28",
+     "takenAt": "2026-09-12 20:02",
+     "source": "camera",
+     "scene": "bar",
+     "caption": "Le Levant, verres sur la table.",
+     "details": "Lucas regarde son téléphone. Sarah parle avec Inès.",
+     "place": "Le Levant",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b29",
+     "takenAt": "2026-09-12 21:05",
+     "source": "camera",
+     "scene": "bar",
+     "caption": "Tom montre une vidéo à Lucas.",
+     "details": "Photo floue, prise de travers.",
+     "place": "Le Levant",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_b30",
+     "takenAt": "2026-09-12 21:52",
+     "source": "camera",
+     "scene": "street_night",
+     "caption": "Arrêt de bus, ligne 12.",
+     "details": "L'écran annonce le prochain bus dans 4 minutes, direction « Port ».",
+     "place": "Gare centrale",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_lucas_car",
+     "takenAt": "2026-08-23 11:43",
+     "source": "received",
+     "scene": "car",
+     "caption": "La Clio grise de Lucas, sortie du garage.",
+     "details": "Une petite citadine grise, carrosserie propre. La plaque est à moitié cachée par un vélo.",
+     "place": "Garage Martin",
+     "from": "lucas",
+     "receivedAt": "2026-08-23 11:45",
+     "device": "Pixel 7"
+    },
+    {
+     "id": "p_vernissage",
+     "takenAt": "2026-09-05 20:12",
+     "source": "received",
+     "scene": "group",
+     "caption": "Vernissage Lumen : Emma, Inès et Alex devant les tirages.",
+     "details": "Emma porte une veste en jean clair, délavée. Alex tient une coupe. Au fond, les 14 tirages encadrés.",
+     "place": "Local du collectif Lumen",
+     "from": "ines",
+     "receivedAt": "2026-09-06 11:05",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_invoice",
+     "takenAt": "2026-09-09 18:20",
+     "source": "camera",
+     "scene": "document",
+     "caption": "Photo d'une facture « Studio Nova » n°114.",
+     "details": "Facture de 1 650 € pour « prestations de tirage ». Signature « E.R. — trésorière ». L'adresse de Studio Nova est rue Paradis.",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_bar_selfie",
+     "takenAt": "2026-09-12 20:12",
+     "source": "camera",
+     "scene": "group",
+     "caption": "Selfie au Levant : Alex, Lucas, Sarah, Karim, Inès, Tom.",
+     "details": "Tout le monde sourit. Karim a déjà sa veste de travail sur le bras. Emma n'est pas là.",
+     "place": "Le Levant",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_emma_couch",
+     "takenAt": "2026-09-12 19:42",
+     "source": "received",
+     "scene": "bed",
+     "caption": "Emma sous la couette, une tasse fumante, la télé allumée.",
+     "details": "Par la fenêtre derrière le lit, le ciel est encore clair : il fait jour dehors. L'horloge du décodeur, en bas de la télé, est illisible.",
+     "place": "Rue Paradis",
+     "from": "emma",
+     "receivedAt": "2026-09-12 22:30",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_parking",
+     "takenAt": "2026-09-12 22:18",
+     "source": "camera",
+     "scene": "parking_night",
+     "caption": "Le parking du Quai 9, de nuit.",
+     "details": "Au fond, les feux arrière d'une petite citadine grise qui repart. Près de la barrière, une silhouette dans une veste claire.",
+     "place": "Parking du Quai 9",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_sarah_jade",
+     "takenAt": "2026-09-12 22:19",
+     "source": "received",
+     "scene": "party",
+     "caption": "L'anniversaire de Jade : ballons et guirlandes.",
+     "details": "Sarah est au premier plan avec sa sœur Jade. Guirlandes lumineuses, une vingtaine d'invités.",
+     "place": "Rue des Lilas",
+     "from": "sarah",
+     "receivedAt": "2026-09-12 22:21",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_karim_desk",
+     "takenAt": "2026-09-12 22:47",
+     "source": "received",
+     "scene": "desk_night",
+     "caption": "Le comptoir d'accueil de l'hôtel, de nuit.",
+     "details": "Un écran de réservation, une sonnette, le logo « Le Cygne » sur le mur. L'horloge murale indique 22:47.",
+     "place": "Hôtel Le Cygne",
+     "from": "karim",
+     "receivedAt": "2026-09-12 22:48",
+     "device": "Galaxy S22"
+    }
+   ],
+   "calendar": [
+    {
+     "id": "c_ev01",
+     "start": "2026-08-21 19:00",
+     "title": "Bloc avec Tom",
+     "location": "Bloc Out"
+    },
+    {
+     "id": "c_ev02",
+     "start": "2026-08-30 14:00",
+     "title": "Canapé Lucas",
+     "location": "Avenue des Chênes"
+    },
+    {
+     "id": "c_ev03",
+     "start": "2026-09-02 10:00",
+     "end": "2026-09-02 11:00",
+     "title": "Point Varenne",
+     "location": "Agence"
+    },
+    {
+     "id": "c_ev04",
+     "start": "2026-09-05 19:00",
+     "title": "Vernissage Lumen",
+     "location": "Local du collectif",
+     "notes": "Apporter l'enceinte."
+    },
+    {
+     "id": "c_ev05",
+     "start": "2026-09-08 09:30",
+     "title": "Dentiste — Dr Lefèvre",
+     "location": "12 rue Garibaldi"
+    },
+    {
+     "id": "c_ev06",
+     "start": "2026-09-10 19:00",
+     "title": "Bloc",
+     "location": "Bloc Out"
+    },
+    {
+     "id": "c_ev07",
+     "start": "2026-09-12 19:30",
+     "title": "Le Levant",
+     "location": "Le Levant"
+    },
+    {
+     "id": "c_quai9",
+     "start": "2026-09-12 22:00",
+     "end": "2026-09-12 22:30",
+     "title": "P. Quai 9 — E.",
+     "location": "Quai 9",
+     "notes": "Créé le 12 sept. à 21:44"
+    },
+    {
+     "id": "c_ev09",
+     "start": "2026-09-14 09:00",
+     "end": "2026-09-14 10:30",
+     "title": "Bureau Lumen — comptes",
+     "location": "Local du collectif",
+     "notes": "Ordre du jour : bilan de l'expo, comptes 2026, factures fournisseurs."
+    },
+    {
+     "id": "c_ev10",
+     "start": "2026-09-14 11:00",
+     "title": "Réunion Varenne (Élodie)",
+     "location": "Agence"
+    },
+    {
+     "id": "c_ev11",
+     "start": "2026-09-16 00:00",
+     "title": "🎂 Mon anniversaire",
+     "allDay": true
+    },
+    {
+     "id": "c_ev12",
+     "start": "2026-09-16 19:00",
+     "title": "Chez maman",
+     "location": "Maison"
+    },
+    {
+     "id": "c_ev13",
+     "start": "2026-09-20 21:00",
+     "title": "Match avec Lucas & Karim",
+     "location": "Stade"
+    }
+   ],
+   "notes": [
+    {
+     "id": "n_lumen",
+     "title": "Lumen — comptes",
+     "createdAt": "2026-09-09 23:10",
+     "modifiedAt": "2026-09-12 17:02",
+     "body": "Factures « Studio Nova » : n°112, 114, 117.\nTotal : 4 300 €.\nToutes validées par la trésorière.\nStudio Nova = même adresse que… rue Paradis ?? Vérifier.\n\n→ Lui en parler AVANT lundi.\n→ Bureau lundi 9h : tout mettre sur la table."
+    },
+    {
+     "id": "n_k",
+     "title": "Ne jamais faire confiance à K.",
+     "createdAt": "2026-03-14 01:20",
+     "modifiedAt": "2026-03-14 01:20",
+     "body": "Ne jamais faire confiance à K."
+    },
+    {
+     "id": "n_todo",
+     "title": "À faire",
+     "createdAt": "2026-09-01 08:10",
+     "modifiedAt": "2026-09-11 22:05",
+     "body": "- Rendre la perceuse à Tom\n- Payer le loyer\n- Rembourser Karim (reste 600)\n- Appeler mamie\n- Renouveler l'abonnement escalade"
+    },
+    {
+     "id": "n_expo",
+     "title": "Idées expo printemps",
+     "createdAt": "2026-08-18 22:40",
+     "modifiedAt": "2026-09-06 10:50",
+     "body": "Thème : « Les gens de la nuit ». Portraits au flash, chauffeurs de bus, gardiens, soignants.\nDemander à Karim pour l'hôtel ?"
+    },
+    {
+     "id": "n_wifi",
+     "title": "Wi-Fi local",
+     "createdAt": "2026-06-02 12:00",
+     "modifiedAt": "2026-06-02 12:00",
+     "body": "Réseau : LUMEN-LOCAL\nMot de passe : argentique2024"
+    },
+    {
+     "id": "n_lisbonne",
+     "title": "Lisbonne ?",
+     "createdAt": "2026-07-12 22:15",
+     "modifiedAt": "2026-08-20 09:00",
+     "body": "Octobre ? Vols ~120 €. Voir avec Lucas et Tom."
+    }
+   ],
+   "mails": [
+    {
+     "id": "mail_comptable",
+     "folder": "inbox",
+     "fromName": "Cabinet Ferran",
+     "fromAddress": "contact@cabinet-ferran.fr",
+     "to": "alex.moreau@mailo.fr",
+     "at": "2026-09-09 17:48",
+     "subject": "Collectif Lumen — anomalies sur les comptes 2026",
+     "body": "Bonjour Monsieur Moreau,\n\nEn préparant le bilan du collectif, nous avons relevé trois factures du fournisseur « Studio Nova » (n°112, 114 et 117) pour un total de 4 300 €, sans bon de commande ni justificatif de prestation.\n\nCes factures ont été validées par la trésorière, Mme E. Roussel. Le SIRET indiqué ne correspond à aucune entreprise enregistrée.\n\nEn tant que président, nous vous invitons à clarifier la situation avant la réunion du bureau.\n\nCordialement,\nP. Ferran"
+    },
+    {
+     "id": "mail_reply",
+     "folder": "sent",
+     "fromName": "Alex Moreau",
+     "fromAddress": "alex.moreau@mailo.fr",
+     "to": "contact@cabinet-ferran.fr",
+     "at": "2026-09-09 19:02",
+     "subject": "Re: Collectif Lumen — anomalies sur les comptes 2026",
+     "body": "Bonjour,\n\nMerci. Je préfère d'abord en parler à la personne concernée. Je reviens vers vous après le bureau de lundi.\n\nAlex"
+    },
+    {
+     "id": "mail_expo",
+     "folder": "inbox",
+     "fromName": "Emma Roussel",
+     "fromAddress": "emma.roussel@mailo.fr",
+     "to": "bureau@collectif-lumen.fr",
+     "at": "2026-09-03 23:47",
+     "subject": "Tableau des dépenses — été",
+     "body": "Voici le tableau des dépenses de l'été. Il manque encore quelques justificatifs, je les ajoute dès que possible.\n\nEmma"
+    },
+    {
+     "id": "mail_bloc",
+     "folder": "inbox",
+     "fromName": "Bloc Out",
+     "fromAddress": "news@blocout.fr",
+     "to": "alex.moreau@mailo.fr",
+     "at": "2026-09-01 10:00",
+     "subject": "Nouvelles voies en septembre 🧗",
+     "body": "Découvrez les 24 nouvelles voies ouvertes cette semaine."
+    },
+    {
+     "id": "mail_colis",
+     "folder": "inbox",
+     "fromName": "Colis Express",
+     "fromAddress": "noreply@colisexpress.fr",
+     "to": "alex.moreau@mailo.fr",
+     "at": "2026-09-03 18:30",
+     "subject": "Votre colis CX4821 est en route",
+     "body": "Livraison prévue demain."
+    },
+    {
+     "id": "mail_banque",
+     "folder": "inbox",
+     "fromName": "Banque Azur",
+     "fromAddress": "releves@banqueazur.fr",
+     "to": "alex.moreau@mailo.fr",
+     "at": "2026-09-05 07:00",
+     "subject": "Votre relevé d'août est disponible",
+     "body": "Votre relevé de compte est disponible dans votre espace personnel."
+    },
+    {
+     "id": "mail_mairie",
+     "folder": "inbox",
+     "fromName": "Mairie — Vie associative",
+     "fromAddress": "asso@mairie.fr",
+     "to": "bureau@collectif-lumen.fr",
+     "at": "2026-08-26 09:40",
+     "subject": "Réservation de salle — 5 septembre",
+     "body": "Votre demande de réservation est acceptée."
+    },
+    {
+     "id": "mail_varenne",
+     "folder": "inbox",
+     "fromName": "Élodie Garnier",
+     "fromAddress": "e.garnier@agence-varenne.fr",
+     "to": "alex.moreau@mailo.fr",
+     "at": "2026-09-11 16:05",
+     "subject": "Réunion lundi 11h",
+     "body": "Je t'envoie l'ordre du jour ce week-end. Bon week-end !"
+    },
+    {
+     "id": "mail_concert",
+     "folder": "inbox",
+     "fromName": "Billetterie Halcyon",
+     "fromAddress": "tickets@halcyon.fr",
+     "to": "alex.moreau@mailo.fr",
+     "at": "2026-08-29 20:00",
+     "subject": "Vos billets",
+     "body": "Merci pour votre commande. 2 billets — 4 octobre."
+    }
+   ],
+   "browser": [
+    {
+     "id": "w01",
+     "at": "2026-08-19 22:30",
+     "kind": "search",
+     "text": "vivian maier exposition 2026"
+    },
+    {
+     "id": "w02",
+     "at": "2026-08-25 07:50",
+     "kind": "search",
+     "text": "régler dérailleur vélo"
+    },
+    {
+     "id": "w03",
+     "at": "2026-08-28 21:15",
+     "kind": "search",
+     "text": "location camion déménagement dimanche"
+    },
+    {
+     "id": "w04",
+     "at": "2026-08-29 19:44",
+     "kind": "visit",
+     "text": "Billetterie Halcyon — Concerts d'automne",
+     "url": "halcyon.fr/automne"
+    },
+    {
+     "id": "w05",
+     "at": "2026-09-02 13:10",
+     "kind": "search",
+     "text": "rembourser dette ami sans se fâcher"
+    },
+    {
+     "id": "w06",
+     "at": "2026-09-04 22:02",
+     "kind": "search",
+     "text": "objectif 35mm argentique occasion"
+    },
+    {
+     "id": "w07",
+     "at": "2026-09-07 22:20",
+     "kind": "search",
+     "text": "comment s'excuser auprès de son ex"
+    },
+    {
+     "id": "w08",
+     "at": "2026-09-09 23:31",
+     "kind": "search",
+     "text": "trésorière association détournement que faire"
+    },
+    {
+     "id": "w09",
+     "at": "2026-09-09 23:40",
+     "kind": "visit",
+     "text": "Détournement de fonds dans une association : les recours",
+     "url": "service-public.fr/associations/detournement",
+     "summary": "Le président peut saisir le bureau, demander une expertise des comptes et porter plainte pour abus de confiance."
+    },
+    {
+     "id": "w10",
+     "at": "2026-09-10 08:12",
+     "kind": "search",
+     "text": "siret studio nova"
+    },
+    {
+     "id": "w11",
+     "at": "2026-09-10 08:14",
+     "kind": "visit",
+     "text": "Annuaire des entreprises — aucun résultat pour « Studio Nova »",
+     "url": "annuaire-entreprises.fr/recherche?q=studio+nova",
+     "summary": "Aucune entreprise ne correspond à cette recherche."
+    },
+    {
+     "id": "w12",
+     "at": "2026-09-11 12:30",
+     "kind": "search",
+     "text": "météo samedi"
+    },
+    {
+     "id": "w13",
+     "at": "2026-09-12 18:10",
+     "kind": "search",
+     "text": "le levant happy hour"
+    },
+    {
+     "id": "w14",
+     "at": "2026-09-12 21:42",
+     "kind": "search",
+     "text": "bus nuit ligne 12 horaires"
+    },
+    {
+     "id": "w15",
+     "at": "2026-09-12 21:44",
+     "kind": "search",
+     "text": "parking quai 9 ouvert la nuit"
+    },
+    {
+     "id": "w16",
+     "at": "2026-09-12 21:55",
+     "kind": "search",
+     "text": "abus de confiance association peine"
+    },
+    {
+     "id": "w17",
+     "at": "2026-09-12 21:56",
+     "kind": "visit",
+     "text": "Abus de confiance : ce que risque l'auteur",
+     "url": "justice.fr/fiches/abus-de-confiance",
+     "summary": "Jusqu'à 5 ans d'emprisonnement et 375 000 € d'amende."
+    }
+   ],
+   "liveEvents": [
+    {
+     "id": "lv01",
+     "afterSeconds": 25,
+     "kind": "message",
+     "app": "messages",
+     "title": "Lucas Ferrand",
+     "body": "Alex réponds stp, faut que je te parle d'hier soir",
+     "conversation": "c_lucas",
+     "message": {
+      "id": "m_lv01",
+      "from": "lucas",
+      "at": "2026-09-13 10:00",
+      "text": "Alex réponds stp, faut que je te parle d'hier soir"
+     },
+     "opens": "message:m_lv01"
+    },
+    {
+     "id": "lv02",
+     "afterSeconds": 70,
+     "kind": "call",
+     "app": "phone",
+     "title": "Appel manqué",
+     "body": "Maman",
+     "call": {
+      "id": "k_lv02",
+      "contact": "maman",
+      "direction": "missed",
+      "at": "2026-09-13 10:01",
+      "durationSeconds": 0
+     },
+     "opens": "call:k_lv02"
+    },
+    {
+     "id": "lv03",
+     "afterSeconds": 120,
+     "kind": "message",
+     "app": "messages",
+     "title": "Les Levantins — Inès",
+     "body": "La police a son téléphone ?? Quelqu'un sait où il allait après le Levant ?",
+     "conversation": "c_group",
+     "message": {
+      "id": "m_lv03",
+      "from": "ines",
+      "at": "2026-09-13 10:00",
+      "text": "La police a son téléphone ?? Quelqu'un sait où il allait après le Levant ?"
+     },
+     "opens": "message:m_lv03"
+    },
+    {
+     "id": "lv04",
+     "afterSeconds": 175,
+     "kind": "message",
+     "app": "messages",
+     "title": "Karim Haddad",
+     "body": "Je te jure que j'ai rien à voir avec ça. J'étais au boulot toute la nuit.",
+     "conversation": "c_karim",
+     "message": {
+      "id": "m_lv04",
+      "from": "karim",
+      "at": "2026-09-13 10:00",
+      "text": "Je te jure que j'ai rien à voir avec ça. J'étais au boulot toute la nuit."
+     },
+     "opens": "message:m_lv04"
+    },
+    {
+     "id": "lv05",
+     "afterSeconds": 230,
+     "kind": "reminder",
+     "app": "calendar",
+     "title": "Demain 09:00",
+     "body": "Bureau Lumen — comptes · Local du collectif",
+     "opens": "calendar:c_ev09"
+    },
+    {
+     "id": "lv06",
+     "afterSeconds": 285,
+     "kind": "deletion",
+     "app": "messages",
+     "title": "Les Levantins",
+     "body": "Emma a supprimé un message",
+     "conversation": "c_group",
+     "deletesMessage": "m_group_emma_2234",
+     "opens": "message:m_group_emma_2234"
+    },
+    {
+     "id": "lv07",
+     "afterSeconds": 340,
+     "kind": "message",
+     "app": "messages",
+     "title": "Emma Roussel",
+     "body": "Si quelqu'un lit ces messages : Alex allait bien quand je l'ai quitté.",
+     "conversation": "c_emma",
+     "message": {
+      "id": "m_live_emma_quit",
+      "from": "emma",
+      "at": "2026-09-13 10:00",
+      "text": "Si quelqu'un lit ces messages : Alex allait bien quand je l'ai quitté."
+     },
+     "opens": "message:m_live_emma_quit"
+    },
+    {
+     "id": "lv08",
+     "afterSeconds": 400,
+     "kind": "message",
+     "app": "messages",
+     "title": "Lucas Ferrand",
+     "body": "J'ai pas tout dit à la police. J'ai déposé quelqu'un au port hier soir. Je peux pas dire qui.",
+     "conversation": "c_lucas",
+     "message": {
+      "id": "m_live_lucas_port",
+      "from": "lucas",
+      "at": "2026-09-13 10:00",
+      "text": "J'ai pas tout dit à la police. J'ai déposé quelqu'un au port hier soir. Je peux pas dire qui."
+     },
+     "opens": "message:m_live_lucas_port"
+    },
+    {
+     "id": "lv09",
+     "afterSeconds": 450,
+     "kind": "message",
+     "app": "messages",
+     "title": "Sarah Benali",
+     "body": "Mon « je sais ce que tu as fait », c'était pour Hugo et Lyon. Rien d'autre. Je m'en veux.",
+     "conversation": "c_sarah",
+     "message": {
+      "id": "m_live_sarah_hugo",
+      "from": "sarah",
+      "at": "2026-09-13 10:00",
+      "text": "Mon « je sais ce que tu as fait », c'était pour Hugo et Lyon. Rien d'autre. Je m'en veux."
+     },
+     "opens": "message:m_live_sarah_hugo"
+    }
+   ]
+  }
+ ],
+ "suspects": [
+  {
+   "id": "s_sarah",
+   "contact": "sarah",
+   "role": "Ex d'Alex",
+   "statement": "« J'ai quitté le Levant vers 21h pour l'anniversaire de ma sœur. Je n'ai pas revu Alex. »",
+   "verdict": "Sarah n'était pas impliquée. Son « Je sais ce que tu as fait » visait une histoire de famille : Alex savait que son frère Hugo partait à Lyon. À 22:19, elle photographiait l'anniversaire de sa sœur, rue des Lilas, à l'autre bout de la ville."
+  },
+  {
+   "id": "s_karim",
+   "contact": "karim",
+   "role": "Ami — Alex lui doit 1 200 €",
+   "statement": "« J'ai pris mon service à l'hôtel Le Cygne à 21h. Je n'ai pas bougé de la nuit. »",
+   "verdict": "Karim avait un mobile — une dette de 1 200 € et des messages menaçants — mais pas l'occasion. Sa position le place à l'hôtel Le Cygne de 20:48 au matin, et sa photo du comptoir est bien prise à 22:47."
+  },
+  {
+   "id": "s_lucas",
+   "contact": "lucas",
+   "role": "Meilleur ami d'Alex",
+   "statement": "« Je suis rentré directement chez moi après le Levant. J'étais au lit vers 22h. »",
+   "verdict": "Lucas a menti, mais pas pour se couvrir lui-même. Il a déposé quelqu'un au port à 22:17 puis il est reparti : à 22:24 il roulait sur la rocade Nord, et Alex était encore en train d'écrire à 22:26."
+  },
+  {
+   "id": "s_emma",
+   "contact": "emma",
+   "role": "Co-fondatrice du collectif Lumen",
+   "statement": "« J'avais la migraine. Je suis restée chez moi toute la soirée. »",
+   "verdict": "Emma Roussel a menti sur toute sa soirée. Elle a donné rendez-vous à Alex au parking du Quai 9 à 22h, s'est fait conduire au port par Lucas, puis s'est fabriqué un alibi avec une photo prise à 19:42."
+  }
+ ],
+ "evidence": [
+  {
+   "id": "e_rdv",
+   "title": "Les messages effacés",
+   "importance": "key",
+   "suspects": [
+    "s_emma"
+   ],
+   "anyOf": true,
+   "refs": [
+    "message:m_emma_del1",
+    "message:m_emma_del2"
+   ],
+   "meaning": "« Parking du Quai 9. 22h. Viens seul. » — Emma a fixé le rendez-vous, puis a demandé à Alex d'effacer la conversation."
+  },
+  {
+   "id": "e_photo_meta",
+   "title": "La photo « chez moi »",
+   "importance": "key",
+   "suspects": [
+    "s_emma"
+   ],
+   "refs": [
+    "photoInfo:p_emma_couch"
+   ],
+   "meaning": "Envoyée à 22:30 comme preuve qu'elle était au lit, la photo a en réalité été prise à 19:42 — il faisait encore jour."
+  },
+  {
+   "id": "e_calendar",
+   "title": "Le rendez-vous du calendrier",
+   "importance": "key",
+   "suspects": [
+    "s_emma"
+   ],
+   "refs": [
+    "calendar:c_quai9"
+   ],
+   "meaning": "« P. Quai 9 — E. » à 22h, créé à 21:44, juste après les messages effacés. « E. », c'est Emma — pas Élodie, qu'Alex voyait lundi à 11h."
+  },
+  {
+   "id": "e_sharing",
+   "title": "Le partage de position coupé",
+   "importance": "key",
+   "suspects": [
+    "s_emma"
+   ],
+   "refs": [
+    "track:t_emma"
+   ],
+   "meaning": "Emma a arrêté de partager sa position à 21:31, dix minutes avant d'écrire à Alex."
+  },
+  {
+   "id": "e_motive",
+   "title": "Les factures Studio Nova",
+   "importance": "key",
+   "suspects": [
+    "s_emma"
+   ],
+   "anyOf": true,
+   "refs": [
+    "mail:mail_comptable",
+    "note:n_lumen",
+    "photoInfo:p_invoice"
+   ],
+   "meaning": "4 300 € de fausses factures validées par la trésorière, Emma. Alex allait tout révéler au bureau de lundi : c'est le mobile."
+  },
+  {
+   "id": "e_lucas_route",
+   "title": "Le détour de Lucas",
+   "importance": "key",
+   "suspects": [
+    "s_lucas",
+    "s_emma"
+   ],
+   "refs": [
+    "track:t_lucas"
+   ],
+   "meaning": "Lucas s'est arrêté rue Paradis — chez Emma — à 21:58, avant d'aller au port. Il l'a conduite au rendez-vous."
+  },
+  {
+   "id": "e_quit",
+   "title": "« Quand je l'ai quitté »",
+   "importance": "supporting",
+   "suspects": [
+    "s_emma"
+   ],
+   "refs": [
+    "message:m_live_emma_quit"
+   ],
+   "meaning": "Emma, qui dit être restée chez elle, admet avoir vu Alex ce soir-là."
+  },
+  {
+   "id": "e_draft",
+   "title": "Le dernier message",
+   "importance": "supporting",
+   "suspects": [
+    "s_lucas"
+   ],
+   "refs": [
+    "draft:d_sarah"
+   ],
+   "meaning": "À 22:26, Alex écrivait encore « Si il m'arrive un truc, c'est à cause de… » : Lucas était déjà reparti (rocade Nord à 22:24)."
+  },
+  {
+   "id": "e_parking",
+   "title": "La silhouette du parking",
+   "importance": "supporting",
+   "suspects": [
+    "s_emma"
+   ],
+   "refs": [
+    "photoInfo:p_parking"
+   ],
+   "meaning": "Une silhouette en veste claire près de la barrière, et la Clio grise de Lucas qui repart : Emma portait sa veste en jean clair au vernissage."
+  },
+  {
+   "id": "e_sarah_alibi",
+   "title": "L'alibi de Sarah",
+   "importance": "supporting",
+   "suspects": [
+    "s_sarah"
+   ],
+   "anyOf": true,
+   "refs": [
+    "photoInfo:p_sarah_jade",
+    "track:t_sarah"
+   ],
+   "meaning": "Sarah était rue des Lilas de 21:29 à minuit : photo prise à 22:19, position partagée."
+  },
+  {
+   "id": "e_karim_alibi",
+   "title": "L'alibi de Karim",
+   "importance": "supporting",
+   "suspects": [
+    "s_karim"
+   ],
+   "anyOf": true,
+   "refs": [
+    "photoInfo:p_karim_desk",
+    "track:t_karim"
+   ],
+   "meaning": "Karim était à l'hôtel Le Cygne toute la nuit : position et photo cohérentes."
+  },
+  {
+   "id": "e_lucas_confession",
+   "title": "L'aveu de Lucas",
+   "importance": "supporting",
+   "suspects": [
+    "s_lucas",
+    "s_emma"
+   ],
+   "refs": [
+    "message:m_live_lucas_port"
+   ],
+   "meaning": "Lucas reconnaît avoir déposé quelqu'un au port — sans dire qui."
+  },
+  {
+   "id": "f_sarah_threat",
+   "title": "« Je sais ce que tu as fait »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_sarah"
+   ],
+   "refs": [
+    "message:m_sarah_0907"
+   ],
+   "meaning": "Une dispute de famille : Alex savait avant elle que son frère Hugo partait à Lyon."
+  },
+  {
+   "id": "f_karim_debt",
+   "title": "La dette de Karim",
+   "importance": "falseLead",
+   "suspects": [
+    "s_karim"
+   ],
+   "anyOf": true,
+   "refs": [
+    "message:m_karim_0910",
+    "call:k17"
+   ],
+   "meaning": "Un vrai mobile, mais Karim n'a jamais quitté l'hôtel."
+  },
+  {
+   "id": "f_note_k",
+   "title": "« Ne jamais faire confiance à K. »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_karim"
+   ],
+   "refs": [
+    "note:n_k"
+   ],
+   "meaning": "Une note de mars, écrite après le prêt à Karim. Rien à voir avec samedi."
+  },
+  {
+   "id": "f_lucas_lie",
+   "title": "Le mensonge de Lucas",
+   "importance": "falseLead",
+   "suspects": [
+    "s_lucas"
+   ],
+   "refs": [
+    "message:m_group_lucas_2340"
+   ],
+   "meaning": "Lucas ment sur sa soirée pour protéger Emma, qui lui a demandé de se taire."
+  }
+ ],
+ "hints": [
+  {
+   "id": "h1",
+   "text": "Regardez où se trouvait chacun entre 21h et 23h. Et qui a cessé d'être visible.",
+   "costSeconds": 40
+  },
+  {
+   "id": "h2",
+   "text": "Une photo n'est pas toujours prise au moment où elle est envoyée.",
+   "costSeconds": 40
+  },
+  {
+   "id": "h3",
+   "text": "Ce qui a été effacé n'a pas forcément disparu. Pensez à la corbeille.",
+   "costSeconds": 40
+  }
+ ],
+ "solution": {
+  "culprit": "s_emma",
+  "headline": "Emma Roussel a attiré Alex au Quai 9 pour le faire taire.",
+  "story": [
+   "Mercredi 9 septembre, le cabinet comptable prévient Alex : trois factures « Studio Nova », 4 300 €, validées par la trésorière du collectif Lumen. Studio Nova n'existe pas. Son adresse : la rue Paradis, chez Emma.",
+   "Alex décide de lui en parler avant la réunion du bureau, lundi 9h. Emma, elle, le supplie de ne rien dire aux autres.",
+   "Samedi, Emma annonce une migraine et reste loin du Levant. À 21:31, elle coupe le partage de sa position. À 21:40, elle écrit : « Parking du Quai 9. 22h. Viens seul. » — puis demande à Alex d'effacer la conversation. Il obéit, mais note le rendez-vous : « P. Quai 9 — E. ».",
+   "Sans voiture, Emma appelle Lucas. Il passe la prendre rue Paradis à 21:58 et la dépose au port à 22:17. Elle lui fait promettre de ne rien dire : il inventera être rentré directement.",
+   "La discussion tourne mal. Alex, qui commençait à écrire à Sarah « Si il m'arrive un truc… », tombe du quai de chargement. Emma panique et s'enfuit. Le téléphone reste au sol.",
+   "À 22:30, elle envoie à Alex une photo d'elle au lit, prise en réalité à 19:42, pour se fabriquer un alibi. À 22:34, elle confirme au groupe être « au lit depuis 20h ». Ce matin, elle a supprimé ce message.",
+   "Grâce à votre enquête, Alex est retrouvé dans l'après-midi, blessé mais vivant, dans un entrepôt du Quai 9."
+  ]
+ }
+}

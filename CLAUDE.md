@@ -1,135 +1,112 @@
-# CLAUDE.md — Bistro (nom de code)
+# CLAUDE.md — SCREENSHOT (nom de travail)
 
-Jeu mobile iOS idle / gestion de restaurant « cozy ». Le joueur tient un bistrot de quartier qui
-tourne tout seul ; le plaisir vient du **labo de recettes** (découvrir des plats en combinant des
-ingrédients) et des **habitués** (clients récurrents avec affinité et histoires).
+Jeu iOS d'**enquête psychologique / investigation numérique** qui se joue entièrement dans
+l'interface d'un téléphone. Le joueur a un accès temporaire au téléphone d'une personne liée à une
+affaire et doit, avant la fin du temps imparti, lire, chercher, remonter dans le temps, croiser les
+informations et désigner le bon suspect.
 
-Ne jamais utiliser « Idle » + « Tycoon » dans le nom (marque déposée).
+**Le téléphone est le jeu.** Pas de personnage qui se déplace, pas de 3D, pas de visual novel, pas de
+cinématiques, pas de jump scare. Proposition de valeur : « Je fouille un téléphone pour résoudre une
+affaire avant que le temps soit écoulé. »
 
 ## Principes non négociables
 
-- Pas de prestige / remise à zéro. Le restaurant grandit en permanence.
-- Pas de pub forcée : uniquement des pubs récompensées choisies par le joueur, plafonnées par jour et par type.
-- Boutique simple, jamais agressive. Aucun achat nécessaire pour progresser.
-- Toujours quelque chose d'intéressant à faire à l'ouverture.
-- Ambiance douce, jamais stressante. Public 25–55 ans, sessions de 3 à 10 min.
+- **Le temps est la mécanique centrale.** Chaque action coûte du temps (lire, charger l'historique,
+  chercher, analyser une photo, ouvrir une localisation, récupérer un message, tenter un code).
+  Le joueur doit sans cesse se demander si une information vaut les secondes qu'elle coûte.
+- **Le jeu ne conclut jamais à la place du joueur.** Aucune fiche, aucun écran ne dit « X ment ».
+  Le dossier des suspects ne fait que regrouper ce que le joueur a trouvé et coché.
+- **Un téléphone réel est plein de banalités.** La majorité du contenu n'est pas un indice
+  (CaseLint vérifie > 70 % de « bruit »). Fausses pistes vraies, informations inutiles, contradictions.
+- **Un mauvais choix s'explique.** Le résultat n'est jamais « bon / mauvais » : ce que le joueur a
+  trouvé de juste, ce que ça voulait vraiment dire, ce qu'il a manqué (révélé progressivement).
+  La solution complète n'est montrée que sur demande, pour garder l'envie de rejouer.
+- **Identité** : mystérieuse, moderne, réaliste, légèrement sombre, premium, adulte (16–40 ans).
+  Noir, blanc, gris, quelques accents, transparences, flou, lignes fines. Aucune illustration de
+  personnage, aucun style enfantin ou cartoon. Avatars = initiales, photos = images générées.
 
 ## Structure du dépôt
 
 ```
-Bistro.xcodeproj/        Coquille de l'app iOS (+ schéma partagé « Bistro »)
-Bistro/                  Code de l'app : uniquement BistroApp.swift + Assets.xcassets
-Configs/Bistro.xcconfig  Bundle ID, version, réglages de signature (source unique)
-.github/workflows/       tests-linux.yml (chaque push), ios-testflight.yml (manuel + PR vers main)
-docs/TESTFLIGHT_SETUP.md Mise en place de la signature et de TestFlight
-docs/design/             Handoff Claude Design v1.0 (NE PAS MODIFIER) — ouvrir « Bistro Handoff.dc.html »
-BistroKit/               Package Swift contenant TOUT le jeu
-  Sources/GameCore/      Moteur en Swift pur (Foundation seulement). Testable sous Linux.
-    Engine/              Game (simulation + actions), événements, RNG déterministe
-    State/               GameState (Codable, sauvegardé tel quel)
-    Save/                SaveGame, migrations, FileSaveStore (atomique + .bak)
-  Sources/GameData/      Fichiers JSON embarqués (aucune logique)
-    Resources/Content/   Contenu : ingredients, stations, recipes, regulars, zones, decorations
-    Resources/Config/    Équilibrage : economy, lab, affinity, progression, offline, ads
-  Sources/BistroUI/      Présentation SwiftUI + SpriteKit (Apple uniquement, exclu sous Linux)
-    State/               GameStore (@Observable, fait tourner le moteur, sauvegarde)
-    Theme/               DesignTokens (couleurs, typo, espacements, rayons, ombres, animations)
-    Components/          Composants du design system (boutons, hud.currency, badge, jauges, Panel…)
-    Screens/             Écrans (Main/ = HUD + scène provisoire + barre d'actions)
-    Localization/        L10n (accès au String Catalog)
-    Resources/           Localizable.xcstrings (en + fr), Fonts/ (OFL), Sketches.xcassets (croquis du handoff)
-  Sources/BalanceSim/    Outil CLI de simulation d'équilibrage (`swift run BalanceSim`)
-  Tests/                 GameCoreTests, GameDataTests (Swift Testing)
-scripts/                 test.sh, setup-linux-swift.sh, design/export-sketches.sh
-HANDOFF_INTEGRATION.md   Ce que l'on attend du design (tokens, composants, assets)
+Screenshot.xcodeproj/     Coquille de l'app iOS (+ schéma partagé « Screenshot »)
+Screenshot/               App : ScreenshotApp.swift, Assets.xcassets (icône), InfoPlist.xcstrings
+Configs/Screenshot.xcconfig  Bundle ID, version, signature (source unique)
+.github/workflows/        tests-linux.yml (chaque push) · ios-testflight.yml (manuel + PR vers main)
+docs/TESTFLIGHT_SETUP.md  Signature et TestFlight sans Mac
+docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
+ScreenshotKit/            Package Swift contenant tout le jeu
+  Sources/CaseEngine/     Moteur en Swift pur (Foundation). Testable sous Linux.
+    Model/                CaseFile (affaire), Moment (heure murale), ItemRef, GameRules, loader, validateur
+    Engine/               Investigation (timer, coûts, données visibles, événements live, verdict),
+                          MessageSearch, Verdict/score, CaseIndex, CaseAnalysis (résolvabilité)
+    Support/              GameClock (SystemClock / ManualClock)
+  Sources/CaseLibrary/    Données : Resources/Cases/case_XXX.json + Resources/Rules/rules.json
+  Sources/ScreenshotUI/   Interface SwiftUI (iOS uniquement, fichiers entourés de #if os(iOS))
+    Session/              GameSession (fait tourner le moteur, navigation, bannières), ProgressStore
+    Phone/                Le téléphone : barre d'état, accueil, bannières, et chaque app (Apps/)
+    Screens/              Titre, briefing, enquête (barre + téléphone), dossier, indices, accusation, résultat
+    Components/           Avatar (initiales), GeneratedPhoto (photo générée), PinMenu
+    Theme/, Support/      Tokens visuels, L10n, formats de date du téléphone
+    Resources/            Localizable.xcstrings (fr + en)
+  Sources/CaseLint/       CLI : valide chaque affaire et vérifie qu'elle est résolvable dans le temps
+  Tests/                  CaseEngineTests (moteur), CaseLibraryTests (affaires, parties complètes,
+                          traductions, absence de vocabulaire de l'ancien prototype)
+scripts/                  test.sh, setup-linux-swift.sh
 ```
 
 ## Architecture — règles
 
-1. **GameCore n'importe jamais SwiftUI, UIKit ni SpriteKit.** Foundation uniquement.
-2. **Le temps vient toujours d'un `GameClock` injecté** (`SystemClock` en prod, `ManualClock` en test/simu).
-   Jamais de `Date()` dans GameCore.
-3. **Aucun nombre d'équilibrage en dur dans le Swift.** Tout va dans `GameData/Resources/Config/*.json`.
-   Prix de base et temps de préparation d'un plat vivent dans `recipes.json` (JSON, donc réglables).
-4. **Aucun contenu en dur.** Tout va dans `GameData/Resources/Content/*.json`.
-5. **Aucun texte affiché dans le JSON.** Les textes sont dans le String Catalog, avec des clés dérivées de
-   l'id via `LocalizationKey` (ex. `dish.bruschetta.name`, `regular.margot.story.2`).
-6. **Aucun nom d'asset écrit à la main.** Toujours `AssetName.*` (ex. `AssetName.ingredient("tomato")` → `ing_tomato`).
-   Un asset manquant affiche un placeholder visible (`GameImage`), jamais de crash.
-7. **Aucune couleur / police / taille / durée en dur dans les vues.** Toujours `Theme.*`.
-8. La présentation lit l'état du moteur et lui envoie des actions ; elle ne contient pas de règles de jeu.
-9. Pas de dépendance tierce sans accord explicite du porteur de projet.
-10. Services externes (pubs, analytics, achats) derrière des protocoles avec implémentation factice.
-
-## Design (handoff Claude Design, direction « Riso chaud »)
-
-- Source de vérité visuelle : `docs/design/` (lecture seule). État de l'intégration et questions
-  ouvertes : `HANDOFF_INTEGRATION.md` (à tenir à jour à chaque jalon).
-- **Chaque nouvel écran est construit directement selon sa maquette annotée** (dimensions, états,
-  cas limites, animations, haptiques). Si la maquette contredit le moteur ou manque d'info :
-  le noter dans HANDOFF_INTEGRATION.md §4 et demander, ne pas improviser.
-- Tokens = noms du handoff (`color.bg.paper` → `Theme.Colors.bgPaper`, `type.title.m` →
-  `Theme.Typography.titleM` via `.typography(...)`). Ombres = décalage d'encre sans flou (`inkShadow`),
-  seule la sheet a une ombre floue. Jamais de noir pur, jamais de sanguine pour du texte courant,
-  un état désactivé = tirets + cadenas + teinte creuse (jamais l'opacité seule).
-- Nombres affichés : toujours `CompactNumber.format(_, style: L10n.numberStyle)`.
-- Images : `GameImage(AssetName.…)` → finaux (`Bistro/Assets.xcassets`) > croquis > SF Symbol > placeholder.
-- Navigation : la scène est l'écran principal ; HUD en haut (lecture + réglages) ; barre d'actions
-  en bas (Habitués · Améliorer · Labo · Menu · Boutique) qui ouvre chaque page en sheet 92 %.
+1. **CaseEngine n'importe jamais SwiftUI/UIKit.** Foundation uniquement.
+2. **Aucune affaire dans le code.** Une affaire = un fichier JSON. Ajouter une affaire ne touche jamais
+   le moteur (voir docs/CASE_AUTHORING.md). Les ids sont uniques dans toute l'affaire.
+3. **Aucun réglage en dur.** Coûts en temps, taille des pages, score : `rules.json`.
+4. **Le temps réel vient d'un `GameClock` injecté.** Jamais `Date()` dans CaseEngine. Les heures d'une
+   affaire sont des `Moment` (heure murale, sans fuseau).
+5. **Modèle de temps** : `écoulé = temps réel d'enquête + coûts des actions`. L'horloge du téléphone
+   avance avec. Pause automatique quand l'app passe en arrière-plan.
+6. **La présentation ne contient pas de règle de jeu** : elle appelle `Investigation` via `GameSession`.
+   Ce qui s'affiche à l'écran est signalé gratuitement au moteur (`markSeen`) ; les preuves « trouvées »
+   sont calculées à partir de ce qui a réellement été vu.
+7. **Aucune couleur / police / taille en dur dans les vues** : `Theme.*`.
+8. Textes d'interface dans le String Catalog (fr par défaut + en) via `L10n.t/f`. Le contenu d'une
+   affaire est écrit dans la langue du téléphone saisi.
+9. Pas de dépendance tierce sans accord du porteur de projet.
 
 ## Conventions
 
-- Swift 6 (mode de langage 6, concurrence stricte), iOS 17 minimum, iPhone portrait uniquement.
-- Code, identifiants et commentaires de code en anglais ; docs pour le porteur de projet en français.
-- Ids de contenu : `snake_case` minuscule (vérifié par `ContentValidator`). Ils sont partagés avec
-  Claude Design : ne jamais renommer un id sans mettre à jour HANDOFF_INTEGRATION.md.
-- Chaque fichier JSON a un `schemaVersion`. Toute évolution incompatible = incrément + migration.
-- Tests : Swift Testing (`import Testing`, `@Test`, `#expect`). Tout nouveau système de GameCore a ses tests.
-- Toute modif de contenu ou de config doit laisser `swift test` au vert (les tests valident les JSON et
-  la présence des traductions en/fr pour chaque id).
+- Swift 6 (concurrence stricte), iOS 17 minimum, iPhone portrait, interface sombre.
+- Code et commentaires en anglais ; docs pour le porteur de projet en français.
+- Tests : Swift Testing. Toute nouvelle règle du moteur a ses tests ; toute affaire est couverte par
+  CaseValidator + CaseAnalysis (tests automatiques).
 
 ## Commandes
 
 ```bash
-cd BistroKit && swift test          # tests moteur + validation des données
-cd BistroKit && swift run BalanceSim # simulateur d'équilibrage
-./scripts/test.sh                    # les deux
+./scripts/test.sh                        # tests + CaseLint
+cd ScreenshotKit && swift test           # tests seuls
+cd ScreenshotKit && swift run CaseLint   # rapport sur chaque affaire
 ```
 
 Sous Linux (conteneur cloud, pas de Xcode) : `./scripts/setup-linux-swift.sh` puis
 `export PATH=/opt/swift/usr/libexec/swift/bin:$PATH LD_LIBRARY_PATH=/opt/swift/usr/lib/x86_64-linux-gnu`.
-BistroUI et l'app ne compilent que sur Mac avec Xcode 16+.
-
-## Choix techniques
-
-- **SpriteKit** (via `SpriteView`) pour la scène vivante du restaurant : actions, atlas de textures,
-  particules (pièces, découvertes) et gestion du z-order gratuits. SwiftUI pour tout le reste (HUD, panneaux, popups).
-- **Sauvegarde** : JSON Codable versionné avec migrations, écrit de façon atomique ; structure pensée pour iCloud plus tard.
-  Changer le format = incrémenter `SaveGame.currentSchemaVersion` + ajouter une migration + un test.
-  Une sauvegarde plus récente que l'app n'est jamais écrasée.
-- **Simulation** : pas fixe (`simulationStepSeconds`), RNG SplitMix64 stocké dans l'état → parties
-  reproductibles. Au retour dans l'app, rattrapage limité à `maxCatchUpSeconds` (le vrai hors-ligne = M5).
-- **Actions joueur** : méthodes `throws(GameActionError)` sur `Game` ; l'UI passe par `GameStore`.
+L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est le workflow macOS qui la vérifie.
 
 ## CI / livraison
 
-- `tests-linux.yml` : `swift test` + `BalanceSim` dans l'image Docker `swift:6.0-noble`, à chaque push.
-- `ios-testflight.yml` : macOS, manuel ou PR vers `main`. Tests, archive signée (certificat + profil
-  en secrets), export, envoi TestFlight via clé API. Build = `<run_number + BUILD_NUMBER_OFFSET>.<attempt>`.
-  Sans secrets : compile pour le simulateur seulement.
-- Ne jamais mettre `DEVELOPMENT_TEAM` / `PROVISIONING_PROFILE_SPECIFIER` en ligne de commande
-  (ça casse les cibles du package) : passer par `BISTRO_TEAM_ID` / `BISTRO_PROFILE_SPECIFIER`.
+- `tests-linux.yml` : `swift test` + `CaseLint` (image Docker `swift:6.0-noble`), à chaque push.
+- `ios-testflight.yml` : macOS, manuel ou PR vers `main`. Tests, archive signée, export, envoi
+  TestFlight via clé API. Build = `<run_number + BUILD_NUMBER_OFFSET>.<attempt>`. Sans secrets :
+  compile pour le simulateur seulement.
+- Ne jamais mettre `DEVELOPMENT_TEAM` / `PROVISIONING_PROFILE_SPECIFIER` en ligne de commande :
+  passer par `APP_TEAM_ID` / `APP_PROFILE_SPECIFIER` (sinon les cibles du package cassent).
 
-## Jalons
+## Feuille de route
 
-- [x] M0 – Mise en place (modules, Theme, JSON valides, tests, docs)
-- [x] M1 – Moteur de base (état, pièces, clients, stations, menu, service, sauvegarde, horloge)
-- [x] Design – tokens, polices, composants de base, navigation, croquis en placeholders (handoff v1.0)
-- [ ] M2 – Scène jouable provisoire (placeholders, tap pour accélérer, HUD, améliorations)
-- [ ] M3 – Labo de recettes (combinaisons, indices, livre de recettes, gestion du menu, ~30 recettes)
-- [ ] M4 – Habitués (fréquences, demandes, affinité, carnet, histoires)
-- [ ] M5 – Progression long terme (réputation, zones, hors ligne, demande du jour, séries)
-- [ ] M6 – Simulateur d'équilibrage + premier rapport
-- [ ] M7 – Monétisation derrière interfaces (mock pubs, StoreKit 2) + analytics
-- [ ] M8 – Tutoriel + localisation FR/EN complète + réglages
-- [ ] M9 – Intégration des illustrations finales (liste : HANDOFF_INTEGRATION.md §3)
+- [x] Prototype jouable : accueil, téléphone (12 apps), timer + coûts, notifications en direct,
+      recherche, corbeille, app verrouillée, dossier des suspects, indices payants, accusation,
+      résultat narratif + score. Affaire #001 « LE DERNIER MESSAGE ».
+- [ ] Recherche globale (toutes apps, filtres par date / contact / app)
+- [ ] Affaires #002–#005 (4 suspects, 5 min) puis #006–#015 (6 suspects, 8–10 min)
+- [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
+- [ ] Monnaie / tickets d'indices, sauvegarde d'une enquête en cours, iCloud
+- [ ] Sons, haptiques fines, finitions d'animation, accessibilité avancée
