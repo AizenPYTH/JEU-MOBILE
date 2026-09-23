@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    { "id": "main_hall", "unlockLevel": 1 },
+    { "id": "counter",   "unlockLevel": 5 },
+    { "id": "terrace",   "unlockLevel": 10 },
+    { "id": "upstairs",  "unlockLevel": 18 },
+    { "id": "garden",    "unlockLevel": 28 }
+  ]
+}
