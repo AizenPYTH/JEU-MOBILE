@@ -36,7 +36,7 @@ struct CallsView: View {
             }
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .appRoot(.phone, subtitle: L10n.f("calls.subtitle", game.calls.count, missed), session: session)
+        .appRoot(.phone, subtitle: L10n.f("n.calls", game.calls.count) + " · " + L10n.f("n.missed", missed), session: session)
     }
 }
 
@@ -70,7 +70,7 @@ struct CallRow: View {
             Spacer(minLength: Theme.Spacing.s3)
             VStack(alignment: .trailing, spacing: Theme.Spacing.s1) {
                 Text(PhoneFormat.time(call.at)).font(Theme.Fonts.dataStrong).foregroundStyle(Theme.Colors.textPrimary)
-                Text(PhoneFormat.relative(call.at, now: game.phoneNow)).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textTertiary)
+                Text(PhoneFormat.dayLabel(call.at, now: game.phoneNow)).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textTertiary)
             }
         }
         .padding(.horizontal, Theme.Spacing.s4)

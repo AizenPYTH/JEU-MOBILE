@@ -4,7 +4,7 @@ import CaseEngine
 
 // MARK: - Browser
 
-/// Browser: an address bar, then the history grouped by day (searches with a magnifier,
+/// Browser: the history grouped by day (searches with a magnifier,
 /// pages with a site badge and their address).
 struct BrowserHistoryView: View {
     let session: GameSession
@@ -14,9 +14,9 @@ struct BrowserHistoryView: View {
         let days = Dictionary(grouping: entries, by: { $0.at.dayNumber })
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                AddressBar(text: L10n.t("browser.history"), secure: false)
-                    .padding(.horizontal, Theme.Spacing.marginCompact)
-                    .padding(.top, Theme.Spacing.s4)
+                if entries.isEmpty {
+                    EmptyStateView(title: L10n.t("empty.browserTitle"), message: L10n.t("empty.browserMessage"))
+                }
                 ForEach(days.keys.sorted(by: >), id: \.self) { day in
                     let items = (days[day] ?? []).sorted { $0.at > $1.at }
                     AppSectionHeader(title: items.first.map { PhoneFormat.longDayCapitalized($0.at) } ?? "", count: items.count)
@@ -37,7 +37,7 @@ struct BrowserHistoryView: View {
             }
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .appRoot(.browser, subtitle: L10n.f("browser.subtitle", entries.count), session: session)
+        .appRoot(.browser, subtitle: L10n.t("browser.history") + " · " + L10n.f("n.pages", entries.count), session: session)
     }
 }
 
@@ -193,7 +193,7 @@ struct MailListView: View {
             }
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .appRoot(.mail, subtitle: L10n.f("mail.subtitle", unread), session: session)
+        .appRoot(.mail, subtitle: L10n.f("n.unread", unread), session: session)
     }
 }
 
@@ -327,7 +327,7 @@ struct ContactsListView: View {
             }
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .appRoot(.contacts, subtitle: L10n.f("contacts.subtitle", game.device.contacts.count - (owner == nil ? 0 : 1)), session: session)
+        .appRoot(.contacts, subtitle: L10n.f("n.contacts", game.device.contacts.count - (owner == nil ? 0 : 1)), session: session)
     }
 
     private func contactRow(_ contact: Contact, subtitle: String?) -> some View {
@@ -614,7 +614,7 @@ struct NotificationsView: View {
             .padding(.horizontal, Theme.Spacing.marginCompact)
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .appRoot(.notifications, subtitle: L10n.f("notif.subtitle", game.unreadNotificationsCount), session: session)
+        .appRoot(.notifications, subtitle: L10n.f("n.unreadF", game.unreadNotificationsCount), session: session)
         .onAppear { session.perform { $0.markNotificationsRead() } }
     }
 }

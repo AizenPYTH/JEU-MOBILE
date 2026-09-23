@@ -99,6 +99,9 @@ struct NotesListView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 AppSectionHeader(title: L10n.t("notes.folder"), count: notes.count, color: Theme.appAccent(.notes))
+                if notes.isEmpty {
+                    EmptyStateView(title: L10n.t("empty.notesTitle"), message: L10n.t("empty.notesMessage"))
+                }
                 CardGroup {
                     ForEach(Array(notes.enumerated()), id: \.element.id) { offset, note in
                         Button {
@@ -125,7 +128,7 @@ struct NotesListView: View {
             }
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .appRoot(.notes, subtitle: L10n.f("notes.subtitle", notes.count), session: session)
+        .appRoot(.notes, subtitle: L10n.f("n.notes", notes.count), session: session)
     }
 }
 

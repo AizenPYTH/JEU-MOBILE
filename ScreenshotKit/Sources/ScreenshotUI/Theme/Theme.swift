@@ -144,12 +144,12 @@ public enum Theme {
         public static let appTile = Font.custom(FontName.medium, fixedSize: 21)
         public static let notificationTitle = Font.custom(FontName.semibold, size: 14, relativeTo: .subheadline)
         public static let notificationBody = Font.custom(FontName.regular, size: 14, relativeTo: .subheadline)
-        public static let logo = Font.custom(FontName.semibold, fixedSize: 26)
+        public static let logo = Font.custom(FontName.semibold, fixedSize: 30)
     }
 
     public enum Tracking {
         public static let overline: CGFloat = 1.5
-        public static let logo: CGFloat = 8.8
+        public static let logo: CGFloat = 12
         public static let timeUp: CGFloat = 4
         public static let display: CGFloat = -1.4
     }

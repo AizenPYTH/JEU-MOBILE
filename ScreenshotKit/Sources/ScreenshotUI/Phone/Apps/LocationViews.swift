@@ -14,7 +14,7 @@ struct LocationView: View {
                 CityMap(places: game.device.places, tracks: [], highlight: nil)
                     .frame(height: Theme.Size.mapHeight)
                     .overlay(alignment: .topLeading) {
-                        Label(L10n.f("location.placesCount", game.device.places.count), systemImage: "mappin")
+                        Label(L10n.f("n.places", game.device.places.count), systemImage: "mappin")
                             .font(Theme.Fonts.caption)
                             .foregroundStyle(Theme.Colors.textPrimary)
                             .padding(.horizontal, Theme.Spacing.s3)
@@ -38,6 +38,9 @@ struct LocationView: View {
                         .foregroundStyle(Theme.Colors.textSecondary)
                         .padding(.horizontal, Theme.Spacing.marginList)
                         .padding(.bottom, Theme.Spacing.s4)
+                    if tracks.isEmpty {
+                        EmptyStateView(title: L10n.t("empty.locationTitle"), message: L10n.t("empty.locationMessage"))
+                    }
                     ForEach(tracks) { track in
                         Button {
                             session.open(.track(track.id))

@@ -38,6 +38,9 @@ struct MessagesListView: View {
                         .buttonStyle(.plain)
                     }
                 } else {
+                    if game.conversations.isEmpty {
+                        EmptyStateView(title: L10n.t("empty.messagesTitle"), message: L10n.t("empty.messagesMessage"))
+                    }
                     ForEach(game.conversations) { summary in
                         Button {
                             session.open(.conversation(summary.id))
@@ -52,7 +55,7 @@ struct MessagesListView: View {
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
         .background(Theme.Colors.bgBase)
-        .appRoot(.messages, subtitle: L10n.f("messages.subtitle", game.conversations.count, unread), session: session)
+        .appRoot(.messages, subtitle: L10n.f("n.conversations", game.conversations.count) + " · " + L10n.f("n.unread", unread), session: session)
     }
 }
 

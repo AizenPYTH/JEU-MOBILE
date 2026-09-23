@@ -12,6 +12,9 @@ struct PhotosGridView: View {
         let days = byDay.keys.sorted(by: >)
         ScrollView {
             LazyVStack(alignment: .leading, spacing: Theme.Spacing.s4, pinnedViews: [.sectionHeaders]) {
+                if days.isEmpty {
+                    EmptyStateView(title: L10n.t("empty.photosTitle"), message: L10n.t("empty.photosMessage"))
+                }
                 ForEach(days, id: \.self) { day in
                     let photos = byDay[day] ?? []
                     Section {
@@ -36,7 +39,7 @@ struct PhotosGridView: View {
                                 .font(Theme.Fonts.headline)
                                 .foregroundStyle(Theme.Colors.textPrimary)
                             Spacer()
-                            Text(L10n.f("photos.count", photos.count))
+                            Text(L10n.f("n.photos", photos.count))
                                 .font(Theme.Fonts.caption)
                                 .foregroundStyle(Theme.Colors.textSecondary)
                         }
@@ -49,7 +52,7 @@ struct PhotosGridView: View {
             }
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .appRoot(.photos, subtitle: L10n.f("photos.subtitle", game.photos.count, days.count), session: session)
+        .appRoot(.photos, subtitle: L10n.f("n.photos", game.photos.count) + " · " + L10n.f("n.days", days.count), session: session)
     }
 }
 

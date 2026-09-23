@@ -20,6 +20,9 @@ struct CalendarListView: View {
                     }
                     .padding(.horizontal, Theme.Spacing.marginCompact)
                     .padding(.top, Theme.Spacing.s4)
+                    if events.isEmpty {
+                        EmptyStateView(title: L10n.t("empty.calendarTitle"), message: L10n.t("empty.calendarMessage"))
+                    }
 
                     ForEach(days.keys.sorted(), id: \.self) { day in
                         let dayEvents = days[day] ?? []

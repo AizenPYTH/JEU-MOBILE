@@ -113,7 +113,7 @@ struct AccusationView: View {
                         HStack(spacing: Theme.Spacing.s2) {
                             Chip(text: L10n.f("carnet.linked", linked), color: linked > 0 ? Theme.Colors.special : Theme.Colors.textTertiary)
                             if !marks.isEmpty {
-                                Chip(text: L10n.f("carnet.marksCount", marks.count), color: Theme.Colors.signal)
+                                Chip(text: L10n.f("n.notes", marks.count), color: Theme.Colors.signal)
                             }
                         }
                     }
@@ -477,7 +477,7 @@ struct ScoreView: View {
                 scoreRow(0, L10n.t("score.suspect"), verdict.isCorrect ? "✓ +\(verdict.scoreParts.suspect)" : "✕ 0")
                 scoreRow(1, L10n.t("score.time"), "\(PhoneFormat.countdown(Double(verdict.remainingSeconds))) · +\(verdict.scoreParts.time)")
                 scoreRow(2, L10n.t("score.found"), "\(verdict.foundCount)/\(verdict.totalCount) · +\(verdict.scoreParts.found)")
-                scoreRow(3, L10n.t("score.hints"), "\(verdict.hintsUsed) · −\(verdict.hintCost)")
+                scoreRow(3, L10n.t("score.hints"), verdict.hintsUsed == 0 ? L10n.t("score.noHint") : "\(verdict.hintsUsed) · −\(verdict.hintCost)")
                 scoreRow(4, L10n.t("score.precision"), "\(verdict.relevantPinnedCount)/\(verdict.pinnedCount) · +\(verdict.scoreParts.precision)")
             }
             Spacer()

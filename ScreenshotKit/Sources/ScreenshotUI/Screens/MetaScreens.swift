@@ -4,10 +4,10 @@ import CaseEngine
 
 // MARK: - Logo
 
-/// "SCREENSHOT" in Geist 600, +34 % tracking, framed by 4 capture marks; the bottom-right one is amber.
+/// "TRACE" in Geist 600, wide tracking, framed by 4 capture marks; the bottom-right one is amber.
 struct Logo: View {
     var body: some View {
-        Text("SCREENSHOT")
+        Text("TRACE")
             .font(Theme.Fonts.logo)
             .tracking(Theme.Tracking.logo)
             .foregroundStyle(Theme.Colors.textPrimary)
@@ -89,14 +89,23 @@ struct HomeView: View {
             HStack {
                 Logo()
                 Spacer()
-                Circle()
-                    .fill(Theme.Colors.bgRaised)
-                    .overlay(Circle().strokeBorder(Theme.Colors.line2))
-                    .overlay(Image(systemName: "person.fill").font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary))
-                    .frame(width: Theme.Size.avatarS, height: Theme.Size.avatarS)
-                    .accessibilityHidden(true)
+                Button { onNavigate(.profile) } label: {
+                    Circle()
+                        .fill(Theme.Colors.bgRaised)
+                        .overlay(Circle().strokeBorder(Theme.Colors.line2))
+                        .overlay(Image(systemName: "person.fill").font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary))
+                        .frame(width: Theme.Size.hit, height: Theme.Size.hit)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text(L10n.t("menu.profile")))
             }
             .padding(.top, Theme.Spacing.s5)
+
+            Text(L10n.t("home.tagline"))
+                .font(Theme.Fonts.narrative)
+                .foregroundStyle(Theme.Colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, Theme.Spacing.s5)
 
             Spacer()
 
@@ -325,11 +334,11 @@ struct CaseIntroView: View {
                         .font(Theme.Fonts.callout)
                         .foregroundStyle(Theme.Colors.signal)
                         .opacity(shownLines >= lines.count ? 1 : 0)
-                    suspects
                 }
             }
 
             VStack(alignment: .leading, spacing: Theme.Spacing.s2) {
+                suspects
                 if let device = caseFile.devices.first {
                     Text(L10n.f("intro.handedOver", device.label, PhoneFormat.dayAndTime(caseFile.phoneStartTime)))
                         .font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
@@ -367,7 +376,7 @@ struct CaseIntroView: View {
                 .foregroundStyle(Theme.Colors.textSecondary)
                 .padding(.leading, Theme.Spacing.s5)
         }
-        .padding(.top, Theme.Spacing.s3)
+        .padding(.bottom, Theme.Spacing.s2)
         .accessibilityElement(children: .combine)
     }
 }

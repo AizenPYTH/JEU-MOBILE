@@ -84,7 +84,7 @@ struct PhoneView: View {
             if let toast = session.toast {
                 VStack {
                     Spacer()
-                    ToastView(text: toast.text)
+                    ToastView(toast: toast)
                         .padding(.bottom, Theme.Spacing.bottomInset)
                 }
                 .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -150,7 +150,8 @@ struct PhoneAppStyle: ViewModifier {
             .scrollContentBackground(.hidden)
             .background(Theme.Colors.bgBase.ignoresSafeArea())
             .contentMargins(.bottom, Theme.Spacing.bottomInset, for: .scrollContent)
-            .toolbarBackground(Theme.Colors.bgBase.opacity(0.85), for: .navigationBar)
+            .toolbarBackground(Theme.Colors.bgBase.opacity(0.96), for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
             .listRowBackground(Theme.Colors.bgRaised)
             .font(Theme.Fonts.body)
     }
@@ -269,22 +270,31 @@ struct StatusBar: View {
             .accessibilityHint(Text(L10n.t("a11y.timerHint")))
             .accessibilityIdentifier("phone.timer")
 
-            if let cost = session.lastCost {
-                Text(L10n.f("bar.cost", cost.seconds))
-                    .font(Theme.Fonts.dataStrong)
-                    .foregroundStyle(Theme.Colors.alertText)
-                    .id(cost.id)
-                    .transition(.opacity.combined(with: .move(edge: .bottom)))
-            }
             Spacer()
             HStack(spacing: 5) {
                 Image(systemName: "cellularbars")
                 Image(systemName: "wifi")
-                Image(systemName: "battery.25")
+                BatteryIndicator(level: session.batteryLevel)
             }
             .font(.system(size: 13, weight: .semibold))
             .foregroundStyle(Theme.Colors.textPrimary)
             .accessibilityHidden(true)
+        }
+        .overlay(alignment: .bottomLeading) {
+            // The time an action just cost, under the timer (never hidden by the camera island).
+            if let cost = session.lastCost {
+                Text(L10n.f("bar.cost", cost.seconds))
+                    .font(Theme.Fonts.dataStrong)
+                    .foregroundStyle(Theme.Colors.alertText)
+                    .padding(.horizontal, Theme.Spacing.s3)
+                    .frame(height: 22)
+                    .background(Capsule().fill(Theme.Colors.alertTint))
+                    .background(Capsule().fill(Theme.Colors.bgBase))
+                    .id(cost.id)
+                    .offset(y: 26)
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+                    .allowsHitTesting(false)
+            }
         }
         .padding(.leading, 26)
         .padding(.trailing, 30)
@@ -304,6 +314,22 @@ struct StatusBar: View {
             .accessibilityHidden(true)
         }
         .animation(Theme.Motion.standard(Theme.Motion.fast), value: session.lastCost)
+    }
+}
+
+/// The seized phone's battery: it was low when the police handed it over, and drains while you
+/// search it (a quiet reminder that time is running out). Percentage next to the icon, red under 10 %.
+struct BatteryIndicator: View {
+    let level: Int
+
+    var body: some View {
+        HStack(spacing: 3) {
+            Text("\(level)")
+                .font(.custom(Theme.FontName.semibold, fixedSize: 11))
+                .monospacedDigit()
+            Image(systemName: level <= 10 ? "battery.0" : level <= 35 ? "battery.25" : "battery.50")
+                .foregroundStyle(level <= 10 ? Theme.Colors.alertText : Theme.Colors.textPrimary)
+        }
     }
 }
 
@@ -400,6 +426,10 @@ struct CarnetBar: View {
         .background(Capsule().fill(Theme.Colors.bgBubbleIn.opacity(0.88)))
         .background(.ultraThinMaterial, in: Capsule())
         .elevation1(Capsule())
+        // A small bounce each time the notebook gains (or loses) an item: "it went there".
+        .phaseAnimator([1.0, 1.07, 1.0], trigger: count) { view, scale in
+            view.scaleEffect(scale)
+        } animation: { _ in .spring(duration: 0.22, bounce: 0.4) }
     }
 }
 

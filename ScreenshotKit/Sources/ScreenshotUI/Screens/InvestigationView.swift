@@ -316,7 +316,7 @@ struct SuspectCard: View {
                 HStack(spacing: Theme.Spacing.s2) {
                     Chip(text: L10n.f("carnet.linked", linked), color: linked > 0 ? Theme.Colors.special : Theme.Colors.textTertiary)
                     if !marks.isEmpty {
-                        Chip(text: L10n.f("carnet.marksCount", marks.count), color: Theme.Colors.signal)
+                        Chip(text: L10n.f("n.notes", marks.count), color: Theme.Colors.signal)
                     }
                 }
             }

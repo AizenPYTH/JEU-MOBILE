@@ -55,6 +55,19 @@ enum PhoneFormat {
         }
     }
 
+    /// Day column of a list whose time is shown elsewhere: "Aujourd'hui", "Hier", "Mardi", "12 sept."
+    static func dayLabel(_ m: Moment, now: Moment) -> String {
+        let days = now.dayNumber - m.dayNumber
+        switch days {
+        case 0: return "Aujourd'hui"
+        case 1: return "Hier"
+        case 2...6:
+            let name = weekdays[m.weekday - 1]
+            return name.prefix(1).uppercased() + name.dropFirst()
+        default: return shortDay(m)
+        }
+    }
+
     /// Day separator in a conversation: "Aujourd'hui 09:14", "Hier 22:30", "sam. 12 sept. 21:40".
     static func separator(_ m: Moment, now: Moment) -> String {
         let days = now.dayNumber - m.dayNumber

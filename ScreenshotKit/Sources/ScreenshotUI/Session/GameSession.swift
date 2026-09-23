@@ -48,6 +48,11 @@ final class GameSession {
     struct Toast: Equatable, Identifiable {
         let id: Int
         let text: String
+        /// Second line: what was pinned / where to find it.
+        var detail: String? = nil
+        var kind: Kind = .neutral
+
+        enum Kind: Equatable { case neutral, pinned, linked }
     }
 
     enum TimerLevel: Equatable {
@@ -61,6 +66,13 @@ final class GameSession {
     }
 
     /// 0…1 of the case duration still available (status bar track).
+    /// Battery of the seized phone (%): from the case's starting level down to a few percent at the
+    /// end of the timer. Display only.
+    var batteryLevel: Int {
+        let start = 23.0, end = 4.0
+        return Int((end + (start - end) * timeProgress).rounded())
+    }
+
     var timeProgress: Double { investigation.durationSeconds > 0 ? remainingSeconds / investigation.durationSeconds : 0 }
 
     convenience init(caseFile: CaseFile, rules: GameRules, clock: any GameClock = SystemClock(), onFinish: @escaping (Verdict) -> Void) {
@@ -311,7 +323,12 @@ final class GameSession {
     func togglePin(_ ref: ItemRef) {
         let pinned = investigation.togglePin(ref)
         Haptics.pin()
-        showToast(pinned ? L10n.f("toast.pinned", investigation.notebook.count) : L10n.t("toast.unpinned"))
+        if pinned {
+            let label = ItemDescriber.describe(ref, in: investigation).label
+            showToast(L10n.f("toast.pinned", investigation.notebook.count), detail: label, kind: .pinned)
+        } else {
+            showToast(L10n.t("toast.unpinned"))
+        }
         refresh()
     }
 
@@ -319,17 +336,17 @@ final class GameSession {
         investigation.link(ref, to: suspect)
         Haptics.pin()
         if let suspect, let s = investigation.index.suspect(suspect) {
-            showToast(L10n.f("toast.linked", investigation.name(of: s.contact)))
+            showToast(L10n.f("toast.linked", investigation.name(of: s.contact)), detail: L10n.t("toast.linkedDetail"), kind: .linked)
         }
         refresh()
     }
 
-    private func showToast(_ text: String) {
-        let toast = Toast(id: (self.toast?.id ?? 0) + 1, text: text)
+    private func showToast(_ text: String, detail: String? = nil, kind: Toast.Kind = .neutral) {
+        let toast = Toast(id: (self.toast?.id ?? 0) + 1, text: text, detail: detail, kind: kind)
         self.toast = toast
         toastTask?.cancel()
         toastTask = Task { [weak self] in
-            try? await Task.sleep(for: .seconds(2))
+            try? await Task.sleep(for: .seconds(toast.detail == nil ? 2 : 2.6))
             guard !Task.isCancelled, self?.toast == toast else { return }
             self?.toast = nil
         }

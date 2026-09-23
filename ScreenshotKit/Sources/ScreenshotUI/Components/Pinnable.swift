@@ -43,18 +43,49 @@ extension View {
     }
 }
 
-/// Toast "◆ Ajouté au carnet · 3" (h 40, r 20, e1).
+/// Toast above the notebook capsule: "◆ Ajouté au carnet · 3" and, below, what was pinned.
+/// Amber for a pin, violet for a link to a suspect.
 struct ToastView: View {
-    let text: String
+    let toast: GameSession.Toast
+
+    private var color: Color {
+        switch toast.kind {
+        case .pinned: Theme.Colors.signal
+        case .linked: Theme.Colors.special
+        case .neutral: Theme.Colors.textSecondary
+        }
+    }
 
     var body: some View {
-        Text(text)
-            .font(Theme.Fonts.calloutStrong)
-            .foregroundStyle(Theme.Colors.textPrimary)
-            .padding(.horizontal, Theme.Spacing.s5)
-            .frame(height: 40)
-            .background(Capsule().fill(Theme.Colors.bgBubbleIn))
-            .elevation1(Capsule())
+        let shape = RoundedRectangle(cornerRadius: Theme.Radius.lg, style: .continuous)
+        HStack(spacing: Theme.Spacing.s3) {
+            Image(systemName: toast.kind == .linked ? "link" : toast.kind == .pinned ? "pin.fill" : "pin.slash")
+                .font(.system(size: 13, weight: .bold))
+                .foregroundStyle(color)
+                .frame(width: 28, height: 28)
+                .background(Circle().fill(color.opacity(0.16)))
+            VStack(alignment: .leading, spacing: 1) {
+                Text(toast.text)
+                    .font(Theme.Fonts.calloutStrong)
+                    .foregroundStyle(Theme.Colors.textPrimary)
+                if let detail = toast.detail {
+                    Text(detail)
+                        .font(Theme.Fonts.caption)
+                        .foregroundStyle(Theme.Colors.textSecondary)
+                        .lineLimit(1)
+                }
+            }
+        }
+        .padding(.leading, Theme.Spacing.s3)
+        .padding(.trailing, Theme.Spacing.s5)
+        .padding(.vertical, Theme.Spacing.s2)
+        .frame(minHeight: 44)
+        .background(shape.fill(Theme.Colors.bgBubbleIn))
+        .overlay(shape.strokeBorder(color.opacity(0.35), lineWidth: 1))
+        .shadow(color: .black.opacity(0.5), radius: 16, y: 12)
+        .padding(.horizontal, Theme.Spacing.s6)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("phone.toast")
     }
 }
 #endif
