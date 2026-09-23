@@ -16,9 +16,10 @@ faut les modifier à la main sur GitHub.
 ## `.github/workflows/ios-build.yml`
 
 ```yaml
-# Compiles the iOS app (ScreenshotUI included) for the simulator on every push that touches the app.
-# No signing, no upload: this is the "does the interface compile?" check.
-# Compiler errors are listed in the job summary and the full log is kept as an artifact.
+# Compiles the iOS app (ScreenshotUI included) for the simulator on every push that touches the app,
+# then plays the main path on a simulator (ScreenshotUITests) and keeps a screenshot of every step.
+# No signing, no upload. Compiler errors and test failures are listed in the job summary; the build
+# log, the test result bundle and the screenshots are kept as artifacts.
 name: iOS – Compile
 
 on:
@@ -26,10 +27,14 @@ on:
     paths:
       - "ScreenshotKit/**"
       - "Screenshot/**"
+      - "ScreenshotUITests/**"
       - "Screenshot.xcodeproj/**"
       - "Configs/**"
       - ".github/workflows/ios-build.yml"
   workflow_dispatch:
+
+permissions:
+  contents: write   # publishes the UI test screenshots to the ci/ui-screenshots branch
 
 concurrency:
   group: ios-compile-${{ github.ref }}
@@ -38,7 +43,7 @@ concurrency:
 jobs:
   compile:
     runs-on: ${{ vars.MACOS_RUNNER || 'macos-15' }}
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -73,6 +78,94 @@ jobs:
           echo "---- tail ----"
           tail -60 "$RUNNER_TEMP/build.log"
           exit $status
+
+      - name: Pick an iPhone simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          devices = json.load(sys.stdin)["devices"]
+          ios = sorted((r for r in devices if "iOS" in r), key=lambda r: [int(x) for x in r.split("iOS-")[-1].split("-")])
+          for runtime in reversed(ios):
+              for d in devices[runtime]:
+                  if d["name"].startswith("iPhone") and "Pro" not in d["name"] and "Plus" not in d["name"] and "Max" not in d["name"]:
+                      print(d["udid"]); sys.exit()
+          ')
+          echo "Simulator: $UDID"
+          xcrun simctl list devices | grep "$UDID" || true
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+          # Boot it now and wait until it is fully up: a cold boot during the test times out the launch.
+          xcrun simctl boot "$UDID" || true
+          xcrun simctl bootstatus "$UDID" -b
+
+      - name: UI tests on the simulator (main path)
+        run: |
+          set +e
+          xcodebuild test \
+            -project Screenshot.xcodeproj -scheme Screenshot -configuration Debug \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -resultBundlePath "$RUNNER_TEMP/UITests.xcresult" \
+            -skipPackagePluginValidation > "$RUNNER_TEMP/uitests.log" 2>&1
+          status=$?
+          set -e
+          echo "### UI tests: $( [ $status -eq 0 ] && echo PASSED || echo FAILED )" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          grep -E "Test Case .*(passed|failed)|error:|XCTAssert|Missing:|crash|Crash" "$RUNNER_TEMP/uitests.log" | head -80 >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "---- results ----"
+          grep -E "Test Case .*(passed|failed)|error:|Missing:|crash|Crash|Executed" "$RUNNER_TEMP/uitests.log" | head -120
+          echo "---- tail ----"
+          tail -40 "$RUNNER_TEMP/uitests.log"
+          mkdir -p "$RUNNER_TEMP/screenshots"
+          xcrun xcresulttool export attachments --path "$RUNNER_TEMP/UITests.xcresult" --output-path "$RUNNER_TEMP/screenshots" || true
+          ls "$RUNNER_TEMP/screenshots" | head -80
+          exit $status
+
+      - name: Publish the screenshots to the ci/ui-screenshots branch
+        if: always()
+        run: |
+          OUT="$RUNNER_TEMP/publish"
+          rm -rf "$OUT" && mkdir -p "$OUT"
+          python3 - "$RUNNER_TEMP/screenshots" "$OUT" <<'PY'
+          import json, os, shutil, sys
+          src, out = sys.argv[1], sys.argv[2]
+          manifest = os.path.join(src, "manifest.json")
+          if os.path.exists(manifest):
+              for test in json.load(open(manifest)):
+                  prefix = test["testIdentifier"].split("/")[-1].replace("()", "")
+                  for a in test.get("attachments", []):
+                      name = a.get("suggestedHumanReadableName", "").split("_0_")[0]
+                      f = a["exportedFileName"]
+                      if f.endswith(".png"):
+                          shutil.copy(os.path.join(src, f), os.path.join(out, f"{prefix}--{name}.png"))
+          PY
+          grep -E "Test Case .*(passed|failed)|error:|Missing:|XCTAssert|crash|Crash|Executed" "$RUNNER_TEMP/uitests.log" > "$OUT/results.txt" || true
+          echo "commit ${{ github.sha }}" >> "$OUT/results.txt"
+          cd "$OUT"
+          git init -q -b ci/ui-screenshots
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -A
+          git commit -q -m "UI test screenshots for ${{ github.sha }}"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ci/ui-screenshots
+
+      - name: Keep the UI test screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-screenshots
+          path: ${{ runner.temp }}/screenshots
+          retention-days: 14
+
+      - name: Keep the UI test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-results
+          path: |
+            ${{ runner.temp }}/uitests.log
+            ${{ runner.temp }}/UITests.xcresult
+          retention-days: 7
 
       - name: Keep the build log
         if: always()
@@ -144,8 +237,8 @@ jobs:
 #   XCODE_VERSION         e.g. "16.4" to pin Xcode (default: newest stable on the runner)
 #   BUILD_NUMBER_OFFSET   added to the run number (use it if TestFlight already has higher builds)
 #
-# Without the secrets (e.g. PR from a fork), the job still runs the tests and compiles the
-# app for the simulator, then stops before signing.
+# Without the secrets (e.g. PR from a fork), the job still runs the tests and makes an unsigned
+# Release archive (checks bundle id, version, build number, privacy manifest), then stops.
 name: iOS – Build & TestFlight
 
 on:
@@ -168,8 +261,6 @@ jobs:
       ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
       ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
       ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
-      ARCHIVE_PATH: ${{ runner.temp }}/Screenshot.xcarchive
-      EXPORT_PATH: ${{ runner.temp }}/export
     steps:
       - uses: actions/checkout@v4
 
@@ -203,14 +294,33 @@ jobs:
             echo "can_sign=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Build for simulator (no signing)
+      - name: Archive without signing (checks the Release archive before the secrets exist)
         if: steps.secrets.outputs.can_sign != 'true'
         run: |
-          xcodebuild build \
-            -project Screenshot.xcodeproj -scheme Screenshot -configuration Debug \
-            -destination 'generic/platform=iOS Simulator' \
-            CODE_SIGNING_ALLOWED=NO | tee "$RUNNER_TEMP/build.log" | grep -E "error:|warning:|BUILD" || true
-          grep -q "BUILD SUCCEEDED" "$RUNNER_TEMP/build.log"
+          set -o pipefail
+          xcodebuild archive \
+            -project Screenshot.xcodeproj -scheme Screenshot -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/Unsigned.xcarchive" \
+            CURRENT_PROJECT_VERSION="$(( ${{ github.run_number }} + ${{ vars.BUILD_NUMBER_OFFSET || 0 }} )).${{ github.run_attempt }}" \
+            CODE_SIGNING_ALLOWED=NO \
+            | tee "$RUNNER_TEMP/archive.log" | grep -E "error:|ARCHIVE" || true
+          grep -q "ARCHIVE SUCCEEDED" "$RUNNER_TEMP/archive.log" || { tail -100 "$RUNNER_TEMP/archive.log"; exit 1; }
+          APP="$RUNNER_TEMP/Unsigned.xcarchive/Products/Applications/Screenshot.app"
+          PLIST="$APP/Info.plist"
+          PB=/usr/libexec/PlistBuddy
+          {
+            echo "### Unsigned Release archive: OK (no signing secrets yet)"
+            echo "| Key | Value |"
+            echo "|---|---|"
+            for key in CFBundleIdentifier CFBundleDisplayName CFBundleShortVersionString CFBundleVersion MinimumOSVersion ITSAppUsesNonExemptEncryption UIRequiresFullScreen; do
+              echo "| $key | $($PB -c "Print :$key" "$PLIST" 2>/dev/null || echo '—') |"
+            done
+            echo "| PrivacyInfo.xcprivacy | $([ -f "$APP/PrivacyInfo.xcprivacy" ] && echo present || echo MISSING) |"
+            echo "| App icon | $(ls "$APP" | grep -c '^AppIcon') file(s) |"
+          } >> "$GITHUB_STEP_SUMMARY"
+          cat "$GITHUB_STEP_SUMMARY"
+          [ -f "$APP/PrivacyInfo.xcprivacy" ] || { echo "::error::PrivacyInfo.xcprivacy is missing from the app bundle"; exit 1; }
 
       - name: Install certificate and provisioning profile
         if: steps.secrets.outputs.can_sign == 'true'
@@ -275,7 +385,7 @@ jobs:
           xcodebuild archive \
             -project Screenshot.xcodeproj -scheme Screenshot -configuration Release \
             -destination 'generic/platform=iOS' \
-            -archivePath "$ARCHIVE_PATH" \
+            -archivePath "$RUNNER_TEMP/Screenshot.xcarchive" \
             APP_TEAM_ID="${{ steps.signing.outputs.team_id }}" \
             APP_PROFILE_SPECIFIER="${{ steps.signing.outputs.profile_name }}" \
             CURRENT_PROJECT_VERSION="${{ steps.version.outputs.build_number }}" \
@@ -306,16 +416,16 @@ jobs:
           </plist>
           PLIST
           xcodebuild -exportArchive \
-            -archivePath "$ARCHIVE_PATH" \
+            -archivePath "$RUNNER_TEMP/Screenshot.xcarchive" \
             -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
-            -exportPath "$EXPORT_PATH"
-          ls -la "$EXPORT_PATH"
+            -exportPath "$RUNNER_TEMP/export"
+          ls -la "$RUNNER_TEMP/export"
 
       - name: Upload to TestFlight
         if: steps.secrets.outputs.can_sign == 'true'
         run: |
           set -euo pipefail
-          IPA=$(find "$EXPORT_PATH" -name '*.ipa' | head -1)
+          IPA=$(find "$RUNNER_TEMP/export" -name '*.ipa' | head -1)
           xcrun altool --upload-app --type ios --file "$IPA" \
             --apiKey "$ASC_KEY_ID" --apiIssuer "$ASC_ISSUER_ID"
           echo "### Uploaded build ${{ steps.version.outputs.build_number }} to TestFlight" >> "$GITHUB_STEP_SUMMARY"
@@ -326,7 +436,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Screenshot-${{ steps.version.outputs.build_number }}
-          path: ${{ env.EXPORT_PATH }}/*.ipa
+          path: ${{ runner.temp }}/export/*.ipa
           retention-days: 14
 
       - name: Clean up secrets

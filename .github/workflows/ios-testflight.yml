@@ -40,8 +40,6 @@ jobs:
       ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
       ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
       ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
-      ARCHIVE_PATH: ${{ runner.temp }}/Screenshot.xcarchive
-      EXPORT_PATH: ${{ runner.temp }}/export
     steps:
       - uses: actions/checkout@v4
 
@@ -166,7 +164,7 @@ jobs:
           xcodebuild archive \
             -project Screenshot.xcodeproj -scheme Screenshot -configuration Release \
             -destination 'generic/platform=iOS' \
-            -archivePath "$ARCHIVE_PATH" \
+            -archivePath "$RUNNER_TEMP/Screenshot.xcarchive" \
             APP_TEAM_ID="${{ steps.signing.outputs.team_id }}" \
             APP_PROFILE_SPECIFIER="${{ steps.signing.outputs.profile_name }}" \
             CURRENT_PROJECT_VERSION="${{ steps.version.outputs.build_number }}" \
@@ -197,16 +195,16 @@ jobs:
           </plist>
           PLIST
           xcodebuild -exportArchive \
-            -archivePath "$ARCHIVE_PATH" \
+            -archivePath "$RUNNER_TEMP/Screenshot.xcarchive" \
             -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
-            -exportPath "$EXPORT_PATH"
-          ls -la "$EXPORT_PATH"
+            -exportPath "$RUNNER_TEMP/export"
+          ls -la "$RUNNER_TEMP/export"
 
       - name: Upload to TestFlight
         if: steps.secrets.outputs.can_sign == 'true'
         run: |
           set -euo pipefail
-          IPA=$(find "$EXPORT_PATH" -name '*.ipa' | head -1)
+          IPA=$(find "$RUNNER_TEMP/export" -name '*.ipa' | head -1)
           xcrun altool --upload-app --type ios --file "$IPA" \
             --apiKey "$ASC_KEY_ID" --apiIssuer "$ASC_ISSUER_ID"
           echo "### Uploaded build ${{ steps.version.outputs.build_number }} to TestFlight" >> "$GITHUB_STEP_SUMMARY"
@@ -217,7 +215,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Screenshot-${{ steps.version.outputs.build_number }}
-          path: ${{ env.EXPORT_PATH }}/*.ipa
+          path: ${{ runner.temp }}/export/*.ipa
           retention-days: 14
 
       - name: Clean up secrets
