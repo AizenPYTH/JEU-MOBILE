@@ -55,7 +55,7 @@ struct MessagesListView: View {
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
         .background(Theme.Colors.bgBase)
-        .appRoot(.messages, subtitle: L10n.f("n.conversations", game.conversations.count) + " · " + L10n.f("n.unread", unread), session: session)
+        .appRoot(.messages, subtitle: L10n.f("n.conversations", game.conversations.count) + (unread > 0 ? " · " + L10n.f("n.unread", unread) : ""), session: session)
     }
 }
 

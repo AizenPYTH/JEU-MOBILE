@@ -684,13 +684,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Accusing now earns up to %ld time point."
+                  "value": "If you are right, the time you have left is worth up to +%ld point."
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Accusing now earns up to %ld time points."
+                  "value": "If you are right, the time you have left is worth up to +%ld points."
                 }
               }
             }
@@ -702,13 +702,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Accuser maintenant rapporte jusqu'à %ld point de temps."
+                  "value": "Si vous avez raison, le temps qu'il vous reste vaut jusqu'à +%ld point."
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Accuser maintenant rapporte jusqu'à %ld points de temps."
+                  "value": "Si vous avez raison, le temps qu'il vous reste vaut jusqu'à +%ld points."
                 }
               }
             }
@@ -739,13 +739,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Accuse now"
+            "value": "Name the culprit"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Accuser maintenant"
+            "value": "Désigner le responsable"
           }
         }
       }
@@ -773,13 +773,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Accuse now?"
+            "value": "Solve the case now?"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Accuser maintenant ?"
+            "value": "Résoudre l'affaire maintenant ?"
           }
         }
       }
@@ -2110,6 +2110,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "À jouer"
+          }
+        }
+      }
+    },
+    "common.allRead": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All read"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout est lu"
           }
         }
       }

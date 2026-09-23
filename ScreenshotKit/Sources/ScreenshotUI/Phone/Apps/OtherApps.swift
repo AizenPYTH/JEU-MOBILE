@@ -184,7 +184,7 @@ struct MailListView: View {
                             MailRow(mail: mail, showsRecipient: folder == .sent, now: session.game.phoneNow)
                         }
                         .buttonStyle(.plain)
-                        if offset < mails.count - 1 { RowDivider(leading: 28) }
+                        if offset < mails.count - 1 { RowDivider(leading: 72) }
                     }
                 }
                 if mails.isEmpty {
@@ -193,7 +193,7 @@ struct MailListView: View {
             }
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .appRoot(.mail, subtitle: L10n.f("n.unread", unread), session: session)
+        .appRoot(.mail, subtitle: unread == 0 ? L10n.t("common.allRead") : L10n.f("n.unread", unread), session: session)
     }
 }
 
@@ -204,11 +204,13 @@ struct MailRow: View {
 
     var body: some View {
         let unread = mail.unread == true && !showsRecipient
+        let name = showsRecipient ? mail.to : mail.fromName
         HStack(alignment: .top, spacing: Theme.Spacing.s3) {
             Circle().fill(unread ? Theme.Colors.info : .clear)
                 .frame(width: 8, height: 8)
-                .padding(.top, 7)
+                .padding(.top, 14)
                 .accessibilityLabel(Text(unread ? L10n.t("a11y.unread") : ""))
+            SenderBadge(name: name)
             VStack(alignment: .leading, spacing: 2) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(showsRecipient ? L10n.f("mail.to", mail.to) : mail.fromName)
@@ -292,6 +294,22 @@ struct MailView: View {
                 Text(L10n.f("mail.attachmentMissing", attachmentTapped ?? ""))
             }
         }
+    }
+}
+
+/// Sender initial on a disc tinted from the name (mail list, like a mail app).
+struct SenderBadge: View {
+    let name: String
+
+    var body: some View {
+        let hue = Double(name.unicodeScalars.reduce(0) { ($0 &* 31 &+ Int($1.value)) & 0xFFFF } % 360) / 360
+        let colors = Theme.avatarColor(hue: hue)
+        Text(String(name.first(where: { $0.isLetter }) ?? "•").uppercased())
+            .font(.custom(Theme.FontName.semibold, fixedSize: 15))
+            .foregroundStyle(Theme.Colors.textPrimary)
+            .frame(width: 34, height: 34)
+            .background(Circle().fill(LinearGradient(colors: [colors.top, colors.bottom], startPoint: .top, endPoint: .bottom)))
+            .accessibilityHidden(true)
     }
 }
 
@@ -665,7 +683,7 @@ struct NotificationsView: View {
             .padding(.horizontal, Theme.Spacing.marginCompact)
             .padding(.bottom, Theme.Spacing.bottomInset)
         }
-        .appRoot(.notifications, subtitle: L10n.f("n.unreadF", game.unreadNotificationsCount), session: session)
+        .appRoot(.notifications, subtitle: game.unreadNotificationsCount == 0 ? L10n.t("common.allRead") : L10n.f("n.unreadF", game.unreadNotificationsCount), session: session)
         .onAppear { session.perform { $0.markNotificationsRead() } }
     }
 }
