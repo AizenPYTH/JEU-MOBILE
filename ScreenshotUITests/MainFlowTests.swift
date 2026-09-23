@@ -196,10 +196,15 @@ final class MainFlowTests: XCTestCase {
         let linkMenu = app.buttons["Lier à un suspect"]
         wait(linkMenu, 5, "menu « Lier à un suspect »")
         linkMenu.tap()
-        // The conversation header is also labelled "Emma Roussel": the menu item comes last.
+        // The conversation header is also labelled "Emma Roussel": take the item under the menu title.
+        let menuTop = linkMenu.frame.maxY
         let emmaChoices = app.buttons.matching(NSPredicate(format: "label == 'Emma Roussel'"))
         wait(emmaChoices.firstMatch, 5, "Emma dans le sous-menu")
-        emmaChoices.element(boundBy: emmaChoices.count - 1).tap()
+        usleep(500_000)
+        let emmaChoice = emmaChoices.allElementsBoundByIndex.first { $0.frame.minY > menuTop }
+        XCTAssertNotNil(emmaChoice, "Emma introuvable dans le sous-menu")
+        emmaChoice?.tap()
+        XCTAssertTrue(linkMenu.waitForNonExistence(timeout: 5), "Le menu ne se ferme pas")
         sleep(1)
         snap("09b-lie-a-emma")
 

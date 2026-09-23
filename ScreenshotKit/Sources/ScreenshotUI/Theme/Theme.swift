@@ -84,7 +84,6 @@ public enum Theme {
         /// Stylised map (reads as a map: land, blocks, main roads, water, parks).
         public static let mapBackground = Color(hex: 0x1A1F24)
         public static let mapBlock = Color(hex: 0x21272D)
-        public static let mapStreet = Color(hex: 0x39414A)
         public static let mapMainRoad = Color(hex: 0x6B6250)
         public static let mapRiver = Color(hex: 0x1D3A55)
         public static let mapPark = Color(hex: 0x1F3A2B)
