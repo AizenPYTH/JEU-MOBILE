@@ -315,3 +315,61 @@ struct ValidatorTests {
         #expect(try JSONDecoder().decode([ItemRef].self, from: data) == [ref])
     }
 }
+
+@Suite("Resuming an investigation")
+struct ResumeTests {
+    @Test func aSavedInvestigationResumesExactlyWhereItWas() throws {
+        let (game, clock) = Fixtures.investigation()
+        game.start()
+        for _ in 0..<40 { clock.advance(by: 1); game.tick() }
+        game.openApp(.messages)
+        game.recoverMessage("e1")
+        game.openPhoto("p1")
+        game.analyzePhoto("p1")
+        game.togglePin(ItemRef(.message, "e1"))
+        game.link(ItemRef(.photoInfo, "p1"), to: "s_emma")
+        game.toggle(.liedAboutAlibi, for: "s_emma")
+        _ = game.useHint()
+        _ = game.unlock(.notes, code: "1609")
+        game.pause() // the app goes to the background
+
+        // Saved as JSON, then the app is killed.
+        let saved = try #require(game.snapshot())
+        let data = try JSONEncoder().encode(saved)
+        let decoded = try JSONDecoder().decode(InvestigationSnapshot.self, from: data)
+        #expect(decoded == saved)
+
+        // Relaunched much later: time spent away does not count.
+        let laterClock = ManualClock(start: clock.now.addingTimeInterval(3_600))
+        let resumed = try #require(Investigation(restoring: decoded, caseFile: game.caseFile, rules: game.rules, clock: laterClock))
+        #expect(resumed.isPaused)
+        #expect(resumed.remainingSeconds == game.remainingSeconds)
+        #expect(resumed.phoneNow == game.phoneNow)
+        #expect(resumed.notebook == game.notebook)
+        #expect(resumed.seen == game.seen)
+        #expect(resumed.marks == game.marks)
+        #expect(resumed.usedHints.map(\.id) == game.usedHints.map(\.id))
+        #expect(resumed.access(to: .notes) == .open)
+        #expect(resumed.visibleMessages(in: "c_emma").map(\.id) == game.visibleMessages(in: "c_emma").map(\.id))
+        #expect(resumed.notifications.map(\.id) == game.notifications.map(\.id))
+        #expect(resumed.drainEvents().isEmpty) // no banner replayed for what was already seen
+        #expect(resumed.foundEvidence.map(\.id) == game.foundEvidence.map(\.id))
+
+        // The timer and the phone's clock go on together, then the case ends normally.
+        resumed.resume()
+        for _ in 0..<30 { laterClock.advance(by: 1); resumed.tick() }
+        #expect(resumed.remainingSeconds == game.remainingSeconds - 30)
+        #expect(resumed.phoneNow == game.phoneNow.adding(seconds: 30))
+        let verdict = try #require(resumed.accuse("s_emma"))
+        #expect(verdict.isCorrect && verdict.foundCount == 2)
+        #expect(resumed.snapshot() == nil) // a finished case is not resumable
+    }
+
+    @Test func aSnapshotOfAnotherCaseIsRefused() throws {
+        let (game, _) = Fixtures.investigation()
+        game.start()
+        var saved = try #require(game.snapshot())
+        saved.caseID = "case_999"
+        #expect(Investigation(restoring: saved, caseFile: game.caseFile, rules: game.rules, clock: ManualClock()) == nil)
+    }
+}

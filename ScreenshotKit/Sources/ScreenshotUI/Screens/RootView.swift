@@ -28,7 +28,9 @@ public struct RootView: View {
     }
 
     @State private var stage: Stage = .home
-    @State private var attempts = ProgressStore.attempts()
+    @State private var attempts: [Attempt] = []
+    /// The investigation the player left, if any ("Reprendre l'enquête").
+    @State private var savedGame: SavedInvestigation?
     @AppStorage(Preferences.reduceMotionKey) private var reduceMotion = false
     private let cases: [CaseFile]
     private let rules: GameRules?
@@ -37,6 +39,8 @@ public struct RootView: View {
     public init() {
         AppFonts.register()
         UITestHooks.applyAtLaunch()
+        _attempts = State(initialValue: ProgressStore.attempts())
+        _savedGame = State(initialValue: SavedInvestigationStore.load())
         _stage = State(initialValue: UITestHooks.showsOnboarding(default: !Preferences.onboardingDone) ? .onboarding : .home)
         // Load into locals first: each stored `let` must be initialised exactly once, and a failure
         // in the second load must not re-assign what the first one already set.
@@ -74,8 +78,9 @@ public struct RootView: View {
         } else {
             switch stage {
             case .home:
-                HomeView(next: nextCase, progress: progress, attemptsCount: attempts.count,
+                HomeView(next: nextCase, resumable: resumable, progress: progress, attemptsCount: attempts.count,
                          onStart: { stage = .intro($0) },
+                         onResume: resumeSaved,
                          onNavigate: { stage = $0 })
                     .transition(.opacity)
             case .cases:
@@ -152,27 +157,52 @@ public struct RootView: View {
 
     private func goHome() {
         attempts = ProgressStore.attempts()
+        savedGame = SavedInvestigationStore.load()
         stage = .home
+    }
+
+    /// The saved investigation and its case, when it belongs to a case of this version.
+    private var resumable: (saved: SavedInvestigation, file: CaseFile)? {
+        guard let savedGame, let file = cases.first(where: { $0.id == savedGame.snapshot.caseID }) else { return nil }
+        return (savedGame, file)
+    }
+
+    /// "Reprendre l'enquête": back to the same screen, same time, same notebook.
+    private func resumeSaved() {
+        guard let rules, let resumable,
+              let session = GameSession(restoring: resumable.saved, caseFile: resumable.file, rules: rules,
+                                        onFinish: { finished($0) }) else {
+            SavedInvestigationStore.clear()
+            savedGame = nil
+            return
+        }
+        session.begin()
+        stage = .playing(session)
     }
 
     private func names(_ session: GameSession) -> [SuspectID: String] {
         Dictionary(uniqueKeysWithValues: session.caseFile.suspects.map { ($0.id, session.game.name(of: $0.contact)) })
     }
 
+    /// A new investigation (replaces any saved one).
     private func start(_ original: CaseFile) {
         guard let rules else { return }
-        let file = UITestHooks.adjusted(original)
-        let session = GameSession(caseFile: file, rules: rules) { verdict in
-            guard case .playing(let session) = stage else { return }
-            let attempt = Attempt(caseID: file.id, date: .now, score: verdict.score, solved: verdict.isCorrect,
-                                  ranked: true, found: verdict.foundCount, total: verdict.totalCount,
-                                  hintsUsed: verdict.hintsUsed)
-            ProgressStore.record(attempt)
-            attempts = ProgressStore.attempts()
-            stage = .result(Play(session: session, verdict: verdict, attemptID: attempt.id))
-        }
+        SavedInvestigationStore.clear()
+        savedGame = nil
+        let session = GameSession(caseFile: UITestHooks.adjusted(original), rules: rules) { finished($0) }
         session.begin()
         stage = .playing(session)
+    }
+
+    private func finished(_ verdict: Verdict) {
+        guard case .playing(let session) = stage else { return }
+        let attempt = Attempt(caseID: session.caseFile.id, date: .now, score: verdict.score, solved: verdict.isCorrect,
+                              ranked: true, found: verdict.foundCount, total: verdict.totalCount,
+                              hintsUsed: verdict.hintsUsed)
+        ProgressStore.record(attempt)
+        attempts = ProgressStore.attempts()
+        savedGame = nil
+        stage = .result(Play(session: session, verdict: verdict, attemptID: attempt.id))
     }
 
     /// "Révéler la solution" after a wrong answer: the attempt becomes unranked.
@@ -202,7 +232,10 @@ enum UITestHooks {
 
     static func applyAtLaunch() {
         #if DEBUG
-        if UserDefaults.standard.bool(forKey: "UITestReset") { ProgressStore.reset() }
+        if UserDefaults.standard.bool(forKey: "UITestReset") {
+            ProgressStore.reset()
+            SavedInvestigationStore.clear()
+        }
         #endif
     }
 

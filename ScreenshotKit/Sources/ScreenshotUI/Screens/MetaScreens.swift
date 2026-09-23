@@ -77,9 +77,11 @@ func caseNumber(_ n: Int) -> String {
 
 struct HomeView: View {
     let next: CaseFile?
+    let resumable: (saved: SavedInvestigation, file: CaseFile)?
     let progress: [String: CaseProgress]
     let attemptsCount: Int
     let onStart: (CaseFile) -> Void
+    let onResume: () -> Void
     let onNavigate: (RootView.Stage) -> Void
 
     var body: some View {
@@ -106,7 +108,11 @@ struct HomeView: View {
                 menuRow(L10n.t("menu.settings"), value: nil) { onNavigate(.settings) }
             }
 
-            if let next { nextCard(next) }
+            if let resumable {
+                resumeCard(resumable.saved, resumable.file)
+            } else if let next {
+                nextCard(next)
+            }
         }
         .padding(.horizontal, Theme.Spacing.marginGame)
         .padding(.bottom, Theme.Spacing.s5)
@@ -125,6 +131,44 @@ struct HomeView: View {
             .overlay(alignment: .bottom) { Rectangle().fill(Theme.Colors.line1).frame(height: 1) }
         }
         .buttonStyle(.plain)
+    }
+
+    /// "Reprendre": case, time left, pinned items, a 3 pt progress bar (time used), CTA 52.
+    private func resumeCard(_ saved: SavedInvestigation, _ file: CaseFile) -> some View {
+        let remaining = saved.remainingSeconds
+        let used = 1 - remaining / max(1, Double(saved.snapshot.durationSeconds))
+        return VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+            ZStack(alignment: .bottomLeading) {
+                RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous).fill(Theme.Colors.bgRaised)
+                    .overlay(StripedPattern().clipShape(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)))
+                Text(PhoneFormat.countdown(remaining))
+                    .font(Theme.Fonts.timerIntro)
+                    .foregroundStyle(Theme.Colors.signal)
+                    .padding(Theme.Spacing.s5)
+            }
+            .frame(height: 150)
+            .accessibilityHidden(true)
+            Text(L10n.f("home.resumeOverline", caseNumber(file.number))).overline(Theme.Colors.signal)
+            Text(file.title).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
+            Text(L10n.f("home.resumeMeta", PhoneFormat.countdown(remaining), saved.snapshot.notebook.count))
+                .font(Theme.Fonts.data).foregroundStyle(Theme.Colors.textSecondary)
+                .accessibilityIdentifier("home.resumeMeta")
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    Capsule().fill(Theme.Colors.line2)
+                    Capsule().fill(Theme.Colors.signal).frame(width: geo.size.width * used)
+                }
+            }
+            .frame(height: 3)
+            .accessibilityHidden(true)
+            Button(L10n.t("home.resume"), action: onResume)
+                .buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
+                .accessibilityIdentifier("home.resume")
+                .padding(.top, Theme.Spacing.s2)
+        }
+        .padding(Theme.Spacing.s5)
+        .background(RoundedRectangle(cornerRadius: Theme.Radius.lg).fill(Theme.Colors.bgSurface))
+        .elevation0(Theme.Radius.lg)
     }
 
     /// Without a game in progress, the "Reprendre" card becomes "Affaire suivante / Commencer".

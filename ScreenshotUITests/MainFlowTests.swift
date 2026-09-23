@@ -252,6 +252,63 @@ final class MainFlowTests: XCTestCase {
         snap("24-dossier-reconstitution")
     }
 
+    // MARK: - Leaving the app during an investigation, then resuming it
+
+    private func secondsLeft() -> Int {
+        let parts = element("phone.timer").label.suffix(5).split(separator: ":").compactMap { Int($0) }
+        return parts.count == 2 ? parts[0] * 60 + parts[1] : -1
+    }
+
+    func testResumeAfterQuittingTheApp() {
+        startCase()
+        openApp("messages")
+        let alibi = element("message.m_emma_2230")
+        tap(element("conversation.c_emma"), "conversation Emma", expecting: alibi)
+        pin(alibi, "50-epingler-avant-de-quitter")
+        let before = secondsLeft()
+        snap("51-avant-de-quitter")
+
+        // Leave the app (it pauses and saves), kill it, stay away 10 s, relaunch without resetting.
+        XCUIDevice.shared.press(.home)
+        sleep(2)
+        app.terminate()
+        sleep(10)
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR", "-UITestOnboarding", "skip"]
+        app.launch()
+
+        let resume = wait(element("home.resume"), 20, "carte « Reprendre l'enquête »")
+        XCTAssertFalse(element("home.start").exists, "La carte Reprendre remplace « Affaire suivante »")
+        XCTAssertTrue(element("home.resumeMeta").label.contains("◆ 1"), "La carte devrait compter 1 élément épinglé")
+        snap("52-accueil-reprendre")
+        tap(resume, "Reprendre l'enquête", expecting: element("phone.timer"))
+
+        // Same screen, same notebook; the timer goes on from where it was (time away does not count).
+        wait(element("message.m_emma_2230"), 5, "retour dans la conversation d'Emma")
+        snap("53-repris-meme-ecran")
+        let after = secondsLeft()
+        XCTAssertTrue(after <= before && before - after <= 8,
+                      "Chrono incohérent après reprise : \(before) s avant, \(after) s après")
+        XCTAssertTrue(element("phone.carnet").label.contains("1"), "Le carnet devrait toujours compter 1 élément")
+        goHome()
+        assertPhoneClockMatchesTimer(caseDurationSeconds: 480, startMinuteOfDay: 10 * 60)
+        snap("54-horloge-apres-reprise")
+
+        // The case then ends normally.
+        tap(element("phone.timer"), "chrono", expecting: element("accuseNow.confirm"))
+        let emma = element("accuse.suspect.s_emma")
+        tap(element("accuseNow.confirm"), "Accuser maintenant", expecting: emma)
+        choose(emma)
+        holdToAccuse()
+        snap("55-resultat-apres-reprise")
+        wait(element("result.primary"), 5, "résultat")
+
+        // Finished: nothing left to resume.
+        app.terminate()
+        app.launch()
+        wait(element("home.start"), 20, "Accueil")
+        XCTAssertFalse(element("home.resume").exists, "Une affaire terminée ne se reprend pas")
+    }
+
     // MARK: - First launch: the three-step onboarding
 
     func testOnboarding() {

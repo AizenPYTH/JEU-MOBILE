@@ -27,7 +27,7 @@ public enum TimedAction: String, Hashable, Sendable {
 }
 
 /// Something the player pinned to the notebook ("◆ Épinglé"), optionally linked to a suspect.
-public struct NotebookEntry: Hashable, Sendable, Identifiable {
+public struct NotebookEntry: Codable, Hashable, Sendable, Identifiable {
     public var ref: ItemRef
     public var linkedTo: SuspectID?
     /// Investigation time when it was pinned.
@@ -52,7 +52,7 @@ public enum AppAccess: Equatable, Sendable {
 /// Reading, searching and analysing all cost seconds, so every tap is a decision.
 /// Not thread-safe by design: the UI keeps it on the main actor.
 public final class Investigation {
-    public enum Phase: String, Sendable {
+    public enum Phase: String, Codable, Sendable {
         case briefing, investigating, accusing, finished
     }
 
@@ -95,6 +95,37 @@ public final class Investigation {
         self.clock = clock
         self.index = CaseIndex(caseFile)
         self.currentDeviceID = caseFile.devices.first?.id ?? ""
+    }
+
+    /// Resumes a saved investigation. Live events and notifications are recomputed from the saved
+    /// elapsed time (same timeline as before). It comes back paused: call `resume()` once the phone
+    /// is on screen. Returns nil for a snapshot of another case or version.
+    public convenience init?(restoring saved: InvestigationSnapshot, caseFile: CaseFile, rules: GameRules, clock: any GameClock) {
+        guard saved.schemaVersion == InvestigationSnapshot.currentSchemaVersion, saved.caseID == caseFile.id,
+              saved.phase == .investigating || saved.phase == .accusing,
+              caseFile.devices.contains(where: { $0.id == saved.currentDeviceID }) else { return nil }
+        var file = caseFile
+        file.durationSeconds = saved.durationSeconds
+        self.init(caseFile: file, rules: rules, clock: clock)
+        phase = saved.phase
+        activeSeconds = saved.activeSeconds
+        penaltySeconds = saved.penaltySeconds
+        currentDeviceID = saved.currentDeviceID
+        seen = saved.seen
+        openedApps = saved.openedApps
+        unlockedApps = saved.unlockedApps
+        recoveredMessages = saved.recoveredMessages
+        readConversations = saved.readConversations
+        loadedPages = saved.loadedPages
+        notebook = saved.notebook
+        marks = saved.marks
+        usedHints = saved.usedHintIDs.compactMap { id in caseFile.hints.first { $0.id == id } }
+        searchCount = saved.searchCount
+        deliverDueEvents()
+        readNotifications = saved.readNotifications
+        warnedLowTime = isLowOnTime
+        pendingEvents.removeAll() // the player already saw these before leaving
+        isPaused = true
     }
 
     // MARK: - Timer

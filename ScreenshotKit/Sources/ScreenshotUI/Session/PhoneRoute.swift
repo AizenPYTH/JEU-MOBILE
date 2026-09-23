@@ -2,7 +2,7 @@
 import CaseEngine
 
 /// Navigation inside the seized phone. The home screen is the empty path.
-enum PhoneRoute: Hashable {
+enum PhoneRoute: Hashable, Codable {
     case app(AppID)
     case conversation(String, focus: String? = nil)
     case contact(ContactID)

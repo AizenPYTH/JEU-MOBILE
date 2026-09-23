@@ -33,6 +33,7 @@ final class GameSession {
 
     private let investigation: Investigation
     @ObservationIgnored private var loop: Task<Void, Never>?
+    @ObservationIgnored private var ticksSinceSave = 0
     @ObservationIgnored private var bannerTask: Task<Void, Never>?
     @ObservationIgnored private var bannerQueue: [PhoneNotification] = []
     @ObservationIgnored private var costTask: Task<Void, Never>?
@@ -62,12 +63,23 @@ final class GameSession {
     /// 0…1 of the case duration still available (status bar track).
     var timeProgress: Double { investigation.durationSeconds > 0 ? remainingSeconds / investigation.durationSeconds : 0 }
 
-    init(caseFile: CaseFile, rules: GameRules, clock: any GameClock = SystemClock(), onFinish: @escaping (Verdict) -> Void) {
-        let investigation = Investigation(caseFile: caseFile, rules: rules, clock: clock)
+    convenience init(caseFile: CaseFile, rules: GameRules, clock: any GameClock = SystemClock(), onFinish: @escaping (Verdict) -> Void) {
+        self.init(investigation: Investigation(caseFile: caseFile, rules: rules, clock: clock), path: [], onFinish: onFinish)
+    }
+
+    /// Resumes a saved investigation on the screen the player left (opening it again costs nothing).
+    convenience init?(restoring saved: SavedInvestigation, caseFile: CaseFile, rules: GameRules,
+                      clock: any GameClock = SystemClock(), onFinish: @escaping (Verdict) -> Void) {
+        guard let investigation = Investigation(restoring: saved.snapshot, caseFile: caseFile, rules: rules, clock: clock) else { return nil }
+        self.init(investigation: investigation, path: saved.path, onFinish: onFinish)
+    }
+
+    private init(investigation: Investigation, path: [PhoneRoute], onFinish: @escaping (Verdict) -> Void) {
         self.investigation = investigation
         self.remainingSeconds = investigation.remainingSeconds
         self.phase = investigation.phase
         self.phoneTime = Self.minute(of: investigation.phoneNow)
+        self.path = path
         self.onFinish = onFinish
     }
 
@@ -82,9 +94,10 @@ final class GameSession {
 
     // MARK: Lifecycle
 
+    /// Starts a new investigation, or carries on with a restored one.
     func begin() {
-        investigation.start()
-        startLoop()
+        if investigation.phase == .briefing { investigation.start() } else { investigation.resume() }
+        if investigation.phase == .investigating { startLoop() }
         refresh()
     }
 
@@ -92,6 +105,17 @@ final class GameSession {
         investigation.pause()
         loop?.cancel()
         loop = nil
+        save()
+    }
+
+    /// Saves the investigation in progress (cleared once the case is over).
+    func save() {
+        ticksSinceSave = 0
+        if let snapshot = investigation.snapshot() {
+            SavedInvestigationStore.save(SavedInvestigation(snapshot: snapshot, path: path))
+        } else {
+            SavedInvestigationStore.clear()
+        }
     }
 
     func resume() {
@@ -113,6 +137,8 @@ final class GameSession {
     private func tick() {
         investigation.tick()
         refresh(contentChanged: false)
+        ticksSinceSave += 1
+        if ticksSinceSave >= 20 { save() } // every ~5 s, in case the app is killed without warning
     }
 
     /// Pulls engine state and events into observable properties.
@@ -144,7 +170,10 @@ final class GameSession {
             phoneTime = minute
             changed = true // relative times ("il y a 2 min") in the apps move too
         }
-        if changed { revision += 1 }
+        if changed {
+            revision += 1
+            save()
+        }
     }
 
     private static func minute(of moment: Moment) -> Moment {
@@ -298,7 +327,7 @@ final class GameSession {
     func accuse(_ suspect: SuspectID) {
         guard let verdict = investigation.accuse(suspect) else { return }
         loop?.cancel(); loop = nil
-        refresh()
+        refresh() // the case is over: this also clears the saved investigation
         onFinish(verdict)
     }
 

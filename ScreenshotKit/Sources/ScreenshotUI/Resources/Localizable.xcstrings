@@ -2185,6 +2185,57 @@
         }
       }
     },
+    "home.resume": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume the investigation"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprendre l'enquête"
+          }
+        }
+      }
+    },
+    "home.resumeMeta": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ left · ◆ %2$ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ restantes · ◆ %2$ld"
+          }
+        }
+      }
+    },
+    "home.resumeOverline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IN PROGRESS · CASE %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EN COURS · AFFAIRE %@"
+          }
+        }
+      }
+    },
     "home.start": {
       "extractionState": "manual",
       "localizations": {
