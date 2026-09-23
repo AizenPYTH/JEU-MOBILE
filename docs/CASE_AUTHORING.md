@@ -12,6 +12,13 @@ cd ScreenshotKit && swift run CaseLint && swift test
 CaseLint signale tout id inconnu, doublon ou incohérence, et vérifie que l'affaire est résolvable
 dans son temps. Les tests échouent si une affaire est invalide.
 
+L'affaire #001 est produite par un script (`scripts/cases/gen_case_001.py`) : modifier le script,
+puis le relancer — ne pas éditer le JSON à la main :
+
+```bash
+python3 scripts/cases/gen_case_001.py ScreenshotKit/Sources/CaseLibrary/Resources/Cases/case_001.json
+```
+
 ## Structure
 
 ```jsonc
@@ -82,5 +89,6 @@ Scènes de photo disponibles : `sunset`, `sky`, `rain`, `street_day`, `street_ni
 3. **Au moins une fausse piste** crédible par suspect innocent, et un moyen de la lever.
 4. **Jamais d'indice qui conclut** : le jeu ne doit jamais écrire « X ment ».
 5. Les événements en direct relancent la pression (dernière minute, contradiction tardive).
-6. Difficulté : 1–5 → 4 suspects, peu de données, 5 min ; 6–15 → 6 suspects, plus de contradictions,
+6. Difficulté : 1–5 → 4 suspects, peu de données, 5 min (exception : l'affaire #001 dure 8 min, choix du
+   brief) ; 6–15 → 6 suspects, plus de contradictions,
    8–10 min ; 16+ → plusieurs téléphones, faux alibis, informations supprimées.

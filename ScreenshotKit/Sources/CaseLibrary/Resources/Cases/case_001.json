@@ -7,9 +7,9 @@
  "synopsis": [
   "Samedi 12 septembre, Alex Moreau, 26 ans, quitte ses amis au bar Le Levant vers 21h30. Il n'est jamais rentré chez lui.",
   "Son téléphone a été retrouvé ce matin, au sol, dans un parking de la zone portuaire. Vous avez accès à son contenu pendant quelques minutes.",
-  "Quatre personnes l'ont côtoyé ce soir-là. L'une d'elles ment."
+  "Quatre personnes gravitaient autour de lui ce soir-là. Toutes n'ont pas dit la vérité."
  ],
- "objective": "Identifier le suspect qui ment sur sa soirée et qui a vu Alex en dernier.",
+ "objective": "Identifier la personne qui a vu Alex en dernier.",
  "difficulty": 1,
  "durationSeconds": 480,
  "phoneStartTime": "2026-09-13 10:00",
@@ -53,7 +53,7 @@
     },
     {
      "id": "sarah",
-     "name": "Sarah Benali",
+     "name": "Sarah Vasseur",
      "phone": "+33 7 81 40 12 56",
      "relation": "Ex",
      "avatarHue": 0.78
@@ -96,7 +96,7 @@
     },
     {
      "id": "hugo",
-     "name": "Hugo Benali",
+     "name": "Hugo Vasseur",
      "phone": "+33 6 27 48 90 65",
      "relation": "Frère de Sarah",
      "avatarHue": 0.7
@@ -173,7 +173,7 @@
        "id": "m_c_emma_008",
        "from": "emma",
        "at": "2026-08-26 21:02",
-       "text": "Tu as vu le mail de la mairie pour la salle ?"
+       "text": "Tu as vu le mail de la mairie pour la buvette ?"
       },
       {
        "id": "m_c_emma_009",
@@ -414,7 +414,7 @@
        "id": "m_c_lucas_013",
        "from": "me",
        "at": "2026-09-04 18:20",
-       "text": "Samedi plutôt, vendredi y a le vernissage demain à préparer"
+       "text": "Pas ce week-end, vernissage demain soir. Samedi prochain ?"
       },
       {
        "id": "m_c_lucas_014",
@@ -456,7 +456,7 @@
        "id": "m_c_lucas_020",
        "from": "lucas",
        "at": "2026-09-12 17:30",
-       "text": "Ce soir 19h30 au Levant, t'es chaud ?"
+       "text": "Comme dit au tel : 19h30 au Levant"
       },
       {
        "id": "m_c_lucas_021",
@@ -519,13 +519,13 @@
        "id": "m_c_sarah_003",
        "from": "sarah",
        "at": "2026-08-27 13:15",
-       "text": "Hugo part à Lyon en octobre, il te l'a dit ?"
+       "text": "Tu peux me renvoyer les photos de l'anniv de Jade de l'an dernier ?"
       },
       {
        "id": "m_c_sarah_004",
        "from": "me",
        "at": "2026-08-27 13:40",
-       "text": "Oui il m'en a parlé"
+       "text": "Je cherche"
       },
       {
        "id": "m_c_sarah_005",
@@ -609,7 +609,7 @@
      ],
      "draft": {
       "id": "d_sarah",
-      "text": "Si il m'arrive un truc, c'est à cause de",
+      "text": "S'il m'arrive un truc, c'est à cause de",
       "at": "2026-09-12 22:26"
      }
     },
@@ -881,6 +881,12 @@
        "text": "Je passe vite fait avant le boulot"
       },
       {
+       "id": "m_c_group_032",
+       "from": "tom",
+       "at": "2026-09-12 19:30",
+       "text": "On est en terrasse au fond"
+      },
+      {
        "id": "m_group_emma_1958",
        "from": "emma",
        "at": "2026-09-12 19:58",
@@ -891,12 +897,6 @@
        "from": "ines",
        "at": "2026-09-12 19:59",
        "text": "Repose-toi !"
-      },
-      {
-       "id": "m_c_group_032",
-       "from": "tom",
-       "at": "2026-09-12 20:14",
-       "text": "On est en terrasse au fond"
       },
       {
        "id": "m_c_group_033",
@@ -1124,7 +1124,7 @@
        "id": "m_c_tom_006",
        "from": "tom",
        "at": "2026-09-10 22:02",
-       "text": "Bloc super hier, à refaire"
+       "text": "Bloc super ce soir, à refaire"
       }
      ]
     },
@@ -1170,17 +1170,29 @@
       {
        "id": "m_c_hugo_000",
        "from": "hugo",
+       "at": "2026-08-27 19:05",
+       "text": "Je pars à Lyon en octobre. Dis rien à Sarah ni aux parents, je leur annonce moi-même."
+      },
+      {
+       "id": "m_c_hugo_001",
+       "from": "me",
+       "at": "2026-08-27 19:12",
+       "text": "Promis."
+      },
+      {
+       "id": "m_c_hugo_002",
+       "from": "hugo",
        "at": "2026-09-06 16:20",
        "text": "J'ai dit à Sarah que tu étais au courant pour Lyon… désolé"
       },
       {
-       "id": "m_c_hugo_001",
+       "id": "m_c_hugo_003",
        "from": "me",
        "at": "2026-09-06 16:45",
        "text": "Pas grave. Elle va m'en vouloir"
       },
       {
-       "id": "m_c_hugo_002",
+       "id": "m_c_hugo_004",
        "from": "hugo",
        "at": "2026-09-06 16:46",
        "text": "Elle t'en veut déjà 😬"
@@ -1281,7 +1293,7 @@
     {
      "id": "k08",
      "contact": "sarah",
-     "direction": "missed",
+     "direction": "outgoing",
      "at": "2026-09-07 22:30",
      "durationSeconds": 0
     },
@@ -1331,8 +1343,8 @@
      "id": "k15",
      "contact": "emma",
      "direction": "incoming",
-     "at": "2026-09-12 21:47",
-     "durationSeconds": 38
+     "at": "2026-09-12 21:34",
+     "durationSeconds": 52
     },
     {
      "id": "k16",
@@ -1525,7 +1537,7 @@
        "id": "tp_me_10",
        "at": "2026-09-12 22:36",
        "place": "pl_quai9",
-       "note": "Dernière position connue"
+       "note": "Dernière position connue — localisation interrompue"
       }
      ]
     },
@@ -1706,7 +1718,7 @@
      "scene": "concert",
      "caption": "Concert au parc — lumières violettes.",
      "details": "La scène est loin, la photo est floue.",
-     "place": "Parc de la Tête d'Or",
+     "place": "Parc des Tilleuls",
      "device": "iPhone 13"
     },
     {
@@ -1911,7 +1923,7 @@
      "source": "camera",
      "scene": "bar",
      "caption": "Le Levant, verres sur la table.",
-     "details": "Lucas regarde son téléphone. Sarah parle avec Inès.",
+     "details": "Lucas, en sweat noir, regarde son téléphone. Sarah parle avec Inès.",
      "place": "Le Levant",
      "device": "iPhone 13"
     },
@@ -2131,7 +2143,7 @@
      "id": "n_todo",
      "title": "À faire",
      "createdAt": "2026-09-01 08:10",
-     "modifiedAt": "2026-09-11 22:05",
+     "modifiedAt": "2026-09-12 20:33",
      "body": "- Rendre la perceuse à Tom\n- Payer le loyer\n- Rembourser Karim (reste 600)\n- Appeler mamie\n- Renouveler l'abonnement escalade"
     },
     {
@@ -2165,7 +2177,7 @@
      "to": "alex.moreau@mailo.fr",
      "at": "2026-09-09 17:48",
      "subject": "Collectif Lumen — anomalies sur les comptes 2026",
-     "body": "Bonjour Monsieur Moreau,\n\nEn préparant le bilan du collectif, nous avons relevé trois factures du fournisseur « Studio Nova » (n°112, 114 et 117) pour un total de 4 300 €, sans bon de commande ni justificatif de prestation.\n\nCes factures ont été validées par la trésorière, Mme E. Roussel. Le SIRET indiqué ne correspond à aucune entreprise enregistrée.\n\nEn tant que président, nous vous invitons à clarifier la situation avant la réunion du bureau.\n\nCordialement,\nP. Ferran"
+     "body": "Bonjour Monsieur Moreau,\n\nEn préparant le bilan du collectif, nous avons relevé trois factures du fournisseur « Studio Nova » (n°112, 114 et 117) pour un total de 4 300 €, sans bon de commande ni justificatif de prestation.\n\nCes factures ont été validées par la trésorière, Mme E. Roussel. Le SIRET indiqué ne correspond à aucune entreprise enregistrée.\n\nEn tant que président, nous vous invitons à clarifier la situation avant la réunion du bureau.\n\nCopies des factures en pièce jointe.\n\nCordialement,\nP. Ferran"
     },
     {
      "id": "mail_reply",
@@ -2224,8 +2236,8 @@
      "fromAddress": "asso@mairie.fr",
      "to": "bureau@collectif-lumen.fr",
      "at": "2026-08-26 09:40",
-     "subject": "Réservation de salle — 5 septembre",
-     "body": "Votre demande de réservation est acceptée."
+     "subject": "Autorisation buvette — vernissage du 5 septembre",
+     "body": "Votre demande d'autorisation de buvette temporaire est acceptée."
     },
     {
      "id": "mail_varenne",
@@ -2282,7 +2294,7 @@
     },
     {
      "id": "w06",
-     "at": "2026-09-04 22:02",
+     "at": "2026-08-27 22:02",
      "kind": "search",
      "text": "objectif 35mm argentique occasion"
     },
@@ -2489,7 +2501,7 @@
      "afterSeconds": 450,
      "kind": "message",
      "app": "messages",
-     "title": "Sarah Benali",
+     "title": "Sarah Vasseur",
      "body": "Mon « je sais ce que tu as fait », c'était pour Hugo et Lyon. Rien d'autre. Je m'en veux.",
      "conversation": "c_sarah",
      "message": {
@@ -2652,7 +2664,7 @@
    "refs": [
     "draft:d_sarah"
    ],
-   "meaning": "À 22:26, Alex écrivait encore « Si il m'arrive un truc, c'est à cause de… » : Lucas était déjà reparti (rocade Nord à 22:24)."
+   "meaning": "À 22:26, Alex écrivait encore « S'il m'arrive un truc, c'est à cause de… » : Lucas était déjà reparti (rocade Nord à 22:24)."
   },
   {
    "id": "e_parking",
@@ -2743,7 +2755,7 @@
    "refs": [
     "note:n_k"
    ],
-   "meaning": "Une note de mars, écrite après le prêt à Karim. Rien à voir avec samedi."
+   "meaning": "Une note écrite en mars, deux mois avant qu'Alex n'emprunte de l'argent à Karim. Elle n'a rien à voir avec la dette ni avec samedi."
   },
   {
    "id": "f_lucas_lie",
@@ -2761,7 +2773,7 @@
  "hints": [
   {
    "id": "h1",
-   "text": "Comparez ce que chacun affirme avec les positions partagées entre 21h et 23h. Et regardez qui a cessé d'être visible.",
+   "text": "Comparez ce que chacun affirme avec les positions partagées entre 21h et 23h. Et regardez qui n'apparaît plus sur la carte.",
    "scoreCost": 0
   },
   {
@@ -2778,7 +2790,7 @@
  ],
  "solution": {
   "culprit": "s_emma",
-  "headline": "Emma Roussel a attiré Alex au Quai 9 pour le faire taire.",
+  "headline": "Emma Roussel a attiré Alex au Quai 9 pour le convaincre de se taire.",
   "summary": "Elle disait être restée au lit. Elle était au port, et elle avait tout à perdre lundi matin.",
   "reveal": [
    {
@@ -2808,7 +2820,7 @@
    },
    {
     "at": "2026-09-12 22:26",
-    "text": "Alex commence à écrire : « Si il m'arrive un truc, c'est à cause de… »",
+    "text": "Alex commence à écrire : « S'il m'arrive un truc, c'est à cause de… »",
     "evidence": "e_draft"
    },
    {
@@ -2825,9 +2837,9 @@
   "story": [
    "Mercredi 9 septembre, le cabinet comptable prévient Alex : trois factures « Studio Nova », 4 300 €, validées par la trésorière du collectif Lumen. Studio Nova n'existe pas. Son adresse : la rue Paradis, chez Emma.",
    "Alex décide de lui en parler avant la réunion du bureau, lundi 9h. Emma, elle, le supplie de ne rien dire aux autres.",
-   "Samedi, Emma annonce une migraine et reste loin du Levant. À 21:31, elle coupe le partage de sa position. À 21:40, elle écrit : « Parking du Quai 9. 22h. Viens seul. » — puis demande à Alex d'effacer la conversation. Il obéit, mais note le rendez-vous : « P. Quai 9 — E. ».",
+   "Samedi, Emma annonce une migraine et reste loin du Levant. À 21:31, elle coupe le partage de sa position. À 21:34, elle appelle Alex, qui quitte le Levant deux minutes plus tard. À 21:40, elle précise par écrit : « Parking du Quai 9. 22h. Viens seul. » — puis demande à Alex d'effacer la conversation. Il obéit, mais note le rendez-vous : « P. Quai 9 — E. ».",
    "Sans voiture, Emma appelle Lucas. Il passe la prendre rue Paradis à 21:58 et la dépose au port à 22:17. Elle lui fait promettre de ne rien dire : il inventera être rentré directement.",
-   "La discussion tourne mal. Alex, qui commençait à écrire à Sarah « Si il m'arrive un truc… », tombe du quai de chargement. Emma panique et s'enfuit. Le téléphone reste au sol.",
+   "La discussion tourne mal. Alex, qui commençait à écrire à Sarah « S'il m'arrive un truc… », tombe du quai de chargement d'un entrepôt voisin. Emma panique et s'enfuit à pied, puis rentre en taxi. Le téléphone reste au sol.",
    "À 22:30, elle envoie à Alex une photo d'elle au lit, prise en réalité à 19:42, pour se fabriquer un alibi. À 22:34, elle confirme au groupe être « au lit depuis 20h ». Ce matin, elle a supprimé ce message.",
    "Grâce à votre enquête, Alex est retrouvé dans l'après-midi, blessé mais vivant, dans un entrepôt du Quai 9."
   ]
