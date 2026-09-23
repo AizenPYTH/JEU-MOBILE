@@ -147,16 +147,7 @@ struct HomeView: View {
         let remaining = saved.remainingSeconds
         let used = 1 - remaining / max(1, Double(saved.snapshot.durationSeconds))
         return VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
-            ZStack(alignment: .bottomLeading) {
-                RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous).fill(Theme.Colors.bgRaised)
-                    .overlay(StripedPattern().clipShape(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)))
-                Text(PhoneFormat.countdown(remaining))
-                    .font(Theme.Fonts.timerIntro)
-                    .foregroundStyle(Theme.Colors.signal)
-                    .padding(Theme.Spacing.s5)
-            }
-            .frame(height: 150)
-            .accessibilityHidden(true)
+            CaseCover(file: file, countdown: remaining, highlight: true)
             Text(L10n.f("home.resumeOverline", caseNumber(file.number))).overline(Theme.Colors.signal)
             Text(file.title).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
             Text(L10n.f("home.resumeMeta", PhoneFormat.countdown(remaining), saved.snapshot.notebook.count))
@@ -184,16 +175,7 @@ struct HomeView: View {
     private func nextCard(_ file: CaseFile) -> some View {
         let entry = progress[file.id]
         return VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
-            ZStack(alignment: .bottomLeading) {
-                RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous).fill(Theme.Colors.bgRaised)
-                    .overlay(StripedPattern().clipShape(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)))
-                Text(PhoneFormat.countdown(Double(file.durationSeconds)))
-                    .font(Theme.Fonts.timerIntro)
-                    .foregroundStyle(Theme.Colors.textPrimary)
-                    .padding(Theme.Spacing.s5)
-            }
-            .frame(height: 150)
-            .accessibilityHidden(true)
+            CaseCover(file: file, countdown: Double(file.durationSeconds), highlight: false)
             Text((entry?.plays ?? 0) > 0 ? L10n.f("home.caseOverline", caseNumber(file.number)) : L10n.t("home.nextCase"))
                 .overline(Theme.Colors.signal)
             Text(file.title).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
@@ -206,6 +188,48 @@ struct HomeView: View {
         .padding(Theme.Spacing.s5)
         .background(RoundedRectangle(cornerRadius: Theme.Radius.lg).fill(Theme.Colors.bgSurface))
         .elevation0(Theme.Radius.lg)
+    }
+}
+
+/// Cover of a case: the seized phone's lock screen (wallpaper, the time it was handed over, whose
+/// phone), and the time you get to search it.
+struct CaseCover: View {
+    let file: CaseFile
+    let countdown: Double
+    /// Resume card: the time left in amber.
+    let highlight: Bool
+
+    var body: some View {
+        let shape = RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)
+        ZStack {
+            Wallpaper()
+            VStack(spacing: 2) {
+                Text(PhoneFormat.longDayCapitalized(file.phoneStartTime))
+                    .font(Theme.Fonts.caption)
+                    .foregroundStyle(Theme.Colors.textSecondary)
+                Text(PhoneFormat.time(file.phoneStartTime))
+                    .font(.custom(Theme.FontName.light, fixedSize: 44))
+                    .foregroundStyle(Theme.Colors.textPrimary)
+                if let label = file.devices.first?.label {
+                    Label(label, systemImage: "lock.fill")
+                        .font(Theme.Fonts.caption)
+                        .foregroundStyle(Theme.Colors.textSecondary)
+                }
+            }
+        }
+        .frame(height: 150)
+        .clipShape(shape)
+        .overlay(shape.strokeBorder(Theme.Colors.line2))
+        .overlay(alignment: .bottomTrailing) {
+            Label(PhoneFormat.countdown(countdown), systemImage: "timer")
+                .font(Theme.Fonts.dataStrong)
+                .foregroundStyle(highlight ? Theme.Colors.signal : Theme.Colors.textPrimary)
+                .padding(.horizontal, Theme.Spacing.s3)
+                .frame(height: 28)
+                .background(Capsule().fill(Theme.Colors.ink0.opacity(0.7)))
+                .padding(Theme.Spacing.s3)
+        }
+        .accessibilityHidden(true)
     }
 }
 
@@ -487,18 +511,64 @@ struct ProfileView: View {
         let best = ranked.map(\.score).max() ?? 0
         let found = attempts.reduce(0) { $0 + $1.found }
         let total = attempts.reduce(0) { $0 + $1.total }
-        VStack(alignment: .leading, spacing: Theme.Spacing.s6) {
-            MetaHeader(title: L10n.t("menu.profile"), onBack: onBack)
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible())], spacing: 10) {
-                StatCard(label: L10n.t("profile.solved"), value: "\(solved)/\(caseCount)")
-                StatCard(label: L10n.t("profile.attempts"), value: "\(attempts.count)")
-                StatCard(label: L10n.t("profile.best"), value: ranked.isEmpty ? "—" : "\(best) %")
-                StatCard(label: L10n.t("profile.found"), value: total == 0 ? "—" : "\(found * 100 / total) %")
+        let rank = min(solved, 4)
+        ScrollView {
+            VStack(alignment: .leading, spacing: Theme.Spacing.s6) {
+                MetaHeader(title: L10n.t("menu.profile"), onBack: onBack)
+                VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+                    Text(L10n.t("profile.rank")).overline(Theme.Colors.signal)
+                    Text(L10n.t("profile.rank\(rank)")).font(Theme.Fonts.title2).foregroundStyle(Theme.Colors.textPrimary)
+                    HStack(spacing: Theme.Spacing.s2) {
+                        ForEach(0..<4, id: \.self) { step in
+                            Capsule().fill(step < rank ? Theme.Colors.signal : Theme.Colors.line2).frame(height: 4)
+                        }
+                    }
+                    Text(rank < 4 ? L10n.t("profile.rankNext") : L10n.t("profile.rankMax"))
+                        .font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
+                }
+                .padding(Theme.Spacing.s5)
+                .background(RoundedRectangle(cornerRadius: Theme.Radius.lg).fill(Theme.Colors.bgSurface))
+                .elevation0(Theme.Radius.lg)
+                .padding(.horizontal, Theme.Spacing.marginList)
+                LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible())], spacing: 10) {
+                    StatCard(label: L10n.t("profile.solved"), value: "\(solved)/\(caseCount)")
+                    StatCard(label: L10n.t("profile.attempts"), value: "\(attempts.count)")
+                    StatCard(label: L10n.t("profile.best"), value: ranked.isEmpty ? "—" : "\(best) %")
+                    StatCard(label: L10n.t("profile.found"), value: total == 0 ? "—" : "\(found * 100 / total) %")
+                }
+                .padding(.horizontal, Theme.Spacing.marginList)
+                VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+                    Text(L10n.t("profile.badges")).overline()
+                    badge("checkmark.seal.fill", L10n.t("profile.badgeFirst"), earned: solved > 0)
+                    badge("bolt.fill", L10n.t("profile.badgeNoHelp"), earned: attempts.contains { $0.solved && $0.ranked && $0.hintsUsed == 0 })
+                    badge("rosette", L10n.t("profile.badgePerfect"), earned: attempts.contains { $0.ranked && $0.score >= 100 })
+                    badge("magnifyingglass", L10n.t("profile.badgeThorough"), earned: attempts.contains { $0.total > 0 && $0.found == $0.total })
+                }
+                .padding(.horizontal, Theme.Spacing.marginList)
             }
-            .padding(.horizontal, Theme.Spacing.marginList)
-            Spacer()
+            .padding(.bottom, Theme.Spacing.s8)
         }
         .padding(.top, Theme.Spacing.s3)
+    }
+}
+
+extension ProfileView {
+    /// A distinction: lit when earned, dimmed (with its condition) otherwise.
+    func badge(_ symbol: String, _ title: String, earned: Bool) -> some View {
+        HStack(spacing: Theme.Spacing.s4) {
+            Image(systemName: symbol)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(earned ? Theme.Colors.textOnLight : Theme.Colors.textTertiary)
+                .frame(width: 36, height: 36)
+                .background(Circle().fill(earned ? Theme.Colors.signal : Theme.Colors.bgRaised))
+            Text(title).font(Theme.Fonts.body).foregroundStyle(earned ? Theme.Colors.textPrimary : Theme.Colors.textTertiary)
+            Spacer()
+            if earned { Image(systemName: "checkmark").foregroundStyle(Theme.Colors.clear) }
+        }
+        .padding(Theme.Spacing.s3)
+        .background(RoundedRectangle(cornerRadius: Theme.Radius.md).fill(Theme.Colors.bgSurface))
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(earned ? .isSelected : [])
     }
 }
 

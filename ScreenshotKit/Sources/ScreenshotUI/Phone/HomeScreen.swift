@@ -9,6 +9,9 @@ struct HomeScreen: View {
 
     private var gridApps: [AppID] { AppID.allCases.filter { !AppID.dock.contains($0) } }
 
+    /// Widgets only where the screen is tall enough (not on the smallest iPhones).
+    @State private var roomForWidgets = true
+
     var body: some View {
         let game = session.game
         let now = session.phoneTime
@@ -37,6 +40,12 @@ struct HomeScreen: View {
                 }
             }
             .padding(.horizontal, 22)
+
+            if roomForWidgets {
+                HomeWidgets(session: session)
+                    .padding(.horizontal, 22)
+                    .padding(.top, 20)
+            }
 
             Spacer(minLength: 0)
 
@@ -75,6 +84,7 @@ struct HomeScreen: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Wallpaper())
+        .onGeometryChange(for: Bool.self) { $0.size.height > 700 } action: { roomForWidgets = $0 }
         .toolbar(.hidden, for: .navigationBar)
     }
 
@@ -86,6 +96,80 @@ struct HomeScreen: View {
         case .notifications: game.unreadNotificationsCount
         default: 0
         }
+    }
+}
+
+/// Two widgets, like a real home screen: the battery, and the next calendar event (tapping it
+/// opens the Calendar, at its usual cost).
+struct HomeWidgets: View {
+    let session: GameSession
+
+    var body: some View {
+        let now = session.phoneTime
+        let next = session.game.device.calendar.filter { $0.start > now }.min { $0.start < $1.start }
+        HStack(spacing: Theme.Spacing.s5) {
+            battery
+            Button { session.launch(.calendar) } label: { upNext(next, now: now) }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("widget.calendar")
+        }
+        .frame(height: 130)
+    }
+
+    private var battery: some View {
+        let level = session.batteryLevel
+        return VStack(alignment: .leading) {
+            ZStack {
+                Circle().stroke(Theme.Colors.line2, lineWidth: 6)
+                Circle()
+                    .trim(from: 0, to: CGFloat(level) / 100)
+                    .stroke(level <= 10 ? Theme.Colors.alert : Theme.Colors.clear, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+                Image(systemName: "iphone").font(.system(size: 20, weight: .semibold)).foregroundStyle(Theme.Colors.textPrimary)
+            }
+            .frame(width: 58, height: 58)
+            Spacer(minLength: 0)
+            Text("\(level) %").font(.custom(Theme.FontName.semibold, fixedSize: 22)).foregroundStyle(Theme.Colors.textPrimary)
+            Text(L10n.t("widget.battery")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
+        }
+        .widgetCard()
+        .accessibilityElement(children: .combine)
+    }
+
+    private func upNext(_ event: CalendarEvent?, now: Moment) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(PhoneFormat.weekdayShort(now) + " \(now.day)")
+                .font(.custom(Theme.FontName.semibold, fixedSize: 12))
+                .foregroundStyle(Theme.appAccent(.calendar))
+            Spacer(minLength: 0)
+            if let event {
+                Text(L10n.t("widget.upNext")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
+                HStack(alignment: .top, spacing: Theme.Spacing.s2) {
+                    RoundedRectangle(cornerRadius: 1.5).fill(Theme.appAccent(.calendar)).frame(width: 3)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(event.title).font(Theme.Fonts.calloutStrong).foregroundStyle(Theme.Colors.textPrimary).lineLimit(2)
+                        Text(PhoneFormat.dayLabel(event.start, now: now) + (event.allDay == true ? "" : " · " + PhoneFormat.time(event.start)))
+                            .font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary).lineLimit(1)
+                    }
+                }
+                .fixedSize(horizontal: false, vertical: true)
+            } else {
+                Text(L10n.t("widget.noEvent")).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
+            }
+        }
+        .widgetCard()
+        .accessibilityElement(children: .combine)
+    }
+}
+
+private extension View {
+    /// Frosted widget card.
+    func widgetCard() -> some View {
+        padding(Theme.Spacing.s4)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: Theme.Radius.banner, style: .continuous).fill(Theme.Colors.bgRaised.opacity(0.55)))
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.banner, style: .continuous))
+            .overlay(RoundedRectangle(cornerRadius: Theme.Radius.banner, style: .continuous).strokeBorder(Theme.Colors.line1))
     }
 }
 

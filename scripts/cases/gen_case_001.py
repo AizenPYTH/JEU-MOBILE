@@ -292,7 +292,7 @@ places = [
     dict(id="pl_rocade", name="Rocade Nord — sortie 4", kind="road", x=0.46, y=0.60),
     dict(id="pl_lilas", name="Rue des Lilas", kind="street", x=0.14, y=0.72),
     dict(id="pl_hotel", name="Hôtel Le Cygne", kind="work", x=0.72, y=0.16),
-    dict(id="pl_varenne", name="Agence Varenne", kind="work", x=0.40, y=0.64),
+    dict(id="pl_varenne", name="Agence Varenne", kind="work", x=0.24, y=0.56),
     dict(id="pl_bloc", name="Salle d'escalade Bloc Out", kind="park", x=0.26, y=0.88),
     dict(id="pl_gare", name="Gare centrale", kind="station", x=0.58, y=0.52),
     dict(id="pl_local", name="Local du collectif Lumen", kind="shop", x=0.52, y=0.72),

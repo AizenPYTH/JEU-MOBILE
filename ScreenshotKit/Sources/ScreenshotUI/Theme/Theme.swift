@@ -296,6 +296,13 @@ public enum Theme {
         }
     }
 
+    /// Colour of a calendar event (like the calendars of a real phone): stable for a given event.
+    public static func eventColor(_ id: String) -> Color {
+        let palette = [appAccent(.calendar), Colors.info, Colors.clear, Colors.signal, Colors.special]
+        let hash = id.unicodeScalars.reduce(0) { ($0 &* 31 &+ Int($1.value)) & 0xFFFF }
+        return palette[hash % palette.count]
+    }
+
     /// Avatar disc colour from a contact's hue (muted, dark enough for light initials).
     public static func avatarColor(hue: Double) -> (top: Color, bottom: Color) {
         (top: Color(hue: hue, saturation: 0.38, brightness: 0.52), bottom: Color(hue: hue, saturation: 0.45, brightness: 0.34))

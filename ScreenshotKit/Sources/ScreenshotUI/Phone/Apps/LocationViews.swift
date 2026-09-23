@@ -234,7 +234,7 @@ struct CityMap: View {
                             Circle().fill(Theme.Colors.textTertiary).frame(width: 7, height: 7)
                         }
                         Text(Self.shortName(place.name))
-                            .font(.custom(Theme.FontName.semibold, fixedSize: 9))
+                            .font(.custom(Theme.FontName.semibold, fixedSize: 10))
                             .foregroundStyle(visited || tracks.isEmpty ? Theme.Colors.textPrimary : Theme.Colors.textSecondary)
                             .lineLimit(1)
                             .fixedSize()

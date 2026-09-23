@@ -264,6 +264,14 @@ struct ConversationView: View {
                             .id(visible.id)
                             .onAppear { session.markSeen(ItemRef(.message, visible.id)) }
                     }
+                    // Like a real messenger: the owner's last message, if nothing came after it.
+                    if let last = messages.last, last.message.isFromOwner, last.state != .removedBySender {
+                        Text(L10n.t("messages.delivered"))
+                            .font(Theme.Fonts.caption)
+                            .foregroundStyle(Theme.Colors.textTertiary)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.trailing, Theme.Spacing.s2)
+                    }
                     if let draft = conversation?.draft {
                         DraftBubble(draft: draft)
                             .onAppear { session.markSeen(ItemRef(.draft, draft.id)) }

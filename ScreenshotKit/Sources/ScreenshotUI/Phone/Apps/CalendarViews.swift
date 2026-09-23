@@ -66,7 +66,7 @@ struct EventRow: View {
                 }
             }
             .frame(width: 48, alignment: .trailing)
-            RoundedRectangle(cornerRadius: 2).fill(Theme.appAccent(.calendar)).frame(width: 4)
+            RoundedRectangle(cornerRadius: 2).fill(Theme.eventColor(event.id)).frame(width: 4)
             VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                 Text(event.title).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
                 if let location = event.location {
@@ -159,7 +159,7 @@ struct CalendarEventView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
                     HStack(alignment: .top, spacing: Theme.Spacing.s4) {
-                        RoundedRectangle(cornerRadius: 2).fill(Theme.appAccent(.calendar)).frame(width: 4, height: 56)
+                        RoundedRectangle(cornerRadius: 2).fill(Theme.eventColor(event.id)).frame(width: 4, height: 56)
                         VStack(alignment: .leading, spacing: Theme.Spacing.s2) {
                             Text(event.title).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
                             if let location = event.location {
