@@ -70,6 +70,8 @@ Accueil → Affaires → Intro → Téléphone → enquête → Carnet → accus
 ## 4. Vérification
 
 - Moteur, affaire, traductions fr/en et absence de vocabulaire de l'ancien prototype : `swift test`
-  (37 tests) et `swift run CaseLint` passent sous Linux.
-- L'interface (ScreenshotUI) ne se compile qu'avec Xcode : elle n'a **pas** pu être compilée dans le
-  conteneur. Le workflow macOS (`ios-testflight.yml`) la compilera ; à défaut, ouvrir le projet sur un Mac.
+  (38 tests) et `swift run CaseLint` passent sous Linux.
+- **Compilation iOS : OK** (workflow `ios-build.yml`, Xcode 26.3, SDK iOS 26.2, cible iOS 17,
+  simulateur arm64 + x86_64) — `BUILD SUCCEEDED`, 0 erreur, 0 avertissement Swift.
+- Pas encore vérifié : exécution de l'app sur simulateur ou appareil (aucun test d'interface, aucune
+  capture), rendu visuel, animations, haptiques, polices chargées à l'exécution.
