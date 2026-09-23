@@ -9,6 +9,8 @@ struct AppBar<Trailing: View>: View {
     let app: AppID?
     var title: String? = nil
     var subtitle: String? = nil
+    /// The Calendar icon shows this day, like on the home screen.
+    var iconDay: Moment? = nil
     let onHome: () -> Void
     @ViewBuilder var trailing: Trailing
 
@@ -58,7 +60,7 @@ struct AppBar<Trailing: View>: View {
     @ViewBuilder
     private var icon: some View {
         if let app {
-            AppTileGlyph(app: app, size: Theme.Size.headerIcon)
+            AppTileGlyph(app: app, size: Theme.Size.headerIcon, calendarDay: iconDay)
         } else {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 15, weight: .bold))
@@ -77,10 +79,11 @@ extension AppBar where Trailing == EmptyView {
 
 extension View {
     /// Root screen of an app: custom header on top, system bar hidden. The navigation title stays
-    /// set so the next screen's back button reads "‹ Messages", "‹ Plans"…
+    /// set so the next screen's back button reads "‹ Messages", "‹ Carte"…
     func appRoot<Trailing: View>(_ app: AppID, subtitle: String?, session: GameSession,
                                  @ViewBuilder trailing: () -> Trailing) -> some View {
-        let bar = AppBar(app: app, subtitle: subtitle, onHome: { session.goHome() }, trailing: trailing)
+        let bar = AppBar(app: app, subtitle: subtitle, iconDay: app == .calendar ? session.phoneTime : nil,
+                         onHome: { session.goHome() }, trailing: trailing)
         return self
             .navigationTitle(app.title)
             .toolbar(.hidden, for: .navigationBar)

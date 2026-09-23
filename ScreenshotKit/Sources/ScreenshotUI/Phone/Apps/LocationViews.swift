@@ -14,7 +14,7 @@ struct LocationView: View {
                 CityMap(places: game.device.places, tracks: [], highlight: nil)
                     .frame(height: Theme.Size.mapHeight)
                     .overlay(alignment: .topLeading) {
-                        Label(L10n.f("location.placesCount", game.device.places.count), systemImage: "mappin.and.ellipse")
+                        Label(L10n.f("location.placesCount", game.device.places.count), systemImage: "mappin")
                             .font(Theme.Fonts.caption)
                             .foregroundStyle(Theme.Colors.textPrimary)
                             .padding(.horizontal, Theme.Spacing.s3)
@@ -230,8 +230,8 @@ struct CityMap: View {
                         } else {
                             Circle().fill(Theme.Colors.textTertiary).frame(width: 7, height: 7)
                         }
-                        Text(place.name)
-                            .font(.custom(Theme.FontName.semibold, fixedSize: 10))
+                        Text(Self.shortName(place.name))
+                            .font(.custom(Theme.FontName.semibold, fixedSize: 9))
                             .foregroundStyle(visited || tracks.isEmpty ? Theme.Colors.textPrimary : Theme.Colors.textSecondary)
                             .lineLimit(1)
                             .fixedSize()
@@ -239,12 +239,17 @@ struct CityMap: View {
                             .padding(.vertical, 1)
                             .background(Capsule().fill(Theme.Colors.mapLabelHalo))
                     }
-                    .position(x: place.x * size.width, y: place.y * size.height)
+                    .position(x: min(max(place.x * size.width, 48), size.width - 48), y: place.y * size.height)
                 }
             }
         }
         .clipped()
         .accessibilityHidden(true)
+    }
+
+    /// "Parking du Quai 9 — zone portuaire" → "Parking du Quai 9" (the full name is in the lists).
+    static func shortName(_ name: String) -> String {
+        name.components(separatedBy: " — ").first ?? name
     }
 }
 #endif

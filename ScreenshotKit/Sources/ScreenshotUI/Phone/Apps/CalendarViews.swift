@@ -67,7 +67,7 @@ struct EventRow: View {
             VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
                 Text(event.title).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
                 if let location = event.location {
-                    Label(location, systemImage: "mappin.and.ellipse")
+                    Label(location, systemImage: "mappin")
                         .font(Theme.Fonts.callout)
                         .foregroundStyle(Theme.Colors.textSecondary)
                         .labelStyle(.titleAndIcon)
@@ -160,7 +160,7 @@ struct CalendarEventView: View {
                         VStack(alignment: .leading, spacing: Theme.Spacing.s2) {
                             Text(event.title).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
                             if let location = event.location {
-                                Label(location, systemImage: "mappin.and.ellipse")
+                                Label(location, systemImage: "mappin")
                                     .font(Theme.Fonts.callout)
                                     .foregroundStyle(Theme.Colors.textSecondary)
                             }

@@ -217,7 +217,7 @@ public enum Theme {
         public static let searchField: CGFloat = 40
         public static let segmented: CGFloat = 38
         public static let homeIndicator = CGSize(width: 134, height: 5)
-        public static let mapHeight: CGFloat = 320
+        public static let mapHeight: CGFloat = 390
         public static let keypadKey: CGFloat = 72
         public static let photoBubble: CGFloat = 200
         public static let photoThumb: CGFloat = 110
