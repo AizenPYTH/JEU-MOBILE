@@ -1,0 +1,65 @@
+# Compiles the iOS app (ScreenshotUI included) for the simulator on every push that touches the app.
+# No signing, no upload: this is the "does the interface compile?" check.
+# Compiler errors are listed in the job summary and the full log is kept as an artifact.
+name: iOS – Compile
+
+on:
+  push:
+    paths:
+      - "ScreenshotKit/**"
+      - "Screenshot/**"
+      - "Screenshot.xcodeproj/**"
+      - "Configs/**"
+      - ".github/workflows/ios-build.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ios-compile-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    runs-on: ${{ vars.MACOS_RUNNER || 'macos-15' }}
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          if [ -n "${{ vars.XCODE_VERSION }}" ]; then
+            XCODE="/Applications/Xcode_${{ vars.XCODE_VERSION }}.app"
+          else
+            XCODE=$(ls -d /Applications/Xcode_*.app | grep -viE 'beta|rc|release_candidate' | sort -V | tail -1)
+          fi
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE/Contents/Developer"
+          xcodebuild -version
+
+      - name: Build for the iOS simulator
+        run: |
+          set +e
+          xcodebuild build \
+            -project Screenshot.xcodeproj -scheme Screenshot -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            -skipPackagePluginValidation \
+            CODE_SIGNING_ALLOWED=NO > "$RUNNER_TEMP/build.log" 2>&1
+          status=$?
+          set -e
+          grep -E "error:|warning:" "$RUNNER_TEMP/build.log" | grep -v "^ld: warning" | sort -u > "$RUNNER_TEMP/diagnostics.txt" || true
+          echo "### iOS compile: $( [ $status -eq 0 ] && echo OK || echo FAILED )" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          grep "error:" "$RUNNER_TEMP/diagnostics.txt" | head -200 >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "---- diagnostics ----"
+          cat "$RUNNER_TEMP/diagnostics.txt"
+          echo "---- tail ----"
+          tail -60 "$RUNNER_TEMP/build.log"
+          exit $status
+
+      - name: Keep the build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build-log
+          path: ${{ runner.temp }}/build.log
+          retention-days: 7
