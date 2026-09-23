@@ -1,0 +1,35 @@
+# Engine tests on Linux (cheap): CaseEngine + case validation (JSON) + CaseLint.
+# Runs on every push. The iOS UI is compiled on macOS by ios-build.yml.
+name: Tests (Linux)
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: tests-linux-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Official Swift image (Docker Hub "swift"), same major version as Xcode's toolchain.
+    container: swift:6.0-noble
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache SwiftPM build
+        uses: actions/cache@v4
+        with:
+          path: ScreenshotKit/.build
+          key: spm-linux-${{ hashFiles('ScreenshotKit/Package.swift') }}-${{ github.sha }}
+          restore-keys: spm-linux-${{ hashFiles('ScreenshotKit/Package.swift') }}-
+
+      - name: Run tests
+        working-directory: ScreenshotKit
+        run: swift test
+
+      - name: Validate the cases (CaseLint)
+        working-directory: ScreenshotKit
+        run: swift run CaseLint
