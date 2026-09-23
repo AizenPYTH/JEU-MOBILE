@@ -139,10 +139,10 @@ final class MainFlowTests: XCTestCase {
         app.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Preuves'")).firstMatch.tap()
         wait(element("notebook.row"), 5, "élément épinglé dans le carnet")
         snap("15-carnet-preuves")
-        // Close the sheet by dragging its grabber down.
-        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.08))
-            .press(forDuration: 0.1, thenDragTo: app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.95)))
-        sleep(1)
+        // Close the sheet by swiping its title down.
+        app.staticTexts["Carnet"].firstMatch.swipeDown(velocity: .fast)
+        XCTAssertTrue(element("notebook.accuse").waitForNonExistence(timeout: 5), "Le carnet ne se ferme pas")
+        snap("15b-carnet-ferme")
 
         // Timer → "Accuser maintenant ?"
         dismissUrgentBanner()
