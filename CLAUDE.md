@@ -134,8 +134,8 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
       résultat narratif + score. Affaire #001 « LE DERNIER MESSAGE ».
 - [x] Intégration du handoff v1.0 : tokens, polices, composants, écrans méta, carnet, fin de partie
       (reste : voir DESIGN_INTEGRATION.md §3)
-- [ ] Recherche globale (toutes apps, filtres par date / contact / app)
+- [x] Onboarding 3 étapes, reprise d'une enquête (sauvegarde locale), recherche globale (toutes apps)
 - [ ] Affaires #002–#005 (4 suspects, 5 min) puis #006–#015 (6 suspects, 8–10 min)
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
-- [ ] Monnaie / tickets d'indices, sauvegarde d'une enquête en cours, iCloud
+- [ ] Monnaie / tickets d'indices, iCloud
 - [ ] Sons, haptiques fines, finitions d'animation, accessibilité avancée

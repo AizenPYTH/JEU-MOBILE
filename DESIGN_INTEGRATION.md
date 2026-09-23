@@ -35,6 +35,9 @@ les points où le handoff contredit le brief ou le moteur — **à trancher par 
 | [34] Résultat négatif (alibi, le piège, ce que vous aviez trouvé, ce qui a été manqué par app, Rejouer / Révéler → non classé) | `ResultView` |
 | [35] Score (chiffre qui défile, 5 lignes en cascade, formule du handoff) | `ScoreView`, `Verdict.score` |
 | Pause quand l'app passe en arrière-plan (« Enquête en pause ») | `PauseOverlay` |
+| [01] Onboarding 3 étapes jouables (Explorer : ouvrir Photos + analyser · Épingler : maintenir un message · Accuser : chrono + maintenir), « Passer », premier lancement seulement, « Revoir l'introduction » dans Paramètres | `OnboardingView` |
+| Reprise d'une enquête : sauvegarde (pause, chaque action, toutes les ~5 s), carte « Reprendre l'enquête » sur l'Accueil (temps restant, épinglés, progression), même écran restauré | `InvestigationSnapshot`, `SavedInvestigationStore`, `HomeView` |
+| [11] Recherche globale : pastille « Rechercher » sur l'accueil du téléphone, Messages · Agenda · Notes · Mail · Navigateur · Contacts, puces par app avec compteurs, groupes par app puis date, terme surligné, dates/jours en français, apps verrouillées exclues, coût d'une recherche | `PhoneSearch`, `GlobalSearchView` |
 
 ## 2. Conflits entre le handoff et le brief — décisions du porteur de projet
 
@@ -57,10 +60,9 @@ Accueil → Affaires → Intro → Téléphone → enquête → Carnet → accus
 
 ## 3. Reste à faire (handoff)
 
-- [01] Onboarding en 3 étapes jouables (l'Affaire 000 est reportée).
-- Reprise d'une partie en cours (« Continuer ») : l'enquête n'est pas encore sauvegardée.
-- Recherche **globale** multi-apps avec chips et reconnaissance des dates en français (aujourd'hui :
-  recherche dans Messages uniquement).
+- Affaire 000 (tutoriel jouable de 3 min) : reportée.
+- Recherche : debounce en frappe continue (aujourd'hui une recherche = validation, car elle coûte du
+  temps), résultat ouvert « centré et surligné 2 s » hors Messages.
 - Rail années/mois dans une conversation, « Aller à une date ».
 - Animation d'ouverture d'app (zoom depuis la tuile), transition « Déverrouillage » après l'intro.
 - [24] Écran d'appel entrant plein écran + message vocal.
@@ -82,6 +84,12 @@ Accueil → Affaires → Intro → Téléphone → enquête → Carnet → accus
      analyse → app Notifications → Carnet (Suspects, Preuves) → chrono → « Accuser maintenant ? » →
      accusation (maintenir) → résultat → reconstitution (la preuve épinglée apparaît « trouvée ») →
      score → Dossiers → reconstitution archivée ;
+  3. onboarding : les 3 démos jouées (gestes détectés), puis absent au lancement suivant ;
+  4. reprise : épingler → quitter (arrière-plan) → tuer l'app → 10 s → relancer → « Reprendre » →
+     même écran, carnet intact, chrono repris là où il était (le temps hors de l'app ne compte pas),
+     horloge cohérente → affaire terminée normalement → plus rien à reprendre ;
+  5. recherche globale : « Quai 9 » (agenda + navigateur, pas le message supprimé, −8 s), filtre par
+     app, ouverture du résultat dans l'Agenda, recherche par date « 12 sept » ;
   2. temps écoulé (durée raccourcie en Debug) → écran 00:00 → accusation forcée → mauvais suspect →
      résultat négatif (alibi, piège, manqués par app) → révéler la solution → reconstitution.
 - Défauts trouvés et corrigés grâce à ces passages : chrono invisible dans le téléphone (masqué par
