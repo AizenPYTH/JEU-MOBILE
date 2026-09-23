@@ -35,6 +35,7 @@ public struct RootView: View {
 
     public init() {
         AppFonts.register()
+        UITestHooks.applyAtLaunch()
         // Load into locals first: each stored `let` must be initialised exactly once, and a failure
         // in the second load must not re-assign what the first one already set.
         let loaded: (cases: [CaseFile], rules: GameRules?, error: String?)
@@ -149,8 +150,9 @@ public struct RootView: View {
         Dictionary(uniqueKeysWithValues: session.caseFile.suspects.map { ($0.id, session.game.name(of: $0.contact)) })
     }
 
-    private func start(_ file: CaseFile) {
+    private func start(_ original: CaseFile) {
         guard let rules else { return }
+        let file = UITestHooks.adjusted(original)
         let session = GameSession(caseFile: file, rules: rules) { verdict in
             guard case .playing(let session) = stage else { return }
             let attempt = Attempt(caseID: file.id, date: .now, score: verdict.score, solved: verdict.isCorrect,
@@ -171,6 +173,28 @@ public struct RootView: View {
         var revealed = play
         revealed.revealed = true
         stage = .result(revealed)
+    }
+}
+
+/// Launch arguments used by the UI tests (Debug builds only; ignored in Release):
+/// `-UITestReset YES` clears the saved attempts, `-UITestDuration <seconds>` shortens every case.
+enum UITestHooks {
+    static func applyAtLaunch() {
+        #if DEBUG
+        if UserDefaults.standard.bool(forKey: "UITestReset") { ProgressStore.reset() }
+        #endif
+    }
+
+    static func adjusted(_ file: CaseFile) -> CaseFile {
+        #if DEBUG
+        let seconds = UserDefaults.standard.integer(forKey: "UITestDuration")
+        if seconds > 0 {
+            var copy = file
+            copy.durationSeconds = seconds
+            return copy
+        }
+        #endif
+        return file
     }
 }
 

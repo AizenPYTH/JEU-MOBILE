@@ -91,6 +91,7 @@ struct AccusationView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityAddTraits(isSelected ? .isSelected : [])
+                    .accessibilityIdentifier("accuse.suspect.\(suspect.id)")
                 }
             }
 
@@ -100,6 +101,7 @@ struct AccusationView: View {
                 HoldToConfirmButton(title: L10n.t("accuse.hold"), disabledTitle: L10n.t("accuse.select"), enabled: selected != nil) {
                     if let selected { session.accuse(selected) }
                 }
+                .accessibilityIdentifier("accuse.hold")
                 if timeLeft {
                     Button(L10n.t("accuse.back")) { session.resumeInvestigation() }
                         .buttonStyle(TertiaryButtonStyle())
@@ -154,6 +156,7 @@ struct ResultView: View {
                     RevealTimeline(steps: caseFile.solution.reveal, found: verdict.foundEvidenceIDs, shown: shownSteps)
                     Button(revealed ? L10n.t("result.replay") : L10n.t("result.seeScore"), action: revealed ? onReplay : onScore)
                         .buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
+                        .accessibilityIdentifier("result.primary")
                         .opacity(shownSteps >= caseFile.solution.reveal.count ? 1 : 0.4)
                 } else {
                     wrongAnswer
@@ -208,7 +211,9 @@ struct ResultView: View {
                 }
             }
             Button(L10n.t("result.replay"), action: onReplay).buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
+                .accessibilityIdentifier("result.replay")
             Button(L10n.t("result.reveal")) { confirmReveal = true }
+                .accessibilityIdentifier("result.reveal")
                 .buttonStyle(TertiaryButtonStyle())
                 .frame(maxWidth: .infinity)
         }
@@ -290,6 +295,7 @@ struct ScoreView: View {
                 .monospacedDigit()
                 .foregroundStyle(Theme.Colors.textPrimary)
                 .contentTransition(.numericText())
+                .accessibilityIdentifier("score.value")
             VStack(spacing: 0) {
                 scoreRow(0, L10n.t("score.suspect"), verdict.isCorrect ? "✓ +\(verdict.scoreParts.suspect)" : "✕ 0")
                 scoreRow(1, L10n.t("score.time"), "\(PhoneFormat.countdown(Double(verdict.remainingSeconds))) · +\(verdict.scoreParts.time)")
@@ -301,6 +307,7 @@ struct ScoreView: View {
             HStack(spacing: Theme.Spacing.s3) {
                 Button(L10n.t("result.replay"), action: onReplay).buttonStyle(SecondaryButtonStyle())
                 Button(L10n.t("score.next"), action: onNext).buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
+                    .accessibilityIdentifier("score.next")
             }
         }
         .padding(.horizontal, Theme.Spacing.marginGame)

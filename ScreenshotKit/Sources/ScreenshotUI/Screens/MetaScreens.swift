@@ -100,6 +100,7 @@ struct HomeView: View {
 
             VStack(spacing: 0) {
                 menuRow(L10n.t("menu.cases"), value: "\(progress.values.filter(\.solved).count)") { onNavigate(.cases) }
+                    .accessibilityIdentifier("menu.cases")
                 menuRow(L10n.t("menu.archive"), value: "\(attemptsCount)") { onNavigate(.archive) }
                 menuRow(L10n.t("menu.profile"), value: nil) { onNavigate(.profile) }
                 menuRow(L10n.t("menu.settings"), value: nil) { onNavigate(.settings) }
@@ -146,6 +147,7 @@ struct HomeView: View {
             Text(file.tagline).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary).lineLimit(2)
             Button(L10n.t("home.start")) { onStart(file) }
                 .buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
+                .accessibilityIdentifier("home.start")
                 .padding(.top, Theme.Spacing.s2)
         }
         .padding(Theme.Spacing.s5)
@@ -176,6 +178,7 @@ struct CasesView: View {
                     ForEach(visible) { file in
                         Button { onOpen(file) } label: { CaseCard(file: file, progress: progress[file.id]) }
                             .buttonStyle(.plain)
+                            .accessibilityIdentifier("case.\(file.id)")
                     }
                     if visible.isEmpty {
                         EmptyStateView(title: L10n.t("cases.emptyTitle"), message: L10n.t("cases.emptyMessage"))
@@ -293,6 +296,7 @@ struct CaseIntroView: View {
                     .accessibilityLabel(Text(L10n.f("a11y.duration", caseFile.durationSeconds / 60)))
             }
             Button(L10n.t("intro.start"), action: onStart)
+                .accessibilityIdentifier("intro.start")
                 .buttonStyle(PrimaryButtonStyle())
         }
         .padding(.horizontal, Theme.Spacing.marginGame)

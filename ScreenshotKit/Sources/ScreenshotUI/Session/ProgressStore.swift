@@ -57,6 +57,10 @@ enum ProgressStore {
         save(attempts().map { var a = $0; if a.id == id { a.ranked = false }; return a })
     }
 
+    static func reset() {
+        UserDefaults.standard.removeObject(forKey: key)
+    }
+
     private static func save(_ attempts: [Attempt]) {
         if let data = try? JSONEncoder().encode(attempts) {
             UserDefaults.standard.set(data, forKey: key)

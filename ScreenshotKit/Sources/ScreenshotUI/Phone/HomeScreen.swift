@@ -158,6 +158,7 @@ struct AppTile: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(Text(badge > 0 ? L10n.f("a11y.appBadge", app.title, badge) : app.title))
+        .accessibilityIdentifier("app.\(app.rawValue)")
     }
 }
 #endif

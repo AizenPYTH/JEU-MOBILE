@@ -45,6 +45,7 @@ struct MessagesListView: View {
                             ConversationRow(summary: summary, game: game)
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("conversation.\(summary.id)")
                     }
                 }
             }
@@ -422,6 +423,7 @@ struct MessageBubble: View {
         .padding(.bottom, lastOfGroup ? 6 : 0)
         .accessibilityElement(children: .combine)
         .accessibilityLabel(Text("\(session.game.name(of: message.from)), \(PhoneFormat.time(message.at)) : \(message.text ?? L10n.t("item.photo"))"))
+        .accessibilityIdentifier("message.\(message.id)")
     }
 }
 

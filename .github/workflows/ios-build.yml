@@ -1,6 +1,7 @@
-# Compiles the iOS app (ScreenshotUI included) for the simulator on every push that touches the app.
-# No signing, no upload: this is the "does the interface compile?" check.
-# Compiler errors are listed in the job summary and the full log is kept as an artifact.
+# Compiles the iOS app (ScreenshotUI included) for the simulator on every push that touches the app,
+# then plays the main path on a simulator (ScreenshotUITests) and keeps a screenshot of every step.
+# No signing, no upload. Compiler errors and test failures are listed in the job summary; the build
+# log, the test result bundle and the screenshots are kept as artifacts.
 name: iOS – Compile
 
 on:
@@ -8,6 +9,7 @@ on:
     paths:
       - "ScreenshotKit/**"
       - "Screenshot/**"
+      - "ScreenshotUITests/**"
       - "Screenshot.xcodeproj/**"
       - "Configs/**"
       - ".github/workflows/ios-build.yml"
@@ -20,7 +22,7 @@ concurrency:
 jobs:
   compile:
     runs-on: ${{ vars.MACOS_RUNNER || 'macos-15' }}
-    timeout-minutes: 40
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -55,6 +57,63 @@ jobs:
           echo "---- tail ----"
           tail -60 "$RUNNER_TEMP/build.log"
           exit $status
+
+      - name: Pick an iPhone simulator
+        id: sim
+        run: |
+          UDID=$(xcrun simctl list devices available -j | python3 -c '
+          import json, sys
+          devices = json.load(sys.stdin)["devices"]
+          ios = sorted((r for r in devices if "iOS" in r), key=lambda r: [int(x) for x in r.split("iOS-")[-1].split("-")])
+          for runtime in reversed(ios):
+              for d in devices[runtime]:
+                  if d["name"].startswith("iPhone") and "Pro" not in d["name"] and "Plus" not in d["name"] and "Max" not in d["name"]:
+                      print(d["udid"]); sys.exit()
+          ')
+          echo "Simulator: $UDID"
+          xcrun simctl list devices | grep "$UDID" || true
+          echo "udid=$UDID" >> "$GITHUB_OUTPUT"
+
+      - name: UI tests on the simulator (main path)
+        run: |
+          set +e
+          xcodebuild test \
+            -project Screenshot.xcodeproj -scheme Screenshot -configuration Debug \
+            -destination "id=${{ steps.sim.outputs.udid }}" \
+            -resultBundlePath "$RUNNER_TEMP/UITests.xcresult" \
+            -skipPackagePluginValidation > "$RUNNER_TEMP/uitests.log" 2>&1
+          status=$?
+          set -e
+          echo "### UI tests: $( [ $status -eq 0 ] && echo PASSED || echo FAILED )" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          grep -E "Test Case .*(passed|failed)|error:|XCTAssert|Missing:|crash|Crash" "$RUNNER_TEMP/uitests.log" | head -80 >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "---- results ----"
+          grep -E "Test Case .*(passed|failed)|error:|Missing:|crash|Crash|Executed" "$RUNNER_TEMP/uitests.log" | head -120
+          echo "---- tail ----"
+          tail -40 "$RUNNER_TEMP/uitests.log"
+          mkdir -p "$RUNNER_TEMP/screenshots"
+          xcrun xcresulttool export attachments --path "$RUNNER_TEMP/UITests.xcresult" --output-path "$RUNNER_TEMP/screenshots" || true
+          ls "$RUNNER_TEMP/screenshots" | head -80
+          exit $status
+
+      - name: Keep the UI test screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-screenshots
+          path: ${{ runner.temp }}/screenshots
+          retention-days: 14
+
+      - name: Keep the UI test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-test-results
+          path: |
+            ${{ runner.temp }}/uitests.log
+            ${{ runner.temp }}/UITests.xcresult
+          retention-days: 7
 
       - name: Keep the build log
         if: always()

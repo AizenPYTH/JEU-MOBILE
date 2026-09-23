@@ -157,6 +157,7 @@ struct StatusBar: View {
             .buttonStyle(.plain)
             .accessibilityLabel(Text(L10n.f("a11y.timer", PhoneFormat.countdown(session.remainingSeconds))))
             .accessibilityHint(Text(L10n.t("a11y.timerHint")))
+            .accessibilityIdentifier("phone.timer")
 
             if let cost = session.lastCost {
                 Text(L10n.f("bar.cost", cost.seconds))
@@ -265,6 +266,7 @@ struct CarnetBar: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel(Text(L10n.f("a11y.carnet", count)))
+            .accessibilityIdentifier("phone.carnet")
 
             Rectangle().fill(Theme.Colors.line2).frame(width: 1, height: 22)
 
@@ -310,6 +312,7 @@ struct HomeIndicator: View {
             .accessibilityLabel(Text(L10n.t("a11y.home")))
             .accessibilityAddTraits(.isButton)
             .accessibilityAction { action() }
+            .accessibilityIdentifier("phone.home")
     }
 }
 
@@ -346,6 +349,7 @@ struct NotificationBanner: View {
                 HStack(spacing: Theme.Spacing.s3) {
                     Button(L10n.t("notif.open")) { session.open(notification) }
                         .buttonStyle(UrgentActionStyle(filled: true))
+                        .accessibilityIdentifier("banner.open")
                     Button("◆ " + L10n.t("pin.add")) {
                         if let ref = notification.opens { session.togglePin(ref) }
                         session.dismissBanner()
@@ -376,8 +380,9 @@ struct NotificationBanner: View {
         .gesture(DragGesture(minimumDistance: 10).onEnded { value in
             if value.translation.height < -10 { session.dismissBanner() }
         })
-        .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(.isButton)
+        .accessibilityElement(children: urgent ? .contain : .combine)
+        .accessibilityAddTraits(urgent ? [] : .isButton)
+        .accessibilityIdentifier("phone.banner")
     }
 }
 

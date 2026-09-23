@@ -13,12 +13,28 @@
 /* Begin PBXFileReference section */
 		B15700000000000000000003 /* Screenshot.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Screenshot.xcconfig; sourceTree = "<group>"; };
 		B15700000000000000000001 /* Screenshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Screenshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B15700000000000000000004 /* ScreenshotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScreenshotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXContainerItemProxy section */
+		B15700000000000000000090 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B15700000000000000000060 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B15700000000000000000040;
+			remoteInfo = Screenshot;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B15700000000000000000002 /* Screenshot */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Screenshot;
+			sourceTree = "<group>";
+		};
+		B15700000000000000000005 /* ScreenshotUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ScreenshotUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +48,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B15700000000000000000024 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -39,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				B15700000000000000000002 /* Screenshot */,
+				B15700000000000000000005 /* ScreenshotUITests */,
 				B15700000000000000000032 /* Configs */,
 				B15700000000000000000031 /* Products */,
 			);
@@ -48,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				B15700000000000000000001 /* Screenshot.app */,
+				B15700000000000000000004 /* ScreenshotUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,6 +111,29 @@
 			productReference = B15700000000000000000001 /* Screenshot.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B15700000000000000000041 /* ScreenshotUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B15700000000000000000052 /* Build configuration list for PBXNativeTarget "ScreenshotUITests" */;
+			buildPhases = (
+				B15700000000000000000023 /* Sources */,
+				B15700000000000000000024 /* Frameworks */,
+				B15700000000000000000025 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B15700000000000000000091 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B15700000000000000000005 /* ScreenshotUITests */,
+			);
+			name = ScreenshotUITests;
+			packageProductDependencies = (
+			);
+			productName = ScreenshotUITests;
+			productReference = B15700000000000000000004 /* ScreenshotUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -98,6 +146,10 @@
 				TargetAttributes = {
 					B15700000000000000000040 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					B15700000000000000000041 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = B15700000000000000000040;
 					};
 				};
 			};
@@ -120,12 +172,20 @@
 			projectRoot = "";
 			targets = (
 				B15700000000000000000040 /* Screenshot */,
+				B15700000000000000000041 /* ScreenshotUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B15700000000000000000022 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B15700000000000000000025 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -142,7 +202,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B15700000000000000000023 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B15700000000000000000091 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B15700000000000000000040 /* Screenshot */;
+			targetProxy = B15700000000000000000090 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B15700000000000000000080 /* Debug */ = {
@@ -258,6 +333,38 @@
 			};
 			name = Release;
 		};
+		B15700000000000000000084 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aizenpyth.screenshot.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = Screenshot;
+			};
+			name = Debug;
+		};
+		B15700000000000000000085 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aizenpyth.screenshot.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = Screenshot;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -275,6 +382,15 @@
 			buildConfigurations = (
 				B15700000000000000000080 /* Debug */,
 				B15700000000000000000081 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B15700000000000000000052 /* Build configuration list for PBXNativeTarget "ScreenshotUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B15700000000000000000084 /* Debug */,
+				B15700000000000000000085 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

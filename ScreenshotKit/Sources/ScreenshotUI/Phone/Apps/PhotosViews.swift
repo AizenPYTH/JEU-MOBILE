@@ -26,6 +26,7 @@ struct PhotosGridView: View {
                                         .clipped()
                                 }
                                 .buttonStyle(.plain)
+                                .accessibilityIdentifier("photo.\(photo.id)")
                                 .pinnable(ItemRef(.photo, photo.id), session: session, radius: 0)
                             }
                         }
@@ -96,6 +97,7 @@ struct PhotoDetailView: View {
                         .buttonStyle(.plain)
                         .foregroundStyle(Theme.Colors.signal)
                         .padding(.horizontal, Theme.Spacing.s5)
+                        .accessibilityIdentifier("photo.analyze")
                     }
                 }
                 .padding(.bottom, Theme.Spacing.s7)

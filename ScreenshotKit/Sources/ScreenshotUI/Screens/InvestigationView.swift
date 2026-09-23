@@ -82,6 +82,7 @@ struct AccuseNowSheet: View {
             Text(L10n.f("accuseNow.bonus", bonus)).font(Theme.Fonts.narrativeSmall).foregroundStyle(Theme.Colors.textSecondary)
             Spacer(minLength: 0)
             Button(L10n.t("accuseNow.confirm"), action: onAccuse).buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
+                .accessibilityIdentifier("accuseNow.confirm")
             Button(L10n.t("accuseNow.cancel"), action: onCancel).buttonStyle(TertiaryButtonStyle()).frame(maxWidth: .infinity)
         }
         .padding(Theme.Spacing.marginGame)
@@ -112,6 +113,7 @@ struct NotebookView: View {
                 }
                 Button(L10n.t("carnet.accuse"), action: onAccuse)
                     .buttonStyle(SecondaryButtonStyle(tint: Theme.Colors.textPrimary))
+                    .accessibilityIdentifier("notebook.accuse")
             }
             .padding(Theme.Spacing.marginList)
             .background(Theme.Colors.ink0.ignoresSafeArea())
@@ -158,6 +160,7 @@ struct NotebookView: View {
                     EvidenceRow(item: row.item, linkedName: row.entry.linkedTo.flatMap { id in
                         session.caseFile.suspects.first { $0.id == id }.map { game.name(of: $0.contact) }
                     }, timeline: chronological)
+                    .accessibilityIdentifier("notebook.row")
                     .contextMenu {
                         ForEach(session.caseFile.suspects) { suspect in
                             Button(game.name(of: suspect.contact)) { session.link(row.entry.ref, to: suspect.id) }
