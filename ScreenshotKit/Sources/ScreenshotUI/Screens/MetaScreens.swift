@@ -198,6 +198,7 @@ struct CaseCover: View {
     let countdown: Double
     /// Resume card: the time left in amber.
     let highlight: Bool
+    var height: CGFloat = 150
 
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)
@@ -217,7 +218,7 @@ struct CaseCover: View {
                 }
             }
         }
-        .frame(height: 150)
+        .frame(height: height)
         .clipShape(shape)
         .overlay(shape.strokeBorder(Theme.Colors.line2))
         .overlay(alignment: .bottomTrailing) {
@@ -289,6 +290,7 @@ struct CaseCard: View {
         let solved = progress?.solved == true
         let perfect = (progress?.bestScore ?? 0) >= 100
         VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+            CaseCover(file: file, countdown: Double(file.durationSeconds), highlight: false, height: 120)
             HStack {
                 Text(L10n.f("home.caseOverline", caseNumber(file.number))).overline(Theme.Colors.signal)
                 Spacer()
