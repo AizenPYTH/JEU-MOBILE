@@ -27,7 +27,7 @@ struct OnboardingView: View {
             }
             .id(step)
             .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .opacity))
-            .frame(maxHeight: .infinity)
+            .frame(maxHeight: .infinity, alignment: .top)
 
             Button(step == .accuse ? L10n.t("onboarding.start") : L10n.t("onboarding.continue")) { advance() }
                 .buttonStyle(PrimaryButtonStyle())
@@ -190,8 +190,7 @@ private struct PinDemo: View {
             DemoStage {
                 VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
                     bubble(L10n.t("onboarding.pin.msg1"), mine: true)
-                    bubble(L10n.t("onboarding.pin.msg2"), mine: false)
-                        .pinnedRing(pinned, radius: Theme.Radius.bubble)
+                    bubble(L10n.t("onboarding.pin.msg2"), mine: false, pinned: pinned)
                         .scaleEffect(pinned ? 1 : 0.99)
                         .onLongPressGesture(minimumDuration: 0.45) {
                             guard !pinned else { return }
@@ -228,7 +227,7 @@ private struct PinDemo: View {
         .animation(Theme.Motion.emphasized(0.3), value: pinned)
     }
 
-    private func bubble(_ text: String, mine: Bool) -> some View {
+    private func bubble(_ text: String, mine: Bool, pinned: Bool = false) -> some View {
         Text(text)
             .font(Theme.Fonts.body)
             .foregroundStyle(mine ? Theme.Colors.textOnLight : Theme.Colors.textPrimary)
@@ -236,6 +235,7 @@ private struct PinDemo: View {
             .padding(.vertical, 10)
             .background(RoundedRectangle(cornerRadius: Theme.Radius.bubble, style: .continuous)
                 .fill(mine ? Theme.Colors.textPrimary : Theme.Colors.bgBubbleIn))
+            .pinnedRing(pinned, radius: Theme.Radius.bubble)
             .frame(maxWidth: .infinity, alignment: mine ? .trailing : .leading)
     }
 }
