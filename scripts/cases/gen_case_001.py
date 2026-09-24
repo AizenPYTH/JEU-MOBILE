@@ -297,6 +297,14 @@ places = [
     dict(id="pl_gare", name="Gare centrale", kind="station", x=0.58, y=0.52),
     dict(id="pl_local", name="Local du collectif Lumen", kind="shop", x=0.52, y=0.72),
 ]
+# Real coordinates (the phone's map is a real city). A place with `revealedBy` stays off the map
+# until the player has come across it elsewhere (a photo, an event, a search, a location history).
+COORDS = {'pl_home_alex': (43.2855, 5.3795, None), 'pl_levant': (43.294, 5.3833, None), 'pl_home_emma': (43.289, 5.3785, ['photoInfo:p_invoice', 'photoInfo:p_emma_couch', 'track:t_emma']), 'pl_home_lucas': (43.3, 5.401, None), 'pl_quai9': (43.317, 5.362, ['calendar:c_quai9', 'browser:w15', 'message:m_emma_del1', 'photo:p_parking']), 'pl_rocade': (43.328, 5.405, ['track:t_lucas']), 'pl_lilas': (43.277, 5.4, ['photoInfo:p_sarah_jade', 'track:t_sarah']), 'pl_hotel': (43.295, 5.373, ['photoInfo:p_karim_desk', 'track:t_karim']), 'pl_varenne': (43.299, 5.38, None), 'pl_bloc': (43.28, 5.415, None), 'pl_gare': (43.303, 5.3805, None), 'pl_local': (43.2975, 5.39, None)}
+for pl in places:
+    lat, lon, revealed = COORDS[pl["id"]]
+    pl["latitude"], pl["longitude"] = lat, lon
+    if revealed:
+        pl["revealedBy"] = revealed
 tracks = [
     dict(id="t_me", contact="me", points=[
         dict(id="tp_me_1", at=t(11, "08:52"), place="pl_varenne"),
@@ -343,8 +351,11 @@ tracks = [
 
 # ---------------------------------------------------------------- photos
 photos = []
-def photo(pid, taken, scene, caption, details, source="camera", place=None, frm=None, received=None, device="iPhone 13"):
+def photo(pid, taken, scene, caption, details, source="camera", place=None, frm=None, received=None, device="iPhone 13",
+          style=None, lines=None):
     p = dict(id=pid, takenAt=taken, source=source, scene=scene, caption=caption, details=details)
+    if style: p["style"] = style
+    if lines: p["lines"] = lines
     if place: p["place"] = place
     if frm: p["from"] = frm
     if received: p["receivedAt"] = received
@@ -384,6 +395,52 @@ banal = [
 for pid, taken, scene, cap, det, place in banal:
     photo(pid, taken, scene, cap, det, place=place)
 
+# What can be read on the screenshots.
+LINES = {
+    "p_b08": ["BLOC OUT", "Horaires", "Lun – Ven   10:00 – 23:00", "Sam – Dim   09:00 – 21:00", "Fermé les jours fériés"],
+    "p_b21": ["Météo — Marseille", "Lun  ☀  27°", "Mar  ☀  28°", "Mer  ☀  26°", "Sam  ⛅  24°", "Dim  ⛈  19°"],
+}
+for p in photos:
+    if p["id"] in LINES:
+        p["lines"] = LINES[p["id"]]
+
+# A real camera roll: years of photos, selfies, blurred shots, pockets, receipts, screenshots.
+def at(year, month, day, hm):
+    return f"{year}-{month:02d}-{day:02d} {hm}"
+
+noise = [
+    ("p_old01", at(2019, 7, 14, "22:41"), "sky", "Feu d'artifice du 14 juillet, 2019.", "Des traînées floues au-dessus du port.", "Vieux-Port", "old", None),
+    ("p_old02", at(2020, 4, 2, "16:10"), "interior_warm", "Confinement : le salon de l'ancien appartement.", "Des cartons, une guitare contre le mur.", None, "old", None),
+    ("p_old03", at(2021, 8, 9, "11:25"), "beach", "Plage des Catalans, août 2021.", "Des serviettes, un parasol rayé.", "Plage des Catalans", "old", None),
+    ("p_old04", at(2022, 12, 24, "20:05"), "interior_warm", "Réveillon chez Maman.", "Une table dressée, des bougies.", None, "old", None),
+    ("p_old05", at(2023, 2, 11, "09:40"), "snow", "Neige à la montagne, février 2023.", "Des sapins blancs, un télésiège au loin.", None, "old", None),
+    ("p_old06", at(2024, 6, 21, "23:12"), "concert", "Fête de la musique 2024.", "Une foule, des lumières rouges.", None, "old", None),
+    ("p_old07", at(2024, 10, 3, "18:30"), "group", "Premier accrochage du collectif Lumen.", "Quatre silhouettes devant un mur blanc.", "Local du collectif Lumen", "old", None),
+    ("p_self01", t(19, "08:02", 8), "mirror", "Selfie dans le miroir de l'ascenseur.", "Alex, un café à la main, l'air pas réveillé.", "Agence Varenne", "selfie", None),
+    ("p_self02", t(29, "17:48", 8), "beach", "Selfie à la plage avec Lucas.", "Deux silhouettes à contre-jour, cheveux mouillés.", "Plage des Catalans", "selfie", None),
+    ("p_self03", t(6, "13:15"), "selfie", "Selfie après le vernissage, cernes comprises.", "Le visage est flou, l'arrière-plan net.", "Domicile", "selfie", None),
+    ("p_blur01", t(22, "23:58", 8), "pocket", "Photo prise dans une poche.", "Tout est noir avec une lueur orange.", None, "blurry", None),
+    ("p_blur02", t(31, "07:12", 8), "ceiling", "Le plafond de la chambre.", "Photo prise par erreur au réveil.", "Domicile", "blurry", None),
+    ("p_blur03", t(12, "21:22"), "bar", "Le Levant, photo ratée.", "Un bras, une lampe, des reflets. Rien d'utile.", "Le Levant", "blurry", None),
+    ("p_quick01", t(27, "12:05", 8), "street_day", "Une affiche de concert, prise en passant.", "« Nuits du Port — 18 septembre ».", None, "quick", None),
+    ("p_quick02", t(9, "13:02"), "car", "Une voiture mal garée devant l'agence.", "Une berline noire sur le trottoir.", "Agence Varenne", "quick", None),
+    ("p_night01", t(4, "23:40"), "street_night", "La rue en bas, depuis la fenêtre.", "Un scooter passe, trois réverbères.", "Domicile", "night", None),
+    ("p_night02", t(11, "22:15"), "view", "La ville depuis le toit de l'immeuble.", "Des lumières jusqu'à la mer.", "Domicile", "night", None),
+    ("p_doc01", t(3, "12:40"), "receipt", "Ticket de caisse — supérette.", "Pâtes, café, lessive. 23,40 €.", None, "document",
+     ["PROXI MARCHÉ", "03/09/2026  12:38", "PÂTES 500G      1,20", "CAFÉ MOULU      4,90", "LESSIVE        11,30", "PAIN            1,10", "TOTAL          23,40 €"]),
+    ("p_doc02", t(28, "10:20", 8), "document", "Attestation d'assurance habitation.", "Pour le propriétaire.", "Domicile", "document",
+     ["ATTESTATION D'ASSURANCE", "Habitation — Formule Essentielle", "Assuré : M. Alex Moreau", "Adresse : rue Vauban, Marseille", "Valable du 01/09/2026 au 31/08/2027"]),
+    ("p_scr01", t(24, "22:30", 8), "screenshot", "Capture : un mème envoyé par Tom.", "Un chat en baudrier. « Moi au premier dévers ».", None, "screenshot",
+     ["Tom Delorme", "Moi au premier dévers 😭", "Réaction : 😂 3"]),
+    ("p_scr02", t(2, "08:14"), "screenshot", "Capture : itinéraire vers l'agence.", "18 min en vélo.", None, "screenshot",
+     ["Itinéraires", "Domicile → Agence Varenne", "🚲  18 min · 4,2 km", "🚶  52 min", "🚌  24 min · ligne 12"]),
+    ("p_scr03", t(11, "12:31"), "screenshot", "Capture : confirmation de commande.", "Des sangles pour le pied photo.", None, "screenshot",
+     ["Commande confirmée", "N° 48-22917", "Sangle trépied ×2", "Livraison : mardi 15 septembre", "Total : 18,90 €"]),
+]
+for pid, taken, scene, cap, det, place, style, lines in noise:
+    photo(pid, taken, scene, cap, det, place=place, style=style, lines=lines,
+          device="iPhone 8" if taken < "2022" else "iPhone 13")
+
 photo("p_lucas_car", t(23, "11:43", 8), "car", "La Clio grise de Lucas, sortie du garage.",
       "Une petite citadine grise, carrosserie propre. La plaque est à moitié cachée par un vélo.",
       source="received", frm="lucas", received=t(23, "11:45", 8), place="Garage Martin", device="Pixel 7")
@@ -392,16 +449,17 @@ photo("p_vernissage", t(5, "20:12"), "group", "Vernissage Lumen : Emma, Inès et
       source="received", frm="ines", received=t(6, "11:05"), place="Local du collectif Lumen", device="iPhone 12")
 photo("p_invoice", t(9, "18:20"), "document", "Photo d'une facture « Studio Nova » n°114.",
       "Facture de 1 650 € pour « prestations de tirage ». Signature « E.R. — trésorière ». L'adresse de Studio Nova est rue Paradis.",
-      place="Domicile")
+      place="Domicile", style="document",
+      lines=["STUDIO NOVA", "FACTURE N° 114", "Prestations de tirage", "Total TTC  1 650,00 €"])
 photo("p_bar_selfie", t(12, "20:12"), "group", "Selfie au Levant : Alex, Lucas, Sarah, Karim, Inès, Tom.",
       "Tout le monde sourit. Karim a déjà sa veste de travail sur le bras. Emma n'est pas là.",
-      place="Le Levant")
+      place="Le Levant", style="selfie")
 photo("p_emma_couch", t(12, "19:42"), "bed", "Emma sous la couette, une tasse fumante, la télé allumée.",
       "Par la fenêtre derrière le lit, le ciel est encore clair : il fait jour dehors. L'horloge du décodeur, en bas de la télé, est illisible.",
       source="received", frm="emma", received=t(12, "22:30"), place="Rue Paradis", device="iPhone 14")
 photo("p_parking", t(12, "22:18"), "parking_night", "Le parking du Quai 9, de nuit.",
       "Au fond, les feux arrière d'une petite citadine grise qui repart. Près de la barrière, une silhouette dans une veste claire.",
-      place="Parking du Quai 9")
+      place="Parking du Quai 9", style="night")
 photo("p_sarah_jade", t(12, "22:19"), "party", "L'anniversaire de Jade : ballons et guirlandes.",
       "Sarah est au premier plan avec sa sœur Jade. Guirlandes lumineuses, une vingtaine d'invités.",
       source="received", frm="sarah", received=t(12, "22:21"), place="Rue des Lilas", device="iPhone 15")
@@ -645,6 +703,25 @@ solution = dict(
     ],
 )
 
+# ---------------------------------------------------------------- opening sequence
+intro = dict(shots=[
+    dict(kind="title", seconds=4.5, ambience=["street", "sirens"],
+         lines=[dict(text="DIMANCHE 13 SEPTEMBRE · 09:52", at=0.4),
+                dict(text="Zone portuaire, Marseille.", at=1.6)]),
+    dict(kind="broadcast", seconds=11, ambience=["street", "crowd", "sirens"], scene="parking_night",
+         channel="INFO 24", label="09:54", location="Zone portuaire — Parking du Quai 9",
+         headline="Un homme de 26 ans porté disparu", ticker="Disparition à Marseille : la police lance un appel à témoins",
+         lines=[dict(text="Nous sommes devant le parking du Quai 9, où le téléphone d'Alex Moreau a été retrouvé ce matin.", at=0.6, speaker="Reporter", voiced=True),
+                dict(text="Le jeune homme n'a plus donné signe de vie depuis samedi soir.", at=5.2, speaker="Reporter", voiced=True),
+                dict(text="Les enquêteurs espèrent que son téléphone parlera.", at=8.4, speaker="Reporter", voiced=True)]),
+    dict(kind="title", seconds=1.6, cues=[dict(sound="vibrate", at=0.9)]),
+    dict(kind="phoneOnTable", seconds=6, label="SCELLÉ N°3\nTéléphone de A. Moreau",
+         cues=[dict(sound="vibrate", at=2.0), dict(sound="notification", at=2.1)],
+         notification=dict(app="messages", title="Maman", body="Je suis très inquiète", at=2.0),
+         lines=[dict(text="Vous avez quelques minutes.", at=3.6)]),
+    dict(kind="unlock", seconds=2.4),
+])
+
 case = dict(
     schemaVersion=1, id="case_001", number=1, title="LE DERNIER MESSAGE",
     tagline="Alex ne donne plus signe de vie depuis samedi soir.",
@@ -655,6 +732,8 @@ case = dict(
     ],
     objective="Identifier la personne qui a vu Alex en dernier.",
     difficulty=1, durationSeconds=480, phoneStartTime=t(13, "10:00"),
+    challengeDurations={"investigator": 900, "detective": 480, "expert": 300},
+    introScene=intro,
     devices=[device], suspects=suspects, evidence=evidence, hints=hints, solution=solution,
 )
 with open(OUT, "w", encoding="utf-8") as f:

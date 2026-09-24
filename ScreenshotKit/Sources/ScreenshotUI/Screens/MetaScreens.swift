@@ -326,25 +326,36 @@ struct CaseCard: View {
     }
 }
 
-// MARK: - 04 · Intro
+// MARK: - 04 · Intro — the case, then the challenge
 
-/// ink.0 background; overline, display title, serif sentences fading in one by one (a tap shows all),
-/// suspects, whose phone and when, the duration in mono; the CTA is active right away.
+/// The case before it starts: the story (serif lines fading in, a tap shows all), the objective,
+/// the suspects, then "Choisissez votre défi" — the same case at three durations, each with the
+/// player's best result there. An investigation in progress on this case can be resumed.
 struct CaseIntroView: View {
     let caseFile: CaseFile
-    let onStart: () -> Void
+    let durations: [Challenge: Int]
+    let unlocked: Set<Challenge>
+    let levels: [Challenge: LevelProgress]
+    /// The investigation in progress on this case, if any.
+    let saved: SavedInvestigation?
+    let onStart: (Challenge) -> Void
+    let onResume: () -> Void
     let onClose: () -> Void
+
     @State private var shownLines = 0
+    @State private var selected: Challenge = .detective
+    @State private var confirmRestart = false
 
     var body: some View {
         let lines = caseFile.synopsis
-        VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
+        VStack(alignment: .leading, spacing: 0) {
             Button(action: onClose) {
                 Image(systemName: "xmark").font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textSecondary)
                     .frame(width: Theme.Size.hit, height: Theme.Size.hit)
             }
             .buttonStyle(.plain)
             .accessibilityLabel(Text(L10n.t("a11y.close")))
+            .padding(.horizontal, Theme.Spacing.marginGame - 10)
 
             ScrollView {
                 VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
@@ -360,28 +371,26 @@ struct CaseIntroView: View {
                         .font(Theme.Fonts.callout)
                         .foregroundStyle(Theme.Colors.signal)
                         .opacity(shownLines >= lines.count ? 1 : 0)
+                    suspects
+                    challengePicker
                 }
+                .padding(.horizontal, Theme.Spacing.marginGame)
+                .padding(.bottom, Theme.Spacing.s6)
             }
+            .contentShape(Rectangle())
+            .onTapGesture { shownLines = lines.count }
 
-            VStack(alignment: .leading, spacing: Theme.Spacing.s2) {
-                suspects
-                if let device = caseFile.devices.first {
-                    Text(L10n.f("intro.handedOver", device.label, PhoneFormat.dayAndTime(caseFile.phoneStartTime)))
-                        .font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
-                }
-                Text(PhoneFormat.countdown(Double(caseFile.durationSeconds)))
-                    .font(Theme.Fonts.timerIntro)
-                    .foregroundStyle(Theme.Colors.textPrimary)
-                    .accessibilityLabel(Text(L10n.f("a11y.duration", caseFile.durationSeconds / 60)))
-            }
-            Button(L10n.t("intro.start"), action: onStart)
-                .accessibilityIdentifier("intro.start")
-                .buttonStyle(PrimaryButtonStyle())
+            actions
+                .padding(.horizontal, Theme.Spacing.marginGame)
+                .padding(.top, Theme.Spacing.s3)
+                .padding(.bottom, Theme.Spacing.s5)
+                .background(Theme.Colors.ink0)
         }
-        .padding(.horizontal, Theme.Spacing.marginGame)
-        .padding(.bottom, Theme.Spacing.s5)
-        .contentShape(Rectangle())
-        .onTapGesture { shownLines = lines.count }
+        .confirmationDialog(L10n.t("intro.restartTitle"), isPresented: $confirmRestart, titleVisibility: .visible) {
+            Button(L10n.t("intro.restartConfirm"), role: .destructive) { onStart(selected) }
+        } message: {
+            Text(L10n.t("intro.restartMessage"))
+        }
         .task {
             for index in 1...max(1, lines.count) {
                 try? await Task.sleep(for: .seconds(Theme.Motion.introGap))
@@ -402,8 +411,123 @@ struct CaseIntroView: View {
                 .foregroundStyle(Theme.Colors.textSecondary)
                 .padding(.leading, Theme.Spacing.s5)
         }
-        .padding(.bottom, Theme.Spacing.s2)
         .accessibilityElement(children: .combine)
+    }
+
+    private var challengePicker: some View {
+        VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
+            Text(L10n.t("challenge.pick")).overline(Theme.Colors.special)
+                .padding(.top, Theme.Spacing.s4)
+            if let device = caseFile.devices.first {
+                Text(L10n.f("intro.handedOver", device.label, PhoneFormat.dayAndTime(caseFile.phoneStartTime)))
+                    .font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
+            }
+            ForEach(Challenge.allCases, id: \.self) { level in
+                ChallengeCard(level: level, seconds: durations[level] ?? caseFile.durationSeconds,
+                              progress: levels[level], locked: !unlocked.contains(level), selected: selected == level) {
+                    selected = level
+                    Haptics.selection()
+                }
+            }
+            Text(L10n.t("challenge.sameStory")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textTertiary)
+        }
+    }
+
+    @ViewBuilder
+    private var actions: some View {
+        let seconds = durations[selected] ?? caseFile.durationSeconds
+        VStack(spacing: Theme.Spacing.s3) {
+            if let saved {
+                Button(action: onResume) {
+                    Text(L10n.f("intro.resume", PhoneFormat.countdown(saved.remainingSeconds)))
+                }
+                .buttonStyle(PrimaryButtonStyle(height: Theme.Size.buttonM))
+                .accessibilityIdentifier("intro.resume")
+                Button { confirmRestart = true } label: {
+                    Text(L10n.f("intro.startLevel", L10n.t("challenge.\(selected.rawValue)"), PhoneFormat.countdown(Double(seconds))))
+                }
+                .buttonStyle(SecondaryButtonStyle(height: Theme.Size.buttonS))
+                .accessibilityIdentifier("intro.start")
+            } else {
+                Button { onStart(selected) } label: {
+                    VStack(spacing: 1) {
+                        Text(L10n.t("intro.start"))
+                        Text(L10n.t("challenge.\(selected.rawValue)") + " · " + PhoneFormat.countdown(Double(seconds)))
+                            .font(Theme.Fonts.dataSmall)
+                    }
+                }
+                .buttonStyle(PrimaryButtonStyle())
+                .accessibilityIdentifier("intro.start")
+            }
+        }
+    }
+}
+
+/// One challenge level: name, what it is for, duration, and the player's best result there.
+struct ChallengeCard: View {
+    let level: Challenge
+    let seconds: Int
+    let progress: LevelProgress?
+    let locked: Bool
+    let selected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(alignment: .center, spacing: Theme.Spacing.s4) {
+                Image(systemName: locked ? "lock.fill" : selected ? "largecircle.fill.circle" : "circle")
+                    .font(.system(size: 20))
+                    .foregroundStyle(selected ? Theme.Colors.special : Theme.Colors.textTertiary)
+                    .frame(width: 24)
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(L10n.t("challenge.\(level.rawValue)").uppercased())
+                            .font(Theme.Fonts.headline)
+                            .tracking(1)
+                            .foregroundStyle(Theme.Colors.textPrimary)
+                        Spacer()
+                        Label(PhoneFormat.countdown(Double(seconds)), systemImage: "timer")
+                            .font(Theme.Fonts.dataStrong)
+                            .foregroundStyle(Theme.Colors.textPrimary)
+                    }
+                    Text(L10n.t("challenge.\(level.rawValue)Pitch")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
+                    status
+                }
+            }
+            .padding(Theme.Spacing.s4)
+            .background(RoundedRectangle(cornerRadius: Theme.Radius.lg, style: .continuous)
+                .fill(selected ? Theme.Colors.specialTint : Theme.Colors.bgSurface))
+            .overlay(RoundedRectangle(cornerRadius: Theme.Radius.lg, style: .continuous)
+                .strokeBorder(selected ? Theme.Colors.special : Theme.Colors.line1, lineWidth: selected ? 2 : 1))
+            .opacity(locked ? 0.55 : 1)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .disabled(locked)
+        .accessibilityAddTraits(selected ? .isSelected : [])
+        .accessibilityIdentifier("challenge.\(level.rawValue)")
+    }
+
+    @ViewBuilder
+    private var status: some View {
+        if locked {
+            Label(L10n.t("challenge.locked"), systemImage: "lock").font(Theme.Fonts.dataSmall).foregroundStyle(Theme.Colors.textTertiary)
+        } else if let progress, progress.solved {
+            HStack(spacing: Theme.Spacing.s3) {
+                Label(L10n.t("challenge.solved"), systemImage: "checkmark.circle.fill").foregroundStyle(Theme.Colors.clear)
+                if let time = progress.bestTime {
+                    Label(PhoneFormat.countdown(Double(time)), systemImage: "stopwatch").foregroundStyle(Theme.Colors.textPrimary)
+                }
+                if let score = progress.bestScore {
+                    Text("\(score) %").foregroundStyle(Theme.Colors.signal)
+                }
+            }
+            .font(Theme.Fonts.dataSmall)
+        } else if let progress, progress.plays > 0 {
+            Text(L10n.f("challenge.tried", progress.plays)).font(Theme.Fonts.dataSmall).foregroundStyle(Theme.Colors.textSecondary)
+        } else {
+            Text(L10n.t("challenge.untried")).font(Theme.Fonts.dataSmall).foregroundStyle(Theme.Colors.textTertiary)
+        }
     }
 }
 
@@ -597,13 +721,20 @@ struct GameSettingsView: View {
     let onBack: () -> Void
     let onReplayOnboarding: () -> Void
     @AppStorage(Preferences.vibrationsKey) private var vibrations = true
+    @AppStorage(Preferences.soundsKey) private var sounds = true
     @AppStorage(Preferences.reduceMotionKey) private var reduceMotion = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s6) {
             MetaHeader(title: L10n.t("menu.settings"), onBack: onBack)
             group(L10n.t("settings.soundGroup")) {
-                Toggle(L10n.t("settings.vibrations"), isOn: $vibrations)
+                VStack(spacing: 0) {
+                    Toggle(L10n.t("settings.sounds"), isOn: $sounds)
+                        .frame(minHeight: 52)
+                    Rectangle().fill(Theme.Colors.line1).frame(height: 1)
+                    Toggle(L10n.t("settings.vibrations"), isOn: $vibrations)
+                        .frame(minHeight: 52)
+                }
             }
             group(L10n.t("settings.accessibilityGroup")) {
                 Toggle(L10n.t("settings.reduceMotion"), isOn: $reduceMotion)

@@ -34,6 +34,7 @@ struct TimeUpView: View {
         .frame(maxWidth: .infinity)
         .background(Theme.Colors.ink0.ignoresSafeArea())
         .task {
+            AudioDirector.shared.play(.sting, volume: 0.8)
             withAnimation(Theme.Motion.dramatic(0.74)) { shown = true }
             withAnimation(.linear(duration: Theme.Motion.timeUpHold)) { progress = 1 }
             try? await Task.sleep(for: .seconds(Theme.Motion.timeUpHold + 0.3))

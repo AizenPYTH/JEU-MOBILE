@@ -27,7 +27,7 @@ struct PhotosGridView: View {
                                 Button {
                                     session.open(.photo(photo.id))
                                 } label: {
-                                    GeneratedPhoto(scene: photo.scene, seed: photo.id)
+                                    GeneratedPhoto(photo: photo)
                                         .aspectRatio(1, contentMode: .fill)
                                         .frame(minHeight: Theme.Size.photoThumb)
                                         .clipped()
@@ -131,7 +131,7 @@ struct PhotoDetailView: View {
         if let photo = game.index.photo(photoID) {
             ScrollView {
                 VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
-                    GeneratedPhoto(scene: photo.scene, seed: photo.id)
+                    GeneratedPhoto(photo: photo)
                         .aspectRatio(4 / 3, contentMode: .fit)
                         .scaleEffect(min(4, max(1, scale * pinch)))
                         .gesture(MagnifyGesture()

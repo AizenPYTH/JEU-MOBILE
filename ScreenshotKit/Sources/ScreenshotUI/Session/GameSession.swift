@@ -76,8 +76,11 @@ final class GameSession {
 
     var timeProgress: Double { investigation.durationSeconds > 0 ? remainingSeconds / investigation.durationSeconds : 0 }
 
-    convenience init(caseFile: CaseFile, rules: GameRules, clock: any GameClock = SystemClock(), onFinish: @escaping (Verdict) -> Void) {
-        self.init(investigation: Investigation(caseFile: caseFile, rules: rules, clock: clock), path: [], onFinish: onFinish)
+    /// `caseFile` is the case as played at `challenge` (see `CaseFile.configured(for:rules:)`).
+    convenience init(caseFile: CaseFile, rules: GameRules, challenge: Challenge = .detective,
+                     clock: any GameClock = SystemClock(), onFinish: @escaping (Verdict) -> Void) {
+        self.init(investigation: Investigation(caseFile: caseFile, rules: rules, clock: clock, challenge: challenge),
+                  path: [], onFinish: onFinish)
     }
 
     /// Resumes a saved investigation on the screen the player left (opening it again costs nothing).
@@ -312,7 +315,7 @@ final class GameSession {
 
     func unlock(_ app: AppID, code: String) -> Bool {
         let ok = investigation.unlock(app, code: code)
-        if !ok { Haptics.warning() }
+        if ok { AudioDirector.shared.play(.unlock, volume: 0.8) } else { Haptics.warning() }
         refresh()
         return ok
     }
@@ -406,6 +409,7 @@ final class GameSession {
 
     private func show(_ n: PhoneNotification) {
         banner = n
+        AudioDirector.shared.play(.notification, volume: n.level == .urgent ? 0.9 : 0.6)
         bannerTask?.cancel()
         guard n.level != .urgent else { return } // urgent stays until the player acts
         let seconds = n.level == .important ? rules.bannerSeconds + 1.5 : rules.bannerSeconds

@@ -71,6 +71,7 @@ struct AppLockView: View {
     private func press(_ key: String) {
         if key == "⌫" { if !code.isEmpty { code.removeLast() }; return }
         guard code.count < length else { return }
+        AudioDirector.shared.play(.key, volume: 0.5)
         code.append(key)
         failed = false
         if code.count == length {

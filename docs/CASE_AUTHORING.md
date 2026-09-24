@@ -29,7 +29,9 @@ python3 scripts/cases/gen_case_001.py ScreenshotKit/Sources/CaseLibrary/Resource
   "synopsis": ["Paragraphe 1 du briefing", "…"],
   "objective": "Ce que le joueur doit déterminer.",
   "difficulty": 1,                 // 1 = affaires 1–5, 2 = 6–15, 3 = 16+
-  "durationSeconds": 300,          // 5 min (1–5), 8–10 min (6–15)
+  "durationSeconds": 300,          // durée du niveau Détective
+  "challengeDurations": { "investigator": 900, "detective": 480, "expert": 300 },  // facultatif
+  "introScene": { "shots": [ … ] },                                               // facultatif
   "phoneStartTime": "2026-10-04 09:30",   // heure affichée par le téléphone au début
   "devices": [ { … } ],            // un ou plusieurs téléphones saisis
   "suspects": [ … ], "evidence": [ … ], "hints": [ … ], "solution": { … }
@@ -47,15 +49,42 @@ indices y font référence.
 | `contacts` | Dont le propriétaire : `"id": "me"`, `"isOwner": true`. `avatarHue` (0–1) teinte l'avatar à initiales. |
 | `conversations` | `participants` (sans le propriétaire), `messages`, `title` pour un groupe, `draft` (brouillon non envoyé). Un message : `from` (`"me"` = propriétaire), `at`, `text` et/ou `photo`. `deletedAt` = supprimé avant l'enquête → il n'apparaît que dans la Corbeille, jusqu'à récupération. `unread` = non lu. |
 | `calls` | `contact`, `direction` (`incoming` / `outgoing` / `missed`), `at`, `durationSeconds`. |
-| `places`, `tracks` | Lieux sur la carte stylisée (`x`, `y` entre 0 et 1) et historiques de position (le propriétaire `"me"` ou un ami qui partage sa position). `sharingStoppedAt` = a coupé le partage. |
-| `photos` | `takenAt` (date des métadonnées), `source` (`camera` / `received` / `screenshot`), `from` + `receivedAt` pour une photo reçue, `place`, `device`, `scene` (ambiance de l'image générée), `caption` (ce qu'on voit), `details` (ce qu'une analyse révèle). |
+| `places`, `tracks` | Lieux et historiques de position (le propriétaire `"me"` ou un ami qui partage sa position). `sharingStoppedAt` = a coupé le partage. Un lieu a `latitude` + `longitude` (vraie carte, MapKit) et `x`, `y` (0–1, carte stylisée de secours). `revealedBy` (refs `"type:id"`) : le lieu reste absent de la carte tant que le joueur n'a vu aucun de ces éléments (ou ouvert un historique qui y passe) ; sans `revealedBy`, il est connu dès le départ. |
+| `photos` | `takenAt` (date des métadonnées), `source` (`camera` / `received` / `screenshot`), `from` + `receivedAt` pour une photo reçue, `place`, `device`, `scene` (ambiance de l'image générée), `caption` (ce qu'on voit), `details` (ce qu'une analyse révèle). `style` (facultatif) : `standard`, `selfie`, `night`, `document`, `screenshot`, `blurry`, `old`, `quick` (cadrage, grain, flou, flash, sépia…). `lines` : le texte lisible sur un document ou une capture. |
 | `calendar`, `notes`, `mails`, `browser` | Rendez-vous, notes, e-mails (`inbox` / `sent`, `attachments` = noms des pièces jointes, jamais téléchargées), historique web (`search` / `visit`, `summary` = contenu de la page). |
 | `lockedApps` | App protégée par un code (`app`, `code`, `hint`) ; le code doit être déductible ailleurs dans le téléphone. |
 | `liveEvents` | Ce qui arrive **pendant** l'enquête, après `afterSeconds` : `message` (dans `conversation`), `call`, `reminder`, `deletion` (quelqu'un supprime un de ses messages → « Ce message a été supprimé »). `title`/`body` = la notification, `opens` = ce qu'elle ouvre. |
 
 Scènes de photo disponibles : `sunset`, `sky`, `rain`, `street_day`, `street_night`, `parking_night`,
 `concert`, `bar`, `party`, `group`, `selfie`, `gallery`, `climbing`, `cat`, `books`, `interior_warm`,
-`bed`, `station`, `laptop`, `desk_night`, `car`, `park`, `plant`, `document`, `screenshot`.
+`bed`, `station`, `laptop`, `desk_night`, `car`, `park`, `plant`, `document`, `screenshot`, `beach`,
+`snow`, `ceiling`, `pocket`, `receipt`, `mirror`, `view`. Une pellicule crédible mélange les années
+(photos `old`), des selfies, des photos ratées (`blurry` : poche, plafond), des captures, des tickets.
+
+## Niveaux de défi
+
+Chaque affaire se joue en **Enquêteur** (15 min), **Détective** (8 min) et **Expert** (5 min) : même
+scénario, mêmes preuves, seul le temps change. Sans `challengeDurations`, les durées découlent de
+`durationSeconds` × les facteurs de `rules.json` (`challenges`). Expert se débloque après une réussite
+en Détective. CaseLint vérifie que l'affaire reste résoluble au niveau le plus court.
+
+## Séquence d'ouverture (`introScene`)
+
+Une suite de plans joués avant de rendre le téléphone au joueur (le chrono ne tourne pas pendant ;
+« Passer » est toujours possible). Chaque plan : `kind`, `seconds`, `ambience` (sons en boucle :
+`street`, `sirens`, `crowd`), `cues` (sons ponctuels `{sound, at}` : `vibrate`, `notification`,
+`unlock`, `key`, `sting`), `lines` (`{text, at, speaker?, voiced?}` — `voiced` = lu par la voix du
+système).
+
+| `kind` | Plan | Champs propres |
+|---|---|---|
+| `title` | Écran noir, sons, une ou deux lignes | — |
+| `broadcast` | Reportage en direct devant le lieu (caméra à l'épaule, gyrophares, sous-titres) | `channel`, `label` (heure), `location`, `headline`, `ticker`, `scene` (image de fond) |
+| `phoneOnTable` | Le téléphone saisi sur une table, l'écran verrouillé s'allume | `label` (étiquette de scellé), `notification` `{app, title, body, at}` |
+| `unlock` | Le téléphone est pris en main et déverrouillé : l'écran d'accueil devient celui du jeu | — |
+
+Tous les décalages (`at`) sont relatifs au début du plan et doivent tenir dans sa durée (validé).
+La notification de l'écran verrouillé devrait exister dans le téléphone (même personne, même texte).
 
 ## Suspects, preuves, indices, solution
 

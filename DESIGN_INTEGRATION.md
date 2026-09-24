@@ -125,18 +125,37 @@ recherche globale ; 3) immersion (rail de dates, appel entrant, fiche photo + mi
 4) polish (sons, animations, micro-interactions). Pas de grosse fonctionnalité avant que le parcours
 Accueil → Affaires → Intro → Téléphone → enquête → Carnet → accusation → résultat soit stable.
 
+## 2 bis. Évolution gameplay & immersion (septembre 2026)
+
+- **Quitter l'enquête** : bouton ‹ à côté du Carnet, confirmation, sauvegarde ; « Reprendre » sur
+  l'accueil et sur l'écran de l'affaire (« Recommencer » demande confirmation).
+- **Niveaux** Enquêteur / Détective / Expert sur l'écran de présentation de l'affaire : durée,
+  meilleur résultat par niveau (résolue, temps, score, nombre de tentatives), Expert verrouillé.
+- **Carte réelle** (MapKit, système — pas de dépendance tierce) : pincer, zoomer, déplacer, double
+  tap, boussole, échelle ; lieux en épingles, trajet en pointillés numérotés, position « moi ».
+  Style sombre, sans commerces ni points d'intérêt. Les lieux apparaissent quand le joueur les
+  découvre ailleurs (`revealedBy`). La carte stylisée reste en secours pour un lieu sans coordonnées.
+- **Photos** : moteur de rendu procédural enrichi (styles selfie, nuit, document lisible, capture,
+  flou, ancienne, prise à la volée ; grain, vignettage, flash). Les personnes restent des
+  silhouettes floues (aucune illustration de personnage).
+- **Séquence d'ouverture** générique (`introScene` dans l'affaire) : noir + sons, reportage,
+  coupure + vibration, téléphone sur la table, déverrouillage → téléphone du jeu, même cadrage.
+  Les couleurs du décor (bois, étiquette de scellé) sont du contenu généré, comme les photos.
+
 ## 3. Reste à faire (handoff)
 
 - Affaire 000 (tutoriel jouable de 3 min) : reportée.
 - Recherche : debounce en frappe continue (aujourd'hui une recherche = validation, car elle coûte du
   temps), résultat ouvert « centré et surligné 2 s » hors Messages.
 - Rail années/mois dans une conversation, « Aller à une date ».
-- Animation d'ouverture d'app (zoom depuis la tuile), transition « Déverrouillage » après l'intro.
+- ~~Transition « Déverrouillage » après l'intro~~ : faite (séquence d'ouverture `CinematicView`,
+  qui se termine sur le téléphone du jeu).
 - [24] Écran d'appel entrant plein écran + message vocal.
 - [14] Fiche infos de photo en sheet avec mini-carte ; [15] curseur temporel de la carte synchronisé.
 - Pile propre par app conservée en revenant à l'accueil, lien retour « ‹ App » 6 s entre apps.
 - Rang et distinctions du Profil ; réglages Ambiance, Effets, Notifications en direct, Contraste élevé.
-- Sons (Ambiance, Effets).
+- Sons : faits pour l'ouverture (rue, sirènes, foule, vibration, voix), les notifications, le clavier
+  à code, le déverrouillage, la fin du temps (réglage « Sons »). Reste : sons de navigation fins.
 - Chargement « Déchiffrement… » [36], erreurs diégétiques [38], blocage 30 s après 2 codes faux [39].
 
 ## 4. Vérification

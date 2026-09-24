@@ -6,7 +6,9 @@ import CaseEngine
 /// The timer keeps running under the sheets; it pauses when the app goes to the background.
 struct InvestigationView: View {
     let session: GameSession
+    let onQuit: () -> Void
     @State private var sheet: Sheet?
+    @State private var askingToQuit = false
     @Environment(\.scenePhase) private var scenePhase
 
     enum Sheet: String, Identifiable {
@@ -18,7 +20,18 @@ struct InvestigationView: View {
         PhoneView(session: session,
                   onNotebook: { sheet = .notebook },
                   onHints: { sheet = .hints },
-                  onTimer: { sheet = .accuseNow })
+                  onTimer: { sheet = .accuseNow },
+                  onQuit: {
+                      // The clock stops while the player decides.
+                      session.pause()
+                      askingToQuit = true
+                  })
+            .alert(L10n.t("quit.title"), isPresented: $askingToQuit) {
+                Button(L10n.t("quit.continue"), role: .cancel) { session.resume() }
+                Button(L10n.t("quit.confirm"), action: onQuit)
+            } message: {
+                Text(L10n.t("quit.message"))
+            }
             .sheet(item: $sheet) { which in
                 Group {
                     switch which {

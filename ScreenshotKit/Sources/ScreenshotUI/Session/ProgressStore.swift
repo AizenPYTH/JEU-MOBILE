@@ -1,5 +1,6 @@
 #if os(iOS)
 import Foundation
+import CaseEngine
 
 /// One finished attempt at a case (screen 05 "Dossiers").
 struct Attempt: Codable, Equatable, Identifiable {
@@ -13,6 +14,22 @@ struct Attempt: Codable, Equatable, Identifiable {
     var found: Int
     var total: Int
     var hintsUsed: Int
+    /// Challenge level (absent in attempts recorded before levels existed: detective).
+    var challenge: Challenge? = nil
+    /// Seconds used on the timer (time costs included).
+    var timeUsed: Int? = nil
+
+    var level: Challenge { challenge ?? .detective }
+}
+
+/// Best results of a case at one challenge level.
+struct LevelProgress: Equatable {
+    var plays = 0
+    var solved = false
+    /// Best ranked score (%).
+    var bestScore: Int?
+    /// Fastest solved, ranked attempt (seconds used).
+    var bestTime: Int?
 }
 
 /// Summary of a case across attempts.
@@ -44,6 +61,24 @@ enum ProgressStore {
             entry.archiveOpen = entry.archiveOpen || attempt.solved || !attempt.ranked
             if attempt.ranked { entry.bestScore = max(entry.bestScore, attempt.score) }
             result[attempt.caseID] = entry
+        }
+        return result
+    }
+
+    /// Per-level results of one case.
+    static func levels(of caseID: String, in attempts: [Attempt]) -> [Challenge: LevelProgress] {
+        var result: [Challenge: LevelProgress] = [:]
+        for attempt in attempts where attempt.caseID == caseID {
+            var entry = result[attempt.level] ?? LevelProgress()
+            entry.plays += 1
+            entry.solved = entry.solved || attempt.solved
+            if attempt.ranked {
+                entry.bestScore = max(entry.bestScore ?? 0, attempt.score)
+                if attempt.solved, let used = attempt.timeUsed {
+                    entry.bestTime = min(entry.bestTime ?? .max, used)
+                }
+            }
+            result[attempt.level] = entry
         }
         return result
     }

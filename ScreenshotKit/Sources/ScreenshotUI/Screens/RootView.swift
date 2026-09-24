@@ -13,6 +13,7 @@ public struct RootView: View {
         case profile
         case settings
         case intro(CaseFile)
+        case cinematic(GameSession, IntroScene)
         case playing(GameSession)
         case result(Play)
         case score(Play)
@@ -103,10 +104,22 @@ public struct RootView: View {
                 }
                     .transition(.move(edge: .trailing))
             case .intro(let file):
-                CaseIntroView(caseFile: file, onStart: { start(file) }, onClose: goHome)
+                CaseIntroView(caseFile: file,
+                              durations: durations(of: file),
+                              unlocked: Set(Challenge.allCases.filter { level in
+                                  rules?.isUnlocked(level, solvedAt: solvedLevels(of: file)) ?? true
+                              }),
+                              levels: ProgressStore.levels(of: file.id, in: attempts),
+                              saved: resumable?.file.id == file.id ? resumable?.saved : nil,
+                              onStart: { start(file, challenge: $0) },
+                              onResume: resumeSaved,
+                              onClose: goHome)
+                    .transition(.opacity)
+            case .cinematic(let session, let scene):
+                CinematicView(scene: scene, caseFile: session.caseFile, session: session, onFinish: { handOver(session) })
                     .transition(.opacity)
             case .playing(let session):
-                PlayingView(session: session)
+                PlayingView(session: session, onQuit: { quit(session) })
                     .transition(.opacity)
             case .result(let play):
                 ResultView(verdict: play.verdict, caseFile: play.session.caseFile, names: names(play.session),
@@ -152,6 +165,7 @@ public struct RootView: View {
         case .profile: "profile"
         case .settings: "settings"
         case .intro(let f): "intro-\(f.id)"
+        case .cinematic: "cinematic"
         case .playing: "playing"
         case .result(let p): "result-\(p.revealed)"
         case .score: "score"
@@ -198,21 +212,54 @@ public struct RootView: View {
         session.game.index.suspect(id).flatMap { session.game.contact($0.contact) }
     }
 
-    /// A new investigation (replaces any saved one).
-    private func start(_ original: CaseFile) {
+    /// Duration of a case at each level.
+    private func durations(of file: CaseFile) -> [Challenge: Int] {
+        var result: [Challenge: Int] = [:]
+        for level in Challenge.allCases {
+            result[level] = rules.map { file.duration(for: level, rules: $0) } ?? file.durationSeconds
+        }
+        return result
+    }
+
+    /// Levels at which a case was already solved (ranked or not).
+    private func solvedLevels(of file: CaseFile) -> Set<Challenge> {
+        Set(attempts.filter { $0.caseID == file.id && $0.solved }.map(\.level))
+    }
+
+    /// A new investigation at a challenge level (replaces any saved one).
+    private func start(_ original: CaseFile, challenge: Challenge) {
         guard let rules else { return }
         SavedInvestigationStore.clear()
         savedGame = nil
-        let session = GameSession(caseFile: UITestHooks.adjusted(original), rules: rules) { finished($0) }
+        let played = UITestHooks.adjusted(original.configured(for: challenge, rules: rules))
+        let session = GameSession(caseFile: played, rules: rules, challenge: challenge) { finished($0) }
+        if let scene = played.introScene, UITestHooks.playsCinematic {
+            // The clock starts when the phone is in the player's hands, not during the opening.
+            stage = .cinematic(session, scene)
+        } else {
+            session.begin()
+            stage = .playing(session)
+        }
+    }
+
+    /// End of the opening: the phone just picked up is the one the player now holds.
+    private func handOver(_ session: GameSession) {
         session.begin()
         stage = .playing(session)
+    }
+
+    /// "Quitter l'enquête": the investigation is saved (it paused when the question was asked).
+    private func quit(_ session: GameSession) {
+        session.pause()
+        goHome()
     }
 
     private func finished(_ verdict: Verdict) {
         guard case .playing(let session) = stage else { return }
         let attempt = Attempt(caseID: session.caseFile.id, date: .now, score: verdict.score, solved: verdict.isCorrect,
                               ranked: true, found: verdict.foundCount, total: verdict.totalCount,
-                              hintsUsed: verdict.hintsUsed)
+                              hintsUsed: verdict.hintsUsed, challenge: session.game.challenge,
+                              timeUsed: session.caseFile.durationSeconds - verdict.remainingSeconds)
         ProgressStore.record(attempt)
         attempts = ProgressStore.attempts()
         savedGame = nil
@@ -231,8 +278,16 @@ public struct RootView: View {
 
 /// Launch arguments used by the UI tests (Debug builds only; ignored in Release):
 /// `-UITestReset YES` clears the saved attempts, `-UITestDuration <seconds>` shortens every case,
-/// `-UITestOnboarding show|skip` forces the first-launch onboarding on or off.
+/// `-UITestOnboarding show|skip` forces the first-launch onboarding on or off,
+/// `-UITestCinematic skip` starts cases without their opening sequence.
 enum UITestHooks {
+    static var playsCinematic: Bool {
+        #if DEBUG
+        if UserDefaults.standard.string(forKey: "UITestCinematic") == "skip" { return false }
+        #endif
+        return true
+    }
+
     static func showsOnboarding(default value: Bool) -> Bool {
         #if DEBUG
         switch UserDefaults.standard.string(forKey: "UITestOnboarding") {
@@ -269,11 +324,12 @@ enum UITestHooks {
 /// Phone while investigating; "temps écoulé" when the timer hits zero; then the accusation.
 struct PlayingView: View {
     let session: GameSession
+    let onQuit: () -> Void
     @State private var timeUpShown = false
 
     var body: some View {
         if session.phase == .investigating {
-            InvestigationView(session: session)
+            InvestigationView(session: session, onQuit: onQuit)
                 .transition(.opacity)
         } else if session.remainingSeconds <= 0 && !timeUpShown {
             TimeUpView { timeUpShown = true }

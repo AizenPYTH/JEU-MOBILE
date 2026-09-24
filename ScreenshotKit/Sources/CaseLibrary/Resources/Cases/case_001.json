@@ -13,6 +13,109 @@
  "difficulty": 1,
  "durationSeconds": 480,
  "phoneStartTime": "2026-09-13 10:00",
+ "challengeDurations": {
+  "investigator": 900,
+  "detective": 480,
+  "expert": 300
+ },
+ "introScene": {
+  "shots": [
+   {
+    "kind": "title",
+    "seconds": 4.5,
+    "ambience": [
+     "street",
+     "sirens"
+    ],
+    "lines": [
+     {
+      "text": "DIMANCHE 13 SEPTEMBRE · 09:52",
+      "at": 0.4
+     },
+     {
+      "text": "Zone portuaire, Marseille.",
+      "at": 1.6
+     }
+    ]
+   },
+   {
+    "kind": "broadcast",
+    "seconds": 11,
+    "ambience": [
+     "street",
+     "crowd",
+     "sirens"
+    ],
+    "scene": "parking_night",
+    "channel": "INFO 24",
+    "label": "09:54",
+    "location": "Zone portuaire — Parking du Quai 9",
+    "headline": "Un homme de 26 ans porté disparu",
+    "ticker": "Disparition à Marseille : la police lance un appel à témoins",
+    "lines": [
+     {
+      "text": "Nous sommes devant le parking du Quai 9, où le téléphone d'Alex Moreau a été retrouvé ce matin.",
+      "at": 0.6,
+      "speaker": "Reporter",
+      "voiced": true
+     },
+     {
+      "text": "Le jeune homme n'a plus donné signe de vie depuis samedi soir.",
+      "at": 5.2,
+      "speaker": "Reporter",
+      "voiced": true
+     },
+     {
+      "text": "Les enquêteurs espèrent que son téléphone parlera.",
+      "at": 8.4,
+      "speaker": "Reporter",
+      "voiced": true
+     }
+    ]
+   },
+   {
+    "kind": "title",
+    "seconds": 1.6,
+    "cues": [
+     {
+      "sound": "vibrate",
+      "at": 0.9
+     }
+    ]
+   },
+   {
+    "kind": "phoneOnTable",
+    "seconds": 6,
+    "label": "SCELLÉ N°3\nTéléphone de A. Moreau",
+    "cues": [
+     {
+      "sound": "vibrate",
+      "at": 2.0
+     },
+     {
+      "sound": "notification",
+      "at": 2.1
+     }
+    ],
+    "notification": {
+     "app": "messages",
+     "title": "Maman",
+     "body": "Je suis très inquiète",
+     "at": 2.0
+    },
+    "lines": [
+     {
+      "text": "Vous avez quelques minutes.",
+      "at": 3.6
+     }
+    ]
+   },
+   {
+    "kind": "unlock",
+    "seconds": 2.4
+   }
+  ]
+ },
  "devices": [
   {
    "id": "dev_alex",
@@ -1402,84 +1505,130 @@
      "name": "Domicile d'Alex — rue Vauban",
      "kind": "home",
      "x": 0.36,
-     "y": 0.46
+     "y": 0.46,
+     "latitude": 43.2855,
+     "longitude": 5.3795
     },
     {
      "id": "pl_levant",
      "name": "Le Levant (bar)",
      "kind": "bar",
      "x": 0.47,
-     "y": 0.38
+     "y": 0.38,
+     "latitude": 43.294,
+     "longitude": 5.3833
     },
     {
      "id": "pl_home_emma",
      "name": "Rue Paradis",
      "kind": "street",
      "x": 0.6,
-     "y": 0.27
+     "y": 0.27,
+     "latitude": 43.289,
+     "longitude": 5.3785,
+     "revealedBy": [
+      "photoInfo:p_invoice",
+      "photoInfo:p_emma_couch",
+      "track:t_emma"
+     ]
     },
     {
      "id": "pl_home_lucas",
      "name": "Avenue des Chênes",
      "kind": "home",
      "x": 0.18,
-     "y": 0.24
+     "y": 0.24,
+     "latitude": 43.3,
+     "longitude": 5.401
     },
     {
      "id": "pl_quai9",
      "name": "Parking du Quai 9 — zone portuaire",
      "kind": "parking",
      "x": 0.84,
-     "y": 0.8
+     "y": 0.8,
+     "latitude": 43.317,
+     "longitude": 5.362,
+     "revealedBy": [
+      "calendar:c_quai9",
+      "browser:w15",
+      "message:m_emma_del1",
+      "photo:p_parking"
+     ]
     },
     {
      "id": "pl_rocade",
      "name": "Rocade Nord — sortie 4",
      "kind": "road",
      "x": 0.46,
-     "y": 0.6
+     "y": 0.6,
+     "latitude": 43.328,
+     "longitude": 5.405,
+     "revealedBy": [
+      "track:t_lucas"
+     ]
     },
     {
      "id": "pl_lilas",
      "name": "Rue des Lilas",
      "kind": "street",
      "x": 0.14,
-     "y": 0.72
+     "y": 0.72,
+     "latitude": 43.277,
+     "longitude": 5.4,
+     "revealedBy": [
+      "photoInfo:p_sarah_jade",
+      "track:t_sarah"
+     ]
     },
     {
      "id": "pl_hotel",
      "name": "Hôtel Le Cygne",
      "kind": "work",
      "x": 0.72,
-     "y": 0.16
+     "y": 0.16,
+     "latitude": 43.295,
+     "longitude": 5.373,
+     "revealedBy": [
+      "photoInfo:p_karim_desk",
+      "track:t_karim"
+     ]
     },
     {
      "id": "pl_varenne",
      "name": "Agence Varenne",
      "kind": "work",
      "x": 0.24,
-     "y": 0.56
+     "y": 0.56,
+     "latitude": 43.299,
+     "longitude": 5.38
     },
     {
      "id": "pl_bloc",
      "name": "Salle d'escalade Bloc Out",
      "kind": "park",
      "x": 0.26,
-     "y": 0.88
+     "y": 0.88,
+     "latitude": 43.28,
+     "longitude": 5.415
     },
     {
      "id": "pl_gare",
      "name": "Gare centrale",
      "kind": "station",
      "x": 0.58,
-     "y": 0.52
+     "y": 0.52,
+     "latitude": 43.303,
+     "longitude": 5.3805
     },
     {
      "id": "pl_local",
      "name": "Local du collectif Lumen",
      "kind": "shop",
      "x": 0.52,
-     "y": 0.72
+     "y": 0.72,
+     "latitude": 43.2975,
+     "longitude": 5.39
     }
    ],
    "tracks": [
@@ -1748,7 +1897,14 @@
      "scene": "screenshot",
      "caption": "Capture : horaires de la salle d'escalade.",
      "details": "Lun–Ven 10h–23h, Sam–Dim 9h–21h.",
-     "device": "iPhone 13"
+     "device": "iPhone 13",
+     "lines": [
+      "BLOC OUT",
+      "Horaires",
+      "Lun – Ven   10:00 – 23:00",
+      "Sam – Dim   09:00 – 21:00",
+      "Fermé les jours fériés"
+     ]
     },
     {
      "id": "p_b09",
@@ -1855,7 +2011,15 @@
      "scene": "screenshot",
      "caption": "Capture : météo de la semaine.",
      "details": "Soleil jusqu'à samedi, orages dimanche.",
-     "device": "iPhone 13"
+     "device": "iPhone 13",
+     "lines": [
+      "Météo — Marseille",
+      "Lun  ☀  27°",
+      "Mar  ☀  28°",
+      "Mer  ☀  26°",
+      "Sam  ⛅  24°",
+      "Dim  ⛈  19°"
+     ]
     },
     {
      "id": "p_b22",
@@ -1948,6 +2112,273 @@
      "device": "iPhone 13"
     },
     {
+     "id": "p_old01",
+     "takenAt": "2019-07-14 22:41",
+     "source": "camera",
+     "scene": "sky",
+     "caption": "Feu d'artifice du 14 juillet, 2019.",
+     "details": "Des traînées floues au-dessus du port.",
+     "style": "old",
+     "place": "Vieux-Port",
+     "device": "iPhone 8"
+    },
+    {
+     "id": "p_old02",
+     "takenAt": "2020-04-02 16:10",
+     "source": "camera",
+     "scene": "interior_warm",
+     "caption": "Confinement : le salon de l'ancien appartement.",
+     "details": "Des cartons, une guitare contre le mur.",
+     "style": "old",
+     "device": "iPhone 8"
+    },
+    {
+     "id": "p_old03",
+     "takenAt": "2021-08-09 11:25",
+     "source": "camera",
+     "scene": "beach",
+     "caption": "Plage des Catalans, août 2021.",
+     "details": "Des serviettes, un parasol rayé.",
+     "style": "old",
+     "place": "Plage des Catalans",
+     "device": "iPhone 8"
+    },
+    {
+     "id": "p_old04",
+     "takenAt": "2022-12-24 20:05",
+     "source": "camera",
+     "scene": "interior_warm",
+     "caption": "Réveillon chez Maman.",
+     "details": "Une table dressée, des bougies.",
+     "style": "old",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_old05",
+     "takenAt": "2023-02-11 09:40",
+     "source": "camera",
+     "scene": "snow",
+     "caption": "Neige à la montagne, février 2023.",
+     "details": "Des sapins blancs, un télésiège au loin.",
+     "style": "old",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_old06",
+     "takenAt": "2024-06-21 23:12",
+     "source": "camera",
+     "scene": "concert",
+     "caption": "Fête de la musique 2024.",
+     "details": "Une foule, des lumières rouges.",
+     "style": "old",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_old07",
+     "takenAt": "2024-10-03 18:30",
+     "source": "camera",
+     "scene": "group",
+     "caption": "Premier accrochage du collectif Lumen.",
+     "details": "Quatre silhouettes devant un mur blanc.",
+     "style": "old",
+     "place": "Local du collectif Lumen",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_self01",
+     "takenAt": "2026-08-19 08:02",
+     "source": "camera",
+     "scene": "mirror",
+     "caption": "Selfie dans le miroir de l'ascenseur.",
+     "details": "Alex, un café à la main, l'air pas réveillé.",
+     "style": "selfie",
+     "place": "Agence Varenne",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_self02",
+     "takenAt": "2026-08-29 17:48",
+     "source": "camera",
+     "scene": "beach",
+     "caption": "Selfie à la plage avec Lucas.",
+     "details": "Deux silhouettes à contre-jour, cheveux mouillés.",
+     "style": "selfie",
+     "place": "Plage des Catalans",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_self03",
+     "takenAt": "2026-09-06 13:15",
+     "source": "camera",
+     "scene": "selfie",
+     "caption": "Selfie après le vernissage, cernes comprises.",
+     "details": "Le visage est flou, l'arrière-plan net.",
+     "style": "selfie",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_blur01",
+     "takenAt": "2026-08-22 23:58",
+     "source": "camera",
+     "scene": "pocket",
+     "caption": "Photo prise dans une poche.",
+     "details": "Tout est noir avec une lueur orange.",
+     "style": "blurry",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_blur02",
+     "takenAt": "2026-08-31 07:12",
+     "source": "camera",
+     "scene": "ceiling",
+     "caption": "Le plafond de la chambre.",
+     "details": "Photo prise par erreur au réveil.",
+     "style": "blurry",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_blur03",
+     "takenAt": "2026-09-12 21:22",
+     "source": "camera",
+     "scene": "bar",
+     "caption": "Le Levant, photo ratée.",
+     "details": "Un bras, une lampe, des reflets. Rien d'utile.",
+     "style": "blurry",
+     "place": "Le Levant",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_quick01",
+     "takenAt": "2026-08-27 12:05",
+     "source": "camera",
+     "scene": "street_day",
+     "caption": "Une affiche de concert, prise en passant.",
+     "details": "« Nuits du Port — 18 septembre ».",
+     "style": "quick",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_quick02",
+     "takenAt": "2026-09-09 13:02",
+     "source": "camera",
+     "scene": "car",
+     "caption": "Une voiture mal garée devant l'agence.",
+     "details": "Une berline noire sur le trottoir.",
+     "style": "quick",
+     "place": "Agence Varenne",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_night01",
+     "takenAt": "2026-09-04 23:40",
+     "source": "camera",
+     "scene": "street_night",
+     "caption": "La rue en bas, depuis la fenêtre.",
+     "details": "Un scooter passe, trois réverbères.",
+     "style": "night",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_night02",
+     "takenAt": "2026-09-11 22:15",
+     "source": "camera",
+     "scene": "view",
+     "caption": "La ville depuis le toit de l'immeuble.",
+     "details": "Des lumières jusqu'à la mer.",
+     "style": "night",
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_doc01",
+     "takenAt": "2026-09-03 12:40",
+     "source": "camera",
+     "scene": "receipt",
+     "caption": "Ticket de caisse — supérette.",
+     "details": "Pâtes, café, lessive. 23,40 €.",
+     "style": "document",
+     "lines": [
+      "PROXI MARCHÉ",
+      "03/09/2026  12:38",
+      "PÂTES 500G      1,20",
+      "CAFÉ MOULU      4,90",
+      "LESSIVE        11,30",
+      "PAIN            1,10",
+      "TOTAL          23,40 €"
+     ],
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_doc02",
+     "takenAt": "2026-08-28 10:20",
+     "source": "camera",
+     "scene": "document",
+     "caption": "Attestation d'assurance habitation.",
+     "details": "Pour le propriétaire.",
+     "style": "document",
+     "lines": [
+      "ATTESTATION D'ASSURANCE",
+      "Habitation — Formule Essentielle",
+      "Assuré : M. Alex Moreau",
+      "Adresse : rue Vauban, Marseille",
+      "Valable du 01/09/2026 au 31/08/2027"
+     ],
+     "place": "Domicile",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_scr01",
+     "takenAt": "2026-08-24 22:30",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : un mème envoyé par Tom.",
+     "details": "Un chat en baudrier. « Moi au premier dévers ».",
+     "style": "screenshot",
+     "lines": [
+      "Tom Delorme",
+      "Moi au premier dévers 😭",
+      "Réaction : 😂 3"
+     ],
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_scr02",
+     "takenAt": "2026-09-02 08:14",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : itinéraire vers l'agence.",
+     "details": "18 min en vélo.",
+     "style": "screenshot",
+     "lines": [
+      "Itinéraires",
+      "Domicile → Agence Varenne",
+      "🚲  18 min · 4,2 km",
+      "🚶  52 min",
+      "🚌  24 min · ligne 12"
+     ],
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_scr03",
+     "takenAt": "2026-09-11 12:31",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : confirmation de commande.",
+     "details": "Des sangles pour le pied photo.",
+     "style": "screenshot",
+     "lines": [
+      "Commande confirmée",
+      "N° 48-22917",
+      "Sangle trépied ×2",
+      "Livraison : mardi 15 septembre",
+      "Total : 18,90 €"
+     ],
+     "device": "iPhone 13"
+    },
+    {
      "id": "p_lucas_car",
      "takenAt": "2026-08-23 11:43",
      "source": "received",
@@ -1978,6 +2409,13 @@
      "scene": "document",
      "caption": "Photo d'une facture « Studio Nova » n°114.",
      "details": "Facture de 1 650 € pour « prestations de tirage ». Signature « E.R. — trésorière ». L'adresse de Studio Nova est rue Paradis.",
+     "style": "document",
+     "lines": [
+      "STUDIO NOVA",
+      "FACTURE N° 114",
+      "Prestations de tirage",
+      "Total TTC  1 650,00 €"
+     ],
      "place": "Domicile",
      "device": "iPhone 13"
     },
@@ -1988,6 +2426,7 @@
      "scene": "group",
      "caption": "Selfie au Levant : Alex, Lucas, Sarah, Karim, Inès, Tom.",
      "details": "Tout le monde sourit. Karim a déjà sa veste de travail sur le bras. Emma n'est pas là.",
+     "style": "selfie",
      "place": "Le Levant",
      "device": "iPhone 13"
     },
@@ -2010,6 +2449,7 @@
      "scene": "parking_night",
      "caption": "Le parking du Quai 9, de nuit.",
      "details": "Au fond, les feux arrière d'une petite citadine grise qui repart. Près de la barrière, une silhouette dans une veste claire.",
+     "style": "night",
      "place": "Parking du Quai 9",
      "device": "iPhone 13"
     },

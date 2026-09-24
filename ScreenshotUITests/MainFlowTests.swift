@@ -5,13 +5,14 @@ import XCTest
 ///
 /// Home → Cases → case intro → phone → notification → apps (Messages, Photos, Notifications)
 /// → pin evidence → notebook → timer → accusation → result → reconstruction → score → archive.
+/// Plus: quitting and resuming, the three challenge levels and replaying, the map, the opening sequence.
 final class MainFlowTests: XCTestCase {
     private var app: XCUIApplication!
 
     override func setUp() {
         continueAfterFailure = false
         app = XCUIApplication()
-        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip"]
+        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip", "-UITestCinematic", "skip"]
     }
 
     private let baseArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR", "-UITestReset", "YES"]
@@ -153,14 +154,44 @@ final class MainFlowTests: XCTestCase {
         app.launch()
         wait(element("home.start"), 20, "Accueil")
         snap("01-accueil")
-
-        let card = element("case.case_001")
-        tap(element("menu.cases"), "Affaires", expecting: card)
-        snap("02-affaires")
-        tap(card, "carte de l'affaire 001", expecting: element("intro.start"))
+        openCaseScreen(shot: "02-affaires")
         sleep(3) // let the serif lines fade in
         snap("03-intro")
         tap(element("intro.start"), "Commencer l'enquête", expecting: element("phone.timer"))
+    }
+
+    /// Home (or the case list) → the presentation screen of case 001.
+    private func openCaseScreen(shot: String? = nil) {
+        let card = element("case.case_001")
+        if !card.waitForExistence(timeout: 2) {
+            tap(element("menu.cases"), "Affaires", expecting: card)
+        }
+        if let shot { snap(shot) }
+        tap(card, "carte de l'affaire 001", expecting: element("intro.start"))
+    }
+
+    /// Accuses Emma straight from the timer and goes through the result and score screens.
+    private func accuseEmmaAndFinish(_ shot: String) {
+        dismissUrgentBanner()
+        tap(element("phone.timer"), "chrono", expecting: element("accuseNow.confirm"))
+        let emma = element("accuse.suspect.s_emma")
+        tap(element("accuseNow.confirm"), "Accuser maintenant", expecting: emma)
+        choose(emma)
+        holdToAccuse()
+        snap(shot)
+        let primary = element("result.primary")
+        wait(primary, 5, "résultat")
+        scrollTo(primary)
+        primary.tap()
+        tap(wait(element("score.next"), 8, "score"), "Suivant", expecting: element("case.case_001"))
+    }
+
+    private func quitInvestigation() {
+        dismissUrgentBanner()
+        tapWhenReady(element("phone.quit"), "Quitter l'enquête")
+        let confirm = app.alerts.buttons["Quitter"]
+        wait(confirm, 5, "confirmation « Quitter l'enquête ? »")
+        confirm.tap()
     }
 
     // MARK: - Solving the case, accusing early from the timer
@@ -481,6 +512,174 @@ final class MainFlowTests: XCTestCase {
         app.launch()
         wait(element("home.start"), 20, "Accueil au 2e lancement")
         XCTAssertFalse(element("onboarding.next").exists, "L'onboarding ne doit apparaître qu'au premier lancement")
+    }
+
+    // MARK: - Quitting the investigation (saved), resuming from home and from the case screen
+
+    func testQuitAndResume() {
+        startCase()
+        openApp("messages")
+        let alibi = element("message.m_emma_2230")
+        tap(element("conversation.c_emma"), "conversation Emma", expecting: alibi)
+        pin(alibi, "70-epingle-avant-quitter")
+
+        // "← Quitter" asks first; "Continuer l'enquête" goes back to the same screen.
+        dismissUrgentBanner()
+        tapWhenReady(element("phone.quit"), "Quitter l'enquête")
+        let alert = app.alerts.firstMatch
+        wait(alert, 5, "confirmation")
+        XCTAssertTrue(alert.staticTexts["Quitter l'enquête ?"].exists, "La confirmation doit poser la question")
+        XCTAssertTrue(alert.staticTexts["Votre progression sera sauvegardée."].exists)
+        snap("71-quitter-confirmation")
+        alert.buttons["Continuer l'enquête"].tap()
+        wait(alibi, 5, "retour dans la conversation après « Continuer »")
+        let before = secondsLeft()
+
+        // Quit for real: home offers to resume; time away does not count.
+        quitInvestigation()
+        let resume = wait(element("home.resume"), 10, "carte « Reprendre l'enquête »")
+        snap("72-accueil-reprendre")
+        sleep(5)
+
+        // The case screen offers it too.
+        openCaseScreen()
+        let introResume = wait(element("intro.resume"), 5, "« Reprendre l'enquête » sur l'écran de l'affaire")
+        sleep(2)
+        snap("73-affaire-reprendre")
+        tap(introResume, "Reprendre (écran de l'affaire)", expecting: element("phone.timer"))
+        wait(element("message.m_emma_2230"), 5, "même écran après reprise")
+        XCTAssertTrue(element("phone.carnet").label.contains("1"), "Le carnet est conservé")
+        let after = secondsLeft()
+        XCTAssertTrue(after <= before && before - after <= 8, "Chrono incohérent : \(before) s avant, \(after) s après")
+        snap("74-repris")
+
+        // Quit again and resume from home.
+        quitInvestigation()
+        tap(resume, "Reprendre l'enquête (accueil)", expecting: element("phone.timer"))
+        wait(element("message.m_emma_2230"), 5, "même écran après reprise depuis l'accueil")
+    }
+
+    // MARK: - Challenge levels: same case, three durations, best result per level, unlocking Expert
+
+    func testChallengeLevelsAndReplay() {
+        app.launch()
+        wait(element("home.start"), 20, "Accueil")
+        openCaseScreen()
+        let investigator = element("challenge.investigator")
+        let detective = element("challenge.detective")
+        let expert = element("challenge.expert")
+        scrollTo(expert)
+        XCTAssertTrue(investigator.label.contains("15:00"), "Enquêteur : 15 min (\(investigator.label))")
+        XCTAssertTrue(detective.label.contains("08:00"), "Détective : 8 min (\(detective.label))")
+        XCTAssertTrue(expert.label.contains("05:00"), "Expert : 5 min (\(expert.label))")
+        XCTAssertTrue(detective.isSelected, "Détective est le niveau proposé par défaut")
+        XCTAssertFalse(expert.isEnabled, "Expert est verrouillé tant que l'affaire n'est pas résolue en Détective")
+        snap("80-niveaux")
+
+        // Enquêteur: 15 minutes on the clock.
+        investigator.tap()
+        XCTAssertTrue(investigator.isSelected)
+        XCTAssertTrue(element("intro.start").label.contains("15:00"), "Le bouton annonce la durée du niveau choisi")
+        snap("81-niveau-enqueteur")
+        tap(element("intro.start"), "Commencer (Enquêteur)", expecting: element("phone.timer"))
+        XCTAssertTrue(secondsLeft() > 14 * 60, "Enquêteur démarre à 15:00 (\(secondsLeft()) s)")
+        accuseEmmaAndFinish("82-resolue-enqueteur")
+
+        // Solved at Enquêteur: shown on its card; Expert still locked.
+        tap(element("case.case_001"), "affaire 001", expecting: element("intro.start"))
+        scrollTo(expert)
+        XCTAssertTrue(investigator.label.contains("Résolue"), "Meilleur résultat affiché (\(investigator.label))")
+        XCTAssertTrue(detective.label.contains("Non tentée") || !detective.label.contains("Résolue"))
+        XCTAssertFalse(expert.isEnabled, "Résoudre en Enquêteur ne débloque pas Expert")
+        snap("83-apres-enqueteur")
+
+        // Replay the same case at Détective (8 minutes): Expert unlocks.
+        detective.tap()
+        tap(element("intro.start"), "Commencer (Détective)", expecting: element("phone.timer"))
+        let left = secondsLeft()
+        XCTAssertTrue(left > 7 * 60 && left <= 8 * 60, "Détective démarre à 08:00 (\(left) s)")
+        accuseEmmaAndFinish("84-resolue-detective")
+        tap(element("case.case_001"), "affaire 001", expecting: element("intro.start"))
+        scrollTo(expert)
+        XCTAssertTrue(expert.isEnabled, "Expert se débloque après une réussite en Détective")
+        expert.tap()
+        XCTAssertTrue(element("intro.start").label.contains("05:00"))
+        snap("85-expert-debloque")
+        tap(element("intro.start"), "Commencer (Expert)", expecting: element("phone.timer"))
+        XCTAssertTrue(secondsLeft() <= 5 * 60, "Expert : 5 minutes")
+    }
+
+    // MARK: - The map: a real, explorable map; places appear as the player learns about them
+
+    func testInteractiveMap() {
+        startCase()
+        openApp("location")
+        let map = wait(element("location.map"), 10, "carte interactive")
+        sleep(2)
+        snap("90-carte")
+        XCTAssertTrue(element("map.pin.pl_levant").exists, "Le Levant (connu) est sur la carte")
+        XCTAssertFalse(element("map.pin.pl_quai9").exists, "Le Quai 9 n'est pas encore connu")
+
+        // Explore: zoom in, pan, zoom out, double tap.
+        map.pinch(withScale: 2.2, velocity: 1.5)
+        sleep(1)
+        snap("91-carte-zoom")
+        map.swipeLeft()
+        map.pinch(withScale: 0.5, velocity: -1.5)
+        map.doubleTap()
+        sleep(1)
+        snap("92-carte-exploree")
+
+        // Alex's location history: the route through the port reveals the Quai 9.
+        let track = element("track.t_me")
+        scrollTo(track, maxSwipes: 4)
+        tap(track, "historique d'Alex", expecting: element("location.map"))
+        sleep(2)
+        snap("93-trajet")
+        XCTAssertTrue(element("map.pin.pl_quai9").exists, "Le trajet passe par le Quai 9 : il apparaît sur la carte")
+    }
+
+    // MARK: - The opening sequence, into the phone
+
+    func testCinematicIntoThePhone() {
+        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip"]
+        app.launch()
+        wait(element("home.start"), 20, "Accueil")
+        openCaseScreen()
+        tapWhenReady(element("intro.start"), "Commencer l'enquête")
+
+        wait(element("cinematic.shot.title"), 5, "écran noir d'ouverture")
+        snap("A0-intro-noir")
+        wait(element("cinematic.shot.broadcast"), 10, "reportage")
+        sleep(2)
+        snap("A1-intro-reportage")
+        wait(element("cinematic.subtitle"), 5, "sous-titres du reportage")
+        sleep(5)
+        snap("A2-intro-reportage-suite")
+        wait(element("cinematic.shot.phone"), 15, "le téléphone sur la table")
+        sleep(3)
+        snap("A3-intro-telephone")
+        wait(element("cinematic.shot.unlock"), 10, "déverrouillage")
+        usleep(1_500_000)
+        snap("A4-intro-deverrouillage")
+
+        // The phone picked up is the game's phone; the clock did not run during the opening.
+        wait(element("phone.timer"), 15, "le téléphone de l'enquête")
+        XCTAssertFalse(element("cinematic.skip").exists)
+        XCTAssertTrue(secondsLeft() >= 8 * 60 - 6, "Le chrono démarre quand le téléphone est en main (\(secondsLeft()) s)")
+        snap("A5-telephone-en-main")
+    }
+
+    func testCinematicCanBeSkipped() {
+        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip"]
+        app.launch()
+        wait(element("home.start"), 20, "Accueil")
+        openCaseScreen()
+        tapWhenReady(element("intro.start"), "Commencer l'enquête")
+        let skip = wait(element("cinematic.skip"), 5, "bouton Passer")
+        sleep(1)
+        tap(skip, "Passer", expecting: element("phone.timer"))
+        XCTAssertTrue(secondsLeft() >= 8 * 60 - 4, "Passer l'ouverture ne coûte pas de temps")
     }
 
     // MARK: - Time runs out, wrong accusation, reveal

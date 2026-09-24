@@ -9,6 +9,7 @@ struct PhoneView: View {
     let onNotebook: () -> Void
     let onHints: () -> Void
     let onTimer: () -> Void
+    let onQuit: () -> Void
     /// Apps open from (and close back into) their icon, like on iOS.
     @Namespace private var appZoom
 
@@ -55,8 +56,11 @@ struct PhoneView: View {
             // Bottom: scrim gradient 96 pt, capsule, home indicator.
             VStack(spacing: Theme.Spacing.s3) {
                 Spacer()
-                CarnetBar(count: session.game.notebook.count, hintAvailable: session.game.nextHint != nil,
-                          onNotebook: onNotebook, onHints: onHints)
+                HStack(spacing: Theme.Spacing.s3) {
+                    QuitButton(action: onQuit)
+                    CarnetBar(count: session.game.notebook.count, hintAvailable: session.game.nextHint != nil,
+                              onNotebook: onNotebook, onHints: onHints)
+                }
                 HomeIndicator { session.goHome() }
             }
             .background(alignment: .bottom) {
@@ -452,6 +456,26 @@ struct CarnetBar: View {
         .phaseAnimator([1.0, 1.07, 1.0], trigger: count) { view, scale in
             view.scaleEffect(scale)
         } animation: { _ in .spring(duration: 0.22, bounce: 0.4) }
+    }
+}
+
+/// "Quitter l'enquête": a round button next to the notebook capsule (the investigation is saved).
+struct QuitButton: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: "chevron.backward")
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(Theme.Colors.textPrimary)
+                .frame(width: Theme.Size.carnetBar, height: Theme.Size.carnetBar)
+                .background(Circle().fill(Theme.Colors.bgBubbleIn.opacity(0.88)))
+                .background(.ultraThinMaterial, in: Circle())
+                .elevation1(Circle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(L10n.t("quit.a11y")))
+        .accessibilityIdentifier("phone.quit")
     }
 }
 

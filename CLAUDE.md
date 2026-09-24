@@ -46,20 +46,20 @@ ScreenshotKit/            Package Swift contenant tout le jeu
     Support/              GameClock (SystemClock / ManualClock)
   Sources/CaseLibrary/    Données : Resources/Cases/case_XXX.json + Resources/Rules/rules.json
   Sources/ScreenshotUI/   Interface SwiftUI (iOS uniquement, fichiers entourés de #if os(iOS))
-    Session/              GameSession (moteur, navigation, bannières, haptiques), ProgressStore (tentatives),
-                          Preferences (réglages)
+    Session/              GameSession (moteur, navigation, bannières, haptiques), ProgressStore (tentatives,
+                          meilleur résultat par niveau), Preferences (réglages), AudioDirector (sons, voix)
     Phone/                Le téléphone : barre d'état, accueil, bannières, et chaque app (Apps/)
-    Screens/              RootView (flux), MetaScreens (Accueil, Affaires, Intro, Dossiers, Profil, Paramètres),
+    Screens/              RootView (flux), CinematicView (séquence d'ouverture), MetaScreens (Accueil, Affaires, Intro, Dossiers, Profil, Paramètres),
                           InvestigationView (téléphone + Carnet + Indices), EndScreens (temps écoulé,
                           accusation, résultat, score)
     Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (épingler / lier), Controls (boutons,
                           maintien pour confirmer, segments, en-têtes, état vide)
     Theme/, Support/      Tokens du handoff (Theme.swift), polices (Fonts.swift), L10n, formats de date
-    Resources/            Localizable.xcstrings (fr + en), Fonts/ (Geist, JetBrains Mono, Instrument Serif — OFL)
+    Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py), Fonts/ (Geist, JetBrains Mono, Instrument Serif — OFL)
   Sources/CaseLint/       CLI : valide chaque affaire et vérifie qu'elle est résolvable dans le temps
   Tests/                  CaseEngineTests (moteur), CaseLibraryTests (affaires, parties complètes,
                           traductions, absence de vocabulaire de l'ancien prototype)
-scripts/                  test.sh, setup-linux-swift.sh
+scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d'affaires), audio/ (sons)
 ```
 
 ## Architecture — règles
@@ -122,7 +122,8 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
 - `ios-build.yml` : compilation de l'app pour le simulateur (sans signature) sur macOS, puis tests
   d'interface `ScreenshotUITests` (parcours complet) sur simulateur, à chaque push touchant l'app.
   Captures de chaque étape publiées sur la branche `ci/ui-screenshots` (+ `results.txt`).
-  Options de lancement Debug pour les tests : `-UITestReset YES`, `-UITestDuration <s>`.
+  Options de lancement Debug pour les tests : `-UITestReset YES`, `-UITestDuration <s>`,
+  `-UITestCinematic skip`.
 - `tests-linux.yml` : `swift test` + `CaseLint` (image Docker `swift:6.0-noble`), à chaque push.
 - `ios-testflight.yml` : macOS, manuel ou PR vers `main`. Tests, archive signée, export, envoi
   TestFlight via clé API. Build = `<run_number + BUILD_NUMBER_OFFSET>.<attempt>`. Sans secrets :
@@ -138,6 +139,8 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
 - [x] Intégration du handoff v1.0 : tokens, polices, composants, écrans méta, carnet, fin de partie
       (reste : voir DESIGN_INTEGRATION.md §3)
 - [x] Onboarding 3 étapes, reprise d'une enquête (sauvegarde locale), recherche globale (toutes apps)
+- [x] Quitter / reprendre, niveaux Enquêteur · Détective · Expert, carte réelle (MapKit) révélée par
+      les indices, photos réalistes (styles), séquence d'ouverture (`introScene`), sons
 - [ ] Affaires #002–#005 (4 suspects, 5 min) puis #006–#015 (6 suspects, 8–10 min)
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
 - [ ] Monnaie / tickets d'indices, iCloud

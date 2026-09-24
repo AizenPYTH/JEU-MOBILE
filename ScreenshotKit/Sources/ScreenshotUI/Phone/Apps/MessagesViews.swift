@@ -375,7 +375,7 @@ struct MessageBubble: View {
                             Button {
                                 session.open(.photo(photoID))
                             } label: {
-                                GeneratedPhoto(scene: photo.scene, seed: photo.id)
+                                GeneratedPhoto(photo: photo)
                                     .frame(width: Theme.Size.photoBubble, height: Theme.Size.photoBubble * 0.75)
                                     .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm, style: .continuous))
                             }

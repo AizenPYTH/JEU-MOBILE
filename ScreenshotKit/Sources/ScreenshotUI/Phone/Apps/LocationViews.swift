@@ -1,63 +1,85 @@
 #if os(iOS)
 import SwiftUI
+import MapKit
 import CaseEngine
 
-/// Location: the owner's history and friends sharing their position, on a stylised city map.
+/// Location: the map of the case (real and explorable when the places have coordinates, the
+/// stylised city otherwise) and, below it, who shared their position with this phone.
 struct LocationView: View {
     let session: GameSession
 
     var body: some View {
         let game = session.game
         let tracks = game.device.tracks
-        ScrollView {
-            VStack(spacing: 0) {
-                CityMap(places: game.device.places, tracks: [], highlight: nil)
-                    .frame(height: Theme.Size.mapHeight)
-                    .overlay(alignment: .topLeading) {
-                        Label(L10n.f("n.places", game.device.places.count), systemImage: "mappin")
-                            .font(Theme.Fonts.caption)
-                            .foregroundStyle(Theme.Colors.textPrimary)
-                            .padding(.horizontal, Theme.Spacing.s3)
-                            .frame(height: 28)
-                            .background(Capsule().fill(Theme.Colors.mapLabelHalo))
-                            .padding(Theme.Spacing.s4)
-                    }
-
-                // Bottom card, like a maps app: who shared their position with this phone.
-                VStack(alignment: .leading, spacing: 0) {
-                    Capsule().fill(Theme.Colors.line3).frame(width: 36, height: 5)
-                        .frame(maxWidth: .infinity)
-                        .padding(.top, Theme.Spacing.s3)
-                    Text(L10n.t("location.people"))
-                        .font(Theme.Fonts.title)
-                        .foregroundStyle(Theme.Colors.textPrimary)
-                        .padding(.horizontal, Theme.Spacing.marginList)
-                        .padding(.top, Theme.Spacing.s4)
-                    Text(L10n.t("location.peopleHelp"))
-                        .font(Theme.Fonts.caption)
-                        .foregroundStyle(Theme.Colors.textSecondary)
-                        .padding(.horizontal, Theme.Spacing.marginList)
-                        .padding(.bottom, Theme.Spacing.s4)
-                    if tracks.isEmpty {
-                        EmptyStateView(title: L10n.t("empty.locationTitle"), message: L10n.t("empty.locationMessage"))
-                    }
-                    ForEach(tracks) { track in
-                        Button {
-                            session.open(.track(track.id))
-                        } label: {
-                            TrackRow(track: track, game: game, cost: session.rules.timeCosts.openTrack)
-                        }
-                        .buttonStyle(.plain)
-                        RowDivider(leading: 76)
-                    }
+        let known = game.knownPlaces
+        let hasRealMap = game.device.places.contains { $0.latitude != nil }
+        VStack(spacing: 0) {
+            Group {
+                if hasRealMap {
+                    CaseMap(markers: CaseMap.markers(for: known), me: me(in: game))
+                } else {
+                    CityMap(places: known, tracks: [], highlight: nil)
                 }
-                .background(UnevenRoundedRectangle(topLeadingRadius: Theme.Radius.sheet, topTrailingRadius: Theme.Radius.sheet, style: .continuous)
-                    .fill(Theme.Colors.bgSurface))
-                .offset(y: -Theme.Spacing.s6)
             }
-            .padding(.bottom, Theme.Spacing.bottomInset)
+            .overlay(alignment: .topLeading) {
+                Label(L10n.f("n.places", known.count), systemImage: "mappin")
+                    .font(Theme.Fonts.caption)
+                    .foregroundStyle(Theme.Colors.textPrimary)
+                    .padding(.horizontal, Theme.Spacing.s3)
+                    .frame(height: 28)
+                    .background(Capsule().fill(Theme.Colors.mapLabelHalo))
+                    .padding(Theme.Spacing.s4)
+                    .allowsHitTesting(false)
+            }
+            .frame(maxHeight: .infinity)
+
+            // Bottom card, like a maps app: who shared their position with this phone.
+            VStack(alignment: .leading, spacing: 0) {
+                Capsule().fill(Theme.Colors.line3).frame(width: 36, height: 5)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, Theme.Spacing.s3)
+                Text(L10n.t("location.people"))
+                    .font(Theme.Fonts.headline)
+                    .foregroundStyle(Theme.Colors.textPrimary)
+                    .padding(.horizontal, Theme.Spacing.marginList)
+                    .padding(.top, Theme.Spacing.s3)
+                Text(L10n.t("location.peopleHelp"))
+                    .font(Theme.Fonts.caption)
+                    .foregroundStyle(Theme.Colors.textSecondary)
+                    .padding(.horizontal, Theme.Spacing.marginList)
+                    .padding(.bottom, Theme.Spacing.s2)
+                ScrollView {
+                    VStack(spacing: 0) {
+                        if tracks.isEmpty {
+                            EmptyStateView(title: L10n.t("empty.locationTitle"), message: L10n.t("empty.locationMessage"))
+                        }
+                        ForEach(tracks) { track in
+                            Button {
+                                session.open(.track(track.id))
+                            } label: {
+                                TrackRow(track: track, game: game, cost: session.rules.timeCosts.openTrack)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("track.\(track.id)")
+                            RowDivider(leading: 76)
+                        }
+                    }
+                    .padding(.bottom, Theme.Spacing.bottomInset)
+                }
+            }
+            .frame(height: 300)
+            .background(UnevenRoundedRectangle(topLeadingRadius: Theme.Radius.sheet, topTrailingRadius: Theme.Radius.sheet, style: .continuous)
+                .fill(Theme.Colors.bgSurface)
+                .ignoresSafeArea(edges: .bottom))
         }
         .appRoot(.location, subtitle: L10n.t("location.subtitle"), session: session)
+    }
+
+    /// The phone's own last position (from the owner's track).
+    private func me(in game: Investigation) -> CLLocationCoordinate2D? {
+        guard let track = game.device.tracks.first(where: { $0.contact == ownerContactID }),
+              let last = track.points.max(by: { $0.at < $1.at }) else { return nil }
+        return CaseMap.coordinate(of: last.place, in: game.device.places)
     }
 }
 
@@ -104,7 +126,7 @@ struct TrackRow: View {
     }
 }
 
-/// One person's movements: route on the map + precise timeline.
+/// One person's movements: the route on the map (numbered stops, zoomable) + the precise timeline.
 struct TrackView: View {
     let trackID: String
     let session: GameSession
@@ -113,54 +135,75 @@ struct TrackView: View {
         let game = session.game
         if let track = game.index.track(trackID) {
             let points = track.points.sorted { $0.at < $1.at }
-            ScrollView {
-                VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
-                    CityMap(places: game.device.places, tracks: [track], highlight: nil)
-                        .frame(height: Theme.Size.mapHeight)
-                        .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
-
-                    if let stopped = track.sharingStoppedAt {
-                        Label(L10n.f("location.stoppedAt", game.name(of: track.contact), PhoneFormat.dayAndTime(stopped)),
-                              systemImage: "location.slash.fill")
-                            .font(Theme.Fonts.callout.weight(.medium))
-                            .foregroundStyle(Theme.Colors.signal)
+            let places = game.device.places
+            let stops = places.filter { place in points.contains { $0.place == place.id } }
+            VStack(spacing: 0) {
+                Group {
+                    if places.contains(where: { $0.latitude != nil }) {
+                        CaseMap(markers: CaseMap.markers(for: stops, route: points),
+                                route: points.compactMap { CaseMap.coordinate(of: $0.place, in: places) })
+                    } else {
+                        CityMap(places: places, tracks: [track], highlight: nil)
                     }
+                }
+                .frame(height: Theme.Size.mapHeight)
 
-                    VStack(alignment: .leading, spacing: 0) {
-                        ForEach(Array(points.enumerated()), id: \.element.id) { offset, point in
-                            HStack(alignment: .top, spacing: Theme.Spacing.s4) {
-                                VStack(spacing: 0) {
-                                    Text("\(offset + 1)")
-                                        .font(Theme.Fonts.dataSmall.weight(.bold))
-                                        .foregroundStyle(Theme.Colors.textOnLight)
-                                        .frame(width: 20, height: 20)
-                                        .background(Circle().fill(Theme.Colors.info))
-                                    if offset < points.count - 1 {
-                                        Rectangle().fill(Theme.Colors.line2).frame(width: 2).frame(minHeight: 28)
-                                    }
-                                }
-                                VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
-                                    Text("\(PhoneFormat.shortDay(point.at)) · \(PhoneFormat.time(point.at))")
-                                        .font(Theme.Fonts.callout.weight(.semibold))
-                                        .monospacedDigit()
-                                    Text(game.index.place(point.place)?.name ?? point.place)
-                                        .font(Theme.Fonts.callout)
-                                    if let note = point.note {
-                                        Text(note)
-                                            .font(Theme.Fonts.caption)
-                                            .foregroundStyle(Theme.Colors.textSecondary)
-                                    }
-                                }
-                                .padding(.bottom, Theme.Spacing.s4)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
+                        if let stopped = track.sharingStoppedAt {
+                            Label(L10n.f("location.stoppedAt", game.name(of: track.contact), PhoneFormat.dayAndTime(stopped)),
+                                  systemImage: "location.slash.fill")
+                                .font(Theme.Fonts.callout.weight(.medium))
+                                .foregroundStyle(Theme.Colors.signal)
+                        }
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(Array(points.enumerated()), id: \.element.id) { offset, point in
+                                TrackStopRow(number: offset + 1, point: point, placeName: game.index.place(point.place)?.name ?? point.place,
+                                             last: offset == points.count - 1)
                             }
                         }
                     }
+                    .padding(Theme.Spacing.s5)
+                    .padding(.bottom, Theme.Spacing.bottomInset)
                 }
-                .padding(Theme.Spacing.s5)
             }
             .navigationTitle(track.contact == ownerContactID ? L10n.t("location.me") : game.name(of: track.contact))
             .navigationBarTitleDisplayMode(.inline)
             .pinnable(ItemRef(.track, track.id), session: session)
+        }
+    }
+}
+
+/// A stop on a route: its number (as on the map), day and time, place, note.
+struct TrackStopRow: View {
+    let number: Int
+    let point: TrackPoint
+    let placeName: String
+    let last: Bool
+
+    var body: some View {
+        HStack(alignment: .top, spacing: Theme.Spacing.s4) {
+            VStack(spacing: 0) {
+                Text("\(number)")
+                    .font(Theme.Fonts.dataSmall.weight(.bold))
+                    .foregroundStyle(Theme.Colors.textPrimary)
+                    .frame(width: 22, height: 22)
+                    .background(Circle().fill(Theme.Colors.info))
+                if !last {
+                    Rectangle().fill(Theme.Colors.line2).frame(width: 2).frame(minHeight: 28)
+                }
+            }
+            VStack(alignment: .leading, spacing: Theme.Spacing.s1) {
+                Text("\(PhoneFormat.shortDay(point.at)) · \(PhoneFormat.time(point.at))")
+                    .font(Theme.Fonts.callout.weight(.semibold))
+                    .monospacedDigit()
+                    .foregroundStyle(Theme.Colors.textPrimary)
+                Text(placeName).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textPrimary)
+                if let note = point.note {
+                    Text(note).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
+                }
+            }
+            .padding(.bottom, Theme.Spacing.s4)
         }
     }
 }
