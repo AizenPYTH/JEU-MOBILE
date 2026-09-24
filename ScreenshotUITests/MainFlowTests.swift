@@ -653,7 +653,8 @@ final class MainFlowTests: XCTestCase {
         wait(element("cinematic.shot.broadcast"), 10, "reportage")
         sleep(2)
         snap("A1-intro-reportage")
-        wait(element("cinematic.subtitle"), 5, "sous-titres du reportage")
+        let subtitle = app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'parking du Quai 9'")).firstMatch
+        wait(subtitle, 5, "sous-titres du reportage")
         sleep(5)
         snap("A2-intro-reportage-suite")
         wait(element("cinematic.shot.phone"), 15, "le téléphone sur la table")
