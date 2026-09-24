@@ -25,5 +25,20 @@
     "found": 25,
     "timeLeft": 10,
     "notebookPrecision": 5
-  }
+  },
+  "challenges": [
+    {
+      "challenge": "investigator",
+      "durationFactor": 1.875
+    },
+    {
+      "challenge": "detective",
+      "durationFactor": 1
+    },
+    {
+      "challenge": "expert",
+      "durationFactor": 0.625,
+      "unlockedBy": "detective"
+    }
+  ]
 }

@@ -11,6 +11,8 @@ public struct GameRules: Codable, Sendable, Equatable {
     /// How long a notification banner stays on screen.
     public var bannerSeconds: Double
     public var scoring: Scoring
+    /// Challenge levels (same case, less time). Optional: defaults in `challengeRules`.
+    public var challenges: [ChallengeRule]? = nil
 
     /// Seconds removed from the timer by each action — reading, searching and analysing cost time.
     public struct TimeCosts: Codable, Sendable, Equatable {

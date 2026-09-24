@@ -37,6 +37,10 @@ public enum CaseValidator {
             for place in device.places {
                 register(place.id, "place")
                 if !(0...1).contains(place.x) || !(0...1).contains(place.y) { fail("place '\(place.id)' is off the map") }
+                if (place.latitude == nil) != (place.longitude == nil) { fail("place '\(place.id)' needs both latitude and longitude") }
+                if let lat = place.latitude, let lon = place.longitude, !(-90...90).contains(lat) || !(-180...180).contains(lon) {
+                    fail("place '\(place.id)' has invalid coordinates")
+                }
             }
             var messageIDs = Set<String>()
             for conversation in device.conversations {
@@ -133,6 +137,36 @@ public enum CaseValidator {
         let keyAboutCulprit = file.evidence.filter { $0.importance == .key && $0.suspects.contains(file.solution.culprit) }
         if keyAboutCulprit.count < 2 { fail("the culprit needs at least 2 key pieces of evidence (found \(keyAboutCulprit.count))") }
         if !file.evidence.contains(where: { $0.importance == .falseLead }) { fail("a case needs at least one false lead") }
+
+        // Places revealed by an item: every reference must exist.
+        for device in file.devices {
+            for place in device.places {
+                for ref in place.revealedBy ?? [] where !known.contains(ref) {
+                    fail("place '\(place.id)' is revealed by unknown '\(ref)'")
+                }
+            }
+        }
+
+        // Challenge levels and the opening sequence.
+        for (level, seconds) in file.challengeDurations ?? [:] {
+            if Challenge(rawValue: level) == nil { fail("unknown challenge level '\(level)'") }
+            if seconds <= 0 { fail("challenge '\(level)' needs a positive duration") }
+        }
+        if let intro = file.introScene {
+            if intro.shots.isEmpty { fail("the intro scene has no shot") }
+            for (n, shot) in intro.shots.enumerated() {
+                if shot.seconds <= 0 { fail("intro shot \(n + 1) needs a positive duration") }
+                for line in shot.lines ?? [] where line.at < 0 || line.at >= shot.seconds {
+                    fail("intro shot \(n + 1): line « \(line.text.prefix(20)) » is outside the shot")
+                }
+                for cue in shot.cues ?? [] where cue.at < 0 || cue.at >= shot.seconds {
+                    fail("intro shot \(n + 1): cue '\(cue.sound)' is outside the shot")
+                }
+                if let n2 = shot.notification, n2.at < 0 || n2.at >= shot.seconds {
+                    fail("intro shot \(n + 1): the notification is outside the shot")
+                }
+            }
+        }
 
         for hint in file.hints {
             register(hint.id, "hint")

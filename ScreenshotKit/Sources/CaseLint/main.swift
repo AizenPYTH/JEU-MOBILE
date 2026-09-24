@@ -13,7 +13,7 @@ var failed = false
 do {
     let rules = try CaseLibrary.loadRules()
     let cases = try CaseLibrary.loadCases()
-    print("SCREENSHOT CaseLint — CaseEngine \(CaseEngine.version) — \(cases.count) case(s)\n")
+    print("TRACE CaseLint — CaseEngine \(CaseEngine.version) — \(cases.count) case(s)\n")
     for file in cases {
         let issues = CaseValidator.validate(file)
         let report = CaseAnalysis.analyze(file, rules: rules)
@@ -24,6 +24,19 @@ do {
         print("  minimum action cost to see all key evidence: \(report.minimumKeyCost) s · estimated solve time: \(report.estimatedSolveSeconds) s")
         if !report.isComfortablySolvable {
             print("  ⚠️  estimated solve time is above 75 % of the duration")
+        }
+        let levels = Challenge.allCases.map { level -> String in
+            let d = file.duration(for: level, rules: rules)
+            return "\(level.rawValue) \(d / 60):\(String(format: "%02d", d % 60))"
+        }
+        print("  challenges: " + levels.joined(separator: " · "))
+        if let shortest = Challenge.allCases.map({ file.duration(for: $0, rules: rules) }).min(),
+           report.estimatedSolveSeconds > shortest * 3 / 4 {
+            print("  ✗ not solvable at the hardest level (\(report.estimatedSolveSeconds) s for \(shortest) s)")
+            failed = true
+        }
+        if let intro = file.introScene {
+            print("  intro: \(intro.shots.count) shots · \(Int(intro.totalSeconds)) s")
         }
         if issues.isEmpty {
             print("  ✓ valid\n")

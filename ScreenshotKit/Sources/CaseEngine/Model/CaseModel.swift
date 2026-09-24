@@ -30,6 +30,11 @@ public struct CaseFile: Codable, Sendable, Identifiable {
     public var evidence: [Evidence]
     public var hints: [Hint]
     public var solution: Solution
+    /// Duration per challenge level ("investigator", "detective", "expert"), in seconds. Missing
+    /// levels use the factors of `rules.json` (see `duration(for:rules:)`).
+    public var challengeDurations: [String: Int]? = nil
+    /// The opening sequence played before the phone (see `IntroScene`); nil = straight to the phone.
+    public var introScene: IntroScene? = nil
 }
 
 // MARK: - Device (one seized phone)
@@ -149,6 +154,12 @@ public struct Place: Codable, Sendable, Identifiable, Hashable {
     /// Position on the stylised city map, 0…1 on both axes.
     public var x: Double
     public var y: Double
+    /// Real-world position for the interactive map (both or neither).
+    public var latitude: Double? = nil
+    public var longitude: Double? = nil
+    /// The place only appears on the map once one of these items has been seen (or a route through
+    /// it opened). nil = shown from the start (home, work, the usual places).
+    public var revealedBy: [ItemRef]? = nil
 }
 
 /// Position history of one person, as the owner's phone can see it
@@ -190,6 +201,16 @@ public struct Photo: Codable, Sendable, Identifiable, Hashable {
     public var caption: String
     /// What a careful look reveals (shown after "Analyser").
     public var details: String
+    /// How the picture was taken (selfie, night shot, document, screenshot, blurry, old…); drives
+    /// how it is rendered. nil = an ordinary photo of its scene.
+    public var style: Style? = nil
+    /// Text legible in the picture itself (a document, a screenshot). Only what anyone can read at
+    /// a glance: what needs a careful look belongs in `details`.
+    public var lines: [String]? = nil
+
+    public enum Style: String, Codable, Sendable {
+        case standard, selfie, night, document, screenshot, blurry, old, quick
+    }
 }
 
 // MARK: - Calendar, notes, mail, browser

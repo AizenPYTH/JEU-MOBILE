@@ -25,6 +25,8 @@ public struct InvestigationSnapshot: Codable, Equatable, Sendable {
     public var usedHintIDs: [String]
     public var searchCount: Int
     public var readNotifications: Set<String>
+    /// Challenge level (absent in games saved by earlier versions: detective).
+    public var challenge: Challenge? = nil
 }
 
 extension Investigation {
@@ -50,7 +52,8 @@ extension Investigation {
             marks: marks,
             usedHintIDs: usedHints.map(\.id),
             searchCount: searchCount,
-            readNotifications: readNotifications
+            readNotifications: readNotifications,
+            challenge: challenge
         )
     }
 }

@@ -27,6 +27,11 @@ struct ShippedCasesTests {
         for file in try CaseLibrary.loadCases() {
             let report = CaseAnalysis.analyze(file, rules: rules)
             #expect(report.isComfortablySolvable, "\(file.id): \(report.estimatedSolveSeconds) s for \(report.duration) s")
+            // Every challenge level, even the hardest, leaves room to actually investigate.
+            for level in Challenge.allCases {
+                let seconds = file.duration(for: level, rules: rules)
+                #expect(report.estimatedSolveSeconds <= seconds * 3 / 4, "\(file.id) at \(level): \(report.estimatedSolveSeconds) s for \(seconds) s")
+            }
             // The phone must be a real haystack: most messages are not evidence.
             #expect(report.noiseRatio > 0.7, "\(file.id): only \(Int(report.noiseRatio * 100)) % noise")
         }

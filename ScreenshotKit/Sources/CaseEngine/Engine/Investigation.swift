@@ -82,6 +82,8 @@ public final class Investigation {
     public let rules: GameRules
     public let clock: any GameClock
     public let index: CaseIndex
+    /// The challenge level this play was started at (its duration is already in `caseFile`).
+    public let challenge: Challenge
 
     public private(set) var phase: Phase = .briefing
     public private(set) var isPaused = false
@@ -111,10 +113,12 @@ public final class Investigation {
     private var warnedLowTime = false
     private var pendingEvents: [InvestigationEvent] = []
 
-    public init(caseFile: CaseFile, rules: GameRules, clock: any GameClock) {
+    /// `caseFile` is the case as played: use `CaseFile.configured(for:rules:)` for a challenge level.
+    public init(caseFile: CaseFile, rules: GameRules, clock: any GameClock, challenge: Challenge = .detective) {
         self.caseFile = caseFile
         self.rules = rules
         self.clock = clock
+        self.challenge = challenge
         self.index = CaseIndex(caseFile)
         self.currentDeviceID = caseFile.devices.first?.id ?? ""
     }
@@ -128,7 +132,7 @@ public final class Investigation {
               caseFile.devices.contains(where: { $0.id == saved.currentDeviceID }) else { return nil }
         var file = caseFile
         file.durationSeconds = saved.durationSeconds
-        self.init(caseFile: file, rules: rules, clock: clock)
+        self.init(caseFile: file, rules: rules, clock: clock, challenge: saved.challenge ?? .detective)
         phase = saved.phase
         activeSeconds = saved.activeSeconds
         penaltySeconds = saved.penaltySeconds
@@ -428,6 +432,19 @@ public final class Investigation {
     }
 
     public func isAnalyzed(_ photoID: String) -> Bool { seen.contains(ItemRef(.photoInfo, photoID)) }
+
+    /// Whether a place shows on the map: always, or once one of its `revealedBy` items has been
+    /// seen, or once a route through it has been opened.
+    public func isKnown(_ place: Place) -> Bool {
+        guard let refs = place.revealedBy, !refs.isEmpty else { return true }
+        if refs.contains(where: { seen.contains($0) }) { return true }
+        return device.tracks.contains { track in
+            seen.contains(ItemRef(.track, track.id)) && track.points.contains { $0.place == place.id }
+        }
+    }
+
+    /// Places currently shown on the map.
+    public var knownPlaces: [Place] { device.places.filter(isKnown) }
 
     public func openTrack(_ id: String) {
         guard index.track(id) != nil else { return }
