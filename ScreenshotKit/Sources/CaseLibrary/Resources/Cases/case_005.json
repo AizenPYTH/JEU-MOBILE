@@ -1,0 +1,3023 @@
+{
+ "schemaVersion": 1,
+ "id": "case_005",
+ "number": 5,
+ "title": "ROUTE DE NUIT",
+ "tagline": "Moteur allumé, portière ouverte. Personne.",
+ "synopsis": [
+  "Vendredi 27 novembre, 23h48. Sur la route du col de la Croix-Perrin, dans le Vercors, un agent de déneigement trouve une voiture arrêtée sur le bas-côté : feux de détresse, moteur allumé, portière ouverte.",
+  "La conductrice, Solène Marchetti, 34 ans, journaliste à L'Écho des Alpes, a disparu. Son téléphone était sur le siège passager. Elle enquêtait depuis des mois sur l'extension d'une carrière.",
+  "Cinq personnes avaient une raison de la croiser cette nuit. Il pleut. Le temps presse."
+ ],
+ "objective": "Identifier la personne qui a donné rendez-vous à Solène au col.",
+ "difficulty": 1,
+ "durationSeconds": 480,
+ "phoneStartTime": "2026-11-28 00:50",
+ "challengeDurations": {
+  "investigator": 900,
+  "detective": 480,
+  "expert": 300
+ },
+ "introScene": {
+  "shots": [
+   {
+    "kind": "scene",
+    "seconds": 7,
+    "scene": "road_night",
+    "camera": "push",
+    "effect": "hazard",
+    "ambience": [
+     "rain",
+     "engine"
+    ],
+    "lines": [
+     {
+      "text": "COL DE LA CROIX-PERRIN · VENDREDI 27 NOVEMBRE · 23:48",
+      "at": 0.3
+     },
+     {
+      "text": "Moteur allumé. Portière ouverte.",
+      "at": 2.6
+     }
+    ]
+   },
+   {
+    "kind": "scene",
+    "seconds": 5,
+    "scene": "road_night",
+    "camera": "drift",
+    "effect": "rain",
+    "ambience": [
+     "rain",
+     "engine"
+    ]
+   },
+   {
+    "kind": "phoneOnTable",
+    "seconds": 7,
+    "surface": "carSeat",
+    "label": "Siège passager — 23:48",
+    "ambience": [
+     "rain",
+     "engine"
+    ],
+    "cues": [
+     {
+      "sound": "vibrate",
+      "at": 0.8
+     },
+     {
+      "sound": "notification",
+      "at": 0.85
+     },
+     {
+      "sound": "notification",
+      "at": 2.6
+     },
+     {
+      "sound": "ring",
+      "at": 4.2
+     }
+    ],
+    "notifications": [
+     {
+      "app": "messages",
+      "title": "Julien (nouveau n°)",
+      "body": "Je suis au parking du col, t'es où ?",
+      "at": 0.8
+     },
+     {
+      "app": "messages",
+      "title": "Romain Vidal",
+      "body": "Tu rentres quand ? Léo a de la fièvre",
+      "at": 2.6
+     },
+     {
+      "app": "phone",
+      "title": "Agathe Lemoine",
+      "body": "Appel entrant",
+      "at": 4.2,
+      "call": true
+     }
+    ],
+    "lines": [
+     {
+      "text": "Personne ne répond.",
+      "at": 5.6
+     }
+    ]
+   },
+   {
+    "kind": "title",
+    "seconds": 1.2,
+    "cues": [
+     {
+      "sound": "vibrate",
+      "at": 0.4
+     }
+    ]
+   },
+   {
+    "kind": "unlock",
+    "seconds": 2.4
+   }
+  ]
+ },
+ "devices": [
+  {
+   "id": "dev_solene",
+   "label": "Téléphone de Solène",
+   "model": "iPhone 12",
+   "lockedApps": [
+    {
+     "app": "notes",
+     "code": "1403",
+     "hint": "Ma date (JJMM)"
+    }
+   ],
+   "contacts": [
+    {
+     "id": "me",
+     "name": "Solène Marchetti",
+     "phone": "+33 6 12 84 37 65",
+     "relation": "Moi",
+     "email": "solene.marchetti@echodesalpes.fr",
+     "birthday": "14/03/1992",
+     "avatarHue": 0.56,
+     "isOwner": true
+    },
+    {
+     "id": "gilles",
+     "name": "Gilles Arnaud",
+     "phone": "+33 4 76 95 20 10",
+     "relation": "Mairie de Vallières — adjoint urbanisme",
+     "email": "g.arnaud@vallieres-en-vercors.fr",
+     "avatarHue": 0.33
+    },
+    {
+     "id": "thierry",
+     "name": "Thierry Brassac",
+     "phone": "+33 6 08 44 17 52",
+     "relation": "Brassac Granulats (PDG)",
+     "email": "t.brassac@brassac-granulats.fr",
+     "avatarHue": 0.07
+    },
+    {
+     "id": "romain",
+     "name": "Romain Vidal",
+     "phone": "+33 6 63 20 88 41",
+     "relation": "Papa de Léo et Nina",
+     "avatarHue": 0.62
+    },
+    {
+     "id": "agathe",
+     "name": "Agathe Lemoine",
+     "phone": "+33 6 70 52 19 03",
+     "relation": "L'Écho — directrice de la rédaction",
+     "email": "a.lemoine@echodesalpes.fr",
+     "avatarHue": 0.95
+    },
+    {
+     "id": "julien",
+     "name": "Julien Faure",
+     "phone": "+33 6 71 30 45 18",
+     "relation": "Carrière",
+     "avatarHue": 0.16
+    },
+    {
+     "id": "jnew",
+     "name": "Julien (nouveau n°)",
+     "phone": "+33 7 58 11 20 94",
+     "relation": "Ajouté le 25/11",
+     "avatarHue": 0.16
+    },
+    {
+     "id": "maman",
+     "name": "Maman",
+     "phone": "+33 6 81 27 64 09",
+     "relation": "Mère",
+     "avatarHue": 0.02
+    },
+    {
+     "id": "beatrice",
+     "name": "Béatrice Roux",
+     "phone": "+33 6 29 71 05 86",
+     "relation": "L'Écho — photo",
+     "email": "b.roux@echodesalpes.fr",
+     "avatarHue": 0.47
+    },
+    {
+     "id": "olivier",
+     "name": "Olivier Brun",
+     "phone": "+33 6 34 90 12 77",
+     "relation": "L'Écho — sports",
+     "avatarHue": 0.72
+    },
+    {
+     "id": "lina",
+     "name": "Lina Perret",
+     "phone": "+33 7 62 18 45 30",
+     "relation": "L'Écho — locale",
+     "avatarHue": 0.84
+    },
+    {
+     "id": "aubert",
+     "name": "Maître Aubert",
+     "phone": "+33 4 76 43 18 22",
+     "relation": "Avocate (divorce)",
+     "email": "cabinet.aubert@avocats-isere.fr",
+     "avatarHue": 0.26
+    },
+    {
+     "id": "fatou",
+     "name": "Fatou Diallo",
+     "phone": "+33 6 45 38 90 12",
+     "relation": "Nounou",
+     "avatarHue": 0.1
+    },
+    {
+     "id": "viallet",
+     "name": "Marc Viallet",
+     "phone": "+33 4 76 88 10 45",
+     "relation": "L'Écho — service juridique",
+     "email": "m.viallet@echodesalpes.fr",
+     "avatarHue": 0.4
+    },
+    {
+     "id": "garage",
+     "name": "Garage du Plateau",
+     "phone": "+33 4 76 95 33 07",
+     "avatarHue": 0.52
+    },
+    {
+     "id": "ecole",
+     "name": "École de Lans",
+     "phone": "+33 4 76 95 40 61",
+     "avatarHue": 0.2
+    },
+    {
+     "id": "chabert",
+     "name": "Dr Chabert — pédiatre",
+     "phone": "+33 4 76 95 11 28",
+     "avatarHue": 0.66
+    }
+   ],
+   "conversations": [
+    {
+     "id": "c_julien",
+     "participants": [
+      "julien"
+     ],
+     "messages": [
+      {
+       "id": "m_julien_000",
+       "from": "julien",
+       "at": "2026-10-08 20:14",
+       "text": "bonsoir c est julien faure, on s est vu a la reunion publique sur la carriere. vous m avez laissé votre carte"
+      },
+      {
+       "id": "m_julien_001",
+       "from": "me",
+       "at": "2026-10-08 20:31",
+       "text": "Bonsoir Julien. Oui, je me souviens. Je vous écoute."
+      },
+      {
+       "id": "m_julien_002",
+       "from": "julien",
+       "at": "2026-10-08 20:33",
+       "text": "pas par msg. on peut se voir ? pas a villard, tout le monde se connait"
+      },
+      {
+       "id": "m_julien_003",
+       "from": "me",
+       "at": "2026-10-08 20:40",
+       "text": "Autrans, parking du foyer de fond, jeudi prochain 18h ?"
+      },
+      {
+       "id": "m_julien_004",
+       "from": "julien",
+       "at": "2026-10-08 20:41",
+       "text": "ok"
+      },
+      {
+       "id": "m_julien_005",
+       "from": "julien",
+       "at": "2026-10-15 17:58",
+       "text": "jsuis la, berlingo blanc au fond"
+      },
+      {
+       "id": "m_julien_006",
+       "from": "julien",
+       "at": "2026-10-22 21:10",
+       "text": "on peut se tutoyer hein 😅 merci pour l autre soir"
+      },
+      {
+       "id": "m_julien_007",
+       "from": "me",
+       "at": "2026-10-22 21:25",
+       "text": "Ok 🙂 Merci à toi. Prends ton temps pour la suite."
+      },
+      {
+       "id": "m_julien_008",
+       "from": "julien",
+       "at": "2026-11-05 22:40",
+       "text": "j ai acces au bureau compta demain, je tente un truc"
+      },
+      {
+       "id": "m_julien_009",
+       "from": "me",
+       "at": "2026-11-05 22:44",
+       "text": "Prends aucun risque. Vraiment."
+      },
+      {
+       "id": "m_julien_010",
+       "from": "julien",
+       "at": "2026-11-05 22:45",
+       "text": "tkt"
+      },
+      {
+       "id": "m_julien_doc",
+       "from": "julien",
+       "at": "2026-11-06 19:52",
+       "text": "regarde le 12/09",
+       "photo": "p_doc_virements"
+      },
+      {
+       "id": "m_julien_012",
+       "from": "julien",
+       "at": "2026-11-06 19:53",
+       "text": "G.A. c est qui a ton avis 😶"
+      },
+      {
+       "id": "m_julien_013",
+       "from": "me",
+       "at": "2026-11-06 20:10",
+       "text": "J'ai une idée. On en parle pas ici."
+      },
+      {
+       "id": "m_julien_014",
+       "from": "julien",
+       "at": "2026-11-12 18:30",
+       "text": "y a un gars du bureau qui m a demandé pourquoi j etais passé vendredi. jcrois que c est rien"
+      },
+      {
+       "id": "m_julien_015",
+       "from": "me",
+       "at": "2026-11-12 18:41",
+       "text": "Tu me dis si ça bouge. Et tu effaces rien, on sait jamais."
+      },
+      {
+       "id": "m_julien_016",
+       "from": "julien",
+       "at": "2026-11-20 19:05",
+       "text": "fred est ok pour parler, il a vu les virements aussi. vendredi 27 au soir ca te va ? 22h ? jte dis ou, faut un coin ou personne nous voit"
+      },
+      {
+       "id": "m_julien_017",
+       "from": "me",
+       "at": "2026-11-20 19:20",
+       "text": "Parfait. Merci Julien."
+      },
+      {
+       "id": "m_julien_1802",
+       "from": "julien",
+       "at": "2026-11-27 18:02",
+       "text": "me suis pété la cheville au taf, je suis aux urgences a grenoble. ce soir c est mort je pense"
+      },
+      {
+       "id": "m_julien_019",
+       "from": "me",
+       "at": "2026-11-27 18:04",
+       "text": "Oh non. Soigne-toi, on se reparle."
+      },
+      {
+       "id": "m_julien_platre",
+       "from": "julien",
+       "at": "2026-11-27 18:40",
+       "text": "le bijou 😩",
+       "photo": "p_platre"
+      },
+      {
+       "id": "m_julien_2103",
+       "from": "julien",
+       "at": "2026-11-27 21:03",
+       "text": "toujours aux urgences, ils me gardent pour la nuit. on reporte ok ? désolé"
+      }
+     ]
+    },
+    {
+     "id": "c_jnew",
+     "participants": [
+      "jnew"
+     ],
+     "messages": [
+      {
+       "id": "m_new_2112",
+       "from": "jnew",
+       "at": "2026-11-25 21:12",
+       "text": "C'est Julien. Nouveau numéro, l'autre est surveillé par Brassac. Efface l'ancien et écris-moi ici."
+      },
+      {
+       "id": "m_jnew_001",
+       "from": "me",
+       "at": "2026-11-25 21:15",
+       "text": "Ah. Ok. Il s'est passé quoi ?"
+      },
+      {
+       "id": "m_jnew_002",
+       "from": "jnew",
+       "at": "2026-11-25 21:19",
+       "text": "Pas par écrit. Je t'expliquerai."
+      },
+      {
+       "id": "m_jnew_003",
+       "from": "me",
+       "at": "2026-11-25 21:20",
+       "text": "Ok. Vendredi ça tient ? Tu viens avec Fred ?"
+      },
+      {
+       "id": "m_jnew_004",
+       "from": "jnew",
+       "at": "2026-11-25 21:26",
+       "text": "Oui. Rappelle-moi l'heure, j'ai perdu mes notes avec l'ancien téléphone."
+      },
+      {
+       "id": "m_jnew_005",
+       "from": "me",
+       "at": "2026-11-25 21:27",
+       "text": "22h. Tu devais me dire où."
+      },
+      {
+       "id": "m_jnew_006",
+       "from": "jnew",
+       "at": "2026-11-25 21:34",
+       "text": "23h plutôt. Parking du col de la Croix-Perrin. Personne n'y passe en hiver."
+      },
+      {
+       "id": "m_jnew_007",
+       "from": "me",
+       "at": "2026-11-25 21:35",
+       "text": "Le col ? Il ferme pas la nuit avec la neige ?"
+      },
+      {
+       "id": "m_jnew_008",
+       "from": "jnew",
+       "at": "2026-11-25 21:40",
+       "text": "Il est ouvert. Je connais la route."
+      },
+      {
+       "id": "m_jnew_009",
+       "from": "me",
+       "at": "2026-11-25 21:41",
+       "text": "Ok. Et Fred ?"
+      },
+      {
+       "id": "m_jnew_010",
+       "from": "jnew",
+       "at": "2026-11-25 21:49",
+       "text": "Il sera là. Apporte tous les documents, il veut voir ce que tu as avant de parler."
+      },
+      {
+       "id": "m_jnew_011",
+       "from": "me",
+       "at": "2026-11-26 08:12",
+       "text": "Tu peux m'appeler ce midi ?"
+      },
+      {
+       "id": "m_jnew_012",
+       "from": "jnew",
+       "at": "2026-11-26 08:40",
+       "text": "Pas possible au travail. Plutôt par écrit."
+      },
+      {
+       "id": "m_jnew_013",
+       "from": "jnew",
+       "at": "2026-11-26 22:03",
+       "text": "Tu en as parlé à qui ?"
+      },
+      {
+       "id": "m_jnew_014",
+       "from": "me",
+       "at": "2026-11-26 22:10",
+       "text": "À ma directrice. C'est tout. Pourquoi ?"
+      },
+      {
+       "id": "m_jnew_015",
+       "from": "jnew",
+       "at": "2026-11-26 22:12",
+       "text": "Pour rien. Moins on est, mieux c'est."
+      },
+      {
+       "id": "m_jnew_016",
+       "from": "me",
+       "at": "2026-11-27 18:08",
+       "text": "Je viens de voir ton msg sur l'ancien numéro. Ta cheville ?! Fais gaffe à ce que tu écris dessus."
+      },
+      {
+       "id": "m_jnew_017",
+       "from": "jnew",
+       "at": "2026-11-27 18:30",
+       "text": "Je sais. Réflexe. On verra pour ce soir."
+      },
+      {
+       "id": "m_jnew_018",
+       "from": "me",
+       "at": "2026-11-27 19:20",
+       "text": "Tu m'as appelée sur l'ancien, j'ai fait court. Repose-toi, on décale."
+      },
+      {
+       "id": "m_jnew_019",
+       "from": "jnew",
+       "at": "2026-11-27 19:41",
+       "text": "D'accord."
+      },
+      {
+       "id": "m_new_2140",
+       "from": "jnew",
+       "at": "2026-11-27 21:40",
+       "text": "Finalement je peux. 23h au parking du col de la Croix-Perrin, comme prévu. Viens seule, avec les documents."
+      },
+      {
+       "id": "m_jnew_021",
+       "from": "me",
+       "at": "2026-11-27 21:44",
+       "text": "t'es pas aux urgences ?? tu m'as écrit y a 40 min qu'ils te gardaient"
+      },
+      {
+       "id": "m_jnew_022",
+       "from": "jnew",
+       "at": "2026-11-27 21:46",
+       "text": "Sorti. Plâtre. Un pote me conduit."
+      },
+      {
+       "id": "m_jnew_023",
+       "from": "me",
+       "at": "2026-11-27 21:47",
+       "text": "Et Fred ?"
+      },
+      {
+       "id": "m_jnew_024",
+       "from": "jnew",
+       "at": "2026-11-27 21:52",
+       "text": "Il vient."
+      },
+      {
+       "id": "m_jnew_025",
+       "from": "me",
+       "at": "2026-11-27 22:29",
+       "text": "Je pars dans 10 min."
+      },
+      {
+       "id": "m_jnew_026",
+       "from": "me",
+       "at": "2026-11-27 23:09",
+       "text": "Suis là. Personne. Brouillard à couper au couteau."
+      },
+      {
+       "id": "m_jnew_027",
+       "from": "jnew",
+       "at": "2026-11-27 23:12",
+       "text": "J'arrive. 2 minutes."
+      },
+      {
+       "id": "m_new_2347",
+       "from": "jnew",
+       "at": "2026-11-27 23:47",
+       "text": "Je suis au parking du col, t'es où ?",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_romain",
+     "participants": [
+      "romain"
+     ],
+     "messages": [
+      {
+       "id": "m_romain_000",
+       "from": "romain",
+       "at": "2026-10-16 19:02",
+       "text": "Demain 8h30 comme d'habitude. Le carnet de santé de Nina est dans son sac."
+      },
+      {
+       "id": "m_romain_001",
+       "from": "me",
+       "at": "2026-10-16 19:30",
+       "text": "Ok"
+      },
+      {
+       "id": "m_romain_002",
+       "from": "romain",
+       "at": "2026-10-21 12:14",
+       "text": "La maîtresse de Léo m'a appelé. Il s'est battu dans la cour. Rien de grave."
+      },
+      {
+       "id": "m_romain_003",
+       "from": "me",
+       "at": "2026-10-21 12:40",
+       "text": "Il m'en a parlé hier. Je lui ai expliqué."
+      },
+      {
+       "id": "m_romain_004",
+       "from": "romain",
+       "at": "2026-10-29 20:40",
+       "text": "Tu peux prendre les enfants le 11 novembre ? J'ai un séminaire."
+      },
+      {
+       "id": "m_romain_005",
+       "from": "me",
+       "at": "2026-10-29 20:52",
+       "text": "Oui. Tu me les déposes la veille ?"
+      },
+      {
+       "id": "m_romain_006",
+       "from": "romain",
+       "at": "2026-10-29 20:53",
+       "text": "Mardi soir 19h."
+      },
+      {
+       "id": "m_romain_007",
+       "from": "romain",
+       "at": "2026-11-07 10:05",
+       "text": "Léo veut fêter son anniversaire au laser game. Je lui ai dit que c'était non. On est d'accord ?"
+      },
+      {
+       "id": "m_romain_008",
+       "from": "me",
+       "at": "2026-11-07 10:30",
+       "text": "On est d'accord. Goûter à la maison, 6 copains max."
+      },
+      {
+       "id": "m_romain_009",
+       "from": "romain",
+       "at": "2026-11-10 19:04",
+       "text": "Devant chez toi. Nina dort dans la voiture."
+      },
+      {
+       "id": "m_romain_010",
+       "from": "romain",
+       "at": "2026-11-18 21:02",
+       "text": "J'ai vu ton nom sous l'article sur la carrière. Tu fais attention ?"
+      },
+      {
+       "id": "m_romain_011",
+       "from": "me",
+       "at": "2026-11-18 21:30",
+       "text": "Toujours."
+      },
+      {
+       "id": "m_romain_012",
+       "from": "romain",
+       "at": "2026-11-21 08:10",
+       "text": "J'arrive dans 20 minutes."
+      },
+      {
+       "id": "m_romain_013",
+       "from": "romain",
+       "at": "2026-11-21 19:40",
+       "text": "Léo a perdu sa dent. La petite souris passe par Grenoble ce soir.",
+       "photo": "p_r_dent"
+      },
+      {
+       "id": "m_romain_014",
+       "from": "me",
+       "at": "2026-11-21 19:52",
+       "text": "😍 dis-lui que je suis fière de lui"
+      },
+      {
+       "id": "m_romain_threat",
+       "from": "romain",
+       "at": "2026-11-26 20:31",
+       "text": "Je le redis par écrit : si tu publies avec ton vrai nom, je demande la garde complète. Je ne veux pas que les types de la carrière sachent où dorment mes enfants."
+      },
+      {
+       "id": "m_romain_016",
+       "from": "me",
+       "at": "2026-11-26 20:40",
+       "text": "Tu n'as pas le droit de me faire ça."
+      },
+      {
+       "id": "m_romain_017",
+       "from": "romain",
+       "at": "2026-11-26 20:41",
+       "text": "J'en ai parlé à mon avocat."
+      },
+      {
+       "id": "m_romain_018",
+       "from": "me",
+       "at": "2026-11-26 20:52",
+       "text": "On en parle mardi devant le juge. Pas ce soir."
+      },
+      {
+       "id": "m_romain_019",
+       "from": "me",
+       "at": "2026-11-27 22:35",
+       "text": "Je suis dehors pour le boulot ce soir. Si souci avec les enfants, appelle, pas de message."
+      },
+      {
+       "id": "m_romain_020",
+       "from": "romain",
+       "at": "2026-11-27 22:41",
+       "text": "Dehors où ? À cette heure-ci ?"
+      },
+      {
+       "id": "m_romain_2305",
+       "from": "romain",
+       "at": "2026-11-27 23:05",
+       "text": "Ils dorment enfin.",
+       "photo": "p_kids_2305"
+      },
+      {
+       "id": "m_romain_2348",
+       "from": "romain",
+       "at": "2026-11-27 23:48",
+       "text": "Tu rentres quand ? Léo a de la fièvre",
+       "unread": true
+      },
+      {
+       "id": "m_romain_023",
+       "from": "romain",
+       "at": "2026-11-27 23:49",
+       "text": "38,4. Le sirop du Dr Chabert est chez toi je crois. Rappelle-moi.",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_agathe",
+     "participants": [
+      "agathe"
+     ],
+     "messages": [
+      {
+       "id": "m_agathe_000",
+       "from": "agathe",
+       "at": "2026-10-20 08:50",
+       "text": "Conf avancée à 9h, je t'attends pour la carrière."
+      },
+      {
+       "id": "m_agathe_001",
+       "from": "me",
+       "at": "2026-10-20 08:52",
+       "text": "J'arrive, bouchons à Sassenage."
+      },
+      {
+       "id": "m_agathe_002",
+       "from": "agathe",
+       "at": "2026-10-30 18:22",
+       "text": "Ton papier sur les pistes de fond : parfait. On le passe samedi."
+      },
+      {
+       "id": "m_agathe_003",
+       "from": "me",
+       "at": "2026-10-30 18:40",
+       "text": "Merci !"
+      },
+      {
+       "id": "m_agathe_004",
+       "from": "agathe",
+       "at": "2026-11-09 07:45",
+       "text": "Tu peux couvrir la foire aux skis d'Autrans samedi ? Olivier est en congé."
+      },
+      {
+       "id": "m_agathe_005",
+       "from": "me",
+       "at": "2026-11-09 08:02",
+       "text": "J'ai les enfants ce week-end-là... je les emmène, ça leur fera plaisir."
+      },
+      {
+       "id": "m_agathe_006",
+       "from": "agathe",
+       "at": "2026-11-19 17:05",
+       "text": "Le juridique veut voir tes documents lundi. Tout."
+      },
+      {
+       "id": "m_agathe_007",
+       "from": "me",
+       "at": "2026-11-19 17:10",
+       "text": "Ok. Je les apporte en main propre, pas par mail."
+      },
+      {
+       "id": "m_agathe_008",
+       "from": "agathe",
+       "at": "2026-11-24 21:30",
+       "text": "Brassac a appelé le directeur général. Ça remonte vite."
+      },
+      {
+       "id": "m_agathe_009",
+       "from": "me",
+       "at": "2026-11-24 21:41",
+       "text": "Tant mieux. Ça veut dire qu'on tape juste."
+      },
+      {
+       "id": "m_agathe_010",
+       "from": "agathe",
+       "at": "2026-11-27 17:20",
+       "text": "Je sais que tu m'en veux. Trouve-moi ta deuxième source et on passe la semaine prochaine. Promis."
+      },
+      {
+       "id": "m_agathe_011",
+       "from": "me",
+       "at": "2026-11-27 17:31",
+       "text": "J'ai peut-être mieux que ça. Je te dis ce soir."
+      },
+      {
+       "id": "m_agathe_2258",
+       "from": "agathe",
+       "at": "2026-11-27 22:58",
+       "text": "Brassac est en direct sur TéléAlpes, il nous allume 😤"
+      },
+      {
+       "id": "m_agathe_bat",
+       "from": "agathe",
+       "at": "2026-11-27 23:02",
+       "text": "Bouclé. Une sur la neige, évidemment.",
+       "photo": "p_bat_2301"
+      },
+      {
+       "id": "m_agathe_014",
+       "from": "me",
+       "at": "2026-11-27 23:10",
+       "text": "Arrivée. Il est pas là. Je te rappelle après."
+      },
+      {
+       "id": "m_agathe_015",
+       "from": "agathe",
+       "at": "2026-11-27 23:40",
+       "text": "Alors ??",
+       "unread": true
+      },
+      {
+       "id": "m_agathe_016",
+       "from": "agathe",
+       "at": "2026-11-28 00:15",
+       "text": "Solène, rappelle-moi. Même tard.",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_redac",
+     "participants": [
+      "agathe",
+      "beatrice",
+      "olivier",
+      "lina"
+     ],
+     "messages": [
+      {
+       "id": "m_redac_000",
+       "from": "olivier",
+       "at": "2026-10-19 09:02",
+       "text": "Qui a piqué mon chargeur en salle de conf ?"
+      },
+      {
+       "id": "m_redac_001",
+       "from": "lina",
+       "at": "2026-10-19 09:05",
+       "text": "pas moi 🙄"
+      },
+      {
+       "id": "m_redac_002",
+       "from": "beatrice",
+       "at": "2026-10-19 09:10",
+       "text": "regarde sous le radiateur, c'est toujours là"
+      },
+      {
+       "id": "m_redac_003",
+       "from": "lina",
+       "at": "2026-10-26 14:20",
+       "text": "Pot vendredi pour mon anniv, 18h en salle de conf. Apportez rien, juste vous"
+      },
+      {
+       "id": "m_redac_004",
+       "from": "beatrice",
+       "at": "2026-10-26 14:26",
+       "text": "je ramène un gâteau quand même"
+      },
+      {
+       "id": "m_redac_005",
+       "from": "me",
+       "at": "2026-10-26 14:40",
+       "text": "J'y serai 🎉"
+      },
+      {
+       "id": "m_redac_006",
+       "from": "agathe",
+       "at": "2026-11-03 08:10",
+       "text": "Rappel : notes de frais avant le 5. Après je signe plus rien."
+      },
+      {
+       "id": "m_redac_007",
+       "from": "olivier",
+       "at": "2026-11-03 08:12",
+       "text": "Oui patronne"
+      },
+      {
+       "id": "m_redac_008",
+       "from": "beatrice",
+       "at": "2026-11-10 11:32",
+       "text": "le parking de la rédac est plein, quelqu'un a un badge pour le P2 ?"
+      },
+      {
+       "id": "m_redac_009",
+       "from": "me",
+       "at": "2026-11-10 11:40",
+       "text": "Pas de badge, mais la rue d'en face est gratuite entre 12h et 14h"
+      },
+      {
+       "id": "m_redac_010",
+       "from": "lina",
+       "at": "2026-11-13 16:00",
+       "text": "Qui me relit un papier de 3000 signes ? 🙏"
+      },
+      {
+       "id": "m_redac_011",
+       "from": "me",
+       "at": "2026-11-13 16:05",
+       "text": "Envoie"
+      },
+      {
+       "id": "m_redac_012",
+       "from": "olivier",
+       "at": "2026-11-17 22:45",
+       "text": "Victoire du GF38 ce soir, je prends deux pages demain, désolé pas désolé"
+      },
+      {
+       "id": "m_redac_013",
+       "from": "agathe",
+       "at": "2026-11-24 10:15",
+       "text": "Conf de vendredi : chacun arrive avec 2 sujets. Pas 1. Deux."
+      },
+      {
+       "id": "m_redac_014",
+       "from": "beatrice",
+       "at": "2026-11-24 10:20",
+       "text": "👍"
+      },
+      {
+       "id": "m_redac_015",
+       "from": "lina",
+       "at": "2026-11-27 12:40",
+       "text": "quelqu'un descend chercher des sandwichs ?"
+      },
+      {
+       "id": "m_redac_016",
+       "from": "olivier",
+       "at": "2026-11-27 12:42",
+       "text": "Moi. Jambon-beurre pour tout le monde ?"
+      },
+      {
+       "id": "m_redac_017",
+       "from": "olivier",
+       "at": "2026-11-27 19:58",
+       "text": "Béa tu nous fais un point sur le conseil de Vallières pour demain ?"
+      },
+      {
+       "id": "m_redac_018",
+       "from": "beatrice",
+       "at": "2026-11-27 20:03",
+       "text": "j'y suis. ça commence en retard"
+      },
+      {
+       "id": "m_redac_2114",
+       "from": "beatrice",
+       "at": "2026-11-27 21:14",
+       "text": "le conseil de vallières a été levé à 21h10, arnaud est parti le premier, bizarre"
+      },
+      {
+       "id": "m_redac_020",
+       "from": "lina",
+       "at": "2026-11-27 21:16",
+       "text": "donc on a rien pour demain ?"
+      },
+      {
+       "id": "m_redac_021",
+       "from": "beatrice",
+       "at": "2026-11-27 21:18",
+       "text": "j'ai des photos de chaises vides 😅"
+      },
+      {
+       "id": "m_redac_022",
+       "from": "agathe",
+       "at": "2026-11-27 21:22",
+       "text": "Une brève suffira. Merci Béa."
+      },
+      {
+       "id": "m_redac_023",
+       "from": "olivier",
+       "at": "2026-11-27 23:26",
+       "text": "Brassac vient de dire à l'antenne que l'Écho « harcèle les entreprises du plateau ». Sympa.",
+       "unread": true
+      },
+      {
+       "id": "m_redac_024",
+       "from": "lina",
+       "at": "2026-11-27 23:28",
+       "text": "c'est pas de la pub gratuite ça ? 😂",
+       "unread": true
+      }
+     ],
+     "title": "Rédac Écho 📰"
+    },
+    {
+     "id": "c_maman",
+     "participants": [
+      "maman"
+     ],
+     "messages": [
+      {
+       "id": "m_maman_000",
+       "from": "maman",
+       "at": "2026-10-18 11:02",
+       "text": "Ma chérie, tu as bien reçu le colis pour les enfants ? Les gants sont un peu grands, ils grandiront."
+      },
+      {
+       "id": "m_maman_001",
+       "from": "me",
+       "at": "2026-10-18 11:30",
+       "text": "Oui merci maman ! Nina ne veut plus les enlever"
+      },
+      {
+       "id": "m_maman_002",
+       "from": "maman",
+       "at": "2026-10-25 18:30",
+       "text": "Tu travailles trop. Ton frère aussi d'ailleurs. Vous tenez ça de votre père."
+      },
+      {
+       "id": "m_maman_003",
+       "from": "maman",
+       "at": "2026-11-03 09:15",
+       "text": "Je viens de réserver le gîte de Méaudre pour le week-end du 14 mars ! Tes 35 ans on les fête en famille, pas de discussion 😘"
+      },
+      {
+       "id": "m_maman_004",
+       "from": "me",
+       "at": "2026-11-03 09:40",
+       "text": "Maman c'est dans 4 mois 😂 mais oui, merci"
+      },
+      {
+       "id": "m_maman_005",
+       "from": "maman",
+       "at": "2026-11-08 16:20",
+       "text": "Le chat a encore dormi dans le panier à linge.",
+       "photo": "p_r_chat"
+      },
+      {
+       "id": "m_maman_006",
+       "from": "maman",
+       "at": "2026-11-11 12:40",
+       "text": "Bon 11 novembre ! Vous faites quoi avec les petits ?"
+      },
+      {
+       "id": "m_maman_007",
+       "from": "me",
+       "at": "2026-11-11 12:55",
+       "text": "Luge si la neige tient. Sinon crêpes et dessin animé."
+      },
+      {
+       "id": "m_maman_008",
+       "from": "maman",
+       "at": "2026-11-22 17:10",
+       "text": "Ils ont parlé de ta carrière à la radio ce matin."
+      },
+      {
+       "id": "m_maman_009",
+       "from": "me",
+       "at": "2026-11-22 17:25",
+       "text": "C'est pas ma carrière maman 😅"
+      },
+      {
+       "id": "m_maman_010",
+       "from": "maman",
+       "at": "2026-11-27 20:35",
+       "text": "Couvre-toi si tu ressors ce soir. La radio annonce du brouillard sur le plateau."
+      },
+      {
+       "id": "m_maman_011",
+       "from": "me",
+       "at": "2026-11-27 20:40",
+       "text": "Promis. Bisous"
+      }
+     ]
+    },
+    {
+     "id": "c_beatrice",
+     "participants": [
+      "beatrice"
+     ],
+     "messages": [
+      {
+       "id": "m_beatrice_000",
+       "from": "beatrice",
+       "at": "2026-10-23 22:40",
+       "text": "tu me passes tes photos du conseil ? j'ai raté le début"
+      },
+      {
+       "id": "m_beatrice_001",
+       "from": "me",
+       "at": "2026-10-23 22:52",
+       "text": "Je t'envoie ça demain"
+      },
+      {
+       "id": "m_beatrice_002",
+       "from": "beatrice",
+       "at": "2026-11-04 19:02",
+       "text": "on va courir samedi ?"
+      },
+      {
+       "id": "m_beatrice_003",
+       "from": "me",
+       "at": "2026-11-04 19:20",
+       "text": "Ok pour 10h, après l'échange des enfants"
+      },
+      {
+       "id": "m_beatrice_004",
+       "from": "beatrice",
+       "at": "2026-11-16 13:30",
+       "text": "tu as l'air crevée en ce moment. ça va vraiment ?"
+      },
+      {
+       "id": "m_beatrice_005",
+       "from": "me",
+       "at": "2026-11-16 13:48",
+       "text": "Grosse histoire. Je te raconte quand je pourrai."
+      },
+      {
+       "id": "m_beatrice_006",
+       "from": "me",
+       "at": "2026-11-27 20:05",
+       "text": "Tu me dis si Arnaud parle de la carrière ?"
+      },
+      {
+       "id": "m_beatrice_007",
+       "from": "beatrice",
+       "at": "2026-11-27 20:07",
+       "text": "promis. salle pleine, ça sent la bagarre"
+      },
+      {
+       "id": "m_beatrice_008",
+       "from": "beatrice",
+       "at": "2026-11-27 21:20",
+       "text": "tu viens pas finalement ?"
+      },
+      {
+       "id": "m_beatrice_009",
+       "from": "me",
+       "at": "2026-11-27 21:31",
+       "text": "Non. J'ai plus important ce soir."
+      },
+      {
+       "id": "m_beatrice_010",
+       "from": "beatrice",
+       "at": "2026-11-27 23:58",
+       "text": "tu dors ? agathe dit que tu réponds plus",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_fatou",
+     "participants": [
+      "fatou"
+     ],
+     "messages": [
+      {
+       "id": "m_fatou_000",
+       "from": "fatou",
+       "at": "2026-10-20 16:40",
+       "text": "Bonjour Solène, Nina a un peu toussé aujourd'hui mais elle a fait une grosse sieste 😊"
+      },
+      {
+       "id": "m_fatou_001",
+       "from": "me",
+       "at": "2026-10-20 17:02",
+       "text": "Merci Fatou"
+      },
+      {
+       "id": "m_fatou_002",
+       "from": "fatou",
+       "at": "2026-11-16 17:02",
+       "text": "Léo a oublié son bonnet chez moi, je le mets dans son sac demain"
+      },
+      {
+       "id": "m_fatou_003",
+       "from": "me",
+       "at": "2026-11-16 17:10",
+       "text": "Merci !!"
+      },
+      {
+       "id": "m_fatou_004",
+       "from": "me",
+       "at": "2026-11-18 12:05",
+       "text": "Fatou, vous pouvez garder Léo jusqu'à 18h30 ce soir ? J'emmène Nina chez le pédiatre."
+      },
+      {
+       "id": "m_fatou_005",
+       "from": "fatou",
+       "at": "2026-11-18 12:20",
+       "text": "Pas de souci 👍"
+      },
+      {
+       "id": "m_fatou_006",
+       "from": "me",
+       "at": "2026-11-20 18:40",
+       "text": "Je vous fais le virement de novembre ce week-end."
+      },
+      {
+       "id": "m_fatou_007",
+       "from": "fatou",
+       "at": "2026-11-20 18:52",
+       "text": "Merci Solène, bon week-end à vous"
+      },
+      {
+       "id": "m_fatou_008",
+       "from": "fatou",
+       "at": "2026-11-26 19:10",
+       "text": "Pour la semaine prochaine, lundi je finis à 17h exceptionnellement"
+      },
+      {
+       "id": "m_fatou_009",
+       "from": "me",
+       "at": "2026-11-26 19:31",
+       "text": "Ok je m'organise"
+      }
+     ]
+    },
+    {
+     "id": "c_garage",
+     "participants": [
+      "garage"
+     ],
+     "messages": [
+      {
+       "id": "m_garage_000",
+       "from": "garage",
+       "at": "2026-11-02 10:05",
+       "text": "Garage du Plateau : votre rendez-vous montage pneus neige est confirmé le mardi 10/11 à 8h30."
+      },
+      {
+       "id": "m_garage_001",
+       "from": "garage",
+       "at": "2026-11-10 11:45",
+       "text": "Garage du Plateau : votre véhicule est prêt. Montant : 312,00 €."
+      }
+     ]
+    },
+    {
+     "id": "c_ecole",
+     "participants": [
+      "ecole"
+     ],
+     "messages": [
+      {
+       "id": "m_ecole_000",
+       "from": "ecole",
+       "at": "2026-11-09 08:00",
+       "text": "École de Lans : grève jeudi 12/11, pas de cantine. Merci de récupérer vos enfants à 11h30 ou de prévoir un pique-nique."
+      },
+      {
+       "id": "m_ecole_001",
+       "from": "ecole",
+       "at": "2026-11-24 16:30",
+       "text": "École de Lans : sortie raquettes le vendredi 4/12. Autorisation à rendre avant lundi."
+      }
+     ]
+    },
+    {
+     "id": "c_aubert",
+     "participants": [
+      "aubert"
+     ],
+     "messages": [
+      {
+       "id": "m_aubert_000",
+       "from": "aubert",
+       "at": "2026-11-12 08:30",
+       "text": "Cabinet Aubert : rendez-vous confirmé aujourd'hui à 14h."
+      },
+      {
+       "id": "m_aubert_001",
+       "from": "me",
+       "at": "2026-11-26 21:05",
+       "text": "Maître, mon ex menace de demander la garde complète si je publie sous mon nom. Il peut ?"
+      },
+      {
+       "id": "m_aubert_002",
+       "from": "aubert",
+       "at": "2026-11-27 09:12",
+       "text": "Bonjour Madame Marchetti. Menacer n'est pas obtenir. Gardez tous ses messages, on en parle mardi avant l'audience."
+      }
+     ]
+    }
+   ],
+   "calls": [
+    {
+     "id": "k01",
+     "contact": "maman",
+     "direction": "incoming",
+     "at": "2026-10-20 19:10",
+     "durationSeconds": 1520
+    },
+    {
+     "id": "k02",
+     "contact": "romain",
+     "direction": "outgoing",
+     "at": "2026-10-22 20:05",
+     "durationSeconds": 240
+    },
+    {
+     "id": "k03",
+     "contact": "julien",
+     "direction": "incoming",
+     "at": "2026-10-28 21:02",
+     "durationSeconds": 780
+    },
+    {
+     "id": "k04",
+     "contact": "garage",
+     "direction": "outgoing",
+     "at": "2026-11-02 09:58",
+     "durationSeconds": 95
+    },
+    {
+     "id": "k05",
+     "contact": "agathe",
+     "direction": "incoming",
+     "at": "2026-11-04 18:10",
+     "durationSeconds": 410
+    },
+    {
+     "id": "k06",
+     "contact": "julien",
+     "direction": "outgoing",
+     "at": "2026-11-06 20:14",
+     "durationSeconds": 610
+    },
+    {
+     "id": "k07",
+     "contact": "ecole",
+     "direction": "incoming",
+     "at": "2026-11-09 10:20",
+     "durationSeconds": 180
+    },
+    {
+     "id": "k08",
+     "contact": "aubert",
+     "direction": "outgoing",
+     "at": "2026-11-13 11:40",
+     "durationSeconds": 540
+    },
+    {
+     "id": "k09",
+     "contact": "maman",
+     "direction": "outgoing",
+     "at": "2026-11-15 18:00",
+     "durationSeconds": 2100
+    },
+    {
+     "id": "k10",
+     "contact": "romain",
+     "direction": "missed",
+     "at": "2026-11-18 20:58",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k11",
+     "contact": "gilles",
+     "direction": "outgoing",
+     "at": "2026-11-19 10:40",
+     "durationSeconds": 48
+    },
+    {
+     "id": "k12",
+     "contact": "julien",
+     "direction": "incoming",
+     "at": "2026-11-20 18:55",
+     "durationSeconds": 342
+    },
+    {
+     "id": "k13",
+     "contact": "fatou",
+     "direction": "incoming",
+     "at": "2026-11-23 17:40",
+     "durationSeconds": 130
+    },
+    {
+     "id": "k14",
+     "contact": "chabert",
+     "direction": "outgoing",
+     "at": "2026-11-24 08:35",
+     "durationSeconds": 75
+    },
+    {
+     "id": "k15",
+     "contact": "thierry",
+     "direction": "outgoing",
+     "at": "2026-11-26 16:05",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k16",
+     "contact": "romain",
+     "direction": "incoming",
+     "at": "2026-11-26 20:15",
+     "durationSeconds": 420
+    },
+    {
+     "id": "k17",
+     "contact": "thierry",
+     "direction": "incoming",
+     "at": "2026-11-27 11:20",
+     "durationSeconds": 185
+    },
+    {
+     "id": "k18",
+     "contact": "agathe",
+     "direction": "outgoing",
+     "at": "2026-11-27 16:45",
+     "durationSeconds": 612
+    },
+    {
+     "id": "k19",
+     "contact": "viallet",
+     "direction": "incoming",
+     "at": "2026-11-27 17:05",
+     "durationSeconds": 300
+    },
+    {
+     "id": "k_julien_1912",
+     "contact": "julien",
+     "direction": "incoming",
+     "at": "2026-11-27 19:12",
+     "durationSeconds": 252
+    },
+    {
+     "id": "k20",
+     "contact": "maman",
+     "direction": "incoming",
+     "at": "2026-11-27 20:10",
+     "durationSeconds": 460
+    },
+    {
+     "id": "k_agathe_2231",
+     "contact": "agathe",
+     "direction": "outgoing",
+     "at": "2026-11-27 22:31",
+     "durationSeconds": 840
+    },
+    {
+     "id": "k_new_2252",
+     "contact": "jnew",
+     "direction": "incoming",
+     "at": "2026-11-27 22:52",
+     "durationSeconds": 70
+    },
+    {
+     "id": "k_new_2346",
+     "contact": "jnew",
+     "direction": "missed",
+     "at": "2026-11-27 23:46",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_agathe_2348",
+     "contact": "agathe",
+     "direction": "missed",
+     "at": "2026-11-27 23:48",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k21",
+     "contact": "romain",
+     "direction": "missed",
+     "at": "2026-11-27 23:52",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k22",
+     "contact": "maman",
+     "direction": "missed",
+     "at": "2026-11-28 00:44",
+     "durationSeconds": 0
+    }
+   ],
+   "places": [
+    {
+     "id": "pl_home",
+     "name": "Domicile — Villard-de-Lans",
+     "kind": "home",
+     "x": 0.196,
+     "y": 0.828,
+     "latitude": 45.071,
+     "longitude": 5.553
+    },
+    {
+     "id": "pl_col",
+     "name": "Col de la Croix-Perrin — parking",
+     "kind": "parking",
+     "x": 0.211,
+     "y": 0.592,
+     "latitude": 45.1135,
+     "longitude": 5.557,
+     "revealedBy": [
+      "message:m_new_2140",
+      "calendar:c_rdv_col"
+     ]
+    },
+    {
+     "id": "pl_d106",
+     "name": "Route du col (D106)",
+     "kind": "road",
+     "x": 0.263,
+     "y": 0.639,
+     "latitude": 45.105,
+     "longitude": 5.571
+    },
+    {
+     "id": "pl_carriere",
+     "name": "Carrière Brassac Granulats",
+     "kind": "industrial",
+     "x": 0.389,
+     "y": 0.722,
+     "latitude": 45.09,
+     "longitude": 5.605
+    },
+    {
+     "id": "pl_mairie",
+     "name": "Mairie de Vallières-en-Vercors",
+     "kind": "work",
+     "x": 0.37,
+     "y": 0.694,
+     "latitude": 45.095,
+     "longitude": 5.6,
+     "revealedBy": [
+      "photoInfo:p_mairie_4x4",
+      "mail:mail_arnaud_2024"
+     ]
+    },
+    {
+     "id": "pl_echo",
+     "name": "L'Écho des Alpes — rédaction, Grenoble",
+     "kind": "work",
+     "x": 0.83,
+     "y": 0.178,
+     "latitude": 45.188,
+     "longitude": 5.724
+    },
+    {
+     "id": "pl_romain",
+     "name": "Chez Romain — Île Verte, Grenoble",
+     "kind": "home",
+     "x": 0.885,
+     "y": 0.147,
+     "latitude": 45.1935,
+     "longitude": 5.739
+    },
+    {
+     "id": "pl_chu",
+     "name": "Urgences du CHU de Grenoble",
+     "kind": "district",
+     "x": 0.915,
+     "y": 0.111,
+     "latitude": 45.2,
+     "longitude": 5.747,
+     "revealedBy": [
+      "message:m_julien_1802"
+     ]
+    },
+    {
+     "id": "pl_imprimerie",
+     "name": "Imprimerie du Drac — Échirolles",
+     "kind": "industrial",
+     "x": 0.789,
+     "y": 0.417,
+     "latitude": 45.145,
+     "longitude": 5.713,
+     "revealedBy": [
+      "photoInfo:p_bat_2301"
+     ]
+    },
+    {
+     "id": "pl_telealpes",
+     "name": "Studio TéléAlpes — Grenoble",
+     "kind": "work",
+     "x": 0.796,
+     "y": 0.167,
+     "latitude": 45.19,
+     "longitude": 5.715,
+     "revealedBy": [
+      "browser:w_debat"
+     ]
+    },
+    {
+     "id": "pl_ecole",
+     "name": "École de Lans-en-Vercors",
+     "kind": "district",
+     "x": 0.33,
+     "y": 0.511,
+     "latitude": 45.128,
+     "longitude": 5.589
+    },
+    {
+     "id": "pl_autrans",
+     "name": "Autrans — foyer de ski de fond",
+     "kind": "park",
+     "x": 0.163,
+     "y": 0.25,
+     "latitude": 45.175,
+     "longitude": 5.544
+    },
+    {
+     "id": "pl_boisbarbu",
+     "name": "Bois Barbu — pistes de fond",
+     "kind": "park",
+     "x": 0.1,
+     "y": 0.867,
+     "latitude": 45.064,
+     "longitude": 5.527
+    }
+   ],
+   "tracks": [
+    {
+     "id": "t_me",
+     "contact": "me",
+     "points": [
+      {
+       "id": "tp_me_1",
+       "at": "2026-11-23 08:40",
+       "place": "pl_echo"
+      },
+      {
+       "id": "tp_me_2",
+       "at": "2026-11-23 18:50",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_me_3",
+       "at": "2026-11-24 10:30",
+       "place": "pl_carriere"
+      },
+      {
+       "id": "tp_me_4",
+       "at": "2026-11-24 12:10",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_me_5",
+       "at": "2026-11-25 09:05",
+       "place": "pl_echo"
+      },
+      {
+       "id": "tp_me_6",
+       "at": "2026-11-25 19:30",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_me_7",
+       "at": "2026-11-26 13:00",
+       "place": "pl_boisbarbu"
+      },
+      {
+       "id": "tp_me_8",
+       "at": "2026-11-26 15:10",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_me_9",
+       "at": "2026-11-27 09:10",
+       "place": "pl_echo"
+      },
+      {
+       "id": "tp_me_10",
+       "at": "2026-11-27 17:45",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_me_11",
+       "at": "2026-11-27 22:40",
+       "place": "pl_home",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_me_12",
+       "at": "2026-11-27 22:55",
+       "place": "pl_d106"
+      },
+      {
+       "id": "tp_me_13",
+       "at": "2026-11-27 23:08",
+       "place": "pl_col"
+      },
+      {
+       "id": "tp_me_14",
+       "at": "2026-11-27 23:48",
+       "place": "pl_col",
+       "note": "Dernière position : moteur allumé"
+      }
+     ]
+    },
+    {
+     "id": "t_romain",
+     "contact": "romain",
+     "points": [
+      {
+       "id": "tp_ro_1",
+       "at": "2026-11-27 16:20",
+       "place": "pl_ecole",
+       "note": "Sortie d'école"
+      },
+      {
+       "id": "tp_ro_2",
+       "at": "2026-11-27 18:30",
+       "place": "pl_romain"
+      },
+      {
+       "id": "tp_ro_3",
+       "at": "2026-11-27 21:00",
+       "place": "pl_romain"
+      },
+      {
+       "id": "tp_ro_4",
+       "at": "2026-11-27 23:05",
+       "place": "pl_romain"
+      },
+      {
+       "id": "tp_ro_5",
+       "at": "2026-11-28 00:00",
+       "place": "pl_romain"
+      }
+     ]
+    }
+   ],
+   "photos": [
+    {
+     "id": "p_old01",
+     "takenAt": "2019-02-17 11:20",
+     "source": "camera",
+     "scene": "snow",
+     "caption": "Villard sous la neige, février 2019.",
+     "details": "Un toit blanc, des skis plantés dans la neige.",
+     "style": "old",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 8"
+    },
+    {
+     "id": "p_old02",
+     "takenAt": "2020-07-12 16:45",
+     "source": "camera",
+     "scene": "garden_stairs",
+     "caption": "Léo, deux ans, dans l'escalier du jardin.",
+     "details": "Une petite silhouette floue qui monte les marches. Été 2020.",
+     "style": "old",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 8"
+    },
+    {
+     "id": "p_old03",
+     "takenAt": "2022-03-14 20:30",
+     "source": "camera",
+     "scene": "party",
+     "caption": "Mes 30 ans — 14 mars 2022.",
+     "details": "Des bougies en forme de 3 et de 0, des silhouettes autour d'une table.",
+     "style": "old",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_old04",
+     "takenAt": "2023-06-03 10:15",
+     "source": "camera",
+     "scene": "park",
+     "caption": "Nina fait ses premiers pas au parc.",
+     "details": "Un parc au printemps, une poussette vide au premier plan.",
+     "style": "old",
+     "place": "Grenoble",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_old05",
+     "takenAt": "2024-12-24 19:40",
+     "source": "camera",
+     "scene": "interior_warm",
+     "caption": "Réveillon chez Maman.",
+     "details": "Une table dressée, un sapin clignotant dans le coin.",
+     "style": "old",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_old06",
+     "takenAt": "2025-06-27 18:30",
+     "source": "camera",
+     "scene": "office",
+     "caption": "Pot de départ de l'ancien secrétaire de rédaction.",
+     "details": "Des gobelets, une banderole « Bonne retraite Jacques ».",
+     "style": "old",
+     "place": "L'Écho des Alpes",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n01",
+     "takenAt": "2026-10-17 15:10",
+     "source": "camera",
+     "scene": "mountain",
+     "caption": "Le Moucherotte dans les nuages.",
+     "details": "Une crête sombre, la lumière perce sur la droite.",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n02",
+     "takenAt": "2026-10-18 14:25",
+     "source": "camera",
+     "scene": "forest",
+     "caption": "Balade en forêt avec les enfants.",
+     "details": "Deux petites silhouettes en bottes, des feuilles rousses.",
+     "place": "Bois Barbu",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n03",
+     "takenAt": "2026-10-23 20:02",
+     "source": "camera",
+     "scene": "office",
+     "caption": "La salle du conseil municipal de Vallières, avant l'ouverture.",
+     "details": "Une vingtaine de chaises, une table en U, un micro qui ne marche pas.",
+     "place": "Mairie de Vallières-en-Vercors",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n04",
+     "takenAt": "2026-10-27 11:05",
+     "source": "camera",
+     "scene": "mountain",
+     "caption": "La carrière vue depuis la route.",
+     "details": "Une saignée grise dans la forêt, deux camions-bennes. Trop loin pour lire quoi que ce soit.",
+     "style": "quick",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n05",
+     "takenAt": "2026-10-31 18:20",
+     "source": "camera",
+     "scene": "party",
+     "caption": "Halloween : un squelette et une citrouille.",
+     "details": "Léo et Nina de dos, déguisés, devant la porte des voisins.",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n06",
+     "takenAt": "2026-11-03 07:40",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : météo de la semaine.",
+     "details": "Pluie, puis premiers flocons jeudi.",
+     "style": "screenshot",
+     "lines": [
+      "Météo — Villard-de-Lans",
+      "Mar  🌧  6°",
+      "Mer  🌧  4°",
+      "Jeu  🌨  1°",
+      "Ven  ☁  3°",
+      "Sam  ☀  5°"
+     ],
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n07",
+     "takenAt": "2026-11-05 09:35",
+     "source": "camera",
+     "scene": "office",
+     "caption": "Conférence de rédaction.",
+     "details": "Un tableau blanc couvert de sujets, des gobelets de café.",
+     "place": "L'Écho des Alpes",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n08",
+     "takenAt": "2026-11-08 18:05",
+     "source": "camera",
+     "scene": "interior_warm",
+     "caption": "Les dessins de Nina sur le frigo.",
+     "details": "Un soleil violet, une maison, quatre bonshommes dont un « papa » barré puis réécrit.",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n09",
+     "takenAt": "2026-11-10 12:05",
+     "source": "camera",
+     "scene": "receipt",
+     "caption": "Facture du garage — pneus neige.",
+     "details": "Montage et équilibrage de quatre pneus.",
+     "style": "document",
+     "lines": [
+      "GARAGE DU PLATEAU",
+      "Villard-de-Lans",
+      "10/11/2026",
+      "4 pneus neige 205/55 R16",
+      "Montage + équilibrage",
+      "TOTAL TTC   312,00 €"
+     ],
+     "place": "Garage du Plateau",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n10",
+     "takenAt": "2026-11-12 07:30",
+     "source": "camera",
+     "scene": "snow",
+     "caption": "Premiers flocons sur le balcon.",
+     "details": "Une fine couche blanche sur la rambarde.",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n11",
+     "takenAt": "2026-11-13 18:40",
+     "source": "camera",
+     "scene": "group",
+     "caption": "Pot d'anniversaire de Lina.",
+     "details": "Cinq silhouettes autour d'un gâteau, Béatrice fait des cornes à Olivier.",
+     "style": "selfie",
+     "place": "L'Écho des Alpes",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n12",
+     "takenAt": "2026-11-15 10:12",
+     "source": "camera",
+     "scene": "pocket",
+     "caption": "Photo prise dans une poche.",
+     "details": "Du noir, un bout de doublure.",
+     "style": "blurry",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n13",
+     "takenAt": "2026-11-17 21:15",
+     "source": "camera",
+     "scene": "document",
+     "caption": "Planning de garde de décembre, griffonné.",
+     "details": "Les semaines sont surlignées en deux couleurs.",
+     "style": "document",
+     "lines": [
+      "DÉCEMBRE",
+      "28/11 → 05/12 : moi",
+      "05/12 → 12/12 : R.",
+      "12/12 : anniv Léo (chez moi)",
+      "Noël : moi · Nouvel an : R."
+     ],
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n14",
+     "takenAt": "2026-11-19 07:55",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : mon article de ce matin.",
+     "details": "Publié en page 3.",
+     "style": "screenshot",
+     "lines": [
+      "L'ÉCHO DES ALPES",
+      "Vallières : la carrière s'agrandit",
+      "L'arrêté du 20 septembre autorise 11 hectares",
+      "de plus. Des riverains contestent.",
+      "Par Solène Marchetti"
+     ],
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n15",
+     "takenAt": "2026-11-21 07:02",
+     "source": "camera",
+     "scene": "ceiling",
+     "caption": "Le plafond de la chambre.",
+     "details": "Photo prise par erreur au réveil.",
+     "style": "blurry",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n16",
+     "takenAt": "2026-11-22 14:30",
+     "source": "camera",
+     "scene": "snow",
+     "caption": "Autrans, première neige qui tient.",
+     "details": "Des traces de skis de fond, un banc enneigé.",
+     "place": "Autrans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n17",
+     "takenAt": "2026-11-24 10:35",
+     "source": "camera",
+     "scene": "mountain",
+     "caption": "La carrière depuis le chemin forestier.",
+     "details": "Un front de taille, une pelleteuse jaune, une barrière « Accès interdit ».",
+     "place": "Carrière Brassac Granulats",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n18",
+     "takenAt": "2026-11-25 19:40",
+     "source": "camera",
+     "scene": "street_night",
+     "caption": "Villard, la grande rue sous la pluie.",
+     "details": "Des guirlandes pas encore allumées, une voiture passe.",
+     "style": "night",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n19",
+     "takenAt": "2026-11-26 13:20",
+     "source": "camera",
+     "scene": "snow",
+     "caption": "Bois Barbu : première sortie en skating.",
+     "details": "Les traces sont fraîches, personne sur la piste.",
+     "place": "Bois Barbu",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n20",
+     "takenAt": "2026-11-26 07:45",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : état des routes du Vercors.",
+     "details": "Brouillard annoncé sur les cols.",
+     "style": "screenshot",
+     "lines": [
+      "Inforoute Isère",
+      "D106 — Col de la Croix-Perrin",
+      "Ouvert · brouillard fréquent la nuit",
+      "D531 — Gorges de la Bourne",
+      "Équipements hiver obligatoires"
+     ],
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n21",
+     "takenAt": "2026-11-27 09:20",
+     "source": "camera",
+     "scene": "office",
+     "caption": "La rédaction, avant la conf.",
+     "details": "Un café, des journaux empilés, l'écran d'Agathe allumé au fond.",
+     "place": "L'Écho des Alpes",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n22",
+     "takenAt": "2026-11-27 17:50",
+     "source": "camera",
+     "scene": "rain",
+     "caption": "La cour sous la pluie.",
+     "details": "Une pluie froide, la lampe du voisin allumée.",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n23",
+     "takenAt": "2026-11-27 22:36",
+     "source": "camera",
+     "scene": "car",
+     "caption": "Le tableau de bord avant de partir.",
+     "details": "Le thermomètre affiche 3 °C. Réservoir au quart. Une pochette cartonnée sur le siège passager.",
+     "style": "quick",
+     "place": "Villard-de-Lans",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_n24",
+     "takenAt": "2026-11-27 23:09",
+     "source": "camera",
+     "scene": "road_night",
+     "caption": "Le parking du col : rien que du brouillard.",
+     "details": "Aucune autre voiture. Un panneau « Col de la Croix-Perrin — 1220 m ».",
+     "style": "blurry",
+     "place": "Col de la Croix-Perrin",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_mairie_4x4",
+     "takenAt": "2026-10-23 19:48",
+     "source": "camera",
+     "scene": "parking_night",
+     "caption": "La cour de la mairie de Vallières, avant le conseil.",
+     "details": "Dans la cour, un 4×4 gris foncé garé sur la place « Adjoint à l'urbanisme », un macaron « ÉLU » derrière le pare-brise et un autocollant du club de ski de Vallières sur la vitre arrière.",
+     "style": "night",
+     "place": "Mairie de Vallières-en-Vercors",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_doc_virements",
+     "takenAt": "2026-11-06 19:40",
+     "source": "received",
+     "scene": "document",
+     "caption": "Photo d'un relevé bancaire de Brassac Granulats.",
+     "details": "Photo prise de biais sur un bureau, un doigt masque un coin. La ligne du 12/09 est surlignée au stylo jaune.",
+     "style": "document",
+     "lines": [
+      "BRASSAC GRANULATS — RELEVÉ",
+      "Compte courant n° •••• 4471",
+      "02/09/2026 — Prélèvement — Assurance engins — 3 812,40 €",
+      "12/09/2026 — Virement — G.A. — 25 000,00 €",
+      "Objet : conseil",
+      "18/09/2026 — Virement — Transports Rival — 9 460,00 €"
+     ],
+     "place": "Carrière Brassac Granulats",
+     "from": "julien",
+     "receivedAt": "2026-11-06 19:52",
+     "device": "Galaxy A52"
+    },
+    {
+     "id": "p_platre",
+     "takenAt": "2026-11-27 18:38",
+     "source": "received",
+     "scene": "bed",
+     "caption": "Une jambe plâtrée sur un brancard, sous un néon.",
+     "details": "Au poignet, un bracelet d'identification du CHU : « FAURE Julien — 27/11/2026 18:31 ». Au fond, un couloir d'urgences.",
+     "place": "CHU de Grenoble",
+     "from": "julien",
+     "receivedAt": "2026-11-27 18:40",
+     "device": "Galaxy A52"
+    },
+    {
+     "id": "p_kids_2305",
+     "takenAt": "2026-11-27 23:04",
+     "source": "received",
+     "scene": "bed",
+     "caption": "Deux enfants endormis dans des lits superposés.",
+     "details": "Une veilleuse en forme de lune. Métadonnées : 23:04, Grenoble — Île Verte.",
+     "style": "night",
+     "place": "Grenoble — Île Verte",
+     "from": "romain",
+     "receivedAt": "2026-11-27 23:05",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_bat_2301",
+     "takenAt": "2026-11-27 23:01",
+     "source": "received",
+     "scene": "document",
+     "caption": "Le BAT de la une de samedi.",
+     "details": "Une épreuve posée sur une table lumineuse, des rotatives floues au fond. Métadonnées : 23:01, Échirolles — Imprimerie du Drac.",
+     "style": "document",
+     "lines": [
+      "L'ÉCHO DES ALPES",
+      "SAMEDI 28 NOVEMBRE 2026",
+      "NEIGE : LE VERCORS SE PRÉPARE",
+      "À UN HIVER PRÉCOCE",
+      "BAT 23:00 — OK A.L."
+     ],
+     "place": "Imprimerie du Drac — Échirolles",
+     "from": "agathe",
+     "receivedAt": "2026-11-27 23:02",
+     "device": "Pixel 7"
+    },
+    {
+     "id": "p_col_2314",
+     "takenAt": "2026-11-27 23:14",
+     "source": "camera",
+     "scene": "road_night",
+     "caption": "Des phares dans le brouillard, sur le parking du col.",
+     "details": "Des phares dans le brouillard. Un 4×4 gris foncé ; derrière le pare-brise, un macaron « ÉLU ». Un autocollant de club de ski sur la vitre arrière. La plaque est illisible.",
+     "style": "night",
+     "place": "Col de la Croix-Perrin",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_r_chat",
+     "takenAt": "2026-11-08 16:15",
+     "source": "received",
+     "scene": "cat",
+     "caption": "Le chat de Maman dans le panier à linge.",
+     "details": "Un chat tigré roulé en boule sur des draps.",
+     "place": "Voiron",
+     "from": "maman",
+     "receivedAt": "2026-11-08 16:20",
+     "device": "iPhone SE"
+    },
+    {
+     "id": "p_r_dent",
+     "takenAt": "2026-11-21 19:38",
+     "source": "received",
+     "scene": "interior_warm",
+     "caption": "Léo montre le trou de sa dent.",
+     "details": "Une silhouette d'enfant sourit, une dent posée dans une boîte d'allumettes.",
+     "place": "Grenoble — Île Verte",
+     "from": "romain",
+     "receivedAt": "2026-11-21 19:40",
+     "device": "iPhone 14"
+    }
+   ],
+   "calendar": [
+    {
+     "id": "c_ev01",
+     "start": "2026-10-23 20:00",
+     "end": "2026-10-23 22:30",
+     "title": "Conseil municipal Vallières",
+     "location": "Mairie de Vallières-en-Vercors",
+     "notes": "Couvrir. Arrêté carrière pas à l'ordre du jour ?"
+    },
+    {
+     "id": "c_ev02",
+     "start": "2026-11-14 10:00",
+     "title": "Foire aux skis d'Autrans (+ enfants)",
+     "location": "Autrans"
+    },
+    {
+     "id": "c_ev03",
+     "start": "2026-11-12 14:00",
+     "end": "2026-11-12 15:00",
+     "title": "Me Aubert",
+     "location": "Grenoble"
+    },
+    {
+     "id": "c_ev04",
+     "start": "2026-11-18 17:30",
+     "title": "Pédiatre Nina — Dr Chabert",
+     "location": "Villard-de-Lans"
+    },
+    {
+     "id": "c_ev05",
+     "start": "2026-11-21 08:30",
+     "title": "Échange garde → R.",
+     "location": "Villard"
+    },
+    {
+     "id": "c_ev06",
+     "start": "2026-11-26 13:00",
+     "end": "2026-11-26 15:00",
+     "title": "Ski de fond",
+     "location": "Bois Barbu"
+    },
+    {
+     "id": "c_ev07",
+     "start": "2026-11-27 09:30",
+     "end": "2026-11-27 11:00",
+     "title": "Conf de rédac — carrière",
+     "location": "L'Écho",
+     "notes": "2 sujets. Pitcher la carrière pour lundi."
+    },
+    {
+     "id": "c_conseil",
+     "start": "2026-11-27 20:00",
+     "end": "2026-11-27 23:00",
+     "title": "Conseil municipal Vallières",
+     "location": "Mairie de Vallières-en-Vercors",
+     "notes": "Béa y va. Moi ? Arnaud préside."
+    },
+    {
+     "id": "c_rdv_col",
+     "start": "2026-11-27 23:00",
+     "end": "2026-11-27 23:45",
+     "title": "J. — col Croix-Perrin 23h",
+     "location": "Parking du col de la Croix-Perrin",
+     "notes": "Créé le 27 nov. à 21:50"
+    },
+    {
+     "id": "c_marche",
+     "start": "2026-11-28 09:00",
+     "title": "Marché de Villard avec Léo et Nina",
+     "location": "Villard-de-Lans",
+     "notes": "R. les dépose à 8h30."
+    },
+    {
+     "id": "c_ev11",
+     "start": "2026-12-01 10:00",
+     "title": "Audience JAF — Me Aubert",
+     "location": "Tribunal judiciaire de Grenoble"
+    },
+    {
+     "id": "c_ev12",
+     "start": "2026-12-04 08:30",
+     "title": "Sortie raquettes (école)",
+     "location": "Lans-en-Vercors",
+     "notes": "Autorisation signée ✔"
+    },
+    {
+     "id": "c_ev13",
+     "start": "2026-12-12 00:00",
+     "title": "🎂 Anniversaire Léo",
+     "allDay": true
+    }
+   ],
+   "notes": [
+    {
+     "id": "n_enquete",
+     "title": "Carrière",
+     "createdAt": "2026-11-06 21:30",
+     "modifiedAt": "2026-11-27 16:40",
+     "body": "Carrière — ce que j'ai :\n- relevés Brassac (via J.)\n- virement 12/09 : 25 000 € à « G.A. », objet « conseil »\n- G.A. = Gilles Arnaud ?? adjoint urbanisme, a signé l'arrêté du 20/09\n- 8 jours entre le virement et la signature\n\nIl me faut une 2e source. Fred ?\nArnaud ne répond ni au mail ni au tel.\n\nClé USB : toujours sur moi. Copie papier dans la pochette."
+    },
+    {
+     "id": "n_courses",
+     "title": "Courses",
+     "createdAt": "2026-11-21 18:00",
+     "modifiedAt": "2026-11-26 18:40",
+     "body": "- lait\n- compotes Nina\n- piles veilleuse\n- sac poubelle\n- sirop (demander Dr Chabert)\n- bougies anniv Léo"
+    },
+    {
+     "id": "n_wifi",
+     "title": "Wi-Fi rédac",
+     "createdAt": "2025-01-06 09:12",
+     "modifiedAt": "2025-01-06 09:12",
+     "body": "Réseau : ECHO-REDAC\nMot de passe : rotative1946"
+    },
+    {
+     "id": "n_sujets",
+     "title": "Idées de sujets",
+     "createdAt": "2026-09-02 22:10",
+     "modifiedAt": "2026-11-24 22:05",
+     "body": "- Les saisonniers qui ne trouvent plus à se loger\n- Fermeture de la ligne de bus du dimanche\n- Les pisteurs-secouristes, une nuit avec eux\n- Neige de culture : qui paie ?"
+    },
+    {
+     "id": "n_garde",
+     "title": "Garde",
+     "createdAt": "2026-09-05 20:00",
+     "modifiedAt": "2026-11-17 21:20",
+     "body": "Une semaine sur deux. Échange le samedi 8h30.\nVacances de Noël : 1re semaine moi.\nNe plus accepter les changements de dernière minute par message."
+    }
+   ],
+   "mails": [
+    {
+     "id": "mail_arnaud_2024",
+     "folder": "inbox",
+     "fromName": "Gilles Arnaud",
+     "fromAddress": "g.arnaud@vallieres-en-vercors.fr",
+     "to": "solene.marchetti@echodesalpes.fr",
+     "at": "2024-03-08 10:14",
+     "subject": "Invitation presse — inauguration du parking relais du Pré-Long",
+     "body": "Madame,\n\nLa commune de Vallières-en-Vercors a le plaisir de vous convier à l'inauguration du parking relais du Pré-Long, samedi 16 mars 2024 à 11h, en présence du conseil municipal.\n\nUn verre de l'amitié suivra.\n\nBien cordialement,\n\nGilles Arnaud\nAdjoint à l'urbanisme, Vallières-en-Vercors\nTél. direct : 07 58 11 20 94"
+    },
+    {
+     "id": "mail_demande_arnaud",
+     "folder": "sent",
+     "fromName": "Solène Marchetti",
+     "fromAddress": "solene.marchetti@echodesalpes.fr",
+     "to": "g.arnaud@vallieres-en-vercors.fr",
+     "at": "2026-11-19 10:02",
+     "subject": "Demande d'entretien — arrêté du 20 septembre",
+     "body": "Monsieur Arnaud,\n\nJe prépare un article sur l'extension de la carrière Brassac Granulats autorisée par l'arrêté du 20 septembre. Je dispose de documents sur lesquels je souhaiterais recueillir votre réaction.\n\nJe reste joignable au 06 12 84 37 65.\n\nSolène Marchetti\nL'Écho des Alpes"
+    },
+    {
+     "id": "mail_droit_reponse",
+     "folder": "sent",
+     "fromName": "Solène Marchetti",
+     "fromAddress": "solene.marchetti@echodesalpes.fr",
+     "to": "t.brassac@brassac-granulats.fr",
+     "at": "2026-11-26 15:30",
+     "subject": "Article à paraître — votre réaction",
+     "body": "Monsieur Brassac,\n\nL'Écho des Alpes s'apprête à publier un article sur des virements de votre société en septembre 2026. Je souhaite vous donner la possibilité de réagir avant publication.\n\nSolène Marchetti"
+    },
+    {
+     "id": "mail_brassac",
+     "folder": "inbox",
+     "fromName": "Thierry Brassac",
+     "fromAddress": "t.brassac@brassac-granulats.fr",
+     "to": "solene.marchetti@echodesalpes.fr",
+     "at": "2026-11-27 14:10",
+     "subject": "Re: Article à paraître — votre réaction",
+     "body": "Madame Marchetti,\n\nJe n'ai rien à répondre à des accusations fondées sur des documents volés. Mes avocats sont informés.\n\nSi cet article paraît, vous le regretterez, vous et votre journal.\n\nT. Brassac\nPrésident, Brassac Granulats"
+    },
+    {
+     "id": "mail_juridique",
+     "folder": "inbox",
+     "fromName": "Marc Viallet",
+     "fromAddress": "m.viallet@echodesalpes.fr",
+     "to": "solene.marchetti@echodesalpes.fr",
+     "at": "2026-11-27 15:50",
+     "subject": "Carrière — avis juridique",
+     "body": "Solène,\n\nJ'ai relu. Le relevé seul ne suffit pas : rien ne dit qui est « G.A. », et ta source, salariée de Brassac, est identifiable par recoupement.\n\nSans une deuxième source ou une réaction de l'intéressé, je ne peux pas valider.\n\nMarc"
+    },
+    {
+     "id": "mail_agathe_stop",
+     "folder": "inbox",
+     "fromName": "Agathe Lemoine",
+     "fromAddress": "a.lemoine@echodesalpes.fr",
+     "to": "solene.marchetti@echodesalpes.fr",
+     "at": "2026-11-27 16:30",
+     "subject": "Lundi",
+     "body": "On ne publie pas lundi. Le juridique bloque tant qu'on n'a pas une deuxième source.\n\nJe sais ce que ça te coûte. Pas de bêtise ce week-end.\n\nA."
+    },
+    {
+     "id": "mail_aubert",
+     "folder": "inbox",
+     "fromName": "Cabinet Aubert",
+     "fromAddress": "cabinet.aubert@avocats-isere.fr",
+     "to": "solene.marchetti@echodesalpes.fr",
+     "at": "2026-11-13 11:20",
+     "subject": "Audience du 1er décembre",
+     "body": "Madame,\n\nL'audience devant le juge aux affaires familiales est fixée au mardi 1er décembre à 10h. Merci de m'apporter les justificatifs de vos horaires de travail.\n\nMe C. Aubert",
+     "attachments": [
+      "Convocation_JAF_01-12.pdf"
+     ]
+    },
+    {
+     "id": "mail_ecole",
+     "folder": "inbox",
+     "fromName": "École de Lans-en-Vercors",
+     "fromAddress": "ecole.lans@ac-grenoble.fr",
+     "to": "solene.marchetti@echodesalpes.fr",
+     "at": "2026-11-16 18:05",
+     "subject": "Sortie raquettes du 4 décembre",
+     "body": "Chers parents, la sortie raquettes des CE1 aura lieu le vendredi 4 décembre. Prévoir vêtements chauds et gourde.",
+     "attachments": [
+      "Autorisation_sortie.pdf"
+     ]
+    },
+    {
+     "id": "mail_energie",
+     "folder": "inbox",
+     "fromName": "Alpénergie",
+     "fromAddress": "facture@alpenergie.fr",
+     "to": "solene.marchetti@echodesalpes.fr",
+     "at": "2026-11-10 06:30",
+     "subject": "Votre facture de novembre",
+     "body": "Votre facture de 118,40 € est disponible.",
+     "attachments": [
+      "Facture_novembre.pdf"
+     ]
+    },
+    {
+     "id": "mail_ski",
+     "folder": "inbox",
+     "fromName": "Nordic Vercors",
+     "fromAddress": "news@nordicvercors.fr",
+     "to": "solene.marchetti@echodesalpes.fr",
+     "at": "2026-11-20 12:00",
+     "subject": "Ouverture des pistes nordiques ❄️",
+     "body": "Les premières pistes de Bois Barbu et d'Autrans ouvrent ce week-end si la neige tient. Forfaits saison en vente en ligne."
+    }
+   ],
+   "browser": [
+    {
+     "id": "w01",
+     "at": "2026-10-12 22:14",
+     "kind": "search",
+     "text": "arrêté extension carrière vallières"
+    },
+    {
+     "id": "w02",
+     "at": "2026-10-12 22:16",
+     "kind": "visit",
+     "text": "Vallières-en-Vercors — Registre des actes",
+     "url": "vallieres-en-vercors.fr/actes/2026-114",
+     "summary": "Arrêté n° 2026-114 du 20 septembre 2026 autorisant l'extension de la carrière Brassac Granulats sur 11 hectares. Signé : G. Arnaud, adjoint délégué à l'urbanisme."
+    },
+    {
+     "id": "w03",
+     "at": "2026-10-30 23:05",
+     "kind": "search",
+     "text": "protéger ses sources journaliste"
+    },
+    {
+     "id": "w04",
+     "at": "2026-10-30 23:07",
+     "kind": "visit",
+     "text": "Le secret des sources des journalistes : ce que dit la loi",
+     "url": "cnpj-info.fr/secret-des-sources",
+     "summary": "La loi protège le secret des sources. Conseils : ne pas stocker les échanges sensibles sur un téléphone professionnel, privilégier les rencontres physiques."
+    },
+    {
+     "id": "w05",
+     "at": "2026-11-01 20:40",
+     "kind": "search",
+     "text": "pneus neige obligatoires isère date"
+    },
+    {
+     "id": "w06",
+     "at": "2026-11-03 21:30",
+     "kind": "search",
+     "text": "brassac granulats chiffre d'affaires"
+    },
+    {
+     "id": "w07",
+     "at": "2026-11-18 22:20",
+     "kind": "search",
+     "text": "gilles arnaud vallières"
+    },
+    {
+     "id": "w08",
+     "at": "2026-11-18 22:21",
+     "kind": "visit",
+     "text": "Vallières-en-Vercors — Le conseil municipal",
+     "url": "vallieres-en-vercors.fr/conseil",
+     "summary": "Gilles Arnaud, 54 ans, adjoint à l'urbanisme depuis 2020. Ancien moniteur, il préside aussi le club de ski de Vallières."
+    },
+    {
+     "id": "w09",
+     "at": "2026-11-22 21:10",
+     "kind": "search",
+     "text": "idée cadeau garçon 8 ans lego"
+    },
+    {
+     "id": "w10",
+     "at": "2026-11-25 21:37",
+     "kind": "search",
+     "text": "col croix perrin fermeture hiver"
+    },
+    {
+     "id": "w11",
+     "at": "2026-11-25 21:38",
+     "kind": "visit",
+     "text": "Routes du Vercors : fermetures hivernales",
+     "url": "inforoute-isere.fr/vercors",
+     "summary": "Le col de la Croix-Perrin (D106) reste ouvert l'hiver et est déneigé la nuit. Brouillard fréquent en novembre."
+    },
+    {
+     "id": "w12",
+     "at": "2026-11-26 07:40",
+     "kind": "search",
+     "text": "météo vercors vendredi soir"
+    },
+    {
+     "id": "w13",
+     "at": "2026-11-26 22:40",
+     "kind": "search",
+     "text": "garde complète conditions juge aux affaires familiales"
+    },
+    {
+     "id": "w14",
+     "at": "2026-11-27 18:15",
+     "kind": "search",
+     "text": "fracture cheville plâtre combien de temps"
+    },
+    {
+     "id": "w15",
+     "at": "2026-11-27 18:17",
+     "kind": "visit",
+     "text": "Fracture de la cheville : prise en charge aux urgences",
+     "url": "sante-pratique.fr/fracture-cheville",
+     "summary": "Une fracture déplacée est souvent opérée : le patient est alors gardé à jeun pour la nuit et opéré le lendemain."
+    },
+    {
+     "id": "w_debat",
+     "at": "2026-11-27 19:50",
+     "kind": "visit",
+     "text": "TéléAlpes — Ce soir",
+     "url": "telealpes.fr/programme",
+     "summary": "Débat en direct 22:45–23:30 : l'avenir des carrières du Vercors, avec Thierry Brassac (Brassac Granulats)."
+    }
+   ],
+   "liveEvents": [
+    {
+     "id": "lv01",
+     "afterSeconds": 25,
+     "kind": "message",
+     "app": "messages",
+     "title": "Maman",
+     "body": "Solène ?? les gendarmes m'ont appelée. Rappelle-moi",
+     "conversation": "c_maman",
+     "message": {
+      "id": "m_live_maman",
+      "from": "maman",
+      "at": "2026-11-28 00:50",
+      "text": "Solène ?? les gendarmes m'ont appelée. Rappelle-moi"
+     },
+     "opens": "message:m_live_maman",
+     "level": "urgent"
+    },
+    {
+     "id": "lv02",
+     "afterSeconds": 80,
+     "kind": "call",
+     "app": "phone",
+     "title": "Appel manqué",
+     "body": "Agathe Lemoine",
+     "call": {
+      "id": "k_lv02",
+      "contact": "agathe",
+      "direction": "missed",
+      "at": "2026-11-28 00:51",
+      "durationSeconds": 0
+     },
+     "opens": "call:k_lv02",
+     "level": "normal"
+    },
+    {
+     "id": "lv03",
+     "afterSeconds": 140,
+     "kind": "message",
+     "app": "messages",
+     "title": "Julien (nouveau n°)",
+     "body": "J'ai attendu 1h au col, t'es jamais venue. C'est quoi ce délire ?",
+     "conversation": "c_jnew",
+     "message": {
+      "id": "m_live_new",
+      "from": "jnew",
+      "at": "2026-11-28 00:52",
+      "text": "J'ai attendu 1h au col, t'es jamais venue. C'est quoi ce délire ?"
+     },
+     "opens": "message:m_live_new",
+     "level": "important"
+    },
+    {
+     "id": "lv04",
+     "afterSeconds": 200,
+     "kind": "message",
+     "app": "messages",
+     "title": "Romain Vidal",
+     "body": "Les gendarmes sont chez moi. Je garde les enfants. Réponds.",
+     "conversation": "c_romain",
+     "message": {
+      "id": "m_live_romain",
+      "from": "romain",
+      "at": "2026-11-28 00:53",
+      "text": "Les gendarmes sont chez moi. Je garde les enfants. Réponds."
+     },
+     "opens": "message:m_live_romain",
+     "level": "important"
+    },
+    {
+     "id": "lv05",
+     "afterSeconds": 260,
+     "kind": "message",
+     "app": "messages",
+     "title": "Julien Faure",
+     "body": "solène les gendarmes m appellent, qu est ce qui se passe ?? je suis tjrs a l hopital",
+     "conversation": "c_julien",
+     "message": {
+      "id": "m_live_julien",
+      "from": "julien",
+      "at": "2026-11-28 00:54",
+      "text": "solène les gendarmes m appellent, qu est ce qui se passe ?? je suis tjrs a l hopital"
+     },
+     "opens": "message:m_live_julien",
+     "level": "important"
+    },
+    {
+     "id": "lv06",
+     "afterSeconds": 320,
+     "kind": "message",
+     "app": "messages",
+     "title": "Rédac Écho 📰 — Béatrice",
+     "body": "agathe vient de m'appeler. quelqu'un a des nouvelles de solène ?",
+     "conversation": "c_redac",
+     "message": {
+      "id": "m_live_beatrice",
+      "from": "beatrice",
+      "at": "2026-11-28 00:55",
+      "text": "agathe vient de m'appeler. quelqu'un a des nouvelles de solène ?"
+     },
+     "opens": "message:m_live_beatrice",
+     "level": "normal"
+    },
+    {
+     "id": "lv07",
+     "afterSeconds": 380,
+     "kind": "reminder",
+     "app": "calendar",
+     "title": "Aujourd'hui 09:00",
+     "body": "Marché de Villard avec Léo et Nina",
+     "opens": "calendar:c_marche",
+     "level": "normal"
+    },
+    {
+     "id": "lv08",
+     "afterSeconds": 440,
+     "kind": "message",
+     "app": "messages",
+     "title": "Agathe Lemoine",
+     "body": "Je monte à la gendarmerie de Villard. Solène, si tu lis ça : on a tout gardé. Tout.",
+     "conversation": "c_agathe",
+     "message": {
+      "id": "m_live_agathe",
+      "from": "agathe",
+      "at": "2026-11-28 00:57",
+      "text": "Je monte à la gendarmerie de Villard. Solène, si tu lis ça : on a tout gardé. Tout."
+     },
+     "opens": "message:m_live_agathe",
+     "level": "normal"
+    }
+   ],
+   "wallpaper": "storm",
+   "batteryPercent": 18
+  }
+ ],
+ "suspects": [
+  {
+   "id": "s_gilles",
+   "contact": "gilles",
+   "role": "Adjoint à l'urbanisme de Vallières-en-Vercors",
+   "age": 54,
+   "address": "Vallières-en-Vercors",
+   "statement": "« J'ai présidé le conseil municipal jusqu'à 23h, puis je suis rentré chez moi. Je ne connais cette journaliste que de loin. »",
+   "verdict": "Gilles Arnaud a signé l'extension de la carrière huit jours après un virement de 25 000 € à « G.A. ». Avec une vieille ligne prépayée — son ancien numéro direct — il s'est fait passer pour Julien, a attiré Solène au col et a levé le conseil à 21h10 pour être au rendez-vous. Son 4×4 d'élu est sur la photo de 23:14."
+  },
+  {
+   "id": "s_thierry",
+   "contact": "thierry",
+   "role": "Patron de Brassac Granulats",
+   "age": 61,
+   "address": "Saint-Nizier-du-Moucherotte",
+   "alibi": "De 22:45 à 23:30, Thierry Brassac était en direct sur le plateau de TéléAlpes, à Grenoble, à près d'une heure du col.",
+   "alibiEvidence": "e_thierry_alibi",
+   "trap": "Un mail de menace le jour même (« vous le regretterez ») et 25 000 € sortis de ses comptes : le mobile était évident, mais pas l'occasion.",
+   "statement": "« Ce soir-là, j'étais sur le plateau de TéléAlpes, en direct. »",
+   "verdict": "Thierry Brassac a menacé Solène et devra s'expliquer sur ses virements. Mais pendant qu'elle attendait au col, il parlait en direct sur TéléAlpes, à Grenoble, de 22:45 à 23:30."
+  },
+  {
+   "id": "s_romain",
+   "contact": "romain",
+   "role": "Ex-mari de Solène",
+   "age": 37,
+   "address": "Île Verte, Grenoble",
+   "alibi": "La position partagée de Romain le place à Grenoble toute la soirée, et il envoie à 23:05 une photo des enfants endormis, prise à 23:04 chez lui.",
+   "alibiEvidence": "e_romain_alibi",
+   "trap": "Des menaces sur la garde, la veille, et il savait que Solène sortait ce soir-là : un coupable tout trouvé.",
+   "statement": "« J'étais chez moi à Grenoble avec les enfants toute la soirée. »",
+   "verdict": "Romain voulait faire pression sur Solène à travers la garde des enfants. Mais il n'a pas quitté Grenoble : à 23:04 il photographiait Léo et Nina endormis, à quarante minutes de route du col."
+  },
+  {
+   "id": "s_agathe",
+   "contact": "agathe",
+   "role": "Directrice de la rédaction de L'Écho des Alpes",
+   "age": 49,
+   "address": "Grenoble",
+   "alibi": "À 23:01, Agathe photographiait le BAT de la une à l'imprimerie d'Échirolles, à 45 minutes du col.",
+   "alibiEvidence": "e_agathe_alibi",
+   "trap": "Elle avait bloqué l'article l'après-midi même, et elle était la seule à qui Solène avait dit où elle allait.",
+   "statement": "« J'ai bouclé l'édition à l'imprimerie jusqu'à minuit passé. »",
+   "verdict": "Agathe a bloqué l'article et savait que Solène montait au col, mais elle bouclait l'édition à Échirolles : son BAT est photographié à 23:01. C'est elle qui a donné l'alerte."
+  },
+  {
+   "id": "s_julien",
+   "contact": "julien",
+   "role": "Conducteur d'engins à la carrière — la source de Solène",
+   "age": 29,
+   "address": "Lans-en-Vercors",
+   "alibi": "Julien s'est cassé la cheville à 17:20. Le bracelet du CHU (18:31), son appel de 19:12 et son message de 21:03 le placent aux urgences, gardé pour la nuit.",
+   "alibiEvidence": "e_julien_alibi",
+   "trap": "C'est « Julien » qui a fixé le rendez-vous et « Julien » qui écrit à 23:47 qu'il attend au col. Mais ce n'est pas son numéro.",
+   "statement": "« Je me suis cassé la cheville au travail vendredi, j'étais aux urgences à Grenoble jusqu'à 1h du matin. »",
+   "verdict": "Julien n'a jamais changé de numéro. Pendant que son « nouveau numéro » donnait rendez-vous à Solène, lui était plâtré aux urgences du CHU, d'où il lui écrivait de reporter."
+  }
+ ],
+ "evidence": [
+  {
+   "id": "e_two_juliens",
+   "title": "Deux Julien le même soir",
+   "importance": "key",
+   "suspects": [
+    "s_gilles",
+    "s_julien"
+   ],
+   "refs": [
+    "message:m_new_2140",
+    "message:m_julien_2103"
+   ],
+   "meaning": "À 21:03, le vrai Julien écrit de son numéro habituel qu'on le garde aux urgences. À 21:40, le « nouveau numéro » écrit « Finalement je peux ». Ce ne sont pas la même personne."
+  },
+  {
+   "id": "e_signature",
+   "title": "Le numéro dans la signature",
+   "importance": "key",
+   "suspects": [
+    "s_gilles"
+   ],
+   "refs": [
+    "contact:jnew",
+    "mail:mail_arnaud_2024"
+   ],
+   "meaning": "Le 07 58 11 20 94 du « nouveau » Julien est le « Tél. direct » de Gilles Arnaud dans son invitation presse de 2024."
+  },
+  {
+   "id": "e_4x4",
+   "title": "Le 4×4 du col",
+   "importance": "key",
+   "suspects": [
+    "s_gilles"
+   ],
+   "refs": [
+    "photoInfo:p_col_2314"
+   ],
+   "meaning": "Le véhicule du rendez-vous, photographié à 23:14 : un 4×4 gris foncé, un macaron « ÉLU », un autocollant de club de ski."
+  },
+  {
+   "id": "e_motive",
+   "title": "25 000 € à « G.A. »",
+   "importance": "key",
+   "suspects": [
+    "s_gilles",
+    "s_thierry"
+   ],
+   "anyOf": true,
+   "refs": [
+    "photoInfo:p_doc_virements",
+    "note:n_enquete"
+   ],
+   "meaning": "Brassac a versé 25 000 € à « G.A. » le 12 septembre ; Gilles Arnaud a signé l'extension le 20. L'article l'aurait mis en cause."
+  },
+  {
+   "id": "e_same_car",
+   "title": "Le même 4×4 à la mairie",
+   "importance": "supporting",
+   "suspects": [
+    "s_gilles"
+   ],
+   "refs": [
+    "photoInfo:p_mairie_4x4"
+   ],
+   "meaning": "Le 23 octobre, le même 4×4 était garé sur la place « Adjoint à l'urbanisme » : macaron ÉLU, autocollant du club de ski de Vallières."
+  },
+  {
+   "id": "e_council_early",
+   "title": "Le conseil levé à 21h10",
+   "importance": "supporting",
+   "suspects": [
+    "s_gilles"
+   ],
+   "refs": [
+    "message:m_redac_2114"
+   ],
+   "meaning": "Arnaud dit avoir présidé jusqu'à 23h. Le conseil a été levé à 21h10 et il est parti le premier."
+  },
+  {
+   "id": "e_julien_alibi",
+   "title": "Aux urgences",
+   "importance": "supporting",
+   "suspects": [
+    "s_julien"
+   ],
+   "anyOf": true,
+   "refs": [
+    "photoInfo:p_platre",
+    "call:k_julien_1912"
+   ],
+   "meaning": "Bracelet du CHU daté de 18:31, appel de 19:12 depuis son numéro habituel : Julien est plâtré, aux urgences."
+  },
+  {
+   "id": "e_thierry_alibi",
+   "title": "En direct à la télévision",
+   "importance": "supporting",
+   "suspects": [
+    "s_thierry"
+   ],
+   "anyOf": true,
+   "refs": [
+    "browser:w_debat",
+    "message:m_agathe_2258"
+   ],
+   "meaning": "Thierry Brassac débattait en direct sur TéléAlpes de 22:45 à 23:30, à Grenoble."
+  },
+  {
+   "id": "e_romain_alibi",
+   "title": "Les enfants endormis",
+   "importance": "supporting",
+   "suspects": [
+    "s_romain"
+   ],
+   "anyOf": true,
+   "refs": [
+    "track:t_romain",
+    "photoInfo:p_kids_2305"
+   ],
+   "meaning": "Romain était chez lui, à l'Île Verte, de 18:30 à minuit : position partagée et photo prise à 23:04."
+  },
+  {
+   "id": "e_agathe_alibi",
+   "title": "Le BAT de 23:01",
+   "importance": "supporting",
+   "suspects": [
+    "s_agathe"
+   ],
+   "refs": [
+    "photoInfo:p_bat_2301"
+   ],
+   "meaning": "À 23:01, Agathe était à l'imprimerie d'Échirolles, à 45 minutes du col."
+  },
+  {
+   "id": "f_julien_rdv",
+   "title": "« Je suis au parking du col »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_julien"
+   ],
+   "refs": [
+    "message:m_new_2347"
+   ],
+   "meaning": "« Julien » dit attendre au col — mais c'est le faux numéro, qui se couvre après coup."
+  },
+  {
+   "id": "f_brassac_threat",
+   "title": "« Vous le regretterez »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_thierry"
+   ],
+   "refs": [
+    "mail:mail_brassac"
+   ],
+   "meaning": "Une menace d'avocats et d'image, envoyée le jour même. Brassac était pourtant à la télévision pendant le rendez-vous."
+  },
+  {
+   "id": "f_romain_custody",
+   "title": "La menace sur la garde",
+   "importance": "falseLead",
+   "suspects": [
+    "s_romain"
+   ],
+   "refs": [
+    "message:m_romain_threat"
+   ],
+   "meaning": "Une pression de père inquiet, pas un piège : Romain n'a pas quitté Grenoble."
+  },
+  {
+   "id": "f_agathe_knew",
+   "title": "Elle savait",
+   "importance": "falseLead",
+   "suspects": [
+    "s_agathe"
+   ],
+   "anyOf": true,
+   "refs": [
+    "call:k_agathe_2231",
+    "mail:mail_agathe_stop"
+   ],
+   "meaning": "Agathe a bloqué l'article et savait que Solène montait au col. C'est aussi elle qui a donné l'alerte."
+  }
+ ],
+ "hints": [
+  {
+   "id": "h1",
+   "text": "Deux « Julien » écrivent à Solène le même soir. Sont-ils vraiment la même personne ?",
+   "scoreCost": 0
+  },
+  {
+   "id": "h2",
+   "text": "Comparez le numéro du « nouveau » Julien avec ceux que vous trouvez ailleurs dans le téléphone : les vieux mails gardent des signatures.",
+   "scoreCost": 8
+  },
+  {
+   "id": "h3",
+   "text": "Solène a photographié la voiture qui arrivait au col à 23:14. Où a-t-elle déjà vu ce 4×4 ?",
+   "scoreCost": 15,
+   "unlockAtRemainingSeconds": 120
+  }
+ ],
+ "solution": {
+  "culprit": "s_gilles",
+  "headline": "Gilles Arnaud s'est fait passer pour Julien pour attirer Solène au col.",
+  "summary": "Le « nouveau numéro » de sa source était une vieille ligne de l'adjoint à l'urbanisme. Il voulait les documents qui le mettaient en cause.",
+  "reveal": [
+   {
+    "at": "2024-03-08 10:14",
+    "text": "Gilles Arnaud signe une invitation presse : « Tél. direct : 07 58 11 20 94 »",
+    "evidence": "e_signature"
+   },
+   {
+    "at": "2026-10-23 19:48",
+    "text": "Solène photographie le 4×4 de l'adjoint dans la cour de la mairie",
+    "evidence": "e_same_car"
+   },
+   {
+    "at": "2026-11-06 19:52",
+    "text": "Julien envoie le relevé : 25 000 € versés à « G.A. » le 12 septembre",
+    "evidence": "e_motive"
+   },
+   {
+    "at": "2026-11-25 21:12",
+    "text": "« C'est Julien. Nouveau numéro » — depuis le 07 58 11 20 94",
+    "evidence": "e_signature"
+   },
+   {
+    "at": "2026-11-27 21:03",
+    "text": "Le vrai Julien, aux urgences : « ils me gardent pour la nuit »",
+    "evidence": "e_julien_alibi"
+   },
+   {
+    "at": "2026-11-27 21:10",
+    "text": "Arnaud lève le conseil municipal et part le premier",
+    "evidence": "e_council_early"
+   },
+   {
+    "at": "2026-11-27 21:40",
+    "text": "Le faux Julien : « Finalement je peux. 23h au parking du col »",
+    "evidence": "e_two_juliens"
+   },
+   {
+    "at": "2026-11-27 23:14",
+    "text": "Solène photographie le 4×4 qui arrive : macaron ÉLU, autocollant de club de ski",
+    "evidence": "e_4x4"
+   },
+   {
+    "at": "2026-11-27 23:47",
+    "text": "« Je suis au parking du col, t'es où ? » — Arnaud se couvre",
+    "evidence": "f_julien_rdv"
+   }
+  ],
+  "story": [
+   "Depuis octobre, Julien Faure, conducteur d'engins chez Brassac Granulats, renseigne Solène. Le 6 novembre, il lui envoie la photo d'un relevé : 25 000 € versés le 12 septembre à « G.A. », huit jours avant que Gilles Arnaud signe l'arrêté d'extension de la carrière.",
+   "Le 19 novembre, Solène demande un entretien à Arnaud : il comprend qu'elle a des documents. Brassac, qui soupçonne Julien depuis qu'on l'a vu au bureau de la comptabilité, lui en parle. Le 25 novembre, Arnaud ressort une vieille ligne prépayée — le « numéro direct » qu'il donnait aux journalistes en 2024 — et écrit à Solène en se faisant passer pour Julien.",
+   "Le faux Julien ne connaît ni l'heure prévue ni les habitudes du vrai. Il déplace le rendez-vous au col de la Croix-Perrin et promet un deuxième témoin, exactement ce que la rédaction exige. Vendredi, le vrai Julien se casse la cheville et reste aux urgences du CHU. À 21h10, Arnaud lève le conseil municipal et quitte la mairie le premier ; à 21:40, il écrit : « Finalement je peux. »",
+   "Solène prévient Agathe, part à 22:40 et arrive au col à 23:08. À 23:14, par réflexe de journaliste, elle photographie le 4×4 qui sort du brouillard. Arnaud réclame la clé USB. Elle refuse et s'enfuit à pied dans la forêt ; son téléphone reste sur le siège passager. Il fouille la voiture, emporte la pochette de documents et, à 23:47, écrit « Je suis au parking du col, t'es où ? » pour faire croire que Julien l'attendait.",
+   "Brassac était en direct sur TéléAlpes, Romain veillait les enfants à Grenoble, Agathe bouclait l'édition à Échirolles, Julien était plâtré au CHU. Chacun avait une raison d'en vouloir à Solène, ou savait où elle allait. Aucun n'était au col.",
+   "Grâce à votre enquête, les gendarmes cherchent au bon endroit : Solène est retrouvée à 6h40 dans une cabane de chasseurs, en hypothermie, mais vivante. La clé USB était dans sa poche. Gilles Arnaud est interpellé dans la matinée ; une enquête est ouverte sur les virements de Brassac Granulats."
+  ]
+ }
+}
