@@ -28,6 +28,8 @@ struct CinematicView: View {
             }
         }
         .overlay(alignment: .topTrailing) {
+            // Hidden on the last shot: the phone is already in the player's hands.
+            if scene.shots.indices.contains(index), scene.shots[index].kind != .unlock {
             Button(action: finish) {
                 HStack(spacing: 4) {
                     Text(L10n.t("cinematic.skip"))
@@ -44,6 +46,7 @@ struct CinematicView: View {
             .padding(.trailing, Theme.Spacing.s5)
             .padding(.top, Theme.Spacing.s3)
             .accessibilityIdentifier("cinematic.skip")
+            }
         }
         .statusBarHidden()
         .persistentSystemOverlays(.hidden)
@@ -261,11 +264,6 @@ private struct PhoneOnTableShot: View {
             let buzzing = shot.notification.map { t >= $0.at && t < $0.at + 1.1 } ?? false
             ZStack {
                 TableSurface()
-                if let label = shot.label {
-                    EvidenceTag(text: label)
-                        .rotationEffect(.degrees(-8))
-                        .offset(x: -110, y: 250)
-                }
                 PhoneDevice {
                     LockScreen(time: caseFile.phoneStartTime, notification: arrived ? shot.notification : nil, lit: arrived || t > 0.6)
                 }
@@ -275,6 +273,12 @@ private struct PhoneOnTableShot: View {
                 .offset(x: buzzing ? sin(t * 90) * 2 : 0, y: 40)
                 .scaleEffect(0.86)
                 .shadow(color: .black.opacity(0.6), radius: 30, y: 30)
+                // The evidence tag lies on the table in front of the phone.
+                if let label = shot.label {
+                    EvidenceTag(text: label)
+                        .rotationEffect(.degrees(-6))
+                        .offset(x: -70, y: 330)
+                }
                 if let caption = shot.lines?.last(where: { $0.at <= t }) {
                     VStack {
                         Spacer()
