@@ -197,6 +197,12 @@ final class MainFlowTests: XCTestCase {
         dismissUrgentBanner()
         tapWhenReady(element("phone.quit"), "Quitter l'enquête")
         let confirm = app.alerts.buttons["Quitter"]
+        if !confirm.waitForExistence(timeout: 4) {
+            // A live notification can land on the tap: clear it and ask again.
+            snap("retry-quitter")
+            dismissUrgentBanner()
+            tapWhenReady(element("phone.quit"), "Quitter l'enquête (2e essai)")
+        }
         wait(confirm, 5, "confirmation « Quitter l'enquête ? »")
         confirm.tap()
     }
