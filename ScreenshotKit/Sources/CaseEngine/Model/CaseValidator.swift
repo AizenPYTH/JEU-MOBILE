@@ -80,6 +80,7 @@ public enum CaseValidator {
                     fail("received photo '\(photo.id)' needs 'from' and 'receivedAt'")
                 }
                 if let from = photo.from, !contactIDs.contains(from) { fail("photo '\(photo.id)' from unknown contact '\(from)'") }
+                if !Photo.scenes.contains(photo.scene) { fail("photo '\(photo.id)' has an unknown scene '\(photo.scene)'") }
             }
             for event in device.calendar { register(event.id, "calendar event"); known.insert(ItemRef(.calendar, event.id)) }
             for note in device.notes { register(note.id, "note"); known.insert(ItemRef(.note, note.id)) }
@@ -117,6 +118,52 @@ public enum CaseValidator {
                 }
             }
             for lock in device.lockedApps where lock.code.isEmpty { fail("empty code for locked app '\(lock.app.rawValue)'") }
+        }
+
+        // Coherence: what is stored on the phone happened before it was handed over (calendar events
+        // may be in the future; live events happen during the investigation).
+        let handedOver = file.phoneStartTime
+        for device in file.devices {
+            func future(_ at: Moment, _ what: String) { if at > handedOver { fail("\(what) is after the phone was handed over (\(at))") } }
+            for c in device.conversations {
+                for m in c.messages {
+                    future(m.at, "message '\(m.id)'")
+                    if let d = m.deletedAt { future(d, "deletion of '\(m.id)'") }
+                    if m.from != ownerContactID, !c.participants.contains(m.from) {
+                        fail("message '\(m.id)' is from '\(m.from)', who is not in conversation '\(c.id)'")
+                    }
+                }
+                if let d = c.draft { future(d.at, "draft '\(d.id)'") }
+            }
+            for call in device.calls { future(call.at, "call '\(call.id)'") }
+            for photo in device.photos {
+                future(photo.takenAt, "photo '\(photo.id)'")
+                if let r = photo.receivedAt {
+                    future(r, "reception of photo '\(photo.id)'")
+                    if r < photo.takenAt { fail("photo '\(photo.id)' is received before it was taken") }
+                }
+            }
+            for track in device.tracks {
+                for point in track.points { future(point.at, "track point '\(point.id)'") }
+                if let s = track.sharingStoppedAt { future(s, "end of sharing of '\(track.id)'") }
+            }
+            for note in device.notes {
+                future(note.modifiedAt, "note '\(note.id)'")
+                if note.modifiedAt < note.createdAt { fail("note '\(note.id)' is modified before it was created") }
+            }
+            for mail in device.mails { future(mail.at, "mail '\(mail.id)'") }
+            for entry in device.browser { future(entry.at, "browser entry '\(entry.id)'") }
+            if let battery = device.batteryPercent, !(1...100).contains(battery) { fail("device '\(device.id)' has an invalid battery level") }
+            // A message sent with a photo: the photo exists by then.
+            let photos = Dictionary(device.photos.map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a })
+            for c in device.conversations {
+                for m in c.messages {
+                    if let p = m.photo.flatMap({ photos[$0] }), p.takenAt > m.at { fail("message '\(m.id)' sends photo '\(p.id)' before it was taken") }
+                }
+            }
+        }
+        for step in file.solution.reveal where step.at > handedOver.adding(seconds: 86_400) {
+            fail("reveal step « \(step.text.prefix(24)) » is long after the investigation")
         }
 
         let suspectIDs = Set(file.suspects.map(\.id))
@@ -162,9 +209,11 @@ public enum CaseValidator {
                 for cue in shot.cues ?? [] where cue.at < 0 || cue.at >= shot.seconds {
                     fail("intro shot \(n + 1): cue '\(cue.sound)' is outside the shot")
                 }
-                if let n2 = shot.notification, n2.at < 0 || n2.at >= shot.seconds {
-                    fail("intro shot \(n + 1): the notification is outside the shot")
+                for n2 in shot.allNotifications where n2.at < 0 || n2.at >= shot.seconds {
+                    fail("intro shot \(n + 1): the notification « \(n2.title) » is outside the shot")
                 }
+                if shot.kind == .scene && shot.scene == nil { fail("intro shot \(n + 1): a scene shot needs a 'scene'") }
+                if let scene = shot.scene, !Photo.scenes.contains(scene) { fail("intro shot \(n + 1): unknown scene '\(scene)'") }
             }
         }
 

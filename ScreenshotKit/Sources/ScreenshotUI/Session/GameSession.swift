@@ -66,14 +66,16 @@ final class GameSession {
         return .normal
     }
 
-    /// 0…1 of the case duration still available (status bar track).
-    /// Battery of the seized phone (%): from the case's starting level down to a few percent at the
-    /// end of the timer. Display only.
+    /// Battery of the seized phone (%): from the level it was handed over with (`Device.batteryPercent`)
+    /// down as the timer runs. Display only.
     var batteryLevel: Int {
-        let start = 23.0, end = 4.0
+        let start = Double(investigation.device.batteryPercent ?? 23)
+        // A phone handed over nearly empty ends the investigation almost dead; a fuller one loses ~20 %.
+        let end = min(start, max(3.0, start - 20))
         return Int((end + (start - end) * timeProgress).rounded())
     }
 
+    /// 0…1 of the case duration still available (status bar track).
     var timeProgress: Double { investigation.durationSeconds > 0 ? remainingSeconds / investigation.durationSeconds : 0 }
 
     /// `caseFile` is the case as played at `challenge` (see `CaseFile.configured(for:rules:)`).

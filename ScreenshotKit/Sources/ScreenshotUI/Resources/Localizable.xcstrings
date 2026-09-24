@@ -2342,6 +2342,23 @@
         }
       }
     },
+    "cinematic.incomingCall": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incoming call"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appel entrant"
+          }
+        }
+      }
+    },
     "cinematic.live": {
       "extractionState": "manual",
       "localizations": {

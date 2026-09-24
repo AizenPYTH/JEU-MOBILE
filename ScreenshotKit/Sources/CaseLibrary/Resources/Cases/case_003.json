@@ -1,0 +1,3137 @@
+{
+ "schemaVersion": 1,
+ "id": "case_003",
+ "number": 3,
+ "title": "APRÈS LA FÊTE",
+ "tagline": "Tout le monde dormait. Personne ne dit la même chose.",
+ "synopsis": [
+  "Samedi 22 août, Jeanne Castaing fête ses 30 ans dans une villa louée au Cap Ferret, avec sa famille et ses amis.",
+  "Dimanche à 7h10, son frère Paul, 33 ans, est retrouvé inconscient au pied de l'escalier de pierre qui descend du jardin à la plage. Il est dans le coma. Tous disent avoir dormi.",
+  "Jeanne vous confie son téléphone : sa soirée y est entière, heure par heure."
+ ],
+ "objective": "Établir qui était avec Paul sur l'escalier de la plage vers 2h10.",
+ "difficulty": 1,
+ "durationSeconds": 480,
+ "phoneStartTime": "2026-08-23 11:40",
+ "challengeDurations": {
+  "investigator": 900,
+  "detective": 480,
+  "expert": 300
+ },
+ "introScene": {
+  "shots": [
+   {
+    "kind": "scene",
+    "seconds": 7,
+    "scene": "villa_morning",
+    "camera": "drift",
+    "effect": "sunlight",
+    "ambience": [
+     "room",
+     "sea"
+    ],
+    "cues": [
+     {
+      "sound": "gulls",
+      "at": 1.4
+     }
+    ],
+    "lines": [
+     {
+      "text": "CAP FERRET · DIMANCHE 23 AOÛT · 07:10",
+      "at": 0.3
+     },
+     {
+      "text": "Le lendemain de ses trente ans.",
+      "at": 2.4
+     }
+    ]
+   },
+   {
+    "kind": "scene",
+    "seconds": 5,
+    "scene": "terrace",
+    "camera": "panRight",
+    "ambience": [
+     "sea"
+    ],
+    "cues": [
+     {
+      "sound": "gulls",
+      "at": 2.0
+     }
+    ]
+   },
+   {
+    "kind": "phoneOnTable",
+    "seconds": 6.5,
+    "surface": "wood",
+    "label": "Table de chevet — chambre du haut — 07:11",
+    "ambience": [
+     "room"
+    ],
+    "cues": [
+     {
+      "sound": "ring",
+      "at": 0.8
+     },
+     {
+      "sound": "vibrate",
+      "at": 0.8
+     },
+     {
+      "sound": "notification",
+      "at": 3.4
+     }
+    ],
+    "notifications": [
+     {
+      "app": "phone",
+      "title": "Grégoire",
+      "body": "Appel entrant",
+      "at": 0.8,
+      "call": true
+     },
+     {
+      "app": "messages",
+      "title": "Grégoire",
+      "body": "JEANNE DESCENDS VITE. C'EST PAUL",
+      "at": 3.4
+     }
+    ],
+    "lines": [
+     {
+      "text": "Personne ne répond.",
+      "at": 4.8
+     }
+    ]
+   },
+   {
+    "kind": "unlock",
+    "seconds": 2.4
+   }
+  ]
+ },
+ "devices": [
+  {
+   "id": "dev_jeanne",
+   "label": "Téléphone de Jeanne",
+   "model": "iPhone 15",
+   "lockedApps": [],
+   "contacts": [
+    {
+     "id": "me",
+     "name": "Jeanne Castaing",
+     "phone": "+33 6 12 48 90 37",
+     "relation": "Moi",
+     "email": "jeanne@castaing-interieurs.fr",
+     "birthday": "22/08/1996",
+     "avatarHue": 0.07,
+     "isOwner": true
+    },
+    {
+     "id": "maxime",
+     "name": "Maxime Rivière",
+     "phone": "+33 6 74 31 08 52",
+     "relation": "Compagnon",
+     "email": "maxime.riviere@mailo.fr",
+     "avatarHue": 0.6
+    },
+    {
+     "id": "paul",
+     "name": "Paul Castaing",
+     "phone": "+33 6 20 57 13 84",
+     "relation": "Frère",
+     "avatarHue": 0.52
+    },
+    {
+     "id": "diane",
+     "name": "Diane Lesage",
+     "phone": "+33 6 88 12 46 09",
+     "relation": "Belle-sœur",
+     "avatarHue": 0.86
+    },
+    {
+     "id": "louise",
+     "name": "Louise Ferrer",
+     "phone": "+33 6 45 09 71 26",
+     "relation": "Meilleure amie",
+     "email": "louise@ferrer-photo.fr",
+     "avatarHue": 0.33
+    },
+    {
+     "id": "gregoire",
+     "name": "Grégoire Salles",
+     "phone": "+33 6 31 66 25 70",
+     "relation": "Associé de Paul (école de surf)",
+     "avatarHue": 0.15
+    },
+    {
+     "id": "mamie",
+     "name": "Mamie Odette",
+     "phone": "+33 5 56 83 14 22",
+     "relation": "Grand-mère",
+     "avatarHue": 0.95
+    },
+    {
+     "id": "maman",
+     "name": "Maman",
+     "phone": "+33 6 07 44 19 63",
+     "relation": "Mère",
+     "avatarHue": 0.02
+    },
+    {
+     "id": "papa",
+     "name": "Papa",
+     "phone": "+33 6 07 44 20 81",
+     "relation": "Père",
+     "avatarHue": 0.64
+    },
+    {
+     "id": "nour",
+     "name": "Nour Benali",
+     "phone": "+33 7 62 18 90 45",
+     "relation": "Amie",
+     "avatarHue": 0.42
+    },
+    {
+     "id": "basile",
+     "name": "Basile Morin",
+     "phone": "+33 6 53 27 84 16",
+     "relation": "Ami (copain de Nour)",
+     "avatarHue": 0.24
+    },
+    {
+     "id": "chloe",
+     "name": "Chloé Darrigade",
+     "phone": "+33 6 29 70 35 48",
+     "relation": "Castaing Intérieurs — associée",
+     "email": "chloe@castaing-interieurs.fr",
+     "avatarHue": 0.78
+    },
+    {
+     "id": "laborde",
+     "name": "Mme Laborde",
+     "phone": "+33 6 84 52 07 31",
+     "relation": "Chantier Caudéran",
+     "avatarHue": 0.48
+    },
+    {
+     "id": "seb",
+     "name": "Seb Carrelage",
+     "phone": "+33 6 16 93 42 58",
+     "relation": "Artisan carreleur",
+     "avatarHue": 0.1
+    },
+    {
+     "id": "dubroca",
+     "name": "M. Dubroca — Villa Les Oyats",
+     "phone": "+33 6 72 05 61 39",
+     "relation": "Loueur de la villa",
+     "avatarHue": 0.56
+    },
+    {
+     "id": "colis",
+     "name": "ColiPoint",
+     "phone": "36 12",
+     "avatarHue": 0.2
+    }
+   ],
+   "conversations": [
+    {
+     "id": "c_maxime",
+     "participants": [
+      "maxime"
+     ],
+     "messages": [
+      {
+       "id": "m_maxime_000",
+       "from": "maxime",
+       "at": "2026-07-09 18:40",
+       "text": "je pars demain 17h. retour dimanche soir."
+      },
+      {
+       "id": "m_maxime_001",
+       "from": "me",
+       "at": "2026-07-09 18:42",
+       "text": "le séminaire tombe VRAIMENT un week-end ?? 🙄"
+      },
+      {
+       "id": "m_maxime_002",
+       "from": "maxime",
+       "at": "2026-07-09 18:51",
+       "text": "oui. c'est l'équipe de Paris qui a choisi."
+      },
+      {
+       "id": "m_maxime_003",
+       "from": "me",
+       "at": "2026-07-09 18:52",
+       "text": "ok ok... ramène-moi un gâteau basque alors 😘"
+      },
+      {
+       "id": "m_maxime_004",
+       "from": "maxime",
+       "at": "2026-07-10 21:14",
+       "text": "bien arrivé."
+      },
+      {
+       "id": "m_maxime_005",
+       "from": "me",
+       "at": "2026-07-10 21:20",
+       "text": "tu me manques déjà 🥺🥺"
+      },
+      {
+       "id": "m_maxime_006",
+       "from": "maxime",
+       "at": "2026-07-11 23:48",
+       "text": "journée longue. je dors. bisous"
+      },
+      {
+       "id": "m_maxime_007",
+       "from": "me",
+       "at": "2026-07-12 11:20",
+       "text": "t'as vu la photo de Diane sur le groupe ?? elle est à Biarritz aussi 😂 vous vous êtes croisés ?"
+      },
+      {
+       "id": "m_maxime_008",
+       "from": "maxime",
+       "at": "2026-07-12 13:05",
+       "text": "non. c'est grand biarritz."
+      },
+      {
+       "id": "m_maxime_009",
+       "from": "maxime",
+       "at": "2026-07-12 22:31",
+       "text": "rentré. tu dors ?"
+      },
+      {
+       "id": "m_maxime_010",
+       "from": "maxime",
+       "at": "2026-07-15 08:20",
+       "text": "tu peux récupérer mon costume au pressing. ticket dans l'entrée."
+      },
+      {
+       "id": "m_maxime_011",
+       "from": "me",
+       "at": "2026-07-15 08:34",
+       "text": "à vos ordres 🫡"
+      },
+      {
+       "id": "m_maxime_012",
+       "from": "me",
+       "at": "2026-07-20 18:02",
+       "text": "yoga ce soir, mange sans moi !! 🧘‍♀️"
+      },
+      {
+       "id": "m_maxime_013",
+       "from": "maxime",
+       "at": "2026-07-20 18:10",
+       "text": "ok"
+      },
+      {
+       "id": "m_maxime_014",
+       "from": "maxime",
+       "at": "2026-07-28 17:45",
+       "text": "dîner avec l'équipe ce soir. je rentre tard."
+      },
+      {
+       "id": "m_maxime_015",
+       "from": "me",
+       "at": "2026-07-28 17:47",
+       "text": "ok ! prends du pain en rentrant si t'es pas mort 🥖"
+      },
+      {
+       "id": "m_maxime_016",
+       "from": "maxime",
+       "at": "2026-08-06 12:30",
+       "text": "voiture de location réservée pour le vendredi 21. 18h30 à la gare."
+      },
+      {
+       "id": "m_maxime_017",
+       "from": "me",
+       "at": "2026-08-06 12:31",
+       "text": "trop bien merci mon cœur ❤️❤️"
+      },
+      {
+       "id": "m_maxime_018",
+       "from": "me",
+       "at": "2026-08-13 21:05",
+       "text": "Diane m'a dit que Paul et elle ça va pas fort en ce moment 😕 tu trouves pas Paul bizarre ?"
+      },
+      {
+       "id": "m_maxime_019",
+       "from": "maxime",
+       "at": "2026-08-13 21:40",
+       "text": "non. fatigué c'est tout."
+      },
+      {
+       "id": "m_maxime_020",
+       "from": "maxime",
+       "at": "2026-08-18 19:22",
+       "text": "tu veux quoi pour tes 30 ans. vraiment."
+      },
+      {
+       "id": "m_maxime_021",
+       "from": "me",
+       "at": "2026-08-18 19:25",
+       "text": "RIEN !!! juste vous tous là-bas 🥹"
+      },
+      {
+       "id": "m_maxime_022",
+       "from": "maxime",
+       "at": "2026-08-18 19:26",
+       "text": "ok"
+      },
+      {
+       "id": "m_maxime_023",
+       "from": "me",
+       "at": "2026-08-21 18:48",
+       "text": "t'es où ?? on part à 19h max sinon bouchons 😩"
+      },
+      {
+       "id": "m_maxime_024",
+       "from": "maxime",
+       "at": "2026-08-21 18:55",
+       "text": "je sors. 10 min."
+      },
+      {
+       "id": "m_maxime_025",
+       "from": "maxime",
+       "at": "2026-08-22 15:58",
+       "text": "je pars chercher Mamie."
+      },
+      {
+       "id": "m_maxime_026",
+       "from": "me",
+       "at": "2026-08-22 15:59",
+       "text": "prends la glace à la supérette en revenant stp 🙏🍦"
+      },
+      {
+       "id": "m_maxime_027",
+       "from": "maxime",
+       "at": "2026-08-22 16:00",
+       "text": "ok"
+      },
+      {
+       "id": "m_maxime_028",
+       "from": "me",
+       "at": "2026-08-22 23:08",
+       "text": "GÂTEAU dans 5 min viens !!! 🎂"
+      },
+      {
+       "id": "m_maxime_029",
+       "from": "maxime",
+       "at": "2026-08-22 23:09",
+       "text": "j'arrive"
+      },
+      {
+       "id": "m_maxime_030",
+       "from": "me",
+       "at": "2026-08-23 01:45",
+       "text": "je monte 😴 tu viens ?"
+      },
+      {
+       "id": "m_maxime_031",
+       "from": "maxime",
+       "at": "2026-08-23 01:46",
+       "text": "j'arrive"
+      },
+      {
+       "id": "m_max_0221",
+       "from": "me",
+       "at": "2026-08-23 02:21",
+       "text": "t'es où ?"
+      },
+      {
+       "id": "m_max_0223",
+       "from": "maxime",
+       "at": "2026-08-23 02:23",
+       "text": "en bas, je bois un verre d'eau, j'arrive"
+      },
+      {
+       "id": "m_maxime_034",
+       "from": "maxime",
+       "at": "2026-08-23 10:58",
+       "text": "les gendarmes veulent parler à tout le monde un par un. je suis sur la terrasse."
+      },
+      {
+       "id": "m_maxime_035",
+       "from": "me",
+       "at": "2026-08-23 11:02",
+       "text": "ok j'arrive"
+      }
+     ]
+    },
+    {
+     "id": "c_paul",
+     "participants": [
+      "paul"
+     ],
+     "messages": [
+      {
+       "id": "m_paul_000",
+       "from": "paul",
+       "at": "2026-07-08 20:12",
+       "text": "Dis à Maman que je l'appelle ce week-end. Semaine de fou à l'école."
+      },
+      {
+       "id": "m_paul_001",
+       "from": "me",
+       "at": "2026-07-08 20:30",
+       "text": "dis-lui toi-même 😤 elle me demande tous les jours"
+      },
+      {
+       "id": "m_paul_002",
+       "from": "paul",
+       "at": "2026-07-08 20:31",
+       "text": "Je sais."
+      },
+      {
+       "id": "m_paul_parts",
+       "from": "paul",
+       "at": "2026-07-21 20:58",
+       "text": "Grégoire veut racheter mes parts. Il m'a mis un chiffre sur la table hier soir. Ça fait des semaines qu'il me met la pression."
+      },
+      {
+       "id": "m_paul_004",
+       "from": "me",
+       "at": "2026-07-21 21:02",
+       "text": "quoi ?? mais c'est TON école !!"
+      },
+      {
+       "id": "m_paul_005",
+       "from": "paul",
+       "at": "2026-07-21 21:05",
+       "text": "C'est notre école. Il dit que je suis plus assez là. Je t'appelle."
+      },
+      {
+       "id": "m_paul_006",
+       "from": "paul",
+       "at": "2026-07-24 18:15",
+       "text": "Demain 10h au poste. Maillot une pièce, crème, et tu écoutes Grégoire."
+      },
+      {
+       "id": "m_paul_007",
+       "from": "me",
+       "at": "2026-07-24 18:20",
+       "text": "oui coach 🏄‍♀️"
+      },
+      {
+       "id": "m_paul_008",
+       "from": "me",
+       "at": "2026-07-25 19:40",
+       "text": "j'ai mal PARTOUT 😭😭 merci c'était génial"
+      },
+      {
+       "id": "m_paul_009",
+       "from": "paul",
+       "at": "2026-07-25 19:52",
+       "text": "Tu reviens quand tu veux."
+      },
+      {
+       "id": "m_paul_debt",
+       "from": "paul",
+       "at": "2026-08-03 21:17",
+       "text": "Louise me doit toujours 3000, elle m'évite. Tu peux lui en parler ?"
+      },
+      {
+       "id": "m_paul_011",
+       "from": "me",
+       "at": "2026-08-03 21:30",
+       "text": "oh Paul... elle galère avec le studio en ce moment 😕"
+      },
+      {
+       "id": "m_paul_012",
+       "from": "paul",
+       "at": "2026-08-03 21:31",
+       "text": "Moi aussi je galère. Ça fait huit mois."
+      },
+      {
+       "id": "m_paul_013",
+       "from": "me",
+       "at": "2026-08-03 21:33",
+       "text": "ok je lui en parle"
+      },
+      {
+       "id": "m_paul_014",
+       "from": "me",
+       "at": "2026-08-10 18:40",
+       "text": "Maman m'a demandé de t'en parler... ils veulent vendre la maison du Pyla 😢 appelle-la stp"
+      },
+      {
+       "id": "m_paul_015",
+       "from": "paul",
+       "at": "2026-08-10 19:15",
+       "text": "Elle m'a appelé. On en parle au Ferret."
+      },
+      {
+       "id": "m_paul_016",
+       "from": "paul",
+       "at": "2026-08-17 12:04",
+       "text": "On arrive samedi vers 14h. Je prends les planches, Grégoire aussi."
+      },
+      {
+       "id": "m_paul_017",
+       "from": "me",
+       "at": "2026-08-17 12:10",
+       "text": "yesss 🌊🌊"
+      },
+      {
+       "id": "m_paul_018",
+       "from": "paul",
+       "at": "2026-08-17 12:11",
+       "text": "Diane demande s'il faut des draps."
+      },
+      {
+       "id": "m_paul_019",
+       "from": "me",
+       "at": "2026-08-17 12:12",
+       "text": "non tout est fourni !!"
+      },
+      {
+       "id": "m_paul_020",
+       "from": "paul",
+       "at": "2026-08-22 20:14",
+       "text": "Il reste du rosé dans la glacière du garage."
+      },
+      {
+       "id": "m_paul_0158",
+       "from": "paul",
+       "at": "2026-08-23 01:58",
+       "text": "t'es réveillée ?",
+       "unread": true
+      },
+      {
+       "id": "m_paul_0201",
+       "from": "paul",
+       "at": "2026-08-23 02:01",
+       "text": "Jeanne. Faut que je te parle. C'est grave.",
+       "unread": true
+      },
+      {
+       "id": "m_paul_0203",
+       "from": "paul",
+       "at": "2026-08-23 02:03",
+       "text": "laisse tomber. je règle ça moi-même.",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_diane",
+     "participants": [
+      "diane"
+     ],
+     "messages": [
+      {
+       "id": "m_diane_000",
+       "from": "diane",
+       "at": "2026-07-03 13:10",
+       "text": "Coucou ! Tu me redonnes le nom de ta coloriste ? 💇‍♀️"
+      },
+      {
+       "id": "m_diane_001",
+       "from": "me",
+       "at": "2026-07-03 13:25",
+       "text": "Léa, à l'Atelier Mèche, rue Notre-Dame !! dis que tu viens de ma part"
+      },
+      {
+       "id": "m_diane_002",
+       "from": "diane",
+       "at": "2026-07-03 13:26",
+       "text": "merci ma belle 😘"
+      },
+      {
+       "id": "m_diane_003",
+       "from": "diane",
+       "at": "2026-07-30 10:02",
+       "text": "pour ton anniv je m'occupe du gâteau avec Louise, t'as pas le droit de demander 🤫"
+      },
+      {
+       "id": "m_diane_004",
+       "from": "me",
+       "at": "2026-07-30 10:05",
+       "text": "😍😍😍"
+      },
+      {
+       "id": "m_diane_005",
+       "from": "diane",
+       "at": "2026-08-11 22:48",
+       "text": "Paul est infernal en ce moment. il dort plus, il parle plus. désolée de te dire ça à toi"
+      },
+      {
+       "id": "m_diane_006",
+       "from": "me",
+       "at": "2026-08-11 22:55",
+       "text": "oh non 😔 c'est l'école ? Grégoire ?"
+      },
+      {
+       "id": "m_diane_007",
+       "from": "diane",
+       "at": "2026-08-11 23:10",
+       "text": "jsp. peut-être."
+      },
+      {
+       "id": "m_diane_008",
+       "from": "diane",
+       "at": "2026-08-20 20:31",
+       "text": "robe bleue ou robe verte pour samedi ? 😅 vote"
+      },
+      {
+       "id": "m_diane_009",
+       "from": "me",
+       "at": "2026-08-20 20:33",
+       "text": "LA BLEUE !!"
+      },
+      {
+       "id": "m_diane_010",
+       "from": "diane",
+       "at": "2026-08-20 20:34",
+       "text": "ok bleue 💙"
+      },
+      {
+       "id": "m_diane_011",
+       "from": "diane",
+       "at": "2026-08-22 12:50",
+       "text": "on part de Lacanau, arrivée vers 14h 🚗"
+      },
+      {
+       "id": "m_diane_012",
+       "from": "diane",
+       "at": "2026-08-23 08:02",
+       "text": "on part au CHU avec Grégoire derrière l'hélico. je t'appelle dès que je sais quelque chose"
+      }
+     ]
+    },
+    {
+     "id": "c_louise",
+     "participants": [
+      "louise"
+     ],
+     "messages": [
+      {
+       "id": "m_louise_000",
+       "from": "louise",
+       "at": "2026-07-06 19:02",
+       "text": "Jeannette !!! le studio a ENFIN l'électricité ⚡️"
+      },
+      {
+       "id": "m_louise_001",
+       "from": "me",
+       "at": "2026-07-06 19:10",
+       "text": "ENFIN 🎉🎉 champagne"
+      },
+      {
+       "id": "m_louise_002",
+       "from": "louise",
+       "at": "2026-07-14 12:40",
+       "text": "shooting mariage samedi à Saint-Émilion, 36° annoncés, je vais fondre"
+      },
+      {
+       "id": "m_louise_003",
+       "from": "me",
+       "at": "2026-07-14 12:45",
+       "text": "bois de l'eau et mets un chapeau !!"
+      },
+      {
+       "id": "m_louise_004",
+       "from": "louise",
+       "at": "2026-07-27 09:15",
+       "text": "tu me prêtes ta voiture jeudi ? la mienne est encore au garage 😩"
+      },
+      {
+       "id": "m_louise_005",
+       "from": "me",
+       "at": "2026-07-27 09:20",
+       "text": "oui tkt, les clés sont chez la gardienne"
+      },
+      {
+       "id": "m_louise_006",
+       "from": "me",
+       "at": "2026-08-04 18:52",
+       "text": "Louise... Paul m'a encore parlé des 3000 😕 t'en es où ?"
+      },
+      {
+       "id": "m_louise_007",
+       "from": "louise",
+       "at": "2026-08-04 18:58",
+       "text": "je sais je sais. je lui ai fait un virement de 300 en juin. je peux pas plus là."
+      },
+      {
+       "id": "m_louise_008",
+       "from": "louise",
+       "at": "2026-08-04 18:59",
+       "text": "il me regarde comme si je l'avais volé"
+      },
+      {
+       "id": "m_louise_009",
+       "from": "me",
+       "at": "2026-08-04 19:02",
+       "text": "je suis entre vous deux, c'est horrible 😣 je t'appelle"
+      },
+      {
+       "id": "m_louise_010",
+       "from": "louise",
+       "at": "2026-08-15 16:20",
+       "text": "j'ai trouvé ton cadeau 🤫🤫"
+      },
+      {
+       "id": "m_louise_011",
+       "from": "me",
+       "at": "2026-08-15 16:21",
+       "text": "noooon dis-moi !!"
+      },
+      {
+       "id": "m_louise_012",
+       "from": "louise",
+       "at": "2026-08-15 16:21",
+       "text": "jamais"
+      },
+      {
+       "id": "m_louise_013",
+       "from": "louise",
+       "at": "2026-08-21 17:30",
+       "text": "j'apporte le trépied : ciel dégagé samedi et la lune se couche vers 1h. parfait pour les étoiles 🌌"
+      },
+      {
+       "id": "m_louise_014",
+       "from": "louise",
+       "at": "2026-08-22 23:02",
+       "text": "il m'a encore sorti le coup des 3000 devant tout le monde. je sors prendre l'air 2 min"
+      },
+      {
+       "id": "m_louise_015",
+       "from": "me",
+       "at": "2026-08-22 23:03",
+       "text": "je suis désolée 😣 viens on fait le gâteau dans 5 min"
+      },
+      {
+       "id": "m_lou_0144",
+       "from": "me",
+       "at": "2026-08-23 01:44",
+       "text": "je vais me coucher je suis morte 🥲 merci pour tout ma louloute"
+      },
+      {
+       "id": "m_louise_017",
+       "from": "louise",
+       "at": "2026-08-23 01:45",
+       "text": "dors bien la trentenaire 🖤 moi je reste un peu sur la terrasse, le ciel est dingue"
+      },
+      {
+       "id": "m_louise_018",
+       "from": "louise",
+       "at": "2026-08-23 02:34",
+       "text": "ton ciel de 30 ans ✨",
+       "photo": "p_louise_0206"
+      },
+      {
+       "id": "m_louise_019",
+       "from": "louise",
+       "at": "2026-08-23 02:34",
+       "photo": "p_louise_0214"
+      },
+      {
+       "id": "m_louise_020",
+       "from": "louise",
+       "at": "2026-08-23 02:35",
+       "text": "je t'en fais un tirage. bonne nuit ❤️",
+       "photo": "p_louise_0227"
+      },
+      {
+       "id": "m_louise_021",
+       "from": "louise",
+       "at": "2026-08-23 10:52",
+       "text": "je suis dans le jardin si tu veux marcher un peu. je bouge pas."
+      }
+     ]
+    },
+    {
+     "id": "c_gregoire",
+     "participants": [
+      "gregoire"
+     ],
+     "messages": [
+      {
+       "id": "m_gregoire_000",
+       "from": "gregoire",
+       "at": "2026-07-24 12:30",
+       "text": "Salut Jeanne ! Paul t'a dit ? cours demain 10h, je t'ai mise avec les débutants 😉"
+      },
+      {
+       "id": "m_gregoire_001",
+       "from": "me",
+       "at": "2026-07-24 12:41",
+       "text": "trop bien merci Greg !!"
+      },
+      {
+       "id": "m_gregoire_002",
+       "from": "gregoire",
+       "at": "2026-08-12 09:48",
+       "text": "Je peux ramener ma planche + un paddle samedi ? y a de la place au garage ?"
+      },
+      {
+       "id": "m_gregoire_003",
+       "from": "me",
+       "at": "2026-08-12 10:02",
+       "text": "oui oui tout ce que tu veux !!"
+      },
+      {
+       "id": "m_gregoire_004",
+       "from": "gregoire",
+       "at": "2026-08-23 00:52",
+       "text": "je ramène ta mamie à Arcachon, j'ai pas bu. je te partage ma position si tu veux suivre 👍"
+      },
+      {
+       "id": "m_gregoire_005",
+       "from": "me",
+       "at": "2026-08-23 00:54",
+       "text": "t'es un ange 🙏🙏 merci Greg"
+      },
+      {
+       "id": "m_gregoire_006",
+       "from": "gregoire",
+       "at": "2026-08-23 01:06",
+       "text": "c'est parti. elle a déjà mis la radio à fond 😂"
+      },
+      {
+       "id": "m_greg_0711",
+       "from": "gregoire",
+       "at": "2026-08-23 07:11",
+       "text": "JEANNE DESCENDS VITE. C'EST PAUL"
+      },
+      {
+       "id": "m_gregoire_008",
+       "from": "gregoire",
+       "at": "2026-08-23 10:14",
+       "text": "on est au CHU avec Diane. ils l'ont pris direct en réa. je te dis dès que je sais"
+      }
+     ]
+    },
+    {
+     "id": "c_mamie",
+     "participants": [
+      "mamie"
+     ],
+     "messages": [
+      {
+       "id": "m_mamie_000",
+       "from": "mamie",
+       "at": "2026-07-16 10:12",
+       "text": "Ma chérie... Tu viens toujours déjeuner dimanche ?... Mamie"
+      },
+      {
+       "id": "m_mamie_001",
+       "from": "me",
+       "at": "2026-07-16 10:30",
+       "text": "oui Mamie !! 12h30 ❤️"
+      },
+      {
+       "id": "m_mamie_002",
+       "from": "mamie",
+       "at": "2026-08-02 16:40",
+       "text": "J'ai retrouvé des photos de vous deux petits... Paul avec son seau rouge... Je te les garde... Mamie"
+      },
+      {
+       "id": "m_mamie_003",
+       "from": "mamie",
+       "at": "2026-08-16 11:30",
+       "text": "Qui vient me chercher samedi ?... Je serai prête à 17h... Mamie"
+      },
+      {
+       "id": "m_mamie_004",
+       "from": "me",
+       "at": "2026-08-16 11:34",
+       "text": "c'est Maxime Mamie ! 17h pile 😘"
+      },
+      {
+       "id": "m_mamie_0207",
+       "from": "mamie",
+       "at": "2026-08-23 02:07",
+       "text": "Bien arrivée ma chérie... Grégoire est un amour. Bonne nuit. Mamie"
+      },
+      {
+       "id": "m_mamie_0209",
+       "from": "mamie",
+       "at": "2026-08-23 02:09",
+       "text": "Tu dors sûrement... Je t'embrasse fort... Mamie"
+      },
+      {
+       "id": "m_mamie_007",
+       "from": "mamie",
+       "at": "2026-08-23 09:05",
+       "text": "Ta mère m'a appelée... Je ne comprends rien... Rappelle-moi ma chérie... Mamie"
+      }
+     ]
+    },
+    {
+     "id": "c_family",
+     "participants": [
+      "paul",
+      "diane",
+      "maxime",
+      "mamie"
+     ],
+     "messages": [
+      {
+       "id": "m_fam_biarritz",
+       "from": "diane",
+       "at": "2026-07-12 11:02",
+       "text": "week-end entre filles à Biarritz 🌊",
+       "photo": "p_diane_biarritz"
+      },
+      {
+       "id": "m_family_001",
+       "from": "mamie",
+       "at": "2026-07-12 11:10",
+       "text": "Que c'est beau... Profitez bien... Mamie"
+      },
+      {
+       "id": "m_family_002",
+       "from": "paul",
+       "at": "2026-07-12 11:25",
+       "text": "Profite."
+      },
+      {
+       "id": "m_family_003",
+       "from": "mamie",
+       "at": "2026-07-19 18:20",
+       "text": "Merci pour ce déjeuner mes chéris... Mamie"
+      },
+      {
+       "id": "m_family_004",
+       "from": "paul",
+       "at": "2026-07-25 12:10",
+       "text": "Jeanne a tenu debout quatre secondes sur la planche. Record familial.",
+       "photo": "p_paul_surf"
+      },
+      {
+       "id": "m_family_005",
+       "from": "me",
+       "at": "2026-07-25 12:14",
+       "text": "3 secondes 8 c'est pas pareil 😤😂"
+      },
+      {
+       "id": "m_family_006",
+       "from": "diane",
+       "at": "2026-07-25 12:20",
+       "text": "championne 🏆"
+      },
+      {
+       "id": "m_family_007",
+       "from": "me",
+       "at": "2026-08-05 20:05",
+       "text": "Rappel : 22 août au Cap Ferret !!! Mamie on vient te chercher 😘"
+      },
+      {
+       "id": "m_family_008",
+       "from": "mamie",
+       "at": "2026-08-05 20:40",
+       "text": "Je note sur mon calendrier... Mamie"
+      },
+      {
+       "id": "m_family_009",
+       "from": "maxime",
+       "at": "2026-08-05 20:44",
+       "text": "ok"
+      },
+      {
+       "id": "m_family_010",
+       "from": "diane",
+       "at": "2026-08-20 19:15",
+       "text": "on apporte quoi ? 🍾"
+      },
+      {
+       "id": "m_family_011",
+       "from": "me",
+       "at": "2026-08-20 19:18",
+       "text": "rien juste vous !!"
+      },
+      {
+       "id": "m_family_012",
+       "from": "diane",
+       "at": "2026-08-20 19:19",
+       "text": "on apporte du champagne alors 😂"
+      },
+      {
+       "id": "m_fam_0149",
+       "from": "diane",
+       "at": "2026-08-23 01:49",
+       "text": "tu descends ? il dort. escalier de la plage 🖤",
+       "deletedAt": "2026-08-23 01:50"
+      },
+      {
+       "id": "m_family_014",
+       "from": "mamie",
+       "at": "2026-08-23 09:31",
+       "text": "Votre mère vient de m'appeler... Qu'est-ce qui s'est passé... Personne n'a rien entendu ?... Mamie"
+      },
+      {
+       "id": "m_fam_diane_0940",
+       "from": "diane",
+       "at": "2026-08-23 09:40",
+       "text": "j'ai dormi à côté de lui toute la nuit, je comprends pas"
+      },
+      {
+       "id": "m_family_016",
+       "from": "maxime",
+       "at": "2026-08-23 09:44",
+       "text": "on sait pas encore. les gendarmes sont là."
+      },
+      {
+       "id": "m_family_017",
+       "from": "mamie",
+       "at": "2026-08-23 09:50",
+       "text": "Je prie pour lui... Mamie"
+      }
+     ],
+     "title": "Les Castaing ☀️"
+    },
+    {
+     "id": "c_party",
+     "participants": [
+      "paul",
+      "diane",
+      "maxime",
+      "louise",
+      "gregoire",
+      "nour",
+      "basile"
+     ],
+     "messages": [
+      {
+       "id": "m_party_000",
+       "from": "louise",
+       "at": "2026-08-01 11:02",
+       "text": "groupe créé pour les 30 ans de notre Jeannette 🎂 (elle est dedans, elle sait, c'est pas une surprise 😂)"
+      },
+      {
+       "id": "m_party_001",
+       "from": "me",
+       "at": "2026-08-01 11:05",
+       "text": "hâte !!!! villa réservée au Ferret le samedi 22, dodo sur place pour ceux qui veulent 🏡"
+      },
+      {
+       "id": "m_party_002",
+       "from": "nour",
+       "at": "2026-08-01 11:20",
+       "text": "on vient mais on dort pas, Basile bosse le dimanche"
+      },
+      {
+       "id": "m_party_003",
+       "from": "basile",
+       "at": "2026-08-01 11:24",
+       "text": "dimanche 7h, oui 😩"
+      },
+      {
+       "id": "m_party_004",
+       "from": "gregoire",
+       "at": "2026-08-08 18:40",
+       "text": "je ramène les planches, qui veut surfer le dimanche matin ?"
+      },
+      {
+       "id": "m_party_005",
+       "from": "paul",
+       "at": "2026-08-08 18:52",
+       "text": "Moi."
+      },
+      {
+       "id": "m_party_006",
+       "from": "louise",
+       "at": "2026-08-08 19:01",
+       "text": "moi je regarde 😂"
+      },
+      {
+       "id": "m_party_007",
+       "from": "me",
+       "at": "2026-08-14 21:10",
+       "text": "playlist collaborative ! ajoutez vos sons 🎶"
+      },
+      {
+       "id": "m_party_008",
+       "from": "nour",
+       "at": "2026-08-14 21:18",
+       "text": "j'ai mis 14 titres de Céline Dion désolée"
+      },
+      {
+       "id": "m_party_009",
+       "from": "basile",
+       "at": "2026-08-14 21:19",
+       "text": "elle ment pas"
+      },
+      {
+       "id": "m_party_010",
+       "from": "me",
+       "at": "2026-08-19 20:02",
+       "text": "Adresse : Villa Les Oyats, allée des Oyats, Cap Ferret. Code du portail 2208 (non c'est pas une blague) 😂"
+      },
+      {
+       "id": "m_party_011",
+       "from": "louise",
+       "at": "2026-08-19 20:10",
+       "text": "qui s'occupe des glaçons ?"
+      },
+      {
+       "id": "m_party_012",
+       "from": "maxime",
+       "at": "2026-08-19 20:31",
+       "text": "moi."
+      },
+      {
+       "id": "m_party_013",
+       "from": "nour",
+       "at": "2026-08-22 13:40",
+       "text": "on part de Bordeaux, arrivée vers 15h ☀️"
+      },
+      {
+       "id": "m_party_014",
+       "from": "me",
+       "at": "2026-08-22 23:20",
+       "text": "30 bougies je suis vieille 😭",
+       "photo": "p_cake"
+      },
+      {
+       "id": "m_party_015",
+       "from": "basile",
+       "at": "2026-08-22 23:22",
+       "text": "joyeux anniv la doyenne"
+      },
+      {
+       "id": "m_party_016",
+       "from": "nour",
+       "at": "2026-08-23 00:31",
+       "text": "on file ! merci pour cette soirée incroyable 🥹 bonne nuit les gens"
+      },
+      {
+       "id": "m_party_017",
+       "from": "basile",
+       "at": "2026-08-23 00:32",
+       "text": "merci Jeanne, gros bisous, à très vite"
+      },
+      {
+       "id": "m_party_018",
+       "from": "me",
+       "at": "2026-08-23 00:33",
+       "text": "merci d'être venus 🥹❤️ rentrez bien !!"
+      },
+      {
+       "id": "m_party_019",
+       "from": "nour",
+       "at": "2026-08-23 01:48",
+       "text": "bien rentrés 😴"
+      },
+      {
+       "id": "m_party_0318",
+       "from": "gregoire",
+       "at": "2026-08-23 03:18",
+       "text": "rentré, désolé si le portail a grincé 🙏"
+      },
+      {
+       "id": "m_party_021",
+       "from": "nour",
+       "at": "2026-08-23 08:20",
+       "text": "Jeanne ?? Louise m'a dit pour Paul. Dis-moi s'il faut quoi que ce soit, on peut revenir"
+      },
+      {
+       "id": "m_party_022",
+       "from": "basile",
+       "at": "2026-08-23 08:24",
+       "text": "on pense fort à vous"
+      }
+     ],
+     "title": "30 ans Jeannette 🎂"
+    },
+    {
+     "id": "c_maman",
+     "participants": [
+      "maman"
+     ],
+     "messages": [
+      {
+       "id": "m_maman_000",
+       "from": "maman",
+       "at": "2026-07-07 18:30",
+       "text": "Tu as eu ton frère ? Il ne répond jamais"
+      },
+      {
+       "id": "m_maman_001",
+       "from": "me",
+       "at": "2026-07-07 18:44",
+       "text": "il est débordé avec l'école 🙄"
+      },
+      {
+       "id": "m_maman_002",
+       "from": "maman",
+       "at": "2026-07-29 12:10",
+       "text": "On décolle pour Porto le 14 ! On sera sages 😄"
+      },
+      {
+       "id": "m_maman_003",
+       "from": "me",
+       "at": "2026-07-29 12:30",
+       "text": "profitez !!!"
+      },
+      {
+       "id": "m_maman_004",
+       "from": "maman",
+       "at": "2026-08-09 11:15",
+       "text": "Ma chérie tu peux en parler à Paul, pour la maison du Pyla ? Papa n'ose pas"
+      },
+      {
+       "id": "m_maman_005",
+       "from": "me",
+       "at": "2026-08-09 11:40",
+       "text": "ok je lui en parle 😕"
+      },
+      {
+       "id": "m_maman_006",
+       "from": "maman",
+       "at": "2026-08-14 19:22",
+       "text": "Bien arrivés à Porto ! 32°"
+      },
+      {
+       "id": "m_maman_007",
+       "from": "maman",
+       "at": "2026-08-22 09:02",
+       "text": "JOYEUX ANNIVERSAIRE ma chérie !!! 30 ans... On est tristes de ne pas être là. On t'appelle ce soir ❤️"
+      },
+      {
+       "id": "m_maman_008",
+       "from": "maman",
+       "at": "2026-08-22 09:05",
+       "text": "Retrouvées dans le grenier avant de partir",
+       "photo": "p_old_2003"
+      },
+      {
+       "id": "m_maman_009",
+       "from": "maman",
+       "at": "2026-08-22 09:05",
+       "photo": "p_old_2005"
+      },
+      {
+       "id": "m_maman_010",
+       "from": "me",
+       "at": "2026-08-22 09:30",
+       "text": "merci maman ❤️❤️ vous me manquez, Paul avec son bob 😂"
+      },
+      {
+       "id": "m_maman_011",
+       "from": "me",
+       "at": "2026-08-23 07:36",
+       "text": "Maman appelle-moi dès que tu vois ça"
+      },
+      {
+       "id": "m_maman_012",
+       "from": "maman",
+       "at": "2026-08-23 08:40",
+       "text": "On cherche un vol. Papa est au téléphone avec la compagnie."
+      }
+     ]
+    },
+    {
+     "id": "c_papa",
+     "participants": [
+      "papa"
+     ],
+     "messages": [
+      {
+       "id": "m_papa_000",
+       "from": "papa",
+       "at": "2026-08-15 13:02",
+       "text": "Porto. Ta mère a déjà acheté trois nappes.",
+       "photo": "p_porto"
+      },
+      {
+       "id": "m_papa_001",
+       "from": "me",
+       "at": "2026-08-15 13:10",
+       "text": "😂😂 classique"
+      },
+      {
+       "id": "m_papa_002",
+       "from": "papa",
+       "at": "2026-08-22 08:30",
+       "text": "Bon anniversaire ma grande. 30 ans. Je suis fier de toi. Papa"
+      },
+      {
+       "id": "m_papa_003",
+       "from": "me",
+       "at": "2026-08-22 09:31",
+       "text": "merci papa ❤️"
+      },
+      {
+       "id": "m_papa_004",
+       "from": "papa",
+       "at": "2026-08-23 08:05",
+       "text": "Ma chérie on rentre au plus vite. Tiens-nous au courant de tout. Papa"
+      }
+     ]
+    },
+    {
+     "id": "c_nour",
+     "participants": [
+      "nour"
+     ],
+     "messages": [
+      {
+       "id": "m_nour_000",
+       "from": "nour",
+       "at": "2026-07-22 21:10",
+       "text": "t'as commencé la série dont je t'ai parlé ?"
+      },
+      {
+       "id": "m_nour_001",
+       "from": "me",
+       "at": "2026-07-22 22:40",
+       "text": "oui !! épisode 3 😱"
+      },
+      {
+       "id": "m_nour_002",
+       "from": "nour",
+       "at": "2026-07-22 22:41",
+       "text": "ATTENDS le 5"
+      },
+      {
+       "id": "m_nour_003",
+       "from": "nour",
+       "at": "2026-08-18 12:15",
+       "text": "on t'offre quoi, t'as pas le droit de dire rien"
+      },
+      {
+       "id": "m_nour_004",
+       "from": "me",
+       "at": "2026-08-18 12:20",
+       "text": "rien !!!"
+      },
+      {
+       "id": "m_nour_005",
+       "from": "nour",
+       "at": "2026-08-18 12:21",
+       "text": "ok donc un truc"
+      }
+     ]
+    },
+    {
+     "id": "c_chloe",
+     "participants": [
+      "chloe"
+     ],
+     "messages": [
+      {
+       "id": "m_chloe_000",
+       "from": "chloe",
+       "at": "2026-07-13 09:12",
+       "text": "Mme Laborde veut revoir le carrelage de la salle de bain 🙃"
+      },
+      {
+       "id": "m_chloe_001",
+       "from": "me",
+       "at": "2026-07-13 09:20",
+       "text": "encore ?? 3e fois"
+      },
+      {
+       "id": "m_chloe_002",
+       "from": "chloe",
+       "at": "2026-07-13 09:21",
+       "text": "elle hésite entre le zellige blanc et le vert sauge"
+      },
+      {
+       "id": "m_chloe_003",
+       "from": "me",
+       "at": "2026-07-13 09:25",
+       "text": "demande à Seb de lui déposer les deux échantillons"
+      },
+      {
+       "id": "m_chloe_004",
+       "from": "chloe",
+       "at": "2026-07-16 11:22",
+       "text": "Seb a déposé les échantillons",
+       "photo": "p_zellige"
+      },
+      {
+       "id": "m_chloe_005",
+       "from": "chloe",
+       "at": "2026-07-30 16:40",
+       "text": "Je suis en congés du 3 au 16 août, tu gères Laborde ? 🙏"
+      },
+      {
+       "id": "m_chloe_006",
+       "from": "me",
+       "at": "2026-07-30 16:45",
+       "text": "tkt"
+      },
+      {
+       "id": "m_chloe_007",
+       "from": "chloe",
+       "at": "2026-08-17 09:05",
+       "text": "Je suis rentrée ! bronzée et pas du tout motivée 🥵"
+      },
+      {
+       "id": "m_chloe_008",
+       "from": "chloe",
+       "at": "2026-08-21 17:10",
+       "text": "Bon week-end d'anniv !!! déconnecte vraiment stp 😘"
+      },
+      {
+       "id": "m_chloe_009",
+       "from": "me",
+       "at": "2026-08-21 17:12",
+       "text": "promis 🥂"
+      },
+      {
+       "id": "m_chloe_010",
+       "from": "chloe",
+       "at": "2026-08-23 11:20",
+       "text": "Jeanne, Louise m'a prévenue. Je décale tout lundi, t'occupe de rien. Je t'embrasse fort"
+      }
+     ]
+    },
+    {
+     "id": "c_laborde",
+     "participants": [
+      "laborde"
+     ],
+     "messages": [
+      {
+       "id": "m_laborde_000",
+       "from": "laborde",
+       "at": "2026-07-20 09:48",
+       "text": "Bonjour Jeanne, finalement le vert sauge me semble plus lumineux. Qu'en pensez-vous ?"
+      },
+      {
+       "id": "m_laborde_001",
+       "from": "me",
+       "at": "2026-07-20 10:10",
+       "text": "Bonjour Madame Laborde, je trouve aussi 🙂 je lance la commande demain"
+      },
+      {
+       "id": "m_laborde_002",
+       "from": "laborde",
+       "at": "2026-08-12 17:30",
+       "text": "Les carreaux sont posés, c'est magnifique. Merci à vous"
+      },
+      {
+       "id": "m_laborde_003",
+       "from": "me",
+       "at": "2026-08-12 17:42",
+       "text": "Ravie !! je passe voir demain après-midi"
+      }
+     ]
+    },
+    {
+     "id": "c_seb",
+     "participants": [
+      "seb"
+     ],
+     "messages": [
+      {
+       "id": "m_seb_000",
+       "from": "seb",
+       "at": "2026-07-16 10:58",
+       "text": "Échantillons déposés chez Mme Laborde. Le vert est plus foncé en vrai."
+      },
+      {
+       "id": "m_seb_001",
+       "from": "seb",
+       "at": "2026-08-06 17:20",
+       "text": "Pose finie mardi chez Laborde si le colis arrive"
+      },
+      {
+       "id": "m_seb_002",
+       "from": "me",
+       "at": "2026-08-06 17:31",
+       "text": "top merci Seb"
+      }
+     ]
+    },
+    {
+     "id": "c_dubroca",
+     "participants": [
+      "dubroca"
+     ],
+     "messages": [
+      {
+       "id": "m_dubroca_000",
+       "from": "dubroca",
+       "at": "2026-08-19 10:40",
+       "text": "Bonjour Madame Castaing, les clés seront dans la boîte à code (4417). Attention à l'escalier de la plage le matin, il glisse avec la rosée."
+      },
+      {
+       "id": "m_dubroca_001",
+       "from": "me",
+       "at": "2026-08-19 10:52",
+       "text": "Merci beaucoup, à vendredi !"
+      },
+      {
+       "id": "m_dubroca_002",
+       "from": "me",
+       "at": "2026-08-21 20:58",
+       "text": "Bien arrivés, la villa est magnifique !!"
+      },
+      {
+       "id": "m_dubroca_003",
+       "from": "dubroca",
+       "at": "2026-08-21 21:15",
+       "text": "Parfait. Bon séjour. État des lieux dimanche 17h."
+      },
+      {
+       "id": "m_dubroca_004",
+       "from": "me",
+       "at": "2026-08-23 10:30",
+       "text": "Monsieur Dubroca, il y a eu un accident cette nuit, mon frère est tombé dans l'escalier de la plage. Les gendarmes sont là. Je vous rappelle."
+      },
+      {
+       "id": "m_dubroca_005",
+       "from": "dubroca",
+       "at": "2026-08-23 10:41",
+       "text": "Mon Dieu. Je suis vraiment désolé. Prenez tout le temps qu'il faut, oubliez l'état des lieux."
+      }
+     ]
+    },
+    {
+     "id": "c_colis",
+     "participants": [
+      "colis"
+     ],
+     "messages": [
+      {
+       "id": "m_colis_000",
+       "from": "colis",
+       "at": "2026-08-18 08:10",
+       "text": "ColiPoint : votre colis n°CP77120 sera livré le lundi 24/08 à votre domicile (Bordeaux)."
+      },
+      {
+       "id": "m_colis_001",
+       "from": "colis",
+       "at": "2026-08-21 14:02",
+       "text": "ColiPoint : expéditeur Nour B. Message : « ne l'ouvre pas avant d'avoir 30 ans »."
+      }
+     ]
+    }
+   ],
+   "calls": [
+    {
+     "id": "k_c01",
+     "contact": "maman",
+     "direction": "incoming",
+     "at": "2026-07-07 19:02",
+     "durationSeconds": 620
+    },
+    {
+     "id": "k_c02",
+     "contact": "maxime",
+     "direction": "outgoing",
+     "at": "2026-07-11 20:30",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_c03",
+     "contact": "chloe",
+     "direction": "incoming",
+     "at": "2026-07-13 09:40",
+     "durationSeconds": 184
+    },
+    {
+     "id": "k_c04",
+     "contact": "laborde",
+     "direction": "incoming",
+     "at": "2026-07-20 10:05",
+     "durationSeconds": 262
+    },
+    {
+     "id": "k_c05",
+     "contact": "paul",
+     "direction": "outgoing",
+     "at": "2026-07-21 21:08",
+     "durationSeconds": 842
+    },
+    {
+     "id": "k_c06",
+     "contact": "louise",
+     "direction": "outgoing",
+     "at": "2026-08-04 19:05",
+     "durationSeconds": 1320
+    },
+    {
+     "id": "k_c07",
+     "contact": "mamie",
+     "direction": "outgoing",
+     "at": "2026-08-16 11:40",
+     "durationSeconds": 412
+    },
+    {
+     "id": "k_c08",
+     "contact": "dubroca",
+     "direction": "outgoing",
+     "at": "2026-08-19 10:15",
+     "durationSeconds": 150
+    },
+    {
+     "id": "k_c09",
+     "contact": "maxime",
+     "direction": "missed",
+     "at": "2026-08-21 18:52",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_c10",
+     "contact": "nour",
+     "direction": "incoming",
+     "at": "2026-08-22 15:02",
+     "durationSeconds": 45
+    },
+    {
+     "id": "k_c11",
+     "contact": "maman",
+     "direction": "incoming",
+     "at": "2026-08-22 19:40",
+     "durationSeconds": 548
+    },
+    {
+     "id": "k_mamie_0208",
+     "contact": "mamie",
+     "direction": "missed",
+     "at": "2026-08-23 02:08",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_paul_0209",
+     "contact": "paul",
+     "direction": "missed",
+     "at": "2026-08-23 02:09",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_greg_0711",
+     "contact": "gregoire",
+     "direction": "missed",
+     "at": "2026-08-23 07:11",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_greg_0712",
+     "contact": "gregoire",
+     "direction": "incoming",
+     "at": "2026-08-23 07:12",
+     "durationSeconds": 220
+    },
+    {
+     "id": "k_c12",
+     "contact": "maman",
+     "direction": "outgoing",
+     "at": "2026-08-23 07:34",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_c13",
+     "contact": "maman",
+     "direction": "incoming",
+     "at": "2026-08-23 07:52",
+     "durationSeconds": 611
+    },
+    {
+     "id": "k_c14",
+     "contact": "papa",
+     "direction": "incoming",
+     "at": "2026-08-23 08:10",
+     "durationSeconds": 190
+    },
+    {
+     "id": "k_c15",
+     "contact": "nour",
+     "direction": "missed",
+     "at": "2026-08-23 08:18",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_c16",
+     "contact": "mamie",
+     "direction": "outgoing",
+     "at": "2026-08-23 09:55",
+     "durationSeconds": 380
+    },
+    {
+     "id": "k_c17",
+     "contact": "diane",
+     "direction": "incoming",
+     "at": "2026-08-23 10:20",
+     "durationSeconds": 142
+    },
+    {
+     "id": "k_c18",
+     "contact": "dubroca",
+     "direction": "outgoing",
+     "at": "2026-08-23 10:28",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_c19",
+     "contact": "gregoire",
+     "direction": "incoming",
+     "at": "2026-08-23 11:15",
+     "durationSeconds": 95
+    }
+   ],
+   "places": [
+    {
+     "id": "pl_villa",
+     "name": "Villa Les Oyats — Cap Ferret",
+     "kind": "home",
+     "x": 0.3,
+     "y": 0.46,
+     "latitude": 44.6365,
+     "longitude": -1.247
+    },
+    {
+     "id": "pl_stairs",
+     "name": "Escalier de la plage (bas du jardin)",
+     "kind": "street",
+     "x": 0.33,
+     "y": 0.49,
+     "latitude": 44.6362,
+     "longitude": -1.2455,
+     "revealedBy": [
+      "photoInfo:p_louise_0214",
+      "message:m_fam_0149"
+     ]
+    },
+    {
+     "id": "pl_pointe",
+     "name": "Plage de la Pointe",
+     "kind": "park",
+     "x": 0.27,
+     "y": 0.53,
+     "latitude": 44.628,
+     "longitude": -1.25
+    },
+    {
+     "id": "pl_phare",
+     "name": "Phare du Cap Ferret",
+     "kind": "park",
+     "x": 0.26,
+     "y": 0.42,
+     "latitude": 44.6428,
+     "longitude": -1.2491
+    },
+    {
+     "id": "pl_mamie",
+     "name": "Arcachon — chez Mamie",
+     "kind": "home",
+     "x": 0.47,
+     "y": 0.44,
+     "latitude": 44.659,
+     "longitude": -1.169,
+     "revealedBy": [
+      "message:m_mamie_0207"
+     ]
+    },
+    {
+     "id": "pl_lege",
+     "name": "Lège-Cap-Ferret",
+     "kind": "district",
+     "x": 0.44,
+     "y": 0.3,
+     "latitude": 44.735,
+     "longitude": -1.195
+    },
+    {
+     "id": "pl_teste",
+     "name": "La Teste-de-Buch",
+     "kind": "district",
+     "x": 0.52,
+     "y": 0.5,
+     "latitude": 44.631,
+     "longitude": -1.145
+    },
+    {
+     "id": "pl_chartrons",
+     "name": "Appartement — Chartrons, Bordeaux",
+     "kind": "home",
+     "x": 0.9,
+     "y": 0.22,
+     "latitude": 44.8545,
+     "longitude": -0.5705
+    },
+    {
+     "id": "pl_agence",
+     "name": "Castaing Intérieurs — Bordeaux",
+     "kind": "work",
+     "x": 0.88,
+     "y": 0.28,
+     "latitude": 44.841,
+     "longitude": -0.5745
+    },
+    {
+     "id": "pl_chu",
+     "name": "CHU de Bordeaux — Pellegrin",
+     "kind": "district",
+     "x": 0.84,
+     "y": 0.31,
+     "latitude": 44.829,
+     "longitude": -0.607,
+     "revealedBy": [
+      "call:k_greg_0712"
+     ]
+    },
+    {
+     "id": "pl_surf",
+     "name": "École de surf Les Baïnes — Lacanau",
+     "kind": "shop",
+     "x": 0.36,
+     "y": 0.06,
+     "latitude": 45.001,
+     "longitude": -1.201
+    },
+    {
+     "id": "pl_biarritz",
+     "name": "Biarritz — Côte des Basques",
+     "kind": "street",
+     "x": 0.08,
+     "y": 0.95,
+     "latitude": 43.479,
+     "longitude": -1.566,
+     "revealedBy": [
+      "calendar:c_biarritz",
+      "photoInfo:p_diane_biarritz"
+     ]
+    }
+   ],
+   "tracks": [
+    {
+     "id": "t_me",
+     "contact": "me",
+     "points": [
+      {
+       "id": "tp_me_1",
+       "at": "2026-08-21 17:58",
+       "place": "pl_agence"
+      },
+      {
+       "id": "tp_me_2",
+       "at": "2026-08-21 18:40",
+       "place": "pl_chartrons"
+      },
+      {
+       "id": "tp_me_3",
+       "at": "2026-08-21 20:52",
+       "place": "pl_villa",
+       "note": "Arrivée"
+      },
+      {
+       "id": "tp_me_4",
+       "at": "2026-08-22 10:44",
+       "place": "pl_phare"
+      },
+      {
+       "id": "tp_me_5",
+       "at": "2026-08-22 11:52",
+       "place": "pl_villa"
+      },
+      {
+       "id": "tp_me_6",
+       "at": "2026-08-22 16:30",
+       "place": "pl_pointe"
+      },
+      {
+       "id": "tp_me_7",
+       "at": "2026-08-22 18:55",
+       "place": "pl_villa"
+      },
+      {
+       "id": "tp_me_8",
+       "at": "2026-08-23 07:14",
+       "place": "pl_villa"
+      }
+     ]
+    },
+    {
+     "id": "t_gregoire",
+     "contact": "gregoire",
+     "points": [
+      {
+       "id": "tp_gr_1",
+       "at": "2026-08-23 01:05",
+       "place": "pl_villa",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_gr_2",
+       "at": "2026-08-23 01:38",
+       "place": "pl_lege"
+      },
+      {
+       "id": "tp_gr_3",
+       "at": "2026-08-23 02:04",
+       "place": "pl_mamie",
+       "note": "Arrêt 17 min"
+      },
+      {
+       "id": "tp_gr_4",
+       "at": "2026-08-23 02:31",
+       "place": "pl_teste"
+      },
+      {
+       "id": "tp_gr_5",
+       "at": "2026-08-23 03:14",
+       "place": "pl_villa",
+       "note": "Arrivée"
+      }
+     ]
+    }
+   ],
+   "photos": [
+    {
+     "id": "p_group_2340",
+     "takenAt": "2026-08-22 23:40",
+     "source": "camera",
+     "scene": "group",
+     "caption": "Photo de groupe devant la baie vitrée, au retardateur.",
+     "details": "Tout le monde pose devant la baie vitrée. Maxime porte un sweat jaune moutarde — le seul vêtement jaune de la photo. Paul est en chemise de lin blanche, Diane en robe bleue, Louise tient son appareil photo. Mamie est assise au premier rang, Grégoire derrière elle, Nour et Basile sur le côté.",
+     "place": "Villa Les Oyats",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_louise_0206",
+     "takenAt": "2026-08-23 02:06",
+     "source": "received",
+     "scene": "sky",
+     "caption": "La Voie lactée au-dessus du toit de la villa, pose longue.",
+     "details": "Pose de 20 secondes, appareil sur trépied, prise depuis la terrasse. En bas du cadre, à travers la baie vitrée, dans le salon éclairé par une lampe, Diane dort sur le canapé, un plaid sur les jambes.",
+     "style": "night",
+     "place": "Villa Les Oyats — terrasse",
+     "from": "louise",
+     "receivedAt": "2026-08-23 02:34",
+     "device": "iPhone 14 Pro"
+    },
+    {
+     "id": "p_louise_0214",
+     "takenAt": "2026-08-23 02:14",
+     "source": "received",
+     "scene": "garden_stairs",
+     "caption": "Le ciel au-dessus du bassin, pose longue depuis la terrasse.",
+     "details": "Pose de 25 secondes. Au fond, en bas du jardin, deux silhouettes floues sur l'escalier de la plage. L'une porte un sweat clair, jaune dans la lumière du lampadaire. L'autre, plus grande, en blanc.",
+     "style": "night",
+     "place": "Villa Les Oyats — terrasse",
+     "from": "louise",
+     "receivedAt": "2026-08-23 02:34",
+     "device": "iPhone 14 Pro"
+    },
+    {
+     "id": "p_louise_0227",
+     "takenAt": "2026-08-23 02:27",
+     "source": "received",
+     "scene": "terrace",
+     "caption": "Étoiles au-dessus de la terrasse, le trépied dans le cadre.",
+     "details": "Horodatage 02:27, même cadrage que la série commencée à 02:06 : le trépied n'a pas bougé. Au premier plan, la table en teck et le reflet de la lampe frontale de Louise. L'escalier, au fond, est de nouveau dans le noir.",
+     "style": "night",
+     "place": "Villa Les Oyats — terrasse",
+     "from": "louise",
+     "receivedAt": "2026-08-23 02:35",
+     "device": "iPhone 14 Pro"
+    },
+    {
+     "id": "p_diane_biarritz",
+     "takenAt": "2026-07-12 10:48",
+     "source": "received",
+     "scene": "terrace",
+     "caption": "« Week-end entre filles » : un café en terrasse face à l'océan.",
+     "details": "Deux cafés sur la table d'un café de la Côte des Basques, une paire de lunettes de soleil d'homme à monture écaille, et une veste de costume bleu marine sur le dossier d'une chaise.",
+     "place": "Biarritz — Côte des Basques",
+     "from": "diane",
+     "receivedAt": "2026-07-12 11:02",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_max_sunglasses",
+     "takenAt": "2026-08-01 16:20",
+     "source": "camera",
+     "scene": "beach",
+     "caption": "Maxime lit sur la plage Pereire, à Arcachon.",
+     "details": "Il porte ses lunettes de soleil à monture écaille, celles qu'il ne quitte pas de l'été. Une serviette rayée, un livre ouvert, sa montre posée sur son sac.",
+     "place": "Arcachon — plage Pereire",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_paul_surf",
+     "takenAt": "2026-07-25 11:32",
+     "source": "received",
+     "scene": "beach",
+     "caption": "Jeanne debout sur une planche (presque).",
+     "details": "Une silhouette en combinaison, bras écartés, une vague minuscule. Grégoire, au fond, applaudit.",
+     "place": "Lacanau — plage centrale",
+     "from": "paul",
+     "receivedAt": "2026-07-25 12:10",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_old_2003",
+     "takenAt": "2003-07-20 15:30",
+     "source": "received",
+     "scene": "beach",
+     "caption": "Jeanne et Paul enfants, dune du Pilat, été 2003.",
+     "details": "Paul, 10 ans, un bob trop grand et un seau rouge. Jeanne, 6 ans, pleure parce qu'elle a du sable dans les yeux.",
+     "style": "old",
+     "place": "Pyla-sur-Mer",
+     "from": "maman",
+     "receivedAt": "2026-08-22 09:05",
+     "device": "Scan"
+    },
+    {
+     "id": "p_old_2005",
+     "takenAt": "2005-12-24 20:10",
+     "source": "received",
+     "scene": "interior_warm",
+     "caption": "Noël 2005 chez Mamie, à Arcachon.",
+     "details": "Une nappe rouge, des bougies, Paul fait une grimace derrière Jeanne. Mamie coupe la bûche.",
+     "style": "old",
+     "place": "Arcachon",
+     "from": "maman",
+     "receivedAt": "2026-08-22 09:05",
+     "device": "Scan"
+    },
+    {
+     "id": "p_porto",
+     "takenAt": "2026-08-15 12:48",
+     "source": "received",
+     "scene": "street_day",
+     "caption": "Une rue de Porto, des nappes brodées en vitrine.",
+     "details": "Des azulejos bleus, une boutique de linge de maison. Maman, de dos, un sac à la main.",
+     "place": "Porto",
+     "from": "papa",
+     "receivedAt": "2026-08-15 13:02",
+     "device": "Galaxy A52"
+    },
+    {
+     "id": "p_zellige",
+     "takenAt": "2026-07-16 11:15",
+     "source": "received",
+     "scene": "document",
+     "caption": "Deux échantillons de zellige, blanc et vert sauge.",
+     "details": "Posés sur le plan de travail de Mme Laborde. Le vert est plus foncé qu'en catalogue.",
+     "place": "Caudéran, Bordeaux",
+     "from": "chloe",
+     "receivedAt": "2026-07-16 11:22",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_old_2022",
+     "takenAt": "2022-06-18 17:05",
+     "source": "camera",
+     "scene": "interior_warm",
+     "caption": "Emménagement aux Chartrons, juin 2022.",
+     "details": "Des cartons partout, une plante sur le rebord de la fenêtre, Maxime assis par terre.",
+     "style": "old",
+     "place": "Chartrons, Bordeaux",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_old_2019",
+     "takenAt": "2019-09-07 19:20",
+     "source": "camera",
+     "scene": "sunset",
+     "caption": "Coucher de soleil au Pyla, 2019.",
+     "details": "Le banc d'Arguin au loin, des parapentes.",
+     "style": "old",
+     "place": "Pyla-sur-Mer",
+     "device": "iPhone 8"
+    },
+    {
+     "id": "p_resa",
+     "takenAt": "2026-07-02 21:14",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : réservation de la villa.",
+     "details": "Confirmation affichée à l'écran.",
+     "style": "screenshot",
+     "lines": [
+      "Bassin Locations",
+      "Réservation confirmée ✓",
+      "Villa Les Oyats — Cap Ferret",
+      "Du ven. 21 au dim. 23 août 2026",
+      "5 chambres · 10 couchages",
+      "Accès plage par escalier privé",
+      "Total : 1 480,00 €"
+     ],
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_selfie_mirror",
+     "takenAt": "2026-07-13 08:10",
+     "source": "camera",
+     "scene": "mirror",
+     "caption": "Selfie dans le miroir de l'agence.",
+     "details": "Jeanne, une tasse à la main, un échantillon de papier peint sous le bras.",
+     "style": "selfie",
+     "place": "Castaing Intérieurs",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_sky_july",
+     "takenAt": "2026-07-17 07:45",
+     "source": "camera",
+     "scene": "sky",
+     "caption": "Ciel rose au-dessus des toits des Chartrons.",
+     "details": "Des martinets, une antenne. Rien d'autre.",
+     "place": "Chartrons, Bordeaux",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_cat",
+     "takenAt": "2026-07-26 10:12",
+     "source": "camera",
+     "scene": "cat",
+     "caption": "Le chat du voisin sur notre balcon.",
+     "details": "Un chat tigré, couché dans le bac à géraniums.",
+     "place": "Chartrons, Bordeaux",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_rain",
+     "takenAt": "2026-07-28 08:30",
+     "source": "camera",
+     "scene": "rain",
+     "caption": "Orage sur les quais.",
+     "details": "Des gouttes énormes sur la vitre du tram.",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_night_chartrons",
+     "takenAt": "2026-07-30 23:10",
+     "source": "camera",
+     "scene": "street_night",
+     "caption": "La rue Notre-Dame, la nuit.",
+     "details": "Des terrasses qui ferment, un vélo contre un réverbère.",
+     "style": "night",
+     "place": "Chartrons, Bordeaux",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_laptop",
+     "takenAt": "2026-08-05 15:02",
+     "source": "camera",
+     "scene": "laptop",
+     "caption": "Plans 3D de la salle de bain Laborde.",
+     "details": "Le zellige vert sauge en rendu 3D, une vasque blanche.",
+     "place": "Castaing Intérieurs",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_ceiling",
+     "takenAt": "2026-08-09 08:02",
+     "source": "camera",
+     "scene": "ceiling",
+     "caption": "Le plafond de la chambre.",
+     "details": "Photo prise par erreur en attrapant le réveil.",
+     "style": "blurry",
+     "place": "Chartrons, Bordeaux",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_plant",
+     "takenAt": "2026-08-09 12:15",
+     "source": "camera",
+     "scene": "plant",
+     "caption": "Le monstera a fait une nouvelle feuille !!",
+     "details": "Une feuille encore roulée, vert clair.",
+     "place": "Chartrons, Bordeaux",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_chantier",
+     "takenAt": "2026-08-13 15:10",
+     "source": "camera",
+     "scene": "interior_warm",
+     "caption": "La salle de bain Laborde, terminée.",
+     "details": "Zellige vert sauge du sol au plafond, lumière de fin d'après-midi.",
+     "place": "Caudéran, Bordeaux",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_meteo",
+     "takenAt": "2026-08-20 18:10",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : météo marine du week-end.",
+     "details": "Soleil samedi, vent faible.",
+     "style": "screenshot",
+     "lines": [
+      "Météo marine — Bassin d'Arcachon",
+      "Ven. 21  ☀  27°  vent NO 10 km/h",
+      "Sam. 22  ☀  29°  vent O 8 km/h",
+      "Nuit sam. → dim. : ciel clair, 18°",
+      "Dim. 23  ⛅  26°  houle 1,2 m"
+     ],
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_quick_car",
+     "takenAt": "2026-08-21 19:32",
+     "source": "camera",
+     "scene": "car",
+     "caption": "Bouchons à la sortie de Bordeaux.",
+     "details": "Des feux stop à perte de vue sur la rocade.",
+     "style": "quick",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_marees",
+     "takenAt": "2026-08-21 21:20",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : horaires des marées.",
+     "details": "Samedi 22 août, Cap Ferret.",
+     "style": "screenshot",
+     "lines": [
+      "Marées — Cap Ferret",
+      "Samedi 22 août",
+      "PM  06:58   3,9 m",
+      "BM  13:10   1,1 m",
+      "PM  19:23   4,0 m",
+      "Dimanche 23 août",
+      "BM  01:36   1,0 m",
+      "PM  07:44   3,8 m"
+     ],
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_sunset_bassin",
+     "takenAt": "2026-08-21 20:58",
+     "source": "camera",
+     "scene": "sunset",
+     "caption": "Premier coucher de soleil sur le bassin.",
+     "details": "Des pinasses au mouillage, la dune du Pilat en face, toute rose.",
+     "place": "Villa Les Oyats",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_ticket",
+     "takenAt": "2026-08-22 10:15",
+     "source": "camera",
+     "scene": "receipt",
+     "caption": "Ticket de la supérette.",
+     "details": "Glaçons, citrons, bougies.",
+     "style": "document",
+     "lines": [
+      "SUPÉRETTE DE LA POINTE",
+      "22/08/2026  10:14",
+      "GLAÇONS 5 KG  x2     7,80",
+      "CITRONS              3,20",
+      "CHARBON 3 KG          8,90",
+      "BOUGIES CHIFFRES 3+0  4,40",
+      "EAU PÉTILL. x6        5,70",
+      "PAIN                 8,60",
+      "TOTAL               38,60 €"
+     ],
+     "place": "Cap Ferret",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_phare",
+     "takenAt": "2026-08-22 10:52",
+     "source": "camera",
+     "scene": "view",
+     "caption": "Le phare du Cap Ferret, vu d'en bas.",
+     "details": "Le phare blanc et rouge, un ciel sans nuage. Maxime, de dos, lit le panneau des horaires.",
+     "place": "Phare du Cap Ferret",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_huitres",
+     "takenAt": "2026-08-22 12:40",
+     "source": "camera",
+     "scene": "terrace",
+     "caption": "Pause huîtres au port.",
+     "details": "Une douzaine d'huîtres sur un plateau en bois, deux verres de vin blanc, les pinasses derrière.",
+     "place": "Port du Cap Ferret",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_stairs_day",
+     "takenAt": "2026-08-22 16:05",
+     "source": "camera",
+     "scene": "garden_stairs",
+     "caption": "L'escalier de pierre qui descend du jardin à la plage.",
+     "details": "Une quarantaine de marches, une rampe en bois sur la droite seulement. Un lampadaire à mi-hauteur. Les marches du bas sont verdâtres, humides.",
+     "place": "Villa Les Oyats",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_dune",
+     "takenAt": "2026-08-22 17:40",
+     "source": "camera",
+     "scene": "beach",
+     "caption": "La dune du Pilat, en face, de l'autre côté du bassin.",
+     "details": "Du sable très blanc, des bateaux au mouillage, Paul et Grégoire à l'eau avec les planches.",
+     "place": "Plage de la Pointe",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_selfie_louise",
+     "takenAt": "2026-08-22 19:30",
+     "source": "camera",
+     "scene": "selfie",
+     "caption": "Jeanne et Louise, joue contre joue.",
+     "details": "Des paillettes sur les joues, la baie vitrée derrière.",
+     "style": "selfie",
+     "place": "Villa Les Oyats",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_pocket",
+     "takenAt": "2026-08-22 21:48",
+     "source": "camera",
+     "scene": "pocket",
+     "caption": "Photo prise dans une poche.",
+     "details": "Tout est noir, une lueur orange.",
+     "style": "blurry",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_cake",
+     "takenAt": "2026-08-22 23:15",
+     "source": "camera",
+     "scene": "party",
+     "caption": "Le gâteau et ses deux bougies « 3 » et « 0 ».",
+     "details": "Des visages éclairés par les bougies, Mamie applaudit.",
+     "place": "Villa Les Oyats",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_gift",
+     "takenAt": "2026-08-22 23:48",
+     "source": "camera",
+     "scene": "gallery",
+     "caption": "Le cadeau de Louise : un tirage encadré.",
+     "details": "Une photo de Jeanne et Paul enfants sur la dune, retirée en grand format, cadre en chêne.",
+     "place": "Villa Les Oyats",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_blur_party",
+     "takenAt": "2026-08-23 00:12",
+     "source": "camera",
+     "scene": "party",
+     "caption": "Tout le monde danse dans le salon.",
+     "details": "Photo floue : des bras levés, une guirlande, un sweat jaune au milieu.",
+     "style": "blurry",
+     "place": "Villa Les Oyats",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_night_garden",
+     "takenAt": "2026-08-23 00:40",
+     "source": "camera",
+     "scene": "garden_stairs",
+     "caption": "Le jardin la nuit, depuis la terrasse.",
+     "details": "Le lampadaire de l'escalier est éteint. Il s'allume quand quelqu'un passe devant.",
+     "style": "night",
+     "place": "Villa Les Oyats",
+     "device": "iPhone 15"
+    }
+   ],
+   "calendar": [
+    {
+     "id": "c_biarritz",
+     "start": "2026-07-10 18:00",
+     "end": "2026-07-12 20:00",
+     "title": "Maxime — séminaire Biarritz",
+     "location": "Biarritz",
+     "notes": "Retour dimanche soir. Récupérer son costume au pressing mercredi."
+    },
+    {
+     "id": "ev_laborde1",
+     "start": "2026-07-16 09:00",
+     "end": "2026-07-16 10:00",
+     "title": "Chantier Laborde — choix carrelage",
+     "location": "Caudéran"
+    },
+    {
+     "id": "ev_mamie",
+     "start": "2026-07-19 12:30",
+     "title": "Déjeuner chez Mamie",
+     "location": "Arcachon"
+    },
+    {
+     "id": "ev_dentiste",
+     "start": "2026-07-21 17:30",
+     "title": "Dentiste — Dr Pujol",
+     "location": "Cours de l'Intendance"
+    },
+    {
+     "id": "ev_surf",
+     "start": "2026-07-25 10:00",
+     "end": "2026-07-25 12:00",
+     "title": "Cours de surf (Paul & Greg) 🏄‍♀️",
+     "location": "École de surf Les Baïnes — Lacanau"
+    },
+    {
+     "id": "ev_laborde2",
+     "start": "2026-08-13 15:00",
+     "title": "Réception chantier Laborde",
+     "location": "Caudéran"
+    },
+    {
+     "id": "ev_villa",
+     "start": "2026-08-21 19:00",
+     "end": "2026-08-23 17:00",
+     "title": "Villa Les Oyats 🏡",
+     "location": "Cap Ferret",
+     "notes": "Boîte à code : 4417. État des lieux dimanche 17h."
+    },
+    {
+     "id": "ev_30",
+     "start": "2026-08-22 00:00",
+     "title": "🎂 Mes 30 ans !!",
+     "allDay": true
+    },
+    {
+     "id": "c_brunch",
+     "start": "2026-08-23 12:30",
+     "end": "2026-08-23 14:30",
+     "title": "Brunch des 30 ans",
+     "location": "Villa Les Oyats",
+     "notes": "Croissants commandés à la boulangerie du port (retrait 11h30)."
+    },
+    {
+     "id": "ev_etat",
+     "start": "2026-08-23 17:00",
+     "title": "État des lieux de sortie — M. Dubroca",
+     "location": "Villa Les Oyats"
+    },
+    {
+     "id": "ev_sang",
+     "start": "2026-08-27 08:00",
+     "title": "Prise de sang (à jeun)",
+     "location": "Laboratoire Chartrons"
+    },
+    {
+     "id": "ev_parents",
+     "start": "2026-08-30 16:40",
+     "title": "Retour des parents — vol Porto → Bordeaux",
+     "location": "Aéroport de Mérignac"
+    }
+   ],
+   "notes": [
+    {
+     "id": "n_discours",
+     "title": "Discours 30 ans (court !!)",
+     "createdAt": "2026-08-17 23:50",
+     "modifiedAt": "2026-08-22 18:40",
+     "body": "Merci d'être là.\nMamie : tu es la plus belle de nous tous, et de loin.\nPaul : merci de m'avoir appris à nager, à tomber de planche et à perdre au Uno sans pleurer.\nLouise : 15 ans d'amitié, 0 dispute (presque).\nMaxime : 4 ans, 1 appartement, 1 monstera. Je t'aime.\n→ NE PAS PLEURER."
+    },
+    {
+     "id": "n_invites",
+     "title": "Invités & chambres",
+     "createdAt": "2026-08-05 21:10",
+     "modifiedAt": "2026-08-20 22:15",
+     "body": "Chambre du haut (vue bassin) : Maxime & moi\nChambre bleue : Paul & Diane\nChambre jardin : Louise\nBureau (canapé-lit) : Grégoire\nMamie : rentre le soir (Greg ou Maxime la raccompagne)\nNour & Basile : repartent vers minuit\nCanapé du salon : libre"
+    },
+    {
+     "id": "n_courses",
+     "title": "Courses samedi",
+     "createdAt": "2026-08-19 21:30",
+     "modifiedAt": "2026-08-22 10:05",
+     "body": "- glaçons x2\n- citrons\n- charbon\n- bougies 3 et 0\n- pain\n- rosé x6, champagne x4 (Diane en apporte)\n- eau pétillante\n- serviettes papier\n- sacs poubelle\n- crème solaire !!"
+    },
+    {
+     "id": "n_cadeau_paul",
+     "title": "Idées cadeau Paul (34 ans en octobre)",
+     "createdAt": "2026-07-28 22:40",
+     "modifiedAt": "2026-08-10 22:05",
+     "body": "- combi neuve ? (il a la même depuis 2019)\n- montre de plongée\n- week-end à Hossegor avec Diane ?? → vu l'ambiance, pas sûr"
+    }
+   ],
+   "mails": [
+    {
+     "id": "mail_resa",
+     "folder": "inbox",
+     "fromName": "Bassin Locations",
+     "fromAddress": "reservation@bassin-locations.fr",
+     "to": "jeanne@castaing-interieurs.fr",
+     "at": "2026-07-02 21:10",
+     "subject": "Confirmation de réservation — Villa Les Oyats",
+     "body": "Bonjour Madame Castaing,\n\nNous vous confirmons la réservation de la Villa Les Oyats (Cap Ferret) du vendredi 21 août (arrivée à partir de 18h) au dimanche 23 août (départ 17h).\n\n5 chambres, 10 couchages, jardin avec accès direct à la plage par un escalier privé.\n\nMontant total : 1 480,00 €. Caution : 1 000 €.\n\nL'équipe Bassin Locations",
+     "attachments": [
+      "Contrat_Villa_Les_Oyats.pdf"
+     ]
+    },
+    {
+     "id": "mail_infos",
+     "folder": "inbox",
+     "fromName": "Bassin Locations",
+     "fromAddress": "reservation@bassin-locations.fr",
+     "to": "jeanne@castaing-interieurs.fr",
+     "at": "2026-08-20 09:12",
+     "subject": "Votre arrivée vendredi — infos pratiques",
+     "body": "Bonjour,\n\nLes clés vous attendent dans la boîte à code à droite du portail. Wi-Fi : OYATS-GUEST.\n\nL'escalier privé qui descend à la plage est éclairé par un lampadaire à détecteur de présence. Les marches peuvent être glissantes le matin (rosée) : prudence avec les enfants.\n\nMerci de ne pas faire de bruit dans le jardin après minuit, les voisins sont proches.\n\nBon séjour !"
+    },
+    {
+     "id": "mail_zellige",
+     "folder": "sent",
+     "fromName": "Jeanne Castaing",
+     "fromAddress": "jeanne@castaing-interieurs.fr",
+     "to": "commandes@terres-et-emaux.fr",
+     "at": "2026-07-21 09:30",
+     "subject": "Commande zellige vert sauge — chantier Laborde",
+     "body": "Bonjour,\n\nSuite à notre échange, je vous confirme la commande de 14 m² de zellige vert sauge (réf. ZV-12), livraison à l'adresse du chantier à Caudéran.\n\nBien cordialement,\nJeanne Castaing\nCastaing Intérieurs"
+    },
+    {
+     "id": "mail_surf",
+     "folder": "inbox",
+     "fromName": "École de surf Les Baïnes",
+     "fromAddress": "contact@lesbaines-surf.fr",
+     "to": "jeanne@castaing-interieurs.fr",
+     "at": "2026-08-10 10:00",
+     "subject": "Fin de saison : derniers créneaux d'août 🌊",
+     "body": "Paul et Grégoire vous remercient pour cet été ! Derniers cours collectifs jusqu'au 30 août. Réservez vite, il reste peu de places."
+    },
+    {
+     "id": "mail_parents",
+     "folder": "inbox",
+     "fromName": "Maman",
+     "fromAddress": "c.castaing@mailo.fr",
+     "to": "jeanne@castaing-interieurs.fr",
+     "at": "2026-08-15 18:05",
+     "subject": "Fwd: vos billets retour",
+     "body": "Pour que tu aies nos horaires ma chérie. On atterrit à 16h40 le dimanche 30 et on prend le train pour Arcachon voir Mamie. Bisous\n\n---------- Message transféré ----------\nVotre voyage : Porto → Bordeaux, dim. 30 août, arrivée 16:40. TER Bordeaux → Arcachon 18:12.",
+     "attachments": [
+      "Billets_30-08.pdf"
+     ]
+    },
+    {
+     "id": "mail_colis",
+     "folder": "inbox",
+     "fromName": "ColiPoint",
+     "fromAddress": "noreply@colipoint.fr",
+     "to": "jeanne@castaing-interieurs.fr",
+     "at": "2026-08-18 08:11",
+     "subject": "Un colis vous attend lundi 24 août",
+     "body": "Votre colis CP77120 sera livré le lundi 24 août à votre domicile. Expéditeur : Nour B."
+    },
+    {
+     "id": "mail_chloe",
+     "folder": "inbox",
+     "fromName": "Chloé Darrigade",
+     "fromAddress": "chloe@castaing-interieurs.fr",
+     "to": "jeanne@castaing-interieurs.fr",
+     "at": "2026-08-21 16:55",
+     "subject": "Planning septembre",
+     "body": "Je t'ai mis le planning de rentrée en pièce jointe. Trois nouveaux chantiers dont un à Pessac. On en parle lundi, profite de ton week-end !\n\nChloé",
+     "attachments": [
+      "Planning_septembre.xlsx"
+     ]
+    }
+   ],
+   "browser": [
+    {
+     "id": "w01",
+     "at": "2026-07-02 20:40",
+     "kind": "search",
+     "text": "location villa cap ferret 10 personnes accès plage"
+    },
+    {
+     "id": "w02",
+     "at": "2026-07-02 20:52",
+     "kind": "visit",
+     "text": "Villa Les Oyats — Bassin Locations",
+     "url": "bassin-locations.fr/villa-les-oyats",
+     "summary": "Villa de 5 chambres côté bassin, grand jardin en pente, escalier privé en pierre jusqu'à la plage, terrasse plein sud."
+    },
+    {
+     "id": "w03",
+     "at": "2026-07-13 14:30",
+     "kind": "search",
+     "text": "zellige vert sauge prix m2"
+    },
+    {
+     "id": "w04",
+     "at": "2026-07-21 21:40",
+     "kind": "search",
+     "text": "associé veut racheter parts sarl refuser"
+    },
+    {
+     "id": "w05",
+     "at": "2026-07-24 22:15",
+     "kind": "search",
+     "text": "surf débutant quelle taille de combinaison"
+    },
+    {
+     "id": "w06",
+     "at": "2026-08-09 22:10",
+     "kind": "search",
+     "text": "comment annoncer à son frère que les parents vendent la maison de famille"
+    },
+    {
+     "id": "w07",
+     "at": "2026-08-17 23:40",
+     "kind": "search",
+     "text": "discours 30 ans pour soi-même drôle court"
+    },
+    {
+     "id": "w08",
+     "at": "2026-08-20 18:05",
+     "kind": "search",
+     "text": "marées cap ferret 22 août"
+    },
+    {
+     "id": "w09",
+     "at": "2026-08-21 21:30",
+     "kind": "search",
+     "text": "escalier en pierre glissant rosée"
+    },
+    {
+     "id": "w10",
+     "at": "2026-08-21 21:32",
+     "kind": "visit",
+     "text": "Pourquoi les marches extérieures glissent-elles le matin ?",
+     "url": "maison-jardin.fr/escaliers-exterieurs-glissants",
+     "summary": "La rosée et les mousses rendent la pierre très glissante entre la nuit et le milieu de matinée. Poser une rampe des deux côtés."
+    },
+    {
+     "id": "w11",
+     "at": "2026-08-22 10:20",
+     "kind": "search",
+     "text": "phare du cap ferret horaires"
+    },
+    {
+     "id": "w12",
+     "at": "2026-08-22 10:21",
+     "kind": "visit",
+     "text": "Phare du Cap Ferret — horaires et tarifs",
+     "url": "phare-capferret.fr/infos",
+     "summary": "Ouvert tous les jours de 10h à 19h30 en juillet et août. 258 marches, vue sur le bassin et l'océan."
+    },
+    {
+     "id": "w13",
+     "at": "2026-08-23 08:34",
+     "kind": "search",
+     "text": "vol porto bordeaux aujourd'hui"
+    },
+    {
+     "id": "w14",
+     "at": "2026-08-23 09:12",
+     "kind": "search",
+     "text": "traumatisme crânien coma chances de réveil"
+    },
+    {
+     "id": "w15",
+     "at": "2026-08-23 10:05",
+     "kind": "visit",
+     "text": "CHU de Bordeaux — Réanimation : informations aux familles",
+     "url": "chu-bordeaux.fr/reanimation/familles",
+     "summary": "Les visites sont possibles de 13h à 20h, deux personnes à la fois. Un médecin reçoit les familles chaque jour."
+    }
+   ],
+   "liveEvents": [
+    {
+     "id": "lv01",
+     "afterSeconds": 20,
+     "kind": "message",
+     "app": "messages",
+     "title": "Maman",
+     "body": "Jeanne on arrive ce soir, on a trouvé un vol. Des nouvelles de l'hôpital ??",
+     "conversation": "c_maman",
+     "message": {
+      "id": "m_lv01",
+      "from": "maman",
+      "at": "2026-08-23 11:40",
+      "text": "Jeanne on arrive ce soir, on a trouvé un vol. Des nouvelles de l'hôpital ??"
+     },
+     "opens": "message:m_lv01",
+     "level": "normal"
+    },
+    {
+     "id": "lv02",
+     "afterSeconds": 70,
+     "kind": "call",
+     "app": "phone",
+     "title": "Appel manqué",
+     "body": "Maxime Rivière",
+     "call": {
+      "id": "k_lv02",
+      "contact": "maxime",
+      "direction": "missed",
+      "at": "2026-08-23 11:41",
+      "durationSeconds": 0
+     },
+     "opens": "call:k_lv02",
+     "level": "important"
+    },
+    {
+     "id": "lv03",
+     "afterSeconds": 130,
+     "kind": "message",
+     "app": "messages",
+     "title": "Les Castaing ☀️ — Diane",
+     "body": "quelqu'un a pris mon chargeur ?",
+     "conversation": "c_family",
+     "message": {
+      "id": "m_lv03",
+      "from": "diane",
+      "at": "2026-08-23 11:42",
+      "text": "quelqu'un a pris mon chargeur ?"
+     },
+     "opens": "message:m_lv03",
+     "level": "normal"
+    },
+    {
+     "id": "lv04",
+     "afterSeconds": 190,
+     "kind": "message",
+     "app": "messages",
+     "title": "Louise Ferrer",
+     "body": "Jeanne, je t'envoie toutes mes photos d'hier soir, la police les veut aussi",
+     "conversation": "c_louise",
+     "message": {
+      "id": "m_lv04",
+      "from": "louise",
+      "at": "2026-08-23 11:43",
+      "text": "Jeanne, je t'envoie toutes mes photos d'hier soir, la police les veut aussi"
+     },
+     "opens": "message:m_lv04",
+     "level": "important"
+    },
+    {
+     "id": "lv05",
+     "afterSeconds": 250,
+     "kind": "message",
+     "app": "messages",
+     "title": "Maxime Rivière",
+     "body": "t'es où ? les gendarmes veulent me reparler. je comprends pas pourquoi",
+     "conversation": "c_maxime",
+     "message": {
+      "id": "m_lv05",
+      "from": "maxime",
+      "at": "2026-08-23 11:44",
+      "text": "t'es où ? les gendarmes veulent me reparler. je comprends pas pourquoi"
+     },
+     "opens": "message:m_lv05",
+     "level": "important"
+    },
+    {
+     "id": "lv06",
+     "afterSeconds": 300,
+     "kind": "reminder",
+     "app": "calendar",
+     "title": "12:30",
+     "body": "Brunch des 30 ans · Villa Les Oyats",
+     "opens": "calendar:c_brunch",
+     "level": "normal"
+    },
+    {
+     "id": "lv07",
+     "afterSeconds": 360,
+     "kind": "message",
+     "app": "messages",
+     "title": "Grégoire Salles",
+     "body": "le médecin dit qu'il a eu de la chance",
+     "conversation": "c_gregoire",
+     "message": {
+      "id": "m_lv07",
+      "from": "gregoire",
+      "at": "2026-08-23 11:46",
+      "text": "le médecin dit qu'il a eu de la chance"
+     },
+     "opens": "message:m_lv07",
+     "level": "normal"
+    },
+    {
+     "id": "lv08",
+     "afterSeconds": 420,
+     "kind": "deletion",
+     "app": "messages",
+     "title": "Les Castaing ☀️",
+     "body": "Diane a supprimé un message",
+     "conversation": "c_family",
+     "deletesMessage": "m_fam_diane_0940",
+     "opens": "message:m_fam_diane_0940",
+     "level": "important"
+    }
+   ],
+   "wallpaper": "shore",
+   "batteryPercent": 41
+  }
+ ],
+ "suspects": [
+  {
+   "id": "s_maxime",
+   "contact": "maxime",
+   "role": "Compagnon de Jeanne",
+   "age": 34,
+   "address": "Chartrons, Bordeaux",
+   "statement": "« J'ai rejoint Jeanne vers 1h45 et je ne me suis pas relevé de la nuit. »",
+   "verdict": "Maxime Rivière a menti. À 02:21, il n'était pas dans le lit : il remontait du jardin. Descendu retrouver Diane sur l'escalier de la plage, il y a trouvé Paul. Le sweat jaune de la photo de Louise, à 02:14, c'est le sien."
+  },
+  {
+   "id": "s_diane",
+   "contact": "diane",
+   "role": "Femme de Paul",
+   "age": 31,
+   "address": "Lacanau",
+   "statement": "« J'ai dormi avec Paul dans notre chambre. Je ne l'ai pas entendu se lever. »",
+   "alibi": "À 02:06, la photo de Louise la montre endormie sur le canapé du salon, un plaid sur les jambes. Sur l'escalier, à 02:14, personne ne porte de robe bleue.",
+   "alibiEvidence": "e_diane_alibi",
+   "trap": "Elle a menti sur sa nuit et c'est elle qui a donné rendez-vous sur l'escalier. Mais après la dispute avec Paul, elle est descendue dormir sur le canapé et n'est jamais allée au rendez-vous.",
+   "verdict": "Diane a menti, par honte : après une dispute avec Paul, elle a dormi sur le canapé du salon. Son message effacé donnait bien rendez-vous sur l'escalier… à Maxime. Elle n'y est pas allée : à 02:06, elle dormait."
+  },
+  {
+   "id": "s_louise",
+   "contact": "louise",
+   "role": "Meilleure amie de Jeanne — doit 3 000 € à Paul",
+   "age": 30,
+   "address": "Saint-Michel, Bordeaux",
+   "statement": "« J'étais sur la terrasse à photographier les étoiles de 2h à 2h30, avec mes écouteurs. Je n'ai rien vu ni entendu. »",
+   "alibi": "Sa série de photos est continue, depuis la terrasse, de 02:06 à 02:27, le trépied au même endroit. C'est même elle qui a photographié, sans le voir, ce qui se passait sur l'escalier.",
+   "alibiEvidence": "e_louise_alibi",
+   "trap": "Une dette de 3 000 €, un échange tendu devant tout le monde au dîner, et elle était dehors au moment des faits.",
+   "verdict": "Louise avait un différend réel avec Paul, mais elle n'a pas quitté la terrasse : ses photos le prouvent, heure par heure. Sans le savoir, elle a fixé l'instant où deux silhouettes se faisaient face sur l'escalier."
+  },
+  {
+   "id": "s_gregoire",
+   "contact": "gregoire",
+   "role": "Associé de Paul à l'école de surf",
+   "age": 36,
+   "address": "Lacanau",
+   "statement": "« J'ai raccompagné Mamie à Arcachon vers 1h, je suis rentré vers 3h15 et je me suis couché. J'ai trouvé Paul à 7h10. »",
+   "alibi": "Sa position partagée le place à Arcachon à 02:04, à La Teste à 02:31, et de retour à la villa seulement à 03:14. Mamie confirme son arrivée à 02:07.",
+   "alibiEvidence": "e_gregoire_alibi",
+   "trap": "Il voulait racheter les parts de Paul, qui refusait, et c'est lui qui l'a « trouvé » au petit matin.",
+   "verdict": "Grégoire avait un conflit d'affaires avec Paul, mais à l'heure de la chute il était à une heure de route, chez Mamie, à Arcachon. Il a trouvé Paul à 7h10 en allant nager, et a donné l'alerte."
+  }
+ ],
+ "evidence": [
+  {
+   "id": "e_not_in_bed",
+   "title": "« Je bois un verre d'eau »",
+   "importance": "key",
+   "suspects": [
+    "s_maxime"
+   ],
+   "refs": [
+    "message:m_max_0221",
+    "message:m_max_0223"
+   ],
+   "meaning": "À 02:21, Maxime n'est pas dans le lit, contrairement à ce qu'il affirme. « Je bois un verre d'eau » : le salon, lui, était occupé par Diane endormie."
+  },
+  {
+   "id": "e_stairs_photo",
+   "title": "Deux silhouettes sur l'escalier",
+   "importance": "key",
+   "suspects": [
+    "s_maxime"
+   ],
+   "refs": [
+    "photoInfo:p_louise_0214"
+   ],
+   "meaning": "À 02:14, la pose longue de Louise saisit deux silhouettes sur l'escalier de la plage : l'une en jaune, l'autre, plus grande, en blanc — la chemise de lin de Paul."
+  },
+  {
+   "id": "e_yellow",
+   "title": "Le sweat jaune",
+   "importance": "key",
+   "suspects": [
+    "s_maxime"
+   ],
+   "refs": [
+    "photoInfo:p_group_2340"
+   ],
+   "meaning": "Sur la photo de groupe de 23:40, le seul vêtement jaune de la soirée est le sweat moutarde de Maxime."
+  },
+  {
+   "id": "e_rdv_deleted",
+   "title": "Le message effacé",
+   "importance": "key",
+   "suspects": [
+    "s_maxime",
+    "s_diane"
+   ],
+   "refs": [
+    "message:m_fam_0149"
+   ],
+   "meaning": "Diane donne rendez-vous à quelqu'un sur l'escalier de la plage, « il dort » : Paul. Un message qu'on efface en une minute. Il ne visait ni Mamie ni Jeanne : dans ce groupe, il ne reste que Maxime."
+  },
+  {
+   "id": "e_paul_awake",
+   "title": "Paul ne dormait pas",
+   "importance": "key",
+   "suspects": [
+    "s_maxime"
+   ],
+   "anyOf": true,
+   "refs": [
+    "call:k_paul_0209",
+    "message:m_paul_0203"
+   ],
+   "meaning": "Paul avait lu le message de 01:49. Il écrit à sa sœur, puis l'appelle à 02:09 : il voulait « régler ça lui-même »."
+  },
+  {
+   "id": "e_affair",
+   "title": "Le même week-end à Biarritz",
+   "importance": "supporting",
+   "suspects": [
+    "s_maxime",
+    "s_diane"
+   ],
+   "refs": [
+    "calendar:c_biarritz",
+    "photoInfo:p_diane_biarritz"
+   ],
+   "meaning": "Le « séminaire » de Maxime et le « week-end entre filles » de Diane tombent le même week-end, au même endroit. Sur la table de Diane : les lunettes écaille de Maxime et une veste de costume bleu marine."
+  },
+  {
+   "id": "e_diane_alibi",
+   "title": "Diane sur le canapé",
+   "importance": "supporting",
+   "suspects": [
+    "s_diane"
+   ],
+   "refs": [
+    "photoInfo:p_louise_0206"
+   ],
+   "meaning": "À 02:06, à travers la baie vitrée, Diane dort sur le canapé du salon. Elle n'est pas allée à son propre rendez-vous."
+  },
+  {
+   "id": "e_louise_alibi",
+   "title": "La série de Louise",
+   "importance": "supporting",
+   "suspects": [
+    "s_louise"
+   ],
+   "anyOf": true,
+   "refs": [
+    "photoInfo:p_louise_0227",
+    "photo:p_louise_0206"
+   ],
+   "meaning": "De 02:06 à 02:27, Louise photographie le ciel depuis la terrasse sans déplacer son trépied."
+  },
+  {
+   "id": "e_gregoire_alibi",
+   "title": "La route d'Arcachon",
+   "importance": "supporting",
+   "suspects": [
+    "s_gregoire"
+   ],
+   "anyOf": true,
+   "refs": [
+    "track:t_gregoire",
+    "message:m_mamie_0207"
+   ],
+   "meaning": "Grégoire dépose Mamie à Arcachon à 02:04 et ne rentre à la villa qu'à 03:14."
+  },
+  {
+   "id": "f_diane_lie",
+   "title": "« À côté de lui toute la nuit »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_diane"
+   ],
+   "refs": [
+    "message:m_fam_diane_0940"
+   ],
+   "meaning": "Diane ment : elle a dormi sur le canapé après une dispute. Elle cache la dispute et sa liaison, pas la chute."
+  },
+  {
+   "id": "f_louise_debt",
+   "title": "Les 3 000 € de Louise",
+   "importance": "falseLead",
+   "suspects": [
+    "s_louise"
+   ],
+   "refs": [
+    "message:m_paul_debt"
+   ],
+   "meaning": "Une vraie dette et une vraie tension, mais Louise n'a jamais quitté la terrasse."
+  },
+  {
+   "id": "f_gregoire_found",
+   "title": "Celui qui l'a trouvé",
+   "importance": "falseLead",
+   "suspects": [
+    "s_gregoire"
+   ],
+   "anyOf": true,
+   "refs": [
+    "call:k_greg_0712",
+    "message:m_paul_parts"
+   ],
+   "meaning": "Grégoire voulait racheter les parts de Paul et c'est lui qui l'a trouvé. Mais cette nuit-là, il était sur la route d'Arcachon."
+  }
+ ],
+ "hints": [
+  {
+   "id": "h1",
+   "text": "Tout le monde dit avoir dormi. Les photos, elles, ne dorment pas : regardez à quelle heure chacune a été prise.",
+   "scoreCost": 0
+  },
+  {
+   "id": "h2",
+   "text": "Louise a photographié le ciel toute la nuit depuis la terrasse. Analysez sa série, puis la grande photo de groupe.",
+   "scoreCost": 8
+  },
+  {
+   "id": "h3",
+   "text": "À 02:21, Jeanne cherche quelqu'un dans son lit. Qui portait du jaune ce soir-là ?",
+   "scoreCost": 15,
+   "unlockAtRemainingSeconds": 120
+  }
+ ],
+ "solution": {
+  "culprit": "s_maxime",
+  "headline": "Maxime Rivière a poussé Paul dans l'escalier de la plage.",
+  "summary": "Il disait ne pas s'être relevé. Il était sur l'escalier, en sweat jaune, là où Diane lui avait donné rendez-vous.",
+  "reveal": [
+   {
+    "at": "2026-07-11 12:00",
+    "text": "« Séminaire » à Biarritz pour lui, « week-end entre filles » à Biarritz pour elle",
+    "evidence": "e_affair"
+   },
+   {
+    "at": "2026-08-22 23:40",
+    "text": "Photo de groupe : Maxime est le seul à porter du jaune",
+    "evidence": "e_yellow"
+   },
+   {
+    "at": "2026-08-23 01:49",
+    "text": "Diane se trompe de conversation : « tu descends ? il dort. escalier de la plage » — effacé à 01:50",
+    "evidence": "e_rdv_deleted"
+   },
+   {
+    "at": "2026-08-23 02:03",
+    "text": "Paul, réveillé, écrit à sa sœur « je règle ça moi-même », puis l'appelle à 02:09",
+    "evidence": "e_paul_awake"
+   },
+   {
+    "at": "2026-08-23 02:04",
+    "text": "Grégoire dépose Mamie à Arcachon, à une heure de route",
+    "evidence": "e_gregoire_alibi"
+   },
+   {
+    "at": "2026-08-23 02:06",
+    "text": "Diane dort sur le canapé du salon",
+    "evidence": "e_diane_alibi"
+   },
+   {
+    "at": "2026-08-23 02:14",
+    "text": "Sur l'escalier : une silhouette en blanc, une autre en jaune",
+    "evidence": "e_stairs_photo"
+   },
+   {
+    "at": "2026-08-23 02:23",
+    "text": "Jeanne se réveille seule. Maxime : « en bas, je bois un verre d'eau »",
+    "evidence": "e_not_in_bed"
+   },
+   {
+    "at": "2026-08-23 02:27",
+    "text": "Louise n'a pas bougé de la terrasse",
+    "evidence": "e_louise_alibi"
+   }
+  ],
+  "story": [
+   "Depuis le printemps, Maxime et Diane se voient en secret. Le week-end du 11 juillet, lui est « en séminaire » à Biarritz, elle en « week-end entre filles » à Biarritz. Sur la photo qu'elle poste dans le groupe de la famille : ses lunettes écaille et sa veste de costume.",
+   "Samedi 22 août, Jeanne fête ses trente ans au Cap Ferret. À 01:05, Grégoire raccompagne Mamie à Arcachon. À 01:45, Jeanne monte se coucher ; Maxime la suit. À 01:49, Diane, qui croit écrire à Maxime, poste dans le groupe de la famille : « tu descends ? il dort. escalier de la plage ». Elle l'efface une minute plus tard. Trop tard : Paul l'a lu.",
+   "Paul et Diane se disputent ; elle descend dormir sur le canapé du salon. Paul écrit à sa sœur — « Faut que je te parle. C'est grave. » — puis « je règle ça moi-même ». Il l'appelle une dernière fois à 02:09, sans réponse, et descend attendre sur l'escalier de la plage.",
+   "Maxime, qui a vu le message, se glisse hors du lit et descend retrouver Diane. C'est Paul qui l'attend. Ils se battent sur les marches. Maxime le repousse ; Paul tombe. Sur la terrasse, écouteurs sur les oreilles, Louise photographie le ciel : sa pose longue de 02:14 enregistre deux silhouettes sous le lampadaire, l'une en blanc, l'autre en jaune.",
+   "Maxime remonte par le jardin. À 02:21, Jeanne se réveille seule et lui écrit. « En bas, je bois un verre d'eau. » Il se recouche à 02:26. Au matin, Grégoire, parti nager, trouve Paul au pied de l'escalier.",
+   "Transporté au CHU de Bordeaux, Paul se réveille trois jours plus tard et confirme. Maxime avoue : il est descendu retrouver Diane, Paul l'attendait, ils se sont battus, il l'a repoussé. Il n'a appelé personne."
+  ]
+ }
+}

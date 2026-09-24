@@ -58,6 +58,26 @@ public struct Device: Codable, Sendable, Identifiable {
     public var browser: [BrowserEntry]
     /// Things that happen *during* the investigation (notifications, incoming calls, deletions).
     public var liveEvents: [LiveEvent]
+    /// The owner's wallpaper (lock and home screens). nil = the default night wallpaper.
+    public var wallpaper: Wallpaper? = nil
+    /// Battery (%) when the phone is handed over; it drains while the player investigates.
+    public var batteryPercent: Int? = nil
+
+    /// Wallpapers a phone can have: each case's phone looks like its owner's.
+    public enum Wallpaper: String, Codable, Sendable, CaseIterable {
+        /// Deep blue night with two soft lights (default).
+        case night
+        /// Cold steel blue and cyan, city lights.
+        case ice
+        /// Warm sand and sea, morning light.
+        case shore
+        /// Black and gold.
+        case gold
+        /// Dark green-grey mountains under a storm.
+        case storm
+        /// Pink and violet dusk.
+        case dusk
+    }
 }
 
 /// The apps of the phone. Order = home screen order.
@@ -211,6 +231,16 @@ public struct Photo: Codable, Sendable, Identifiable, Hashable {
     public enum Style: String, Codable, Sendable {
         case standard, selfie, night, document, screenshot, blurry, old, quick
     }
+
+    /// Scenes the generated pictures know how to paint (ScreenshotUI's PhotoPainter). The validator
+    /// rejects any other key, so a case never shows an empty picture.
+    public static let scenes: Set<String> = [
+        "sunset", "sky", "rain", "street_day", "street_night", "parking_night", "concert", "bar", "party", "group", "selfie",
+        "gallery", "climbing", "cat", "books", "interior_warm", "bed", "station", "laptop", "desk_night", "car", "park",
+        "plant", "document", "screenshot", "beach", "snow", "ceiling", "pocket", "receipt", "mirror", "view",
+        "metro", "club", "road_night", "forest", "gala", "vitrine", "vitrine_empty", "mountain", "office", "terrace",
+        "garden_stairs", "villa_morning",
+    ]
 }
 
 // MARK: - Calendar, notes, mail, browser

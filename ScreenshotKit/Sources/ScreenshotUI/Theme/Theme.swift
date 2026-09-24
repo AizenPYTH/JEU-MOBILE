@@ -102,6 +102,35 @@ public enum Theme {
 
     // MARK: Typography (§D) — three voices: Geist (UI), JetBrains Mono (data), Instrument Serif (narrative)
 
+    /// Phone wallpapers: every seized phone looks like its owner's (the case picks one).
+    public struct WallpaperPalette: Sendable {
+        public let top: Color
+        public let bottom: Color
+        public let lightA: Color
+        public let lightB: Color
+    }
+
+    public enum Wallpapers {
+        /// Deep night blue with two soft lights (default, case #001).
+        public static let night = WallpaperPalette(top: Colors.wallpaperTop, bottom: Colors.wallpaperBottom,
+                                                   lightA: Colors.wallpaperLightA, lightB: Colors.wallpaperLightB)
+        /// Cold steel and cyan city lights.
+        public static let ice = WallpaperPalette(top: Color(hex: 0x10212C), bottom: Color(hex: 0x05080B),
+                                                 lightA: Color(hex: 0x2F8FB0, opacity: 0.5), lightB: Color(hex: 0x6FD3E0, opacity: 0.22))
+        /// Sand, sea and a morning sun.
+        public static let shore = WallpaperPalette(top: Color(hex: 0x3B5566), bottom: Color(hex: 0x14181A),
+                                                   lightA: Color(hex: 0xE8B77A, opacity: 0.55), lightB: Color(hex: 0x6FA3B8, opacity: 0.45))
+        /// Black and gold.
+        public static let gold = WallpaperPalette(top: Color(hex: 0x1B150C), bottom: Color(hex: 0x070605),
+                                                  lightA: Color(hex: 0xC8973E, opacity: 0.5), lightB: Color(hex: 0x6E4A1E, opacity: 0.45))
+        /// Storm over dark mountains.
+        public static let storm = WallpaperPalette(top: Color(hex: 0x1A2320), bottom: Color(hex: 0x060807),
+                                                   lightA: Color(hex: 0x4F6B62, opacity: 0.5), lightB: Color(hex: 0x8A9A8E, opacity: 0.22))
+        /// Pink and violet dusk.
+        public static let dusk = WallpaperPalette(top: Color(hex: 0x2A1830), bottom: Color(hex: 0x0A070C),
+                                                  lightA: Color(hex: 0xB0508A, opacity: 0.5), lightB: Color(hex: 0x5B4AB8, opacity: 0.4))
+    }
+
     public enum FontName {
         public static let light = "Geist-Light"
         public static let regular = "Geist-Regular"

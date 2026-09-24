@@ -1,5 +1,6 @@
-/// The opening sequence of a case: a few shots (black screen with sounds, a news report, the phone on
-/// a table, the unlock) that lead from the real world to the phone the player is about to search.
+/// The opening sequence of a case: a few shots (black screen with sounds, a place, a news report, the
+/// phone where it was found, the unlock) that lead from the real world to the phone the player is
+/// about to search.
 /// Pure data: every case can have its own, the player (`CinematicView`) is generic.
 public struct IntroScene: Codable, Sendable, Hashable {
     public var shots: [IntroShot]
@@ -13,7 +14,10 @@ public struct IntroShot: Codable, Sendable, Hashable {
         case title
         /// A live news report in front of a place (the camera stays on the place).
         case broadcast
-        /// The seized phone lying on a table, its lock screen lighting up.
+        /// A place, filmed: a picture of `scene` with a camera move and an optional effect
+        /// (a train arriving, a blackout, rain on a windscreen…). Lines are captions or announcements.
+        case scene
+        /// The phone lying where it was found (`surface`), its lock screen lighting up.
         case phoneOnTable
         /// The phone is picked up and unlocked: the home screen appears, then the game.
         case unlock
@@ -38,6 +42,40 @@ public struct IntroShot: Codable, Sendable, Hashable {
     public var label: String? = nil
     /// A notification arriving on the lock screen.
     public var notification: IntroNotification? = nil
+    /// More notifications (or an incoming call), in order.
+    public var notifications: [IntroNotification]? = nil
+    /// Scene shots: how the camera moves.
+    public var camera: Camera? = nil
+    /// Scene shots: what happens in the picture.
+    public var effect: Effect? = nil
+    /// Phone shots: what the phone lies on.
+    public var surface: Surface? = nil
+
+    public enum Camera: String, Codable, Sendable {
+        case still, push, pull, panLeft, panRight, drift
+    }
+
+    public enum Effect: String, Codable, Sendable {
+        /// Headlights sweep in, the picture shakes: a train pulls into the station.
+        case trainArrival
+        /// The lights go out, then red emergency lights.
+        case blackout
+        /// Rain streaks on a window or a windscreen.
+        case rain
+        /// Orange hazard lights blinking.
+        case hazard
+        /// Morning sun moving slowly through curtains.
+        case sunlight
+    }
+
+    public enum Surface: String, Codable, Sendable {
+        case wood, bench, glass, carSeat, sofa, marble
+    }
+
+    /// Every notification of the shot, in order.
+    public var allNotifications: [IntroNotification] {
+        ([notification].compactMap { $0 } + (notifications ?? [])).sorted { $0.at < $1.at }
+    }
 }
 
 public struct IntroLine: Codable, Sendable, Hashable {
@@ -59,4 +97,6 @@ public struct IntroNotification: Codable, Sendable, Hashable {
     public var title: String
     public var body: String
     public var at: Double
+    /// An incoming call ringing (title = caller) instead of a banner.
+    public var call: Bool? = nil
 }

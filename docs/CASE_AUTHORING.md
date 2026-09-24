@@ -12,12 +12,23 @@ cd ScreenshotKit && swift run CaseLint && swift test
 CaseLint signale tout id inconnu, doublon ou incohérence, et vérifie que l'affaire est résolvable
 dans son temps. Les tests échouent si une affaire est invalide.
 
-L'affaire #001 est produite par un script (`scripts/cases/gen_case_001.py`) : modifier le script,
+Chaque affaire est produite par un script (`scripts/cases/gen_case_00N.py`) : modifier le script,
 puis le relancer — ne pas éditer le JSON à la main :
 
 ```bash
 python3 scripts/cases/gen_case_001.py ScreenshotKit/Sources/CaseLibrary/Resources/Cases/case_001.json
 ```
+
+Pour vérifier une affaire en cours d'écriture sans l'ajouter au jeu :
+
+```bash
+cd ScreenshotKit && swift run CaseLint --rules Sources/CaseLibrary/Resources/Rules/rules.json /chemin/case_006.json
+```
+
+Les affaires existantes montrent cinq structures différentes, à ne pas recopier telles quelles :
+#001 (messages effacés + photo mal datée), #002 (chronologie du téléphone lui-même : où était-il quand ce
+message est parti ?), #003 (versions contradictoires, horodatage des photos), #004 (objet disparu : la
+copie avant le « vol », un noir qui n'était pas une panne), #005 (usurpation d'un numéro, cinq suspects).
 
 ## Structure
 
@@ -53,12 +64,15 @@ indices y font référence.
 | `photos` | `takenAt` (date des métadonnées), `source` (`camera` / `received` / `screenshot`), `from` + `receivedAt` pour une photo reçue, `place`, `device`, `scene` (ambiance de l'image générée), `caption` (ce qu'on voit), `details` (ce qu'une analyse révèle). `style` (facultatif) : `standard`, `selfie`, `night`, `document`, `screenshot`, `blurry`, `old`, `quick` (cadrage, grain, flou, flash, sépia…). `lines` : le texte lisible sur un document ou une capture. |
 | `calendar`, `notes`, `mails`, `browser` | Rendez-vous, notes, e-mails (`inbox` / `sent`, `attachments` = noms des pièces jointes, jamais téléchargées), historique web (`search` / `visit`, `summary` = contenu de la page). |
 | `lockedApps` | App protégée par un code (`app`, `code`, `hint`) ; le code doit être déductible ailleurs dans le téléphone. |
+| `wallpaper`, `batteryPercent` | L'apparence du téléphone : fond d'écran (`night`, `ice`, `shore`, `gold`, `storm`, `dusk`) et batterie au moment où il est remis (elle baisse pendant l'enquête). Chaque affaire a les siens. |
 | `liveEvents` | Ce qui arrive **pendant** l'enquête, après `afterSeconds` : `message` (dans `conversation`), `call`, `reminder`, `deletion` (quelqu'un supprime un de ses messages → « Ce message a été supprimé »). `title`/`body` = la notification, `opens` = ce qu'elle ouvre. |
 
 Scènes de photo disponibles : `sunset`, `sky`, `rain`, `street_day`, `street_night`, `parking_night`,
 `concert`, `bar`, `party`, `group`, `selfie`, `gallery`, `climbing`, `cat`, `books`, `interior_warm`,
 `bed`, `station`, `laptop`, `desk_night`, `car`, `park`, `plant`, `document`, `screenshot`, `beach`,
-`snow`, `ceiling`, `pocket`, `receipt`, `mirror`, `view`. Une pellicule crédible mélange les années
+`snow`, `ceiling`, `pocket`, `receipt`, `mirror`, `view`, `metro`, `club`, `road_night`, `forest`, `gala`,
+`vitrine`, `vitrine_empty`, `mountain`, `office`, `terrace`, `garden_stairs`, `villa_morning` (toute autre clé est
+refusée par le validateur). Une pellicule crédible mélange les années
 (photos `old`), des selfies, des photos ratées (`blurry` : poche, plafond), des captures, des tickets.
 
 ## Niveaux de défi
@@ -72,19 +86,22 @@ en Détective. CaseLint vérifie que l'affaire reste résoluble au niveau le plu
 
 Une suite de plans joués avant de rendre le téléphone au joueur (le chrono ne tourne pas pendant ;
 « Passer » est toujours possible). Chaque plan : `kind`, `seconds`, `ambience` (sons en boucle :
-`street`, `sirens`, `crowd`), `cues` (sons ponctuels `{sound, at}` : `vibrate`, `notification`,
-`unlock`, `key`, `sting`), `lines` (`{text, at, speaker?, voiced?}` — `voiced` = lu par la voix du
+`street`, `sirens`, `crowd`, `metro`, `room`, `sea`, `hall`, `rain`, `engine`), `cues` (sons ponctuels
+`{sound, at}` : `vibrate`, `notification`, `unlock`, `key`, `sting`, `chime`, `train`, `powerdown`, `ring`, `gulls`),
+`lines` (`{text, at, speaker?, voiced?}` — `voiced` = lu par la voix du
 système).
 
 | `kind` | Plan | Champs propres |
 |---|---|---|
 | `title` | Écran noir, sons, une ou deux lignes | — |
 | `broadcast` | Reportage en direct devant le lieu (caméra à l'épaule, gyrophares, sous-titres) | `channel`, `label` (heure), `location`, `headline`, `ticker`, `scene` (image de fond) |
-| `phoneOnTable` | Le téléphone saisi sur une table, l'écran verrouillé s'allume | `label` (étiquette de scellé), `notification` `{app, title, body, at}` |
+| `scene` | Un lieu filmé : l'image `scene`, un mouvement de caméra et un effet. 1ʳᵉ ligne = titre de lieu/heure ; lignes avec `speaker` = annonces sous-titrées ; autres = voix narrative | `scene`, `camera` (`still`, `push`, `pull`, `panLeft`, `panRight`, `drift`), `effect` (`trainArrival`, `blackout`, `rain`, `hazard`, `sunlight`) |
+| `phoneOnTable` | Le téléphone là où il a été trouvé, l'écran verrouillé s'allume | `surface` (`wood`, `bench`, `glass`, `carSeat`, `sofa`, `marble`), `label` (étiquette), `notification` ou `notifications` `[{app, title, body, at, call?}]` (`call: true` = appel entrant qui sonne) |
 | `unlock` | Le téléphone est pris en main et déverrouillé : l'écran d'accueil devient celui du jeu | — |
 
 Tous les décalages (`at`) sont relatifs au début du plan et doivent tenir dans sa durée (validé).
 La notification de l'écran verrouillé devrait exister dans le téléphone (même personne, même texte).
+Les versions filmées (Veo 3.1) des ouvertures #002–#005 sont décrites plan par plan dans `docs/CINEMATIQUES_VEO.md`.
 
 ## Suspects, preuves, indices, solution
 

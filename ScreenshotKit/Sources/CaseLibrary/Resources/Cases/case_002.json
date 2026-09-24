@@ -1,0 +1,3436 @@
+{
+ "schemaVersion": 1,
+ "id": "case_002",
+ "number": 2,
+ "title": "PREMIER MÉTRO",
+ "tagline": "Son téléphone a pris le premier métro. Pas elle.",
+ "synopsis": [
+  "Vendredi 16 octobre, Clémence Aubry, 29 ans, régisseuse son au Silo, un club de la Confluence, termine son service vers 2h du matin. Elle n'est jamais rentrée chez elle.",
+  "À 5h12, un agent trouve son téléphone sur un banc de la station Terreaux-Sud, quai 2, huit minutes après le passage du premier métro. Dans la nuit, sa sœur a pourtant reçu un message rassurant.",
+  "Vous avez quelques minutes pour comprendre qui avait ce téléphone entre les mains."
+ ],
+ "objective": "Découvrir qui avait le téléphone de Clémence après 2h30.",
+ "difficulty": 1,
+ "durationSeconds": 480,
+ "phoneStartTime": "2026-10-17 07:40",
+ "challengeDurations": {
+  "investigator": 900,
+  "detective": 480,
+  "expert": 300
+ },
+ "introScene": {
+  "shots": [
+   {
+    "kind": "scene",
+    "seconds": 7,
+    "scene": "metro",
+    "camera": "push",
+    "ambience": [
+     "metro"
+    ],
+    "cues": [
+     {
+      "sound": "chime",
+      "at": 1.6
+     }
+    ],
+    "lines": [
+     {
+      "text": "STATION TERREAUX-SUD · SAMEDI 17 OCTOBRE · 05:03",
+      "at": 0.3
+     },
+     {
+      "text": "Le premier métro en direction de Gare de Vaise entre en station.",
+      "at": 2.2,
+      "speaker": "Annonce",
+      "voiced": true
+     }
+    ]
+   },
+   {
+    "kind": "scene",
+    "seconds": 5,
+    "scene": "metro",
+    "camera": "still",
+    "effect": "trainArrival",
+    "ambience": [
+     "metro"
+    ],
+    "cues": [
+     {
+      "sound": "train",
+      "at": 0.2
+     }
+    ]
+   },
+   {
+    "kind": "phoneOnTable",
+    "seconds": 6.5,
+    "surface": "bench",
+    "label": "OBJET TROUVÉ — quai 2 — 05:12",
+    "ambience": [
+     "metro"
+    ],
+    "cues": [
+     {
+      "sound": "vibrate",
+      "at": 1.2
+     },
+     {
+      "sound": "notification",
+      "at": 1.25
+     },
+     {
+      "sound": "ring",
+      "at": 3.4
+     }
+    ],
+    "notifications": [
+     {
+      "app": "messages",
+      "title": "Anaïs",
+      "body": "clem ?? réponds stp",
+      "at": 1.2
+     },
+     {
+      "app": "phone",
+      "title": "Anaïs",
+      "body": "Appel entrant",
+      "at": 3.4,
+      "call": true
+     }
+    ],
+    "lines": [
+     {
+      "text": "Personne ne le réclame.",
+      "at": 5.0
+     }
+    ]
+   },
+   {
+    "kind": "title",
+    "seconds": 1.4,
+    "cues": [
+     {
+      "sound": "vibrate",
+      "at": 0.5
+     }
+    ]
+   },
+   {
+    "kind": "unlock",
+    "seconds": 2.4
+   }
+  ]
+ },
+ "devices": [
+  {
+   "id": "dev_clemence",
+   "label": "Téléphone de Clémence",
+   "model": "iPhone 14",
+   "lockedApps": [],
+   "contacts": [
+    {
+     "id": "me",
+     "name": "Clémence Aubry",
+     "phone": "+33 6 48 27 15 93",
+     "relation": "Moi",
+     "email": "clem.aubry@mailo.fr",
+     "birthday": "03/02/1997",
+     "avatarHue": 0.55,
+     "isOwner": true
+    },
+    {
+     "id": "anais",
+     "name": "Anaïs Aubry",
+     "phone": "+33 6 31 84 50 27",
+     "relation": "Sœur",
+     "email": "anais.aubry@mailo.fr",
+     "birthday": "19/06/2000",
+     "avatarHue": 0.95
+    },
+    {
+     "id": "papa",
+     "name": "Papa",
+     "phone": "+33 6 07 62 11 48",
+     "relation": "Père",
+     "avatarHue": 0.07
+    },
+    {
+     "id": "bastien",
+     "name": "Bastien Kermarrec",
+     "phone": "+33 6 72 39 08 64",
+     "relation": "Coloc",
+     "avatarHue": 0.33
+    },
+    {
+     "id": "yanis",
+     "name": "Yanis Ferhat",
+     "phone": "+33 7 58 14 92 30",
+     "relation": "Silo — DJ résident",
+     "avatarHue": 0.75
+    },
+    {
+     "id": "mathilde",
+     "name": "Mathilde Roche",
+     "phone": "+33 6 20 45 77 81",
+     "relation": "Silo — gérante",
+     "email": "m.roche@lesilo-lyon.fr",
+     "avatarHue": 0.12
+    },
+    {
+     "id": "raphael",
+     "name": "Raphaël Sané",
+     "phone": "+33 6 89 03 26 12",
+     "relation": "Silo — sécurité",
+     "avatarHue": 0.03
+    },
+    {
+     "id": "kader",
+     "name": "Kader Benslimane",
+     "phone": "+33 6 44 71 58 09",
+     "relation": "Silo — bar",
+     "avatarHue": 0.47
+    },
+    {
+     "id": "lou",
+     "name": "Lou Perrin",
+     "phone": "+33 6 15 98 36 70",
+     "relation": "Run du dimanche",
+     "avatarHue": 0.4
+    },
+    {
+     "id": "nico",
+     "name": "Nico Lambert",
+     "phone": "+33 7 66 20 81 45",
+     "relation": "Silo — régie lumière",
+     "avatarHue": 0.62
+    },
+    {
+     "id": "sofia",
+     "name": "Sofia Benali",
+     "phone": "+33 6 93 57 04 18",
+     "relation": "Silo — bar",
+     "avatarHue": 0.86
+    },
+    {
+     "id": "helene",
+     "name": "Hélène Castel",
+     "phone": "+33 4 78 83 21 60",
+     "relation": "La Friche Nord — direction technique",
+     "email": "h.castel@lafrichenord.fr",
+     "avatarHue": 0.2
+    },
+    {
+     "id": "besson",
+     "name": "M. Besson (proprio)",
+     "phone": "+33 6 11 29 84 37",
+     "relation": "Propriétaire",
+     "avatarHue": 0.27
+    },
+    {
+     "id": "dentiste",
+     "name": "Cabinet des Chartreux",
+     "phone": "04 78 28 90 12",
+     "relation": "Dentiste",
+     "avatarHue": 0.52
+    },
+    {
+     "id": "malik",
+     "name": "Malik (Anaïs)",
+     "phone": "+33 6 52 80 13 66",
+     "relation": "Copain d'Anaïs",
+     "avatarHue": 0.68
+    }
+   ],
+   "conversations": [
+    {
+     "id": "c_anais",
+     "participants": [
+      "anais"
+     ],
+     "messages": [
+      {
+       "id": "m_anais_000",
+       "from": "anais",
+       "at": "2026-09-05 12:14",
+       "text": "t'as vu le groupe famille ??? papa a mis une photo de lui en maillot 😭"
+      },
+      {
+       "id": "m_anais_001",
+       "from": "me",
+       "at": "2026-09-05 12:40",
+       "text": "mdr jai vu"
+      },
+      {
+       "id": "m_anais_002",
+       "from": "me",
+       "at": "2026-09-05 12:40",
+       "text": "il est fier de son bronzage"
+      },
+      {
+       "id": "m_anais_003",
+       "from": "anais",
+       "at": "2026-09-08 18:55",
+       "text": "tu pourrais garder pistache le we du 10 octobre ??? je pars à annecy avec malik"
+      },
+      {
+       "id": "m_anais_004",
+       "from": "me",
+       "at": "2026-09-08 19:20",
+       "text": "oui tkt"
+      },
+      {
+       "id": "m_anais_005",
+       "from": "anais",
+       "at": "2026-09-08 19:21",
+       "text": "t'es la meilleure"
+      },
+      {
+       "id": "m_anais_006",
+       "from": "anais",
+       "at": "2026-09-12 13:02",
+       "text": "anniv de papa le 24 octobre, on lui offre quoi ???"
+      },
+      {
+       "id": "m_anais_007",
+       "from": "me",
+       "at": "2026-09-12 14:30",
+       "text": "jsp une platine ? il ecoute ses 33t sur la chaine de 1992"
+      },
+      {
+       "id": "m_anais_008",
+       "from": "anais",
+       "at": "2026-09-12 14:31",
+       "text": "c'est pas trop cher ??"
+      },
+      {
+       "id": "m_anais_009",
+       "from": "me",
+       "at": "2026-09-12 14:35",
+       "text": "on fait moitie moitie"
+      },
+      {
+       "id": "m_anais_010",
+       "from": "anais",
+       "at": "2026-09-12 14:35",
+       "text": "ok go"
+      },
+      {
+       "id": "m_anais_011",
+       "from": "anais",
+       "at": "2026-09-17 21:48",
+       "text": "t'as des nouvelles de yanis ?"
+      },
+      {
+       "id": "m_anais_012",
+       "from": "me",
+       "at": "2026-09-17 22:30",
+       "text": "il me rend toujours pas mon casque"
+      },
+      {
+       "id": "m_anais_013",
+       "from": "anais",
+       "at": "2026-09-17 22:31",
+       "text": "garde tes distances stp"
+      },
+      {
+       "id": "m_anais_014",
+       "from": "me",
+       "at": "2026-09-17 22:33",
+       "text": "tkt"
+      },
+      {
+       "id": "m_anais_015",
+       "from": "anais",
+       "at": "2026-09-23 07:12",
+       "text": "regarde qui dort sur ma blouse propre",
+       "photo": "p_pistache"
+      },
+      {
+       "id": "m_anais_016",
+       "from": "me",
+       "at": "2026-09-23 09:40",
+       "text": "le boss"
+      },
+      {
+       "id": "m_anais_017",
+       "from": "me",
+       "at": "2026-10-01 13:30",
+       "text": "jai eu la friche nord"
+      },
+      {
+       "id": "m_anais_018",
+       "from": "anais",
+       "at": "2026-10-01 13:31",
+       "text": "QUOIII ??? le poste de régie générale ?????"
+      },
+      {
+       "id": "m_anais_019",
+       "from": "me",
+       "at": "2026-10-01 13:31",
+       "text": "ouais a partir de decembre"
+      },
+      {
+       "id": "m_anais_020",
+       "from": "anais",
+       "at": "2026-10-01 13:32",
+       "text": "je suis trop fière de toi ❤️ papa va pleurer"
+      },
+      {
+       "id": "m_anais_021",
+       "from": "me",
+       "at": "2026-10-01 13:34",
+       "text": "dis rien je veux lui dire moi"
+      },
+      {
+       "id": "m_anais_022",
+       "from": "anais",
+       "at": "2026-10-02 17:05",
+       "text": "t'as dit à yanis ?"
+      },
+      {
+       "id": "m_anais_023",
+       "from": "me",
+       "at": "2026-10-02 17:30",
+       "text": "ce soir"
+      },
+      {
+       "id": "m_anais_024",
+       "from": "anais",
+       "at": "2026-10-02 17:30",
+       "text": "courage"
+      },
+      {
+       "id": "m_anais_025",
+       "from": "anais",
+       "at": "2026-10-08 17:02",
+       "text": "oups j'ai un peu parlé à papa… il va t'écrire 🙈"
+      },
+      {
+       "id": "m_anais_026",
+       "from": "me",
+       "at": "2026-10-08 17:40",
+       "text": "t'es pas possible"
+      },
+      {
+       "id": "m_anais_027",
+       "from": "anais",
+       "at": "2026-10-09 20:10",
+       "text": "je te dépose pistache demain 10h ??"
+      },
+      {
+       "id": "m_anais_028",
+       "from": "me",
+       "at": "2026-10-09 20:31",
+       "text": "11h plutot je finis tard"
+      },
+      {
+       "id": "m_anais_029",
+       "from": "anais",
+       "at": "2026-10-09 20:32",
+       "text": "ok 11h, sa litière est dans le sac bleu et il mange 2 fois par jour PAS PLUS"
+      },
+      {
+       "id": "m_anais_030",
+       "from": "me",
+       "at": "2026-10-10 12:35",
+       "text": "pistache a fait un patch",
+       "photo": "p_pistache_synth"
+      },
+      {
+       "id": "m_anais_031",
+       "from": "anais",
+       "at": "2026-10-10 12:50",
+       "text": "MDR il a plus de talent que moi"
+      },
+      {
+       "id": "m_anais_032",
+       "from": "anais",
+       "at": "2026-10-11 17:15",
+       "text": "je passe le récupérer vers 19h, ça va ?"
+      },
+      {
+       "id": "m_anais_033",
+       "from": "me",
+       "at": "2026-10-11 17:20",
+       "text": "ok"
+      },
+      {
+       "id": "m_anais_034",
+       "from": "anais",
+       "at": "2026-10-12 10:02",
+       "text": "la platine est commandée !!! 180 chacune ça te va ???"
+      },
+      {
+       "id": "m_anais_035",
+       "from": "me",
+       "at": "2026-10-12 11:15",
+       "text": "ok je te vire ca ce soir"
+      },
+      {
+       "id": "m_anais_036",
+       "from": "anais",
+       "at": "2026-10-14 13:40",
+       "text": "t'as vu l'histoire de la fille agressée sur les quais de saône samedi ?? fais gaffe quand tu rentres à pied la nuit stp"
+      },
+      {
+       "id": "m_anais_037",
+       "from": "me",
+       "at": "2026-10-14 15:02",
+       "text": "je fais gaffe tkt"
+      },
+      {
+       "id": "m_anais_038",
+       "from": "anais",
+       "at": "2026-10-16 23:34",
+       "text": "je bosse demain à 7h mais écris moi quand t'es rentrée stp ???"
+      },
+      {
+       "id": "m_anais_039",
+       "from": "me",
+       "at": "2026-10-16 23:50",
+       "text": "oui maman"
+      },
+      {
+       "id": "m_anais_040",
+       "from": "anais",
+       "at": "2026-10-16 23:50",
+       "text": "😒"
+      },
+      {
+       "id": "m_anais_0212",
+       "from": "me",
+       "at": "2026-10-17 02:12",
+       "text": "je sors, je rentre a pied, je t'ecris en arrivant"
+      },
+      {
+       "id": "m_anais_042",
+       "from": "anais",
+       "at": "2026-10-17 02:13",
+       "text": "ok. prends pas les quais stp"
+      },
+      {
+       "id": "m_anais_043",
+       "from": "anais",
+       "at": "2026-10-17 02:47",
+       "text": "t'as appelé ? ça a coupé direct"
+      },
+      {
+       "id": "m_anais_044",
+       "from": "anais",
+       "at": "2026-10-17 02:48",
+       "text": "clem ?"
+      },
+      {
+       "id": "m_anais_0307",
+       "from": "me",
+       "at": "2026-10-17 03:07",
+       "text": "Ne t'inquiète pas, je dors chez Yanis. On s'est reparlé. Je t'appelle demain."
+      },
+      {
+       "id": "m_anais_0310",
+       "from": "anais",
+       "at": "2026-10-17 03:10",
+       "text": "ah ok… vous vous êtes remis ensemble ?? bonne nuit"
+      },
+      {
+       "id": "m_anais_047",
+       "from": "anais",
+       "at": "2026-10-17 05:10",
+       "text": "pourquoi ta localisation est aux terreaux ??? t'es pas chez yanis ?",
+       "unread": true
+      },
+      {
+       "id": "m_anais_0512",
+       "from": "anais",
+       "at": "2026-10-17 05:12",
+       "text": "clem ?? réponds stp",
+       "unread": true
+      },
+      {
+       "id": "m_anais_049",
+       "from": "anais",
+       "at": "2026-10-17 05:40",
+       "text": "j'appelle yanis il répond pas",
+       "unread": true
+      },
+      {
+       "id": "m_anais_050",
+       "from": "anais",
+       "at": "2026-10-17 06:05",
+       "text": "je vais au silo",
+       "unread": true
+      },
+      {
+       "id": "m_anais_051",
+       "from": "anais",
+       "at": "2026-10-17 06:48",
+       "text": "c'est fermé. y a personne. j'appelle la police",
+       "unread": true
+      },
+      {
+       "id": "m_anais_052",
+       "from": "anais",
+       "at": "2026-10-17 07:21",
+       "text": "la police dit qu'on a retrouvé ton téléphone dans le métro. clem je t'en supplie",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_mathilde",
+     "participants": [
+      "mathilde"
+     ],
+     "messages": [
+      {
+       "id": "m_mathilde_000",
+       "from": "mathilde",
+       "at": "2026-09-07 10:12",
+       "text": "Bonjour Clémence, je t'envoie le planning de septembre ce soir. Peux-tu me confirmer ta présence le samedi 19 ?"
+      },
+      {
+       "id": "m_mathilde_001",
+       "from": "me",
+       "at": "2026-09-07 11:40",
+       "text": "oui ok pour le 19"
+      },
+      {
+       "id": "m_mathilde_002",
+       "from": "mathilde",
+       "at": "2026-09-07 11:42",
+       "text": "Parfait, merci."
+      },
+      {
+       "id": "m_mathilde_003",
+       "from": "me",
+       "at": "2026-09-14 16:20",
+       "text": "mathilde j'ai toujours pas les heures sup d'aout sur la fiche de paie, 14h en tout"
+      },
+      {
+       "id": "m_mathilde_004",
+       "from": "mathilde",
+       "at": "2026-09-14 17:05",
+       "text": "Je regarde avec le cabinet comptable. Ce sera régularisé en septembre, promis."
+      },
+      {
+       "id": "m_mathilde_005",
+       "from": "me",
+       "at": "2026-09-14 17:10",
+       "text": "ok merci"
+      },
+      {
+       "id": "m_mathilde_006",
+       "from": "mathilde",
+       "at": "2026-09-22 11:30",
+       "text": "Peux-tu me transférer la facture du technicien pour la console ? Le cabinet la réclame."
+      },
+      {
+       "id": "m_mathilde_007",
+       "from": "me",
+       "at": "2026-09-22 12:02",
+       "text": "je te la transfere ce soir"
+      },
+      {
+       "id": "m_mathilde_008",
+       "from": "mathilde",
+       "at": "2026-09-26 03:58",
+       "text": "Merci pour ce soir, le son était parfait. Le collectif était ravi."
+      },
+      {
+       "id": "m_mathilde_009",
+       "from": "me",
+       "at": "2026-09-26 11:20",
+       "text": "trop cool merci"
+      },
+      {
+       "id": "m_mathilde_010",
+       "from": "mathilde",
+       "at": "2026-09-28 09:45",
+       "text": "Merci d'être venue hier soir. Tu as oublié ton écharpe grise, je te la rapporte vendredi."
+      },
+      {
+       "id": "m_mathilde_011",
+       "from": "me",
+       "at": "2026-09-28 10:30",
+       "text": "ah trop bien merci"
+      },
+      {
+       "id": "m_mathilde_012",
+       "from": "me",
+       "at": "2026-10-01 10:05",
+       "text": "les heures sup sont toujours pas dessus"
+      },
+      {
+       "id": "m_mathilde_013",
+       "from": "mathilde",
+       "at": "2026-10-01 10:40",
+       "text": "Je sais. C'est une période difficile pour le Silo, je te demande un peu de patience. Ne t'inquiète pas, rien ne sera oublié."
+      },
+      {
+       "id": "m_mathilde_014",
+       "from": "me",
+       "at": "2026-10-01 10:42",
+       "text": "ca fait 2 mois mathilde"
+      },
+      {
+       "id": "m_mathilde_015",
+       "from": "mathilde",
+       "at": "2026-10-01 10:50",
+       "text": "Je sais."
+      },
+      {
+       "id": "m_mathilde_016",
+       "from": "mathilde",
+       "at": "2026-10-05 18:20",
+       "text": "J'ai bien reçu ton courrier. Je suis déçue, je ne te le cache pas. Mais je comprends. On en reparle vendredi, au calme."
+      },
+      {
+       "id": "m_mathilde_017",
+       "from": "me",
+       "at": "2026-10-05 18:45",
+       "text": "merci. c'est pas contre toi"
+      },
+      {
+       "id": "m_mathilde_018",
+       "from": "mathilde",
+       "at": "2026-10-09 13:10",
+       "text": "Peux-tu arriver à 20h30 ce soir ? Balances avec le live à 21h."
+      },
+      {
+       "id": "m_mathilde_019",
+       "from": "me",
+       "at": "2026-10-09 13:30",
+       "text": "ok"
+      },
+      {
+       "id": "m_mathilde_020",
+       "from": "mathilde",
+       "at": "2026-10-14 11:05",
+       "text": "Pour vendredi : soirée Basses Fréquences, trois DJ, ouverture 23h. Le planning complet arrive par mail demain."
+      },
+      {
+       "id": "m_mathilde_021",
+       "from": "me",
+       "at": "2026-10-14 11:20",
+       "text": "ca marche"
+      },
+      {
+       "id": "m_mathilde_2240",
+       "from": "mathilde",
+       "at": "2026-10-16 22:40",
+       "text": "Il faut qu'on parle ce soir, après ton service. Pas au club."
+      },
+      {
+       "id": "m_mathilde_2252",
+       "from": "me",
+       "at": "2026-10-16 22:52",
+       "text": "ok"
+      }
+     ]
+    },
+    {
+     "id": "c_yanis",
+     "participants": [
+      "yanis"
+     ],
+     "messages": [
+      {
+       "id": "m_yanis_000",
+       "from": "me",
+       "at": "2026-09-06 14:02",
+       "text": "tu peux me rendre mon casque stp j'en ai besoin samedi"
+      },
+      {
+       "id": "m_yanis_001",
+       "from": "yanis",
+       "at": "2026-09-06 16:48",
+       "text": "ouais je le ramène au silo vendredi"
+      },
+      {
+       "id": "m_yanis_002",
+       "from": "yanis",
+       "at": "2026-09-11 20:12",
+       "text": "casque dans ta loge"
+      },
+      {
+       "id": "m_yanis_003",
+       "from": "me",
+       "at": "2026-09-11 20:30",
+       "text": "merci"
+      },
+      {
+       "id": "m_yanis_004",
+       "from": "yanis",
+       "at": "2026-09-20 13:05",
+       "text": "t'as encore mes 3 vinyles blancs de detroit ?"
+      },
+      {
+       "id": "m_yanis_005",
+       "from": "me",
+       "at": "2026-09-20 15:40",
+       "text": "oui je te les rends"
+      },
+      {
+       "id": "m_yanis_006",
+       "from": "yanis",
+       "at": "2026-09-20 15:41",
+       "text": "tranquille"
+      },
+      {
+       "id": "m_yanis_007",
+       "from": "yanis",
+       "at": "2026-09-29 23:02",
+       "text": "y a une rumeur comme quoi tu pars"
+      },
+      {
+       "id": "m_yanis_008",
+       "from": "me",
+       "at": "2026-09-29 23:30",
+       "text": "on en parle pas par msg"
+      },
+      {
+       "id": "m_yanis_009",
+       "from": "me",
+       "at": "2026-10-02 18:40",
+       "text": "je peux te parler avant le service ce soir ?"
+      },
+      {
+       "id": "m_yanis_010",
+       "from": "yanis",
+       "at": "2026-10-02 18:52",
+       "text": "ok 20h au bar"
+      },
+      {
+       "id": "m_yanis_011",
+       "from": "yanis",
+       "at": "2026-10-02 23:58",
+       "text": "tu pouvais me le dire avant l'été. la friche nord sérieux ?"
+      },
+      {
+       "id": "m_yanis_012",
+       "from": "me",
+       "at": "2026-10-03 00:10",
+       "text": "je l'ai su y a 2 jours yanis"
+      },
+      {
+       "id": "m_yanis_013",
+       "from": "yanis",
+       "at": "2026-10-03 00:11",
+       "text": "3 ans qu'on bosse ensemble"
+      },
+      {
+       "id": "m_yanis_014",
+       "from": "me",
+       "at": "2026-10-03 00:15",
+       "text": "je sais"
+      },
+      {
+       "id": "m_yanis_015",
+       "from": "yanis",
+       "at": "2026-10-03 13:20",
+       "text": "désolé pour hier. ça fait juste bizarre"
+      },
+      {
+       "id": "m_yanis_016",
+       "from": "me",
+       "at": "2026-10-03 13:45",
+       "text": "je comprends"
+      },
+      {
+       "id": "m_yanis_017",
+       "from": "yanis",
+       "at": "2026-10-08 17:22",
+       "text": "tu leur as dit oui du coup ?"
+      },
+      {
+       "id": "m_yanis_018",
+       "from": "me",
+       "at": "2026-10-08 17:35",
+       "text": "j'ai signe tout a l'heure"
+      },
+      {
+       "id": "m_yanis_019",
+       "from": "yanis",
+       "at": "2026-10-08 17:36",
+       "text": "ok"
+      },
+      {
+       "id": "m_yanis_020",
+       "from": "yanis",
+       "at": "2026-10-12 19:10",
+       "text": "je te rends tes câbles jack vendredi"
+      },
+      {
+       "id": "m_yanis_021",
+       "from": "me",
+       "at": "2026-10-12 19:30",
+       "text": "ok"
+      },
+      {
+       "id": "m_yanis_022",
+       "from": "yanis",
+       "at": "2026-10-16 23:47",
+       "text": "mathilde t'a dit ? elle me laisse le closing jusqu'à 3h30"
+      },
+      {
+       "id": "m_yanis_023",
+       "from": "me",
+       "at": "2026-10-16 23:49",
+       "text": "cool pour toi"
+      },
+      {
+       "id": "m_yanis_024",
+       "from": "yanis",
+       "at": "2026-10-17 01:40",
+       "text": "kader dit que t'as proposé à nico de venir avec toi à la friche"
+      },
+      {
+       "id": "m_yanis_025",
+       "from": "me",
+       "at": "2026-10-17 01:44",
+       "text": "c'est pas du debauchage yanis, ils cherchent un regisseur lumiere c'est tout"
+      },
+      {
+       "id": "m_yanis_026",
+       "from": "yanis",
+       "at": "2026-10-17 01:47",
+       "text": "et un dj ils cherchent pas ?"
+      },
+      {
+       "id": "m_yanis_027",
+       "from": "me",
+       "at": "2026-10-17 01:49",
+       "text": "demande leur"
+      },
+      {
+       "id": "m_yanis_0152",
+       "from": "yanis",
+       "at": "2026-10-17 01:52",
+       "text": "tu vas le regretter sérieux"
+      },
+      {
+       "id": "m_yanis_029",
+       "from": "me",
+       "at": "2026-10-17 01:53",
+       "text": "de quoi"
+      },
+      {
+       "id": "m_yanis_030",
+       "from": "yanis",
+       "at": "2026-10-17 01:55",
+       "text": "de partir. le silo c'est chez toi. la friche c'est une usine à subventions"
+      },
+      {
+       "id": "m_yanis_031",
+       "from": "me",
+       "at": "2026-10-17 01:57",
+       "text": "on en reparle demain la je bosse"
+      },
+      {
+       "id": "m_yanis_032",
+       "from": "yanis",
+       "at": "2026-10-17 03:48",
+       "text": "t'es bien rentrée ?",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_bastien",
+     "participants": [
+      "bastien"
+     ],
+     "messages": [
+      {
+       "id": "m_bastien_000",
+       "from": "bastien",
+       "at": "2026-09-07 19:02",
+       "text": "on est à sec de PQ et de liquide vaisselle"
+      },
+      {
+       "id": "m_bastien_001",
+       "from": "me",
+       "at": "2026-09-07 19:30",
+       "text": "je passe a la superette en rentrant"
+      },
+      {
+       "id": "m_bastien_002",
+       "from": "bastien",
+       "at": "2026-09-09 18:15",
+       "text": "le proprio passe demain matin pour la chaudière, t'es là ?"
+      },
+      {
+       "id": "m_bastien_003",
+       "from": "me",
+       "at": "2026-09-09 18:40",
+       "text": "oui jusqu'a midi"
+      },
+      {
+       "id": "m_bastien_004",
+       "from": "bastien",
+       "at": "2026-09-15 12:20",
+       "text": "colis pour toi chez la gardienne"
+      },
+      {
+       "id": "m_bastien_005",
+       "from": "me",
+       "at": "2026-09-15 12:45",
+       "text": "mes modules 🙏"
+      },
+      {
+       "id": "m_bastien_006",
+       "from": "bastien",
+       "at": "2026-09-21 20:10",
+       "text": "planning ménage : toi salle de bain, moi évier + poubelles. marché conclu ?"
+      },
+      {
+       "id": "m_bastien_007",
+       "from": "me",
+       "at": "2026-09-21 20:30",
+       "text": "marche conclu"
+      },
+      {
+       "id": "m_bastien_008",
+       "from": "bastien",
+       "at": "2026-09-30 18:04",
+       "text": "loyer : 1080 / 2 = 540 chacun, je vire au proprio lundi"
+      },
+      {
+       "id": "m_bastien_009",
+       "from": "me",
+       "at": "2026-09-30 18:30",
+       "text": "je te fais le virement ce soir"
+      },
+      {
+       "id": "m_bastien_010",
+       "from": "bastien",
+       "at": "2026-10-04 11:02",
+       "text": "t'as couru combien ce matin ?"
+      },
+      {
+       "id": "m_bastien_011",
+       "from": "me",
+       "at": "2026-10-04 11:10",
+       "text": "12km"
+      },
+      {
+       "id": "m_bastien_012",
+       "from": "bastien",
+       "at": "2026-10-04 11:10",
+       "text": "psychopathe"
+      },
+      {
+       "id": "m_bastien_013",
+       "from": "bastien",
+       "at": "2026-10-10 15:48",
+       "text": "le chat de ta sœur a vomi sur mon tapis"
+      },
+      {
+       "id": "m_bastien_014",
+       "from": "me",
+       "at": "2026-10-10 16:02",
+       "text": "mdrrr desole je nettoie en rentrant"
+      },
+      {
+       "id": "m_bastien_015",
+       "from": "bastien",
+       "at": "2026-10-13 21:30",
+       "text": "ciné jeudi soir ? y a le film coréen au ciné de la croix-rousse"
+      },
+      {
+       "id": "m_bastien_016",
+       "from": "me",
+       "at": "2026-10-13 21:44",
+       "text": "je bosse pas jeudi go"
+      },
+      {
+       "id": "m_bastien_017",
+       "from": "bastien",
+       "at": "2026-10-16 23:50",
+       "text": "rentré du bar, j'ai laissé la lumière de l'entrée allumée pour toi"
+      },
+      {
+       "id": "m_bastien_018",
+       "from": "me",
+       "at": "2026-10-16 23:52",
+       "text": "merci"
+      },
+      {
+       "id": "m_bastien_0216",
+       "from": "bastien",
+       "at": "2026-10-17 02:16",
+       "text": "dsl j'ai bu 3 bières je peux pas conduire, prends un vélo'v ou un taxi"
+      },
+      {
+       "id": "m_bastien_020",
+       "from": "me",
+       "at": "2026-10-17 02:17",
+       "text": "laisse tomber"
+      },
+      {
+       "id": "m_bastien_021",
+       "from": "bastien",
+       "at": "2026-10-17 07:32",
+       "text": "t'es pas rentrée ? ton lit est pas défait",
+       "unread": true
+      },
+      {
+       "id": "m_bastien_022",
+       "from": "bastien",
+       "at": "2026-10-17 07:36",
+       "text": "clem ??",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_raphael",
+     "participants": [
+      "raphael"
+     ],
+     "messages": [
+      {
+       "id": "m_raphael_000",
+       "from": "raphael",
+       "at": "2026-09-12 01:58",
+       "text": "Je te raccompagne ce soir ? Les quais c'est pas top la nuit."
+      },
+      {
+       "id": "m_raphael_001",
+       "from": "me",
+       "at": "2026-09-12 02:03",
+       "text": "non merci ca va"
+      },
+      {
+       "id": "m_raphael_002",
+       "from": "raphael",
+       "at": "2026-09-19 02:05",
+       "text": "Je peux te déposer, j'ai le scooter."
+      },
+      {
+       "id": "m_raphael_003",
+       "from": "me",
+       "at": "2026-09-19 02:09",
+       "text": "c'est gentil mais non"
+      },
+      {
+       "id": "m_raphael_004",
+       "from": "raphael",
+       "at": "2026-09-26 03:12",
+       "text": "T'es rentrée ?"
+      },
+      {
+       "id": "m_raphael_005",
+       "from": "me",
+       "at": "2026-09-26 11:22",
+       "text": "oui dsl je dormais"
+      },
+      {
+       "id": "m_raphael_006",
+       "from": "raphael",
+       "at": "2026-10-03 18:40",
+       "text": "Tu sais que tu peux compter sur moi hein."
+      },
+      {
+       "id": "m_raphael_007",
+       "from": "me",
+       "at": "2026-10-03 19:05",
+       "text": "oui raphael merci"
+      },
+      {
+       "id": "m_raphael_008",
+       "from": "raphael",
+       "at": "2026-10-10 01:55",
+       "text": "Je te raccompagne ? 5 min."
+      },
+      {
+       "id": "m_raphael_009",
+       "from": "me",
+       "at": "2026-10-10 01:58",
+       "text": "raphael stp"
+      },
+      {
+       "id": "m_raphael_010",
+       "from": "raphael",
+       "at": "2026-10-10 01:58",
+       "text": "Ok ok."
+      },
+      {
+       "id": "m_raphael_011",
+       "from": "raphael",
+       "at": "2026-10-17 02:08",
+       "text": "Tu pars à quelle heure ? Je t'accompagne jusqu'au quai."
+      },
+      {
+       "id": "m_raphael_012",
+       "from": "me",
+       "at": "2026-10-17 02:09",
+       "text": "juste a la porte alors"
+      },
+      {
+       "id": "m_raphael_013",
+       "from": "raphael",
+       "at": "2026-10-17 04:10",
+       "text": "T'es rentrée ?",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_staff",
+     "participants": [
+      "mathilde",
+      "kader",
+      "raphael",
+      "yanis",
+      "nico",
+      "sofia"
+     ],
+     "messages": [
+      {
+       "id": "m_staff_000",
+       "from": "mathilde",
+       "at": "2026-09-05 17:02",
+       "text": "Bonjour à tous. Ce soir, ouverture à 23h. Merci d'être à l'heure."
+      },
+      {
+       "id": "m_staff_001",
+       "from": "kader",
+       "at": "2026-09-05 17:10",
+       "text": "👍"
+      },
+      {
+       "id": "m_staff_002",
+       "from": "nico",
+       "at": "2026-09-11 19:30",
+       "text": "qqn a vu la clé du local lumière ?"
+      },
+      {
+       "id": "m_staff_003",
+       "from": "sofia",
+       "at": "2026-09-11 19:34",
+       "text": "tiroir de la caisse"
+      },
+      {
+       "id": "m_staff_004",
+       "from": "nico",
+       "at": "2026-09-11 19:35",
+       "text": "t'es une reine"
+      },
+      {
+       "id": "m_staff_005",
+       "from": "kader",
+       "at": "2026-09-12 04:12",
+       "text": "caisse fermée. record de la saison 🍾"
+      },
+      {
+       "id": "m_staff_006",
+       "from": "me",
+       "at": "2026-09-19 23:10",
+       "text": "euh les futs devant l'issue de secours cour c'est normal ?",
+       "photo": "p_issue_1"
+      },
+      {
+       "id": "m_staff_007",
+       "from": "mathilde",
+       "at": "2026-09-19 23:14",
+       "text": "C'est provisoire, la livraison est arrivée en avance. Kader, peux-tu les déplacer demain ?"
+      },
+      {
+       "id": "m_staff_008",
+       "from": "kader",
+       "at": "2026-09-19 23:15",
+       "text": "ok patronne"
+      },
+      {
+       "id": "m_staff_009",
+       "from": "raphael",
+       "at": "2026-09-24 17:30",
+       "text": "Rappel : pas de sac à dos en loge le samedi. Consigne de la préfecture."
+      },
+      {
+       "id": "m_staff_010",
+       "from": "yanis",
+       "at": "2026-09-26 18:02",
+       "text": "b2b avec le collectif ce soir, prévoyez des bouchons 😈"
+      },
+      {
+       "id": "m_staff_011",
+       "from": "sofia",
+       "at": "2026-09-26 18:05",
+       "text": "on survivra"
+      },
+      {
+       "id": "m_staff_012",
+       "from": "mathilde",
+       "at": "2026-09-27 13:10",
+       "text": "Apéro ce soir chez moi à partir de 18h30 pour fêter la rentrée. L'adresse est dans l'invitation. Venez comme vous êtes."
+      },
+      {
+       "id": "m_staff_013",
+       "from": "sofia",
+       "at": "2026-09-27 13:15",
+       "text": "yesss"
+      },
+      {
+       "id": "m_staff_014",
+       "from": "nico",
+       "at": "2026-09-27 13:40",
+       "text": "je peux pas, le petit a de la fièvre 😭 amusez vous"
+      },
+      {
+       "id": "m_staff_015",
+       "from": "kader",
+       "at": "2026-09-27 19:44",
+       "text": "la patronne a sorti le grand jeu",
+       "photo": "p_apero_keys"
+      },
+      {
+       "id": "m_staff_016",
+       "from": "nico",
+       "at": "2026-09-27 19:50",
+       "text": "vous abusez"
+      },
+      {
+       "id": "m_staff_017",
+       "from": "raphael",
+       "at": "2026-10-04 03:40",
+       "text": "Fermeture ok, rien à signaler."
+      },
+      {
+       "id": "m_staff_018",
+       "from": "kader",
+       "at": "2026-10-04 03:52",
+       "text": "compteur ce soir : 1040 entrées 😬"
+      },
+      {
+       "id": "m_staff_019",
+       "from": "mathilde",
+       "at": "2026-10-04 10:12",
+       "text": "Merci de ne pas communiquer les chiffres de fréquentation sur ce groupe."
+      },
+      {
+       "id": "m_staff_020",
+       "from": "mathilde",
+       "at": "2026-10-07 09:30",
+       "text": "Livraison des fûts décalée à jeudi. Merci de laisser la cour libre."
+      },
+      {
+       "id": "m_staff_021",
+       "from": "me",
+       "at": "2026-10-10 22:30",
+       "text": "toujours les futs devant la sortie de secours",
+       "photo": "p_issue_2"
+      },
+      {
+       "id": "m_staff_022",
+       "from": "mathilde",
+       "at": "2026-10-10 22:41",
+       "text": "Je m'en occupe."
+      },
+      {
+       "id": "m_staff_023",
+       "from": "nico",
+       "at": "2026-10-13 12:02",
+       "text": "je peux échanger mon vendredi 23 avec qqn ?"
+      },
+      {
+       "id": "m_staff_024",
+       "from": "sofia",
+       "at": "2026-10-13 12:30",
+       "text": "moi je veux bien"
+      },
+      {
+       "id": "m_staff_025",
+       "from": "mathilde",
+       "at": "2026-10-15 18:32",
+       "text": "Le planning de vendredi est dans vos mails. Soirée Basses Fréquences, grosse affluence attendue."
+      },
+      {
+       "id": "m_staff_026",
+       "from": "sofia",
+       "at": "2026-10-16 20:05",
+       "text": "qqn peut ramener des citrons ? on est à sec"
+      },
+      {
+       "id": "m_staff_027",
+       "from": "kader",
+       "at": "2026-10-16 20:07",
+       "text": "je passe au primeur"
+      },
+      {
+       "id": "m_staff_028",
+       "from": "yanis",
+       "at": "2026-10-16 22:15",
+       "text": "le retour cabine est bizarre"
+      },
+      {
+       "id": "m_staff_029",
+       "from": "me",
+       "at": "2026-10-16 22:16",
+       "text": "je regarde"
+      },
+      {
+       "id": "m_staff_030",
+       "from": "me",
+       "at": "2026-10-16 22:22",
+       "text": "c'etait le retour gauche, c'est bon"
+      },
+      {
+       "id": "m_staff_031",
+       "from": "mathilde",
+       "at": "2026-10-17 01:31",
+       "text": "Je file. Kader, tu fermes la caisse ? Bonne fin de soirée à tous."
+      },
+      {
+       "id": "m_staff_032",
+       "from": "kader",
+       "at": "2026-10-17 01:32",
+       "text": "oui t'inquiète"
+      },
+      {
+       "id": "m_staff_0213",
+       "from": "raphael",
+       "at": "2026-10-17 02:13",
+       "text": "clem est partie je l'ai laissée au coin du quai"
+      },
+      {
+       "id": "m_staff_034",
+       "from": "nico",
+       "at": "2026-10-17 02:14",
+       "text": "bisous clem 👋"
+      },
+      {
+       "id": "m_staff_035",
+       "from": "kader",
+       "at": "2026-10-17 02:49",
+       "text": "yanis en feu ce soir 🔥",
+       "photo": "p_booth_0248"
+      },
+      {
+       "id": "m_staff_036",
+       "from": "sofia",
+       "at": "2026-10-17 02:50",
+       "text": "la piste est pleine à craquer"
+      },
+      {
+       "id": "m_staff_037",
+       "from": "raphael",
+       "at": "2026-10-17 03:05",
+       "text": "Grosse file encore.",
+       "photo": "p_door_0304"
+      },
+      {
+       "id": "m_staff_038",
+       "from": "yanis",
+       "at": "2026-10-17 03:36",
+       "text": "merci la team, closing de fou"
+      },
+      {
+       "id": "m_staff_039",
+       "from": "kader",
+       "at": "2026-10-17 04:02",
+       "text": "caisse fermée, je rentre. bonne nuit"
+      },
+      {
+       "id": "m_staff_040",
+       "from": "raphael",
+       "at": "2026-10-17 04:05",
+       "text": "Porte fermée."
+      }
+     ],
+     "title": "Staff Silo 🔊"
+    },
+    {
+     "id": "c_lou",
+     "participants": [
+      "lou"
+     ],
+     "messages": [
+      {
+       "id": "m_lou_000",
+       "from": "lou",
+       "at": "2026-09-12 20:15",
+       "text": "demain 9h au pont de la guill ?"
+      },
+      {
+       "id": "m_lou_001",
+       "from": "me",
+       "at": "2026-09-12 20:40",
+       "text": "go mais 9h30 je finis a 2h"
+      },
+      {
+       "id": "m_lou_002",
+       "from": "lou",
+       "at": "2026-09-13 11:30",
+       "text": "10km en 52 min je suis morte 💀"
+      },
+      {
+       "id": "m_lou_003",
+       "from": "me",
+       "at": "2026-09-13 11:45",
+       "text": "t'as tout donne"
+      },
+      {
+       "id": "m_lou_004",
+       "from": "lou",
+       "at": "2026-09-18 22:10",
+       "text": "t'as commencé la série danoise ?"
+      },
+      {
+       "id": "m_lou_005",
+       "from": "me",
+       "at": "2026-09-18 22:40",
+       "text": "episode 3 je suis accro"
+      },
+      {
+       "id": "m_lou_006",
+       "from": "lou",
+       "at": "2026-09-19 16:00",
+       "text": "pas de run demain j'ai mal au genou 😩"
+      },
+      {
+       "id": "m_lou_007",
+       "from": "me",
+       "at": "2026-09-19 16:20",
+       "text": "repose toi"
+      },
+      {
+       "id": "m_lou_008",
+       "from": "lou",
+       "at": "2026-10-03 15:12",
+       "text": "demain 9h30 ?"
+      },
+      {
+       "id": "m_lou_009",
+       "from": "me",
+       "at": "2026-10-03 15:30",
+       "text": "oui"
+      },
+      {
+       "id": "m_lou_010",
+       "from": "lou",
+       "at": "2026-10-04 10:52",
+       "text": "envoie ton temps"
+      },
+      {
+       "id": "m_lou_011",
+       "from": "me",
+       "at": "2026-10-04 10:55",
+       "photo": "p_run_screen"
+      },
+      {
+       "id": "m_lou_012",
+       "from": "lou",
+       "at": "2026-10-04 10:56",
+       "text": "t'es une machine"
+      },
+      {
+       "id": "m_lou_013",
+       "from": "lou",
+       "at": "2026-10-10 18:00",
+       "text": "demain même heure ?"
+      },
+      {
+       "id": "m_lou_014",
+       "from": "me",
+       "at": "2026-10-10 18:30",
+       "text": "oui"
+      },
+      {
+       "id": "m_lou_015",
+       "from": "lou",
+       "at": "2026-10-11 12:04",
+       "text": "trop beau ce matin sur les berges"
+      },
+      {
+       "id": "m_lou_016",
+       "from": "me",
+       "at": "2026-10-11 12:10",
+       "text": "grave"
+      },
+      {
+       "id": "m_lou_017",
+       "from": "lou",
+       "at": "2026-10-15 09:20",
+       "text": "ce dimanche je peux pas, anniv de ma nièce"
+      },
+      {
+       "id": "m_lou_018",
+       "from": "me",
+       "at": "2026-10-15 09:45",
+       "text": "ok on se cale mercredi soir"
+      },
+      {
+       "id": "m_lou_019",
+       "from": "lou",
+       "at": "2026-10-16 19:40",
+       "text": "bon courage pour ta soirée basses fréquences ! j'ai déjà pris des places pour la friche en décembre haha"
+      },
+      {
+       "id": "m_lou_020",
+       "from": "me",
+       "at": "2026-10-16 19:52",
+       "text": "mdr viens me voir"
+      },
+      {
+       "id": "m_lou_021",
+       "from": "lou",
+       "at": "2026-10-17 07:12",
+       "text": "clem ta sœur m'a appelée. t'es où ?",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_papa",
+     "participants": [
+      "papa"
+     ],
+     "messages": [
+      {
+       "id": "m_papa_000",
+       "from": "papa",
+       "at": "2026-09-13 10:05",
+       "text": "Bonjour ma grande. As-tu reçu le colis de ta grand-mère ? Bises. Papa"
+      },
+      {
+       "id": "m_papa_001",
+       "from": "me",
+       "at": "2026-09-13 12:30",
+       "text": "oui merci papa"
+      },
+      {
+       "id": "m_papa_002",
+       "from": "papa",
+       "at": "2026-09-27 11:20",
+       "text": "Tu viens déjeuner le dimanche 25 octobre ? Ta sœur vient. Papa"
+      },
+      {
+       "id": "m_papa_003",
+       "from": "me",
+       "at": "2026-09-27 12:02",
+       "text": "oui"
+      },
+      {
+       "id": "m_papa_004",
+       "from": "papa",
+       "at": "2026-10-08 17:48",
+       "text": "Anaïs m'a dit que tu avais une bonne nouvelle ?? Papa"
+      },
+      {
+       "id": "m_papa_005",
+       "from": "me",
+       "at": "2026-10-08 17:55",
+       "text": "elle peut pas se taire mdr je t'appelle ce soir"
+      },
+      {
+       "id": "m_papa_006",
+       "from": "papa",
+       "at": "2026-10-08 20:40",
+       "text": "Je suis très fier de toi. Papa"
+      },
+      {
+       "id": "m_papa_007",
+       "from": "papa",
+       "at": "2026-10-17 07:10",
+       "text": "Clémence, ta sœur m'a appelé. Rappelle-moi. Papa",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_kader",
+     "participants": [
+      "kader"
+     ],
+     "messages": [
+      {
+       "id": "m_kader_000",
+       "from": "kader",
+       "at": "2026-09-12 18:40",
+       "text": "tu peux me laisser les clés de la régie ce soir ? je dois récup la rallonge"
+      },
+      {
+       "id": "m_kader_001",
+       "from": "me",
+       "at": "2026-09-12 18:55",
+       "text": "dans ma loge"
+      },
+      {
+       "id": "m_kader_002",
+       "from": "kader",
+       "at": "2026-10-01 22:10",
+       "text": "c'est vrai pour la friche ??"
+      },
+      {
+       "id": "m_kader_003",
+       "from": "me",
+       "at": "2026-10-01 22:30",
+       "text": "oui mais garde le pour toi"
+      },
+      {
+       "id": "m_kader_004",
+       "from": "kader",
+       "at": "2026-10-01 22:31",
+       "text": "motus"
+      },
+      {
+       "id": "m_kader_005",
+       "from": "kader",
+       "at": "2026-10-16 21:45",
+       "text": "tu veux un truc à boire avant l'ouverture ?"
+      },
+      {
+       "id": "m_kader_006",
+       "from": "me",
+       "at": "2026-10-16 21:47",
+       "text": "une limonade stp"
+      },
+      {
+       "id": "m_kader_007",
+       "from": "kader",
+       "at": "2026-10-17 06:55",
+       "text": "ta sœur m'a appelé. t'es partie à 2h c'est ça ? réponds",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_nico",
+     "participants": [
+      "nico"
+     ],
+     "messages": [
+      {
+       "id": "m_nico_000",
+       "from": "nico",
+       "at": "2026-09-25 15:10",
+       "text": "tu peux me montrer ton patch pour la console lumière ? le dmx déconne"
+      },
+      {
+       "id": "m_nico_001",
+       "from": "me",
+       "at": "2026-09-25 15:40",
+       "text": "je te montre demain avant l'ouverture"
+      },
+      {
+       "id": "m_nico_002",
+       "from": "nico",
+       "at": "2026-10-12 14:20",
+       "text": "la friche cherche vraiment un régisseur lumière ?"
+      },
+      {
+       "id": "m_nico_003",
+       "from": "me",
+       "at": "2026-10-12 14:50",
+       "text": "oui envoie ton cv a helene castel"
+      },
+      {
+       "id": "m_nico_004",
+       "from": "nico",
+       "at": "2026-10-12 14:51",
+       "text": "merci clem t'es un amour"
+      }
+     ]
+    },
+    {
+     "id": "c_helene",
+     "participants": [
+      "helene"
+     ],
+     "messages": [
+      {
+       "id": "m_helene_000",
+       "from": "helene",
+       "at": "2026-10-01 12:35",
+       "text": "Bonjour Clémence, je vous ai envoyé la proposition par mail. Hâte de travailler avec vous !"
+      },
+      {
+       "id": "m_helene_001",
+       "from": "me",
+       "at": "2026-10-01 12:50",
+       "text": "merci beaucoup je lis ca ce soir"
+      },
+      {
+       "id": "m_helene_002",
+       "from": "helene",
+       "at": "2026-10-08 16:10",
+       "text": "Contrat signé, bienvenue ! On vous prépare un badge pour le 1er décembre."
+      },
+      {
+       "id": "m_helene_003",
+       "from": "me",
+       "at": "2026-10-08 16:30",
+       "text": "merci !!"
+      }
+     ]
+    },
+    {
+     "id": "c_besson",
+     "participants": [
+      "besson"
+     ],
+     "messages": [
+      {
+       "id": "m_besson_000",
+       "from": "besson",
+       "at": "2026-09-09 09:02",
+       "text": "Bonjour, je passerai demain jeudi à 10h pour l'entretien de la chaudière. Cordialement, R. Besson"
+      },
+      {
+       "id": "m_besson_001",
+       "from": "me",
+       "at": "2026-09-09 10:15",
+       "text": "bonjour, c'est note, je serai la"
+      },
+      {
+       "id": "m_besson_002",
+       "from": "besson",
+       "at": "2026-09-10 11:20",
+       "text": "Chaudière OK. Bonne journée."
+      }
+     ]
+    },
+    {
+     "id": "c_dentiste",
+     "participants": [
+      "dentiste"
+     ],
+     "messages": [
+      {
+       "id": "m_dentiste_000",
+       "from": "dentiste",
+       "at": "2026-09-21 10:00",
+       "text": "Cabinet des Chartreux : rappel de votre RDV le mardi 22/09 à 09h30. Merci de prévenir en cas d'empêchement."
+      }
+     ]
+    }
+   ],
+   "calls": [
+    {
+     "id": "k01",
+     "contact": "papa",
+     "direction": "incoming",
+     "at": "2026-09-06 11:00",
+     "durationSeconds": 640
+    },
+    {
+     "id": "k02",
+     "contact": "anais",
+     "direction": "outgoing",
+     "at": "2026-09-08 19:12",
+     "durationSeconds": 1420
+    },
+    {
+     "id": "k03",
+     "contact": "dentiste",
+     "direction": "incoming",
+     "at": "2026-09-15 10:05",
+     "durationSeconds": 45
+    },
+    {
+     "id": "k04",
+     "contact": "yanis",
+     "direction": "missed",
+     "at": "2026-09-20 12:30",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k05",
+     "contact": "lou",
+     "direction": "outgoing",
+     "at": "2026-09-13 09:05",
+     "durationSeconds": 31
+    },
+    {
+     "id": "k06",
+     "contact": "helene",
+     "direction": "incoming",
+     "at": "2026-10-01 11:40",
+     "durationSeconds": 540
+    },
+    {
+     "id": "k07",
+     "contact": "anais",
+     "direction": "outgoing",
+     "at": "2026-10-01 13:40",
+     "durationSeconds": 890
+    },
+    {
+     "id": "k08",
+     "contact": "mathilde",
+     "direction": "incoming",
+     "at": "2026-10-01 14:10",
+     "durationSeconds": 312
+    },
+    {
+     "id": "k09",
+     "contact": "yanis",
+     "direction": "missed",
+     "at": "2026-10-03 12:40",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k10",
+     "contact": "papa",
+     "direction": "outgoing",
+     "at": "2026-10-08 20:05",
+     "durationSeconds": 1510
+    },
+    {
+     "id": "k11",
+     "contact": "bastien",
+     "direction": "incoming",
+     "at": "2026-10-10 16:20",
+     "durationSeconds": 62
+    },
+    {
+     "id": "k12",
+     "contact": "anais",
+     "direction": "incoming",
+     "at": "2026-10-11 18:52",
+     "durationSeconds": 38
+    },
+    {
+     "id": "k13",
+     "contact": "besson",
+     "direction": "incoming",
+     "at": "2026-10-13 09:15",
+     "durationSeconds": 120
+    },
+    {
+     "id": "k14",
+     "contact": "lou",
+     "direction": "incoming",
+     "at": "2026-10-14 19:30",
+     "durationSeconds": 402
+    },
+    {
+     "id": "k15",
+     "contact": "mathilde",
+     "direction": "missed",
+     "at": "2026-10-16 16:48",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k16",
+     "contact": "kader",
+     "direction": "outgoing",
+     "at": "2026-10-16 20:40",
+     "durationSeconds": 35
+    },
+    {
+     "id": "k_bastien_0214",
+     "contact": "bastien",
+     "direction": "outgoing",
+     "at": "2026-10-17 02:14",
+     "durationSeconds": 48
+    },
+    {
+     "id": "k_mathilde_0219",
+     "contact": "mathilde",
+     "direction": "incoming",
+     "at": "2026-10-17 02:19",
+     "durationSeconds": 112
+    },
+    {
+     "id": "k_anais_0246",
+     "contact": "anais",
+     "direction": "outgoing",
+     "at": "2026-10-17 02:46",
+     "durationSeconds": 4
+    },
+    {
+     "id": "k_anais_0249",
+     "contact": "anais",
+     "direction": "missed",
+     "at": "2026-10-17 02:49",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_anais_0513",
+     "contact": "anais",
+     "direction": "missed",
+     "at": "2026-10-17 05:13",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_anais_0552",
+     "contact": "anais",
+     "direction": "missed",
+     "at": "2026-10-17 05:52",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_papa_0708",
+     "contact": "papa",
+     "direction": "missed",
+     "at": "2026-10-17 07:08",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k_lou_0714",
+     "contact": "lou",
+     "direction": "missed",
+     "at": "2026-10-17 07:14",
+     "durationSeconds": 0
+    }
+   ],
+   "places": [
+    {
+     "id": "pl_home",
+     "name": "Domicile — montée de la Grande-Côte",
+     "kind": "home",
+     "x": 0.395,
+     "y": 0.27,
+     "latitude": 45.7715,
+     "longitude": 4.8325
+    },
+    {
+     "id": "pl_silo",
+     "name": "Le Silo — quai Rambaud",
+     "kind": "work",
+     "x": 0.232,
+     "y": 0.9,
+     "latitude": 45.74,
+     "longitude": 4.817
+    },
+    {
+     "id": "pl_docks",
+     "name": "Parking des Docks",
+     "kind": "parking",
+     "x": 0.258,
+     "y": 0.93,
+     "latitude": 45.7385,
+     "longitude": 4.8195
+    },
+    {
+     "id": "pl_arloing",
+     "name": "Quai Arloing — Vaise",
+     "kind": "street",
+     "x": 0.163,
+     "y": 0.25,
+     "latitude": 45.7725,
+     "longitude": 4.8105,
+     "revealedBy": [
+      "calendar:c_apero_mathilde",
+      "photoInfo:p_pocket_0309"
+     ]
+    },
+    {
+     "id": "pl_terreaux",
+     "name": "Station Terreaux-Sud",
+     "kind": "station",
+     "x": 0.416,
+     "y": 0.35,
+     "latitude": 45.7675,
+     "longitude": 4.8345
+    },
+    {
+     "id": "pl_paulbert",
+     "name": "Rue Paul-Bert — chez Anaïs",
+     "kind": "home",
+     "x": 0.6,
+     "y": 0.56,
+     "latitude": 45.757,
+     "longitude": 4.852
+    },
+    {
+     "id": "pl_gratteciel",
+     "name": "Villeurbanne — Gratte-Ciel",
+     "kind": "district",
+     "x": 0.911,
+     "y": 0.31,
+     "latitude": 45.7695,
+     "longitude": 4.8815,
+     "revealedBy": [
+      "message:m_anais_0307"
+     ]
+    },
+    {
+     "id": "pl_berges",
+     "name": "Berges du Rhône",
+     "kind": "park",
+     "x": 0.505,
+     "y": 0.61,
+     "latitude": 45.7545,
+     "longitude": 4.843
+    },
+    {
+     "id": "pl_marche",
+     "name": "Marché de la Croix-Rousse",
+     "kind": "shop",
+     "x": 0.389,
+     "y": 0.18,
+     "latitude": 45.776,
+     "longitude": 4.832
+    },
+    {
+     "id": "pl_friche",
+     "name": "La Friche Nord",
+     "kind": "work",
+     "x": 0.095,
+     "y": 0.1,
+     "latitude": 45.78,
+     "longitude": 4.804,
+     "revealedBy": [
+      "mail:mail_friche_offer"
+     ]
+    }
+   ],
+   "tracks": [
+    {
+     "id": "t_me",
+     "contact": "me",
+     "points": [
+      {
+       "id": "tp_me_1",
+       "at": "2026-10-08 15:02",
+       "place": "pl_friche"
+      },
+      {
+       "id": "tp_me_2",
+       "at": "2026-10-09 20:25",
+       "place": "pl_silo"
+      },
+      {
+       "id": "tp_me_3",
+       "at": "2026-10-10 02:40",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_me_4",
+       "at": "2026-10-10 20:40",
+       "place": "pl_silo"
+      },
+      {
+       "id": "tp_me_5",
+       "at": "2026-10-11 09:35",
+       "place": "pl_berges"
+      },
+      {
+       "id": "tp_me_6",
+       "at": "2026-10-11 11:05",
+       "place": "pl_marche"
+      },
+      {
+       "id": "tp_me_7",
+       "at": "2026-10-14 18:10",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_me_8",
+       "at": "2026-10-16 20:35",
+       "place": "pl_silo"
+      },
+      {
+       "id": "tp_me_9",
+       "at": "2026-10-17 02:12",
+       "place": "pl_silo",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_me_10",
+       "at": "2026-10-17 02:24",
+       "place": "pl_docks"
+      },
+      {
+       "id": "tp_me_11",
+       "at": "2026-10-17 02:58",
+       "place": "pl_arloing"
+      },
+      {
+       "id": "tp_me_12",
+       "at": "2026-10-17 03:07",
+       "place": "pl_arloing"
+      },
+      {
+       "id": "tp_me_13",
+       "at": "2026-10-17 04:36",
+       "place": "pl_arloing",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_me_14",
+       "at": "2026-10-17 04:52",
+       "place": "pl_terreaux"
+      },
+      {
+       "id": "tp_me_15",
+       "at": "2026-10-17 05:12",
+       "place": "pl_terreaux",
+       "note": "Dernière position connue"
+      }
+     ]
+    },
+    {
+     "id": "t_bastien",
+     "contact": "bastien",
+     "points": [
+      {
+       "id": "tp_ba_1",
+       "at": "2026-10-16 18:30",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_ba_2",
+       "at": "2026-10-16 23:50",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_ba_3",
+       "at": "2026-10-17 02:16",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_ba_4",
+       "at": "2026-10-17 04:30",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_ba_5",
+       "at": "2026-10-17 07:30",
+       "place": "pl_home"
+      }
+     ]
+    },
+    {
+     "id": "t_anais",
+     "contact": "anais",
+     "points": [
+      {
+       "id": "tp_an_1",
+       "at": "2026-10-16 19:10",
+       "place": "pl_paulbert"
+      },
+      {
+       "id": "tp_an_2",
+       "at": "2026-10-17 03:10",
+       "place": "pl_paulbert"
+      },
+      {
+       "id": "tp_an_3",
+       "at": "2026-10-17 06:10",
+       "place": "pl_paulbert",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_an_4",
+       "at": "2026-10-17 06:34",
+       "place": "pl_silo"
+      },
+      {
+       "id": "tp_an_5",
+       "at": "2026-10-17 07:25",
+       "place": "pl_silo"
+      }
+     ]
+    }
+   ],
+   "photos": [
+    {
+     "id": "p_old01",
+     "takenAt": "2019-08-24 23:40",
+     "source": "camera",
+     "scene": "concert",
+     "caption": "Festival d'été, 2019. La scène au loin.",
+     "details": "Des lasers verts, la foule en contre-jour.",
+     "style": "old",
+     "device": "iPhone 8"
+    },
+    {
+     "id": "p_old02",
+     "takenAt": "2021-06-21 22:15",
+     "source": "camera",
+     "scene": "street_night",
+     "caption": "Fête de la musique 2021, rue de la République.",
+     "details": "Un sound system sur un trottoir, des gens qui dansent.",
+     "style": "old",
+     "place": "Lyon 2e",
+     "device": "iPhone 8"
+    },
+    {
+     "id": "p_old03",
+     "takenAt": "2022-02-03 21:05",
+     "source": "camera",
+     "scene": "party",
+     "caption": "Anniversaire, 25 ans.",
+     "details": "Un gâteau avec deux bougies « 2 » et « 5 », des guirlandes.",
+     "style": "old",
+     "device": "iPhone 8"
+    },
+    {
+     "id": "p_old04",
+     "takenAt": "2023-07-14 21:30",
+     "source": "camera",
+     "scene": "sunset",
+     "caption": "Coucher de soleil sur la Saône, juillet 2023.",
+     "details": "Des péniches, la passerelle en contre-jour.",
+     "style": "old",
+     "place": "Quai Saint-Vincent",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_old05",
+     "takenAt": "2024-12-24 20:10",
+     "source": "camera",
+     "scene": "interior_warm",
+     "caption": "Réveillon chez Papa.",
+     "details": "Une table, des bougies, une platine vinyle à l'ancienne sur le buffet.",
+     "style": "old",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_old06",
+     "takenAt": "2025-05-10 01:20",
+     "source": "camera",
+     "scene": "club",
+     "caption": "Selfie en cabine avec Yanis, mai 2025.",
+     "details": "Deux silhouettes sous une lumière rouge, un casque partagé.",
+     "style": "old",
+     "place": "Le Silo",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_synth01",
+     "takenAt": "2026-09-06 17:20",
+     "source": "camera",
+     "scene": "desk_night",
+     "caption": "Le rack de modules, câbles partout.",
+     "details": "Une vingtaine de câbles colorés, une petite lampe orange. Rien d'autre.",
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_club01",
+     "takenAt": "2026-09-11 20:40",
+     "source": "camera",
+     "scene": "club",
+     "caption": "Le Silo vide, avant l'ouverture.",
+     "details": "La boule à facettes éteinte, les lumières de service allumées.",
+     "place": "Le Silo",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_berges01",
+     "takenAt": "2026-09-13 09:58",
+     "source": "camera",
+     "scene": "park",
+     "caption": "Berges du Rhône, run du dimanche.",
+     "details": "Des platanes, un cycliste, le fleuve gris.",
+     "place": "Berges du Rhône",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_vinyl01",
+     "takenAt": "2026-09-16 18:05",
+     "source": "camera",
+     "scene": "books",
+     "caption": "Trois vinyles achetés chez le disquaire.",
+     "details": "Des pochettes sans titre, une étiquette « 12€ ».",
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_loge01",
+     "takenAt": "2026-09-19 21:10",
+     "source": "camera",
+     "scene": "mirror",
+     "caption": "Selfie dans le miroir de la loge, casque autour du cou.",
+     "details": "Des stickers sur le miroir, un gobelet de thé.",
+     "style": "selfie",
+     "place": "Le Silo",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_view01",
+     "takenAt": "2026-09-20 10:30",
+     "source": "camera",
+     "scene": "view",
+     "caption": "Lyon depuis le haut de la montée de la Grande-Côte.",
+     "details": "Les toits, Fourvière dans la brume.",
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_sunset01",
+     "takenAt": "2026-09-24 19:30",
+     "source": "camera",
+     "scene": "sunset",
+     "caption": "Coucher de soleil depuis la passerelle Saint-Vincent.",
+     "details": "Le ciel orange, des gens assis sur les marches.",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_plant01",
+     "takenAt": "2026-09-28 08:50",
+     "source": "camera",
+     "scene": "plant",
+     "caption": "Le monstera de Bastien a une nouvelle feuille.",
+     "details": "Une plante près de la fenêtre, un arrosoir jaune.",
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_ceiling01",
+     "takenAt": "2026-09-30 07:02",
+     "source": "camera",
+     "scene": "ceiling",
+     "caption": "Le plafond de la chambre.",
+     "details": "Photo prise par erreur au réveil.",
+     "style": "blurry",
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_quick01",
+     "takenAt": "2026-10-02 14:12",
+     "source": "camera",
+     "scene": "street_day",
+     "caption": "Une affiche collée sur un poteau.",
+     "details": "« Basses Fréquences — vendredi 16 octobre — Le Silo ».",
+     "style": "quick",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_rain01",
+     "takenAt": "2026-10-06 08:20",
+     "source": "camera",
+     "scene": "rain",
+     "caption": "Pluie sur la fenêtre du salon.",
+     "details": "Des gouttes, la rue floue derrière.",
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_friche01",
+     "takenAt": "2026-10-08 14:50",
+     "source": "camera",
+     "scene": "gallery",
+     "caption": "La grande salle de La Friche Nord, vide.",
+     "details": "Un plafond très haut, des passerelles métalliques, une console sous une bâche.",
+     "place": "La Friche Nord",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_night01",
+     "takenAt": "2026-10-10 02:35",
+     "source": "camera",
+     "scene": "street_night",
+     "caption": "La montée de la Grande-Côte, de nuit.",
+     "details": "Les marches désertes, trois réverbères.",
+     "style": "night",
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_berges02",
+     "takenAt": "2026-10-11 10:02",
+     "source": "camera",
+     "scene": "park",
+     "caption": "Selfie avec Lou après le run.",
+     "details": "Deux silhouettes essoufflées, le Rhône derrière.",
+     "style": "selfie",
+     "place": "Berges du Rhône",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_market01",
+     "takenAt": "2026-10-11 11:10",
+     "source": "camera",
+     "scene": "street_day",
+     "caption": "Le marché de la Croix-Rousse.",
+     "details": "Des étals de légumes, une file devant le fromager.",
+     "place": "Marché de la Croix-Rousse",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_metro01",
+     "takenAt": "2026-09-22 09:02",
+     "source": "camera",
+     "scene": "metro",
+     "caption": "Métro presque vide, le matin.",
+     "details": "Un siège vide, une publicité floue.",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_club02",
+     "takenAt": "2026-10-16 20:50",
+     "source": "camera",
+     "scene": "club",
+     "caption": "Le Silo avant la soirée Basses Fréquences.",
+     "details": "Les enceintes empilées de chaque côté de la scène, personne encore.",
+     "place": "Le Silo",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_console01",
+     "takenAt": "2026-10-16 21:30",
+     "source": "camera",
+     "scene": "desk_night",
+     "caption": "La console son, prête.",
+     "details": "Des faders éclairés, une feuille de patch scotchée à côté.",
+     "place": "Le Silo",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_selfie01",
+     "takenAt": "2026-10-16 23:40",
+     "source": "camera",
+     "scene": "selfie",
+     "caption": "Selfie en régie, soirée Basses Fréquences.",
+     "details": "Le visage éclairé en bleu, la foule floue derrière.",
+     "style": "selfie",
+     "place": "Le Silo",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_receipt01",
+     "takenAt": "2026-09-16 18:02",
+     "source": "camera",
+     "scene": "receipt",
+     "caption": "Ticket du disquaire.",
+     "details": "Trois vinyles d'occasion.",
+     "style": "document",
+     "lines": [
+      "DISQUES DE LA COLLINE",
+      "16/09/2026  17:58",
+      "VINYLE OCCASION   12,00",
+      "VINYLE OCCASION   12,00",
+      "VINYLE OCCASION   15,00",
+      "TOTAL            39,00 €",
+      "CB"
+     ],
+     "place": "Croix-Rousse",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_invoice01",
+     "takenAt": "2026-09-22 19:40",
+     "source": "camera",
+     "scene": "document",
+     "caption": "Facture du technicien pour la console.",
+     "details": "À transférer à Mathilde.",
+     "style": "document",
+     "lines": [
+      "ATELIER SON RHÔNE",
+      "Facture n° 2026-117",
+      "Réparation console — le Silo",
+      "Remplacement 2 faders",
+      "Total TTC   340,00 €"
+     ],
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_run_screen",
+     "takenAt": "2026-10-04 10:48",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : la course de dimanche.",
+     "details": "12,1 km, parcours le long du Rhône.",
+     "style": "screenshot",
+     "lines": [
+      "Course à pied",
+      "Dimanche 4 octobre · 09:36",
+      "Distance   12,1 km",
+      "Durée      1:03:12",
+      "Allure     5'13\" /km"
+     ],
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_contract",
+     "takenAt": "2026-10-08 15:20",
+     "source": "camera",
+     "scene": "document",
+     "caption": "Contrat de travail — La Friche Nord.",
+     "details": "Première page, signée.",
+     "style": "document",
+     "lines": [
+      "LA FRICHE NORD",
+      "Contrat de travail à durée indéterminée",
+      "Poste : régisseuse générale",
+      "Prise de poste : 1er décembre 2026",
+      "Signé à Lyon, le 8 octobre 2026"
+     ],
+     "place": "La Friche Nord",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_meteo",
+     "takenAt": "2026-10-16 18:04",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : météo de la nuit.",
+     "details": "Il va faire froid.",
+     "style": "screenshot",
+     "lines": [
+      "Météo — Lyon",
+      "Ven 16  22h   7°",
+      "Sam 17  02h   4°",
+      "Sam 17  05h   2°",
+      "Brouillard sur la Saône"
+     ],
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_issue_1",
+     "takenAt": "2026-09-19 23:08",
+     "source": "camera",
+     "scene": "parking_night",
+     "caption": "La cour du Silo, de nuit : des fûts empilés.",
+     "details": "Six fûts métalliques contre une porte verte marquée « Sortie de secours ». La barre anti-panique est bloquée.",
+     "style": "night",
+     "place": "Le Silo",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_issue_2",
+     "takenAt": "2026-10-10 22:28",
+     "source": "camera",
+     "scene": "parking_night",
+     "caption": "La cour du Silo, encore les fûts.",
+     "details": "Huit fûts cette fois, devant la même porte verte. Un chariot est garé juste devant.",
+     "style": "night",
+     "place": "Le Silo",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_pistache",
+     "takenAt": "2026-09-23 07:05",
+     "source": "received",
+     "scene": "cat",
+     "caption": "Pistache, le chat d'Anaïs, couché sur une blouse.",
+     "details": "Un chat tigré roulé en boule sur un tissu bleu clair.",
+     "place": "Rue Paul-Bert",
+     "from": "anais",
+     "receivedAt": "2026-09-23 07:12",
+     "device": "iPhone 13"
+    },
+    {
+     "id": "p_pistache_synth",
+     "takenAt": "2026-10-10 12:33",
+     "source": "camera",
+     "scene": "cat",
+     "caption": "Pistache assis sur le rack de modules.",
+     "details": "Le chat a une patte sur un câble jaune. Des voyants rouges allumés.",
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_apero_keys",
+     "takenAt": "2026-09-27 19:41",
+     "source": "received",
+     "scene": "interior_warm",
+     "caption": "Apéro chez Mathilde : des verres sur une table basse.",
+     "details": "Mathilde pose ses clés sur la table basse : un porte-clés en cuir rouge avec un grand M doré. Parquet clair.",
+     "place": "Vaise, Lyon",
+     "from": "kader",
+     "receivedAt": "2026-09-27 19:44",
+     "device": "Galaxy A54"
+    },
+    {
+     "id": "p_booth_0248",
+     "takenAt": "2026-10-17 02:48",
+     "source": "received",
+     "scene": "club",
+     "caption": "La cabine DJ, lumières rouges.",
+     "details": "Yanis aux platines, casque sur une oreille. L'horloge de la régie indique 02:48.",
+     "place": "Le Silo",
+     "from": "kader",
+     "receivedAt": "2026-10-17 02:49",
+     "device": "Galaxy A54"
+    },
+    {
+     "id": "p_door_0304",
+     "takenAt": "2026-10-17 03:04",
+     "source": "received",
+     "scene": "street_night",
+     "caption": "La file d'attente devant l'entrée du Silo.",
+     "details": "Une trentaine de personnes derrière les barrières. Dans la vitre de la porte, le reflet d'une doudoune orange : celle de Raphaël. L'enseigne lumineuse au-dessus de l'entrée affiche 03:04.",
+     "place": "Le Silo",
+     "from": "raphael",
+     "receivedAt": "2026-10-17 03:05",
+     "device": "iPhone 12"
+    },
+    {
+     "id": "p_pocket_0309",
+     "takenAt": "2026-10-17 03:09",
+     "source": "camera",
+     "scene": "pocket",
+     "caption": "Photo floue, sombre.",
+     "details": "Photo floue, prise par erreur. Un parquet clair, le pied d'une table basse, et un porte-clés en cuir rouge avec un grand M doré.",
+     "style": "blurry",
+     "place": "Quai Arloing — Vaise",
+     "device": "iPhone 14"
+    }
+   ],
+   "calendar": [
+    {
+     "id": "c_rdv_dentiste",
+     "start": "2026-09-22 09:30",
+     "end": "2026-09-22 10:00",
+     "title": "Dentiste",
+     "location": "Cabinet des Chartreux"
+    },
+    {
+     "id": "c_apero_mathilde",
+     "start": "2026-09-27 18:30",
+     "end": "2026-09-27 22:00",
+     "title": "Apéro staff chez Mathilde",
+     "location": "14 quai Arloing, 3e ét. — Vaise",
+     "notes": "Code 4127B. Apporter une bouteille."
+    },
+    {
+     "id": "c_run_1004",
+     "start": "2026-10-04 09:30",
+     "end": "2026-10-04 10:45",
+     "title": "Run berges avec Lou",
+     "location": "Pont de la Guillotière"
+    },
+    {
+     "id": "c_loyer",
+     "start": "2026-10-05 00:00",
+     "title": "Loyer — virement à Bastien (540 €)",
+     "allDay": true
+    },
+    {
+     "id": "c_friche_sign",
+     "start": "2026-10-08 15:00",
+     "end": "2026-10-08 16:00",
+     "title": "Signature contrat — La Friche Nord",
+     "location": "La Friche Nord, Vaise",
+     "notes": "Apporter RIB + pièce d'identité."
+    },
+    {
+     "id": "c_pistache",
+     "start": "2026-10-10 00:00",
+     "title": "Garde Pistache 🐈",
+     "allDay": true,
+     "notes": "Anaïs le dépose à 11h, le récupère dimanche 19h."
+    },
+    {
+     "id": "c_run_1011",
+     "start": "2026-10-11 09:30",
+     "end": "2026-10-11 10:45",
+     "title": "Run berges avec Lou",
+     "location": "Pont de la Guillotière"
+    },
+    {
+     "id": "c_cine",
+     "start": "2026-10-15 20:15",
+     "title": "Ciné avec Bastien",
+     "location": "Croix-Rousse"
+    },
+    {
+     "id": "c_silo_1016",
+     "start": "2026-10-16 21:00",
+     "end": "2026-10-17 02:00",
+     "title": "Silo — régie son (Basses Fréquences)",
+     "location": "Le Silo"
+    },
+    {
+     "id": "c_inspection",
+     "start": "2026-10-19 10:00",
+     "end": "2026-10-19 12:00",
+     "title": "Visite inspection — Silo",
+     "location": "Le Silo, quai Rambaud",
+     "notes": "Accusé de réception reçu le 15/10."
+    },
+    {
+     "id": "c_papa_bday",
+     "start": "2026-10-24 00:00",
+     "title": "🎂 Anniv Papa",
+     "allDay": true,
+     "notes": "Platine : moitié avec Anaïs (180 €)."
+    },
+    {
+     "id": "c_dej_papa",
+     "start": "2026-10-25 12:30",
+     "title": "Déjeuner chez Papa",
+     "location": "Villefranche"
+    },
+    {
+     "id": "c_last_day",
+     "start": "2026-11-30 00:00",
+     "title": "Dernier jour au Silo",
+     "allDay": true
+    }
+   ],
+   "notes": [
+    {
+     "id": "n_silo",
+     "title": "Silo — à noter",
+     "createdAt": "2026-09-19 23:20",
+     "modifiedAt": "2026-10-12 23:30",
+     "body": "19/09 : fûts devant l'issue de secours (cour). Photo.\n03/10 : 1040 entrées au compteur (jauge 800).\n10/10 : fûts toujours là.\nHeures sup août + sept : 26 h, toujours pas payées.\n\n→ inspection du travail ?"
+    },
+    {
+     "id": "n_friche",
+     "title": "Friche Nord — questions",
+     "createdAt": "2026-09-30 22:10",
+     "modifiedAt": "2026-10-07 23:05",
+     "body": "- salaire brut / heures de nuit ?\n- date : 1er décembre\n- préavis Silo : 1 mois → dernier jour 30/11\n- badge + parking\n- demander pour Nico (régie lumière)"
+    },
+    {
+     "id": "n_patch",
+     "title": "Patch basse — Basses Fréquences",
+     "createdAt": "2026-10-12 17:40",
+     "modifiedAt": "2026-10-15 16:20",
+     "body": "VCO1 dent de scie → filtre LP, résonance 11h\nLFO lent sur cutoff\nSub : sinus -1 oct\nNe pas oublier le limiteur sur le master"
+    },
+    {
+     "id": "n_courses",
+     "title": "Courses coloc",
+     "createdAt": "2026-09-07 19:25",
+     "modifiedAt": "2026-10-14 18:20",
+     "body": "- PQ\n- liquide vaisselle\n- café\n- croquettes (pistache ?)\n- piles"
+    },
+    {
+     "id": "n_vinyles",
+     "title": "Vinyles à chercher",
+     "createdAt": "2026-06-02 11:00",
+     "modifiedAt": "2026-09-16 18:10",
+     "body": "- réédition du premier album de la scène de Detroit\n- maxis house 92–95\n- rendre les 3 blancs à Yanis !!"
+    }
+   ],
+   "mails": [
+    {
+     "id": "mail_facture",
+     "folder": "inbox",
+     "fromName": "Atelier Son Rhône",
+     "fromAddress": "contact@atelierson-rhone.fr",
+     "to": "clem.aubry@mailo.fr",
+     "at": "2026-09-22 17:12",
+     "subject": "Facture 2026-117 — réparation console",
+     "body": "Bonjour,\n\nVeuillez trouver ci-joint la facture pour le remplacement des deux faders de la console du Silo.\n\nCordialement,\nL'Atelier",
+     "attachments": [
+      "Facture_2026-117.pdf"
+     ]
+    },
+    {
+     "id": "mail_run",
+     "folder": "inbox",
+     "fromName": "Club de course Rive Gauche",
+     "fromAddress": "news@courserivegauche.fr",
+     "to": "clem.aubry@mailo.fr",
+     "at": "2026-09-30 08:00",
+     "subject": "Octobre : sorties longues le dimanche 🏃",
+     "body": "Rendez-vous chaque dimanche à 9h30 au pont de la Guillotière. Deux groupes : 10 et 15 km."
+    },
+    {
+     "id": "mail_friche_offer",
+     "folder": "inbox",
+     "fromName": "Hélène Castel",
+     "fromAddress": "h.castel@lafrichenord.fr",
+     "to": "clem.aubry@mailo.fr",
+     "at": "2026-10-01 12:30",
+     "subject": "Proposition — poste de régisseuse générale",
+     "body": "Bonjour Clémence,\n\nSuite à nos échanges, j'ai le plaisir de vous proposer le poste de régisseuse générale de La Friche Nord, en CDI, à partir du 1er décembre 2026.\n\nVous trouverez la proposition détaillée en pièce jointe. Nous pourrions signer le contrat le jeudi 8 octobre à 15h, sur place, quai de la Friche à Vaise.\n\nAu plaisir,\nHélène Castel\nDirection technique — La Friche Nord",
+     "attachments": [
+      "Proposition_regie_generale.pdf"
+     ]
+    },
+    {
+     "id": "mail_banque",
+     "folder": "inbox",
+     "fromName": "Banque Saône & Rhône",
+     "fromAddress": "releves@bsr-banque.fr",
+     "to": "clem.aubry@mailo.fr",
+     "at": "2026-10-03 07:00",
+     "subject": "Votre relevé de septembre est disponible",
+     "body": "Votre relevé de compte est disponible dans votre espace personnel.",
+     "attachments": [
+      "Releve_2026-09.pdf"
+     ]
+    },
+    {
+     "id": "mail_demission",
+     "folder": "sent",
+     "fromName": "Clémence Aubry",
+     "fromAddress": "clem.aubry@mailo.fr",
+     "to": "m.roche@lesilo-lyon.fr",
+     "at": "2026-10-05 10:02",
+     "subject": "Démission",
+     "body": "Bonjour Mathilde,\n\nJe t'informe de ma démission de mon poste de régisseuse son. Mon préavis d'un mois commence aujourd'hui ; mon dernier jour serait le 30 novembre si on s'arrange pour les congés.\n\nMerci pour ces trois ans.\n\nClémence"
+    },
+    {
+     "id": "mail_signalement",
+     "folder": "sent",
+     "fromName": "Clémence Aubry",
+     "fromAddress": "clem.aubry@mailo.fr",
+     "to": "signalements.rhone@inspection-travail.fr",
+     "at": "2026-10-13 11:20",
+     "subject": "Signalement — établissement Le Silo, quai Rambaud (Lyon 2e)",
+     "body": "Bonjour,\n\nJe travaille au Silo, quai Rambaud, depuis trois ans. Je souhaite signaler :\n\n- l'issue de secours de la cour est régulièrement bloquée par des fûts (photos du 19 septembre et du 10 octobre) ;\n- l'effectif dépasse la jauge autorisée de 800 personnes presque chaque week-end (1040 entrées le samedi 3 octobre).\n\nJe préfère que mon nom ne soit pas communiqué à l'employeur.\n\nClémence Aubry",
+     "attachments": [
+      "issue_secours_1.jpg",
+      "issue_secours_2.jpg"
+     ]
+    },
+    {
+     "id": "mail_inspection_ack",
+     "folder": "inbox",
+     "fromName": "Inspection du travail — Rhône",
+     "fromAddress": "signalements.rhone@inspection-travail.fr",
+     "to": "clem.aubry@mailo.fr",
+     "at": "2026-10-15 16:05",
+     "subject": "Accusé de réception — votre signalement du 13 octobre",
+     "body": "Madame,\n\nNous accusons réception de votre signalement du 13 octobre 2026 concernant l'établissement « Le Silo », quai Rambaud, Lyon 2e (encombrement d'une issue de secours, dépassement de l'effectif autorisé).\n\nUne visite de contrôle est programmée le lundi 19 octobre à 10h. Conformément à la procédure, l'exploitant en est informé ce jour. Votre identité ne lui est pas communiquée.\n\nEn cas de manquement grave, une fermeture administrative temporaire peut être proposée au préfet.\n\nCordialement,\nUnité de contrôle Lyon Centre"
+    },
+    {
+     "id": "mail_running_order",
+     "folder": "inbox",
+     "fromName": "Mathilde Roche",
+     "fromAddress": "m.roche@lesilo-lyon.fr",
+     "to": "equipe@lesilo-lyon.fr",
+     "at": "2026-10-15 18:30",
+     "subject": "Vendredi 16 — Basses Fréquences : planning",
+     "body": "Bonjour à toutes et à tous,\n\nVoici le planning de vendredi.\n\nOuverture des portes : 23:00\nFermeture : 03:30\n\nRégie son — Clémence : 21:00 – 02:00 (Nico reprend le son après 02:00)\nRégie lumière — Nico : 21:00 – 03:45\nPorte — Raphaël : 22:00 – 04:00\nBar — Kader, Sofia : 22:00 – fermeture (Kader clôture la caisse)\n\nLine-up :\n23:00 – 00:00  Mila K.\n00:00 – 01:00  Dune Kollektiv\n01:00 – 03:30  Yanis (closing)\n\nJe partirai vers 01:30. Merci à tous, ce sera une grosse soirée.\n\nMathilde"
+    },
+    {
+     "id": "mail_disquaire",
+     "folder": "inbox",
+     "fromName": "Disques de la Colline",
+     "fromAddress": "bonjour@disquesdelacolline.fr",
+     "to": "clem.aubry@mailo.fr",
+     "at": "2026-09-15 11:00",
+     "subject": "Votre réservation est arrivée",
+     "body": "Bonjour, le disque que vous aviez réservé est arrivé. Il vous attend en boutique jusqu'à samedi."
+    }
+   ],
+   "browser": [
+    {
+     "id": "w01",
+     "at": "2026-09-08 23:12",
+     "kind": "search",
+     "text": "module filtre eurorack occasion lyon"
+    },
+    {
+     "id": "w02",
+     "at": "2026-09-14 16:05",
+     "kind": "search",
+     "text": "heures supplementaires non payees que faire"
+    },
+    {
+     "id": "w03",
+     "at": "2026-09-14 16:08",
+     "kind": "visit",
+     "text": "Heures supplémentaires non payées : vos recours",
+     "url": "service-public.fr/particuliers/heures-sup",
+     "summary": "Le salarié peut réclamer le paiement par écrit, puis saisir le conseil de prud'hommes dans un délai de 3 ans."
+    },
+    {
+     "id": "w04",
+     "at": "2026-09-26 02:08",
+     "kind": "search",
+     "text": "premier metro samedi lyon horaire"
+    },
+    {
+     "id": "w05",
+     "at": "2026-09-29 23:40",
+     "kind": "search",
+     "text": "comment dire a son ex qu'on part"
+    },
+    {
+     "id": "w06",
+     "at": "2026-10-01 12:40",
+     "kind": "search",
+     "text": "la friche nord lyon"
+    },
+    {
+     "id": "w07",
+     "at": "2026-10-01 12:41",
+     "kind": "visit",
+     "text": "La Friche Nord — salle de concerts, Vaise",
+     "url": "lafrichenord.fr",
+     "summary": "Ancienne usine textile reconvertie : 1 500 places, deux scènes, un studio de résidence. Ouverture de la saison en décembre."
+    },
+    {
+     "id": "w08",
+     "at": "2026-10-05 09:30",
+     "kind": "search",
+     "text": "preavis demission cdi 3 ans anciennete"
+    },
+    {
+     "id": "w09",
+     "at": "2026-10-09 18:20",
+     "kind": "search",
+     "text": "idées repas rapide avant service de nuit"
+    },
+    {
+     "id": "w10",
+     "at": "2026-10-12 23:40",
+     "kind": "search",
+     "text": "inspection du travail signalement anonyme ?"
+    },
+    {
+     "id": "w11",
+     "at": "2026-10-12 23:44",
+     "kind": "visit",
+     "text": "Signaler un danger sur son lieu de travail",
+     "url": "travail-emploi.gouv.fr/signaler",
+     "summary": "Tout salarié peut saisir l'inspection du travail par courrier ou par mail. L'inspecteur est tenu au secret sur l'origine du signalement."
+    },
+    {
+     "id": "w12",
+     "at": "2026-10-13 00:02",
+     "kind": "search",
+     "text": "issue de secours encombree obligation erp"
+    },
+    {
+     "id": "w13",
+     "at": "2026-10-14 13:55",
+     "kind": "search",
+     "text": "agression quais de saone samedi"
+    },
+    {
+     "id": "w14",
+     "at": "2026-10-16 18:03",
+     "kind": "search",
+     "text": "meteo lyon nuit vendredi"
+    },
+    {
+     "id": "w15",
+     "at": "2026-10-17 04:31",
+     "kind": "search",
+     "text": "premier métro terreaux samedi"
+    },
+    {
+     "id": "w16",
+     "at": "2026-10-17 04:32",
+     "kind": "visit",
+     "text": "Horaires — Ligne D : premiers départs",
+     "url": "tcl-horaires.fr/ligne-d",
+     "summary": "Samedi : premier départ 04:55. Passage à Terreaux-Sud vers 05:04, direction Gare de Vaise."
+    }
+   ],
+   "liveEvents": [
+    {
+     "id": "lv01",
+     "afterSeconds": 25,
+     "kind": "message",
+     "app": "messages",
+     "title": "Anaïs Aubry",
+     "body": "yanis dit qu'elle est jamais venue chez lui. clem t'es où ???",
+     "conversation": "c_anais",
+     "message": {
+      "id": "m_live_anais_yanis",
+      "from": "anais",
+      "at": "2026-10-17 07:40",
+      "text": "yanis dit qu'elle est jamais venue chez lui. clem t'es où ???"
+     },
+     "opens": "message:m_live_anais_yanis",
+     "level": "urgent"
+    },
+    {
+     "id": "lv02",
+     "afterSeconds": 80,
+     "kind": "call",
+     "app": "phone",
+     "title": "Appel manqué",
+     "body": "Papa",
+     "call": {
+      "id": "k_lv_papa",
+      "contact": "papa",
+      "direction": "missed",
+      "at": "2026-10-17 07:41",
+      "durationSeconds": 0
+     },
+     "opens": "call:k_lv_papa",
+     "level": "normal"
+    },
+    {
+     "id": "lv03",
+     "afterSeconds": 140,
+     "kind": "message",
+     "app": "messages",
+     "title": "Mathilde Roche",
+     "body": "Clémence, rappelle-moi dès que tu vois ça. Je me suis inquiétée toute la nuit.",
+     "conversation": "c_mathilde",
+     "message": {
+      "id": "m_live_mathilde",
+      "from": "mathilde",
+      "at": "2026-10-17 07:42",
+      "text": "Clémence, rappelle-moi dès que tu vois ça. Je me suis inquiétée toute la nuit."
+     },
+     "opens": "message:m_live_mathilde",
+     "level": "important"
+    },
+    {
+     "id": "lv04",
+     "afterSeconds": 200,
+     "kind": "reminder",
+     "app": "calendar",
+     "title": "Lundi 10:00",
+     "body": "Visite inspection — Silo · Le Silo, quai Rambaud",
+     "opens": "calendar:c_inspection",
+     "level": "important"
+    },
+    {
+     "id": "lv05",
+     "afterSeconds": 250,
+     "kind": "message",
+     "app": "messages",
+     "title": "Yanis Ferhat",
+     "body": "c'est pas moi. j'ai fini à 3h30 demande à kader",
+     "conversation": "c_yanis",
+     "message": {
+      "id": "m_live_yanis",
+      "from": "yanis",
+      "at": "2026-10-17 07:44",
+      "text": "c'est pas moi. j'ai fini à 3h30 demande à kader"
+     },
+     "opens": "message:m_live_yanis",
+     "level": "normal"
+    },
+    {
+     "id": "lv06",
+     "afterSeconds": 310,
+     "kind": "message",
+     "app": "messages",
+     "title": "Staff Silo 🔊 — Kader",
+     "body": "la police est au silo, ils demandent les vidéos du parking des docks",
+     "conversation": "c_staff",
+     "message": {
+      "id": "m_live_staff_police",
+      "from": "kader",
+      "at": "2026-10-17 07:45",
+      "text": "la police est au silo, ils demandent les vidéos du parking des docks"
+     },
+     "opens": "message:m_live_staff_police",
+     "level": "important"
+    },
+    {
+     "id": "lv07",
+     "afterSeconds": 370,
+     "kind": "message",
+     "app": "messages",
+     "title": "Bastien Kermarrec",
+     "body": "je suis désolé. j'aurais dû venir te chercher",
+     "conversation": "c_bastien",
+     "message": {
+      "id": "m_live_bastien",
+      "from": "bastien",
+      "at": "2026-10-17 07:46",
+      "text": "je suis désolé. j'aurais dû venir te chercher"
+     },
+     "opens": "message:m_live_bastien",
+     "level": "normal"
+    },
+    {
+     "id": "lv08",
+     "afterSeconds": 430,
+     "kind": "message",
+     "app": "messages",
+     "title": "Anaïs Aubry",
+     "body": "la police me demande si t'avais des problèmes au boulot. je sais pas quoi leur dire",
+     "conversation": "c_anais",
+     "message": {
+      "id": "m_live_anais_police",
+      "from": "anais",
+      "at": "2026-10-17 07:47",
+      "text": "la police me demande si t'avais des problèmes au boulot. je sais pas quoi leur dire"
+     },
+     "opens": "message:m_live_anais_police",
+     "level": "normal"
+    }
+   ],
+   "wallpaper": "ice",
+   "batteryPercent": 9
+  }
+ ],
+ "suspects": [
+  {
+   "id": "s_mathilde",
+   "contact": "mathilde",
+   "role": "Gérante du Silo",
+   "age": 41,
+   "address": "Vaise (Lyon 9e)",
+   "statement": "« Je suis partie du Silo vers 1h30 et je suis rentrée directement chez moi, à Vaise. Je n'ai pas revu Clémence. »",
+   "verdict": "Mathilde Roche a menti. Elle a attendu Clémence au parking des Docks, l'a appelée à 02:19 et l'a fait monter dans sa voiture. Après la dispute, elle a gardé le téléphone, a écrit à Anaïs à 03:07 depuis chez elle, quai Arloing, puis l'a déposé à la station Terreaux-Sud."
+  },
+  {
+   "id": "s_yanis",
+   "contact": "yanis",
+   "role": "DJ résident du Silo, ex de Clémence",
+   "age": 32,
+   "address": "Villeurbanne — Gratte-Ciel",
+   "alibi": "À 02:48, Yanis était aux platines du Silo (photo de Kader, horloge de la régie), et le planning le fait jouer jusqu'à 03:30. Le téléphone, lui, était déjà à Vaise.",
+   "alibiEvidence": "e_yanis_alibi",
+   "trap": "« Tu vas le regretter » et un message qui dit « je dors chez Yanis » : tout semblait l'accuser. Il parlait de son départ à La Friche Nord, et le message qui le nomme n'a pas été écrit par Clémence.",
+   "statement": "« J'ai joué jusqu'à la fermeture, 3h30, puis je suis rentré à Villeurbanne en taxi. Elle n'est jamais venue chez moi. »",
+   "verdict": "Yanis n'y est pour rien. Son « tu vas le regretter » parlait de La Friche Nord. À 02:48, il était aux platines, et le message « je dors chez Yanis » part de Vaise, pas de Villeurbanne : quelqu'un a voulu le désigner."
+  },
+  {
+   "id": "s_bastien",
+   "contact": "bastien",
+   "role": "Colocataire de Clémence",
+   "age": 30,
+   "address": "Montée de la Grande-Côte (Croix-Rousse)",
+   "alibi": "Sa position partagée ne quitte pas l'appartement de la Croix-Rousse de 23:50 à 07:30.",
+   "alibiEvidence": "e_bastien_alibi",
+   "trap": "Il dit avoir dormi toute la nuit, mais il a décroché à 02:14 et refusé d'aller la chercher. Il a menti par honte, pas pour se couvrir.",
+   "statement": "« Je dormais. Je n'ai rien entendu de la nuit. »",
+   "verdict": "Bastien a menti par honte : il a décroché à 02:14 et a refusé de venir parce qu'il avait bu. Mais sa position ne quitte pas la Croix-Rousse de la nuit."
+  },
+  {
+   "id": "s_raphael",
+   "contact": "raphael",
+   "role": "Responsable sécurité du Silo",
+   "age": 35,
+   "address": "Oullins",
+   "alibi": "À 03:04, il photographiait la file d'attente devant l'entrée du Silo — son reflet dans la vitre, l'heure sur l'enseigne. Le téléphone était alors à Vaise, à quatre kilomètres.",
+   "alibiEvidence": "e_raphael_alibi",
+   "trap": "Le dernier à l'avoir vue, et des semaines de messages insistants pour la raccompagner. Mais il n'a pas quitté la porte.",
+   "statement": "« Je l'ai laissée devant le club à 2h12. Je suis resté à la porte jusqu'à la fermeture. »",
+   "verdict": "Raphaël était trop insistant, mais il a dit vrai : il est resté à la porte du Silo. Sa photo de la file est prise à 03:04, quand le téléphone de Clémence était déjà quai Arloing."
+  }
+ ],
+ "evidence": [
+  {
+   "id": "e_fake_message",
+   "title": "Le message de 03:07",
+   "importance": "key",
+   "suspects": [
+    "s_mathilde"
+   ],
+   "refs": [
+    "message:m_anais_0307",
+    "track:t_me"
+   ],
+   "meaning": "À 03:07, le message « je dors chez Yanis » part du quai Arloing, à Vaise. Le téléphone n'a jamais été à Villeurbanne. Et ce n'est pas la façon d'écrire de Clémence : majuscules, accents, points."
+  },
+  {
+   "id": "e_address",
+   "title": "L'adresse de Mathilde",
+   "importance": "key",
+   "suspects": [
+    "s_mathilde"
+   ],
+   "refs": [
+    "calendar:c_apero_mathilde"
+   ],
+   "meaning": "Mathilde habite 14 quai Arloing : le téléphone y a passé 1 h 38, de 02:58 à 04:36."
+  },
+  {
+   "id": "e_call",
+   "title": "L'appel de 02:19",
+   "importance": "key",
+   "suspects": [
+    "s_mathilde"
+   ],
+   "refs": [
+    "call:k_mathilde_0219"
+   ],
+   "meaning": "Mathilde, qui dit ne pas l'avoir revue, l'appelle à 02:19 pendant presque 2 minutes. Cinq minutes plus tard, le téléphone est au parking des Docks."
+  },
+  {
+   "id": "e_motive",
+   "title": "Le signalement",
+   "importance": "key",
+   "suspects": [
+    "s_mathilde"
+   ],
+   "anyOf": true,
+   "refs": [
+    "mail:mail_inspection_ack",
+    "message:m_mathilde_2240"
+   ],
+   "meaning": "Clémence a signalé le Silo à l'inspection du travail : visite lundi 19 à 10h, fermeture possible. Le soir même où Mathilde l'apprend, elle écrit « Il faut qu'on parle ce soir. Pas au club. »"
+  },
+  {
+   "id": "e_keyring",
+   "title": "Le porte-clés rouge",
+   "importance": "supporting",
+   "suspects": [
+    "s_mathilde"
+   ],
+   "refs": [
+    "photoInfo:p_pocket_0309",
+    "photoInfo:p_apero_keys"
+   ],
+   "meaning": "La photo prise par erreur à 03:09 montre le porte-clés en cuir rouge « M » de Mathilde, sur le même parquet clair que le soir de l'apéro."
+  },
+  {
+   "id": "e_cut_call",
+   "title": "L'appel coupé",
+   "importance": "supporting",
+   "suspects": [
+    "s_mathilde"
+   ],
+   "refs": [
+    "call:k_anais_0246"
+   ],
+   "meaning": "À 02:46, Clémence appelle sa sœur : 4 secondes, puis plus rien. Elle était dans la voiture de Mathilde."
+  },
+  {
+   "id": "e_yanis_alibi",
+   "title": "L'alibi de Yanis",
+   "importance": "supporting",
+   "suspects": [
+    "s_yanis"
+   ],
+   "anyOf": true,
+   "refs": [
+    "photoInfo:p_booth_0248",
+    "mail:mail_running_order"
+   ],
+   "meaning": "À 02:48, Yanis est aux platines du Silo ; il joue jusqu'à 03:30."
+  },
+  {
+   "id": "e_bastien_alibi",
+   "title": "L'alibi de Bastien",
+   "importance": "supporting",
+   "suspects": [
+    "s_bastien"
+   ],
+   "refs": [
+    "track:t_bastien"
+   ],
+   "meaning": "Bastien n'a pas quitté l'appartement de la Croix-Rousse de 23:50 à 07:30."
+  },
+  {
+   "id": "e_raphael_alibi",
+   "title": "L'alibi de Raphaël",
+   "importance": "supporting",
+   "suspects": [
+    "s_raphael"
+   ],
+   "refs": [
+    "photoInfo:p_door_0304"
+   ],
+   "meaning": "À 03:04, Raphaël photographie la file devant le Silo : sa doudoune orange dans la vitre, l'heure sur l'enseigne."
+  },
+  {
+   "id": "f_yanis_threat",
+   "title": "« Tu vas le regretter »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_yanis"
+   ],
+   "refs": [
+    "message:m_yanis_0152"
+   ],
+   "meaning": "Pas une menace : Yanis parle de son départ à La Friche Nord, comme le montrent les messages autour."
+  },
+  {
+   "id": "f_bastien_lie",
+   "title": "Le coloc qui « dormait »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_bastien"
+   ],
+   "refs": [
+    "call:k_bastien_0214"
+   ],
+   "meaning": "Bastien a décroché 48 secondes à 02:14 et a refusé d'aller la chercher. Il a menti par honte."
+  },
+  {
+   "id": "f_raphael_last",
+   "title": "Le dernier à l'avoir vue",
+   "importance": "falseLead",
+   "suspects": [
+    "s_raphael"
+   ],
+   "refs": [
+    "message:m_staff_0213"
+   ],
+   "meaning": "Raphaël l'a laissée au coin du quai à 02:12, puis il est retourné à la porte. Ses messages insistants n'en font pas un coupable."
+  },
+  {
+   "id": "f_named_yanis",
+   "title": "« Vous vous êtes remis ensemble ? »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_yanis"
+   ],
+   "refs": [
+    "message:m_anais_0310"
+   ],
+   "meaning": "Anaïs a cru le message de 03:07. C'est exactement ce que son auteur voulait : que tout le monde cherche chez Yanis."
+  }
+ ],
+ "hints": [
+  {
+   "id": "h1",
+   "text": "Un téléphone se souvient d'où il était. Comparez chaque message de la nuit avec l'endroit où il se trouvait.",
+   "scoreCost": 0
+  },
+  {
+   "id": "h2",
+   "text": "Regardez l'historique de position « Moi » entre 2h et 5h, puis cherchez qui habite là.",
+   "scoreCost": 8
+  },
+  {
+   "id": "h3",
+   "text": "Le message de 03:07 n'est pas écrit comme les autres, et il part de Vaise. Qui a appelé Clémence à 02:19 ?",
+   "scoreCost": 15,
+   "unlockAtRemainingSeconds": 120
+  }
+ ],
+ "solution": {
+  "culprit": "s_mathilde",
+  "headline": "Mathilde Roche a gardé le téléphone de Clémence et a écrit à sa place.",
+  "summary": "Elle disait être rentrée seule à Vaise. Le téléphone de Clémence y est rentré avec elle.",
+  "reveal": [
+   {
+    "at": "2026-10-15 16:05",
+    "text": "L'inspection du travail annonce une visite du Silo lundi à 10h et prévient l'exploitante",
+    "evidence": "e_motive"
+   },
+   {
+    "at": "2026-10-16 22:40",
+    "text": "« Il faut qu'on parle ce soir, après ton service. Pas au club. »",
+    "evidence": "e_motive"
+   },
+   {
+    "at": "2026-10-17 02:14",
+    "text": "Bastien décroche, mais refuse de venir la chercher",
+    "evidence": "f_bastien_lie"
+   },
+   {
+    "at": "2026-10-17 02:19",
+    "text": "Mathilde appelle : « je suis au parking des Docks ». À 02:24, le téléphone y est",
+    "evidence": "e_call"
+   },
+   {
+    "at": "2026-10-17 02:46",
+    "text": "Clémence tente d'appeler sa sœur : 4 secondes, coupé",
+    "evidence": "e_cut_call"
+   },
+   {
+    "at": "2026-10-17 02:58",
+    "text": "Le téléphone arrive quai Arloing, chez Mathilde, et y reste 1 h 38",
+    "evidence": "e_address"
+   },
+   {
+    "at": "2026-10-17 03:07",
+    "text": "« Ne t'inquiète pas, je dors chez Yanis. » — des majuscules, des points, et Vaise",
+    "evidence": "e_fake_message"
+   },
+   {
+    "at": "2026-10-17 03:09",
+    "text": "Une photo prise par erreur : le porte-clés rouge au grand M",
+    "evidence": "e_keyring"
+   },
+   {
+    "at": "2026-10-17 04:52",
+    "text": "Le téléphone est posé sur un banc de Terreaux-Sud, avant le premier métro",
+    "evidence": "e_fake_message"
+   }
+  ],
+  "story": [
+   "Mardi 13 octobre, Clémence signale le Silo à l'inspection du travail : l'issue de secours de la cour est bloquée par des fûts, et la jauge de 800 personnes est dépassée presque chaque week-end. Jeudi, l'inspection annonce une visite pour lundi 10h et prévient l'exploitante. Mathilde n'a pas besoin de nom : une seule personne avait photographié ces fûts dans le groupe du staff.",
+   "Vendredi à 22:40, Mathilde écrit : « Il faut qu'on parle ce soir, après ton service. Pas au club. » À 01:31, elle annonce à tout le monde qu'elle rentre. En réalité, elle attend dans sa voiture, au parking des Docks, à deux cents mètres de la sortie.",
+   "À 02:12, Clémence quitte le Silo. Il fait 4 degrés. Bastien, qui a bu, refuse de venir la chercher. À 02:19, Mathilde appelle et propose de la ramener. Dans la voiture, elle prend la direction de Vaise « pour parler cinq minutes » et exige que Clémence retire son signalement. À 02:46, Clémence essaie d'appeler sa sœur ; Mathilde lui ordonne de raccrocher.",
+   "À 02:52, quai Arloing, Clémence claque la portière et part à pied le long de la Saône. Son téléphone est resté sur le socle de charge du tableau de bord, déverrouillé. Mathilde le monte chez elle. À 03:07, elle répond à Anaïs à la place de sa sœur — avec des majuscules, des accents, des points — et nomme Yanis. À 03:09, en le reposant, elle déclenche l'appareil photo : son propre porte-clés apparaît sur l'image.",
+   "À 04:36, elle ressort, vérifie l'horaire du premier métro sur le téléphone de Clémence et le dépose à 04:52 sur un banc de la station Terreaux-Sud, pour faire croire que Clémence est partie seule. Un agent le trouve à 05:12, huit minutes après le passage du premier métro.",
+   "Grâce à votre enquête, les recherches se concentrent sur les berges de Vaise. Clémence est retrouvée à 9h sous un pont, la cheville tordue, en hypothermie, mais vivante. Mathilde reconnaît avoir gardé le téléphone et envoyé le message."
+  ]
+ }
+}

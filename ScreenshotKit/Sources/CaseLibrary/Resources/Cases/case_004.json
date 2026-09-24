@@ -1,0 +1,3077 @@
+{
+ "schemaVersion": 1,
+ "id": "case_004",
+ "number": 4,
+ "title": "90 SECONDES",
+ "tagline": "Quatre-vingt-dix secondes de noir. Un collier de 4 millions.",
+ "synopsis": [
+  "Jeudi 12 novembre, gala d'ouverture de l'exposition « Éclats — joaillerie du XXᵉ siècle » au Pavillon Mercure, à Paris. Pièce maîtresse : le collier Aurore, 1928, prêté par le collectionneur Adrien Sterne.",
+  "À 22h14, la salle plonge dans le noir pendant 90 secondes. Quand la lumière revient, la vitrine 4 est vide. Aucune effraction.",
+  "La commissaire de l'exposition, Salomé Tessier, vous confie son téléphone. Tout le monde a une théorie."
+ ],
+ "objective": "Découvrir qui a fait disparaître le collier Aurore.",
+ "difficulty": 1,
+ "durationSeconds": 480,
+ "phoneStartTime": "2026-11-12 23:25",
+ "challengeDurations": {
+  "investigator": 900,
+  "detective": 480,
+  "expert": 300
+ },
+ "introScene": {
+  "shots": [
+   {
+    "kind": "scene",
+    "seconds": 7,
+    "scene": "gala",
+    "camera": "push",
+    "ambience": [
+     "hall"
+    ],
+    "lines": [
+     {
+      "text": "PAVILLON MERCURE · JEUDI 12 NOVEMBRE · 22:13",
+      "at": 0.3
+     },
+     {
+      "text": "Mesdames et messieurs… dans quelques instants, le collier Aurore.",
+      "at": 2.4,
+      "speaker": "Iris Nakamura",
+      "voiced": true
+     }
+    ]
+   },
+   {
+    "kind": "scene",
+    "seconds": 4,
+    "scene": "vitrine",
+    "camera": "push",
+    "ambience": [
+     "hall"
+    ]
+   },
+   {
+    "kind": "scene",
+    "seconds": 5,
+    "scene": "gala",
+    "camera": "still",
+    "effect": "blackout",
+    "ambience": [
+     "hall"
+    ],
+    "cues": [
+     {
+      "sound": "powerdown",
+      "at": 0.3
+     },
+     {
+      "sound": "sting",
+      "at": 1.2
+     }
+    ],
+    "lines": [
+     {
+      "text": "22:14",
+      "at": 0.5
+     }
+    ]
+   },
+   {
+    "kind": "scene",
+    "seconds": 4.5,
+    "scene": "vitrine_empty",
+    "camera": "push",
+    "ambience": [
+     "crowd"
+    ],
+    "lines": [
+     {
+      "text": "La vitrine 4 est vide.",
+      "at": 1.2
+     }
+    ]
+   },
+   {
+    "kind": "phoneOnTable",
+    "seconds": 6.5,
+    "surface": "marble",
+    "label": "Salon d'honneur — 22:31",
+    "ambience": [
+     "crowd"
+    ],
+    "cues": [
+     {
+      "sound": "vibrate",
+      "at": 0.6
+     },
+     {
+      "sound": "notification",
+      "at": 0.65
+     },
+     {
+      "sound": "notification",
+      "at": 1.9
+     },
+     {
+      "sound": "ring",
+      "at": 3.2
+     }
+    ],
+    "notifications": [
+     {
+      "app": "messages",
+      "title": "Victor Almeida",
+      "body": "C'était pas une panne. Personne t'a prévenue ??",
+      "at": 0.6
+     },
+     {
+      "app": "messages",
+      "title": "Éclats — équipe gala",
+      "body": "Hélène : la police est là",
+      "at": 1.9
+     },
+     {
+      "app": "phone",
+      "title": "Adrien Sterne",
+      "body": "Appel entrant",
+      "at": 3.2,
+      "call": true
+     }
+    ]
+   },
+   {
+    "kind": "unlock",
+    "seconds": 2.4
+   }
+  ]
+ },
+ "devices": [
+  {
+   "id": "dev_salome",
+   "label": "Téléphone de Salomé",
+   "model": "iPhone 16 Pro",
+   "lockedApps": [],
+   "contacts": [
+    {
+     "id": "me",
+     "name": "Salomé Tessier",
+     "phone": "+33 6 12 48 73 05",
+     "relation": "Moi",
+     "email": "salome.tessier@volute.fr",
+     "birthday": "09/05/1990",
+     "avatarHue": 0.11,
+     "isOwner": true
+    },
+    {
+     "id": "sterne",
+     "name": "Adrien Sterne",
+     "phone": "+33 6 07 21 94 58",
+     "relation": "Prêteur — collier Aurore",
+     "email": "a.sterne@collection-sterne.fr",
+     "avatarHue": 0.09
+    },
+    {
+     "id": "enzo",
+     "name": "Enzo Barros",
+     "phone": "+33 6 51 38 72 44",
+     "relation": "Extra Relais Intérim (gala)",
+     "avatarHue": 0.55
+    },
+    {
+     "id": "victor",
+     "name": "Victor Almeida",
+     "phone": "+33 6 33 70 15 82",
+     "relation": "Régisseur lumière — Pavillon Mercure",
+     "email": "v.almeida@pavillon-mercure.fr",
+     "avatarHue": 0.62
+    },
+    {
+     "id": "iris",
+     "name": "Iris Nakamura",
+     "phone": "+33 6 80 44 27 19",
+     "relation": "Animatrice du gala",
+     "avatarHue": 0.88
+    },
+    {
+     "id": "josiane",
+     "name": "Josiane Petit",
+     "phone": "+33 6 22 91 03 67",
+     "relation": "Vestiaire — Pavillon Mercure",
+     "avatarHue": 0.03
+    },
+    {
+     "id": "helene",
+     "name": "Hélène Dubreuil",
+     "phone": "+33 6 45 12 88 30",
+     "relation": "Directrice du Pavillon Mercure",
+     "email": "h.dubreuil@pavillon-mercure.fr",
+     "avatarHue": 0.4
+    },
+    {
+     "id": "noemie",
+     "name": "Noémie Castel",
+     "phone": "+33 7 68 02 51 94",
+     "relation": "Assistante",
+     "email": "noemie.castel@volute.fr",
+     "avatarHue": 0.33
+    },
+    {
+     "id": "camille",
+     "name": "Camille Tessier",
+     "phone": "+33 6 74 39 60 12",
+     "relation": "Sœur",
+     "avatarHue": 0.95
+    },
+    {
+     "id": "samir",
+     "name": "Samir Bouaziz",
+     "phone": "+33 6 19 57 84 26",
+     "relation": "Ami",
+     "avatarHue": 0.2
+    },
+    {
+     "id": "lemaire",
+     "name": "Pierre-Yves Lemaire",
+     "phone": "+33 6 90 26 47 71",
+     "relation": "Scénographe — atelier Bagnolet",
+     "email": "py@lemaire-scenographie.fr",
+     "avatarHue": 0.72
+    },
+    {
+     "id": "garrel",
+     "name": "Étienne Garrel",
+     "phone": "+33 1 42 60 18 35",
+     "relation": "Expert joaillerie (constats d'état)",
+     "email": "e.garrel@garrel-expertise.fr",
+     "avatarHue": 0.5
+    },
+    {
+     "id": "valmont",
+     "name": "Cécile Morin — Valmont Art",
+     "phone": "+33 1 46 93 70 22",
+     "relation": "Assureur (chargée de compte)",
+     "email": "c.morin@valmont-art.fr",
+     "avatarHue": 0.66
+    },
+    {
+     "id": "agence",
+     "name": "Relais Intérim",
+     "phone": "01 44 52 18 90",
+     "relation": "Agence d'intérim",
+     "avatarHue": 0.15
+    },
+    {
+     "id": "fauve",
+     "name": "Maison Fauve Réceptions",
+     "phone": "01 43 57 62 08",
+     "relation": "Prestataire du cocktail",
+     "avatarHue": 0.8
+    },
+    {
+     "id": "arteo",
+     "name": "Arteo Transports",
+     "phone": "01 48 12 77 40",
+     "relation": "Transport d'œuvres",
+     "avatarHue": 0.25
+    },
+    {
+     "id": "banque",
+     "name": "Banque Citadine",
+     "phone": "36 10",
+     "avatarHue": 0.58
+    }
+   ],
+   "conversations": [
+    {
+     "id": "c_sterne",
+     "participants": [
+      "sterne"
+     ],
+     "messages": [
+      {
+       "id": "m_sterne_000",
+       "from": "sterne",
+       "at": "2026-10-02 16:05",
+       "text": "Chère Salomé, merci pour ce déjeuner. Votre projet pour « Éclats » m'a convaincu : l'Aurore sera des vôtres. Mon notaire vous fera parvenir la convention de prêt dans la semaine. Bien à vous, A. S."
+      },
+      {
+       "id": "m_sterne_001",
+       "from": "me",
+       "at": "2026-10-02 16:40",
+       "text": "Merci infiniment, Monsieur Sterne. C'est une très belle nouvelle pour l'exposition."
+      },
+      {
+       "id": "m_sterne_002",
+       "from": "sterne",
+       "at": "2026-10-09 18:22",
+       "text": "Convention signée ce jour. Je compte sur vous pour que l'Aurore soit traitée comme une personne, et non comme un objet. A. S."
+      },
+      {
+       "id": "m_sterne_003",
+       "from": "me",
+       "at": "2026-10-09 18:35",
+       "text": "Elle le sera. Vitrine 4, salle 2, dans l'axe de l'entrée. Je vous envoie le plan dès qu'il est validé."
+      },
+      {
+       "id": "m_sterne_004",
+       "from": "sterne",
+       "at": "2026-10-16 11:03",
+       "text": "Chère Salomé, mon joaillier a revu l'estimation de l'Aurore : les perles fines de cette qualité ont pris beaucoup de valeur ces dernières années. J'ai prié Valmont d'en tenir compte. Pardonnez-moi ces formalités. A. S."
+      },
+      {
+       "id": "m_sterne_005",
+       "from": "me",
+       "at": "2026-10-16 11:20",
+       "text": "Aucun souci, je transmets à Hélène pour le dossier de la salle."
+      },
+      {
+       "id": "m_sterne_006",
+       "from": "sterne",
+       "at": "2026-10-28 15:48",
+       "text": "M. Garrel sort de chez moi. Il a trouvé l'Aurore « en parfait état ». J'avoue en être soulagé. A. S."
+      },
+      {
+       "id": "m_sterne_007",
+       "from": "me",
+       "at": "2026-10-28 16:02",
+       "text": "Oui, il m'a appelée, tout est conforme. Vous aurez son rapport ce soir."
+      },
+      {
+       "id": "m_sterne_key",
+       "from": "sterne",
+       "at": "2026-10-29 09:12",
+       "text": "Comme convenu dans la convention de prêt, je conserve le double de la clé de la vitrine 4. Je préfère qu'il en soit ainsi. A. S."
+      },
+      {
+       "id": "m_sterne_009",
+       "from": "me",
+       "at": "2026-10-29 09:30",
+       "text": "Entendu. L'original reste avec moi, dans le coffre du Pavillon."
+      },
+      {
+       "id": "m_sterne_010",
+       "from": "sterne",
+       "at": "2026-11-06 19:10",
+       "text": "Pour la soirée, je rêve d'un vrai moment de théâtre autour de l'Aurore. Me permettez-vous d'en toucher un mot à votre équipe technique ? A. S."
+      },
+      {
+       "id": "m_sterne_011",
+       "from": "me",
+       "at": "2026-11-06 19:31",
+       "text": "Bien sûr, voyez directement avec Victor, le régisseur. Il adore ce genre de défi."
+      },
+      {
+       "id": "m_sterne_012",
+       "from": "sterne",
+       "at": "2026-11-10 20:05",
+       "text": "Je serai là jeudi dès 17h. J'ai hâte, et un peu le trac, je l'avoue. A. S."
+      },
+      {
+       "id": "m_sterne_1712",
+       "from": "sterne",
+       "at": "2026-11-12 17:12",
+       "text": "Mon joaillier, M. Kessler, passera avec moi à 17h30 pour un dernier nettoyage. Vingt minutes, seuls, s'il vous plaît. A. S."
+      },
+      {
+       "id": "m_sterne_014",
+       "from": "me",
+       "at": "2026-11-12 17:14",
+       "text": "Bien sûr, je préviens la sécurité."
+      },
+      {
+       "id": "m_sterne_015",
+       "from": "sterne",
+       "at": "2026-11-12 17:53",
+       "text": "C'est fait. Elle brille comme au premier jour. Merci de votre confiance. A. S."
+      },
+      {
+       "id": "m_sterne_016",
+       "from": "me",
+       "at": "2026-11-12 22:24",
+       "text": "Monsieur Sterne, où êtes-vous ? La police veut voir tout le monde en salle 1."
+      }
+     ]
+    },
+    {
+     "id": "c_team",
+     "participants": [
+      "helene",
+      "victor",
+      "noemie",
+      "josiane",
+      "lemaire"
+     ],
+     "messages": [
+      {
+       "id": "m_team_000",
+       "from": "helene",
+       "at": "2026-10-05 09:02",
+       "text": "Bonjour à tous, je crée le groupe pour le gala du 12/11. Merci de garder les échanges ici plutôt que par mail 🙏"
+      },
+      {
+       "id": "m_team_001",
+       "from": "noemie",
+       "at": "2026-10-05 09:10",
+       "text": "Parfait !"
+      },
+      {
+       "id": "m_team_002",
+       "from": "victor",
+       "at": "2026-10-05 09:31",
+       "text": "ok"
+      },
+      {
+       "id": "m_team_003",
+       "from": "lemaire",
+       "at": "2026-10-05 10:02",
+       "text": "Bonjour à tous. Premier plan de salle d'ici mercredi."
+      },
+      {
+       "id": "m_team_004",
+       "from": "lemaire",
+       "at": "2026-10-07 18:40",
+       "text": "Plan v1 sur le drive. 6 vitrines, scène côté jardin."
+      },
+      {
+       "id": "m_team_005",
+       "from": "me",
+       "at": "2026-10-07 19:02",
+       "text": "Merci PY. On en parle demain 10h au Pavillon."
+      },
+      {
+       "id": "m_team_006",
+       "from": "victor",
+       "at": "2026-10-13 14:15",
+       "text": "qui a les clés du local technique ? faut que je sorte les découpes"
+      },
+      {
+       "id": "m_team_007",
+       "from": "helene",
+       "at": "2026-10-13 14:20",
+       "text": "Moi. Je descends."
+      },
+      {
+       "id": "m_team_008",
+       "from": "noemie",
+       "at": "2026-10-20 08:47",
+       "text": "Arteo confirme les vitrines pour demain, créneau 8h-10h"
+      },
+      {
+       "id": "m_team_009",
+       "from": "me",
+       "at": "2026-10-20 08:50",
+       "text": "Super. Il faut quelqu'un au quai de livraison dès 7h45"
+      },
+      {
+       "id": "m_team_010",
+       "from": "josiane",
+       "at": "2026-10-20 08:52",
+       "text": "Je serai là, j'ouvre à 7h30 de toute façon"
+      },
+      {
+       "id": "m_team_011",
+       "from": "noemie",
+       "at": "2026-10-21 10:14",
+       "text": "Le camion est bloqué sur le périph 🙃 ils annoncent 11h30"
+      },
+      {
+       "id": "m_team_012",
+       "from": "noemie",
+       "at": "2026-10-21 11:40",
+       "text": "Les vitrines sont là ! Une rayure sur la 6, je la prends en photo pour les réserves"
+      },
+      {
+       "id": "m_team_013",
+       "from": "lemaire",
+       "at": "2026-10-23 17:05",
+       "text": "Plan v3 validé par Hélène. La vitrine 4 est dans l'axe de la poursuite."
+      },
+      {
+       "id": "m_team_014",
+       "from": "victor",
+       "at": "2026-10-23 17:10",
+       "text": "je la règle lundi"
+      },
+      {
+       "id": "m_team_015",
+       "from": "helene",
+       "at": "2026-10-27 12:30",
+       "text": "Rappel : noms + fonctions pour les badges avant le 6/11"
+      },
+      {
+       "id": "m_team_016",
+       "from": "noemie",
+       "at": "2026-10-27 12:44",
+       "text": "Je fais le tableau"
+      },
+      {
+       "id": "m_team_017",
+       "from": "josiane",
+       "at": "2026-11-03 09:15",
+       "text": "Combien de personnes au vestiaire le 12 ? J'ai 280 cintres"
+      },
+      {
+       "id": "m_team_018",
+       "from": "me",
+       "at": "2026-11-03 09:40",
+       "text": "350 invités. On prend des portants en plus ?"
+      },
+      {
+       "id": "m_team_019",
+       "from": "josiane",
+       "at": "2026-11-03 09:41",
+       "text": "Je m'en occupe"
+      },
+      {
+       "id": "m_team_victor_joke",
+       "from": "victor",
+       "at": "2026-11-05 18:22",
+       "text": "toujours pas de réponse pour mes heures du 11. je vais finir par leur faire un noir en plein discours 😤"
+      },
+      {
+       "id": "m_team_021",
+       "from": "helene",
+       "at": "2026-11-05 18:30",
+       "text": "Victor, on en parle demain matin dans mon bureau."
+      },
+      {
+       "id": "m_team_022",
+       "from": "noemie",
+       "at": "2026-11-09 16:02",
+       "text": "Les cartels sont arrivés. Coquille sur la vitrine 2 : « 1928 » au lieu de « 1938 »"
+      },
+      {
+       "id": "m_team_023",
+       "from": "me",
+       "at": "2026-11-09 16:10",
+       "text": "Je rappelle l'imprimeur. Merci Noémie"
+      },
+      {
+       "id": "m_team_024",
+       "from": "helene",
+       "at": "2026-11-11 08:05",
+       "text": "Courage à ceux qui montent aujourd'hui malgré le férié. Café et viennoiseries à l'accueil ☕"
+      },
+      {
+       "id": "m_team_025",
+       "from": "lemaire",
+       "at": "2026-11-11 08:30",
+       "text": "Merci !! 🥐"
+      },
+      {
+       "id": "m_team_026",
+       "from": "noemie",
+       "at": "2026-11-12 07:58",
+       "text": "Jour J 💫"
+      },
+      {
+       "id": "m_team_027",
+       "from": "helene",
+       "at": "2026-11-12 13:40",
+       "text": "La sécurité arrive à 16h. Personne ne touche aux vitrines sans Salomé ou moi."
+      },
+      {
+       "id": "m_team_028",
+       "from": "me",
+       "at": "2026-11-12 16:12",
+       "text": "Aurore posée, vitrine 4 fermée à 16h10. Merci Hélène."
+      },
+      {
+       "id": "m_team_029",
+       "from": "victor",
+       "at": "2026-11-12 19:52",
+       "text": "régie ok. conducteur envoyé à Salomé"
+      },
+      {
+       "id": "m_team_030",
+       "from": "helene",
+       "at": "2026-11-12 20:01",
+       "text": "Portes ouvertes. Bonne soirée à tous 🥂"
+      },
+      {
+       "id": "m_team_031",
+       "from": "noemie",
+       "at": "2026-11-12 21:47",
+       "text": "Discours dans 3 min, Hélène t'es où ?"
+      },
+      {
+       "id": "m_team_032",
+       "from": "helene",
+       "at": "2026-11-12 21:48",
+       "text": "J'arrive"
+      },
+      {
+       "id": "m_team_033",
+       "from": "noemie",
+       "at": "2026-11-12 22:16",
+       "text": "LA VITRINE 4 EST VIDE"
+      },
+      {
+       "id": "m_team_034",
+       "from": "me",
+       "at": "2026-11-12 22:16",
+       "text": "Personne ne sort. Hélène, les portes."
+      },
+      {
+       "id": "m_victor_2216",
+       "from": "victor",
+       "at": "2026-11-12 22:16",
+       "text": "je suis en régie !! c'était le noir du conducteur, personne t'a prévenue ??",
+       "photo": "p_regie_2215"
+      },
+      {
+       "id": "m_team_036",
+       "from": "josiane",
+       "at": "2026-11-12 22:18",
+       "text": "Au vestiaire tout le monde est calme, je bouge pas"
+      },
+      {
+       "id": "m_team_2219",
+       "from": "helene",
+       "at": "2026-11-12 22:19",
+       "text": "l'extra est parti par l'arrière !!!"
+      },
+      {
+       "id": "m_team_038",
+       "from": "noemie",
+       "at": "2026-11-12 22:20",
+       "text": "Le serveur ?? Celui de ce soir ?"
+      },
+      {
+       "id": "m_team_039",
+       "from": "helene",
+       "at": "2026-11-12 22:22",
+       "text": "Sécurité prévenue. Police appelée."
+      },
+      {
+       "id": "m_team_040",
+       "from": "helene",
+       "at": "2026-11-12 22:31",
+       "text": "la police est là"
+      },
+      {
+       "id": "m_team_041",
+       "from": "noemie",
+       "at": "2026-11-12 22:58",
+       "text": "Ils prennent les identités de tout le monde en salle 1"
+      },
+      {
+       "id": "m_team_042",
+       "from": "helene",
+       "at": "2026-11-12 23:12",
+       "text": "Salomé, ils veulent ton téléphone aussi. Désolée.",
+       "unread": true
+      }
+     ],
+     "title": "Éclats — équipe gala ✨"
+    },
+    {
+     "id": "c_victor",
+     "participants": [
+      "victor"
+     ],
+     "messages": [
+      {
+       "id": "m_victor_000",
+       "from": "victor",
+       "at": "2026-10-08 11:20",
+       "text": "salut, t'as la fiche technique des vitrines ? faut que je sache s'il y a de la led dedans"
+      },
+      {
+       "id": "m_victor_001",
+       "from": "me",
+       "at": "2026-10-08 11:45",
+       "text": "Pas de LED intégrée, tout vient de tes découpes. Je t'envoie la fiche."
+      },
+      {
+       "id": "m_victor_002",
+       "from": "victor",
+       "at": "2026-10-19 17:02",
+       "text": "tes cartels sont trop brillants, ça va me faire des reflets partout"
+      },
+      {
+       "id": "m_victor_003",
+       "from": "me",
+       "at": "2026-10-19 17:20",
+       "text": "Je demande une finition mate à l'imprimeur"
+      },
+      {
+       "id": "m_victor_004",
+       "from": "victor",
+       "at": "2026-10-26 22:14",
+       "text": "réglage vitrine 4 fini. ça claque"
+      },
+      {
+       "id": "m_victor_005",
+       "from": "me",
+       "at": "2026-10-26 22:30",
+       "text": "Hâte de voir !"
+      },
+      {
+       "id": "m_victor_006",
+       "from": "victor",
+       "at": "2026-11-07 10:05",
+       "text": "le monsieur du collier m'a appelé. il veut un effet pour la révélation, je te fais un point"
+      },
+      {
+       "id": "m_victor_007",
+       "from": "me",
+       "at": "2026-11-07 10:40",
+       "text": "Ok, vois avec lui tant que ça reste élégant. Mets tout dans le conducteur."
+      },
+      {
+       "id": "m_victor_008",
+       "from": "victor",
+       "at": "2026-11-12 19:41",
+       "text": "conducteur v3 dans ta boîte. lis le avant 22h stp"
+      },
+      {
+       "id": "m_victor_009",
+       "from": "me",
+       "at": "2026-11-12 19:44",
+       "text": "Oui oui dès que je souffle"
+      },
+      {
+       "id": "m_victor_2230",
+       "from": "victor",
+       "at": "2026-11-12 22:30",
+       "text": "C'était pas une panne. Personne t'a prévenue ?? C'est écrit dans le conducteur, 22:14, je l'ai pas inventé"
+      },
+      {
+       "id": "m_victor_011",
+       "from": "victor",
+       "at": "2026-11-12 22:33",
+       "text": "ils photographient ma console comme si j'étais un voleur"
+      }
+     ]
+    },
+    {
+     "id": "c_helene",
+     "participants": [
+      "helene"
+     ],
+     "messages": [
+      {
+       "id": "m_helene_000",
+       "from": "helene",
+       "at": "2026-10-01 17:30",
+       "text": "Salomé, le conseil valide les dates : gala le 12 novembre, ouverture au public le 13. Bravo !"
+      },
+      {
+       "id": "m_helene_001",
+       "from": "me",
+       "at": "2026-10-01 17:45",
+       "text": "Merci Hélène !! On va faire quelque chose de beau."
+      },
+      {
+       "id": "m_helene_002",
+       "from": "helene",
+       "at": "2026-10-12 09:20",
+       "text": "Tu peux passer signer la convention de mise à disposition de la salle ?"
+      },
+      {
+       "id": "m_helene_003",
+       "from": "me",
+       "at": "2026-10-12 09:40",
+       "text": "Jeudi matin ?"
+      },
+      {
+       "id": "m_helene_004",
+       "from": "helene",
+       "at": "2026-10-12 09:41",
+       "text": "Parfait"
+      },
+      {
+       "id": "m_helene_005",
+       "from": "helene",
+       "at": "2026-10-22 19:02",
+       "text": "Petite question : Victor a déclaré 14h sup sur le montage, c'est validé de ton côté ?"
+      },
+      {
+       "id": "m_helene_006",
+       "from": "me",
+       "at": "2026-10-22 19:30",
+       "text": "Oui, il a fait tous les réglages le soir. C'est justifié."
+      },
+      {
+       "id": "m_helene_007",
+       "from": "helene",
+       "at": "2026-10-29 11:05",
+       "text": "Le coffre est libre pour la clé de la 4. Code habituel."
+      },
+      {
+       "id": "m_helene_008",
+       "from": "me",
+       "at": "2026-10-29 11:10",
+       "text": "Top. M. Sterne garde le double, c'est dans sa convention."
+      },
+      {
+       "id": "m_helene_009",
+       "from": "helene",
+       "at": "2026-10-29 11:12",
+       "text": "Ok, noté pour la sécurité."
+      },
+      {
+       "id": "m_helene_010",
+       "from": "helene",
+       "at": "2026-11-10 18:00",
+       "text": "Iris Nakamura m'a demandé si elle pouvait « voir le collier de près » avant jeudi. J'ai dit non 🙂"
+      },
+      {
+       "id": "m_helene_011",
+       "from": "me",
+       "at": "2026-11-10 18:12",
+       "text": "Moi aussi. Personne n'ouvre la 4."
+      },
+      {
+       "id": "m_helene_2217",
+       "from": "helene",
+       "at": "2026-11-12 22:17",
+       "text": "C'est Victor qui a coupé le courant ?! Il est où ??"
+      },
+      {
+       "id": "m_helene_013",
+       "from": "me",
+       "at": "2026-11-12 22:18",
+       "text": "Il dit que c'était prévu. Je vérifie."
+      },
+      {
+       "id": "m_helene_014",
+       "from": "helene",
+       "at": "2026-11-12 22:40",
+       "text": "Les policiers veulent la liste des extras. Tu as le contact de l'agence ?"
+      },
+      {
+       "id": "m_helene_015",
+       "from": "me",
+       "at": "2026-11-12 22:41",
+       "text": "Relais Intérim, je te transfère."
+      }
+     ]
+    },
+    {
+     "id": "c_iris",
+     "participants": [
+      "iris"
+     ],
+     "messages": [
+      {
+       "id": "m_iris_000",
+       "from": "iris",
+       "at": "2026-10-04 14:22",
+       "text": "Salooomé !! Hélène m'a proposé d'animer ton gala, je dis OUI évidemment 🥹✨"
+      },
+      {
+       "id": "m_iris_001",
+       "from": "me",
+       "at": "2026-10-04 14:50",
+       "text": "Trop contente !! On se cale un café pour le déroulé ?"
+      },
+      {
+       "id": "m_iris_002",
+       "from": "iris",
+       "at": "2026-10-04 14:51",
+       "text": "mardi 13 ? je suis dispo à partir de 16h"
+      },
+      {
+       "id": "m_iris_003",
+       "from": "iris",
+       "at": "2026-10-13 18:05",
+       "text": "merci pour le café, j'adore le concept. je bosse mes textes"
+      },
+      {
+       "id": "m_iris_004",
+       "from": "iris",
+       "at": "2026-10-30 21:40",
+       "text": "tu peux m'envoyer 3-4 lignes sur chaque pièce ? mes abonnés vont poser des questions en live"
+      },
+      {
+       "id": "m_iris_005",
+       "from": "me",
+       "at": "2026-10-30 22:10",
+       "text": "Je t'envoie les textes des cartels demain"
+      },
+      {
+       "id": "m_iris_access",
+       "from": "iris",
+       "at": "2026-11-10 15:32",
+       "text": "Tu pourrais m'ouvrir la vitrine 4 avant la soirée ? Juste 2 minutes pour un gros plan, promis je touche pas 😇"
+      },
+      {
+       "id": "m_iris_007",
+       "from": "me",
+       "at": "2026-11-10 16:05",
+       "text": "Non Iris, désolée 😅 Personne n'y touche à part le prêteur, c'est dans l'assurance. Tu auras la poursuite, c'est déjà pas mal."
+      },
+      {
+       "id": "m_iris_008",
+       "from": "iris",
+       "at": "2026-11-10 16:06",
+       "text": "ok ok madame la commissaire 🫡"
+      },
+      {
+       "id": "m_iris_009",
+       "from": "iris",
+       "at": "2026-11-10 21:14",
+       "text": "et sinon mon look pour jeudi, validé ?",
+       "photo": "p_iris_look"
+      },
+      {
+       "id": "m_iris_010",
+       "from": "me",
+       "at": "2026-11-10 21:30",
+       "text": "Validé à 200 %"
+      },
+      {
+       "id": "m_iris_011",
+       "from": "iris",
+       "at": "2026-11-12 18:45",
+       "text": "je suis là ! loge 2 c'est bien ça ?"
+      },
+      {
+       "id": "m_iris_012",
+       "from": "me",
+       "at": "2026-11-12 18:47",
+       "text": "Loge 2 oui. Maquillage à 19h."
+      },
+      {
+       "id": "m_iris_013",
+       "from": "me",
+       "at": "2026-11-12 22:21",
+       "text": "Iris tu as posté ?? Enlève ça tout de suite stp"
+      },
+      {
+       "id": "m_iris_014",
+       "from": "iris",
+       "at": "2026-11-12 22:25",
+       "text": "j'ai cru bien faire, tout le monde filmait de toute façon 😓"
+      }
+     ]
+    },
+    {
+     "id": "c_josiane",
+     "participants": [
+      "josiane"
+     ],
+     "messages": [
+      {
+       "id": "m_josiane_000",
+       "from": "josiane",
+       "at": "2026-10-20 20:04",
+       "text": "Bonsoir Salomé c'est Josiane du vestiaire. Hélène m'a donné votre numéro. Pour le 12 je peux avoir 2 personnes en renfort ?"
+      },
+      {
+       "id": "m_josiane_001",
+       "from": "me",
+       "at": "2026-10-20 20:30",
+       "text": "Bonsoir Josiane ! Je demande à l'agence, normalement oui."
+      },
+      {
+       "id": "m_josiane_002",
+       "from": "josiane",
+       "at": "2026-10-20 20:31",
+       "text": "Merci ma belle"
+      },
+      {
+       "id": "m_josiane_003",
+       "from": "josiane",
+       "at": "2026-11-12 17:20",
+       "text": "Le petit extra est gentil comme tout. Il m'aide à monter les portants avant de passer au service"
+      },
+      {
+       "id": "m_josiane_004",
+       "from": "me",
+       "at": "2026-11-12 17:25",
+       "text": "Parfait, merci Josiane !"
+      },
+      {
+       "id": "m_josiane_2240",
+       "from": "josiane",
+       "at": "2026-11-12 22:40",
+       "text": "Salomé, pour le petit Enzo : il était avec moi au vestiaire pendant tout le noir, il était venu m'apporter un verre d'eau. Il tenait la lampe de son téléphone pour que je voie les tickets. Il a paniqué après, il n'est pas déclaré le pauvre."
+      },
+      {
+       "id": "m_josiane_006",
+       "from": "me",
+       "at": "2026-11-12 22:42",
+       "text": "Merci Josiane. Dites-le à la police, c'est important."
+      },
+      {
+       "id": "m_josiane_007",
+       "from": "josiane",
+       "at": "2026-11-12 22:43",
+       "text": "Je leur ai dit. Ils écrivent tout."
+      }
+     ]
+    },
+    {
+     "id": "c_noemie",
+     "participants": [
+      "noemie"
+     ],
+     "messages": [
+      {
+       "id": "m_noemie_000",
+       "from": "noemie",
+       "at": "2026-10-01 09:05",
+       "text": "Coucou ! J'attaque les demandes de prêt ce matin"
+      },
+      {
+       "id": "m_noemie_001",
+       "from": "noemie",
+       "at": "2026-10-06 13:12",
+       "text": "Le musée de Lyon est ok pour les deux broches 🎉"
+      },
+      {
+       "id": "m_noemie_002",
+       "from": "me",
+       "at": "2026-10-06 13:20",
+       "text": "YES"
+      },
+      {
+       "id": "m_noemie_003",
+       "from": "noemie",
+       "at": "2026-10-14 18:50",
+       "text": "Je pars plus tôt demain, dentiste à 16h, ça va ?"
+      },
+      {
+       "id": "m_noemie_004",
+       "from": "me",
+       "at": "2026-10-14 19:02",
+       "text": "Bien sûr"
+      },
+      {
+       "id": "m_noemie_005",
+       "from": "noemie",
+       "at": "2026-10-23 12:05",
+       "text": "Tu veux quoi comme sandwich ? Je descends"
+      },
+      {
+       "id": "m_noemie_006",
+       "from": "me",
+       "at": "2026-10-23 12:06",
+       "text": "Poulet crudités stp, merci !!"
+      },
+      {
+       "id": "m_noemie_007",
+       "from": "noemie",
+       "at": "2026-11-02 10:15",
+       "text": "Liste presse à jour : 42 accrédités"
+      },
+      {
+       "id": "m_noemie_008",
+       "from": "me",
+       "at": "2026-11-02 10:30",
+       "text": "Top. Tu relances les mensuels ?"
+      },
+      {
+       "id": "m_noemie_009",
+       "from": "noemie",
+       "at": "2026-11-02 10:31",
+       "text": "C'est parti"
+      },
+      {
+       "id": "m_noemie_010",
+       "from": "noemie",
+       "at": "2026-11-09 19:30",
+       "text": "Tu as vu l'article sur Sterne dans la Gazette ? 😬"
+      },
+      {
+       "id": "m_noemie_011",
+       "from": "me",
+       "at": "2026-11-09 19:40",
+       "text": "Oui… On n'en parle pas trop, il est susceptible."
+      },
+      {
+       "id": "m_noemie_012",
+       "from": "noemie",
+       "at": "2026-11-12 22:13",
+       "text": "la salle est magnifique 😍",
+       "photo": "p_room_2213"
+      },
+      {
+       "id": "m_noemie_013",
+       "from": "noemie",
+       "at": "2026-11-12 22:50",
+       "text": "Ça va toi ? Je suis avec les policiers en salle 1, ils demandent tout le monde"
+      },
+      {
+       "id": "m_noemie_014",
+       "from": "me",
+       "at": "2026-11-12 22:52",
+       "text": "Tiens bon. J'arrive."
+      }
+     ]
+    },
+    {
+     "id": "c_camille",
+     "participants": [
+      "camille"
+     ],
+     "messages": [
+      {
+       "id": "m_camille_000",
+       "from": "camille",
+       "at": "2026-10-03 11:02",
+       "text": "t'es dispo pour un facetime ce soir ? maman veut qu'on parle de noël 🙄"
+      },
+      {
+       "id": "m_camille_001",
+       "from": "me",
+       "at": "2026-10-03 11:30",
+       "text": "Vers 21h ?"
+      },
+      {
+       "id": "m_camille_002",
+       "from": "camille",
+       "at": "2026-10-03 11:31",
+       "text": "ok"
+      },
+      {
+       "id": "m_camille_003",
+       "from": "camille",
+       "at": "2026-10-11 16:40",
+       "text": "Jules a perdu sa première dent !!",
+       "photo": "p_jules"
+      },
+      {
+       "id": "m_camille_004",
+       "from": "me",
+       "at": "2026-10-11 17:02",
+       "text": "Trop mignon !! Dis-lui que tata envoie une pièce 😂"
+      },
+      {
+       "id": "m_camille_005",
+       "from": "camille",
+       "at": "2026-10-22 22:14",
+       "text": "je monte à paris le week-end du 7, je peux dormir chez toi ?"
+      },
+      {
+       "id": "m_camille_006",
+       "from": "me",
+       "at": "2026-10-22 22:40",
+       "text": "Évidemment ! Par contre je bosse le samedi après-midi, le gala c'est le 12"
+      },
+      {
+       "id": "m_camille_007",
+       "from": "camille",
+       "at": "2026-10-22 22:41",
+       "text": "pas grave je ferai les boutiques"
+      },
+      {
+       "id": "m_camille_008",
+       "from": "camille",
+       "at": "2026-11-06 21:15",
+       "text": "train demain 8h04, arrivée gare de lyon 10h02"
+      },
+      {
+       "id": "m_camille_009",
+       "from": "me",
+       "at": "2026-11-06 21:20",
+       "text": "Je viens te chercher"
+      },
+      {
+       "id": "m_camille_010",
+       "from": "camille",
+       "at": "2026-11-08 18:55",
+       "text": "bien rentrée, merci pour le week end ❤️ courage pour jeudi"
+      },
+      {
+       "id": "m_camille_011",
+       "from": "camille",
+       "at": "2026-11-12 22:48",
+       "text": "je viens de voir un truc sur ton gala sur les réseaux ??? ça va ?"
+      },
+      {
+       "id": "m_camille_012",
+       "from": "me",
+       "at": "2026-11-12 23:05",
+       "text": "Ça va. Police. Je t'appelle demain."
+      },
+      {
+       "id": "m_camille_013",
+       "from": "camille",
+       "at": "2026-11-12 23:06",
+       "text": "ok. je t'aime"
+      }
+     ]
+    },
+    {
+     "id": "c_samir",
+     "participants": [
+      "samir"
+     ],
+     "messages": [
+      {
+       "id": "m_samir_000",
+       "from": "samir",
+       "at": "2026-10-03 20:12",
+       "text": "Yo, footing dimanche aux Buttes ?"
+      },
+      {
+       "id": "m_samir_001",
+       "from": "me",
+       "at": "2026-10-03 20:40",
+       "text": "Si c'est 10h et pas 8h, oui"
+      },
+      {
+       "id": "m_samir_002",
+       "from": "samir",
+       "at": "2026-10-03 20:41",
+       "text": "10h deal"
+      },
+      {
+       "id": "m_samir_003",
+       "from": "samir",
+       "at": "2026-10-17 12:05",
+       "text": "t'as vu la saison 3 ? j'ai pas dormi"
+      },
+      {
+       "id": "m_samir_004",
+       "from": "me",
+       "at": "2026-10-17 12:30",
+       "text": "Pas le temps de rien voir, je vis au Pavillon 😭"
+      },
+      {
+       "id": "m_samir_005",
+       "from": "samir",
+       "at": "2026-10-25 09:58",
+       "text": "je suis devant l'entrée du parc, t'es où"
+      },
+      {
+       "id": "m_samir_006",
+       "from": "me",
+       "at": "2026-10-25 10:01",
+       "text": "2 min !!"
+      },
+      {
+       "id": "m_samir_007",
+       "from": "me",
+       "at": "2026-11-04 19:20",
+       "text": "Tu veux venir au gala jeudi 12 ? J'ai une place pour toi"
+      },
+      {
+       "id": "m_samir_008",
+       "from": "samir",
+       "at": "2026-11-04 19:28",
+       "text": "grave. costume obligatoire ?"
+      },
+      {
+       "id": "m_samir_009",
+       "from": "me",
+       "at": "2026-11-04 19:29",
+       "text": "Tenue de soirée. Donc oui 😇"
+      },
+      {
+       "id": "m_samir_010",
+       "from": "samir",
+       "at": "2026-11-12 20:22",
+       "text": "arrivé. c'est ouf ici"
+      },
+      {
+       "id": "m_samir_2214",
+       "from": "samir",
+       "at": "2026-11-12 22:14",
+       "text": "tout s'éteint ?? c'est voulu ?",
+       "photo": "p_stage_2214"
+      },
+      {
+       "id": "m_samir_2226",
+       "from": "samir",
+       "at": "2026-11-12 22:26",
+       "text": "je sais pas si ça peut servir mais Iris a pas lâché son micro sur pied de tout le noir. elle parlait, j'étais au premier rang à 2 m d'elle"
+      },
+      {
+       "id": "m_samir_013",
+       "from": "me",
+       "at": "2026-11-12 22:27",
+       "text": "Merci. Dis-le aux policiers."
+      }
+     ]
+    },
+    {
+     "id": "c_enzo",
+     "participants": [
+      "enzo"
+     ],
+     "messages": [
+      {
+       "id": "m_enzo_000",
+       "from": "enzo",
+       "at": "2026-11-12 16:52",
+       "text": "bonjour madame c'est Enzo de relais interim, je suis a l'entrée du personnel mais le monsieur veut pas me laisser rentrer"
+      },
+      {
+       "id": "m_enzo_001",
+       "from": "me",
+       "at": "2026-11-12 16:54",
+       "text": "Bonjour Enzo, je descends. La petite porte grise à droite du perron ?"
+      },
+      {
+       "id": "m_enzo_002",
+       "from": "enzo",
+       "at": "2026-11-12 16:54",
+       "text": "oui"
+      },
+      {
+       "id": "m_enzo_003",
+       "from": "me",
+       "at": "2026-11-12 22:44",
+       "text": "Enzo, où êtes-vous ? Revenez ou appelez-moi, s'il vous plaît."
+      },
+      {
+       "id": "m_enzo_004",
+       "from": "enzo",
+       "at": "2026-11-12 23:08",
+       "text": "je vous jure j'ai rien pris madame. j'ai eu peur c'est tout. je viens demain voir la police si il faut"
+      }
+     ]
+    },
+    {
+     "id": "c_lemaire",
+     "participants": [
+      "lemaire"
+     ],
+     "messages": [
+      {
+       "id": "m_lemaire_000",
+       "from": "lemaire",
+       "at": "2026-10-07 22:05",
+       "text": "Salomé, je pense qu'on peut gagner 40 cm en décalant la scène. Je te montre demain."
+      },
+      {
+       "id": "m_lemaire_001",
+       "from": "me",
+       "at": "2026-10-07 22:30",
+       "text": "Ok. Pas trop près de la 4 quand même."
+      },
+      {
+       "id": "m_lemaire_002",
+       "from": "me",
+       "at": "2026-10-14 13:05",
+       "text": "Je suis devant l'atelier"
+      },
+      {
+       "id": "m_lemaire_003",
+       "from": "lemaire",
+       "at": "2026-10-14 13:06",
+       "text": "je descends !"
+      },
+      {
+       "id": "m_lemaire_004",
+       "from": "lemaire",
+       "at": "2026-10-29 17:40",
+       "text": "Les bustes de velours sont prêts. Le noir est plus profond que l'échantillon, tu vas aimer"
+      },
+      {
+       "id": "m_lemaire_005",
+       "from": "me",
+       "at": "2026-10-29 17:52",
+       "text": "J'ai hâte"
+      },
+      {
+       "id": "m_lemaire_006",
+       "from": "lemaire",
+       "at": "2026-11-12 12:40",
+       "text": "Je t'attends à l'atelier à 13h pour les derniers socles. Tu restes manger un bout ?"
+      },
+      {
+       "id": "m_lemaire_007",
+       "from": "me",
+       "at": "2026-11-12 12:42",
+       "text": "Vite fait alors, je dois être au Pavillon vers 15h"
+      },
+      {
+       "id": "m_lemaire_008",
+       "from": "lemaire",
+       "at": "2026-11-12 23:01",
+       "text": "Je viens d'apprendre. Je suis désolé. Dis-moi si je peux faire quoi que ce soit.",
+       "unread": true
+      }
+     ]
+    },
+    {
+     "id": "c_agence",
+     "participants": [
+      "agence"
+     ],
+     "messages": [
+      {
+       "id": "m_agence_000",
+       "from": "agence",
+       "at": "2026-11-12 11:02",
+       "text": "Relais Intérim : renfort confirmé pour le gala du 12/11 au Pavillon Mercure : 1 extra service, Enzo B. Prise de poste 17h, entrée du personnel. Contrat de mission établi le 13/11 (demande tardive)."
+      },
+      {
+       "id": "m_agence_001",
+       "from": "agence",
+       "at": "2026-11-12 11:03",
+       "text": "Relais Intérim : numéro de l'extra : 06 51 38 72 44."
+      }
+     ]
+    },
+    {
+     "id": "c_arteo",
+     "participants": [
+      "arteo"
+     ],
+     "messages": [
+      {
+       "id": "m_arteo_000",
+       "from": "arteo",
+       "at": "2026-10-20 16:00",
+       "text": "ARTEO Transports : livraison AT-2210 prévue le 21/10 entre 08:00 et 10:00. Merci de prévoir un accès quai."
+      },
+      {
+       "id": "m_arteo_001",
+       "from": "arteo",
+       "at": "2026-10-21 10:12",
+       "text": "ARTEO Transports : votre livraison AT-2210 est retardée. Nouvelle heure estimée : 11:30."
+      },
+      {
+       "id": "m_arteo_002",
+       "from": "arteo",
+       "at": "2026-10-21 11:34",
+       "text": "ARTEO Transports : livraison AT-2210 effectuée. Signataire : J. PETIT."
+      }
+     ]
+    },
+    {
+     "id": "c_banque",
+     "participants": [
+      "banque"
+     ],
+     "messages": [
+      {
+       "id": "m_banque_000",
+       "from": "banque",
+       "at": "2026-10-05 08:00",
+       "text": "Banque Citadine : prélèvement LOYER OCTOBRE de 1 140,00 € effectué."
+      },
+      {
+       "id": "m_banque_001",
+       "from": "banque",
+       "at": "2026-11-05 08:00",
+       "text": "Banque Citadine : prélèvement LOYER NOVEMBRE de 1 140,00 € effectué."
+      },
+      {
+       "id": "m_banque_002",
+       "from": "banque",
+       "at": "2026-11-12 18:31",
+       "text": "Banque Citadine : paiement de 12,80 € chez PHARMACIE WILSON."
+      }
+     ]
+    }
+   ],
+   "calls": [
+    {
+     "id": "k01",
+     "contact": "sterne",
+     "direction": "incoming",
+     "at": "2026-10-01 12:10",
+     "durationSeconds": 246
+    },
+    {
+     "id": "k02",
+     "contact": "camille",
+     "direction": "outgoing",
+     "at": "2026-10-03 21:04",
+     "durationSeconds": 1840
+    },
+    {
+     "id": "k03",
+     "contact": "helene",
+     "direction": "incoming",
+     "at": "2026-10-12 09:15",
+     "durationSeconds": 182
+    },
+    {
+     "id": "k04",
+     "contact": "iris",
+     "direction": "outgoing",
+     "at": "2026-10-13 15:40",
+     "durationSeconds": 58
+    },
+    {
+     "id": "k05",
+     "contact": "valmont",
+     "direction": "incoming",
+     "at": "2026-10-20 14:40",
+     "durationSeconds": 312
+    },
+    {
+     "id": "k06",
+     "contact": "arteo",
+     "direction": "missed",
+     "at": "2026-10-21 10:05",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k07",
+     "contact": "lemaire",
+     "direction": "incoming",
+     "at": "2026-10-23 16:50",
+     "durationSeconds": 424
+    },
+    {
+     "id": "k08",
+     "contact": "samir",
+     "direction": "missed",
+     "at": "2026-10-25 09:56",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k09",
+     "contact": "garrel",
+     "direction": "outgoing",
+     "at": "2026-10-26 10:05",
+     "durationSeconds": 151
+    },
+    {
+     "id": "k10",
+     "contact": "garrel",
+     "direction": "incoming",
+     "at": "2026-10-28 12:20",
+     "durationSeconds": 97
+    },
+    {
+     "id": "k11",
+     "contact": "camille",
+     "direction": "incoming",
+     "at": "2026-11-01 19:00",
+     "durationSeconds": 1210
+    },
+    {
+     "id": "k12",
+     "contact": "victor",
+     "direction": "missed",
+     "at": "2026-11-07 10:01",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k13",
+     "contact": "noemie",
+     "direction": "outgoing",
+     "at": "2026-11-11 08:10",
+     "durationSeconds": 95
+    },
+    {
+     "id": "k14",
+     "contact": "agence",
+     "direction": "outgoing",
+     "at": "2026-11-12 10:40",
+     "durationSeconds": 214
+    },
+    {
+     "id": "k15",
+     "contact": "fauve",
+     "direction": "incoming",
+     "at": "2026-11-12 14:20",
+     "durationSeconds": 131
+    },
+    {
+     "id": "k16",
+     "contact": "helene",
+     "direction": "outgoing",
+     "at": "2026-11-12 22:21",
+     "durationSeconds": 62
+    },
+    {
+     "id": "k_sterne_2231",
+     "contact": "sterne",
+     "direction": "incoming",
+     "at": "2026-11-12 22:31",
+     "durationSeconds": 180
+    },
+    {
+     "id": "k17",
+     "contact": "enzo",
+     "direction": "outgoing",
+     "at": "2026-11-12 22:46",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k18",
+     "contact": "camille",
+     "direction": "missed",
+     "at": "2026-11-12 22:55",
+     "durationSeconds": 0
+    },
+    {
+     "id": "k19",
+     "contact": "enzo",
+     "direction": "incoming",
+     "at": "2026-11-12 23:02",
+     "durationSeconds": 160
+    },
+    {
+     "id": "k20",
+     "contact": "valmont",
+     "direction": "missed",
+     "at": "2026-11-12 23:14",
+     "durationSeconds": 0
+    }
+   ],
+   "places": [
+    {
+     "id": "pl_pavillon",
+     "name": "Pavillon Mercure — avenue du Président-Wilson",
+     "kind": "work",
+     "x": 0.18,
+     "y": 0.52,
+     "latitude": 48.865,
+     "longitude": 2.2975
+    },
+    {
+     "id": "pl_home",
+     "name": "Domicile — rue des Envierges",
+     "kind": "home",
+     "x": 0.82,
+     "y": 0.36,
+     "latitude": 48.8715,
+     "longitude": 2.3895
+    },
+    {
+     "id": "pl_sterne",
+     "name": "Hôtel particulier Sterne — avenue Foch",
+     "kind": "home",
+     "x": 0.1,
+     "y": 0.34,
+     "latitude": 48.8715,
+     "longitude": 2.283,
+     "revealedBy": [
+      "mail:mail_avenant"
+     ]
+    },
+    {
+     "id": "pl_kessler",
+     "name": "Atelier Kessler — rue de la Paix",
+     "kind": "shop",
+     "x": 0.46,
+     "y": 0.4,
+     "latitude": 48.869,
+     "longitude": 2.331,
+     "revealedBy": [
+      "calendar:c_sterne_1730"
+     ]
+    },
+    {
+     "id": "pl_valmont",
+     "name": "Assurances Valmont Art — La Défense",
+     "kind": "work",
+     "x": 0.04,
+     "y": 0.12,
+     "latitude": 48.892,
+     "longitude": 2.238,
+     "revealedBy": [
+      "mail:mail_avenant"
+     ]
+    },
+    {
+     "id": "pl_rossignol",
+     "name": "Salle des ventes Rossignol — rue Drouot",
+     "kind": "shop",
+     "x": 0.52,
+     "y": 0.33,
+     "latitude": 48.874,
+     "longitude": 2.342,
+     "revealedBy": [
+      "browser:w_gazette"
+     ]
+    },
+    {
+     "id": "pl_atelier",
+     "name": "Atelier Lemaire — Bagnolet",
+     "kind": "industrial",
+     "x": 0.95,
+     "y": 0.55,
+     "latitude": 48.864,
+     "longitude": 2.417
+    },
+    {
+     "id": "pl_gare",
+     "name": "Gare de Lyon",
+     "kind": "station",
+     "x": 0.7,
+     "y": 0.78,
+     "latitude": 48.8443,
+     "longitude": 2.374
+    },
+    {
+     "id": "pl_cafe",
+     "name": "Café du Jourdain",
+     "kind": "bar",
+     "x": 0.83,
+     "y": 0.3,
+     "latitude": 48.8752,
+     "longitude": 2.389
+    },
+    {
+     "id": "pl_buttes",
+     "name": "Parc des Buttes-Chaumont",
+     "kind": "park",
+     "x": 0.8,
+     "y": 0.2,
+     "latitude": 48.88,
+     "longitude": 2.383
+    }
+   ],
+   "tracks": [
+    {
+     "id": "t_me",
+     "contact": "me",
+     "points": [
+      {
+       "id": "tp_me_1",
+       "at": "2026-11-07 09:55",
+       "place": "pl_gare"
+      },
+      {
+       "id": "tp_me_2",
+       "at": "2026-11-07 10:40",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_me_3",
+       "at": "2026-11-08 10:05",
+       "place": "pl_buttes"
+      },
+      {
+       "id": "tp_me_4",
+       "at": "2026-11-11 08:35",
+       "place": "pl_pavillon"
+      },
+      {
+       "id": "tp_me_5",
+       "at": "2026-11-11 20:10",
+       "place": "pl_home"
+      },
+      {
+       "id": "tp_me_6",
+       "at": "2026-11-12 07:55",
+       "place": "pl_home",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_me_7",
+       "at": "2026-11-12 08:30",
+       "place": "pl_pavillon"
+      },
+      {
+       "id": "tp_me_8",
+       "at": "2026-11-12 12:20",
+       "place": "pl_pavillon",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_me_9",
+       "at": "2026-11-12 12:58",
+       "place": "pl_atelier"
+      },
+      {
+       "id": "tp_me_10",
+       "at": "2026-11-12 14:25",
+       "place": "pl_atelier",
+       "note": "Départ"
+      },
+      {
+       "id": "tp_me_11",
+       "at": "2026-11-12 15:10",
+       "place": "pl_pavillon"
+      },
+      {
+       "id": "tp_me_12",
+       "at": "2026-11-12 23:20",
+       "place": "pl_pavillon",
+       "note": "Toujours sur place"
+      }
+     ]
+    }
+   ],
+   "photos": [
+    {
+     "id": "p_old01",
+     "takenAt": "2019-03-14 18:20",
+     "source": "camera",
+     "scene": "gallery",
+     "caption": "Accrochage « Verre & lumière », Lyon, 2019.",
+     "details": "Des vases sur des socles blancs. Salomé, de dos, un mètre ruban à la main.",
+     "style": "old",
+     "place": "Lyon",
+     "device": "iPhone 11"
+    },
+    {
+     "id": "p_old02",
+     "takenAt": "2021-06-26 21:40",
+     "source": "camera",
+     "scene": "party",
+     "caption": "Vernissage à Nantes, juin 2021.",
+     "details": "Des guirlandes, du monde dans une cour pavée.",
+     "style": "old",
+     "place": "Nantes",
+     "device": "iPhone 11"
+    },
+    {
+     "id": "p_old03",
+     "takenAt": "2023-08-12 17:15",
+     "source": "camera",
+     "scene": "beach",
+     "caption": "Plage avec Camille et Jules, été 2023.",
+     "details": "Un seau rouge, un château de sable effondré.",
+     "style": "old",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_old04",
+     "takenAt": "2024-12-30 15:02",
+     "source": "camera",
+     "scene": "snow",
+     "caption": "Neige au chalet, décembre 2024.",
+     "details": "Des sapins, une luge contre un mur en bois.",
+     "style": "old",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_old05",
+     "takenAt": "2025-05-09 20:30",
+     "source": "camera",
+     "scene": "interior_warm",
+     "caption": "Mes 35 ans.",
+     "details": "Des bougies, une table pleine de verres.",
+     "style": "old",
+     "place": "Domicile",
+     "device": "iPhone 14"
+    },
+    {
+     "id": "p_b01",
+     "takenAt": "2026-10-01 11:10",
+     "source": "camera",
+     "scene": "gallery",
+     "caption": "Salle 2 du Pavillon, encore vide.",
+     "details": "Parquet nu, murs blancs, des rails lumière au plafond.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b02",
+     "takenAt": "2026-10-08 10:20",
+     "source": "camera",
+     "scene": "laptop",
+     "caption": "Plan v1 à l'écran.",
+     "details": "Six rectangles numérotés et une scène à gauche.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b03",
+     "takenAt": "2026-10-10 09:12",
+     "source": "camera",
+     "scene": "cat",
+     "caption": "Pistache sur la pile de catalogues.",
+     "details": "Un chat tigré couché sur des épreuves imprimées.",
+     "place": "Domicile",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b04",
+     "takenAt": "2026-10-09 15:40",
+     "source": "camera",
+     "scene": "document",
+     "caption": "Convention de prêt — page 1.",
+     "details": "Un tampon d'étude notariale en bas de page.",
+     "style": "document",
+     "lines": [
+      "CONVENTION DE PRÊT D'ŒUVRE",
+      "Prêteur : M. Adrien Sterne",
+      "Emprunteur : Pavillon Mercure",
+      "Objet : collier dit « Aurore », Paris, 1928",
+      "Exposition « Éclats » — 13/11/2026 – 28/02/2027",
+      "Art. 7 — Accès aux vitrines : voir annexe 2"
+     ],
+     "place": "Étude Lanvin",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b05",
+     "takenAt": "2026-10-14 13:30",
+     "source": "camera",
+     "scene": "office",
+     "caption": "L'atelier de PY à Bagnolet.",
+     "details": "Des maquettes de vitrines en carton plume, des pots de peinture noire.",
+     "place": "Bagnolet",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b06",
+     "takenAt": "2026-10-16 23:05",
+     "source": "camera",
+     "scene": "street_night",
+     "caption": "Belleville, la nuit, en rentrant.",
+     "details": "Une rue en pente, des réverbères, un scooter garé.",
+     "style": "night",
+     "place": "Domicile",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b07",
+     "takenAt": "2026-10-18 11:50",
+     "source": "camera",
+     "scene": "terrace",
+     "caption": "Café au Jourdain, un dimanche.",
+     "details": "Deux tasses, un croissant entamé, du soleil sur la table.",
+     "place": "Café du Jourdain",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b08",
+     "takenAt": "2026-10-21 11:45",
+     "source": "camera",
+     "scene": "vitrine",
+     "caption": "Livraison des vitrines.",
+     "details": "Six vitrines encore sous bâche, des sangles au sol. Une rayure sur la 6.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b09",
+     "takenAt": "2026-10-23 17:20",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : plan de salle v3.",
+     "details": "La vitrine 4 est au centre, face à l'entrée.",
+     "style": "screenshot",
+     "lines": [
+      "SALLE 2 — PLAN v3",
+      "Scène (animation) — côté jardin",
+      "Vitrines 1 à 6",
+      "Vitrine 4 : collier Aurore — axe poursuite",
+      "Régie : mezzanine, fond de salle",
+      "Vestiaire : entrée Wilson",
+      "Sortie de service : couloir B"
+     ],
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b10",
+     "takenAt": "2026-10-25 10:35",
+     "source": "camera",
+     "scene": "park",
+     "caption": "Footing aux Buttes-Chaumont.",
+     "details": "Les arbres roux, le temple au loin, Samir essoufflé.",
+     "place": "Parc des Buttes-Chaumont",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b11",
+     "takenAt": "2026-10-27 23:48",
+     "source": "camera",
+     "scene": "receipt",
+     "caption": "Reçu de taxi.",
+     "details": "Retour tardif du Pavillon.",
+     "style": "document",
+     "lines": [
+      "TAXI PARISIEN",
+      "27/10/2026  23:21 → 23:46",
+      "Av. du Pdt-Wilson → Rue des Envierges",
+      "Montant : 31,40 €",
+      "Merci de votre confiance"
+     ],
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b12",
+     "takenAt": "2026-10-30 14:12",
+     "source": "camera",
+     "scene": "document",
+     "caption": "Épreuve du cartel de la vitrine 4.",
+     "details": "Une étiquette noire, lettres dorées.",
+     "style": "document",
+     "lines": [
+      "VITRINE 4",
+      "Collier « Aurore »",
+      "Paris, 1928",
+      "Perles fines en chute, platine, diamants taille ancienne",
+      "Prêt de M. Adrien Sterne"
+     ],
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b13",
+     "takenAt": "2026-11-02 16:40",
+     "source": "camera",
+     "scene": "books",
+     "caption": "Épreuves du catalogue.",
+     "details": "Des pages étalées sur le bureau, des post-it jaunes partout.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b14",
+     "takenAt": "2026-11-04 08:20",
+     "source": "camera",
+     "scene": "rain",
+     "caption": "Pluie sur la fenêtre du salon.",
+     "details": "Des gouttes, les toits gris derrière.",
+     "place": "Domicile",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b15",
+     "takenAt": "2026-11-06 21:15",
+     "source": "camera",
+     "scene": "gallery",
+     "caption": "Essais lumière en salle 2.",
+     "details": "Un rond de lumière blanche sur une vitrine vide, le reste dans le noir.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b16",
+     "takenAt": "2026-11-07 10:04",
+     "source": "camera",
+     "scene": "station",
+     "caption": "Gare de Lyon, en attendant Camille.",
+     "details": "Le panneau affiche « Lyon Part-Dieu — arrivée 10h02 — à l'heure ».",
+     "style": "quick",
+     "place": "Gare de Lyon",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b17",
+     "takenAt": "2026-11-07 20:45",
+     "source": "camera",
+     "scene": "selfie",
+     "caption": "Selfie avec Camille.",
+     "details": "Deux sœurs, même nez, même rire. Une bougie derrière.",
+     "style": "selfie",
+     "place": "Domicile",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b18",
+     "takenAt": "2026-11-11 15:30",
+     "source": "camera",
+     "scene": "gallery",
+     "caption": "Montage du 11 novembre.",
+     "details": "Les vitrines numérotées sont en place, encore vides. Des escabeaux partout.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b19",
+     "takenAt": "2026-11-12 08:41",
+     "source": "camera",
+     "scene": "view",
+     "caption": "Le matin, depuis le perron du Pavillon.",
+     "details": "La Seine en contrebas, la tour dans la brume.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b20",
+     "takenAt": "2026-11-12 16:05",
+     "source": "camera",
+     "scene": "vitrine",
+     "caption": "Pose de l'Aurore dans la vitrine 4.",
+     "details": "Le collier est posé sur le buste de velours noir, le fermoir bien visible au centre, face à la salle. Photo prise de trop loin pour compter les perles. Hélène tient la porte de la vitrine.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b21",
+     "takenAt": "2026-11-12 18:40",
+     "source": "camera",
+     "scene": "gala",
+     "caption": "La salle prête, avant l'ouverture.",
+     "details": "Tables hautes, nappes noires, les six vitrines allumées.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b22",
+     "takenAt": "2026-11-12 19:58",
+     "source": "camera",
+     "scene": "mirror",
+     "caption": "Selfie avec Noémie, en noir.",
+     "details": "Deux robes noires, des badges « ORGANISATION ».",
+     "style": "selfie",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b23",
+     "takenAt": "2026-11-12 20:35",
+     "source": "camera",
+     "scene": "gala",
+     "caption": "Les premiers invités.",
+     "details": "Une foule en tenue de soirée, des coupes, la vitrine 4 au fond.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_b24",
+     "takenAt": "2026-11-12 21:52",
+     "source": "camera",
+     "scene": "gala",
+     "caption": "Discours d'Hélène.",
+     "details": "Photo floue : Hélène au pupitre, un bras levé devant l'objectif.",
+     "style": "blurry",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_blur01",
+     "takenAt": "2026-10-19 07:10",
+     "source": "camera",
+     "scene": "ceiling",
+     "caption": "Le plafond de la chambre.",
+     "details": "Photo prise par erreur au réveil.",
+     "style": "blurry",
+     "place": "Domicile",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_blur02",
+     "takenAt": "2026-11-12 22:14",
+     "source": "camera",
+     "scene": "pocket",
+     "caption": "Photo déclenchée par erreur dans le noir.",
+     "details": "Tout est noir. En haut à droite, la lueur verte d'un bloc de secours « SORTIE ».",
+     "style": "blurry",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_scr01",
+     "takenAt": "2026-11-12 07:40",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : météo de jeudi.",
+     "details": "Pluie le matin, sec le soir.",
+     "style": "screenshot",
+     "lines": [
+      "Paris — jeudi 12 novembre",
+      "08h  🌧  9°",
+      "14h  ☁  12°",
+      "20h  ☁  10°",
+      "23h  🌙  8°"
+     ],
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_scr02",
+     "takenAt": "2026-11-10 11:15",
+     "source": "camera",
+     "scene": "screenshot",
+     "caption": "Capture : liste des badges.",
+     "details": "Le tableau de Noémie.",
+     "style": "screenshot",
+     "lines": [
+      "BADGES GALA — 12/11",
+      "Organisation : S. Tessier, N. Castel",
+      "Pavillon : H. Dubreuil, V. Almeida, J. Petit",
+      "Animation : I. Nakamura",
+      "Prêteur : A. Sterne + 1",
+      "Cocktail : Maison Fauve (8)"
+     ],
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_vitrine_1752",
+     "takenAt": "2026-11-12 17:52",
+     "source": "camera",
+     "scene": "vitrine",
+     "caption": "La vitrine 4 sous les projecteurs, pour les réseaux.",
+     "details": "En zoomant : on compte 41 perles. Le fermoir est tourné vers le fond de la vitrine, invisible.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_vitrine_2216",
+     "takenAt": "2026-11-12 22:16",
+     "source": "camera",
+     "scene": "vitrine_empty",
+     "caption": "La vitrine 4, vide, sous la poursuite.",
+     "details": "La porte vitrée est entrouverte de deux centimètres. La serrure est intacte, sans rayure ni trace d'outil : elle a été ouverte avec une clé. Le buste de velours est vide.",
+     "place": "Pavillon Mercure",
+     "device": "iPhone 16 Pro"
+    },
+    {
+     "id": "p_room_2213",
+     "takenAt": "2026-11-12 22:13",
+     "source": "received",
+     "scene": "gala",
+     "caption": "La salle 2 pendant la présentation d'Iris.",
+     "details": "La scène à gauche, Iris au micro dans la poursuite. À droite, près de la vitrine 4, Adrien Sterne, seul, une main dans la poche de sa veste.",
+     "place": "Pavillon Mercure",
+     "from": "noemie",
+     "receivedAt": "2026-11-12 22:13",
+     "device": "iPhone 15"
+    },
+    {
+     "id": "p_stage_2214",
+     "takenAt": "2026-11-12 22:14",
+     "source": "received",
+     "scene": "gala",
+     "caption": "La scène au moment où tout s'éteint.",
+     "details": "Prise à 22:14 pile. Iris Nakamura, au micro sur pied, est le dernier point éclairé de la salle. La vitrine 4, à l'autre bout, est déjà dans le noir, à une vingtaine de mètres.",
+     "style": "night",
+     "place": "Pavillon Mercure",
+     "from": "samir",
+     "receivedAt": "2026-11-12 22:14",
+     "device": "Pixel 8"
+    },
+    {
+     "id": "p_regie_2215",
+     "takenAt": "2026-11-12 22:15",
+     "source": "received",
+     "scene": "desk_night",
+     "caption": "La console de la régie, dans le noir.",
+     "details": "L'écran affiche « Q47 — NOIR 90 s — GO 22:14:00 » et un compte à rebours. La régie est sur la mezzanine au fond de la salle, à une trentaine de mètres de la vitrine 4. Le reflet de Victor, casque sur les oreilles, dans l'écran.",
+     "style": "night",
+     "place": "Pavillon Mercure",
+     "from": "victor",
+     "receivedAt": "2026-11-12 22:16",
+     "device": "Galaxy S23"
+    },
+    {
+     "id": "p_iris_look",
+     "takenAt": "2026-11-10 21:10",
+     "source": "received",
+     "scene": "mirror",
+     "caption": "Iris dans une robe noire à sequins.",
+     "details": "Selfie dans un miroir de cabine d'essayage. Rien de plus.",
+     "style": "selfie",
+     "from": "iris",
+     "receivedAt": "2026-11-10 21:14",
+     "device": "iPhone 16"
+    },
+    {
+     "id": "p_jules",
+     "takenAt": "2026-10-11 16:38",
+     "source": "received",
+     "scene": "interior_warm",
+     "caption": "Jules montre le trou de sa dent.",
+     "details": "Un petit garçon hilare, une dent dans la main.",
+     "place": "Lyon",
+     "from": "camille",
+     "receivedAt": "2026-10-11 16:40",
+     "device": "iPhone 13"
+    }
+   ],
+   "calendar": [
+    {
+     "id": "c_ev01",
+     "start": "2026-10-02 12:30",
+     "end": "2026-10-02 14:30",
+     "title": "Déjeuner M. Sterne",
+     "location": "Chez lui — avenue Foch"
+    },
+    {
+     "id": "c_ev02",
+     "start": "2026-10-09 15:00",
+     "end": "2026-10-09 16:00",
+     "title": "Signature convention de prêt — Aurore",
+     "location": "Étude Me Lanvin"
+    },
+    {
+     "id": "c_ev03",
+     "start": "2026-10-13 16:00",
+     "title": "Café avec Iris — déroulé du gala",
+     "location": "Café du Jourdain"
+    },
+    {
+     "id": "c_ev04",
+     "start": "2026-10-14 13:00",
+     "title": "Atelier PY — maquettes vitrines",
+     "location": "Bagnolet"
+    },
+    {
+     "id": "c_ev05",
+     "start": "2026-10-21 08:00",
+     "end": "2026-10-21 10:00",
+     "title": "Livraison vitrines (Arteo)",
+     "location": "Pavillon Mercure — quai"
+    },
+    {
+     "id": "c_ev06",
+     "start": "2026-10-28 10:00",
+     "end": "2026-10-28 12:00",
+     "title": "Constat d'état Aurore — É. Garrel",
+     "location": "Avenue Foch"
+    },
+    {
+     "id": "c_ev07",
+     "start": "2026-11-07 10:02",
+     "title": "Camille — gare de Lyon",
+     "location": "Gare de Lyon"
+    },
+    {
+     "id": "c_ev08",
+     "start": "2026-11-11 08:30",
+     "end": "2026-11-11 20:00",
+     "title": "Montage (férié !)",
+     "location": "Pavillon Mercure"
+    },
+    {
+     "id": "c_ev09",
+     "start": "2026-11-12 13:00",
+     "end": "2026-11-12 14:30",
+     "title": "Atelier PY — derniers socles",
+     "location": "Bagnolet"
+    },
+    {
+     "id": "c_ev10",
+     "start": "2026-11-12 16:00",
+     "end": "2026-11-12 16:15",
+     "title": "Pose Aurore + fermeture vitrine 4 (avec Hélène)",
+     "location": "Pavillon Mercure — salle 2"
+    },
+    {
+     "id": "c_sterne_1730",
+     "start": "2026-11-12 17:30",
+     "end": "2026-11-12 17:50",
+     "title": "M. Sterne + son joaillier (M. Kessler) — vitrine 4 ouverte",
+     "location": "Pavillon Mercure — salle 2",
+     "notes": "Dernier nettoyage avant le gala. Seuls, à sa demande. Prévenir la sécurité."
+    },
+    {
+     "id": "c_gala",
+     "start": "2026-11-12 20:00",
+     "end": "2026-11-13 00:30",
+     "title": "GALA — Éclats",
+     "location": "Pavillon Mercure",
+     "notes": "20:00 portes · 21:50 discours Hélène · 22:10 Iris : présentation des pièces, finale sur l'Aurore · 23:00 DJ"
+    },
+    {
+     "id": "c_presse",
+     "start": "2026-11-13 09:00",
+     "end": "2026-11-13 10:00",
+     "title": "Point presse Éclats",
+     "location": "Pavillon Mercure"
+    },
+    {
+     "id": "c_ev11",
+     "start": "2026-11-13 10:00",
+     "title": "Ouverture au public",
+     "location": "Pavillon Mercure"
+    },
+    {
+     "id": "c_ev12",
+     "start": "2026-11-16 00:00",
+     "title": "🎂 Jules — 7 ans",
+     "allDay": true
+    }
+   ],
+   "notes": [
+    {
+     "id": "n_todo",
+     "title": "Gala — à faire",
+     "createdAt": "2026-11-02 08:50",
+     "modifiedAt": "2026-11-12 15:20",
+     "body": "- Badges (Noémie) ✓\n- Coquille cartel vitrine 2 ✓\n- Portants vestiaire (Josiane) ✓\n- Extra en plus → Relais ✓\n- Lire le conducteur de Victor\n- Plan de table carré VIP\n- Récupérer la clé de la 4 au coffre après la soirée"
+    },
+    {
+     "id": "n_textes",
+     "title": "Textes pour Iris",
+     "createdAt": "2026-10-31 10:12",
+     "modifiedAt": "2026-10-31 11:40",
+     "body": "V1 — Broche « Hirondelle », 1911. Or, émail plique-à-jour. Prêt du musée de Lyon.\nV2 — Bracelet « Rails », 1938. Platine, onyx.\nV4 — Collier « Aurore », Paris, 1928. Perles fines en chute, fermoir platine et diamants taille ancienne. Porté une seule fois en public, en 1931. Prêt de M. Adrien Sterne.\nV6 — Montre-bracelet « Cadran nuit », 1952."
+    },
+    {
+     "id": "n_appart",
+     "title": "Appart",
+     "createdAt": "2026-10-04 21:30",
+     "modifiedAt": "2026-11-03 22:10",
+     "body": "Loyer 1 140 € le 5.\nChaudière : le technicien passe le 20/11 entre 8h et 12h.\nRendre les clés de cave à la gardienne."
+    },
+    {
+     "id": "n_apres",
+     "title": "Après Éclats",
+     "createdAt": "2026-10-18 23:02",
+     "modifiedAt": "2026-11-08 22:30",
+     "body": "Vacances. Vraies vacances.\nProjet 2027 : les bijoux d'artistes (Calder ?). Voir avec Noémie pour les demandes de prêt."
+    }
+   ],
+   "mails": [
+    {
+     "id": "mail_avenant",
+     "folder": "inbox",
+     "fromName": "Cécile Morin — Valmont Art",
+     "fromAddress": "c.morin@valmont-art.fr",
+     "to": "salome.tessier@volute.fr",
+     "at": "2026-10-20 15:12",
+     "subject": "Avenant n°2 — exposition « Éclats » — collier Aurore",
+     "body": "Bonjour Madame Tessier,\n\nSuite à notre échange téléphonique, veuillez trouver ci-joint l'avenant n°2 au contrat « clou à clou » de l'exposition « Éclats ».\n\nLa valeur assurée du collier Aurore est portée de 1,8 M€ à 4,2 M€ à la demande du prêteur, M. Adrien Sterne (avenue Foch, Paris 16e), sur la base d'une nouvelle estimation établie par l'Atelier Kessler le 14 octobre 2026.\n\nLes autres garanties restent inchangées. L'avenant prend effet au 21 octobre 2026.\n\nJe reste à votre disposition à notre siège de La Défense.\n\nBien cordialement,\nCécile Morin\nChargée de compte — Valmont Art",
+     "attachments": [
+      "Avenant_Aurore_n2.pdf"
+     ]
+    },
+    {
+     "id": "mail_avenant_re",
+     "folder": "sent",
+     "fromName": "Salomé Tessier",
+     "fromAddress": "salome.tessier@volute.fr",
+     "to": "c.morin@valmont-art.fr",
+     "at": "2026-10-20 16:02",
+     "subject": "Re: Avenant n°2 — exposition « Éclats » — collier Aurore",
+     "body": "Bonjour Madame Morin,\n\nBien reçu, merci. Je transmets à la direction du Pavillon Mercure.\n\nBien à vous,\nSalomé Tessier"
+    },
+    {
+     "id": "mail_expertise",
+     "folder": "inbox",
+     "fromName": "Étienne Garrel",
+     "fromAddress": "e.garrel@garrel-expertise.fr",
+     "to": "salome.tessier@volute.fr",
+     "at": "2026-10-28 18:30",
+     "subject": "Constat d'état avant exposition — collier Aurore",
+     "body": "Madame,\n\nVoici mon constat d'état, établi ce matin au domicile du prêteur.\n\nDescription : collier de 43 perles fines, montées en chute (de 4,1 à 8,6 mm), fermoir platine et diamants taille ancienne, présenté fermoir visible de face.\n\nÉtat : très bon. Lustre homogène, enfilage récent (2019), aucune perle manquante ni fêlée.\n\nRecommandations : vitrine climatisée, hygrométrie 45–55 %, aucune manipulation sans gants.\n\nCordialement,\nÉtienne Garrel\nExpert près la cour d'appel",
+     "attachments": [
+      "Constat_Aurore_face.jpg",
+      "Constat_Aurore.pdf"
+     ]
+    },
+    {
+     "id": "mail_conducteur",
+     "folder": "inbox",
+     "fromName": "Victor Almeida",
+     "fromAddress": "v.almeida@pavillon-mercure.fr",
+     "to": "salome.tessier@volute.fr",
+     "at": "2026-11-12 19:40",
+     "subject": "Conducteur lumière — gala v3",
+     "unread": true,
+     "body": "Salut,\n\nConducteur v3 ci-joint, les tops principaux :\n\n19:45 — salle en préchauffe, vitrines à 60 %\n20:00 — ouverture, ambiance ambre\n21:50 — pupitre, découpe sur Hélène\n22:10 — poursuite sur Iris (scène)\n22:14:00 — NOIR TOTAL 90 s (blocs de secours seuls). À la demande de M. Sterne : effet de révélation, ne pas prévenir la salle.\n22:15:30 — poursuite sur vitrine 4, retour salle progressif.\n23:00 — DJ, ambiance club\n00:30 — service\n\nLis-le avant 22h stp.\n\nVictor",
+     "attachments": [
+      "Conducteur_gala_v3.pdf"
+     ]
+    },
+    {
+     "id": "mail_arteo",
+     "folder": "inbox",
+     "fromName": "Arteo Transports",
+     "fromAddress": "planning@arteo-transports.fr",
+     "to": "salome.tessier@volute.fr",
+     "at": "2026-10-19 10:30",
+     "subject": "Confirmation — livraison AT-2210 (6 vitrines)",
+     "body": "Bonjour,\n\nNous confirmons la livraison de 6 vitrines au Pavillon Mercure le mercredi 21 octobre, créneau 08:00–10:00.\n\nL'équipe Arteo"
+    },
+    {
+     "id": "mail_presse",
+     "folder": "inbox",
+     "fromName": "Noémie Castel",
+     "fromAddress": "noemie.castel@volute.fr",
+     "to": "salome.tessier@volute.fr",
+     "at": "2026-11-02 10:14",
+     "subject": "Accréditations presse — liste v2",
+     "body": "Coucou,\n\nListe à jour : 42 accrédités, dont 6 photographes. Les mensuels sont à relancer.\n\nNoémie",
+     "attachments": [
+      "Accreditations_Eclats_v2.xlsx"
+     ]
+    },
+    {
+     "id": "mail_invit",
+     "folder": "inbox",
+     "fromName": "Hélène Dubreuil",
+     "fromAddress": "h.dubreuil@pavillon-mercure.fr",
+     "to": "salome.tessier@volute.fr",
+     "at": "2026-10-26 17:05",
+     "subject": "Carton d'invitation — BAT",
+     "body": "Salomé,\n\nLe BAT du carton est en pièce jointe. Je trouve le doré un peu fort, qu'en penses-tu ?\n\nHélène",
+     "attachments": [
+      "Carton_Eclats_BAT.pdf"
+     ]
+    },
+    {
+     "id": "mail_sorel",
+     "folder": "inbox",
+     "fromName": "Imprimerie Sorel",
+     "fromAddress": "compta@imprimerie-sorel.fr",
+     "to": "salome.tessier@volute.fr",
+     "at": "2026-11-10 09:05",
+     "subject": "Facture n°2026-318 — cartels « Éclats »",
+     "body": "Madame,\n\nVeuillez trouver ci-joint notre facture pour 24 cartels (finition mate) et la réimpression du cartel V2.\n\nMontant : 612,00 € TTC.",
+     "attachments": [
+      "Facture_2026-318.pdf"
+     ]
+    },
+    {
+     "id": "mail_gazette",
+     "folder": "inbox",
+     "fromName": "La Gazette des ventes",
+     "fromAddress": "lettre@gazette-des-ventes.fr",
+     "to": "salome.tessier@volute.fr",
+     "at": "2026-11-09 07:00",
+     "subject": "La lettre du lundi",
+     "body": "Au sommaire : le marché des perles fines au plus haut, les ventes de décembre à Drouot, un grand collectionneur parisien se sépare d'une partie de sa collection."
+    }
+   ],
+   "browser": [
+    {
+     "id": "w01",
+     "at": "2026-10-01 22:40",
+     "kind": "search",
+     "text": "exposition joaillerie xxe siècle paris 2026"
+    },
+    {
+     "id": "w02",
+     "at": "2026-10-08 23:10",
+     "kind": "search",
+     "text": "convention de prêt oeuvre particulier clauses clés vitrine"
+    },
+    {
+     "id": "w03",
+     "at": "2026-10-16 11:30",
+     "kind": "search",
+     "text": "collier aurore 1928 perles"
+    },
+    {
+     "id": "w04",
+     "at": "2026-10-16 11:33",
+     "kind": "visit",
+     "text": "Le collier Aurore, une pièce légendaire de 1928",
+     "url": "bijoux-anciens.fr/aurore-1928",
+     "summary": "Réalisé à Paris en 1928 pour une danseuse, porté une seule fois en public en 1931. Acquis en 1987 par la famille Sterne. Aucune photo récente publiée."
+    },
+    {
+     "id": "w05",
+     "at": "2026-10-20 15:30",
+     "kind": "search",
+     "text": "avenant assurance oeuvre prêt valeur agréée"
+    },
+    {
+     "id": "w06",
+     "at": "2026-11-01 22:05",
+     "kind": "search",
+     "text": "vitrine musée serrure combien de temps pour ouvrir"
+    },
+    {
+     "id": "w07",
+     "at": "2026-11-05 07:52",
+     "kind": "visit",
+     "text": "Itinéraire : Rue des Envierges → Avenue du Président-Wilson",
+     "url": "plan.ratp-itineraires.fr",
+     "summary": "Métro ligne 11 puis ligne 9 : 38 min. Taxi : 27 min."
+    },
+    {
+     "id": "w08",
+     "at": "2026-11-06 21:25",
+     "kind": "search",
+     "text": "train lyon paris 8h04 samedi arrivée voie"
+    },
+    {
+     "id": "w_gazette",
+     "at": "2026-11-09 19:34",
+     "kind": "visit",
+     "text": "Adrien Sterne se sépare de douze pièces de sa collection — vente le 3 décembre",
+     "url": "gazette-des-ventes.fr/actualites/sterne-dispersion",
+     "summary": "Le collectionneur disperse douze pièces le jeudi 3 décembre à la salle des ventes Rossignol, rue Drouot. Selon plusieurs marchands, il traverserait de sérieuses difficultés financières : son hôtel particulier de l'avenue Foch serait hypothéqué. L'Aurore ne fait pas partie de la vente."
+    },
+    {
+     "id": "w10",
+     "at": "2026-11-09 19:41",
+     "kind": "search",
+     "text": "salle des ventes rossignol drouot 3 décembre catalogue"
+    },
+    {
+     "id": "w11",
+     "at": "2026-11-10 15:50",
+     "kind": "search",
+     "text": "iris nakamura abonnés"
+    },
+    {
+     "id": "w12",
+     "at": "2026-11-12 07:39",
+     "kind": "search",
+     "text": "météo paris jeudi soir"
+    },
+    {
+     "id": "w_iris_post",
+     "at": "2026-11-12 22:21",
+     "kind": "visit",
+     "text": "iris.nakamura — publication",
+     "url": "fil.social/iris.nakamura/p/8812",
+     "summary": "Publié à 22:17. Une photo floue de la vitrine vide sous la poursuite : « Scène surréaliste au gala Éclats : noir total, et le collier Aurore a DISPARU. Je suis sous le choc. » 12 400 j'aime. Commentaires : « c'est elle qui a fait le coup pour le buzz 😂 », « la régie a coupé exprès ?? »."
+    },
+    {
+     "id": "w14",
+     "at": "2026-11-12 22:38",
+     "kind": "search",
+     "text": "vol bijou exposition prêteur assurance qui est indemnisé"
+    },
+    {
+     "id": "w15",
+     "at": "2026-11-12 22:57",
+     "kind": "search",
+     "text": "extra intérim sans contrat droits"
+    }
+   ],
+   "liveEvents": [
+    {
+     "id": "lv01",
+     "afterSeconds": 25,
+     "kind": "message",
+     "app": "messages",
+     "title": "Éclats — équipe gala — Hélène",
+     "body": "La police veut la liste de tout le personnel avec les horaires. Tu l'as ?",
+     "conversation": "c_team",
+     "message": {
+      "id": "m_live_helene_list",
+      "from": "helene",
+      "at": "2026-11-12 23:25",
+      "text": "La police veut la liste de tout le personnel avec les horaires. Tu l'as ?"
+     },
+     "opens": "message:m_live_helene_list",
+     "level": "normal"
+    },
+    {
+     "id": "lv02",
+     "afterSeconds": 75,
+     "kind": "call",
+     "app": "phone",
+     "title": "Appel manqué",
+     "body": "Adrien Sterne",
+     "call": {
+      "id": "k_lv_sterne",
+      "contact": "sterne",
+      "direction": "missed",
+      "at": "2026-11-12 23:26",
+      "durationSeconds": 0
+     },
+     "opens": "call:k_lv_sterne",
+     "level": "important"
+    },
+    {
+     "id": "lv03",
+     "afterSeconds": 130,
+     "kind": "message",
+     "app": "messages",
+     "title": "Adrien Sterne",
+     "body": "Chère Salomé, je suis anéanti. Mon avocat vous contactera demain. A. S.",
+     "conversation": "c_sterne",
+     "message": {
+      "id": "m_live_sterne_lawyer",
+      "from": "sterne",
+      "at": "2026-11-12 23:27",
+      "text": "Chère Salomé, je suis anéanti. Mon avocat vous contactera demain. A. S."
+     },
+     "opens": "message:m_live_sterne_lawyer",
+     "level": "important"
+    },
+    {
+     "id": "lv04",
+     "afterSeconds": 190,
+     "kind": "message",
+     "app": "messages",
+     "title": "Iris Nakamura",
+     "body": "je suis désolée pour le post, j'aurais pas dû 🙏",
+     "conversation": "c_iris",
+     "message": {
+      "id": "m_live_iris_sorry",
+      "from": "iris",
+      "at": "2026-11-12 23:28",
+      "text": "je suis désolée pour le post, j'aurais pas dû 🙏"
+     },
+     "opens": "message:m_live_iris_sorry",
+     "level": "normal"
+    },
+    {
+     "id": "lv05",
+     "afterSeconds": 250,
+     "kind": "message",
+     "app": "messages",
+     "title": "Victor Almeida",
+     "body": "Je leur ai donné le conducteur. Ils me regardent comme si c'était moi.",
+     "conversation": "c_victor",
+     "message": {
+      "id": "m_live_victor_cue",
+      "from": "victor",
+      "at": "2026-11-12 23:29",
+      "text": "Je leur ai donné le conducteur. Ils me regardent comme si c'était moi."
+     },
+     "opens": "message:m_live_victor_cue",
+     "level": "important"
+    },
+    {
+     "id": "lv06",
+     "afterSeconds": 310,
+     "kind": "reminder",
+     "app": "calendar",
+     "title": "Demain 09:00",
+     "body": "Point presse Éclats · Pavillon Mercure",
+     "opens": "calendar:c_presse",
+     "level": "normal"
+    },
+    {
+     "id": "lv07",
+     "afterSeconds": 370,
+     "kind": "message",
+     "app": "messages",
+     "title": "Josiane Petit",
+     "body": "Monsieur Sterne a récupéré son manteau au vestiaire à 22h35, il était pressé",
+     "conversation": "c_josiane",
+     "message": {
+      "id": "m_live_josiane_coat",
+      "from": "josiane",
+      "at": "2026-11-12 23:31",
+      "text": "Monsieur Sterne a récupéré son manteau au vestiaire à 22h35, il était pressé"
+     },
+     "opens": "message:m_live_josiane_coat",
+     "level": "normal"
+    },
+    {
+     "id": "lv08",
+     "afterSeconds": 430,
+     "kind": "call",
+     "app": "phone",
+     "title": "Appel manqué",
+     "body": "Relais Intérim",
+     "call": {
+      "id": "k_lv_agence",
+      "contact": "agence",
+      "direction": "missed",
+      "at": "2026-11-12 23:32",
+      "durationSeconds": 0
+     },
+     "opens": "call:k_lv_agence",
+     "level": "normal"
+    }
+   ],
+   "wallpaper": "gold",
+   "batteryPercent": 31
+  }
+ ],
+ "suspects": [
+  {
+   "id": "s_enzo",
+   "contact": "enzo",
+   "role": "Extra serveur, embauché le jour même",
+   "age": 23,
+   "address": "Aubervilliers",
+   "statement": "« J'ai paniqué, je travaillais sans être déclaré. Je n'ai rien pris. »",
+   "alibi": "Pendant les 90 secondes de noir, Enzo était au vestiaire avec Josiane Petit, la lampe de son téléphone allumée pour qu'elle voie les tickets.",
+   "alibiEvidence": "e_enzo_alibi",
+   "trap": "Il s'est enfui par la sortie de service à 22:18. Mais il fuyait un contrat qui n'existait pas encore, pas la police.",
+   "verdict": "Enzo Barros n'a rien pris. Il a fui parce que son contrat de mission n'était pas encore établi et qu'il se croyait en faute. Pendant tout le noir, il tenait la lampe de son téléphone au vestiaire, à côté de Josiane."
+  },
+  {
+   "id": "s_victor",
+   "contact": "victor",
+   "role": "Régisseur lumière du Pavillon",
+   "age": 47,
+   "address": "Montreuil",
+   "statement": "« Je n'ai fait qu'exécuter le conducteur. Le noir était prévu. »",
+   "alibi": "À 22:15, Victor photographiait sa console en régie, sur la mezzanine, à trente mètres de la vitrine 4 : le noir était le top « Q47 » du conducteur.",
+   "alibiEvidence": "e_victor_alibi",
+   "trap": "C'est lui qui a « coupé le courant », et il avait plaisanté sur un noir en plein discours. Mais il n'a fait qu'exécuter un effet commandé par quelqu'un d'autre.",
+   "verdict": "Victor Almeida a lancé le noir, mais il ne l'a pas inventé : c'était écrit dans le conducteur envoyé à 19:40, « à la demande de M. Sterne ». Pendant les 90 secondes, il était en régie, à trente mètres de la vitrine."
+  },
+  {
+   "id": "s_iris",
+   "contact": "iris",
+   "role": "Animatrice de la soirée",
+   "age": 34,
+   "address": "Paris 11e",
+   "statement": "« J'étais sur scène, au micro, pendant tout le noir. »",
+   "alibi": "Iris n'a pas quitté son micro sur pied pendant le noir : un invité du premier rang, à deux mètres, l'a photographiée à 22:14 et l'a entendue parler jusqu'au retour de la lumière.",
+   "alibiEvidence": "e_iris_alibi",
+   "trap": "Elle avait demandé qu'on lui ouvre la vitrine 4, et elle a annoncé la disparition en ligne trois minutes après. Une journaliste qui a flairé le scoop, pas une voleuse.",
+   "verdict": "Iris Nakamura voulait un gros plan, puis un scoop. Rien de plus. Pendant les 90 secondes, elle parlait au micro, sur scène, à une vingtaine de mètres de la vitrine 4."
+  },
+  {
+   "id": "s_sterne",
+   "contact": "sterne",
+   "role": "Collectionneur, propriétaire du collier",
+   "age": 61,
+   "address": "Avenue Foch, Paris 16e",
+   "statement": "« J'étais près de la vitrine quand la lumière s'est éteinte. Je n'ai rien vu. Ce collier était toute ma vie. »",
+   "verdict": "Adrien Sterne a organisé la disparition de son propre collier. Le vrai avait été remplacé par une copie à 17:30, pendant les vingt minutes qu'il avait exigées « seul » avec son joaillier. Le noir de 22:14, c'est lui qui l'avait commandé ; la vitrine, il l'a ouverte avec son double de la clé."
+  }
+ ],
+ "evidence": [
+  {
+   "id": "e_pearls",
+   "title": "41 perles au lieu de 43",
+   "importance": "key",
+   "suspects": [
+    "s_sterne"
+   ],
+   "refs": [
+    "photoInfo:p_vitrine_1752",
+    "mail:mail_expertise"
+   ],
+   "meaning": "Sur la photo de 17:52, le collier n'a que 41 perles et le fermoir est caché ; le constat de l'expert en compte 43, fermoir de face. Bien avant le noir, la vitrine 4 ne contenait déjà plus le vrai collier."
+  },
+  {
+   "id": "e_swap_slot",
+   "title": "Vingt minutes, seuls",
+   "importance": "key",
+   "suspects": [
+    "s_sterne"
+   ],
+   "refs": [
+    "calendar:c_sterne_1730"
+   ],
+   "meaning": "La seule ouverture de la vitrine 4 entre la pose (16:05) et la photo de 17:52 : M. Sterne et « son joaillier », seuls, de 17:30 à 17:50. C'est là que la copie a remplacé le vrai collier."
+  },
+  {
+   "id": "e_cue",
+   "title": "Le noir était commandé",
+   "importance": "key",
+   "suspects": [
+    "s_sterne",
+    "s_victor"
+   ],
+   "refs": [
+    "mail:mail_conducteur"
+   ],
+   "meaning": "« 22:14:00 — NOIR TOTAL 90 s. À la demande de M. Sterne : ne pas prévenir la salle. » La « panne » était un effet exigé par le prêteur."
+  },
+  {
+   "id": "e_key",
+   "title": "Le double de la clé",
+   "importance": "key",
+   "suspects": [
+    "s_sterne"
+   ],
+   "refs": [
+    "message:m_sterne_key"
+   ],
+   "meaning": "Seuls Salomé et Adrien Sterne avaient une clé de la vitrine 4. Elle n'a pas été forcée."
+  },
+  {
+   "id": "e_insurance",
+   "title": "4,2 millions",
+   "importance": "key",
+   "suspects": [
+    "s_sterne"
+   ],
+   "refs": [
+    "mail:mail_avenant"
+   ],
+   "meaning": "Trois semaines avant le gala, la valeur assurée de l'Aurore passe de 1,8 à 4,2 M€, à la demande du prêteur, sur l'estimation de son propre joaillier. C'est le mobile."
+  },
+  {
+   "id": "e_position",
+   "title": "Seul près de la vitrine",
+   "importance": "supporting",
+   "suspects": [
+    "s_sterne",
+    "s_iris"
+   ],
+   "refs": [
+    "photoInfo:p_room_2213"
+   ],
+   "meaning": "Une minute avant le noir, Adrien Sterne se tient seul contre la vitrine 4, la main dans la poche — là où il garde sa clé. Iris, elle, est sur scène."
+  },
+  {
+   "id": "e_debts",
+   "title": "La dispersion Sterne",
+   "importance": "supporting",
+   "suspects": [
+    "s_sterne"
+   ],
+   "refs": [
+    "browser:w_gazette"
+   ],
+   "meaning": "Sterne vend douze pièces, son hôtel particulier est hypothéqué : il a besoin d'argent, vite."
+  },
+  {
+   "id": "e_no_force",
+   "title": "Ouverte avec une clé",
+   "importance": "supporting",
+   "suspects": [
+    "s_sterne"
+   ],
+   "refs": [
+    "photoInfo:p_vitrine_2216"
+   ],
+   "meaning": "La porte de la vitrine est entrouverte, la serrure intacte : quelqu'un l'a ouverte avec une clé, dans le noir, puis l'a mal refermée."
+  },
+  {
+   "id": "e_coat",
+   "title": "Le manteau",
+   "importance": "supporting",
+   "suspects": [
+    "s_sterne"
+   ],
+   "refs": [
+    "message:m_live_josiane_coat"
+   ],
+   "meaning": "À 22:35, Adrien Sterne récupère son manteau en hâte. C'est dans sa doublure que la copie sera retrouvée."
+  },
+  {
+   "id": "e_enzo_alibi",
+   "title": "L'alibi d'Enzo",
+   "importance": "supporting",
+   "suspects": [
+    "s_enzo"
+   ],
+   "refs": [
+    "message:m_josiane_2240"
+   ],
+   "meaning": "Enzo était au vestiaire avec Josiane pendant tout le noir, la lampe de son téléphone allumée."
+  },
+  {
+   "id": "e_victor_alibi",
+   "title": "L'alibi de Victor",
+   "importance": "supporting",
+   "suspects": [
+    "s_victor"
+   ],
+   "anyOf": true,
+   "refs": [
+    "photoInfo:p_regie_2215",
+    "message:m_victor_2216"
+   ],
+   "meaning": "À 22:15, Victor est en régie, sur la mezzanine, devant sa console : « Q47 — NOIR 90 s ». Il exécutait le conducteur."
+  },
+  {
+   "id": "e_iris_alibi",
+   "title": "L'alibi d'Iris",
+   "importance": "supporting",
+   "suspects": [
+    "s_iris"
+   ],
+   "anyOf": true,
+   "refs": [
+    "photoInfo:p_stage_2214",
+    "message:m_samir_2226"
+   ],
+   "meaning": "Iris est au micro sur pied quand tout s'éteint, et elle ne le lâche pas : Samir, au premier rang, l'entend parler pendant les 90 secondes."
+  },
+  {
+   "id": "f_enzo_fled",
+   "title": "La fuite de l'extra",
+   "importance": "falseLead",
+   "suspects": [
+    "s_enzo"
+   ],
+   "refs": [
+    "message:m_team_2219"
+   ],
+   "meaning": "Enzo s'est enfui, mais par peur : son contrat de mission ne devait être établi que le lendemain."
+  },
+  {
+   "id": "f_victor_cut",
+   "title": "« C'est Victor qui a coupé ? »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_victor"
+   ],
+   "refs": [
+    "message:m_helene_2217"
+   ],
+   "meaning": "Victor a bien lancé le noir, mais c'était un top du conducteur, demandé par M. Sterne."
+  },
+  {
+   "id": "f_victor_joke",
+   "title": "« Un noir en plein discours »",
+   "importance": "falseLead",
+   "suspects": [
+    "s_victor"
+   ],
+   "refs": [
+    "message:m_team_victor_joke"
+   ],
+   "meaning": "Une blague de régisseur fâché pour des heures supplémentaires. Rien à voir avec le noir de 22:14."
+  },
+  {
+   "id": "f_iris_access",
+   "title": "Le gros plan d'Iris",
+   "importance": "falseLead",
+   "suspects": [
+    "s_iris"
+   ],
+   "refs": [
+    "message:m_iris_access"
+   ],
+   "meaning": "Iris voulait une belle image pour ses abonnés. On le lui a refusé, et elle n'a jamais approché la vitrine."
+  },
+  {
+   "id": "f_iris_post",
+   "title": "Le post de 22:17",
+   "importance": "falseLead",
+   "suspects": [
+    "s_iris"
+   ],
+   "refs": [
+    "browser:w_iris_post"
+   ],
+   "meaning": "Annoncer la disparition si vite ressemble à un aveu. C'est seulement le réflexe d'une journaliste suivie par des milliers de personnes."
+  }
+ ],
+ "hints": [
+  {
+   "id": "h1",
+   "text": "Et si le collier avait disparu avant le noir ?",
+   "scoreCost": 0
+  },
+  {
+   "id": "h2",
+   "text": "Comparez la photo de la vitrine prise à 17:52 avec le constat de l'expert, dans vos mails.",
+   "scoreCost": 8
+  },
+  {
+   "id": "h3",
+   "text": "Qui a eu la vitrine ouverte pour lui seul, et qui a demandé le noir ? Le conducteur de Victor le dit.",
+   "scoreCost": 15,
+   "unlockAtRemainingSeconds": 120
+  }
+ ],
+ "solution": {
+  "culprit": "s_sterne",
+  "headline": "Adrien Sterne a volé son propre collier, deux fois.",
+  "summary": "Le noir n'était pas une panne, et le collier exposé n'était déjà plus le vrai.",
+  "reveal": [
+   {
+    "at": "2026-10-20 15:12",
+    "text": "La valeur assurée de l'Aurore passe de 1,8 à 4,2 M€, à la demande du prêteur",
+    "evidence": "e_insurance"
+   },
+   {
+    "at": "2026-10-29 09:12",
+    "text": "Sterne garde le double de la clé de la vitrine 4",
+    "evidence": "e_key"
+   },
+   {
+    "at": "2026-11-09 19:34",
+    "text": "Il disperse douze pièces : sa maison est hypothéquée",
+    "evidence": "e_debts"
+   },
+   {
+    "at": "2026-11-12 17:30",
+    "text": "Vingt minutes seul avec « son joaillier », vitrine 4 ouverte",
+    "evidence": "e_swap_slot"
+   },
+   {
+    "at": "2026-11-12 17:52",
+    "text": "La photo pour les réseaux : 41 perles, fermoir caché. Le constat en comptait 43",
+    "evidence": "e_pearls"
+   },
+   {
+    "at": "2026-11-12 19:40",
+    "text": "Le conducteur : « NOIR TOTAL 90 s — à la demande de M. Sterne »",
+    "evidence": "e_cue"
+   },
+   {
+    "at": "2026-11-12 22:13",
+    "text": "Sterne se tient seul près de la vitrine 4, la main dans la poche",
+    "evidence": "e_position"
+   },
+   {
+    "at": "2026-11-12 22:16",
+    "text": "La vitrine est entrouverte, la serrure intacte : ouverte avec une clé",
+    "evidence": "e_no_force"
+   }
+  ],
+  "story": [
+   "Adrien Sterne est ruiné. Son hôtel particulier de l'avenue Foch est hypothéqué, il disperse douze pièces à Drouot. Il lui reste l'Aurore — et un acheteur privé, à l'étranger, prêt à la payer sans poser de questions.",
+   "En octobre, il prête le collier à l'exposition « Éclats ». Puis il fait réévaluer la pièce par son propre joaillier, Marc Kessler : Valmont Art porte la valeur assurée de 1,8 à 4,2 M€. Il exige de garder le double de la clé de la vitrine 4.",
+   "Le 12 novembre, à 17:30, il obtient vingt minutes « seul » avec son joaillier, vitrine ouverte, pour un « dernier nettoyage ». Le vrai collier repart dans une mallette ; une copie prend sa place. Le copiste a oublié deux perles, et Kessler a tourné le fermoir vers le fond pour cacher l'imitation. À 17:52, Salomé la photographie sans rien remarquer.",
+   "Quelques jours plus tôt, il a obtenu de Victor un « effet de révélation » : 90 secondes de noir total à 22:14, sans prévenir la salle. Salomé n'a jamais ouvert le conducteur.",
+   "À 22:14, dans le noir, il ouvre la vitrine avec son double, empoche la copie et referme mal. À 22:15:30, la poursuite éclaire une vitrine vide. L'extra s'enfuit, le régisseur est montré du doigt, l'animatrice poste la nouvelle : tout le monde regarde ailleurs. Sterne appelle Salomé à 22:31, anéanti.",
+   "À 22:35, il récupère son manteau au vestiaire, pressé de partir. La police l'arrête à la porte. La copie de 41 perles est dans la doublure. L'assurance aurait payé 4,2 millions pour un collier déjà vendu."
+  ]
+ }
+}

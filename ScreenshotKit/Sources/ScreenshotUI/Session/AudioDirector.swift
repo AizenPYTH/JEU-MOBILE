@@ -12,6 +12,18 @@ final class AudioDirector {
 
     enum Sound: String, CaseIterable {
         case street, sirens, crowd, vibrate, notification, unlock, key, tick, sting
+        case metro, chime, train, room, sea, gulls, hall, powerdown, rain, engine, ring
+    }
+
+    /// Relative level of each looping ambience (the loudest ones are pulled back).
+    static func ambienceVolume(_ name: String) -> Float {
+        switch name {
+        case "sirens": 0.45
+        case "engine": 0.35
+        case "hall", "rain": 0.5
+        case "room": 0.4
+        default: 0.55
+        }
     }
 
     private var players: [String: AVAudioPlayer] = [:]

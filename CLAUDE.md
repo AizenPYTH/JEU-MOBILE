@@ -36,6 +36,7 @@ Configs/Screenshot.xcconfig  Bundle ID, version, signature (source unique)
                           ios-testflight.yml (manuel + PR vers main). Contenu de référence : docs/CI_WORKFLOWS.md
 docs/TESTFLIGHT_SETUP.md  Signature et TestFlight sans Mac
 docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
+docs/CINEMATIQUES_VEO.md  Ouvertures des affaires #002–#005, plan par plan, avec prompts Veo 3.1
 docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — lire README.md
 DESIGN_INTEGRATION.md     État de l'intégration du handoff + conflits à trancher
 ScreenshotKit/            Package Swift contenant tout le jeu
@@ -141,7 +142,10 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
 - [x] Onboarding 3 étapes, reprise d'une enquête (sauvegarde locale), recherche globale (toutes apps)
 - [x] Quitter / reprendre, niveaux Enquêteur · Détective · Expert, carte réelle (MapKit) révélée par
       les indices, photos réalistes (styles), séquence d'ouverture (`introScene`), sons
-- [ ] Affaires #002–#005 (4 suspects, 5 min) puis #006–#015 (6 suspects, 8–10 min)
+- [x] Affaires #002–#005 : « PREMIER MÉTRO », « APRÈS LA FÊTE », « 90 SECONDES », « ROUTE DE NUIT » — chacune
+      avec son téléphone (fond, batterie), ses lieux, sa structure d'indices et son ouverture (prompts Veo :
+      docs/CINEMATIQUES_VEO.md)
+- [ ] Affaires #006–#015 (6 suspects, 8–10 min)
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
 - [ ] Monnaie / tickets d'indices, iCloud
 - [ ] Sons, haptiques fines, finitions d'animation, accessibilité avancée

@@ -108,6 +108,6 @@ struct IntroSceneTests {
         file.introScene = scene
         #expect(CaseValidator.validate(file).isEmpty)
         file.introScene?.shots[2].notification?.at = 9
-        #expect(CaseValidator.validate(file).contains { $0.message.contains("notification is outside") })
+        #expect(CaseValidator.validate(file).contains { $0.message.contains("is outside the shot") && $0.message.contains("notification") })
     }
 }

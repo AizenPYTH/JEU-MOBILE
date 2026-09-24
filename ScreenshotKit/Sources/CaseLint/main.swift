@@ -6,13 +6,27 @@ import CaseLibrary
 //
 //   swift run CaseLint
 //
+//   swift run CaseLint --rules path/to/rules.json path/to/case_002.json …
+//
 // For each case: loads it, validates every reference, and checks it can be solved in time.
+// With file arguments, checks those files instead of the shipped cases (to try a case before adding it).
 // Exit code 1 if anything is wrong (used by CI).
 
 var failed = false
 do {
-    let rules = try CaseLibrary.loadRules()
-    let cases = try CaseLibrary.loadCases()
+    var arguments = Array(CommandLine.arguments.dropFirst())
+    var rulesPath: String?
+    if let i = arguments.firstIndex(of: "--rules"), i + 1 < arguments.count {
+        rulesPath = arguments[i + 1]
+        arguments.removeSubrange(i...(i + 1))
+    }
+    let rules = try rulesPath.map { try CaseLoader.loadRules(Data(contentsOf: URL(fileURLWithPath: $0))) } ?? CaseLibrary.loadRules()
+    let cases = arguments.isEmpty
+        ? try CaseLibrary.loadCases()
+        : try arguments.map { path in
+            let url = URL(fileURLWithPath: path)
+            return try CaseLoader.loadCase(Data(contentsOf: url), name: url.lastPathComponent)
+        }
     print("TRACE CaseLint — CaseEngine \(CaseEngine.version) — \(cases.count) case(s)\n")
     for file in cases {
         let issues = CaseValidator.validate(file)

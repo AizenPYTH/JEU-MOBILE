@@ -95,7 +95,7 @@ enum PhotoPainter {
         switch scene {
         case "screenshot": .screenshot
         case "document": .document
-        case "street_night", "parking_night", "concert", "desk_night", "party": .night
+        case "street_night", "parking_night", "concert", "desk_night", "party", "club", "road_night", "forest": .night
         default: .standard
         }
     }
@@ -140,6 +140,18 @@ enum PhotoPainter {
         case "receipt": receipt(&ctx, w, h, &rng, lines: lines)
         case "mirror": mirror(&ctx, w, h, &rng)
         case "view": viewFromWindow(&ctx, w, h, &rng)
+        case "metro": metro(&ctx, w, h, &rng)
+        case "club": club(&ctx, w, h, &rng)
+        case "road_night": roadNight(&ctx, w, h, &rng)
+        case "forest": forest(&ctx, w, h, &rng)
+        case "gala": gala(&ctx, w, h, &rng)
+        case "vitrine": vitrine(&ctx, w, h, &rng, empty: false)
+        case "vitrine_empty": vitrine(&ctx, w, h, &rng, empty: true)
+        case "mountain": mountain(&ctx, w, h, &rng)
+        case "office": office(&ctx, w, h, &rng)
+        case "terrace": terrace(&ctx, w, h, &rng)
+        case "garden_stairs": gardenStairs(&ctx, w, h, &rng)
+        case "villa_morning": villaMorning(&ctx, w, h, &rng)
         default: sky(&ctx, w, h, &rng)
         }
     }

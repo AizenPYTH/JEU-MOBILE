@@ -160,14 +160,21 @@ final class MainFlowTests: XCTestCase {
         tap(element("intro.start"), "Commencer l'enquête", expecting: element("phone.timer"))
     }
 
-    /// Home (or the case list) → the presentation screen of case 001.
-    private func openCaseScreen(shot: String? = nil) {
-        let card = element("case.case_001")
+    /// Home (or the case list) → the presentation screen of a case (001 by default).
+    private func openCaseScreen(_ id: String = "case_001", shot: String? = nil) {
+        let card = element("case.\(id)")
         if !card.waitForExistence(timeout: 2) {
             tap(element("menu.cases"), "Affaires", expecting: card)
         }
+        scrollTo(card)
         if let shot { snap(shot) }
-        tap(card, "carte de l'affaire 001", expecting: element("intro.start"))
+        tap(card, "carte de l'affaire \(id)", expecting: element("intro.start"))
+    }
+
+    /// "Suivant" on the score screen proposes the next case; close it to go home.
+    private func leaveNextCaseScreen() {
+        tap(wait(element("score.next"), 8, "score"), "Suivant", expecting: element("intro.close"))
+        tap(element("intro.close"), "fermer l'affaire suivante", expecting: element("home.start"))
     }
 
     /// Accuses Emma straight from the timer and goes through the result and score screens.
@@ -183,7 +190,7 @@ final class MainFlowTests: XCTestCase {
         wait(primary, 5, "résultat")
         scrollTo(primary)
         primary.tap()
-        tap(wait(element("score.next"), 8, "score"), "Suivant", expecting: element("case.case_001"))
+        leaveNextCaseScreen()
     }
 
     private func quitInvestigation() {
@@ -343,13 +350,14 @@ final class MainFlowTests: XCTestCase {
         wait(element("score.value"), 5, "score")
         sleep(3)
         snap("21-score")
-        element("score.next").tap()
-        sleep(1)
-        snap("22-apres-score")
+        // "Suivant" proposes the next case (#002), with its own story.
+        tap(element("score.next"), "Suivant", expecting: element("intro.close"))
+        sleep(2)
+        snap("22-affaire-suivante")
+        XCTAssertTrue(app.staticTexts["PREMIER MÉTRO"].exists, "L'affaire suivante devrait être la #002")
 
         // Archive: the attempt is listed and its reconstruction opens.
-        app.buttons.matching(NSPredicate(format: "label CONTAINS 'Accueil'")).firstMatch.tap()
-        wait(element("home.start"), 5, "retour à l'accueil")
+        tap(element("intro.close"), "fermer l'affaire suivante", expecting: element("home.start"))
         app.buttons.matching(NSPredicate(format: "label CONTAINS 'Dossiers'")).firstMatch.tap()
         sleep(1)
         snap("23-dossiers")
@@ -586,7 +594,7 @@ final class MainFlowTests: XCTestCase {
         accuseEmmaAndFinish("82-resolue-enqueteur")
 
         // Solved at Enquêteur: shown on its card; Expert still locked.
-        tap(element("case.case_001"), "affaire 001", expecting: element("intro.start"))
+        openCaseScreen()
         scrollTo(expert)
         XCTAssertTrue(investigator.label.contains("Résolue"), "Meilleur résultat affiché (\(investigator.label))")
         XCTAssertTrue(detective.label.contains("Non tentée") || !detective.label.contains("Résolue"))
@@ -599,7 +607,7 @@ final class MainFlowTests: XCTestCase {
         let left = secondsLeft()
         XCTAssertTrue(left > 7 * 60 && left <= 8 * 60, "Détective démarre à 08:00 (\(left) s)")
         accuseEmmaAndFinish("84-resolue-detective")
-        tap(element("case.case_001"), "affaire 001", expecting: element("intro.start"))
+        openCaseScreen()
         scrollTo(expert)
         XCTAssertTrue(expert.isEnabled, "Expert se débloque après une réussite en Détective")
         expert.tap()
@@ -681,6 +689,65 @@ final class MainFlowTests: XCTestCase {
         sleep(1)
         tap(skip, "Passer", expecting: element("phone.timer"))
         XCTAssertTrue(secondsLeft() >= 8 * 60 - 4, "Passer l'ouverture ne coûte pas de temps")
+    }
+
+    // MARK: - Cases #002–#005: each one opens its own phone
+
+    /// A conversation that only exists in that case's phone, and the case's title.
+    private let newCases: [(id: String, title: String, conversation: String)] = [
+        ("case_002", "PREMIER MÉTRO", "c_anais"),
+        ("case_003", "APRÈS LA FÊTE", "c_family"),
+        ("case_004", "90 SECONDES", "c_team"),
+        ("case_005", "ROUTE DE NUIT", "c_redac"),
+    ]
+
+    func testEveryNewCaseOpensItsOwnPhone() {
+        app.launch()
+        wait(element("home.start"), 20, "Accueil")
+        for (n, item) in newCases.enumerated() {
+            openCaseScreen(item.id)
+            XCTAssertTrue(app.staticTexts[item.title].exists, "Écran de présentation de \(item.id)")
+            sleep(2)
+            snap("B\(n)0-\(item.id)-presentation")
+            tap(element("intro.start"), "Commencer \(item.id)", expecting: element("phone.timer"))
+            dismissUrgentBanner()
+            snap("B\(n)1-\(item.id)-accueil-telephone")
+            openApp("messages")
+            wait(element("conversation.\(item.conversation)"), 8, "conversation propre à \(item.id)")
+            snap("B\(n)2-\(item.id)-messages")
+            openApp("photos")
+            sleep(1)
+            snap("B\(n)3-\(item.id)-photos")
+            openApp("location")
+            wait(element("location.map"), 10, "carte de \(item.id)")
+            sleep(2)
+            snap("B\(n)4-\(item.id)-carte")
+            quitInvestigation()
+            wait(element("home.resume"), 10, "reprise proposée pour \(item.id)")
+        }
+    }
+
+    /// The four new opening sequences, each with its own place and phone.
+    func testNewCinematics() {
+        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip"]
+        app.launch()
+        wait(element("home.start"), 20, "Accueil")
+        for (n, item) in newCases.enumerated() {
+            openCaseScreen(item.id)
+            tapWhenReady(element("intro.start"), "Commencer \(item.id)")
+            wait(element("cinematic.shot.scene"), 6, "premier plan de \(item.id)")
+            sleep(3)
+            snap("C\(n)0-\(item.id)-plan1")
+            sleep(4)
+            snap("C\(n)1-\(item.id)-plan2")
+            wait(element("cinematic.shot.phone"), 25, "le téléphone de \(item.id)")
+            sleep(4)
+            snap("C\(n)2-\(item.id)-telephone")
+            wait(element("phone.timer"), 30, "fin de l'ouverture de \(item.id)")
+            snap("C\(n)3-\(item.id)-en-main")
+            quitInvestigation()
+            wait(element("home.resume"), 10, "retour à l'accueil")
+        }
     }
 
     // MARK: - Time runs out, wrong accusation, reveal

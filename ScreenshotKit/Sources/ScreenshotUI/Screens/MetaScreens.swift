@@ -203,7 +203,7 @@ struct CaseCover: View {
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)
         ZStack {
-            Wallpaper()
+            Wallpaper(style: file.devices.first?.wallpaper ?? .night)
             VStack(spacing: 2) {
                 Text(PhoneFormat.longDayCapitalized(file.phoneStartTime))
                     .font(Theme.Fonts.caption)
@@ -355,6 +355,7 @@ struct CaseIntroView: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel(Text(L10n.t("a11y.close")))
+            .accessibilityIdentifier("intro.close")
             .padding(.horizontal, Theme.Spacing.marginGame - 10)
 
             ScrollView {

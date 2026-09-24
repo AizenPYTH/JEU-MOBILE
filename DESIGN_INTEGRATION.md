@@ -142,6 +142,17 @@ Accueil → Affaires → Intro → Téléphone → enquête → Carnet → accus
   coupure + vibration, téléphone sur la table, déverrouillage → téléphone du jeu, même cadrage.
   Les couleurs du décor (bois, étiquette de scellé) sont du contenu généré, comme les photos.
 
+## 2 ter. Une identité par affaire (#002–#005)
+
+- **Téléphone** : fond d'écran propre à chaque propriétaire (`Theme.Wallpapers` : `night` #001, `ice` #002, `shore`
+  #003, `gold` #004, `storm` #005), batterie de départ différente (9 %, 41 %, 31 %, 18 %), modèle différent. Le fond
+  apparaît sur l'écran verrouillé de l'ouverture, l'accueil du téléphone et la carte de l'affaire.
+- **Ouvertures** : nouveau type de plan `scene` (un lieu filmé : image générée, mouvement de caméra, effet — arrivée
+  d'un train, coupure de courant, pluie, feux de détresse, soleil du matin), téléphone posé sur des surfaces
+  différentes (banc de métro, table de chevet, table en marbre, siège passager), notifications empilées et appel
+  entrant sur l'écran verrouillé. 12 nouvelles scènes photo, 11 nouveaux sons synthétisés.
+- Les couleurs des surfaces et des scènes sont du contenu généré (comme les photos) ; l'interface reste en `Theme.*`.
+
 ## 3. Reste à faire (handoff)
 
 - Affaire 000 (tutoriel jouable de 3 min) : reportée.

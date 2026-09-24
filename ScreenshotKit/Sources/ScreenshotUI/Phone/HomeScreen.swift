@@ -83,7 +83,7 @@ struct HomeScreen: View {
             .padding(.bottom, Theme.Spacing.bottomInset - Theme.Spacing.s5)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Wallpaper())
+        .background(Wallpaper(style: session.game.device.wallpaper ?? .night))
         .onGeometryChange(for: Bool.self) { $0.size.height > 700 } action: { roomForWidgets = $0 }
         .toolbar(.hidden, for: .navigationBar)
     }
@@ -173,23 +173,37 @@ private extension View {
     }
 }
 
-/// Wallpaper: a deep night gradient with two soft, blurred lights — dark, but clearly a phone's
-/// lock/home screen, not an empty black surface.
+/// Wallpaper: a deep gradient with two soft, blurred lights — dark, but clearly a phone's
+/// lock/home screen, not an empty black surface. Each case's phone has its own (`Device.wallpaper`).
 struct Wallpaper: View {
+    var style: Device.Wallpaper = .night
+
+    static func palette(_ style: Device.Wallpaper) -> Theme.WallpaperPalette {
+        switch style {
+        case .night: Theme.Wallpapers.night
+        case .ice: Theme.Wallpapers.ice
+        case .shore: Theme.Wallpapers.shore
+        case .gold: Theme.Wallpapers.gold
+        case .storm: Theme.Wallpapers.storm
+        case .dusk: Theme.Wallpapers.dusk
+        }
+    }
+
     var body: some View {
+        let palette = Self.palette(style)
         ZStack {
-            LinearGradient(colors: [Theme.Colors.wallpaperTop, Theme.Colors.wallpaperBottom], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [palette.top, palette.bottom], startPoint: .top, endPoint: .bottom)
             GeometryReader { geo in
-                Circle().fill(Theme.Colors.wallpaperLightA)
+                Circle().fill(palette.lightA)
                     .frame(width: geo.size.width * 0.9)
                     .blur(radius: 70)
                     .position(x: geo.size.width * 0.15, y: geo.size.height * 0.2)
-                Circle().fill(Theme.Colors.wallpaperLightB)
+                Circle().fill(palette.lightB)
                     .frame(width: geo.size.width * 0.8)
                     .blur(radius: 80)
                     .position(x: geo.size.width * 0.95, y: geo.size.height * 0.62)
             }
-            LinearGradient(colors: [.clear, Theme.Colors.wallpaperBottom.opacity(0.7)], startPoint: .center, endPoint: .bottom)
+            LinearGradient(colors: [.clear, palette.bottom.opacity(0.7)], startPoint: .center, endPoint: .bottom)
         }
         .ignoresSafeArea()
         .allowsHitTesting(false)
