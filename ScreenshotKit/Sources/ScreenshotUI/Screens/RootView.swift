@@ -124,7 +124,7 @@ public struct RootView: View {
             case .result(let play):
                 ResultView(verdict: play.verdict, caseFile: play.session.caseFile, names: names(play.session),
                            onScore: { stage = .score(play) },
-                           onReplay: { start(play.session.caseFile) },
+                           onReplay: { replay(play) },
                            onRevealRequested: { reveal(play) },
                            revealed: play.revealed,
                            accusedEvidence: accusedEvidence(play.session, play.verdict.accused),
@@ -135,7 +135,7 @@ public struct RootView: View {
             case .score(let play):
                 ScoreView(verdict: play.verdict, duration: play.session.caseFile.durationSeconds,
                           caseTitle: play.session.caseFile.title,
-                          onReplay: { start(play.session.caseFile) },
+                          onReplay: { replay(play) },
                           onNext: { stage = nextCase(after: play.session.caseFile).map { .intro($0) } ?? .cases })
                     .transition(.opacity)
             case .archived(let file, let attempt):
@@ -246,6 +246,12 @@ public struct RootView: View {
     private func handOver(_ session: GameSession) {
         session.begin()
         stage = .playing(session)
+    }
+
+    /// "Rejouer": the same case, from the start, at the same level.
+    private func replay(_ play: Play) {
+        let original = cases.first { $0.id == play.session.caseFile.id } ?? play.session.caseFile
+        start(original, challenge: play.session.game.challenge)
     }
 
     /// "Quitter l'enquête": the investigation is saved (it paused when the question was asked).
