@@ -248,6 +248,11 @@ final class MainFlowTests: XCTestCase {
         let emmaChoice = emmaChoices.allElementsBoundByIndex.first { $0.frame.minY > menuTop }
         XCTAssertNotNil(emmaChoice, "Emma introuvable dans le sous-menu")
         emmaChoice?.tap()
+        if !linkMenu.waitForNonExistence(timeout: 4) {
+            // A tap during the submenu's animation can be swallowed: tap the choice again.
+            snap("retry-lier-emma")
+            if let emmaChoice, emmaChoice.exists { emmaChoice.tap() }
+        }
         XCTAssertTrue(linkMenu.waitForNonExistence(timeout: 5), "Le menu ne se ferme pas")
         sleep(1)
         snap("09b-lie-a-emma")
