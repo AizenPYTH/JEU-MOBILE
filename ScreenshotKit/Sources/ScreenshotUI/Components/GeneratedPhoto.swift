@@ -80,7 +80,7 @@ struct GeneratedPhoto: View, Equatable {
         .accessibilityHidden(true)
     }
 
-    static func == (a: GeneratedPhoto, b: GeneratedPhoto) -> Bool {
+    nonisolated static func == (a: GeneratedPhoto, b: GeneratedPhoto) -> Bool {
         a.scene == b.scene && a.seed == b.seed && a.style == b.style && a.lines == b.lines
     }
 }

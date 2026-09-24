@@ -41,8 +41,8 @@ struct CaseProgress: Equatable {
     var bestScore = 0
 }
 
-/// Attempts kept on the device (UserDefaults). An investigation itself is not saved: a case is short
-/// and meant to be replayed from the start.
+/// Finished attempts kept on the device (UserDefaults). The investigation in progress is saved
+/// separately (`SavedInvestigationStore`).
 enum ProgressStore {
     private static let key = "screenshot.attempts.v1"
 
