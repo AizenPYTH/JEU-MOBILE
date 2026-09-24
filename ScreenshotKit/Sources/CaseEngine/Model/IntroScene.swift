@@ -50,6 +50,8 @@ public struct IntroShot: Codable, Sendable, Hashable {
     public var effect: Effect? = nil
     /// Phone shots: what the phone lies on.
     public var surface: Surface? = nil
+    /// Phone shots: the time on the lock screen (default: when the phone is handed over).
+    public var time: Moment? = nil
 
     public enum Camera: String, Codable, Sendable {
         case still, push, pull, panLeft, panRight, drift

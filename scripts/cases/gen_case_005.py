@@ -798,7 +798,7 @@ intro = dict(shots=[
          lines=[dict(text="COL DE LA CROIX-PERRIN · VENDREDI 27 NOVEMBRE · 23:48", at=0.3),
                 dict(text="Moteur allumé. Portière ouverte.", at=2.6)]),
     dict(kind="scene", seconds=5, scene="road_night", camera="drift", effect="rain", ambience=["rain", "engine"]),
-    dict(kind="phoneOnTable", seconds=7, surface="carSeat", label="Siège passager — 23:48", ambience=["rain", "engine"],
+    dict(kind="phoneOnTable", seconds=7, time="2026-11-27 23:48", surface="carSeat", label="Siège passager — 23:48", ambience=["rain", "engine"],
          cues=[dict(sound="vibrate", at=0.8), dict(sound="notification", at=0.85), dict(sound="notification", at=2.6),
                dict(sound="ring", at=4.2)],
          notifications=[dict(app="messages", title="Julien (nouveau n°)", body="Je suis au parking du col, t'es où ?", at=0.8),

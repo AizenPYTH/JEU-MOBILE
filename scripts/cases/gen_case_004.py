@@ -746,7 +746,7 @@ intro = dict(shots=[
          lines=[dict(text="22:14", at=0.5)]),
     dict(kind="scene", seconds=4.5, scene="vitrine_empty", camera="push", ambience=["crowd"],
          lines=[dict(text="La vitrine 4 est vide.", at=1.2)]),
-    dict(kind="phoneOnTable", seconds=6.5, surface="marble", label="Salon d'honneur — 22:31", ambience=["crowd"],
+    dict(kind="phoneOnTable", seconds=6.5, time="2026-11-12 22:31", surface="marble", label="Salon d'honneur — 22:31", ambience=["crowd"],
          cues=[dict(sound="vibrate", at=0.6), dict(sound="notification", at=0.65), dict(sound="notification", at=1.9), dict(sound="ring", at=3.2)],
          notifications=[dict(app="messages", title="Victor Almeida", body="C'était pas une panne. Personne t'a prévenue ??", at=0.6),
                         dict(app="messages", title="Éclats — équipe gala", body="Hélène : la police est là", at=1.9),

@@ -96,7 +96,7 @@ système).
 | `title` | Écran noir, sons, une ou deux lignes | — |
 | `broadcast` | Reportage en direct devant le lieu (caméra à l'épaule, gyrophares, sous-titres) | `channel`, `label` (heure), `location`, `headline`, `ticker`, `scene` (image de fond) |
 | `scene` | Un lieu filmé : l'image `scene`, un mouvement de caméra et un effet. 1ʳᵉ ligne = titre de lieu/heure ; lignes avec `speaker` = annonces sous-titrées ; autres = voix narrative | `scene`, `camera` (`still`, `push`, `pull`, `panLeft`, `panRight`, `drift`), `effect` (`trainArrival`, `blackout`, `rain`, `hazard`, `sunlight`) |
-| `phoneOnTable` | Le téléphone là où il a été trouvé, l'écran verrouillé s'allume | `surface` (`wood`, `bench`, `glass`, `carSeat`, `sofa`, `marble`), `label` (étiquette), `notification` ou `notifications` `[{app, title, body, at, call?}]` (`call: true` = appel entrant qui sonne) |
+| `phoneOnTable` | Le téléphone là où il a été trouvé, l'écran verrouillé s'allume | `surface` (`wood`, `bench`, `glass`, `carSeat`, `sofa`, `marble`), `label` (étiquette), `notification` ou `notifications` `[{app, title, body, at, call?}]` (`call: true` = appel entrant qui sonne), `time` (heure affichée sur l'écran verrouillé, par défaut `phoneStartTime`) |
 | `unlock` | Le téléphone est pris en main et déverrouillé : l'écran d'accueil devient celui du jeu | — |
 
 Tous les décalages (`at`) sont relatifs au début du plan et doivent tenir dans sa durée (validé).

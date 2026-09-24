@@ -818,7 +818,7 @@ intro = {"shots": [
                {"text": "Le premier métro en direction de Gare de Vaise entre en station.", "at": 2.2, "speaker": "Annonce", "voiced": True}]},
     {"kind": "scene", "seconds": 5, "scene": "metro", "camera": "still", "effect": "trainArrival", "ambience": ["metro"],
      "cues": [{"sound": "train", "at": 0.2}]},
-    {"kind": "phoneOnTable", "seconds": 6.5, "surface": "bench", "label": "OBJET TROUVÉ — quai 2 — 05:12", "ambience": ["metro"],
+    {"kind": "phoneOnTable", "seconds": 6.5, "time": "2026-10-17 05:12", "surface": "bench", "label": "OBJET TROUVÉ — quai 2 — 05:12", "ambience": ["metro"],
      "cues": [{"sound": "vibrate", "at": 1.2}, {"sound": "notification", "at": 1.25}, {"sound": "ring", "at": 3.4}],
      "notifications": [{"app": "messages", "title": "Anaïs", "body": "clem ?? réponds stp", "at": 1.2},
                        {"app": "phone", "title": "Anaïs", "body": "Appel entrant", "at": 3.4, "call": True}],

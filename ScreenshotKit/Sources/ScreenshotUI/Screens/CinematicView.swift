@@ -272,7 +272,7 @@ private struct PhoneOnTableShot: View {
             ZStack {
                 SurfaceView(surface: shot.surface ?? .wood)
                 PhoneDevice {
-                    LockScreen(time: caseFile.phoneStartTime, notifications: arrived, lit: !arrived.isEmpty || t > 0.6,
+                    LockScreen(time: shot.time ?? caseFile.phoneStartTime, notifications: arrived, lit: !arrived.isEmpty || t > 0.6,
                                wallpaper: caseFile.devices.first?.wallpaper ?? .night)
                 }
                 .frame(width: 300, height: 620)

@@ -795,7 +795,7 @@ intro = dict(shots=[
                 dict(text="Le lendemain de ses trente ans.", at=2.4)]),
     dict(kind="scene", seconds=5, scene="terrace", camera="panRight", ambience=["sea"],
          cues=[dict(sound="gulls", at=2.0)]),
-    dict(kind="phoneOnTable", seconds=6.5, surface="wood", label="Table de chevet — chambre du haut — 07:11",
+    dict(kind="phoneOnTable", seconds=6.5, time="2026-08-23 07:11", surface="wood", label="Table de chevet — chambre du haut — 07:11",
          ambience=["room"],
          cues=[dict(sound="ring", at=0.8), dict(sound="vibrate", at=0.8), dict(sound="notification", at=3.4)],
          notifications=[dict(app="phone", title="Grégoire", body="Appel entrant", at=0.8, call=True),
