@@ -46,6 +46,7 @@ struct InvestigationView: View {
                             .presentationDetents([.height(380), .medium])
                     }
                 }
+                .environment(\.caseNumber, session.caseFile.number)
                 .presentationCornerRadius(Theme.Radius.sheet)
                 .presentationBackground(Trace.Colors.desk)
                 .presentationDragIndicator(.visible)

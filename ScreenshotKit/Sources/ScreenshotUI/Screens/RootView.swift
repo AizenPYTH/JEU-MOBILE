@@ -3,8 +3,32 @@ import SwiftUI
 import CaseEngine
 import CaseLibrary
 
-/// Home → Affaires → Intro → investigation (phone) → time up / accusation → result → score.
+/// Launch: the loading screen does the real start-up work, then fades into the game.
 public struct RootView: View {
+    @State private var loader = LaunchLoader()
+    @State private var boot: BootData?
+
+    public init() {}
+
+    public var body: some View {
+        ZStack {
+            Trace.Colors.desk.ignoresSafeArea()
+            if let boot {
+                GameRoot(boot: boot)
+                    .transition(.opacity)
+            } else {
+                LoadingScreen(loader: loader) { data in
+                    withAnimation(.easeInOut(duration: 0.6)) { boot = data }
+                }
+                .transition(.opacity)
+            }
+        }
+        .preferredColorScheme(.dark)
+    }
+}
+
+/// Home → Affaires → Intro → investigation (phone) → time up / accusation → result → score.
+struct GameRoot: View {
     enum Stage {
         case onboarding
         case home
@@ -37,28 +61,17 @@ public struct RootView: View {
     private let rules: GameRules?
     private let loadError: String?
 
-    public init() {
-        AppFonts.register()
-        UITestHooks.applyAtLaunch()
-        _attempts = State(initialValue: ProgressStore.attempts())
-        _savedGame = State(initialValue: SavedInvestigationStore.load())
+    /// Everything was loaded by the loading screen (`LaunchLoader`): fonts, saves, rules, cases.
+    init(boot: BootData) {
+        _attempts = State(initialValue: boot.attempts)
+        _savedGame = State(initialValue: boot.savedGame)
         _stage = State(initialValue: UITestHooks.showsOnboarding(default: !Preferences.onboardingDone) ? .onboarding : .home)
-        // Load into locals first: each stored `let` must be initialised exactly once, and a failure
-        // in the second load must not re-assign what the first one already set.
-        let loaded: (cases: [CaseFile], rules: GameRules?, error: String?)
-        do {
-            let cases = try CaseLibrary.loadCases().sorted { $0.number < $1.number }
-            let rules = try CaseLibrary.loadRules()
-            loaded = (cases, rules, nil)
-        } catch {
-            loaded = ([], nil, String(describing: error))
-        }
-        cases = loaded.cases
-        rules = loaded.rules
-        loadError = loaded.error
+        cases = boot.cases
+        rules = boot.rules
+        loadError = boot.loadError
     }
 
-    public var body: some View {
+    var body: some View {
         ZStack {
             Trace.Colors.desk.ignoresSafeArea()
             content
@@ -115,12 +128,15 @@ public struct RootView: View {
                             onStart: { start(file, challenge: $0) },
                             onResume: resumeSaved,
                             onClose: goHome)
+                    .environment(\.caseNumber, file.number)
                     .transition(.asymmetric(insertion: .scale(scale: 0.96).combined(with: .opacity), removal: .opacity))
             case .cinematic(let session, let scene):
                 CinematicView(scene: scene, caseFile: session.caseFile, session: session, onFinish: { handOver(session) })
+                    .environment(\.caseNumber, session.caseFile.number)
                     .transition(.opacity)
             case .playing(let session):
                 PlayingView(session: session, onQuit: { quit(session) })
+                    .environment(\.caseNumber, session.caseFile.number)
                     .transition(.opacity)
             case .result(let play):
                 ResultView(verdict: play.verdict, caseFile: play.session.caseFile, names: names(play.session),
@@ -132,6 +148,7 @@ public struct RootView: View {
                            culprit: culprit(play.session, play.verdict.culprit),
                            accused: culprit(play.session, play.verdict.accused))
                     .id(play.revealed)
+                    .environment(\.caseNumber, play.session.caseFile.number)
                     .transition(.opacity)
             case .score(let play):
                 ScoreView(verdict: play.verdict, duration: play.session.caseFile.durationSeconds,
@@ -141,6 +158,7 @@ public struct RootView: View {
                     .transition(.opacity)
             case .archived(let file, let attempt):
                 ArchivedCaseView(caseFile: file, attempt: attempt, onClose: { stage = .archive })
+                    .environment(\.caseNumber, file.number)
                     .transition(.move(edge: .trailing))
             }
         }

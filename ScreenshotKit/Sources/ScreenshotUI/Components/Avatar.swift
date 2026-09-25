@@ -2,12 +2,29 @@
 import SwiftUI
 import CaseEngine
 
-/// Neutral avatar: initials on a disc tinted by the contact's hue (portraits will be real photos later — never drawings).
+/// Phone avatar: the contact's informal photo (`avatar_<NNN>_<contactId>`) when delivered, otherwise
+/// initials on a disc tinted by the contact's hue. Never the case file portrait: that one is paper.
 struct Avatar: View {
     let contact: Contact?
     var size: CGFloat = Theme.Size.avatarM
+    @Environment(\.caseNumber) private var caseNumber
 
     var body: some View {
+        if let photo = ArtLibrary.avatar(case: caseNumber, contact: contact) {
+            Image(uiImage: photo)
+                .resizable()
+                .scaledToFill()
+                .frame(width: size, height: size)
+                .clipShape(Circle())
+                .overlay(Circle().strokeBorder(Theme.Colors.line2, lineWidth: 1))
+                .accessibilityHidden(true)
+        } else {
+            initials
+        }
+    }
+
+    @ViewBuilder
+    private var initials: some View {
         let colors = contact.map { Theme.avatarColor(hue: $0.avatarHue) }
         Circle()
             .fill(colors.map { LinearGradient(colors: [$0.top, $0.bottom], startPoint: .top, endPoint: .bottom) }
@@ -38,13 +55,30 @@ struct GroupAvatar: View {
     }
 }
 
-/// Portrait placeholder of a suspect (rectangle, initials) until real photos exist.
+/// A person's picture on paper: the case file photo (`portrait_<NNN>_<contactId>`, 4:5) when
+/// delivered — filled and cropped, never stretched — otherwise the striped placeholder with initials.
 struct Portrait: View {
     let contact: Contact?
     var width: CGFloat = Theme.Size.portrait
     var height: CGFloat = Theme.Size.portrait
+    @Environment(\.caseNumber) private var caseNumber
 
     var body: some View {
+        if let photo = ArtLibrary.portrait(case: caseNumber, contact: contact) {
+            Image(uiImage: photo)
+                .resizable()
+                .interpolation(.high)
+                .scaledToFill()
+                .frame(width: width, height: height)
+                .clipped()
+                .accessibilityHidden(true)
+        } else {
+            placeholder
+        }
+    }
+
+    @ViewBuilder
+    private var placeholder: some View {
         let colors = Theme.avatarColor(hue: contact?.avatarHue ?? 0.6)
         RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)
             .fill(LinearGradient(colors: [colors.top, colors.bottom], startPoint: .top, endPoint: .bottom))

@@ -52,6 +52,14 @@ final class AudioDirector {
         return player
     }
 
+    /// Launch: loads and primes the interface sounds (paper, stamps, notifications…) so the first
+    /// one plays without a delay.
+    func warmUp() {
+        for sound in [Sound.paper, .stamp, .folder, .typewriter, .notification, .unlock, .key, .tick, .sting, .vibrate] {
+            _ = player(for: sound.rawValue)
+        }
+    }
+
     /// A one-off sound (unknown names are ignored: a case may name sounds a later version adds).
     func play(_ name: String, volume: Float = 1) {
         guard enabled, let player = player(for: name) else { return }

@@ -105,6 +105,7 @@ struct AccusationView: View {
         .animation(Trace.Motion.emphasized, value: selected)
         .sheet(item: Binding(get: { fileOpen.map(SuspectSheetID.init) }, set: { fileOpen = $0?.id })) { item in
             NavigationStack { SuspectFileView(suspectID: item.id, session: session) }
+                .environment(\.caseNumber, session.caseFile.number)
                 .presentationBackground(Trace.Colors.desk)
         }
     }

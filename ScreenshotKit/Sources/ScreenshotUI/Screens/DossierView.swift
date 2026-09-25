@@ -90,6 +90,7 @@ struct DossierView: View {
             if let suspect = caseFile.suspects.first(where: { $0.id == item.id }) {
                 ScrollView { SuspectDossierPreview(suspect: suspect, caseFile: caseFile, game: game).padding(8) }
                     .background(TraceDesk())
+                    .environment(\.caseNumber, caseFile.number)
                     .presentationDragIndicator(.visible)
             }
         }

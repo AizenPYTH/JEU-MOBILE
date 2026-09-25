@@ -182,6 +182,7 @@ struct FolderCard: View {
             PhotoPrint(caption: facts.subject, border: 6) {
                 if let contact = facts.subjectContact() {
                     Portrait(contact: contact, width: 92, height: 92).saturation(0.3)
+                        .environment(\.caseNumber, file.number)
                 } else {
                     GeneratedPhoto(scene: file.introScene?.shots.first { $0.scene != nil }?.scene ?? "vitrine", seed: file.id)
                         .frame(width: 92, height: 92)

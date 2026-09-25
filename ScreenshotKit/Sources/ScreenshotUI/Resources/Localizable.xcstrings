@@ -4495,6 +4495,23 @@
         }
       }
     },
+    "launch.loading": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement"
+          }
+        }
+      }
+    },
     "location.lastSeen": {
       "extractionState": "manual",
       "localizations": {

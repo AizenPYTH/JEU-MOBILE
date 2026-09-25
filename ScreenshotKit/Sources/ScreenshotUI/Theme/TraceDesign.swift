@@ -49,6 +49,12 @@ enum Trace {
         static let marginRed = Color(hex: 0xA3261E, opacity: 0.45)
         static let highlight = Color(hex: 0xC8573F, opacity: 0.16)
         static let shadow = Color(hex: 0x000000, opacity: 0.4)
+        // Loading screen bar (sampled from loading_main: the bar drawn in the artwork)
+        static let loadingTrack = Color(hex: 0x060606)
+        static let loadingRim = Color(hex: 0x7A7470, opacity: 0.85)
+        static let loadingRedDeep = Color(hex: 0x6A0000)
+        static let loadingRed = Color(hex: 0xA80A08)
+        static let loadingRedHot = Color(hex: 0xE0181C)
     }
 
     enum FontName {
@@ -266,17 +272,20 @@ struct PhotoPrint<Content: View>: View {
     }
 }
 
-/// An identity-photo placeholder for a person (no illustration: initials on tinted stripes).
+/// An identity photo printed for the file: white 3 pt border. The delivered photo is desaturated by
+/// 15 % (handoff « Portraits » §1.1); without one, initials on tinted stripes, desaturated further.
 struct IDPhoto: View {
     let contact: Contact?
     var width: CGFloat = 70
     var height: CGFloat = 84
+    @Environment(\.caseNumber) private var caseNumber
 
     var body: some View {
+        let real = ArtLibrary.portrait(case: caseNumber, contact: contact) != nil
         PhotoPrint(border: 3) {
             Portrait(contact: contact, width: width, height: height)
                 .clipShape(Rectangle())
-                .saturation(0.35)
+                .saturation(real ? 0.85 : 0.35)
         }
     }
 }
