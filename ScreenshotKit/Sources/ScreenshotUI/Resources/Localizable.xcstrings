@@ -8400,13 +8400,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Report issued by the digital investigations desk — TRACE."
+            "value": "Report issued by the digital investigations desk — CONCLUDE : ENQUÊTES."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rapport établi par le bureau des enquêtes numériques — TRACE."
+            "value": "Rapport établi par le bureau des enquêtes numériques — CONCLUDE : ENQUÊTES."
           }
         }
       }

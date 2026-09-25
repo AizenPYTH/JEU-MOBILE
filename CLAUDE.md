@@ -1,4 +1,9 @@
-# CLAUDE.md — SCREENSHOT (nom de travail)
+# CLAUDE.md — CONCLUDE : ENQUÊTES
+
+Nom du jeu : **CONCLUDE : ENQUÊTES** (nom sous l'icône : « Conclude »). Anciens noms de travail : SCREENSHOT,
+TRACE — ils restent dans les identifiants internes (cible Xcode `Screenshot`, package `ScreenshotKit`,
+`Trace.*` pour le design, bundle `com.aizenpyth.screenshot`, à ne pas changer : TestFlight y est lié).
+Logo source : `docs/brand/conclude_logo_source.png` ; icône de l'app dérivée : `Screenshot/Assets.xcassets/AppIcon.appiconset`.
 
 Jeu iOS d'**enquête psychologique / investigation numérique** qui se joue entièrement dans
 l'interface d'un téléphone. Le joueur a un accès temporaire au téléphone d'une personne liée à une
@@ -38,6 +43,7 @@ docs/TESTFLIGHT_SETUP.md  Signature et TestFlight sans Mac
 docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
 docs/CINEMATIQUES_VEO.md  Ouvertures des affaires #002–#005, plan par plan, avec prompts Veo 3.1
 docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — tokens du téléphone
+docs/brand/               Logo CONCLUDE : ENQUÊTES (source de l'icône)
 docs/design_trace/        Handoff TRACE v2 « dossier d'enquête » (NE PAS MODIFIER) — tout ce qui est hors du téléphone
 DESIGN_INTEGRATION.md     État de l'intégration du handoff + conflits à trancher
 ScreenshotKit/            Package Swift contenant tout le jeu

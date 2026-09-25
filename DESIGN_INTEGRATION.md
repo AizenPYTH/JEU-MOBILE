@@ -3,6 +3,15 @@
 Source : `docs/design/` (non modifié). Ce document dit ce qui est intégré, ce qui reste à faire, et
 les points où le handoff contredit le brief ou le moteur — **à trancher par le porteur de projet**.
 
+## Nom et logo — CONCLUDE : ENQUÊTES (septembre 2026)
+
+Le jeu s'appelle désormais **CONCLUDE : ENQUÊTES**. Icône de l'app = logo fourni par le porteur de projet
+(`docs/brand/conclude_logo_source.png`), recadré sur la tuile et redimensionné en 1024 × 1024 (iOS
+arrondit lui-même les coins). Nom sous l'icône : « Conclude » (le nom complet serait tronqué sur
+l'écran d'accueil). Dans le jeu, l'en-tête du Bureau reprend le logo : CONCLUDE en capitales, puis
+« ENQUÊTES » souligné de rouge ; la carte d'enquêteur et le rapport de clôture portent le nom.
+Le nom sur l'App Store se change dans App Store Connect (fiche de l'app), pas dans le code.
+
 ## 0. Direction artistique TRACE v2 — « papier dehors, verre dedans » (septembre 2026)
 
 Source : `docs/design_trace/` (handoff Claude Design « TRACE », lecture seule — lire `README.md`).

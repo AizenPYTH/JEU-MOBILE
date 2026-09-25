@@ -520,15 +520,15 @@ final class MainFlowTests: XCTestCase {
         wait(element("home.start"), 10, "Accueil après l'onboarding")
         snap("46-accueil-apres-onboarding")
 
-        // The app as it appears on the iPhone's home screen: name "TRACE" under its icon.
+        // The app as it appears on the iPhone's home screen: name "Conclude" under its icon.
         XCUIDevice.shared.press(.home)
         let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        var icon = springboard.icons["TRACE"]
+        var icon = springboard.icons["Conclude"]
         for _ in 0..<3 where !icon.waitForExistence(timeout: 3) {
             springboard.swipeLeft()
-            icon = springboard.icons["TRACE"]
+            icon = springboard.icons["Conclude"]
         }
-        XCTAssertTrue(icon.exists, "L'icône « TRACE » devrait être sur l'écran d'accueil")
+        XCTAssertTrue(icon.exists, "L'icône « Conclude » devrait être sur l'écran d'accueil")
         snap("47-icone-ecran-accueil-ios")
 
         // Shown once: the next launch opens straight on the home screen.

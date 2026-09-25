@@ -2,7 +2,7 @@
 import SwiftUI
 import CaseEngine
 
-/// TRACE design V2 — « dossier d'enquête ». Paper outside, glass inside: everything that belongs to
+/// CONCLUDE design (« TRACE » v2 handoff) — « dossier d'enquête ». Paper outside, glass inside: everything that belongs to
 /// the investigator (folders, files, exhibits, notebook, hints, forms, report) is paper on a dark
 /// desk; the seized phone alone stays a modern glass OS (the `Theme` tokens).
 /// Tokens follow design_handoff_trace/README.md §3.
@@ -603,6 +603,13 @@ extension Trace {
         static let sheet: CGFloat = 20
         static let edge: CGFloat = 10
     }
+}
+
+/// The game's name (logo: docs/brand/). Not translated.
+enum Brand {
+    static let name = "CONCLUDE"
+    static let tagline = "ENQUÊTES"
+    static let full = "CONCLUDE : ENQUÊTES"
 }
 
 /// "001" style case number.

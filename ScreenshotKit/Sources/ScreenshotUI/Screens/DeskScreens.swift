@@ -4,14 +4,18 @@ import CaseEngine
 
 // MARK: - Wordmark
 
-/// TRACE / BUREAU DES ENQUÊTES — mono, wide tracking.
+/// CONCLUDE : ENQUÊTES — the game's name as on its logo: slab caps, then « ENQUÊTES » underlined in red.
 struct TraceWordmark: View {
     var subtitle: String = L10n.t("desk.subtitle")
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("TRACE").font(Trace.Fonts.wordmark).tracking(9).foregroundStyle(Trace.Colors.bone)
-            Text(subtitle).font(Trace.Fonts.monoSmall).tracking(2.6).foregroundStyle(Trace.Colors.bone2)
+            Text(verbatim: Brand.name).font(Trace.Fonts.wordmark).tracking(6).foregroundStyle(Trace.Colors.bone)
+            Text(verbatim: Brand.tagline)
+                .font(Trace.Fonts.fieldValue).tracking(4).foregroundStyle(Trace.Colors.bone)
+                .padding(.bottom, 3)
+                .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.stampOnDark).frame(height: 1.5) }
+            Text(subtitle).font(Trace.Fonts.monoSmall).tracking(2.6).foregroundStyle(Trace.Colors.bone2).padding(.top, 2)
         }
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isHeader)
@@ -479,7 +483,7 @@ struct InvestigatorView: View {
             HStack {
                 Text(L10n.t("investigator.card")).font(Trace.Fonts.monoSmall.weight(.bold)).tracking(2).foregroundStyle(Trace.Colors.bone)
                 Spacer()
-                Text("TRACE").font(Trace.Fonts.monoSmall.weight(.bold)).tracking(3).foregroundStyle(Trace.Colors.bone2)
+                Text(verbatim: Brand.name).font(Trace.Fonts.monoSmall.weight(.bold)).tracking(3).foregroundStyle(Trace.Colors.bone2)
             }
             .padding(.horizontal, 16).frame(height: 34)
             .background(Trace.Colors.ink)

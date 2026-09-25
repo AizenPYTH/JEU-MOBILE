@@ -27,7 +27,7 @@ do {
             let url = URL(fileURLWithPath: path)
             return try CaseLoader.loadCase(Data(contentsOf: url), name: url.lastPathComponent)
         }
-    print("TRACE CaseLint — CaseEngine \(CaseEngine.version) — \(cases.count) case(s)\n")
+    print("CONCLUDE CaseLint — CaseEngine \(CaseEngine.version) — \(cases.count) case(s)\n")
     for file in cases {
         let issues = CaseValidator.validate(file)
         let report = CaseAnalysis.analyze(file, rules: rules)
