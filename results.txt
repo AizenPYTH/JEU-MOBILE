@@ -1,0 +1,16 @@
+Test Case '-[ScreenshotUITests.MainFlowTests testChallengeLevelsAndReplay]' passed (210.986 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testCinematicCanBeSkipped]' passed (41.504 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testCinematicIntoThePhone]' passed (49.507 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testEveryNewCaseOpensItsOwnPhone]' passed (210.747 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testGlobalSearchAcrossApps]' passed (71.248 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testInteractiveMap]' passed (55.614 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testMainPathSolvedEarly]' passed (267.697 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testNewCinematics]' passed (199.605 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testOnboarding]' passed (58.562 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testQuitAndResume]' passed (96.280 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testResumeAfterQuittingTheApp]' passed (105.467 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testTimeUpWrongAccusationThenReveal]' passed (72.943 seconds).
+	 Executed 12 tests, with 0 failures (0 unexpected) in 1440.160 (1440.174) seconds
+	 Executed 12 tests, with 0 failures (0 unexpected) in 1440.160 (1440.178) seconds
+	 Executed 12 tests, with 0 failures (0 unexpected) in 1440.160 (1440.184) seconds
+commit 9ccafc0bc07e0c3ffbf7f564b9f6f221c89ad84b
