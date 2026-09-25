@@ -558,7 +558,7 @@ struct SuspectFileView: View {
     private func statement(_ suspect: Suspect) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(L10n.t("suspect.statementLabel")).fieldLabel()
-            Text("« " + suspect.statement + " »").font(Trace.Fonts.quote).foregroundStyle(Trace.Colors.ink)
+            Text(suspect.statement).font(Trace.Fonts.quote).foregroundStyle(Trace.Colors.ink)
                 .fixedSize(horizontal: false, vertical: true)
                 .padding(.leading, 12)
                 .overlay(alignment: .leading) { Rectangle().fill(Trace.Colors.ink).frame(width: 1.5) }

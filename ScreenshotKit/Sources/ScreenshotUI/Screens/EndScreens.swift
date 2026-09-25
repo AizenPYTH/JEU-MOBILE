@@ -702,7 +702,7 @@ struct ScoreView: View {
                         }
                     }
                     VStack(spacing: 0) {
-                        scoreRow(0, L10n.t("score.suspect"), verdict.isCorrect ? "✓ +\(verdict.scoreParts.suspect)" : "✕ 0")
+                        scoreRow(0, L10n.t("score.suspect"), verdict.isCorrect ? L10n.t("report.yes").uppercased() + " · +\(verdict.scoreParts.suspect)" : L10n.t("report.no").uppercased() + " · 0")
                         scoreRow(1, L10n.t("score.time"), "\(PhoneFormat.countdown(Double(verdict.remainingSeconds))) · +\(verdict.scoreParts.time)")
                         scoreRow(2, L10n.t("score.found"), "\(verdict.foundCount)/\(verdict.totalCount) · +\(verdict.scoreParts.found)")
                         scoreRow(3, L10n.t("score.hints"), verdict.hintsUsed == 0 ? L10n.t("score.noHint") : "\(verdict.hintsUsed) · −\(verdict.hintCost)")
