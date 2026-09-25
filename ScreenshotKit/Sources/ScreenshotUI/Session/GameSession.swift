@@ -342,6 +342,7 @@ final class GameSession {
         Haptics.pin()
         if pinned {
             let label = ItemDescriber.describe(ref, in: investigation).label
+            AudioDirector.shared.play(.stamp, volume: 0.55)
             showToast(L10n.f("toast.pinned", investigation.notebook.count), detail: label, kind: .pinned)
         } else {
             showToast(L10n.t("toast.unpinned"))
@@ -354,6 +355,29 @@ final class GameSession {
         Haptics.pin()
         if let suspect, let s = investigation.index.suspect(suspect) {
             showToast(L10n.f("toast.linked", investigation.name(of: s.contact)), detail: L10n.t("toast.linkedDetail"), kind: .linked)
+        }
+        refresh()
+    }
+
+    /// « L'accuse… » / « Le disculpe… » from the phone: files the item (if needed), links it to the
+    /// suspect and records the player's reading, in one gesture. Choosing the same again undoes it.
+    func annotate(_ ref: ItemRef, suspect: SuspectID, stance: NotebookEntry.Stance) {
+        let entry = investigation.notebook.first { $0.ref == ref }
+        if entry?.linkedTo == suspect && entry?.stance == stance {
+            investigation.setStance(nil, for: ref)
+            investigation.link(ref, to: nil)
+            Haptics.selection()
+            refresh()
+            return
+        }
+        let wasPinned = entry != nil
+        investigation.link(ref, to: suspect)
+        investigation.setStance(stance, for: ref)
+        Haptics.pin()
+        if !wasPinned { AudioDirector.shared.play(.stamp, volume: 0.55) }
+        if let s = investigation.index.suspect(suspect) {
+            showToast(L10n.f(stance == .incriminates ? "toast.accuses" : "toast.clears", investigation.name(of: s.contact)),
+                      detail: investigation.pieceNumber(of: ref).map { PieceFormat.title($0) }, kind: .linked)
         }
         refresh()
     }
@@ -479,6 +503,26 @@ enum Haptics {
         guard Preferences.vibrations else { return }
         #if canImport(UIKit)
         UISelectionFeedbackGenerator().selectionChanged()
+        #endif
+    }
+
+    /// A stamp hitting the paper: heavy (RÉSOLU, a new piece) or a warning (NON RÉSOLU).
+    static func stamp(heavy: Bool) {
+        guard Preferences.vibrations else { return }
+        #if canImport(UIKit)
+        if heavy {
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        } else {
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        }
+        #endif
+    }
+
+    /// Opening a folder, turning a page: a light touch.
+    static func paper() {
+        guard Preferences.vibrations else { return }
+        #if canImport(UIKit)
+        UIImpactFeedbackGenerator(style: .soft).impactOccurred(intensity: 0.6)
         #endif
     }
 }

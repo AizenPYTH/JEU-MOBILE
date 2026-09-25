@@ -217,6 +217,11 @@ public enum CaseValidator {
             }
         }
 
+        if let dossier = file.dossier, let subject = dossier.subjectContact,
+           !file.devices.contains(where: { $0.contacts.contains { $0.id == subject } }) {
+            fail("the dossier's subject '\(subject)' is not a contact")
+        }
+
         for hint in file.hints {
             register(hint.id, "hint")
             if hint.scoreCost < 0 { fail("hint '\(hint.id)' has a negative cost") }

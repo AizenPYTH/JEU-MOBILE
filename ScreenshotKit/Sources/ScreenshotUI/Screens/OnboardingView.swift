@@ -30,13 +30,13 @@ struct OnboardingView: View {
             .frame(maxHeight: .infinity, alignment: .top)
 
             Button(step == .accuse ? L10n.t("onboarding.start") : L10n.t("onboarding.continue")) { advance() }
-                .buttonStyle(PrimaryButtonStyle())
+                .buttonStyle(PaperButtonStyle(height: 56))
                 .disabled(!done.contains(step))
                 .accessibilityIdentifier("onboarding.next")
                 .padding(.bottom, Theme.Spacing.s5)
         }
         .padding(.horizontal, Theme.Spacing.marginGame)
-        .background(Theme.Colors.ink0.ignoresSafeArea())
+        .background(TraceDesk())
         .animation(Theme.Motion.emphasized(), value: step)
         .animation(Theme.Motion.standard(), value: done)
     }
@@ -46,13 +46,13 @@ struct OnboardingView: View {
         HStack(spacing: 6) {
             ForEach(Step.allCases, id: \.self) { s in
                 Capsule()
-                    .fill(s == step ? Theme.Colors.textPrimary : (s.rawValue < step.rawValue ? Theme.Colors.textSecondary : Theme.Colors.line3))
+                    .fill(s == step ? Trace.Colors.bone : (s.rawValue < step.rawValue ? Trace.Colors.bone2 : Trace.Colors.graphite))
                     .frame(width: 18, height: 3)
             }
             .accessibilityHidden(true)
             Text(L10n.f("onboarding.stepOf", step.rawValue + 1, Step.allCases.count))
-                .font(Theme.Fonts.dataSmall)
-                .foregroundStyle(Theme.Colors.textTertiary)
+                .font(Trace.Fonts.monoSmall)
+                .foregroundStyle(Trace.Colors.bone3)
                 .padding(.leading, Theme.Spacing.s3)
             Spacer()
             Button(L10n.t("onboarding.skip"), action: onFinish)
@@ -80,9 +80,9 @@ private struct StepText: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
-            Text(overline).overline(Theme.Colors.signal)
-            Text(title).font(Theme.Fonts.title2).tracking(-0.8).foregroundStyle(Theme.Colors.textPrimary)
-            Text(body_).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
+            Text(overline).fieldLabel(Trace.Colors.stampOnDark)
+            Text(title).font(Trace.Fonts.screenTitle).foregroundStyle(Trace.Colors.bone)
+            Text(body_).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.bone2)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -323,7 +323,7 @@ private struct AccuseDemo: View {
                             .frame(minHeight: Theme.Size.buttonL)
                             .accessibilityIdentifier("onboarding.accused")
                     } else {
-                        HoldToConfirmButton(title: L10n.t("accuse.hold"), disabledTitle: L10n.t("accuse.select"), enabled: selected != nil) {
+                        HoldToCloseButton(title: L10n.t("accuse.hold"), disabledTitle: L10n.t("accuse.select"), enabled: selected != nil) {
                             accused = true
                             onDone()
                         }

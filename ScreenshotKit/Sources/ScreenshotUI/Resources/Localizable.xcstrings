@@ -27,13 +27,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Notebook, %ld pinned item"
+                  "value": "Notebook, %ld piece in the file"
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Notebook, %ld pinned items"
+                  "value": "Notebook, %ld pieces in the file"
                 }
               }
             }
@@ -45,13 +45,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Carnet, %ld élément épinglé"
+                  "value": "Carnet, %ld pièce au dossier"
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "Carnet, %ld éléments épinglés"
+                  "value": "Carnet, %ld pièces au dossier"
                 }
               }
             }
@@ -99,13 +99,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Difficulty %ld of 3"
+            "value": "Difficulty %ld out of 5"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Difficulté %ld sur 3"
+            "value": "Difficulté %ld sur 5"
           }
         }
       }
@@ -259,13 +259,30 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pinned"
+            "value": "In the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Épinglé"
+            "value": "Au dossier"
+          }
+        }
+      }
+    },
+    "a11y.stamp": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stamp: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampon : %@"
           }
         }
       }
@@ -347,13 +364,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "YOUR CASE RESTS ON %ld ITEM"
+                  "value": "BASED ON %ld PIECE"
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "YOUR CASE RESTS ON %ld ITEMS"
+                  "value": "BASED ON %ld PIECES"
                 }
               }
             }
@@ -365,13 +382,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "VOTRE ACCUSATION REPOSE SUR %ld ÉLÉMENT"
+                  "value": "SUR LA BASE DE %ld PIÈCE"
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "VOTRE ACCUSATION REPOSE SUR %ld ÉLÉMENTS"
+                  "value": "SUR LA BASE DE %ld PIÈCES"
                 }
               }
             }
@@ -408,7 +425,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dossier"
+            "value": "Fiche"
           }
         }
       }
@@ -436,13 +453,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hold to confirm"
+            "value": "Hold to close the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Maintenir pour confirmer"
+            "value": "Maintenir pour clore le dossier"
           }
         }
       }
@@ -453,13 +470,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hold to accuse %@"
+            "value": "Hold to name %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Maintenir pour accuser %@"
+            "value": "Maintenir pour désigner %@"
           }
         }
       }
@@ -470,13 +487,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Select the suspect you believe is responsible, then confirm."
+            "value": "Tick the person you hold responsible, then close the file."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sélectionnez le suspect qui vous semble être l'auteur, puis confirmez."
+            "value": "Cochez la personne que vous tenez pour responsable, puis clôturez le dossier."
           }
         }
       }
@@ -528,13 +545,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nothing is linked to this suspect: your accusation rests on intuition."
+            "value": "no linked piece: you trust your instinct"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aucun élément lié à ce suspect : votre accusation repose sur votre intuition."
+            "value": "aucune pièce liée : vous vous fiez à votre intuition"
           }
         }
       }
@@ -562,13 +579,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "SOLVE THE CASE"
+            "value": "FILE %@ · FINAL VERIFICATION"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "RÉSOUDRE L'AFFAIRE"
+            "value": "DOSSIER %@ · VÉRIFICATION FINALE"
           }
         }
       }
@@ -579,13 +596,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choose a suspect from the list."
+            "value": "Tick a box in the list."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choisissez un suspect dans la liste."
+            "value": "Cochez une case dans la liste."
           }
         }
       }
@@ -596,13 +613,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choose a suspect"
+            "value": "Tick a suspect"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choisissez un suspect"
+            "value": "Cochez un suspect"
           }
         }
       }
@@ -664,13 +681,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "You accuse %@"
+            "value": "You name %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vous accusez %@"
+            "value": "Vous désignez %@"
           }
         }
       }
@@ -739,13 +756,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Name the culprit"
+            "value": "Go to the final verification"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Désigner le responsable"
+            "value": "Passer à la vérification finale"
           }
         }
       }
@@ -756,13 +773,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ LEFT"
+            "value": "MEMO · %@ LEFT"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "IL RESTE %@"
+            "value": "NOTE DE SERVICE · IL RESTE %@"
           }
         }
       }
@@ -773,13 +790,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Solve the case now?"
+            "value": "Close the file now?"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Résoudre l'affaire maintenant ?"
+            "value": "Clore le dossier maintenant ?"
           }
         }
       }
@@ -1035,6 +1052,241 @@
           "stringUnit": {
             "state": "translated",
             "value": "non classé"
+          }
+        }
+      }
+    },
+    "archives.all": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous"
+          }
+        }
+      }
+    },
+    "archives.attempts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld attempt"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld attempts"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld tentative"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld tentatives"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "archives.closedOn": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Closed %1$@ · %2$ld/100"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clos le %1$@ · %2$ld/100"
+          }
+        }
+      }
+    },
+    "archives.count": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld file"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld files"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld dossier"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld dossiers"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "archives.empty": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No file here."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun dossier ici."
+          }
+        }
+      }
+    },
+    "archives.emptyTip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "closed files are kept here"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "les dossiers clos sont rangés ici"
+          }
+        }
+      }
+    },
+    "archives.open": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En cours"
+          }
+        }
+      }
+    },
+    "archives.openCTA": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consult"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulter"
+          }
+        }
+      }
+    },
+    "archives.solved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solved"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Résolus"
+          }
+        }
+      }
+    },
+    "archives.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archives"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archives"
+          }
+        }
+      }
+    },
+    "archives.unsolved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unsolved"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non résolus"
           }
         }
       }
@@ -1589,13 +1841,30 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Solve the case"
+            "value": "Go to the final verification"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Résoudre l'affaire"
+            "value": "Passer à la vérification finale"
+          }
+        }
+      }
+    },
+    "carnet.accusesArrow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "accuses →"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "l'accuse →"
           }
         }
       }
@@ -1617,19 +1886,36 @@
         }
       }
     },
+    "carnet.clearsArrow": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "clears →"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "le disculpe →"
+          }
+        }
+      }
+    },
     "carnet.emptyMessage": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Press and hold an item to pin it."
+            "value": "long press an item → add to the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Maintenez un élément pour l'épingler."
+            "value": "appui long sur un élément → verser au dossier"
           }
         }
       }
@@ -1640,13 +1926,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Empty notebook"
+            "value": "No piece in the file."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Carnet vide"
+            "value": "Aucune pièce au dossier."
           }
         }
       }
@@ -1657,13 +1943,30 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Clues (%ld)"
+            "value": "Pieces (%ld)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Indices (%ld)"
+            "value": "Pièces (%ld)"
+          }
+        }
+      }
+    },
+    "carnet.header": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOTEBOOK · FILE %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CARNET · DOSSIER %@"
           }
         }
       }
@@ -1674,13 +1977,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Press and hold a clue to link it to a suspect."
+            "value": "long press a piece → accuses / clears"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Maintenez un indice pour le lier à un suspect."
+            "value": "appui long sur une pièce → l'accuse / le disculpe"
           }
         }
       }
@@ -1766,13 +2069,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Notes"
+            "value": "Connections"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Notes"
+            "value": "Connexions"
           }
         }
       }
@@ -1783,13 +2086,30 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your deductions: tick them in each suspect's file."
+            "value": "What you connected to each suspect. Nothing is checked: it is your reasoning."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vos déductions : cochez-les dans le dossier de chaque suspect."
+            "value": "Ce que vous avez relié à chaque suspect. Rien n'est vérifié : c'est votre raisonnement."
+          }
+        }
+      }
+    },
+    "carnet.nothingYet": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nothing yet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "rien pour l'instant"
           }
         }
       }
@@ -1800,13 +2120,54 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "YOUR GOAL"
+            "value": "OBJECTIVE"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "VOTRE OBJECTIF"
+            "value": "OBJECTIF"
+          }
+        }
+      }
+    },
+    "carnet.pieces": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld PIECE"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld PIECES"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld PIÈCE"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld PIÈCES"
+                }
+              }
+            }
           }
         }
       }
@@ -1851,13 +2212,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "pinned"
+            "value": "in the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "épinglés"
+            "value": "au dossier"
           }
         }
       }
@@ -2342,6 +2703,40 @@
         }
       }
     },
+    "chrono.empty": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No dated piece in the file."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune pièce datée dans le dossier."
+          }
+        }
+      }
+    },
+    "chrono.emptyTip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "file pieces: they line up here by time"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "versez des pièces : elles se rangent ici par heure"
+          }
+        }
+      }
+    },
     "cinematic.incomingCall": {
       "extractionState": "manual",
       "localizations": {
@@ -2576,6 +2971,557 @@
           "stringUnit": {
             "state": "translated",
             "value": "Appels récents"
+          }
+        }
+      }
+    },
+    "desk.nextFile": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next file"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dossier suivant"
+          }
+        }
+      }
+    },
+    "desk.openFile": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open file"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dossier en cours"
+          }
+        }
+      }
+    },
+    "desk.otherFiles": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other files"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autres dossiers"
+          }
+        }
+      }
+    },
+    "desk.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Digital investigations desk"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bureau des enquêtes numériques"
+          }
+        }
+      }
+    },
+    "dossier.defaultCategory": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CASE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AFFAIRE"
+          }
+        }
+      }
+    },
+    "dossier.difficulty": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficulty"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Difficulté"
+          }
+        }
+      }
+    },
+    "dossier.exhibitOne": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exhibit 1: the seized phone"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièce n° 1 : le téléphone saisi"
+          }
+        }
+      }
+    },
+    "dossier.inProgress": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IN PROGRESS · %@ LEFT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EN COURS · %@ RESTANTES"
+          }
+        }
+      }
+    },
+    "dossier.lastContact": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last contact"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dernier contact"
+          }
+        }
+      }
+    },
+    "dossier.noPieces": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No piece filed yet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune pièce versée pour l'instant."
+          }
+        }
+      }
+    },
+    "dossier.noPiecesTip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in the phone: long press → add to the file"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dans le téléphone : appui long → verser au dossier"
+          }
+        }
+      }
+    },
+    "dossier.notStarted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOT OPENED · %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NON OUVERT · %@"
+          }
+        }
+      }
+    },
+    "dossier.number": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FILE #%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DOSSIER #%@"
+          }
+        }
+      }
+    },
+    "dossier.numberLong": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FILE No. %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DOSSIER N° %@"
+          }
+        }
+      }
+    },
+    "dossier.openPhone": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the phone"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le téléphone"
+          }
+        }
+      }
+    },
+    "dossier.pieceOne": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exhibit 1"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièce n° 1"
+          }
+        }
+      }
+    },
+    "dossier.pieces": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pieces"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièces"
+          }
+        }
+      }
+    },
+    "dossier.piecesCount": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld piece filed"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld pieces filed"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld pièce versée"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "%ld pièces versées"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "dossier.place": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Place"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lieu"
+          }
+        }
+      }
+    },
+    "dossier.state": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statut"
+          }
+        }
+      }
+    },
+    "dossier.status": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statut"
+          }
+        }
+      }
+    },
+    "dossier.suspectFileHeader": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FILE %1$@ · SUSPECT %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DOSSIER %1$@ · SUSPECT %2$@"
+          }
+        }
+      }
+    },
+    "dossier.suspectsIntro": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "People linked to the case. Their statements have not been checked."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personnes liées à l'affaire. Leurs déclarations n'ont pas été vérifiées."
+          }
+        }
+      }
+    },
+    "dossier.tab.chronology": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timeline"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chronologie"
+          }
+        }
+      }
+    },
+    "dossier.tab.context": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Context"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexte"
+          }
+        }
+      }
+    },
+    "dossier.tab.pieces": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pieces · %ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièces · %ld"
+          }
+        }
+      }
+    },
+    "dossier.tab.report": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rapport"
+          }
+        }
+      }
+    },
+    "dossier.tab.suspects": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suspects · %ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suspects · %ld"
+          }
+        }
+      }
+    },
+    "dossier.tabNumber": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "#%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "#%@"
+          }
+        }
+      }
+    },
+    "dossier.type": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Type"
+          }
+        }
+      }
+    },
+    "dossier.victim": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Person concerned"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personne concernée"
           }
         }
       }
@@ -2994,13 +3940,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Best possible score"
+            "value": "Maximum mark"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Score maximal possible"
+            "value": "Note maximale"
           }
         }
       }
@@ -3011,13 +3957,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "IF YOU ARE STUCK"
+            "value": "SUPERVISOR'S ENVELOPES"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "SI VOUS BLOQUEZ"
+            "value": "PLIS DU SUPERVISEUR"
           }
         }
       }
@@ -3028,13 +3974,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reveal"
+            "value": "Open the envelope"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Révéler"
+            "value": "Ouvrir le pli"
           }
         }
       }
@@ -3045,13 +3991,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "max %ld %%"
+            "value": "max mark %ld"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "max %ld %%"
+            "value": "note max %ld"
           }
         }
       }
@@ -3283,13 +4229,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Start"
+            "value": "Open the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Commencer"
+            "value": "Ouvrir le dossier"
           }
         }
       }
@@ -3443,6 +4389,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recommencer en %@ · %@"
+          }
+        }
+      }
+    },
+    "investigator.card": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Investigator card"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carte d'enquêteur"
+          }
+        }
+      }
+    },
+    "investigator.number": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Badge no."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matricule"
+          }
+        }
+      }
+    },
+    "investigator.record": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service record"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "États de service"
+          }
+        }
+      }
+    },
+    "investigator.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Investigator"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enquêteur"
           }
         }
       }
@@ -5084,13 +6098,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hold to pin to the notebook."
+            "value": "Hold to add to the file."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Maintenez pour épingler au carnet."
+            "value": "Maintenez pour verser au dossier."
           }
         }
       }
@@ -5152,13 +6166,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "HOLD TO PIN"
+            "value": "HOLD TO ADD TO THE FILE"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "MAINTENIR POUR ÉPINGLER"
+            "value": "MAINTENIR POUR VERSER AU DOSSIER"
           }
         }
       }
@@ -5486,19 +6500,325 @@
         }
       }
     },
+    "piece.callRecord": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CALL RECORD"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RELEVÉ D'APPELS"
+          }
+        }
+      }
+    },
+    "piece.kind.app": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "APP"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "APPLICATION"
+          }
+        }
+      }
+    },
+    "piece.kind.browser": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WEB SEARCH"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RECHERCHE WEB"
+          }
+        }
+      }
+    },
+    "piece.kind.calendar": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CALENDAR"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AGENDA"
+          }
+        }
+      }
+    },
+    "piece.kind.call": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CALL"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "APPEL"
+          }
+        }
+      }
+    },
+    "piece.kind.contact": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONTACT CARD"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FICHE CONTACT"
+          }
+        }
+      }
+    },
+    "piece.kind.deleted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DELETED MESSAGE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MESSAGE SUPPRIMÉ"
+          }
+        }
+      }
+    },
+    "piece.kind.draft": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DRAFT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BROUILLON"
+          }
+        }
+      }
+    },
+    "piece.kind.mail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EMAIL"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "COURRIEL"
+          }
+        }
+      }
+    },
+    "piece.kind.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MESSAGE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MESSAGE"
+          }
+        }
+      }
+    },
+    "piece.kind.note": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOTE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOTE"
+          }
+        }
+      }
+    },
+    "piece.kind.photo": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PHOTO"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PHOTO"
+          }
+        }
+      }
+    },
+    "piece.kind.photoInfo": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PHOTO ANALYSIS"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ANALYSE PHOTO"
+          }
+        }
+      }
+    },
+    "piece.kind.track": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LOCATION"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LOCALISATION"
+          }
+        }
+      }
+    },
+    "piece.number": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EXHIBIT %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PIÈCE %@"
+          }
+        }
+      }
+    },
+    "piece.search": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SEARCH"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RECHERCHE"
+          }
+        }
+      }
+    },
+    "pin.accuses": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accuses…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accuse…"
+          }
+        }
+      }
+    },
     "pin.add": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pin"
+            "value": "Add to the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Épingler"
+            "value": "Verser au dossier"
+          }
+        }
+      }
+    },
+    "pin.clears": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clears…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le disculpe…"
           }
         }
       }
@@ -5526,13 +6846,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Remove from notebook"
+            "value": "Remove from the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retirer du carnet"
+            "value": "Retirer du dossier"
           }
         }
       }
@@ -5566,7 +6886,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Délier"
+            "value": "Retirer le lien"
           }
         }
       }
@@ -5843,6 +7163,91 @@
         }
       }
     },
+    "profile.rankShort0": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trainee"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stagiaire"
+          }
+        }
+      }
+    },
+    "profile.rankShort1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Investigator"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enquêteur"
+          }
+        }
+      }
+    },
+    "profile.rankShort2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senior investigator"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enquêteur confirmé"
+          }
+        }
+      }
+    },
+    "profile.rankShort3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inspector"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inspecteur"
+          }
+        }
+      }
+    },
+    "profile.rankShort4": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chief inspector"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inspecteur principal"
+          }
+        }
+      }
+    },
     "profile.solved": {
       "extractionState": "manual",
       "localizations": {
@@ -5941,6 +7346,176 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitter l'enquête ?"
+          }
+        }
+      }
+    },
+    "report.caseTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File %1$@ — %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dossier %1$@ — %2$@"
+          }
+        }
+      }
+    },
+    "report.culpritFound": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Culprit named"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responsable désigné"
+          }
+        }
+      }
+    },
+    "report.date": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Closed on"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clos le"
+          }
+        }
+      }
+    },
+    "report.hints": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hints used"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indices utilisés"
+          }
+        }
+      }
+    },
+    "report.keyFound": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key pieces found"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièces clés trouvées"
+          }
+        }
+      }
+    },
+    "report.locked": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report under seal: solve the case or see the solution to open it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rapport sous scellé : résolvez l'affaire ou consultez la solution pour l'ouvrir."
+          }
+        }
+      }
+    },
+    "report.no": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non"
+          }
+        }
+      }
+    },
+    "report.reconstruction": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconstruction"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reconstitution"
+          }
+        }
+      }
+    },
+    "report.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Closing report"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rapport de clôture"
+          }
+        }
+      }
+    },
+    "report.yes": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oui"
           }
         }
       }
@@ -6087,13 +7662,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "THE %ld DECISIVE ITEMS"
+            "value": "THE %ld DECISIVE PIECES"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "LES %ld ÉLÉMENTS DÉTERMINANTS"
+            "value": "LES %ld PIÈCES DÉTERMINANTES"
           }
         }
       }
@@ -6224,19 +7799,53 @@
         }
       }
     },
+    "result.overline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FILE %@ · CONCLUSION REPORT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DOSSIER %@ · RAPPORT DE CONCLUSION"
+          }
+        }
+      }
+    },
     "result.replay": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Replay the case"
+            "value": "Reopen the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rejouer l'affaire"
+            "value": "Rouvrir le dossier"
+          }
+        }
+      }
+    },
+    "result.reportTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONCLUSION REPORT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RAPPORT DE CONCLUSION"
           }
         }
       }
@@ -6247,13 +7856,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reveal the solution"
+            "value": "See the solution"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Révéler la solution"
+            "value": "Consulter la solution"
           }
         }
       }
@@ -6275,19 +7884,36 @@
         }
       }
     },
+    "result.revealConfirmButton": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reveal the solution"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Révéler la solution"
+          }
+        }
+      }
+    },
     "result.revealConfirmTitle": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reveal the solution?"
+            "value": "See the solution?"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Révéler la solution ?"
+            "value": "Consulter la solution ?"
           }
         }
       }
@@ -6366,13 +7992,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "See the score"
+            "value": "Closing report"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Voir le score"
+            "value": "Rapport de clôture"
           }
         }
       }
@@ -6434,13 +8060,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "TIMELINE"
+            "value": "RECONSTRUCTION"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "CHRONOLOGIE"
+            "value": "RECONSTITUTION"
           }
         }
       }
@@ -6632,6 +8258,23 @@
         }
       }
     },
+    "score.final": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Final mark"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note finale"
+          }
+        }
+      }
+    },
     "score.found": {
       "extractionState": "manual",
       "localizations": {
@@ -6672,13 +8315,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Next case"
+            "value": "Next file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Affaire suivante"
+            "value": "Dossier suivant"
           }
         }
       }
@@ -6706,13 +8349,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "SCORE"
+            "value": "CLOSING REPORT"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "SCORE"
+            "value": "RAPPORT DE CLÔTURE"
           }
         }
       }
@@ -6723,13 +8366,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "◆ PERFECT"
+            "value": "FLAWLESS"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "◆ PARFAITE"
+            "value": "SANS FAUTE"
           }
         }
       }
@@ -6747,6 +8390,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Précision du carnet"
+          }
+        }
+      }
+    },
+    "score.signature": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report issued by the digital investigations desk — TRACE."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rapport établi par le bureau des enquêtes numériques — TRACE."
           }
         }
       }
@@ -7006,6 +8666,23 @@
         }
       }
     },
+    "settings.legibleHandwriting": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Legible handwriting"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écriture manuscrite lisible"
+          }
+        }
+      }
+    },
     "settings.model": {
       "extractionState": "manual",
       "localizations": {
@@ -7176,6 +8853,278 @@
         }
       }
     },
+    "stamp.cleared": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLEARED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DISCULPÉ"
+          }
+        }
+      }
+    },
+    "stamp.confidential": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONFIDENTIAL"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CONFIDENTIEL"
+          }
+        }
+      }
+    },
+    "stamp.designated": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NAMED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DÉSIGNÉ"
+          }
+        }
+      }
+    },
+    "stamp.mention": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "COMMENDED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MENTION"
+          }
+        }
+      }
+    },
+    "stamp.new": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEW"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOUVEAU"
+          }
+        }
+      }
+    },
+    "stamp.perfect": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FLAWLESS"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SANS FAUTE"
+          }
+        }
+      }
+    },
+    "stamp.resume": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OPEN"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EN COURS"
+          }
+        }
+      }
+    },
+    "stamp.revealed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SOLUTION VIEWED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SOLUTION CONSULTÉE"
+          }
+        }
+      }
+    },
+    "stamp.solved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SOLVED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RÉSOLU"
+          }
+        }
+      }
+    },
+    "stamp.unsolved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "UNSOLVED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NON RÉSOLU"
+          }
+        }
+      }
+    },
+    "status.new": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau"
+          }
+        }
+      }
+    },
+    "status.open": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En cours"
+          }
+        }
+      }
+    },
+    "status.openFile": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvert"
+          }
+        }
+      }
+    },
+    "status.solved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solved"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Résolu"
+          }
+        }
+      }
+    },
+    "status.unsolved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unsolved"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non résolu"
+          }
+        }
+      }
+    },
+    "suspect.address": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Address"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adresse"
+          }
+        }
+      }
+    },
     "suspect.againstCount": {
       "extractionState": "manual",
       "localizations": {
@@ -7210,6 +9159,40 @@
         }
       }
     },
+    "suspect.ageLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Age"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Âge"
+          }
+        }
+      }
+    },
+    "suspect.ageShort": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AGE %ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%ld ANS"
+          }
+        }
+      }
+    },
     "suspect.claims": {
       "extractionState": "manual",
       "localizations": {
@@ -7223,6 +9206,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "DÉCLARATION"
+          }
+        }
+      }
+    },
+    "suspect.counts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld against · %2$ld for"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld contre · %2$ld pour"
           }
         }
       }
@@ -7244,6 +9244,23 @@
         }
       }
     },
+    "suspect.fileHeader": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SUSPECT FILE %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FICHE SUSPECT %@"
+          }
+        }
+      }
+    },
     "suspect.inPhone": {
       "extractionState": "manual",
       "localizations": {
@@ -7261,19 +9278,53 @@
         }
       }
     },
+    "suspect.letter": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SUSPECT %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SUSPECT %@"
+          }
+        }
+      }
+    },
+    "suspect.link": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Link to the case"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lien avec l'affaire"
+          }
+        }
+      }
+    },
     "suspect.linked": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "LINKED ITEMS (%ld)"
+            "value": "LINKED PIECES (%ld)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "ÉLÉMENTS LIÉS (%ld)"
+            "value": "PIÈCES LIÉES (%ld)"
           }
         }
       }
@@ -7284,13 +9335,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "YOUR NOTES"
+            "value": "INVESTIGATOR'S NOTES"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "VOS NOTES"
+            "value": "NOTES DE L'ENQUÊTEUR"
           }
         }
       }
@@ -7359,13 +9410,30 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nothing linked. Pin an item, then link it to this suspect."
+            "value": "no linked piece yet"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aucun élément lié. Épinglez un élément puis liez-le à ce suspect."
+            "value": "aucune pièce liée pour l'instant"
+          }
+        }
+      }
+    },
+    "suspect.noPiece": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No linked piece"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune pièce liée"
           }
         }
       }
@@ -7383,6 +9451,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "SUSPECT"
+          }
+        }
+      }
+    },
+    "suspect.phoneLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phone"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Téléphone"
           }
         }
       }
@@ -7444,13 +9529,30 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "For each item, mark whether it incriminates or clears them. The game does not check: it is your reasoning."
+            "value": "Annotate each piece: accuses or clears. The game does not check: it is your reasoning."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pour chaque élément, indiquez s'il l'accuse ou le disculpe. Le jeu ne vérifie pas : c'est votre raisonnement."
+            "value": "Annotez chaque pièce : l'accuse ou le disculpe. Le jeu ne vérifie pas : c'est votre raisonnement."
+          }
+        }
+      }
+    },
+    "suspect.statementLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stated alibi"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alibi déclaré"
           }
         }
       }
@@ -7489,19 +9591,70 @@
         }
       }
     },
+    "tab.archives": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archives"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archives"
+          }
+        }
+      }
+    },
+    "tab.bureau": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desk"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bureau"
+          }
+        }
+      }
+    },
+    "tab.investigator": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Investigator"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enquêteur"
+          }
+        }
+      }
+    },
     "timeUp.subtitle": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The phone locks itself."
+            "value": "The phone is sealed."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le téléphone se verrouille."
+            "value": "Le téléphone est placé sous scellé."
           }
         }
       }
@@ -7665,13 +9818,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Added to the notebook · %ld"
+            "value": "Exhibit %ld added to the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajouté au carnet · %ld"
+            "value": "Pièce %ld versée au dossier"
           }
         }
       }
@@ -7682,13 +9835,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Removed from the notebook"
+            "value": "Removed from the file"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retiré du carnet"
+            "value": "Retirée du dossier"
           }
         }
       }
@@ -7886,13 +10039,105 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Checking the case file…"
+            "value": "VERIFYING THE FILE…"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vérification du dossier…"
+            "value": "VÉRIFICATION DU DOSSIER…"
+          }
+        }
+      }
+    },
+    "verdict.closed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File closed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dossier clos"
+          }
+        }
+      }
+    },
+    "verdict.crossCheck": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cross-checking the pieces… done."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recoupement des pièces… terminé."
+          }
+        }
+      }
+    },
+    "verdict.designated": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Named suspect: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suspect désigné : %@"
+          }
+        }
+      }
+    },
+    "verdict.pieces": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Pieces filed: %ld"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Pieces filed: %ld"
+                }
+              }
+            }
+          }
+        },
+        "fr": {
+          "variations": {
+            "plural": {
+              "one": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Pièces versées : %ld"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Pièces versées : %ld"
+                }
+              }
+            }
           }
         }
       }

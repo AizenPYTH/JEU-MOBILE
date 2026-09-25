@@ -1,4 +1,14 @@
 {
+ "dossier": {
+  "rating": 3,
+  "category": "VOL",
+  "city": "Paris",
+  "place": "Pavillon Mercure — gala",
+  "subject": "Collier Aurore, 1928",
+  "subjectLabel": "OBJET DISPARU",
+  "lastContact": "2026-11-12 22:13",
+  "lastContactLabel": "DERNIÈRE OBSERVATION"
+ },
  "schemaVersion": 1,
  "id": "case_004",
  "number": 4,

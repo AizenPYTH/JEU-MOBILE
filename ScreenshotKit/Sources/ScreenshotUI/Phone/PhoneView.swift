@@ -358,30 +358,35 @@ struct BatteryIndicator: View {
     }
 }
 
+/// The timer as a paper tag hanging on the phone (the design's `TraceStatus`): tilted −2°, a
+/// punched hole, mono digits. ≤ 01:00: red outline and filled hole. ≤ 00:10: the tag turns red.
 struct TimerPill: View {
     let remaining: Double
     let level: GameSession.TimerLevel
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
-        let color: Color = level == .critical ? Theme.Colors.alertText : level == .low ? Theme.Colors.signal : Theme.Colors.textPrimary
-        HStack(spacing: 6) {
-            Circle().fill(color).frame(width: Theme.Size.timerDot, height: Theme.Size.timerDot)
+        let critical = level == .critical
+        let low = level == .low
+        HStack(spacing: 7) {
+            Circle()
+                .fill(low || critical ? (critical ? Trace.Colors.stampText : Trace.Colors.stamp) : Trace.Colors.desk.opacity(0.85))
+                .overlay(Circle().strokeBorder(Trace.Colors.inkSoft.opacity(0.5), lineWidth: low || critical ? 0 : 1))
+                .frame(width: 6, height: 6)
             Text(PhoneFormat.countdown(remaining))
-                .font(level == .critical ? Theme.Fonts.timerCritical : Theme.Fonts.timer)
+                .font(.custom(Trace.FontName.monoBold, fixedSize: 14))
                 .monospacedDigit()
-                .foregroundStyle(color)
+                .foregroundStyle(critical ? Trace.Colors.stampText : Trace.Colors.ink)
         }
-        .padding(.horizontal, 10)
-        .frame(height: Theme.Size.timerPill)
-        .background(Capsule().fill(level == .normal ? Theme.Colors.bgRaised : (level == .low ? Theme.Colors.signalTint : Theme.Colors.alertTint)))
-        .phaseAnimator(reduceMotion || level == .normal ? [1.0] : [1.0, level == .critical ? 0.72 : 0.9]) { view, value in
-            view
-                .opacity(level == .critical ? value : 1)
-                .shadow(color: level == .low ? Theme.Colors.signal.opacity((1 - value) * 2.5) : .clear, radius: 3)
-        } animation: { _ in
-            .easeInOut(duration: level == .critical ? 0.5 : 1)
-        }
+        .padding(.horizontal, 9)
+        .frame(height: 24)
+        .background(RoundedRectangle(cornerRadius: 2).fill(critical ? Trace.Colors.stamp : Trace.Colors.paper))
+        .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(Trace.Colors.stamp, lineWidth: low ? 1.5 : 0))
+        .shadow(color: .black.opacity(0.35), radius: 3, y: 2)
+        .rotationEffect(.degrees(-2))
+        .phaseAnimator(reduceMotion || !critical ? [1.0] : [1.0, 0.78]) { view, value in
+            view.opacity(value)
+        } animation: { _ in .easeInOut(duration: 0.5) }
     }
 }
 
@@ -402,26 +407,28 @@ struct CriticalVignette: View {
 
 // MARK: - Notebook capsule & home indicator
 
-/// Capsule h 46, r 23, translucent: "◆ Carnet · n" and "Indice".
+/// The notebook's kraft tab sticking out at the bottom of the phone (the design's `CarnetTab`):
+/// « CARNET [n PIÈCES] | INDICE ». The counter flashes red for a moment when a piece is filed.
 struct CarnetBar: View {
     let count: Int
     let hintAvailable: Bool
     let onNotebook: () -> Void
     let onHints: () -> Void
+    @State private var flash = false
 
     var body: some View {
         HStack(spacing: 0) {
             Button(action: onNotebook) {
-                HStack(spacing: Theme.Spacing.s3) {
-                    Text("◆").foregroundStyle(count > 0 ? Theme.Colors.signal : Theme.Colors.textTertiary)
-                    Text(L10n.t("carnet.title")).foregroundStyle(Theme.Colors.textPrimary)
-                    Text("\(count)")
-                        .font(Theme.Fonts.dataStrong)
-                        .foregroundStyle(count > 0 ? Theme.Colors.signal : Theme.Colors.textSecondary)
+                HStack(spacing: 10) {
+                    Text(L10n.t("carnet.title").uppercased()).font(Trace.Fonts.button).tracking(2.4).foregroundStyle(Trace.Colors.kraftInk)
+                    Text(L10n.f("carnet.pieces", count))
+                        .font(Trace.Fonts.monoSmall.weight(.bold))
+                        .foregroundStyle(Trace.Colors.bone)
+                        .padding(.horizontal, 6).frame(height: 20)
+                        .background(RoundedRectangle(cornerRadius: 2).fill(flash ? Trace.Colors.stamp : Trace.Colors.ink))
                         .contentTransition(.numericText())
-                        .animation(Theme.Motion.emphasized(0.2), value: count)
                 }
-                .padding(.horizontal, Theme.Spacing.s5)
+                .padding(.horizontal, 16)
                 .frame(maxHeight: .infinity)
                 .contentShape(Rectangle())
             }
@@ -429,33 +436,37 @@ struct CarnetBar: View {
             .accessibilityLabel(Text(L10n.f("a11y.carnet", count)))
             .accessibilityIdentifier("phone.carnet")
 
-            Rectangle().fill(Theme.Colors.line2).frame(width: 1, height: 22)
+            Rectangle().fill(Trace.Colors.kraftLabel.opacity(0.5)).frame(width: 1, height: 22)
 
             Button(action: onHints) {
-                HStack(spacing: Theme.Spacing.s2) {
-                    Image(systemName: "lightbulb")
-                    Text(L10n.t("bar.hint"))
-                    if hintAvailable {
-                        Circle().fill(Theme.Colors.signal).frame(width: 6, height: 6)
-                    }
+                HStack(spacing: 6) {
+                    Text(L10n.t("bar.hint").uppercased()).font(Trace.Fonts.monoSmall.weight(.bold)).tracking(1.6)
+                    if hintAvailable { Circle().fill(Trace.Colors.stamp).frame(width: 6, height: 6) }
                 }
-                .foregroundStyle(Theme.Colors.textPrimary)
-                .padding(.horizontal, Theme.Spacing.s5)
+                .foregroundStyle(Trace.Colors.kraftInk)
+                .padding(.horizontal, 14)
                 .frame(maxHeight: .infinity)
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("phone.hints")
         }
-        .font(Theme.Fonts.calloutStrong)
         .frame(height: Theme.Size.carnetBar)
-        .background(Capsule().fill(Theme.Colors.bgBubbleIn.opacity(0.88)))
-        .background(.ultraThinMaterial, in: Capsule())
-        .elevation1(Capsule())
-        // A small bounce each time the notebook gains (or loses) an item: "it went there".
-        .phaseAnimator([1.0, 1.07, 1.0], trigger: count) { view, scale in
-            view.scaleEffect(scale)
-        } animation: { _ in .spring(duration: 0.22, bounce: 0.4) }
+        .background(
+            UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 4, bottomTrailingRadius: 4, topTrailingRadius: 10)
+                .fill(Trace.Colors.kraft)
+                .overlay(PaperGrain(intensity: 0.05).clipShape(RoundedRectangle(cornerRadius: 10)))
+                .shadow(color: .black.opacity(0.45), radius: 10, y: -2)
+        )
+        // A small lift each time a piece is filed: "it went in the file".
+        .phaseAnimator([0.0, -6.0, 0.0], trigger: count) { view, y in
+            view.offset(y: y)
+        } animation: { _ in .spring(duration: 0.28, bounce: 0.35) }
+        .onChange(of: count) { old, new in
+            guard new > old else { return }
+            flash = true
+            Task { try? await Task.sleep(for: .seconds(1.5)); flash = false }
+        }
     }
 }
 

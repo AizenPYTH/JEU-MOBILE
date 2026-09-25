@@ -149,6 +149,15 @@ struct AllCasesTests {
         }
     }
 
+    /// Every case has a typed cover (type, city, place, subject) for its folder.
+    @Test func everyCaseHasItsFolderCover() throws {
+        for file in try Self.cases() {
+            let dossier = try #require(file.dossier, "\(file.id) has no dossier cover")
+            #expect(!dossier.category.isEmpty && !dossier.city.isEmpty && !dossier.place.isEmpty && !dossier.subject.isEmpty, "\(file.id)")
+            if let last = dossier.lastContact { #expect(last <= file.phoneStartTime, "\(file.id): last contact after the handover") }
+        }
+    }
+
     /// Same levels everywhere, three hints in tiers (free clue, place, evidence).
     @Test func levelsAndHintsFollowTheRules() throws {
         let rules = try CaseLibrary.loadRules()

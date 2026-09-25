@@ -755,6 +755,7 @@ intro = dict(shots=[
 ])
 
 case = dict(
+    dossier=dict(rating=3, category="VOL", city="Paris", place="Pavillon Mercure — gala", subject="Collier Aurore, 1928", subjectLabel="OBJET DISPARU", lastContact="2026-11-12 22:13", lastContactLabel="DERNIÈRE OBSERVATION"),
     schemaVersion=1, id="case_004", number=4, title="90 SECONDES",
     tagline="Quatre-vingt-dix secondes de noir. Un collier de 4 millions.",
     synopsis=[

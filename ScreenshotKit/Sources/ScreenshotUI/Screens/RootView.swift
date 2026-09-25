@@ -60,7 +60,7 @@ public struct RootView: View {
 
     public var body: some View {
         ZStack {
-            Theme.Colors.ink0.ignoresSafeArea()
+            Trace.Colors.desk.ignoresSafeArea()
             content
         }
         .preferredColorScheme(.dark)
@@ -79,23 +79,21 @@ public struct RootView: View {
         } else {
             switch stage {
             case .home:
-                HomeView(next: nextCase, resumable: resumable, progress: progress, attemptsCount: attempts.count,
-                         onStart: { stage = .intro($0) },
-                         onResume: resumeSaved,
-                         onNavigate: { stage = $0 })
+                BureauView(cases: cases, progress: progress, resumable: resumable, featured: resumable?.file ?? nextCase,
+                           rank: L10n.t("profile.rankShort\(InvestigatorView.rankIndex(attempts))"),
+                           onOpen: { stage = .intro($0) },
+                           onResume: resumeSaved,
+                           onTab: selectTab)
                     .transition(.opacity)
-            case .cases:
-                CasesView(cases: cases, progress: progress, onOpen: { stage = .intro($0) }, onBack: goHome)
-                    .transition(.move(edge: .trailing))
-            case .archive:
-                ArchiveView(cases: cases, attempts: attempts, progress: progress,
-                            onOpen: { file, attempt in stage = .archived(file, attempt) }, onBack: goHome)
-                    .transition(.move(edge: .trailing))
+            case .cases, .archive:
+                ArchivesView(cases: cases, progress: progress, attempts: attempts, savedCaseID: resumable?.file.id,
+                             onOpen: { stage = .intro($0) }, onTab: selectTab)
+                    .transition(.opacity)
             case .profile:
-                ProfileView(attempts: attempts, caseCount: cases.count, onBack: goHome)
-                    .transition(.move(edge: .trailing))
+                InvestigatorView(attempts: attempts, caseCount: cases.count, onSettings: { stage = .settings }, onTab: selectTab)
+                    .transition(.opacity)
             case .settings:
-                GameSettingsView(onBack: goHome, onReplayOnboarding: { stage = .onboarding })
+                GameSettingsView(onBack: { stage = .profile }, onReplayOnboarding: { stage = .onboarding })
                     .transition(.move(edge: .trailing))
             case .onboarding:
                 OnboardingView {
@@ -104,17 +102,20 @@ public struct RootView: View {
                 }
                     .transition(.move(edge: .trailing))
             case .intro(let file):
-                CaseIntroView(caseFile: file,
-                              durations: durations(of: file),
-                              unlocked: Set(Challenge.allCases.filter { level in
-                                  rules?.isUnlocked(level, solvedAt: solvedLevels(of: file)) ?? true
-                              }),
-                              levels: ProgressStore.levels(of: file.id, in: attempts),
-                              saved: resumable?.file.id == file.id ? resumable?.saved : nil,
-                              onStart: { start(file, challenge: $0) },
-                              onResume: resumeSaved,
-                              onClose: goHome)
-                    .transition(.opacity)
+                DossierView(caseFile: file,
+                            rules: rules,
+                            durations: durations(of: file),
+                            unlocked: Set(Challenge.allCases.filter { level in
+                                rules?.isUnlocked(level, solvedAt: solvedLevels(of: file)) ?? true
+                            }),
+                            levels: ProgressStore.levels(of: file.id, in: attempts),
+                            saved: resumable?.file.id == file.id ? resumable?.saved : nil,
+                            attempts: attempts.filter { $0.caseID == file.id },
+                            archiveOpen: progress[file.id]?.archiveOpen == true,
+                            onStart: { start(file, challenge: $0) },
+                            onResume: resumeSaved,
+                            onClose: goHome)
+                    .transition(.asymmetric(insertion: .scale(scale: 0.96).combined(with: .opacity), removal: .opacity))
             case .cinematic(let session, let scene):
                 CinematicView(scene: scene, caseFile: session.caseFile, session: session, onFinish: { handOver(session) })
                     .transition(.opacity)
@@ -134,7 +135,7 @@ public struct RootView: View {
                     .transition(.opacity)
             case .score(let play):
                 ScoreView(verdict: play.verdict, duration: play.session.caseFile.durationSeconds,
-                          caseTitle: play.session.caseFile.title,
+                          caseTitle: play.session.caseFile.title, caseNumber: play.session.caseFile.number,
                           onReplay: { replay(play) },
                           onNext: { stage = nextCase(after: play.session.caseFile).map { .intro($0) } ?? .cases })
                     .transition(.opacity)
@@ -146,6 +147,16 @@ public struct RootView: View {
     }
 
     private var progress: [String: CaseProgress] { ProgressStore.summary(of: attempts) }
+
+    private func selectTab(_ tab: DeskTab) {
+        attempts = ProgressStore.attempts()
+        savedGame = SavedInvestigationStore.load()
+        switch tab {
+        case .bureau: stage = .home
+        case .archives: stage = .cases
+        case .investigator: stage = .profile
+        }
+    }
 
     /// The first case not solved yet (or the last one).
     private var nextCase: CaseFile? {

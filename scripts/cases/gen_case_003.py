@@ -805,6 +805,7 @@ intro = dict(shots=[
 ])
 
 case = dict(
+    dossier=dict(rating=3, category="CHUTE SUSPECTE", city="Cap Ferret", place="Villa Les Oyats", subject="Paul Castaing", subjectLabel="VICTIME", subjectAge=33, subjectContact="paul", lastContact="2026-08-23 02:09"),
     schemaVersion=1, id="case_003", number=3, title="APRÈS LA FÊTE",
     tagline="Tout le monde dormait. Personne ne dit la même chose.",
     synopsis=[

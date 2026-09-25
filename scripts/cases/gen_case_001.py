@@ -723,6 +723,7 @@ intro = dict(shots=[
 ])
 
 case = dict(
+    dossier=dict(rating=2, category="DISPARITION", city="Marseille", place="Zone portuaire", subject="Alex Moreau", subjectLabel="PERSONNE DISPARUE", subjectAge=26, subjectContact="me", lastContact=t(12, "22:08")),
     schemaVersion=1, id="case_001", number=1, title="LE DERNIER MESSAGE",
     tagline="Alex ne donne plus signe de vie depuis samedi soir.",
     synopsis=[

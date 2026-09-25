@@ -260,3 +260,29 @@ for start in (0.0, 1.2):
             t = i / RATE
             ring[j0 + i] += math.sin(2 * math.pi * f * t) * math.sin(math.pi * i / (0.13 * RATE)) * 0.5
 write("ring", lowpass(ring, 3500))
+
+# ---- The case file (design V2) -------------------------------------------------------------------
+
+# A rubber stamp on paper: a dull thud and a short paper slap.
+n = int(0.35 * RATE)
+stamp = []
+for i in range(n):
+    t = i / RATE
+    thud = math.sin(2 * math.pi * 90 * t) * math.exp(-t * 28) * 0.9
+    slap = random.uniform(-1, 1) * math.exp(-t * 60) * 0.6
+    stamp.append(thud + slap)
+write("stamp", lowpass(stamp, 1800))
+
+# A sheet of paper sliding: a soft band of noise that swells and fades.
+n = int(0.4 * RATE)
+sheet = highpass(lowpass(noise(n), 5000), 1200)
+write("paper", [s * math.sin(math.pi * i / n) ** 2 * 0.5 for i, s in enumerate(sheet)])
+
+# A cardboard folder opening: a lower, longer rub.
+n = int(0.6 * RATE)
+card = highpass(lowpass(noise(n), 2200), 300)
+write("folder", [s * math.sin(math.pi * i / n) * (1 - 0.5 * i / n) * 0.6 for i, s in enumerate(card)])
+
+# A typewriter key, very dry.
+write("typewriter", [math.exp(-(i / RATE) * 180) * (random.uniform(-1, 1) * 0.7 + math.sin(2 * math.pi * 1200 * i / RATE) * 0.3)
+                     for i in range(int(0.05 * RATE))])

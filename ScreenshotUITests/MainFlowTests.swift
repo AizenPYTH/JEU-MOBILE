@@ -100,8 +100,8 @@ final class MainFlowTests: XCTestCase {
 
     private func pin(_ target: XCUIElement, _ name: String) {
         target.press(forDuration: 1.2)
-        let pinButton = app.buttons["Épingler"]
-        wait(pinButton, 5, "context menu « Épingler »")
+        let pinButton = app.buttons["Verser au dossier"]
+        wait(pinButton, 5, "context menu « Verser au dossier »")
         snap(name)
         pinButton.tap()
     }
@@ -234,11 +234,11 @@ final class MainFlowTests: XCTestCase {
         XCTAssertTrue(element("phone.carnet").label.contains("1"), "Le carnet devrait compter 1 élément")
         snap("09-epingle")
 
-        // Link it to Emma: long press → "Lier à un suspect" → Emma Roussel.
+        // Annotate it against Emma: long press → "L'accuse…" → Emma Roussel.
         _ = element("phone.toast").waitForNonExistence(timeout: 4)
         alibi.press(forDuration: 1.2)
-        let linkMenu = app.buttons["Lier à un suspect"]
-        wait(linkMenu, 5, "menu « Lier à un suspect »")
+        let linkMenu = app.buttons["L'accuse…"]
+        wait(linkMenu, 5, "menu « L'accuse… »")
         linkMenu.tap()
         // The conversation header is also labelled "Emma Roussel": take the item under the menu title.
         let menuTop = linkMenu.frame.maxY
@@ -306,12 +306,16 @@ final class MainFlowTests: XCTestCase {
         // A suspect's file: what the phone holds about them, their statement, the linked chain.
         element("notebook.tab.0").tap()
         tap(element("notebook.suspect.s_emma"), "fiche d'Emma", expecting: element("suspect.name"))
-        // The linked message hangs from Emma's file; mark it "L'accuse".
+        // The message annotated from the phone hangs from Emma's file, already marked "L'accuse";
+        // "Le disculpe" is the other hand annotation.
         let against = element("suspect.stance.incriminates.0")
         scrollTo(against)
-        against.tap()
-        usleep(600_000)
+        if !against.isSelected {
+            against.tap()
+            usleep(600_000)
+        }
         XCTAssertTrue(against.isSelected, "« L'accuse » devrait être sélectionné")
+        XCTAssertFalse(element("suspect.stance.clears.0").isSelected, "« Le disculpe » ne doit pas l'être")
         sleep(1)
         snap("15a3-fiche-suspect")
         app.navigationBars.buttons.firstMatch.tap()
@@ -365,14 +369,16 @@ final class MainFlowTests: XCTestCase {
         tap(element("score.next"), "Suivant", expecting: element("intro.close"))
         sleep(2)
         snap("22-affaire-suivante")
-        XCTAssertTrue(app.staticTexts["PREMIER MÉTRO"].exists, "L'affaire suivante devrait être la #002")
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label ==[cd] %@", "PREMIER MÉTRO")).firstMatch.exists, "L'affaire suivante devrait être la #002")
 
         // Archive: the attempt is listed and its reconstruction opens.
         tap(element("intro.close"), "fermer l'affaire suivante", expecting: element("home.start"))
-        app.buttons.matching(NSPredicate(format: "label CONTAINS 'Dossiers'")).firstMatch.tap()
+        tap(element("menu.cases"), "Archives", expecting: element("case.case_001"))
         sleep(1)
-        snap("23-dossiers")
-        app.buttons.matching(NSPredicate(format: "label CONTAINS[c] 'dernier message'")).firstMatch.tap()
+        snap("23-archives")
+        tap(element("case.case_001"), "dossier 001 aux archives", expecting: element("dossier.tab.4"))
+        element("dossier.tab.4").tap()
+        wait(element("dossier.reconstruction"), 5, "reconstitution du dossier clos")
         sleep(1)
         snap("24-dossier-reconstitution")
     }
@@ -442,7 +448,7 @@ final class MainFlowTests: XCTestCase {
 
         let resume = wait(element("home.resume"), 20, "carte « Reprendre l'enquête »")
         XCTAssertFalse(element("home.start").exists, "La carte Reprendre remplace « Affaire suivante »")
-        XCTAssertTrue(element("home.resumeMeta").label.contains("◆ 1"), "La carte devrait compter 1 élément épinglé")
+        XCTAssertTrue(element("home.resumeMeta").label.contains("1"), "La carte devrait compter 1 élément épinglé")
         snap("52-accueil-reprendre")
         tap(resume, "Reprendre l'enquête", expecting: element("phone.timer"))
 
@@ -717,7 +723,7 @@ final class MainFlowTests: XCTestCase {
         wait(element("home.start"), 20, "Accueil")
         for (n, item) in newCases.enumerated() {
             openCaseScreen(item.id)
-            XCTAssertTrue(app.staticTexts[item.title].exists, "Écran de présentation de \(item.id)")
+            XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label ==[cd] %@", item.title)).firstMatch.exists, "Écran de présentation de \(item.id)")
             sleep(2)
             snap("B\(n)0-\(item.id)-presentation")
             tap(element("intro.start"), "Commencer \(item.id)", expecting: element("phone.timer"))

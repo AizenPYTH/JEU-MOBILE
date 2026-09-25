@@ -35,6 +35,30 @@ public struct CaseFile: Codable, Sendable, Identifiable {
     public var challengeDurations: [String: Int]? = nil
     /// The opening sequence played before the phone (see `IntroScene`); nil = straight to the phone.
     public var introScene: IntroScene? = nil
+    /// The cover of the case file (type, place, victim…), shown on the folder. Presentation only.
+    public var dossier: DossierInfo? = nil
+}
+
+/// What is typed on the cover of a case file. Facts known before the investigation, never a clue.
+public struct DossierInfo: Codable, Sendable, Hashable {
+    /// "DISPARITION", "VOL"…
+    public var category: String
+    public var city: String
+    /// "Zone portuaire", "Pavillon Mercure"…
+    public var place: String
+    /// The person (or object) at the centre of the case.
+    public var subject: String
+    /// "VICTIME" by default; "PERSONNE DISPARUE", "OBJET DISPARU"…
+    public var subjectLabel: String? = nil
+    public var subjectAge: Int? = nil
+    /// Contact whose identity photo is clipped to the file (nil for an object).
+    public var subjectContact: ContactID? = nil
+    /// Last sign of life / last time the object was seen.
+    public var lastContact: Moment? = nil
+    /// "DERNIER CONTACT" by default.
+    public var lastContactLabel: String? = nil
+    /// Difficulty shown on the folder, 1…5 (how hard the reasoning is, not the time).
+    public var rating: Int? = nil
 }
 
 // MARK: - Device (one seized phone)

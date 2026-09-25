@@ -1,4 +1,15 @@
 {
+ "dossier": {
+  "rating": 3,
+  "category": "CHUTE SUSPECTE",
+  "city": "Cap Ferret",
+  "place": "Villa Les Oyats",
+  "subject": "Paul Castaing",
+  "subjectLabel": "VICTIME",
+  "subjectAge": 33,
+  "subjectContact": "paul",
+  "lastContact": "2026-08-23 02:09"
+ },
  "schemaVersion": 1,
  "id": "case_003",
  "number": 3,

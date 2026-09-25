@@ -13,6 +13,8 @@ final class AudioDirector {
     enum Sound: String, CaseIterable {
         case street, sirens, crowd, vibrate, notification, unlock, key, tick, sting
         case metro, chime, train, room, sea, gulls, hall, powerdown, rain, engine, ring
+        /// The case file: a dry stamp, a sheet of paper, a folder, a typewriter key.
+        case stamp, paper, folder, typewriter
     }
 
     /// Relative level of each looping ambience (the loudest ones are pulled back).

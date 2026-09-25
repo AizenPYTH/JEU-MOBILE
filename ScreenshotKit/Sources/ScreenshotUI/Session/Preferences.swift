@@ -6,6 +6,8 @@ enum Preferences {
     static let vibrationsKey = "screenshot.vibrations"
     static let reduceMotionKey = "screenshot.reduceMotion"
     static let soundsKey = "screenshot.sounds"
+    /// Accessibility: handwritten annotations in a legible serif instead of Caveat.
+    static let legibleHandwritingKey = "trace.legibleHandwriting"
 
     static let onboardingDoneKey = "screenshot.onboardingDone"
 

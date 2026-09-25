@@ -828,6 +828,7 @@ intro = {"shots": [
 ]}
 
 case = dict(
+    dossier=dict(rating=2, category="DISPARITION INQUIÉTANTE", city="Lyon", place="Confluence — Le Silo", subject="Clémence Aubry", subjectLabel="PERSONNE DISPARUE", subjectAge=29, subjectContact="me", lastContact="2026-10-17 02:17"),
     schemaVersion=1, id="case_002", number=2, title="PREMIER MÉTRO",
     tagline="Son téléphone a pris le premier métro. Pas elle.",
     synopsis=[

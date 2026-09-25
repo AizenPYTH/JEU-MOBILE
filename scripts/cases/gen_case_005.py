@@ -810,6 +810,7 @@ intro = dict(shots=[
 ])
 
 case = dict(
+    dossier=dict(rating=4, category="DISPARITION", city="Vercors", place="Col de la Croix-Perrin", subject="Solène Marchetti", subjectLabel="PERSONNE DISPARUE", subjectAge=34, subjectContact="me", lastContact="2026-11-27 23:10"),
     schemaVersion=1, id="case_005", number=5, title="ROUTE DE NUIT",
     tagline="Moteur allumé, portière ouverte. Personne.",
     synopsis=[

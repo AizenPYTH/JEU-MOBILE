@@ -1,4 +1,15 @@
 {
+ "dossier": {
+  "rating": 2,
+  "category": "DISPARITION",
+  "city": "Marseille",
+  "place": "Zone portuaire",
+  "subject": "Alex Moreau",
+  "subjectLabel": "PERSONNE DISPARUE",
+  "subjectAge": 26,
+  "subjectContact": "me",
+  "lastContact": "2026-09-12 22:08"
+ },
  "schemaVersion": 1,
  "id": "case_001",
  "number": 1,

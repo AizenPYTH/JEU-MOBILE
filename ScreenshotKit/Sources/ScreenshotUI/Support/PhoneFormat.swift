@@ -39,6 +39,12 @@ enum PhoneFormat {
     }
 
     /// "12 sept."
+    /// "SAM. 12.09" (case files, reports).
+    static func shortWeekdayDot(_ m: Moment) -> String { "\(weekdayShort(m)). \(pad(m.day)).\(pad(m.month))" }
+
+    /// "12.09.2026"
+    static func dotted(_ m: Moment) -> String { "\(pad(m.day)).\(pad(m.month)).\(m.year)" }
+
     static func shortDay(_ m: Moment) -> String { "\(m.day) \(shortMonths[m.month - 1])" }
 
     /// "12 sept. à 22:17"
