@@ -783,10 +783,16 @@ final class MainFlowTests: XCTestCase {
         holdToAccuse()
 
         let reveal = element("result.reveal")
+        // The typed verification and the stamp play first (~4.5 s).
+        sleep(6)
         snap("33-resultat-negatif")
         scrollTo(reveal)
         reveal.tap()
         let confirm = app.sheets.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Révéler'")).firstMatch
+        if !confirm.waitForExistence(timeout: 3) {
+            snap("retry-consulter-solution")
+            reveal.tap()
+        }
         wait(confirm, 5, "confirmation de révélation")
         snap("34-confirmation-revelation")
         confirm.tap()

@@ -63,7 +63,7 @@ struct ChallengeCard: View {
             Text(L10n.t("challenge.locked")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkFaint)
         } else if let progress, progress.solved {
             HStack(spacing: 8) {
-                StampMark(text: L10n.t("challenge.solved").uppercased(), size: 8, angle: -3)
+                StampMark(text: L10n.t("challenge.solved"), size: 8, angle: -3)
                 if let time = progress.bestTime { Text(PhoneFormat.countdown(Double(time))).foregroundStyle(Trace.Colors.ink) }
                 if let score = progress.bestScore { Text("\(score) / 100").foregroundStyle(Trace.Colors.ink) }
             }

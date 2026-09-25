@@ -293,7 +293,7 @@ struct StampMark: View {
     var filled = false
 
     var body: some View {
-        Text(text)
+        Text(text.uppercased())
             .font(Trace.Fonts.stamp(size))
             .tracking(size * 0.16)
             .foregroundStyle(filled ? Trace.Colors.stampText : color)
