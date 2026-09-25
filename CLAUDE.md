@@ -37,7 +37,8 @@ Configs/Screenshot.xcconfig  Bundle ID, version, signature (source unique)
 docs/TESTFLIGHT_SETUP.md  Signature et TestFlight sans Mac
 docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
 docs/CINEMATIQUES_VEO.md  Ouvertures des affaires #002–#005, plan par plan, avec prompts Veo 3.1
-docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — lire README.md
+docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — tokens du téléphone
+docs/design_trace/        Handoff TRACE v2 « dossier d'enquête » (NE PAS MODIFIER) — tout ce qui est hors du téléphone
 DESIGN_INTEGRATION.md     État de l'intégration du handoff + conflits à trancher
 ScreenshotKit/            Package Swift contenant tout le jeu
   Sources/CaseEngine/     Moteur en Swift pur (Foundation). Testable sous Linux.
@@ -50,13 +51,16 @@ ScreenshotKit/            Package Swift contenant tout le jeu
     Session/              GameSession (moteur, navigation, bannières, haptiques), ProgressStore (tentatives,
                           meilleur résultat par niveau), Preferences (réglages), AudioDirector (sons, voix)
     Phone/                Le téléphone : barre d'état, accueil, bannières, et chaque app (Apps/)
-    Screens/              RootView (flux), CinematicView (séquence d'ouverture), MetaScreens (Accueil, Affaires, Intro, Dossiers, Profil, Paramètres),
+    Screens/              RootView (flux), CinematicView (séquence d'ouverture), DeskScreens (Bureau, Archives, Enquêteur),
+                          DossierView (dossier ouvert), MetaScreens (niveaux, archive, Paramètres),
                           InvestigationView (téléphone + Carnet + Indices), EndScreens (temps écoulé,
                           accusation, résultat, score)
-    Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (épingler / lier), Controls (boutons,
+    Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (verser au dossier / l'accuse / le disculpe),
+                          Dossier (pièces à conviction, fiches suspects, chronologie), Controls (boutons,
                           maintien pour confirmer, segments, en-têtes, état vide)
-    Theme/, Support/      Tokens du handoff (Theme.swift), polices (Fonts.swift), L10n, formats de date
-    Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py), Fonts/ (Geist, JetBrains Mono, Instrument Serif — OFL)
+    Theme/, Support/      Tokens du téléphone (Theme.swift), direction TRACE (TraceDesign.swift), polices, L10n, dates
+    Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py), Fonts/ (Geist, JetBrains Mono,
+                          Instrument Serif, Newsreader, IBM Plex Mono, Caveat — OFL)
   Sources/CaseLint/       CLI : valide chaque affaire et vérifie qu'elle est résolvable dans le temps
   Tests/                  CaseEngineTests (moteur), CaseLibraryTests (affaires, parties complètes,
                           traductions, absence de vocabulaire de l'ancien prototype)
@@ -82,22 +86,24 @@ scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d
    affaire est écrit dans la langue du téléphone saisi.
 9. Pas de dépendance tierce sans accord du porteur de projet.
 
-## Design (handoff SCREENSHOT v1.0)
+## Design — TRACE v2 « papier dehors, verre dedans »
 
-- Source de vérité visuelle : `docs/design/` (lecture seule). État et conflits : `DESIGN_INTEGRATION.md`
-  (à tenir à jour). Si la maquette contredit le brief ou le moteur : noter le conflit et demander.
-- Tokens = noms du handoff dans `Theme` : 6 noirs étagés (`ink0` → `bgSelected`), le blanc cassé
-  `textPrimary` est la couleur d'action, ambre `signal` = épinglé / important, `alert` = urgence et chrono
-  critique, `trace` = liens, `clear` = disculpé / réussi. Jamais de noir pur ni de blanc pur.
-- Polices : Geist (interface), JetBrains Mono (données, heures, chrono), Instrument Serif italique
-  (voix narrative). Toujours `Theme.Fonts.*`.
-- Téléphone dessiné comme un objet (cadre, îlot caméra) ; icônes d'apps originales aux conventions
-  connues (plus de tuiles 2 lettres) ; chaque app a un en-tête icône + nom (`AppBar`) ; couleurs
-  fonctionnelles `info` / `clear` / `signal` / `alert` / `special` (voir DESIGN_INTEGRATION.md §2.7) ;
-  barre d'état = pastille du chrono (normal / ≤ 60 s / ≤ 10 s) ; capsule Carnet en bas ; tout contenu
-  s'épingle par appui long et se lie à un suspect.
-- Accusation = maintenir 900 ms. Score = 60 · bon suspect + 25 · trouvées/total + 10 · temps restant/durée
-  + 5 · épingles pertinentes/épingles − coût des indices (valeurs dans `rules.json` et l'affaire).
+- Sources de vérité : `docs/design_trace/` (tout ce qui appartient à l'enquêteur : bureau, dossiers,
+  pièces, carnet, indices, vérification, rapports) et `docs/design/` (le téléphone saisi). Lecture seule.
+  État et conflits : `DESIGN_INTEGRATION.md` (à tenir à jour). Si la maquette contredit le brief ou
+  le moteur : noter le conflit et demander.
+- Hors du téléphone : `Trace.*` (TraceDesign.swift) — bureau sombre, papiers, kraft, encre, tampon
+  rouge, stylo bleu ; Newsreader (texte), IBM Plex Mono (champs, pièces, chrono), Caveat (manuscrit du
+  joueur uniquement). Le jeu n'écrit jamais à la main à la place du joueur : seuls les tampons
+  administratifs sont imprimés.
+- Dans le téléphone : tokens v1.0 `Theme.*` (6 noirs étagés, `textPrimary`, `signal`, `alert`,
+  `trace`, `clear`), Geist / JetBrains Mono, aucune texture papier. Deux objets papier seulement sur
+  le téléphone : l'étiquette du chrono et l'onglet kraft du Carnet.
+- Vocabulaire : Verser au dossier, L'accuse / Le disculpe, Vérification finale, Clore le dossier,
+  Rapport de clôture, Bureau, Archives, Enquêteur. Pièce n° = ordre de versement au dossier.
+- Clore le dossier = maintenir 1,2 s ; vérification tapée 2,4 s puis tampon RÉSOLU / NON RÉSOLU.
+  Note finale = 60 · bon suspect + 25 · trouvées/total + 10 · temps restant/durée + 5 · pièces
+  pertinentes/pièces − coût des indices (valeurs dans `rules.json` et l'affaire).
 
 ## Conventions
 
@@ -145,6 +151,8 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
 - [x] Affaires #002–#005 : « PREMIER MÉTRO », « APRÈS LA FÊTE », « 90 SECONDES », « ROUTE DE NUIT » — chacune
       avec son téléphone (fond, batterie), ses lieux, sa structure d'indices et son ouverture (prompts Veo :
       docs/CINEMATIQUES_VEO.md)
+- [x] Direction artistique TRACE v2 : Bureau, Archives, Enquêteur, dossier ouvert, pièces à conviction, fiches
+      suspects, carnet de terrain, plis d'indices, vérification finale, tampons, rapports (docs/design_trace)
 - [ ] Affaires #006–#015 (6 suspects, 8–10 min)
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
 - [ ] Monnaie / tickets d'indices, iCloud

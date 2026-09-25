@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="height:54px;position:relative;display:flex;align-items:center;justify-content:space-between;padding:8px 26px 0 22px;flex:none;box-sizing:border-box;width:100%;font-family:'Geist',sans-serif">
+  <div style="position:absolute;top:11px;left:50%;transform:translateX(-50%);width:124px;height:36px;border-radius:20px;background:#000"></div>
+  <sc-if value="{{ isNormal }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;align-items:center;gap:6px;height:24px;padding:0 9px 0 7px;background:#ECE5D3;color:#1C1A17;border-radius:2px;transform:rotate(-2deg);box-shadow:0 4px 10px rgba(0,0,0,0.45)"><span style="width:6px;height:6px;border-radius:3px;box-shadow:inset 0 0 0 1.5px #5B5448"></span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums">{{ time }}</span></div>
+  </sc-if>
+  <sc-if value="{{ isLow }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;gap:6px;height:24px;padding:0 9px 0 7px;background:#ECE5D3;color:#A3261E;border-radius:2px;transform:rotate(-2deg);box-shadow:0 4px 10px rgba(0,0,0,0.45),inset 0 0 0 1.5px #A3261E"><span style="width:6px;height:6px;border-radius:3px;background:#A3261E"></span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums">{{ time }}</span></div>
+  </sc-if>
+  <sc-if value="{{ isCritical }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;gap:6px;height:24px;padding:0 9px 0 7px;background:#A3261E;color:#F2E9E4;border-radius:2px;transform:rotate(-2deg);box-shadow:0 4px 14px rgba(163,38,30,0.5)"><span style="width:6px;height:6px;border-radius:3px;background:#F2E9E4"></span><span style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums">{{ time }}</span></div>
+  </sc-if>
+  <sc-if value="{{ isClock }}" hint-placeholder-val="{{ false }}">
+    <span style="font-size:16px;font-weight:600;color:#EFEBE3;width:72px;text-align:center">{{ time }}</span>
+  </sc-if>
+  <div style="display:flex;align-items:center;gap:6px">
+    <div style="display:flex;align-items:flex-end;gap:2px;height:11px"><span style="width:3px;height:4px;border-radius:1px;background:#EFEBE3"></span><span style="width:3px;height:6px;border-radius:1px;background:#EFEBE3"></span><span style="width:3px;height:8px;border-radius:1px;background:#EFEBE3"></span><span style="width:3px;height:11px;border-radius:1px;background:rgba(239,235,227,0.35)"></span></div>
+    <div style="width:24px;height:12px;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(239,235,227,0.45);padding:2px;box-sizing:border-box;display:flex"><span style="width:40%;height:100%;border-radius:2px;background:#EFEBE3"></span></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:60},&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;timer&quot;,&quot;clock&quot;],&quot;default&quot;:&quot;timer&quot;,&quot;tsType&quot;:&quot;'timer'|'clock'&quot;},&quot;level&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;normal&quot;,&quot;low&quot;,&quot;critical&quot;],&quot;default&quot;:&quot;normal&quot;,&quot;tsType&quot;:&quot;'normal'|'low'|'critical'&quot;},&quot;time&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;06:42&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const mode = this.props.mode ?? 'timer';
+    const level = this.props.level ?? 'normal';
+    const t = mode === 'timer';
+    return { time: this.props.time ?? '06:42', isClock: !t, isNormal: t && level === 'normal', isLow: t && level === 'low', isCritical: t && level === 'critical' };
+  }
+}
+</script>
+</body>
+</html>

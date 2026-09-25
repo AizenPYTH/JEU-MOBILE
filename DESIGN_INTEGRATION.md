@@ -3,6 +3,46 @@
 Source : `docs/design/` (non modifié). Ce document dit ce qui est intégré, ce qui reste à faire, et
 les points où le handoff contredit le brief ou le moteur — **à trancher par le porteur de projet**.
 
+## 0. Direction artistique TRACE v2 — « papier dehors, verre dedans » (septembre 2026)
+
+Source : `docs/design_trace/` (handoff Claude Design « TRACE », lecture seule — lire `README.md`).
+Elle **remplace** le handoff v1.0 pour tout ce qui est hors du téléphone ; le téléphone saisi garde
+les tokens v1.0 (`Theme.*`), c'est l'objet moderne au milieu du dossier.
+
+| Élément TRACE | Où dans le code |
+|---|---|
+| Tokens (bureau, papiers, kraft, encres, tampon, stylo, ruban…), polices Newsreader / IBM Plex Mono / Caveat, mouvements | `Theme/TraceDesign.swift` (`Trace.Colors/Fonts/Motion/Spacing`) |
+| Matières et objets : papier + grain, kraft, lignes, agrafe, ruban adhésif, trombone, tirage photo, photo d'identité | `TraceDesign.swift` (`.paper()`, `.kraft()`, `RuledLines`, `Staple`, `Tape`, `Paperclip`, `PhotoPrint`, `IDPhoto`) |
+| Tampons (RÉSOLU, NON RÉSOLU en pointillé, CONFIDENTIEL, DISCULPÉ…), tampon qui tombe (son + haptique) | `StampMark`, `FallingStamp` |
+| Champs de formulaire, lignes de registre, difficulté ■■□□□, étiquettes « P.04 », écriture manuscrite | `FieldRow`, `LedgerRow`, `DifficultyMeter`, `EvidenceLabel`, `Handwritten` |
+| Intercalaires, barre Bureau · Archives · Enquêteur | `DividerTabs`, `DeskTabBar` |
+| 02 Bureau (dossier en cours + dossiers suivants, chemises kraft, onglet, agrafe, tampons) | `Screens/DeskScreens.swift` (`BureauView`, `FolderCard`, `FolderTabRow`) |
+| 03 Archives (filtres, dossiers clos, note, tentatives) · 20 Enquêteur (carte, états de service) | `ArchivesView`, `ArchiveCard`, `InvestigatorView` |
+| 04 Dossier ouvert (couverture qui pivote, intercalaires Contexte / Suspects / Pièces / Chronologie / Rapport, niveaux en cases à cocher) | `Screens/DossierView.swift` |
+| 06 Pièces à conviction (un support par type : tirage, capture, relevé d'appels, extrait de carte, page d'agenda, note jaune, courriel, page web, fiche) numérotées dans l'ordre de versement | `Components/Dossier.swift` (`ExhibitView`, `PieceFormat`) |
+| 07–08 Suspects en fiches bristol, fiche suspect dactylographiée, annotations « l'accuse » / « le disculpe » entourées à la main | `SuspectIndexCard`, `SuspectFileView`, `LinkedChain` |
+| 11 Carnet à spirale (lignes bleues, marge rouge) : Suspects · Pièces · Chronologie · Connexions | `NotebookView`, `NotebookPaper`, `ConnectionBlock`, `ChronologySheet` |
+| 13 Indices en plis kraft cachetés (cire, ficelle tant que verrouillés), note du superviseur une fois ouverts | `HintsView`, `HintCard` |
+| 05 Téléphone : chrono en étiquette papier (normal / ≤ 60 s contour rouge / ≤ 10 s étiquette rouge), onglet kraft « CARNET n PIÈCES · INDICE », confirmation en étiquette scotchée | `Phone/PhoneView.swift` (`TimerPill`, `CarnetBar`), `Components/Pinnable.swift` (`ToastView`) |
+| 15 Vérification finale (formulaire, cases, « Vous désignez… », maintenir **1,2 s** pour clore) | `EndScreens.swift` (`AccusationView`, `HoldToCloseButton`) |
+| 16 « VÉRIFICATION DU DOSSIER… » tapé à la machine (2,4 s) puis chemise fermée + tampon | `VerificationView` |
+| 17–18 Rapport de conclusion RÉSOLU / fiche de débriefing NON RÉSOLU (« Rouvrir le dossier », « Consulter la solution ») | `ResultView` |
+| 19 Rapport de clôture (note finale / 100, lignes de calcul, SANS FAUTE) | `ScoreView` |
+| Sons papier : tampon, feuille, chemise, machine à écrire (générés) | `scripts/audio/gen_sounds.py`, `AudioDirector.Sound` |
+| Données de couverture (catégorie, ville, lieu, personne concernée, dernier contact, difficulté 1–5) | `DossierInfo` optionnel dans l'affaire (présentation seule ; anciennes sauvegardes inchangées) |
+
+Vocabulaire appliqué : Épingler → **Verser au dossier** ; Lier → **L'accuse… / Le disculpe…** ;
+Accuser → **Vérification finale / Clore le dossier** ; Score → **Rapport de clôture / Note finale** ;
+Accueil → **Bureau** ; Dossiers terminés → **Archives** ; Profil → **Enquêteur**.
+
+Règles tenues : le jeu n'annote jamais à la place du joueur (seuls les tampons administratifs sont
+« imprimés » ; tout le manuscrit vient d'un geste du joueur) ; aucune texture papier dans les apps du
+téléphone ; réglage « Écriture manuscrite lisible » (Caveat → Newsreader italique).
+
+Écarts assumés : pas d'illustration de personne (photos d'identité = portraits générés, comme avant) ;
+les écrans 01 Remise, 14 Notifications, 21 Vide et 22 Confirmation reprennent les composants TRACE
+sans maquette dédiée ; l'onboarding garde ses démos « verre » (elles montrent le téléphone) sur fond bureau.
+
 ## 1. Intégré
 
 | Élément du handoff | Où dans le code |
@@ -76,7 +116,7 @@ les points où le handoff contredit le brief ou le moteur — **à trancher par 
      « Indices » désigne maintenant les éléments épinglés).
    - **Décision finale** : « Résoudre l'affaire — Qui est responsable ? », liste des suspects avec ce
      que le joueur leur a lié, panneau « Vous accusez X » + les éléments sur lesquels repose
-     l'accusation, puis maintien 900 ms (inchangé).
+     l'accusation, puis maintien 1,2 s (inchangé).
    - **Résultat** : « X était responsable », les éléments déterminants (preuves `key` de l'affaire,
      ✓ trouvé / ○ manqué, avec ce que chacune prouve), « Votre dossier » (ce que le joueur avait lié),
      puis la chronologie. Une mauvaise réponse garde la règle : alibi, piège, trouvé de juste, manqué
@@ -192,6 +232,6 @@ Accueil → Affaires → Intro → Téléphone → enquête → Carnet → accus
 - Défauts trouvés et corrigés grâce à ces passages : chrono invisible dans le téléphone (masqué par
   les fonds des écrans), Carnet sans bouton de fermeture, pluriels (« 1 manquées »), texte tronqué
   de « Accuser maintenant ? », message-alibi d'Emma épinglé non compté comme preuve.
-- Reste à vérifier sur un vrai iPhone : sensation tactile (appui long, maintien 900 ms, glissements),
+- Reste à vérifier sur un vrai iPhone : sensation tactile (appui long, maintien 1,2 s, glissements),
   vibrations, lisibilité réelle, performances, mise en arrière-plan / pause, VoiceOver, écran plus
   petit ou plus grand, notifications urgentes (lv07/lv08, non atteintes dans les tests).
