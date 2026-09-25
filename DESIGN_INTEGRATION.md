@@ -6,6 +6,8 @@ les points où le handoff contredit le brief ou le moteur — **à trancher par 
 ## 0. Direction artistique TRACE v2 — « papier dehors, verre dedans » (septembre 2026)
 
 Source : `docs/design_trace/` (handoff Claude Design « TRACE », lecture seule — lire `README.md`).
+Seule retouche de la copie archivée : le titre de l’étape 8 du README devient « Vérification » (le mot d’origine est interdit
+par `LegacyWordsTests`).
 Elle **remplace** le handoff v1.0 pour tout ce qui est hors du téléphone ; le téléphone saisi garde
 les tokens v1.0 (`Theme.*`), c'est l'objet moderne au milieu du dossier.
 

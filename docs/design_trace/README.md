@@ -214,7 +214,7 @@ Tableau complet : Charte §11. Sons et haptiques à ajouter à ceux de la V1 :
 5. Mapping du vocabulaire (§2) : dans les fichiers de localisation uniquement.
 6. Épingler = `deposit(ref)` → le numéro de pièce est l'index de versement + 1, figé ensuite. Les tampons joueur (ÉLÉMENT CLÉ, ALIBI À VÉRIFIER, DISCULPÉ) et les annotations sont un **état de présentation** à stocker à côté de l'état de partie existant (clé = id de pièce ou de suspect). Ils n'influencent pas le score, sauf si le moteur utilise déjà « disculpé » ou « lien ».
 7. Accessibilité : chaque tampon est lu par VoiceOver (« tampon : résolu »), les annotations Caveat ont une alternative texte, et un réglage « Écriture manuscrite lisible » remplace Caveat par Newsreader italique. Contraste : ink/paper 14:1, ink.soft/paper 6.2:1, stamp/paper 6.4:1, bone.2/desk 7.4:1. Réduire les animations : voir la Charte.
-8. Recette : comparer chaque écran à sa maquette numérotée (01–22) et à la charte.
+8. Vérification : comparer chaque écran à sa maquette numérotée (01–22) et à la charte.
 
 ## 10. Screen inventory
 
