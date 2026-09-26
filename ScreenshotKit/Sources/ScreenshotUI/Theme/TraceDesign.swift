@@ -292,12 +292,18 @@ struct IDPhoto: View {
     @Environment(\.caseNumber) private var caseNumber
 
     var body: some View {
-        let real = ArtLibrary.portrait(case: caseNumber, contact: contact) != nil
+        // No portrait yet: the initials in Newsreader on BEN blue, same frame (final handoff §N),
+        // never the phone's app-tile placeholder.
+        let image = ArtLibrary.portrait(case: caseNumber, contact: contact)
         PhotoPrint(border: 3) {
-            Portrait(contact: contact, width: width, height: height)
-                .clipShape(Rectangle())
-                .saturation(real ? 0.85 : 0.35)
+            PortraitOrInitials(image: image, initials: Self.initials(of: contact?.name ?? ""), width: width, height: height)
+                .saturation(image != nil ? 0.85 : 1)
         }
+    }
+
+    /// « Emma Roussel » → « ER »
+    static func initials(of name: String) -> String {
+        name.split(separator: " ").prefix(2).compactMap { $0.first.map { String($0).uppercased() } }.joined()
     }
 }
 

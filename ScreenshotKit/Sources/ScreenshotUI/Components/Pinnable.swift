@@ -79,8 +79,15 @@ private let pinnableScreenHeight: CGFloat = 400
 
 extension View {
     /// Makes an element of the phone « versable »: long press → « VERSER AU DOSSIER ».
-    func pinnable(_ ref: ItemRef, session: GameSession, radius: CGFloat = Theme.Radius.lg) -> some View {
-        modifier(Pinnable(ref: ref, session: session, radius: radius))
+    /// `enabled: false` for what is on screen but cannot be filed yet (a message removed by its
+    /// sender, whose text is hidden until it is recovered).
+    @ViewBuilder
+    func pinnable(_ ref: ItemRef, session: GameSession, radius: CGFloat = Theme.Radius.lg, enabled: Bool = true) -> some View {
+        if enabled {
+            modifier(Pinnable(ref: ref, session: session, radius: radius))
+        } else {
+            self
+        }
     }
 }
 

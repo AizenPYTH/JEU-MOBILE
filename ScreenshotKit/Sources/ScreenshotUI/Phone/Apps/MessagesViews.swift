@@ -449,12 +449,14 @@ struct MessageBubble: View {
                 }
             }
             .accessibilityElement(children: .combine)
-            .accessibilityLabel(Text("\(session.game.name(of: message.from)), \(PhoneFormat.time(message.at)) : \(message.text ?? L10n.t("item.photo"))"))
+            // A message removed by its sender reads as removed: its text stays hidden until recovered.
+            .accessibilityLabel(Text("\(session.game.name(of: message.from)), \(PhoneFormat.time(message.at)) : \(visible.state == .removedBySender ? L10n.t("messages.removed") : (message.text ?? L10n.t("item.photo")))"))
             .accessibilityIdentifier("message.\(message.id)")
             .overlay {
                 if spotlight { CoachRing(radius: Theme.Radius.bubble) }
             }
-            .pinnable(ItemRef(.message, message.id), session: session, radius: Theme.Radius.bubble)
+            .pinnable(ItemRef(.message, message.id), session: session, radius: Theme.Radius.bubble,
+                      enabled: visible.state != .removedBySender)
             if visible.state == .recovered {
                 Text(L10n.t("messages.recovered"))
                     .font(Theme.Fonts.dataSmall)

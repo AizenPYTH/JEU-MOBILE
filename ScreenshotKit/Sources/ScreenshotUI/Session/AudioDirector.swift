@@ -55,6 +55,9 @@ final class AudioDirector {
     /// Launch: loads and primes the interface sounds (paper, stamps, notifications…) so the first
     /// one plays without a delay.
     func warmUp() {
+        // The session is set to « ambient, mix with others » before any player is primed: a primed
+        // player on the default session would stop the music the player is listening to.
+        prepareSession()
         for sound in [Sound.paper, .stamp, .folder, .typewriter, .notification, .unlock, .key, .tick, .sting, .vibrate] {
             _ = player(for: sound.rawValue)
         }

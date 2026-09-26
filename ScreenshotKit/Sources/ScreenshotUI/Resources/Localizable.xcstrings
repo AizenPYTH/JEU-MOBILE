@@ -7238,6 +7238,74 @@
         }
       }
     },
+    "result.revealAskCancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to the report"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour au rapport"
+          }
+        }
+      }
+    },
+    "result.revealAskConfirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read the solution"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulter la solution"
+          }
+        }
+      }
+    },
+    "result.revealAskMessage": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This attempt will not count in your results. You can play the case again later, from the start."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette partie ne comptera pas dans vos résultats. Vous pourrez rejouer le dossier plus tard, depuis le début."
+          }
+        }
+      }
+    },
+    "result.revealAskTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read the solution?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consulter la solution ?"
+          }
+        }
+      }
+    },
     "result.rightFinds": {
       "extractionState": "manual",
       "localizations": {

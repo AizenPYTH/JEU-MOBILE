@@ -225,7 +225,9 @@ final class MainFlowTests: XCTestCase {
 
     /// Bureau → the case file (briefing) of a case.
     private func openCaseFile(_ id: String = "case_001", shot: String? = nil) {
-        let start = element("intro.start")
+        // Its main button: « Ouvrir le téléphone », or « Reprendre l'enquête » when it is in progress.
+        let start = app.descendants(matching: .any).matching(
+            NSPredicate(format: "identifier IN %@", ["intro.start", "intro.resume"])).firstMatch
         let row = element("case.\(id)")
         if row.waitForExistence(timeout: 3) {
             scrollTo(row)
@@ -846,15 +848,16 @@ final class MainFlowTests: XCTestCase {
         choose(wait(element("accuse.suspect.s_lucas"), 10, "suspects"))
         holdToConclude()
         readReport("35-verification-2")
+        // « Consulter la solution » asks first (the attempt stops counting).
         let reveal = element("result.reveal")
         scrollTo(reveal)
-        reveal.tap()
-        let confirmReveal = app.buttons.matching(NSPredicate(format: "label BEGINSWITH[c] 'Révéler' OR label BEGINSWITH[c] 'Consulter'")).firstMatch
-        if !reveal.waitForNonExistence(timeout: 3), confirmReveal.exists {
-            confirmReveal.tap()
-        }
+        tap(reveal, "Consulter la solution", expecting: element("result.revealConfirm"))
+        snap("36-confirmation-solution")
+        element("result.revealConfirm").tap()
         XCTAssertTrue(reveal.waitForNonExistence(timeout: 8), "La solution s'affiche")
+        XCTAssertFalse(element("result.retry").exists, "Après la solution, on classe le dossier : pas de reprise")
+        wait(element("result.file"), 5, "« Classer le dossier » après la solution")
         sleep(2)
-        snap("36-solution-revelee")
+        snap("37-solution-revelee")
     }
 }

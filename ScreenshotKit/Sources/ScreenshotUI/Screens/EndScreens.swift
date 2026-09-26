@@ -537,6 +537,9 @@ struct ResultView: View {
 
     /// The verification is over: the report is on screen.
     @State private var reading = false
+    /// « Consulter la solution ? » is on screen; `revealAsked` once confirmed (acted on when it closes).
+    @State private var askingReveal = false
+    @State private var revealAsked = false
     @Environment(\.dynamicTypeSize) private var typeSize
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
     @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
@@ -577,6 +580,21 @@ struct ResultView: View {
         }
         .scrollBounceBehavior(.basedOnSize)
         .safeAreaInset(edge: .bottom, spacing: 0) { actions }
+        .sheet(isPresented: $askingReveal, onDismiss: {
+            if revealAsked { revealAsked = false; onRevealRequested() }
+        }) {
+            PaperConfirmSheet(title: L10n.t("result.revealAskTitle"),
+                              message: L10n.t("result.revealAskMessage"),
+                              confirm: L10n.t("result.revealAskConfirm"),
+                              confirmID: "result.revealConfirm",
+                              cancel: L10n.t("result.revealAskCancel"),
+                              cancelID: "result.revealCancel",
+                              onConfirm: { revealAsked = true; askingReveal = false },
+                              onCancel: { askingReveal = false })
+                .presentationDetents([.medium])
+                .presentationCornerRadius(16)
+                .presentationBackground(Trace.Colors.paper)
+        }
     }
 
     private var sheet: some View {
@@ -832,6 +850,11 @@ struct ResultView: View {
                 Button(L10n.t("result.fileCase"), action: onFile)
                     .buttonStyle(CTAButtonStyle())
                     .accessibilityIdentifier("result.file")
+            } else if revealed {
+                // The solution was read: the case can only be filed (unsolved), not replayed at once.
+                Button(L10n.t("result.fileCase"), action: onFileAnyway)
+                    .buttonStyle(CTAButtonStyle())
+                    .accessibilityIdentifier("result.file")
             } else {
                 Button(L10n.t("result.retry"), action: onRetry)
                     .buttonStyle(CTAButtonStyle())
@@ -858,7 +881,7 @@ struct ResultView: View {
             .buttonStyle(TextLinkStyle())
             .accessibilityIdentifier("result.fileAnyway")
         if !revealed {
-            Button(L10n.t("result.reveal"), action: onRevealRequested)
+            Button(L10n.t("result.reveal")) { askingReveal = true }
                 .buttonStyle(TextLinkStyle())
                 .accessibilityIdentifier("result.reveal")
         }
