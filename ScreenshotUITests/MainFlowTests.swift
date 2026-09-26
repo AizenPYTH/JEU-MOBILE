@@ -636,10 +636,12 @@ final class MainFlowTests: XCTestCase {
         sleep(1)
         snap("73-dossier-reprendre")
         tap(introResume, "Reprendre (dossier)", expecting: element("phone.timer"))
+        // Read at once: the time away (5 s here, plus the navigation, 15 s or more) must not count;
+        // what counts is only the few seconds of play around the pause (XCUITest queries are slow).
+        let after = secondsLeft()
+        XCTAssertTrue(after <= before && before - after <= 10, "Chrono incohérent : \(before) s avant, \(after) s après")
         wait(element("message.m_emma_2230"), 5, "même écran après reprise")
         assertPieces(1)
-        let after = secondsLeft()
-        XCTAssertTrue(after <= before && before - after <= 8, "Chrono incohérent : \(before) s avant, \(after) s après")
         snap("74-repris")
 
         // Pause again and resume from the Bureau.
