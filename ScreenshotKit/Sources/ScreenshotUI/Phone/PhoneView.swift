@@ -195,6 +195,9 @@ enum PhoneLayout {
     static let barRadius: CGFloat = 10
     /// Centre of the bar from the bottom of the glass (home indicator 24 + 8, gap 8, half bar).
     static let barCenterFromBottom: CGFloat = 72
+    /// Height of the glass the bar covers, plus a gap: a screen that does not scroll keeps its
+    /// controls above it (home indicator 24 + 8, gap 8, bar 64, gap 8).
+    static let barClearance: CGFloat = 112
     /// Top of the timer tag: it hangs just under the camera island.
     static let tagTop: CGFloat = 38
     /// Toasts sit under the timer tag.

@@ -502,8 +502,14 @@ struct TrashView: View {
                     .foregroundStyle(Theme.Colors.textSecondary)
                     .padding(.top, Theme.Spacing.s4)
                 ForEach(game.trash) { item in
-                    TrashCard(item: item, session: session)
-                        .pinnable(ItemRef(.message, item.message.id), session: session, radius: Theme.Radius.md)
+                    if item.isRecovered {
+                        TrashCard(item: item, session: session)
+                            .pinnable(ItemRef(.message, item.message.id), session: session, radius: Theme.Radius.md)
+                    } else {
+                        // Its content is still hidden: nothing to file yet (a long press would mark
+                        // it seen and reveal it without paying for the recovery).
+                        TrashCard(item: item, session: session)
+                    }
                 }
                 if game.trash.isEmpty {
                     EmptyStateView(title: L10n.t("trash.emptyTitle"), message: L10n.t("trash.emptyMessage"))

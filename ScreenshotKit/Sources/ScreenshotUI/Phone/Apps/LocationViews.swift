@@ -130,6 +130,8 @@ struct TrackRow: View {
 struct TrackView: View {
     let trackID: String
     let session: GameSession
+    /// Height of the screen under the navigation bar (the map gives way on small iPhones).
+    @State private var available: CGFloat = 0
 
     var body: some View {
         let game = session.game
@@ -146,7 +148,7 @@ struct TrackView: View {
                         CityMap(places: places, tracks: [track], highlight: nil)
                     }
                 }
-                .frame(height: Theme.Size.mapHeight)
+                .frame(height: Self.mapHeight(in: available))
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.Spacing.s5) {
@@ -167,10 +169,19 @@ struct TrackView: View {
                     .padding(.bottom, Theme.Spacing.bottomInset)
                 }
             }
+            .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { available = $0 }
             .navigationTitle(track.contact == ownerContactID ? L10n.t("location.me") : game.name(of: track.contact))
             .navigationBarTitleDisplayMode(.inline)
             .pinnable(ItemRef(.track, track.id), session: session)
         }
+    }
+
+    /// 390 pt where there is room; on a small iPhone (SE) the map shrinks so that the timeline
+    /// keeps `trackListMin` of visible room above the dossier bar.
+    private static func mapHeight(in available: CGFloat) -> CGFloat {
+        guard available > 0 else { return Theme.Size.mapHeight }
+        let room = available - PhoneLayout.barClearance - Theme.Size.trackListMin
+        return min(Theme.Size.mapHeight, max(Theme.Size.mapHeight / 2, room))
     }
 }
 

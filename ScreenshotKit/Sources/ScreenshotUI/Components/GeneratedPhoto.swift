@@ -107,6 +107,27 @@ enum PhotoPainter {
     }
 
     static func paint(scene: String, style: Photo.Style, lines: [String], in ctx: inout C, size: CGSize, rng: inout SeededRandom) {
+        guard style == .night, !nocturnalScenes.contains(scene) else {
+            paintScene(scene, style: style, lines: lines, in: &ctx, size: size, rng: &rng)
+            return
+        }
+        // Day for night: a scene painted in daylight, shot at night. The whole picture is
+        // underexposed, drained and cooled (a daylight sky or window turns blue-black), then the
+        // scene's own lights — lamps, screens, lit windows — are put back at full strength, and an
+        // open sky gets its stars.
+        let replay = rng
+        var local = rng
+        ctx.drawLayer { layer in
+            layer.addFilter(.saturation(nightSaturation))
+            layer.addFilter(.colorMultiply(nightShade))
+            paintScene(scene, style: style, lines: lines, in: &layer, size: size, rng: &local)
+        }
+        rng = local
+        nightLights(scene: scene, in: &ctx, size: size, replay: replay)
+    }
+
+    private static func paintScene(_ scene: String, style: Photo.Style, lines: [String], in ctx: inout C, size: CGSize,
+                                   rng: inout SeededRandom) {
         let w = size.width, h = size.height
         switch scene {
         case "sunset": sunset(&ctx, w, h, &rng)
@@ -860,12 +881,166 @@ enum PhotoPainter {
     }
 }
 
+// MARK: - Night
+
+/// A night shot (`style: night`). Scenes already painted at night keep their look; a scene painted
+/// in daylight is shot « day for night »: underexposed, drained and cooled, its own lights (lamps,
+/// screens, lit windows, city glow) put back at full strength over it, and stars in an open sky.
+/// Everything is replayed from the photo's seed, so a light lands exactly where the day painting
+/// has it.
+extension PhotoPainter {
+    /// Already nocturnal (dark sky, their own lights), or pictures whose text must stay legible.
+    static let nocturnalScenes: Set<String> = [
+        "street_night", "parking_night", "concert", "bar", "party", "club", "road_night", "forest",
+        "gala", "vitrine", "vitrine_empty", "desk_night", "laptop", "metro", "pocket",
+        "document", "screenshot", "receipt",
+    ]
+    /// Day for night: colours drained, then multiplied by a cold blue-black (about a fifth of the
+    /// light is left, a daylight sky becomes a deep navy).
+    static let nightSaturation: Double = 0.4
+    static let nightShade = Color(hex: 0x2E3A5C)
+
+    /// The lights of a day scene shot at night, over its darkened painting. `replay` is the
+    /// generator as the painter received it: its first draws give the same positions.
+    static func nightLights(scene: String, in ctx: inout C, size: CGSize, replay: SeededRandom) {
+        let w = size.width, h = size.height
+        var rng = replay
+        var sky = replay.fork(0x5354_4152_5321)
+        switch scene {
+        case "sky":
+            milkyWay(&ctx, w, h, &sky, bottom: 0.8)
+            stars(&ctx, w, h, &sky, bottom: 0.8)
+        case "terrace":
+            stars(&ctx, w, h, &sky, bottom: 0.3)
+            // The far shore of the bay, a string of small lights on the horizon.
+            for _ in 0..<14 {
+                let x = sky.next() * w, y = h * (0.44 + sky.next() * 0.01)
+                glow(&ctx, CGPoint(x: x, y: y), 5, hex(0xFFC27A), 0.7)
+                ctx.fill(Path(ellipseIn: CGRect(x: x - 0.8, y: y - 0.8, width: 1.6, height: 1.6)), with: .color(hex(0xFFE9C4)))
+            }
+        case "garden_stairs":
+            stars(&ctx, w, h, &sky, bottom: 0.3)
+            // The garden lamp by the steps.
+            let lamp = CGPoint(x: w * 0.15, y: h * 0.5)
+            glow(&ctx, lamp, w * 0.22, hex(0xFFD58A), 0.5)
+            ctx.fill(Path(ellipseIn: CGRect(x: lamp.x - 3, y: lamp.y - 2, width: 6, height: 4)), with: .color(hex(0xFFEBC2)))
+        case "park":
+            stars(&ctx, w, h, &sky, bottom: 0.3)
+        case "beach", "sunset":
+            stars(&ctx, w, h, &sky, bottom: 0.4)
+        case "snow":
+            stars(&ctx, w, h, &sky, bottom: 0.2)
+        case "mountain":
+            stars(&ctx, w, h, &sky, bottom: 0.26)
+        case "bed":
+            // The television, where the day painting has it.
+            let tv = CGRect(x: w * 0.66, y: h * 0.3, width: w * 0.3, height: h * 0.2)
+            ctx.fill(Path(tv.insetBy(dx: 3, dy: 3)),
+                     with: .linearGradient(Gradient(colors: [hex(0x6FA0D8), hex(0x2C4F7A)]),
+                                           startPoint: CGPoint(x: tv.minX, y: tv.minY), endPoint: CGPoint(x: tv.maxX, y: tv.maxY)))
+            glow(&ctx, CGPoint(x: tv.midX, y: tv.midY), w * 0.32, hex(0x6FA0D8), 0.3)
+            ctx.fill(Path(CGRect(x: tv.maxX - 16, y: tv.maxY + 3, width: 12, height: 4)), with: .color(hex(0x6FF0A0).opacity(0.6)))
+        case "view":
+            // The same lit windows as the day painting, and the sodium haze over the city.
+            skyline(&ctx, w, h, &rng, base: 0.95, color: .clear, lit: 0.1, windowColor: hex(0xFFE0A8))
+            glow(&ctx, CGPoint(x: w * 0.5, y: h), w * 0.7, hex(0xFF9F43), 0.2)
+        case "street_day":
+            // The shop front is lit.
+            let shop = CGRect(x: w * 0.66, y: h * 0.5, width: w * 0.2, height: h * 0.18)
+            ctx.fill(Path(shop), with: .color(hex(0xFFD9A0).opacity(0.8)))
+            glow(&ctx, CGPoint(x: shop.midX, y: shop.maxY), w * 0.24, hex(0xFFB35C), 0.3)
+        case "group", "selfie":
+            let warm = rng.next() > 0.4
+            bokeh(&ctx, w, h, &rng, count: 16, colors: warm ? [hex(0xFFC98A), hex(0xFFE0B0)] : [hex(0xDDE8FF), hex(0x9CC8F0)],
+                  radius: 6...22, yMax: 0.55, blur: 10)
+        case "rain":
+            bokeh(&ctx, w, h, &rng, count: 14, colors: [hex(0xFFD08A), hex(0xE0E6EE), hex(0xFF7A6A)], radius: 6...20, blur: 9)
+        case "books":
+            glow(&ctx, CGPoint(x: w * 0.8, y: h * 0.1), w * 0.6, hex(0xFFE0B0), 0.3)
+        case "gallery":
+            for i in 0..<4 {
+                let x = w * (0.06 + CGFloat(i) * 0.24)
+                glow(&ctx, CGPoint(x: x + w * 0.09, y: h * 0.12), w * 0.2, hex(0xFFF3D6), 0.45)
+            }
+        case "climbing":
+            glow(&ctx, CGPoint(x: w * 0.5, y: -h * 0.1), w * 0.8, .white, 0.22)
+        case "station":
+            glow(&ctx, CGPoint(x: w * 0.5, y: 0), w * 0.8, hex(0xFFE2B0), 0.2)
+            // The departure board, row by row as painted.
+            let board = CGRect(x: w * 0.18, y: h * 0.28, width: w * 0.64, height: h * 0.22)
+            for row in 0..<4 {
+                let y = board.minY + 6 + CGFloat(row) * board.height / 4.3
+                ctx.fill(Path(CGRect(x: board.minX + 6, y: y, width: board.width * 0.15, height: 4)), with: .color(hex(0xFFB547).opacity(0.9)))
+                ctx.fill(Path(CGRect(x: board.minX + board.width * 0.24, y: y, width: board.width * (0.4 + rng.next() * 0.2), height: 4)),
+                         with: .color(hex(0xFFB547).opacity(0.7)))
+                if row == 1 { ctx.fill(Path(CGRect(x: board.maxX - 30, y: y, width: 24, height: 4)), with: .color(hex(0xFF5A4A))) }
+            }
+            glow(&ctx, CGPoint(x: board.midX, y: board.midY), w * 0.3, hex(0xFFB547), 0.12)
+        case "ceiling":
+            glow(&ctx, CGPoint(x: w * (0.3 + rng.next() * 0.4), y: h * (0.3 + rng.next() * 0.3)), w * 0.35, hex(0xFFF1DC), 0.85)
+        case "mirror":
+            glow(&ctx, CGPoint(x: w * 0.6, y: h * 0.45), w * 0.18, .white, 0.7)
+        case "office":
+            // The monitors are still on.
+            for i in 0..<3 {
+                let x = w * (0.08 + CGFloat(i) * 0.31)
+                let screen = CGRect(x: x + 4, y: h * 0.47, width: w * 0.22 - 8, height: h * 0.12)
+                ctx.fill(Path(screen), with: .color(hex(0xDDE6EE).opacity(0.8 - Double(i) * 0.15)))
+                glow(&ctx, CGPoint(x: screen.midX, y: screen.midY), w * 0.18, hex(0xBFD4FF), 0.2)
+            }
+        default:
+            // No light of its own (a room by day, a car, a cat…): it stays in the dark.
+            break
+        }
+    }
+
+    /// Stars, fainter towards the bottom of the band (haze near the horizon).
+    static func stars(_ ctx: inout C, _ w: CGFloat, _ h: CGFloat, _ rng: inout SeededRandom, bottom: CGFloat) {
+        let band = max(1, h * bottom)
+        for _ in 0..<Int(w * band / 240) {
+            let x = rng.next() * w, y = rng.next() * band
+            let r = 0.4 + rng.next() * rng.next() * 1.3
+            let fade = 1 - Double(y / band) * 0.7
+            let tint = rng.next() > 0.8 ? hex(0xFFE9C8) : hex(0xDDE8FF)
+            ctx.fill(Path(ellipseIn: CGRect(x: x - r, y: y - r, width: r * 2, height: r * 2)),
+                     with: .color(tint.opacity((0.35 + Double(rng.next()) * 0.6) * fade)))
+        }
+    }
+
+    /// A long exposure's Milky Way: a soft diagonal band and its dust of small stars.
+    static func milkyWay(_ ctx: inout C, _ w: CGFloat, _ h: CGFloat, _ rng: inout SeededRandom, bottom: CGFloat) {
+        let band = h * bottom
+        var local = rng
+        ctx.drawLayer { layer in
+            layer.addFilter(.blur(radius: max(4, w * 0.03)))
+            for i in 0..<12 {
+                let t = CGFloat(i) / 11
+                glow(&layer, CGPoint(x: w * t, y: band * (0.95 - t * 0.85)), w * (0.1 + local.next() * 0.06), hex(0xB8C4E8), 0.16)
+            }
+        }
+        for _ in 0..<Int(w * h / 140) {
+            let t = local.next()
+            let spread = (local.next() - 0.5) * w * 0.16
+            let x = w * t + spread * 0.5, y = band * (0.95 - t * 0.85) + spread
+            ctx.fill(Path(ellipseIn: CGRect(x: x, y: y, width: 0.9, height: 0.9)), with: .color(.white.opacity(0.25 + Double(local.next()) * 0.4)))
+        }
+        rng = local
+    }
+}
+
 /// Small deterministic generator so a photo always looks the same.
 struct SeededRandom {
     private var state: UInt64
 
     init(seed: String) {
         state = seed.unicodeScalars.reduce(UInt64(1469598103934665603)) { ($0 ^ UInt64($1.value)) &* 1099511628211 }
+    }
+
+    /// A second sequence from the same seed, independent of the first (a night photo's sky).
+    func fork(_ salt: UInt64) -> SeededRandom {
+        var copy = self
+        copy.state = (state ^ salt) &* 0xBF58_476D_1CE4_E5B9
+        return copy
     }
 
     mutating func next() -> CGFloat {

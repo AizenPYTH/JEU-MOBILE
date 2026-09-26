@@ -247,7 +247,18 @@ public enum Theme {
         public static let segmented: CGFloat = 38
         public static let homeIndicator = CGSize(width: 134, height: 5)
         public static let mapHeight: CGFloat = 390
+        /// Visible room kept for a route's timeline under its map (small iPhones).
+        public static let trackListMin: CGFloat = 130
+        /// Code keypad of a locked app: 72 pt keys where there is room, then 64, 60, never under 52
+        /// (the whole lock screen stays above the dossier bar, iPhone SE included).
         public static let keypadKey: CGFloat = 72
+        public static let keypadKeyMedium: CGFloat = 64
+        public static let keypadKeyCompact: CGFloat = 60
+        public static let keypadKeyMin: CGFloat = 52
+        /// Digit size relative to its key (28 pt on a 72 pt key).
+        public static let keypadGlyphRatio: CGFloat = 0.39
+        /// The locked app's icon above the keypad.
+        public static let lockGlyph: CGFloat = 64
         public static let photoBubble: CGFloat = 200
         public static let photoThumb: CGFloat = 110
         public static let unreadDot: CGFloat = 7

@@ -3,6 +3,10 @@ import SwiftUI
 import CaseEngine
 
 /// Lock screen of a protected app: a code keypad, with the owner's hint. Each try costs time.
+///
+/// The whole screen stays above the dossier bar on every iPhone (SE included): the keys shrink
+/// (72 → 64 → 60 → 52 pt, never less) and the icon goes before anything has to scroll; only an
+/// oversized text setting falls back to a scrolling keypad.
 struct AppLockView: View {
     let app: AppID
     let session: GameSession
@@ -12,60 +16,119 @@ struct AppLockView: View {
     private var lock: AppLock? { session.game.device.lockedApps.first { $0.app == app } }
     private var length: Int { lock?.code.count ?? 4 }
 
+    private static let keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "⌫"]
+
+    /// One size of the lock screen: keys, gaps, and the app icon (nil: hidden, the header shows it).
+    struct Metrics {
+        let key: CGFloat
+        let rowGap: CGFloat
+        let columnGap: CGFloat
+        let block: CGFloat
+        let glyph: CGFloat?
+
+        static let roomy = Metrics(key: Theme.Size.keypadKey, rowGap: Theme.Spacing.s4, columnGap: Theme.Spacing.s5,
+                                   block: Theme.Spacing.s6, glyph: Theme.Size.lockGlyph)
+        static let regular = Metrics(key: Theme.Size.keypadKeyMedium, rowGap: Theme.Spacing.s3, columnGap: Theme.Spacing.s5,
+                                     block: Theme.Spacing.s5, glyph: Theme.Size.avatarM)
+        static let compact = Metrics(key: Theme.Size.keypadKeyCompact, rowGap: Theme.Spacing.s3, columnGap: Theme.Spacing.s5,
+                                     block: Theme.Spacing.s3, glyph: nil)
+        static let tight = Metrics(key: Theme.Size.keypadKeyMin, rowGap: Theme.Spacing.s2, columnGap: Theme.Spacing.s5,
+                                   block: Theme.Spacing.s3, glyph: nil)
+    }
+
     var body: some View {
-        VStack(spacing: Theme.Spacing.s7) {
-            Spacer()
-            AppTileGlyph(app: app, size: 64)
-                .overlay(alignment: .bottomTrailing) {
-                    Image(systemName: "lock.fill")
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundStyle(Theme.Colors.textPrimary)
-                        .frame(width: 28, height: 28)
-                        .background(Circle().fill(Theme.Colors.bgSelected))
-                        .overlay(Circle().strokeBorder(Theme.Colors.bgBase, lineWidth: 2))
-                        .offset(x: 8, y: 8)
-                }
-            Text(L10n.f("lock.title", app.title)).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
-            if let hint = lock?.hint {
-                Text(L10n.f("lock.hint", hint))
-                    .font(Theme.Fonts.callout)
-                    .foregroundStyle(Theme.Colors.textSecondary)
+        // The first size that fits the room left above the dossier bar.
+        ViewThatFits(in: .vertical) {
+            panel(.roomy)
+            panel(.regular)
+            panel(.compact)
+            panel(.tight)
+            ScrollView {
+                panel(.tight)
+                    .padding(.vertical, Theme.Spacing.s4)
             }
-            HStack(spacing: Theme.Spacing.s5) {
-                ForEach(0..<length, id: \.self) { i in
-                    Circle()
-                        .strokeBorder(Theme.Colors.textPrimary, lineWidth: 1.5)
-                        .background(Circle().fill(i < code.count ? Theme.Colors.textPrimary : .clear))
-                        .frame(width: 14, height: 14)
+            .scrollBounceBehavior(.basedOnSize)
+            .contentMargins(.bottom, 0, for: .scrollContent)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.bottom, PhoneLayout.barClearance)
+        .appRoot(app, subtitle: L10n.t("lock.subtitle"), session: session)
+    }
+
+    private func panel(_ m: Metrics) -> some View {
+        VStack(spacing: m.block) {
+            if let glyph = m.glyph {
+                AppTileGlyph(app: app, size: glyph)
+                    .overlay(alignment: .bottomTrailing) {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 13, weight: .bold))
+                            .foregroundStyle(Theme.Colors.textPrimary)
+                            .frame(width: 28, height: 28)
+                            .background(Circle().fill(Theme.Colors.bgSelected))
+                            .overlay(Circle().strokeBorder(Theme.Colors.bgBase, lineWidth: 2))
+                            .offset(x: 8, y: 8)
+                    }
+            }
+            VStack(spacing: Theme.Spacing.s2) {
+                Text(L10n.f("lock.title", app.title)).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
+                if let hint = lock?.hint {
+                    Text(L10n.f("lock.hint", hint))
+                        .font(Theme.Fonts.callout)
+                        .foregroundStyle(Theme.Colors.textSecondary)
                 }
             }
-            .modifier(Shake(animatableData: failed ? 1 : 0))
-            Text(L10n.f("lock.cost", session.rules.timeCosts.unlockAttempt))
-                .font(Theme.Fonts.caption)
-                .foregroundStyle(Theme.Colors.textTertiary)
-            LazyVGrid(columns: Array(repeating: GridItem(.fixed(Theme.Size.keypadKey), spacing: Theme.Spacing.s5), count: 3),
-                      spacing: Theme.Spacing.s4) {
-                ForEach(["1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", "⌫"], id: \.self) { key in
-                    if key.isEmpty {
-                        Color.clear.frame(width: Theme.Size.keypadKey, height: Theme.Size.keypadKey)
-                    } else {
-                        Button {
-                            press(key)
-                        } label: {
-                            Text(key)
-                                .font(.system(size: 28, weight: .regular))
-                                .foregroundStyle(Theme.Colors.textPrimary)
-                                .frame(width: Theme.Size.keypadKey, height: Theme.Size.keypadKey)
-                                .background(Circle().fill(key == "⌫" ? .clear : Theme.Colors.bgRaised))
-                        }
-                        .buttonStyle(.plain)
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+            .padding(.horizontal, Theme.Spacing.marginList)
+            VStack(spacing: Theme.Spacing.s3) {
+                HStack(spacing: Theme.Spacing.s5) {
+                    ForEach(0..<length, id: \.self) { i in
+                        Circle()
+                            .strokeBorder(Theme.Colors.textPrimary, lineWidth: 1.5)
+                            .background(Circle().fill(i < code.count ? Theme.Colors.textPrimary : .clear))
+                            .frame(width: 14, height: 14)
+                    }
+                }
+                .modifier(Shake(animatableData: failed ? 1 : 0))
+                Text(L10n.f("lock.cost", session.rules.timeCosts.unlockAttempt))
+                    .font(Theme.Fonts.caption)
+                    .foregroundStyle(Theme.Colors.textTertiary)
+            }
+            keypad(m)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func keypad(_ m: Metrics) -> some View {
+        VStack(spacing: m.rowGap) {
+            ForEach(0..<4, id: \.self) { row in
+                HStack(spacing: m.columnGap) {
+                    ForEach(Self.keys[(row * 3)..<(row * 3 + 3)], id: \.self) { key in
+                        keyButton(key, size: m.key)
                     }
                 }
             }
-            Spacer()
         }
-        .frame(maxWidth: .infinity)
-        .appRoot(app, subtitle: L10n.t("lock.subtitle"), session: session)
+    }
+
+    @ViewBuilder
+    private func keyButton(_ key: String, size: CGFloat) -> some View {
+        if key.isEmpty {
+            Color.clear.frame(width: size, height: size)
+        } else {
+            Button {
+                press(key)
+            } label: {
+                Text(key)
+                    .font(.system(size: size * Theme.Size.keypadGlyphRatio, weight: .regular))
+                    .foregroundStyle(Theme.Colors.textPrimary)
+                    .frame(width: size, height: size)
+                    .background(Circle().fill(key == "⌫" ? .clear : Theme.Colors.bgRaised))
+                    .contentShape(Circle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("lock.key.\(key)")
+        }
     }
 
     private func press(_ key: String) {

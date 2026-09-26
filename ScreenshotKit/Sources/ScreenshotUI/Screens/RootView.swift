@@ -58,6 +58,16 @@ struct GameRoot: View {
         case archived(CaseFile, Attempt)
     }
 
+    /// A new case asked for while another one is in progress (« Commencer quand même ? »).
+    struct PendingStart: Identifiable {
+        let file: CaseFile
+        let challenge: Challenge
+        /// Number of the case whose investigation would be abandoned.
+        let inProgress: Int
+
+        var id: String { file.id }
+    }
+
     /// A finished investigation on its way through the result screens.
     struct Play {
         let session: GameSession
@@ -78,6 +88,10 @@ struct GameRoot: View {
     @State private var assigned: Bool = PlayerStore.isAssigned
     /// « Classer quand même » was chosen on a report of #001.
     @State private var filedAnyway = false
+    /// Starting a case while another one is in progress: asked first.
+    @State private var replaceAsk: PendingStart?
+    /// « Commencer quand même »: the case starts once the sheet has gone.
+    @State private var replaceConfirmed: PendingStart?
     @AppStorage(Preferences.reduceMotionKey) private var reduceMotion = false
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
     private let cases: [CaseFile]
@@ -117,6 +131,27 @@ struct GameRoot: View {
         }
         .preferredColorScheme(.dark)
         .animation(noMotion ? .easeInOut(duration: 0.2) : Trace.Motion.paper, value: stageKey)
+        .sheet(item: $replaceAsk, onDismiss: {
+            guard let pending = replaceConfirmed else { return }
+            replaceConfirmed = nil
+            begin(pending.file, challenge: pending.challenge)
+        }) { pending in
+            PaperConfirmSheet(title: L10n.t("start.replaceTitle"),
+                              message: L10n.f("start.replaceMessage", dossierNumber(pending.inProgress)),
+                              confirm: L10n.t("start.replaceConfirm"),
+                              confirmID: "start.confirmReplace",
+                              destructive: true,
+                              cancel: L10n.t("start.replaceCancel"),
+                              cancelID: "start.cancelReplace",
+                              onConfirm: {
+                                  replaceConfirmed = pending
+                                  replaceAsk = nil
+                              },
+                              onCancel: { replaceAsk = nil })
+                .presentationDetents([.medium, .large])
+                .presentationCornerRadius(16)
+                .presentationBackground(Trace.Colors.paper)
+        }
     }
 
     /// Screens of the desk slide in (fade + 24 pt); with reduced motion, they only fade.
@@ -355,8 +390,17 @@ struct GameRoot: View {
         Set(attempts.filter { $0.caseID == file.id && $0.solved }.map(\.level))
     }
 
-    /// A new investigation at a challenge level (replaces any saved one).
+    /// A new investigation at a challenge level (replaces any saved one). Another case in progress
+    /// is never dropped silently: the player confirms first. The same case asks on its own briefing.
     private func start(_ original: CaseFile, challenge: Challenge) {
+        if let resumable, resumable.file.id != original.id {
+            replaceAsk = PendingStart(file: original, challenge: challenge, inProgress: resumable.file.number)
+            return
+        }
+        begin(original, challenge: challenge)
+    }
+
+    private func begin(_ original: CaseFile, challenge: Challenge) {
         guard let session = makeSession(original, challenge: challenge) else { return }
         SavedInvestigationStore.clear()
         savedGame = nil

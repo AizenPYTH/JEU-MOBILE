@@ -747,6 +747,12 @@ final class MainFlowTests: XCTestCase {
 
             // The opening: the sealed bag, then the phone's lock screen, which waits for the player.
             tapWhenReady(element("intro.start"), "Ouvrir le téléphone \(item.id)")
+            if n > 0 {
+                // The previous case is still in progress (paused): starting this one asks first.
+                wait(element("start.cancelReplace"), 5, "« Une autre enquête est en cours » (\(item.id))")
+                if n == 1 { snap("B\(n)0b-\(item.id)-autre-enquete-en-cours") }
+                tapWhenReady(element("start.confirmReplace"), "Commencer quand même \(item.id)")
+            }
             let unlock = wait(element("opening.unlock"), 8, "écran verrouillé de \(item.id)")
             sleep(1)
             snap("B\(n)1-\(item.id)-verrouille")
