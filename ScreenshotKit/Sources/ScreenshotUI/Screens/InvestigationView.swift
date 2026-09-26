@@ -285,12 +285,12 @@ struct NotebookView: View {
     /// §N: an empty file says what to do next.
     private var emptyFile: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(L10n.t("carnet.empty.title"))
+            Text(L10n.t("carnet.emptyState.title"))
                 .font(Trace.Fonts.serifTitle(22))
                 .foregroundStyle(Trace.Colors.ink)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
-            Text(L10n.t("carnet.empty.body"))
+            Text(L10n.t("carnet.emptyState.body"))
                 .font(Trace.Fonts.prose)
                 .foregroundStyle(Trace.Colors.inkMid)
                 .fixedSize(horizontal: false, vertical: true)

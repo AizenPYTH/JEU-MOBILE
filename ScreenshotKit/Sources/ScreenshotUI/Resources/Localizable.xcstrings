@@ -2148,7 +2148,7 @@
         }
       }
     },
-    "carnet.empty.body": {
+    "carnet.emptyState.body": {
       "extractionState": "manual",
       "localizations": {
         "en": {
@@ -2165,7 +2165,7 @@
         }
       }
     },
-    "carnet.empty.title": {
+    "carnet.emptyState.title": {
       "extractionState": "manual",
       "localizations": {
         "en": {

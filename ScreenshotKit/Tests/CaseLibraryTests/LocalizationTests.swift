@@ -79,4 +79,18 @@ struct LocalizationTests {
         }
         #expect(findings.isEmpty, "Banned words:\n\(findings.sorted().joined(separator: "\n"))")
     }
+
+    /// Xcode generates a Swift symbol per key by dropping the separators ("carnet.empty.title" and
+    /// "carnet.emptyTitle" both give `carnetEmptyTitle`): two such keys stop the iOS build.
+    @Test func keysGenerateDistinctSymbols() throws {
+        let catalogURL = Self.uiSources.appendingPathComponent("Resources/Localizable.xcstrings")
+        let catalog = try JSONDecoder().decode(Catalog.self, from: Data(contentsOf: catalogURL))
+        var bySymbol: [String: [String]] = [:]
+        for key in catalog.strings.keys {
+            let symbol = String(key.unicodeScalars.filter { CharacterSet.alphanumerics.contains($0) }).lowercased()
+            bySymbol[symbol, default: []].append(key)
+        }
+        let clashes = bySymbol.values.filter { $0.count > 1 }.map { $0.sorted().joined(separator: " / ") }.sorted()
+        #expect(clashes.isEmpty, "Keys generating the same symbol:\n\(clashes.joined(separator: "\n"))")
+    }
 }

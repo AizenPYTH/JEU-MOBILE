@@ -1,14 +1,75 @@
-# Intégration du handoff design SCREENSHOT v1.0
+# Intégration des handoffs design (v1.0 → TRACE v2 → final V3)
 
-Source : `docs/design/` (non modifié). Ce document dit ce qui est intégré, ce qui reste à faire, et
+Sources : `docs/design_final/` (V3, parcours), `docs/design_trace/`, `docs/design/` (non modifiés). Ce document dit ce qui est intégré, ce qui reste à faire, et
 les points où le handoff contredit le brief ou le moteur — **à trancher par le porteur de projet**.
+
+## V3 — Handoff final « CONCLUDE » (26 septembre 2026)
+
+Source : `docs/design_final/FINAL_DESIGN_HANDOFF_CONCLUDE.md` (lecture seule) et le logo maître
+`docs/brand/logo_conclude_master.png`. Il **remplace les parcours** des handoffs précédents ; les matières
+(papier, kraft, tampons) et le téléphone restent ceux de TRACE v2 / v1.0.
+
+### Intégré
+
+| Écran / règle | Où |
+|---|---|
+| 01 Lancement : fond #0A0908, tuile 188 pt, « NOREL GAMES », 1,6–4 s, préchargement réel (portraits du #001 et des joueurs d'abord) ; écran de lancement système identique (`Configs/Info.plist`, `LaunchTile`, `LaunchBackground`) | `LaunchScreen.swift` |
+| 02 Titre (bandeau logo −1,5°, accroche, mission, 3 verbes, un bouton, ⚙) · 02b Titre-reprise · 03 Qui enquête ? (Élise présélectionnée, « ✓ CHOISIE », aucun matricule) | `TitleScreens.swift` |
+| 04 Briefing : chemise kraft, feuille texturée, en-tête catégorie/ville, tirage, titre, résumé, VOTRE MISSION, 3 étapes (#001) ou « Rappel des règles », pied « n SUSPECTS · TEMPS », [OUVRIR LE TÉLÉPHONE] ; niveau replié (caché à la 1re partie) | `DossierView.swift` |
+| Ouverture : sachet de scellé → téléphone (≤ 1,8 s), déverrouillage automatique au #001, écran verrouillé des #002–#005 ; le chrono démarre au premier écran d'accueil | `CaseOpening.swift` |
+| 05 Téléphone : étiquette chrono papier (rouge sous 01:00, tic, haptique sous 00:10, « EN PAUSE »), barre du dossier 64 pt (compteur, CARNET contour → plein) | `PhoneView.swift` |
+| 06–07 Appui long 0,4 s → feuille « VERSER AU DOSSIER » (déjà versé → « PIÈCE 0N · déjà au dossier » + VOIR DANS LE CARNET), copie papier qui vole vers la barre, pulsation rouge, étiquette « PIÈCE 0N » | `Pinnable.swift`, `FilingSheet.swift` |
+| Tutoriel du #001 : bulles 1 EXPLORER / 2 VERSER AU DOSSIER / 3 RELIER, une à la fois, jamais bloquantes, au-dessus de 06:30 seulement, relance à 90 s ; « Revoir le tutoriel » | `Tutorial.swift`, `CoachBubble.swift` |
+| 08 Carnet : PIÈCES · n / SUSPECTS / CHRONOLOGIE, « CETTE PIÈCE… » [L'ACCUSE] [LE DISCULPE] + puces suspects, ▲n ▼n, ampoule, CONCLURE toujours actif (contour < 3 pièces reliées), feuille « Aucune pièce au dossier », état vide | `InvestigationView.swift` |
+| 14 Indice : feuille papier sur voile, indices en post-it, coût en points | `InvestigationView.swift` |
+| 09 Conclusion : « QUI EST RESPONSABLE ? », grille des suspects ▲▼, « MAINTENIR : {PRÉNOM} EST RESPONSABLE » 1,2 s (VoiceOver : confirmation), forcée à 00:00 avec « TEMPS ÉCOULÉ » | `EndScreens.swift` |
+| 10 Vérification tapée 1,4 s + tampons PNG · 11 Rapport (ce qui s'est passé / ce que vous n'avez pas vu, pièces clés ✓/○, temps · indices · note) · [REPRENDRE L'ENQUÊTE] (chrono plein, pièces gardées), « Classer quand même », « Consulter la solution » | `EndScreens.swift` |
+| 12 Affectation au BEN (une seule fois : #001 résolu, ou 2 échecs, ou « Classer quand même »), sceau, signature de Lacaze, cachet du rang | `AssignmentView.swift`, `Player.swift` |
+| 13 Bureau : une grande chemise « PROCHAINE ENQUÊTE », « AUTRES DOSSIERS », état « tous classés », pas de logo · Profil avant / après affectation · Paramètres (Temps détendu ×1,5, Revoir le tutoriel, À propos) | `DeskScreens.swift`, `MetaScreens.swift` |
+| Logo (§H) : AppIcon recadré, `logo_tile`, `logo_wordmark` ; tampons, sceau, signature, textures | `Assets.xcassets`, `Art.xcassets/{Brand,Stamps,Textures}` |
+| Vocabulaire : EXPLORER · VERSER AU DOSSIER · CONCLURE ; « Épingler », « Accuser », « Recrue », « Stagiaire », TRACE, MoonWolf absents (test `bannedWordsAreGone`) | `Localizable.xcstrings` |
+
+### Écarts assumés (décisions)
+
+- **Aucune cinématique** (demande du porteur de projet) : ni la cinématique #001, ni « Voir / Revoir la
+  séquence », ni la cinématique de recrutement de l'écran 12. L'affaire est présentée par le briefing et
+  l'ouverture courte. `introScene` reste dans les JSON (non joué). `docs/CINEMATIQUES_VEO.md` est archivé.
+- **Pas de tickets** (l'économie n'existe pas) : l'écran 14 affiche le coût de chaque indice en points de
+  note et la note maximale restante. Le bouton « PLUS DE TICKETS » n'existe donc pas.
+- **Une pièce = un suspect** : le moteur relie une pièce à un seul suspect (`NotebookEntry.linkedTo`) ; le
+  handoff (« une pièce peut être liée à plusieurs suspects ») demanderait un changement de moteur et de
+  sauvegarde — non fait.
+- **Pas d'annotation manuscrite automatique** dans le Carnet : le jeu n'écrit jamais à la main à la place du
+  joueur (règle du projet) ; le lien est résumé en ligne tapée (« L'accuse : Lucas »). Indices en
+  Newsreader italique sur post-it (pas en Caveat), pour la même raison.
+- **Bulle 1** : le texte ne nomme pas le propriétaire du téléphone (« Commencez par les messages. »), pour
+  rester valable si le #001 change ; elle est posée au-dessus de l'icône Messages (dans le dock, sans place
+  en dessous).
+- **Choix de l'apparence (A/B)** : proposé seulement après l'affectation (profil › « Changer d'enquêteur ou
+  d'apparence »), conformément au §A (couche carrière après #001).
+- **Niveaux Enquêteur · Détective · Expert** : conservés, repliés sous « NIVEAU : … » dans le briefing et
+  cachés à la toute première partie. ⚠ Le nom du niveau « Enquêteur » est aussi celui du premier rang
+  (ENQUÊTEUR) : à renommer si cela gêne (décision du porteur de projet).
+- **Paramètres › À propos** : tuile 96 pt + « NOREL GAMES » + version ; pas de carte de partage (P2).
+- **Sauvegardes** : aucun changement de format. Un joueur d'une version précédente qui a déjà des parties
+  est considéré comme affecté (Élise A par défaut, modifiable dans le profil).
+
+### Reste à faire (V3)
+
+- Portraits définitifs (joueurs A/B, suspects des 5 affaires, Lacaze) : les écrans affichent les initiales
+  sur fond bleu-gris en attendant (§N).
+- Sons dédiés du handoff (`paper_slide`, `evidence_bag`, `stamp_heavy`, `clock_tick_soft`, `office_room`…) :
+  les sons générés existants sont utilisés à la place.
+- Écran 10 de 06 (« Avancement de service » quand le rang change), carte de partage d'un rapport (P2).
+- Vérifier sur appareil : Dynamic Type AX3 sur iPhone SE (critère 17), VoiceOver de bout en bout (critère 18).
 
 ## Nom et logo — CONCLUDE : ENQUÊTES (septembre 2026)
 
 Le jeu s'appelle désormais **CONCLUDE : ENQUÊTES**. Icône de l'app = logo fourni par le porteur de projet
 (`docs/brand/conclude_logo_source.png`), recadré sur la tuile et redimensionné en 1024 × 1024 (iOS
 arrondit lui-même les coins). Nom sous l'icône : « Conclude » (le nom complet serait tronqué sur
-l'écran d'accueil). Dans le jeu, l'en-tête du Bureau reprend le logo : CONCLUDE en capitales, puis
+l'écran d'accueil). [V3 : l'icône vient désormais du logo maître `docs/brand/logo_conclude_master.png`, et le logo
+n'apparaît plus que sur 01, 02, 02b et À propos.] Avant V3, l'en-tête du Bureau reprenait le logo : CONCLUDE en capitales, puis
 « ENQUÊTES » souligné de rouge ; la carte d'enquêteur et le rapport de clôture portent le nom.
 Le nom sur l'App Store se change dans App Store Connect (fiche de l'app), pas dans le code.
 
