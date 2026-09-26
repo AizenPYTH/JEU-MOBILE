@@ -3,6 +3,8 @@ import SwiftUI
 import CaseEngine
 
 /// Screen 08 — the phone's home screen: date + story time, "periodic table" app tiles, dock.
+/// In case #001, bubble 1 « EXPLORER » points at Messages (the other icons at 45 %); any tap closes
+/// it, nothing is blocked (final handoff §D).
 struct HomeScreen: View {
     let session: GameSession
     let zoom: Namespace.ID
@@ -11,10 +13,14 @@ struct HomeScreen: View {
 
     /// Widgets only where the screen is tall enough (not on the smallest iPhones).
     @State private var roomForWidgets = true
+    /// The Messages icon of the dock, in the home screen's space (bubble 1 points at it).
+    @State private var messagesIcon: CGRect = .zero
 
     var body: some View {
         let game = session.game
         let now = session.phoneTime
+        let exploring = session.coach.active == .explore
+        let dimmed = exploring ? homeDimmedOpacity : 1
         VStack(spacing: 0) {
             VStack(spacing: Theme.Spacing.s1) {
                 Text(PhoneFormat.longDayCapitalized(now))
@@ -28,23 +34,26 @@ struct HomeScreen: View {
             }
             .padding(.top, Theme.Spacing.s7)
             .padding(.bottom, Theme.Spacing.s8)
+            .opacity(dimmed)
 
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Theme.Spacing.s5), count: 4),
                       spacing: 22) {
                 ForEach(gridApps, id: \.self) { app in
                     AppTile(app: app, badge: badge(for: app, in: game), locked: game.access(to: app) == .locked,
                             calendarDay: app == .calendar ? now : nil) {
-                        session.launch(app)
+                        launch(app)
                     }
                     .appZoomSource(app, in: zoom)
                 }
             }
             .padding(.horizontal, 22)
+            .opacity(dimmed)
 
             if roomForWidgets {
                 HomeWidgets(session: session)
                     .padding(.horizontal, 22)
                     .padding(.top, 20)
+                    .opacity(dimmed)
             }
 
             Spacer(minLength: 0)
@@ -65,14 +74,20 @@ struct HomeScreen: View {
             .buttonStyle(.plain)
             .accessibilityIdentifier("phone.search")
             .padding(.bottom, Theme.Spacing.s4)
+            .opacity(dimmed)
 
             HStack {
                 ForEach(AppID.dock, id: \.self) { app in
-                    AppTile(app: app, badge: badge(for: app, in: game), locked: false, showsLabel: false) {
-                        session.launch(app)
+                    AppTile(app: app, badge: badge(for: app, in: game), locked: false, showsLabel: false,
+                            spotlight: exploring && app == .messages) {
+                        launch(app)
+                    }
+                    .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(homeSpace)) } action: { frame in
+                        if app == .messages { messagesIcon = frame }
                     }
                     .appZoomSource(app, in: zoom)
                     .frame(maxWidth: .infinity)
+                    .opacity(exploring && app != .messages ? homeDimmedOpacity : 1)
                 }
             }
             .padding(.vertical, Theme.Spacing.s4)
@@ -80,12 +95,48 @@ struct HomeScreen: View {
             .background(RoundedRectangle(cornerRadius: Theme.Radius.dock, style: .continuous).fill(Theme.Colors.bgRaised.opacity(0.6)))
             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.dock, style: .continuous))
             .padding(.horizontal, 14)
-            .padding(.bottom, Theme.Spacing.bottomInset - Theme.Spacing.s5)
+            // Above the dossier bar.
+            .padding(.bottom, Theme.Spacing.bottomInset)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .coordinateSpace(.named(homeSpace))
+        .overlay {
+            if exploring && messagesIcon != .zero {
+                exploreBubble
+            }
+        }
+        // Any tap on the home screen answers bubble 1; the tap itself goes on to what is under it.
+        .contentShape(Rectangle())
+        .simultaneousGesture(TapGesture().onEnded {
+            if session.coach.active == .explore { session.coach.dismiss() }
+        })
+        .animation(.easeOut(duration: 0.2), value: exploring)
         .background(Wallpaper(style: session.game.device.wallpaper ?? .night))
         .onGeometryChange(for: Bool.self) { $0.size.height > 700 } action: { roomForWidgets = $0 }
         .toolbar(.hidden, for: .navigationBar)
+        .onAppear { session.coach.homeAppeared() }
+        // Leaving the home screen (an app, the search, a notification) answers bubble 1 too.
+        .onDisappear { session.coach.appOpened() }
+    }
+
+    private func launch(_ app: AppID) {
+        session.coach.appOpened()
+        session.launch(app)
+    }
+
+    /// Bubble 1, just above the Messages icon of the dock, its arrow pointing down at it.
+    private var exploreBubble: some View {
+        GeometryReader { geo in
+            let width = min(homeBubbleWidth, geo.size.width - 24)
+            let x = min(max(messagesIcon.midX - width / 2, 12), max(12, geo.size.width - 12 - width))
+            CoachBubble(bubble: .explore, arrow: .bottom, arrowOffset: messagesIcon.midX - (x + width / 2)) {
+                session.coach.dismiss()
+            }
+            .frame(width: width)
+            .padding(.leading, x)
+            .padding(.bottom, max(0, geo.size.height - messagesIcon.minY + 20))
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .bottomLeading)
+        }
     }
 
     private func badge(for app: AppID, in game: Investigation) -> Int {
@@ -98,6 +149,12 @@ struct HomeScreen: View {
         }
     }
 }
+
+/// The home screen's coordinate space (bubble 1 finds the Messages icon in it).
+private let homeSpace = "phone.home.space"
+/// Everything but the Messages icon while bubble 1 is up (§D).
+private let homeDimmedOpacity: Double = 0.45
+private let homeBubbleWidth: CGFloat = 280
 
 /// Two widgets, like a real home screen: the battery, and the next calendar event (tapping it
 /// opens the Calendar, at its usual cost).
@@ -216,12 +273,17 @@ struct AppTile: View {
     let locked: Bool
     var showsLabel = true
     var calendarDay: Moment? = nil
+    /// The icon a tutorial bubble points at (3 pt ring + halo).
+    var spotlight = false
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
             VStack(spacing: 6) {
                 AppTileGlyph(app: app, calendarDay: calendarDay)
+                    .overlay {
+                        if spotlight { CoachRing(radius: Theme.Radius.icon) }
+                    }
                     .overlay(alignment: .topTrailing) {
                         if badge > 0 {
                             Text("\(badge)")

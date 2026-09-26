@@ -1,18 +1,21 @@
 import XCTest
 
-/// Plays the main path of SCREENSHOT on a simulator, like a player would, and keeps a screenshot of
-/// every step (exported by CI as the "ui-screenshots" artifact).
+/// Plays CONCLUDE : ENQUÊTES on a simulator, like a player would, and keeps a screenshot of every
+/// step (published by CI on the `ci/ui-screenshots` branch).
 ///
-/// Home → Cases → case intro → phone → notification → apps (Messages, Photos, Notifications)
-/// → pin evidence → notebook → timer → accusation → result → reconstruction → score → archive.
-/// Plus: quitting and resuming, the three challenge levels and replaying, the map, the opening sequence.
+/// First launch (final handoff §C): Lancement → Titre → Qui enquête ? → Dossier #001 → ouverture →
+/// téléphone with the three tutorial bubbles → verser au dossier → Carnet → conclure → vérification →
+/// rapport → affectation → Bureau. Then, as a returning player: the apps, the search, pause and
+/// resume, the challenge levels, the map, the opening of cases #002–#005, time up and a wrong
+/// conclusion with « Reprendre l'enquête ».
 final class MainFlowTests: XCTestCase {
     private var app: XCUIApplication!
 
+    /// A returning player, already assigned to the BEN, tutorial seen.
     override func setUp() {
         continueAfterFailure = false
         app = XCUIApplication()
-        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip", "-UITestCinematic", "skip"]
+        app.launchArguments = baseArguments + ["-UITestFirstLaunch", "skip"]
     }
 
     private let baseArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR", "-UITestReset", "YES"]
@@ -53,13 +56,13 @@ final class MainFlowTests: XCTestCase {
 
     /// Taps, and taps once more if the expected result did not appear (a tap during an animation
     /// can be swallowed by SwiftUI).
-    private func tap(_ element: XCUIElement, _ what: String, expecting result: XCUIElement) {
+    private func tap(_ element: XCUIElement, _ what: String, expecting result: XCUIElement, timeout: TimeInterval = 6) {
         tapWhenReady(element, what)
         if !result.waitForExistence(timeout: 4) {
             snap("retry-\(what)")
-            element.tap()
+            if element.exists { element.tap() }
         }
-        wait(result, 6, "après « \(what) »")
+        wait(result, timeout, "après « \(what) »")
     }
 
     /// An urgent notification covers the phone with a scrim until it is dismissed.
@@ -98,15 +101,46 @@ final class MainFlowTests: XCTestCase {
         XCTAssertTrue(element.exists && element.isHittable, "Could not scroll to \(element.debugDescription)")
     }
 
-    private func pin(_ target: XCUIElement, _ name: String) {
-        target.press(forDuration: 1.2)
-        let pinButton = app.buttons["Verser au dossier"]
-        wait(pinButton, 5, "context menu « Verser au dossier »")
+    /// Long press (0.4 s in the game) → the « VERSER AU DOSSIER » sheet → confirm.
+    private func file(_ target: XCUIElement, _ name: String) {
+        dismissUrgentBanner()
+        let confirm = element("filing.confirm")
+        target.press(forDuration: 0.9)
+        if !confirm.waitForExistence(timeout: 4) {
+            snap("retry-verser-\(name)")
+            dismissUrgentBanner()
+            target.press(forDuration: 1.2)
+        }
+        wait(confirm, 5, "feuille « Verser au dossier »")
         snap(name)
-        pinButton.tap()
+        confirm.tap()
+        XCTAssertTrue(confirm.waitForNonExistence(timeout: 5), "La feuille de versement ne se ferme pas")
     }
 
-    /// Selects a suspect card on the accusation screen (checked through its "selected" trait).
+    /// The dossier bar counts the pieces filed.
+    private func assertPieces(_ n: Int) {
+        let bar = wait(element("phone.bar"), 5, "barre du dossier")
+        let counted = expectation(for: NSPredicate(format: "label CONTAINS %@", "\(n) pièce"), evaluatedWith: bar)
+        XCTAssertEqual(XCTWaiter().wait(for: [counted], timeout: 5), .completed, "La barre devrait compter \(n) pièce(s) : « \(bar.label) »")
+    }
+
+    private func openCarnet() {
+        dismissUrgentBanner()
+        tap(element("phone.carnet"), "Carnet", expecting: element("notebook.title"))
+    }
+
+    /// Carnet › PIÈCES: piece `n` accuses (or clears) a suspect.
+    private func link(piece n: Int, to suspect: String, accuses: Bool = true) {
+        element("notebook.tab.0").tap()
+        let stance = element(accuses ? "notebook.accuses.\(n)" : "notebook.clears.\(n)")
+        let chip = element("notebook.suspectChip.\(suspect)")
+        scrollTo(stance, maxSwipes: 6)
+        tap(stance, "L'accuse / Le disculpe (pièce \(n))", expecting: chip)
+        tapWhenReady(chip, "suspect \(suspect)")
+        usleep(600_000)
+    }
+
+    /// Selects a suspect card on the conclusion screen (checked through its "selected" trait).
     private func choose(_ suspect: XCUIElement) {
         tapWhenReady(suspect, "suspect")
         if !suspect.isSelected {
@@ -116,148 +150,293 @@ final class MainFlowTests: XCTestCase {
         XCTAssertTrue(suspect.isSelected, "Le suspect n'est pas sélectionné")
     }
 
-    /// "Maintenir pour confirmer" (900 ms): hold well past the threshold, once more if needed.
-    private func holdToAccuse() {
+    /// « MAINTENIR : {PRÉNOM} EST RESPONSABLE » (1.2 s): hold well past the threshold, once more if needed.
+    private func holdToConclude() {
         let hold = element("accuse.hold")
-        let result = app.descendants(matching: .any).matching(
-            NSPredicate(format: "identifier IN %@", ["result.primary", "result.reveal"])).firstMatch
+        let verification = app.descendants(matching: .any).matching(
+            NSPredicate(format: "identifier IN %@", ["verify.view", "result.read", "result.report"])).firstMatch
         wait(hold, 5, "bouton maintenir")
         usleep(500_000)
-        hold.press(forDuration: 2.0)
-        if !result.waitForExistence(timeout: 5) {
+        hold.press(forDuration: 2.2)
+        if !verification.waitForExistence(timeout: 5) {
             snap("retry-maintenir")
-            hold.press(forDuration: 2.5)
+            hold.press(forDuration: 2.6)
         }
-        wait(result, 8, "écran de résultat")
+        wait(verification, 8, "vérification du dossier")
     }
 
-    /// Reads the home screen clock and the timer, and checks clock = 10:00 + time spent (±1 min for
-    /// a minute boundary crossed between the two reads).
+    /// Vérification (typed, stamp) → [LIRE LE RAPPORT] → the report.
+    private func readReport(_ shot: String) {
+        let read = wait(element("result.read"), 15, "« Lire le rapport »")
+        sleep(1)
+        snap(shot)
+        tap(read, "Lire le rapport", expecting: element("result.report"))
+    }
+
+    /// Carnet → CONCLURE → the conclusion screen.
+    private func concludeFromCarnet() {
+        openCarnet()
+        let conclude = element("notebook.accuse")
+        let title = element("accuse.title")
+        tapWhenReady(conclude, "Conclure l'enquête")
+        let anyway = element("notebook.concludeAnyway")
+        if anyway.waitForExistence(timeout: 2) { anyway.tap() }
+        wait(title, 8, "écran de conclusion")
+    }
+
+    /// Designates Emma (#001's culprit) from the Carnet, reads the report and files the case.
+    private func concludeEmmaAndFile(_ shot: String) {
+        concludeFromCarnet()
+        choose(element("accuse.suspect.s_emma"))
+        holdToConclude()
+        readReport(shot)
+        let fileIt = element("result.file")
+        scrollTo(fileIt)
+        fileIt.tap()
+        wait(element("home.title"), 10, "retour au Bureau")
+    }
+
+    /// Reads the phone's clock and the timer: clock = 10:00 + time spent (±1 min at a minute boundary).
     private func assertPhoneClockMatchesTimer(caseDurationSeconds: Int, startMinuteOfDay: Int) {
         let clock = wait(element("phone.clock"), 5, "horloge du téléphone").label   // "10:02"
-        let timer = element("phone.timer").label                                       // "…06:31"
-        func minutesSeconds(_ text: String) -> (Int, Int)? {
-            let parts = text.suffix(5).split(separator: ":").compactMap { Int($0) }
-            return parts.count == 2 ? (parts[0], parts[1]) : nil
+        let left = secondsLeft()
+        let digits = clock.filter { $0.isNumber || $0 == ":" }
+        let parts = digits.suffix(5).split(separator: ":").compactMap { Int($0) }
+        guard parts.count == 2, left >= 0 else {
+            return XCTFail("Horloge ou chrono illisible : « \(clock) » / \(left) s")
         }
-        guard let (ch, cm) = minutesSeconds(clock), let (tm, ts) = minutesSeconds(timer) else {
-            return XCTFail("Horloge ou chrono illisible : « \(clock) » / « \(timer) »")
-        }
-        let spent = caseDurationSeconds - (tm * 60 + ts)
+        let spent = caseDurationSeconds - left
         let expected = startMinuteOfDay + spent / 60
-        let shown = ch * 60 + cm
-        XCTAssertTrue(abs(shown - expected) <= 1, "Horloge \(clock) incohérente avec le chrono \(timer)")
-        if spent >= 90 { XCTAssertNotEqual(clock, "10:00", "L'horloge du téléphone ne devrait plus être à 10:00") }
+        let shown = parts[0] * 60 + parts[1]
+        XCTAssertTrue(abs(shown - expected) <= 1, "Horloge \(clock) incohérente avec le chrono (\(left) s restantes)")
+    }
+
+    /// Seconds left, from the timer's label or value ("06:31" somewhere in it).
+    private func secondsLeft() -> Int {
+        let timer = element("phone.timer")
+        for text in [timer.value as? String ?? "", timer.label] {
+            if let range = text.range(of: #"\d{2}:\d{2}"#, options: .regularExpression) {
+                let parts = text[range].split(separator: ":").compactMap { Int($0) }
+                if parts.count == 2 { return parts[0] * 60 + parts[1] }
+            }
+        }
+        return -1
+    }
+
+    /// Bureau → the case file (briefing) of a case.
+    private func openCaseFile(_ id: String = "case_001", shot: String? = nil) {
+        let start = element("intro.start")
+        let row = element("case.\(id)")
+        if row.waitForExistence(timeout: 3) {
+            scrollTo(row)
+            if let shot { snap(shot) }
+            tap(row, "dossier \(id)", expecting: start)
+        } else {
+            // The featured folder of the Bureau (the next case to open).
+            tap(element("home.start"), "Ouvrir le dossier", expecting: start)
+        }
+    }
+
+    /// From the briefing to the phone: the opening transition (automatic unlock for #001; the lock
+    /// screen of cases #002–#005 waits for the player).
+    private func openPhone(_ what: String = "Ouvrir le téléphone") {
+        tapWhenReady(element("intro.start"), what)
+        let timer = element("phone.timer")
+        let unlock = element("opening.unlock")
+        if !timer.waitForExistence(timeout: 5), unlock.waitForExistence(timeout: 3) {
+            tapWhenReady(unlock, "déverrouiller")
+        }
+        wait(timer, 10, "le téléphone de l'enquête")
     }
 
     private func startCase() {
         app.launch()
-        wait(element("home.start"), 20, "Accueil")
-        snap("01-accueil")
-        openCaseScreen(shot: "02-affaires")
-        sleep(3) // let the serif lines fade in
-        snap("03-intro")
-        tap(element("intro.start"), "Commencer l'enquête", expecting: element("phone.timer"))
+        wait(element("home.title"), 20, "Bureau")
+        snap("01-bureau")
+        openCaseFile()
+        sleep(1)
+        snap("02-dossier")
+        openPhone()
     }
 
-    /// Home (or the case list) → the presentation screen of a case (001 by default).
-    private func openCaseScreen(_ id: String = "case_001", shot: String? = nil) {
-        let card = element("case.\(id)")
-        if !card.waitForExistence(timeout: 2) {
-            tap(element("menu.cases"), "Affaires", expecting: card)
-        }
-        scrollTo(card)
-        if let shot { snap(shot) }
-        tap(card, "carte de l'affaire \(id)", expecting: element("intro.start"))
-    }
-
-    /// "Suivant" on the score screen proposes the next case; close it to go home.
-    private func leaveNextCaseScreen() {
-        tap(wait(element("score.next"), 8, "score"), "Suivant", expecting: element("intro.close"))
-        tap(element("intro.close"), "fermer l'affaire suivante", expecting: element("home.start"))
-    }
-
-    /// Accuses Emma straight from the timer and goes through the result and score screens.
-    private func accuseEmmaAndFinish(_ shot: String) {
+    /// « Pause » (the phone's ‹): confirm, back to the Bureau.
+    private func pauseInvestigation() {
         dismissUrgentBanner()
-        tap(element("phone.timer"), "chrono", expecting: element("accuseNow.confirm"))
-        let emma = element("accuse.suspect.s_emma")
-        tap(element("accuseNow.confirm"), "Accuser maintenant", expecting: emma)
-        choose(emma)
-        holdToAccuse()
-        snap(shot)
-        let primary = element("result.primary")
-        wait(primary, 5, "résultat")
-        scrollTo(primary)
-        primary.tap()
-        leaveNextCaseScreen()
-    }
-
-    private func quitInvestigation() {
-        dismissUrgentBanner()
-        tapWhenReady(element("phone.quit"), "Quitter l'enquête")
-        let confirm = app.alerts.buttons["Quitter"]
+        tapWhenReady(element("phone.quit"), "Mettre en pause")
+        let confirm = element("pause.confirm")
         if !confirm.waitForExistence(timeout: 4) {
             // A live notification can land on the tap: clear it and ask again.
-            snap("retry-quitter")
+            snap("retry-pause")
             dismissUrgentBanner()
-            tapWhenReady(element("phone.quit"), "Quitter l'enquête (2e essai)")
+            tapWhenReady(element("phone.quit"), "Mettre en pause (2e essai)")
         }
-        wait(confirm, 5, "confirmation « Quitter l'enquête ? »")
+        wait(confirm, 5, "« Mettre l'enquête en pause ? »")
         confirm.tap()
     }
 
-    // MARK: - Solving the case, accusing early from the timer
+    // MARK: - First launch: 4 taps to the phone, the tutorial of #001, the assignment
+
+    func testFirstLaunchToTheBureau() {
+        app.launchArguments = baseArguments + ["-UITestFirstLaunch", "show"]
+        app.launch()
+
+        // 01 · Launch, then 02 · Title: the banner, the promise, the three verbs, one button.
+        let start = wait(element("title.start"), 20, "écran titre")
+        sleep(1)
+        snap("F01-titre")
+        XCTAssertTrue(element("title.settings").exists, "⚙ sur l'écran titre")
+        XCTAssertTrue(app.staticTexts["Un téléphone. Une disparition. Quelqu'un ment."].exists, "L'accroche")
+        for verb in ["EXPLORER", "VERSER AU DOSSIER", "CONCLURE"] {
+            XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", verb)).firstMatch.exists, "Verbe \(verb)")
+        }
+
+        // 03 · Who investigates: Élise preselected, no service number, no rank.
+        tap(start, "Commencer l'enquête", expecting: element("who.continue"))
+        let elise = element("who.elise")
+        XCTAssertTrue(elise.isSelected, "Élise est présélectionnée")
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'BEN-0'")).firstMatch.exists, "Aucun matricule avant l'affectation")
+        snap("F02-qui-enquete")
+        tapWhenReady(element("who.vincent"), "Vincent")
+        XCTAssertTrue(element("who.vincent").isSelected, "Vincent choisi")
+        snap("F03-vincent")
+        tapWhenReady(elise, "Élise")
+
+        // 04 · The briefing of #001: the mission and the three steps.
+        tap(element("who.continue"), "Continuer", expecting: element("intro.start"))
+        sleep(1)
+        snap("F04-briefing")
+        XCTAssertFalse(element("challenge.expert").exists, "Pas de choix de niveau à la première partie")
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'BEN-0'")).firstMatch.exists)
+
+        // The opening (automatic unlock), then the phone: bubble 1 under Messages.
+        openPhone()
+        XCTAssertTrue(secondsLeft() >= 8 * 60 - 8, "Le chrono démarre quand le téléphone est en main (\(secondsLeft()) s)")
+        let bubble1 = wait(element("coach.bubble.1"), 6, "bulle 1 EXPLORER")
+        snap("F05-telephone-bulle-1")
+
+        // Bubble 1 never blocks: tapping Messages answers it.
+        tap(element("app.messages"), "Messages", expecting: element("conversation.c_emma"))
+        XCTAssertTrue(bubble1.waitForNonExistence(timeout: 3), "La bulle 1 disparaît quand on ouvre une app")
+        let alibi = element("message.m_emma_2230")
+        tap(element("conversation.c_emma"), "conversation Emma", expecting: alibi)
+
+        // Bubble 2 after 2 s of reading in a conversation that holds a piece.
+        if element("coach.bubble.2").waitForExistence(timeout: 6) {
+            snap("F06-bulle-2")
+        }
+        scrollTo(alibi, maxSwipes: 4)
+        file(alibi, "F07-feuille-verser")
+        XCTAssertFalse(element("coach.bubble.2").exists, "Verser la pièce ferme la bulle 2")
+        wait(element("piece.badge"), 5, "étiquette « PIÈCE 01 » sur le message")
+        assertPieces(1)
+        sleep(1)
+        snap("F08-piece-versee")
+
+        // 08 · Carnet: bubble 3 above CONCLURE, the piece on top, L'ACCUSE → Emma.
+        openCarnet()
+        wait(element("notebook.row"), 5, "la pièce dans le carnet")
+        if element("coach.bubble.3").waitForExistence(timeout: 3) {
+            snap("F09-carnet-bulle-3")
+        }
+        link(piece: 1, to: "s_emma")
+        XCTAssertFalse(element("coach.bubble.3").exists, "Relier une pièce ferme la bulle 3")
+        snap("F10-piece-reliee")
+
+        // 09 · Conclusion: named button, hold 1.2 s.
+        tapWhenReady(element("notebook.accuse"), "Conclure l'enquête")
+        let emma = wait(element("accuse.suspect.s_emma"), 8, "écran de conclusion")
+        snap("F11-conclusion")
+        choose(emma)
+        let hold = element("accuse.hold")
+        XCTAssertTrue(hold.label.uppercased().contains("EMMA"), "Le bouton nomme la personne désignée (\(hold.label))")
+        snap("F12-conclusion-emma")
+        // A short press sends nothing.
+        hold.press(forDuration: 0.3)
+        sleep(1)
+        XCTAssertTrue(element("accuse.title").exists, "Relâcher avant 1,2 s n'envoie rien")
+        holdToConclude()
+
+        // 10–11 · Verification, stamp, report.
+        readReport("F13-verification-resolu")
+        sleep(1)
+        snap("F14-rapport")
+        XCTAssertTrue(element("result.keyEvidence").exists, "Pièces clés du rapport")
+        let fileIt = element("result.file")
+        scrollTo(fileIt)
+
+        // 12 · Assignment (once), then 13 · the Bureau.
+        tap(fileIt, "Classer le dossier", expecting: element("assignment.desk"), timeout: 10)
+        sleep(2)
+        snap("F15-affectation")
+        tap(element("assignment.desk"), "Aller au Bureau", expecting: element("home.title"))
+        sleep(1)
+        snap("F16-bureau")
+
+        // The profile now shows the service number and the rank.
+        tap(element("tab.investigator"), "Enquêteur", expecting: element("profile.view"))
+        sleep(1)
+        snap("F17-profil")
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'BEN-04821'")).firstMatch.exists,
+                      "Le matricule apparaît après l'affectation")
+
+        // The app as it appears on the iPhone's home screen: « Conclude » under its icon.
+        XCUIDevice.shared.press(.home)
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        var icon = springboard.icons["Conclude"]
+        for _ in 0..<3 where !icon.waitForExistence(timeout: 3) {
+            springboard.swipeLeft()
+            icon = springboard.icons["Conclude"]
+        }
+        XCTAssertTrue(icon.exists, "L'icône « Conclude » devrait être sur l'écran d'accueil")
+        snap("F18-icone-ecran-accueil-ios")
+
+        // Next launch: straight to the Bureau, no title, no assignment again.
+        app.terminate()
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
+        app.launch()
+        wait(element("home.title"), 20, "Bureau au lancement suivant")
+        XCTAssertFalse(element("title.start").exists, "Pas d'écran titre après l'affectation")
+    }
+
+    // MARK: - The phone, the pieces, the Carnet, the hints, concluding early
 
     func testMainPathSolvedEarly() {
         startCase()
         snap("04-telephone-accueil")
+        XCTAssertFalse(element("coach.bubble.1").exists, "Pas de bulle pour un joueur qui connaît le jeu")
 
         // The timer really counts down.
-        let timer = element("phone.timer")
-        let before = timer.label
+        let before = secondsLeft()
         sleep(3)
-        XCTAssertNotEqual(before, timer.label, "Le chrono ne bouge pas")
+        XCTAssertTrue(secondsLeft() < before, "Le chrono ne bouge pas")
 
         // The phone keeps living: Lucas writes 25 s in.
         wait(element("phone.banner"), 40, "notification en direct")
         snap("05-notification")
 
-        // Messages → Emma → pin her 22:30 "alibi" message.
+        // Messages → Emma → file her 22:30 "alibi" message.
         openApp("messages")
         wait(element("conversation.c_emma"), 5, "conversation Emma")
         snap("06-messages")
         let alibi = element("message.m_emma_2230")
         tap(element("conversation.c_emma"), "conversation Emma", expecting: alibi)
         snap("07-conversation")
-        pin(alibi, "08-menu-epingler")
-        XCTAssertTrue(element("phone.carnet").label.contains("1"), "Le carnet devrait compter 1 élément")
-        snap("09-epingle")
+        file(alibi, "08-verser-au-dossier")
+        assertPieces(1)
+        snap("09-piece-versee")
 
-        // Annotate it against Emma: long press → "L'accuse…" → Emma Roussel.
+        // Filing the same piece again: « déjà au dossier » → see it in the Carnet.
         _ = element("phone.toast").waitForNonExistence(timeout: 4)
-        alibi.press(forDuration: 1.2)
-        let linkMenu = app.buttons["L'accuse…"]
-        wait(linkMenu, 5, "menu « L'accuse… »")
-        linkMenu.tap()
-        // The conversation header is also labelled "Emma Roussel": take the item under the menu title.
-        let menuTop = linkMenu.frame.maxY
-        let emmaChoices = app.buttons.matching(NSPredicate(format: "label == 'Emma Roussel'"))
-        wait(emmaChoices.firstMatch, 5, "Emma dans le sous-menu")
-        usleep(500_000)
-        let emmaChoice = emmaChoices.allElementsBoundByIndex.first { $0.frame.minY > menuTop }
-        XCTAssertNotNil(emmaChoice, "Emma introuvable dans le sous-menu")
-        emmaChoice?.tap()
-        if !linkMenu.waitForNonExistence(timeout: 4) {
-            // A tap during the submenu's animation can be swallowed: tap the choice again.
-            snap("retry-lier-emma")
-            if let emmaChoice, emmaChoice.exists { emmaChoice.tap() }
+        alibi.press(forDuration: 0.9)
+        let viewIt = element("filing.viewInCarnet")
+        if viewIt.waitForExistence(timeout: 4) {
+            snap("09b-deja-au-dossier")
+            tap(viewIt, "Voir dans le carnet", expecting: element("notebook.title"))
+            element("notebook.close").tap()
+            XCTAssertTrue(element("notebook.title").waitForNonExistence(timeout: 5), "Le carnet ne se ferme pas")
         }
-        XCTAssertTrue(linkMenu.waitForNonExistence(timeout: 5), "Le menu ne se ferme pas")
-        sleep(1)
-        snap("09b-lie-a-emma")
 
-        // Photos → the photo "at home" → analyse its metadata → pin the analysis.
+        // Photos → the photo "at home" → analyse its metadata.
         openApp("photos")
         snap("10-photos")
         let couch = element("photo.p_emma_couch")
@@ -269,11 +448,8 @@ final class MainFlowTests: XCTestCase {
         sleep(1)
         snap("12-photo-analysee")
 
-        // Notifications app: the live events so far.
-        visitApp("notifications", "Notifications", "13-notifications")
-        XCTAssertTrue(app.staticTexts["Lucas Ferrand"].firstMatch.exists, "La notification de Lucas devrait être listée")
-
         // Every app says where the player is (icon + name in its header).
+        visitApp("notifications", "Notifications", "13-notifications")
         visitApp("calendar", "Calendrier", "13c-calendrier")
         visitApp("location", "Carte", "13d-carte")
         visitApp("phone", "Téléphone", "13e-appels")
@@ -289,98 +465,51 @@ final class MainFlowTests: XCTestCase {
         assertPhoneClockMatchesTimer(caseDurationSeconds: 480, startMinuteOfDay: 10 * 60)
         snap("13b-horloge")
 
-        // Notebook.
-        element("phone.carnet").tap()
+        // Carnet: PIÈCES · SUSPECTS · CHRONOLOGIE.
+        openCarnet()
+        wait(element("notebook.row"), 5, "pièce dans le carnet")
         sleep(1)
-        snap("14-carnet-suspects")
-        XCTAssertTrue(element("notebook.objective").exists, "Le carnet devrait rappeler l'objectif")
+        snap("14-carnet-pieces")
+        link(piece: 1, to: "s_emma")
+        snap("15-carnet-liee")
         element("notebook.tab.1").tap()
-        wait(element("notebook.row"), 5, "élément épinglé dans le carnet")
-        snap("15-carnet-indices")
+        wait(element("notebook.suspect.s_emma"), 5, "fiche d'Emma")
+        sleep(1)
+        snap("15a-carnet-suspects")
         element("notebook.tab.2").tap()
         sleep(1)
-        snap("15a-carnet-chronologie")
-        element("notebook.tab.3").tap()
-        sleep(1)
-        snap("15a2-carnet-notes")
-        // A suspect's file: what the phone holds about them, their statement, the linked chain.
-        element("notebook.tab.0").tap()
-        tap(element("notebook.suspect.s_emma"), "fiche d'Emma", expecting: element("suspect.name"))
-        // The message annotated from the phone hangs from Emma's file, already marked "L'accuse";
-        // "Le disculpe" is the other hand annotation.
-        let against = element("suspect.stance.incriminates.0")
-        scrollTo(against)
-        if !against.isSelected {
-            against.tap()
-            usleep(600_000)
-        }
-        XCTAssertTrue(against.isSelected, "« L'accuse » devrait être sélectionné")
-        XCTAssertFalse(element("suspect.stance.clears.0").isSelected, "« Le disculpe » ne doit pas l'être")
-        sleep(1)
-        snap("15a3-fiche-suspect")
-        app.navigationBars.buttons.firstMatch.tap()
-        wait(element("notebook.suspect.s_emma"), 5, "retour aux suspects")
-        element("notebook.close").tap()
-        XCTAssertTrue(element("notebook.accuse").waitForNonExistence(timeout: 5), "Le carnet ne se ferme pas")
-        snap("15b-carnet-ferme")
+        snap("15b-carnet-chronologie")
 
-        // Help: what each tier gives and costs (score, never time).
-        dismissUrgentBanner()
-        tap(element("phone.hints"), "Aide", expecting: element("hints.close"))
+        // Help: each hint costs points on the final note, never time.
+        tap(element("notebook.hint"), "Indice", expecting: element("hints.close"))
         sleep(1)
-        snap("15c-aide")
+        snap("15c-indice")
         element("hints.close").tap()
-        XCTAssertTrue(element("hints.close").waitForNonExistence(timeout: 5), "L'aide ne se ferme pas")
+        XCTAssertTrue(element("hints.close").waitForNonExistence(timeout: 5), "L'indice ne se ferme pas")
+        element("notebook.close").tap()
+        XCTAssertTrue(element("notebook.title").waitForNonExistence(timeout: 5), "Le carnet ne se ferme pas")
 
-        // Timer → "Accuser maintenant ?"
-        dismissUrgentBanner()
-        tap(element("phone.timer"), "chrono", expecting: element("accuseNow.confirm"))
-        snap("16-accuser-maintenant")
-        let emma = element("accuse.suspect.s_emma")
-        tap(element("accuseNow.confirm"), "Accuser maintenant", expecting: emma)
+        // Conclude early, from the Carnet.
+        concludeFromCarnet()
+        snap("17-conclusion")
+        choose(element("accuse.suspect.s_emma"))
+        snap("18-conclusion-emma")
+        holdToConclude()
+        readReport("19-verification")
+        sleep(1)
+        snap("20-rapport")
+        XCTAssertTrue(element("result.keyEvidence").exists, "Le rapport liste les pièces clés")
+        let fileIt = element("result.file")
+        scrollTo(fileIt)
+        snap("20b-rapport-bas")
+        fileIt.tap()
 
-        // Accusation: choose Emma, hold to confirm.
-        snap("17-accusation")
-        XCTAssertTrue(app.staticTexts["Qui est responsable ?"].exists, "La décision finale doit poser la question")
-        choose(emma)
-        let accused = wait(element("accuse.youAccuse"), 5, "panneau « Vous accusez »")
-        XCTAssertTrue(accused.label.contains("Emma"), "Le panneau devrait nommer la personne accusée")
-        snap("18-accusation-emma")
-        holdToAccuse()
-
-        // Result: who was responsible, the decisive evidence, then the reconstruction step by step.
-        snap("19-resultat")
-        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'était responsable'")).firstMatch.exists,
-                      "Le résultat doit dire qui était responsable")
-        XCTAssertTrue(element("result.keyEvidence").exists, "Le résultat doit lister les éléments déterminants")
-        sleep(7)
-        snap("20-reconstitution")
-        // The pinned 22:30 message (with the analysed photo) is officially found: ● in the reconstruction.
-        let found = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH 'Trouvé, 22:30'")).firstMatch
-        XCTAssertTrue(found.exists, "La preuve épinglée devrait apparaître comme trouvée dans la reconstitution")
-        scrollTo(element("result.primary"))
-        element("result.primary").tap()
-
-        // Score.
-        wait(element("score.value"), 5, "score")
-        sleep(3)
-        snap("21-score")
-        // "Suivant" proposes the next case (#002), with its own story.
-        tap(element("score.next"), "Suivant", expecting: element("intro.close"))
-        sleep(2)
-        snap("22-affaire-suivante")
-        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label ==[cd] %@", "PREMIER MÉTRO")).firstMatch.exists, "L'affaire suivante devrait être la #002")
-
-        // Archive: the attempt is listed and its reconstruction opens.
-        tap(element("intro.close"), "fermer l'affaire suivante", expecting: element("home.start"))
+        // Back on the Bureau; the case is in the Archives.
+        wait(element("home.title"), 10, "Bureau")
+        snap("21-bureau-apres")
         tap(element("menu.cases"), "Archives", expecting: element("case.case_001"))
         sleep(1)
         snap("23-archives")
-        tap(element("case.case_001"), "dossier 001 aux archives", expecting: element("dossier.tab.4"))
-        element("dossier.tab.4").tap()
-        wait(element("dossier.reconstruction"), 5, "reconstitution du dossier clos")
-        sleep(1)
-        snap("24-dossier-reconstitution")
     }
 
     // MARK: - Phone-wide search
@@ -422,19 +551,14 @@ final class MainFlowTests: XCTestCase {
         snap("64-recherche-date")
     }
 
-    // MARK: - Leaving the app during an investigation, then resuming it
-
-    private func secondsLeft() -> Int {
-        let parts = element("phone.timer").label.suffix(5).split(separator: ":").compactMap { Int($0) }
-        return parts.count == 2 ? parts[0] * 60 + parts[1] : -1
-    }
+    // MARK: - Leaving the app during an investigation, then resuming it (02b)
 
     func testResumeAfterQuittingTheApp() {
         startCase()
         openApp("messages")
         let alibi = element("message.m_emma_2230")
         tap(element("conversation.c_emma"), "conversation Emma", expecting: alibi)
-        pin(alibi, "50-epingler-avant-de-quitter")
+        file(alibi, "50-verser-avant-de-quitter")
         let before = secondsLeft()
         snap("51-avant-de-quitter")
 
@@ -443,157 +567,103 @@ final class MainFlowTests: XCTestCase {
         sleep(2)
         app.terminate()
         sleep(10)
-        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR", "-UITestOnboarding", "skip"]
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
         app.launch()
 
-        let resume = wait(element("home.resume"), 20, "carte « Reprendre l'enquête »")
-        XCTAssertFalse(element("home.start").exists, "La carte Reprendre remplace « Affaire suivante »")
-        XCTAssertTrue(element("home.resumeMeta").label.contains("1"), "La carte devrait compter 1 élément épinglé")
-        snap("52-accueil-reprendre")
+        // 02b · Titre, reprise: the investigation in progress, one button.
+        let resume = wait(element("title.resume"), 20, "« Reprendre l'enquête » (écran titre)")
+        XCTAssertTrue(element("title.desk").exists, "Lien « Aller au Bureau »")
+        sleep(1)
+        snap("52-titre-reprise")
         tap(resume, "Reprendre l'enquête", expecting: element("phone.timer"))
 
-        // Same screen, same notebook; the timer goes on from where it was (time away does not count).
+        // Same screen, same pieces; the timer goes on from where it was (time away does not count).
         wait(element("message.m_emma_2230"), 5, "retour dans la conversation d'Emma")
         snap("53-repris-meme-ecran")
         let after = secondsLeft()
         XCTAssertTrue(after <= before && before - after <= 8,
                       "Chrono incohérent après reprise : \(before) s avant, \(after) s après")
-        XCTAssertTrue(element("phone.carnet").label.contains("1"), "Le carnet devrait toujours compter 1 élément")
+        assertPieces(1)
         goHome()
         assertPhoneClockMatchesTimer(caseDurationSeconds: 480, startMinuteOfDay: 10 * 60)
         snap("54-horloge-apres-reprise")
 
         // The case then ends normally.
-        tap(element("phone.timer"), "chrono", expecting: element("accuseNow.confirm"))
-        let emma = element("accuse.suspect.s_emma")
-        tap(element("accuseNow.confirm"), "Accuser maintenant", expecting: emma)
-        choose(emma)
-        holdToAccuse()
-        snap("55-resultat-apres-reprise")
-        wait(element("result.primary"), 5, "résultat")
+        concludeFromCarnet()
+        choose(element("accuse.suspect.s_emma"))
+        holdToConclude()
+        readReport("55-resultat-apres-reprise")
 
         // Finished: nothing left to resume.
         app.terminate()
         app.launch()
-        wait(element("home.start"), 20, "Accueil")
+        wait(element("home.title"), 20, "Bureau")
         XCTAssertFalse(element("home.resume").exists, "Une affaire terminée ne se reprend pas")
+        XCTAssertFalse(element("title.resume").exists)
     }
 
-    // MARK: - First launch: the three-step onboarding
-
-    func testOnboarding() {
-        app.launchArguments = baseArguments + ["-UITestOnboarding", "show"]
-        app.launch()
-        let next = wait(element("onboarding.next"), 20, "onboarding")
-        XCTAssertFalse(next.isEnabled, "« Continuer » doit attendre que le geste soit fait")
-        snap("40-onboarding-explorer")
-
-        // 1 · Explorer: open Photos, analyse the photo (the demo timer loses 15 s).
-        tap(element("onboarding.app.photos"), "Photos (démo)", expecting: element("onboarding.analyze"))
-        tap(element("onboarding.analyze"), "Analyser (démo)", expecting: element("onboarding.metadata"))
-        snap("41-onboarding-analyse")
-        XCTAssertTrue(next.isEnabled)
-        next.tap()
-
-        // 2 · Épingler: hold the message.
-        let target = wait(element("onboarding.pinTarget"), 5, "message à épingler")
-        snap("42-onboarding-epingler")
-        usleep(700_000)
-        target.press(forDuration: 1.0)
-        let carnet = element("onboarding.carnet")
-        let pinned = expectation(for: NSPredicate(format: "label CONTAINS '1'"), evaluatedWith: carnet)
-        XCTAssertEqual(XCTWaiter().wait(for: [pinned], timeout: 5), .completed, "Le carnet de la démo devrait compter 1")
-        snap("43-onboarding-epingle")
-        next.tap()
-
-        // 3 · Accuser: choose, hold to confirm.
-        let suspect = wait(element("onboarding.suspect.0"), 5, "suspects de la démo")
-        snap("44-onboarding-accuser")
-        choose(suspect)
-        let hold = element("onboarding.hold")
-        usleep(500_000)
-        hold.press(forDuration: 2.0)
-        wait(element("onboarding.accused"), 5, "accusation de la démo")
-        snap("45-onboarding-accuse")
-        next.tap()
-
-        wait(element("home.start"), 10, "Accueil après l'onboarding")
-        snap("46-accueil-apres-onboarding")
-
-        // The app as it appears on the iPhone's home screen: name "Conclude" under its icon.
-        XCUIDevice.shared.press(.home)
-        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-        var icon = springboard.icons["Conclude"]
-        for _ in 0..<3 where !icon.waitForExistence(timeout: 3) {
-            springboard.swipeLeft()
-            icon = springboard.icons["Conclude"]
-        }
-        XCTAssertTrue(icon.exists, "L'icône « Conclude » devrait être sur l'écran d'accueil")
-        snap("47-icone-ecran-accueil-ios")
-
-        // Shown once: the next launch opens straight on the home screen.
-        app.terminate()
-        app.launchArguments = baseArguments
-        app.launch()
-        wait(element("home.start"), 20, "Accueil au 2e lancement")
-        XCTAssertFalse(element("onboarding.next").exists, "L'onboarding ne doit apparaître qu'au premier lancement")
-    }
-
-    // MARK: - Quitting the investigation (saved), resuming from home and from the case screen
+    // MARK: - Pausing the investigation (saved), resuming from the Bureau and from the case file
 
     func testQuitAndResume() {
         startCase()
         openApp("messages")
         let alibi = element("message.m_emma_2230")
         tap(element("conversation.c_emma"), "conversation Emma", expecting: alibi)
-        pin(alibi, "70-epingle-avant-quitter")
+        file(alibi, "70-verse-avant-pause")
 
-        // "← Quitter" asks first; "Continuer l'enquête" goes back to the same screen.
+        // ‹ asks first; « Continuer » goes back to the same screen.
         dismissUrgentBanner()
-        tapWhenReady(element("phone.quit"), "Quitter l'enquête")
-        let alert = app.alerts.firstMatch
-        wait(alert, 5, "confirmation")
-        XCTAssertTrue(alert.staticTexts["Quitter l'enquête ?"].exists, "La confirmation doit poser la question")
-        XCTAssertTrue(alert.staticTexts["Votre progression sera sauvegardée."].exists)
-        snap("71-quitter-confirmation")
-        alert.buttons["Continuer l'enquête"].tap()
+        tapWhenReady(element("phone.quit"), "Mettre en pause")
+        let cancel = wait(element("pause.cancel"), 5, "« Mettre l'enquête en pause ? »")
+        XCTAssertTrue(element("pause.confirm").exists)
+        sleep(1)
+        snap("71-pause-confirmation")
+        cancel.tap()
         wait(alibi, 5, "retour dans la conversation après « Continuer »")
         let before = secondsLeft()
 
-        // Quit for real: home offers to resume; time away does not count.
-        quitInvestigation()
-        let resume = wait(element("home.resume"), 10, "carte « Reprendre l'enquête »")
-        snap("72-accueil-reprendre")
+        // Pause for real: the Bureau offers to resume; time away does not count.
+        pauseInvestigation()
+        let resume = wait(element("home.resume"), 10, "« Reprendre l'enquête » au Bureau")
+        snap("72-bureau-reprendre")
         sleep(5)
 
-        // The case screen offers it too.
-        openCaseScreen()
-        let introResume = wait(element("intro.resume"), 5, "« Reprendre l'enquête » sur l'écran de l'affaire")
-        sleep(2)
-        snap("73-affaire-reprendre")
-        tap(introResume, "Reprendre (écran de l'affaire)", expecting: element("phone.timer"))
+        // The case file offers it too.
+        openCaseFile()
+        let introResume = wait(element("intro.resume"), 5, "« Reprendre l'enquête » sur le dossier")
+        sleep(1)
+        snap("73-dossier-reprendre")
+        tap(introResume, "Reprendre (dossier)", expecting: element("phone.timer"))
         wait(element("message.m_emma_2230"), 5, "même écran après reprise")
-        XCTAssertTrue(element("phone.carnet").label.contains("1"), "Le carnet est conservé")
+        assertPieces(1)
         let after = secondsLeft()
         XCTAssertTrue(after <= before && before - after <= 8, "Chrono incohérent : \(before) s avant, \(after) s après")
         snap("74-repris")
 
-        // Quit again and resume from home.
-        quitInvestigation()
-        tap(resume, "Reprendre l'enquête (accueil)", expecting: element("phone.timer"))
-        wait(element("message.m_emma_2230"), 5, "même écran après reprise depuis l'accueil")
+        // Pause again and resume from the Bureau.
+        pauseInvestigation()
+        tap(resume, "Reprendre l'enquête (Bureau)", expecting: element("phone.timer"))
+        wait(element("message.m_emma_2230"), 5, "même écran après reprise depuis le Bureau")
     }
 
-    // MARK: - Challenge levels: same case, three durations, best result per level, unlocking Expert
+    // MARK: - Challenge levels: same case, three durations, unlocking Expert
+
+    /// The level choice may be folded behind a « NIVEAU » row on the case file.
+    private func showLevels(_ level: XCUIElement) {
+        if !level.waitForExistence(timeout: 3), element("briefing.level").exists {
+            tapWhenReady(element("briefing.level"), "Niveau")
+        }
+        scrollTo(level)
+    }
 
     func testChallengeLevelsAndReplay() {
         app.launch()
-        wait(element("home.start"), 20, "Accueil")
-        openCaseScreen()
+        wait(element("home.title"), 20, "Bureau")
+        openCaseFile()
         let investigator = element("challenge.investigator")
         let detective = element("challenge.detective")
         let expert = element("challenge.expert")
-        scrollTo(expert)
+        showLevels(expert)
         XCTAssertTrue(investigator.label.contains("15:00"), "Enquêteur : 15 min (\(investigator.label))")
         XCTAssertTrue(detective.label.contains("08:00"), "Détective : 8 min (\(detective.label))")
         XCTAssertTrue(expert.label.contains("05:00"), "Expert : 5 min (\(expert.label))")
@@ -602,35 +672,27 @@ final class MainFlowTests: XCTestCase {
         snap("80-niveaux")
 
         // Enquêteur: 15 minutes on the clock.
-        investigator.tap()
+        tapWhenReady(investigator, "Enquêteur")
         XCTAssertTrue(investigator.isSelected)
-        XCTAssertTrue(element("intro.start").label.contains("15:00"), "Le bouton annonce la durée du niveau choisi")
         snap("81-niveau-enqueteur")
-        tap(element("intro.start"), "Commencer (Enquêteur)", expecting: element("phone.timer"))
+        openPhone("Ouvrir le téléphone (Enquêteur)")
         XCTAssertTrue(secondsLeft() > 14 * 60, "Enquêteur démarre à 15:00 (\(secondsLeft()) s)")
-        accuseEmmaAndFinish("82-resolue-enqueteur")
+        concludeEmmaAndFile("82-resolue-enqueteur")
 
-        // Solved at Enquêteur: shown on its card; Expert still locked.
-        openCaseScreen()
-        scrollTo(expert)
-        XCTAssertTrue(investigator.label.contains("Résolue"), "Meilleur résultat affiché (\(investigator.label))")
-        XCTAssertTrue(detective.label.contains("Non tentée") || !detective.label.contains("Résolue"))
-        XCTAssertFalse(expert.isEnabled, "Résoudre en Enquêteur ne débloque pas Expert")
-        snap("83-apres-enqueteur")
-
-        // Replay the same case at Détective (8 minutes): Expert unlocks.
-        detective.tap()
-        tap(element("intro.start"), "Commencer (Détective)", expecting: element("phone.timer"))
+        // Replay at Détective (8 minutes): Expert unlocks.
+        openCaseFile()
+        showLevels(detective)
+        tapWhenReady(detective, "Détective")
+        openPhone("Ouvrir le téléphone (Détective)")
         let left = secondsLeft()
         XCTAssertTrue(left > 7 * 60 && left <= 8 * 60, "Détective démarre à 08:00 (\(left) s)")
-        accuseEmmaAndFinish("84-resolue-detective")
-        openCaseScreen()
-        scrollTo(expert)
+        concludeEmmaAndFile("84-resolue-detective")
+        openCaseFile()
+        showLevels(expert)
         XCTAssertTrue(expert.isEnabled, "Expert se débloque après une réussite en Détective")
-        expert.tap()
-        XCTAssertTrue(element("intro.start").label.contains("05:00"))
+        tapWhenReady(expert, "Expert")
         snap("85-expert-debloque")
-        tap(element("intro.start"), "Commencer (Expert)", expecting: element("phone.timer"))
+        openPhone("Ouvrir le téléphone (Expert)")
         XCTAssertTrue(secondsLeft() <= 5 * 60, "Expert : 5 minutes")
     }
 
@@ -664,51 +726,7 @@ final class MainFlowTests: XCTestCase {
         XCTAssertTrue(element("map.pin.pl_quai9").exists, "Le trajet passe par le Quai 9 : il apparaît sur la carte")
     }
 
-    // MARK: - The opening sequence, into the phone
-
-    func testCinematicIntoThePhone() {
-        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip"]
-        app.launch()
-        wait(element("home.start"), 20, "Accueil")
-        openCaseScreen()
-        tapWhenReady(element("intro.start"), "Commencer l'enquête")
-
-        wait(element("cinematic.shot.title"), 5, "écran noir d'ouverture")
-        snap("A0-intro-noir")
-        wait(element("cinematic.shot.broadcast"), 10, "reportage")
-        sleep(2)
-        snap("A1-intro-reportage")
-        let subtitle = app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'parking du Quai 9' OR label CONTAINS 'signe de vie' OR label CONTAINS 'téléphone parlera'")).firstMatch
-        wait(subtitle, 5, "sous-titres du reportage")
-        sleep(5)
-        snap("A2-intro-reportage-suite")
-        wait(element("cinematic.shot.phone"), 15, "le téléphone sur la table")
-        sleep(3)
-        snap("A3-intro-telephone")
-        wait(element("cinematic.shot.unlock"), 10, "déverrouillage")
-        usleep(1_500_000)
-        snap("A4-intro-deverrouillage")
-
-        // The phone picked up is the game's phone; the clock did not run during the opening.
-        wait(element("phone.timer"), 15, "le téléphone de l'enquête")
-        XCTAssertFalse(element("cinematic.skip").exists)
-        XCTAssertTrue(secondsLeft() >= 8 * 60 - 6, "Le chrono démarre quand le téléphone est en main (\(secondsLeft()) s)")
-        snap("A5-telephone-en-main")
-    }
-
-    func testCinematicCanBeSkipped() {
-        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip"]
-        app.launch()
-        wait(element("home.start"), 20, "Accueil")
-        openCaseScreen()
-        tapWhenReady(element("intro.start"), "Commencer l'enquête")
-        let skip = wait(element("cinematic.skip"), 5, "bouton Passer")
-        sleep(1)
-        tap(skip, "Passer", expecting: element("phone.timer"))
-        XCTAssertTrue(secondsLeft() >= 8 * 60 - 4, "Passer l'ouverture ne coûte pas de temps")
-    }
-
-    // MARK: - Cases #002–#005: each one opens its own phone
+    // MARK: - Cases #002–#005: the opening (lock screen) and each case's own phone
 
     /// A conversation that only exists in that case's phone, and the case's title.
     private let newCases: [(id: String, title: String, conversation: String)] = [
@@ -720,85 +738,113 @@ final class MainFlowTests: XCTestCase {
 
     func testEveryNewCaseOpensItsOwnPhone() {
         app.launch()
-        wait(element("home.start"), 20, "Accueil")
+        wait(element("home.title"), 20, "Bureau")
         for (n, item) in newCases.enumerated() {
-            openCaseScreen(item.id)
-            XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label ==[cd] %@", item.title)).firstMatch.exists, "Écran de présentation de \(item.id)")
-            sleep(2)
-            snap("B\(n)0-\(item.id)-presentation")
-            tap(element("intro.start"), "Commencer \(item.id)", expecting: element("phone.timer"))
+            openCaseFile(item.id)
+            XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label ==[cd] %@", item.title)).firstMatch.exists, "Dossier de \(item.id)")
+            sleep(1)
+            snap("B\(n)0-\(item.id)-dossier")
+
+            // The opening: the sealed bag, then the phone's lock screen, which waits for the player.
+            tapWhenReady(element("intro.start"), "Ouvrir le téléphone \(item.id)")
+            let unlock = wait(element("opening.unlock"), 8, "écran verrouillé de \(item.id)")
+            sleep(1)
+            snap("B\(n)1-\(item.id)-verrouille")
+            XCTAssertFalse(element("phone.timer").exists, "Le chrono ne tourne pas avant le déverrouillage")
+            tap(unlock, "déverrouiller \(item.id)", expecting: element("phone.timer"))
+            XCTAssertTrue(secondsLeft() >= 8 * 60 - 6, "Le chrono démarre au déverrouillage (\(secondsLeft()) s)")
             dismissUrgentBanner()
-            snap("B\(n)1-\(item.id)-accueil-telephone")
+            snap("B\(n)2-\(item.id)-accueil-telephone")
             openApp("messages")
             wait(element("conversation.\(item.conversation)"), 8, "conversation propre à \(item.id)")
-            snap("B\(n)2-\(item.id)-messages")
-            openApp("photos")
-            sleep(1)
-            snap("B\(n)3-\(item.id)-photos")
+            snap("B\(n)3-\(item.id)-messages")
             openApp("location")
             wait(element("location.map"), 10, "carte de \(item.id)")
             sleep(2)
             snap("B\(n)4-\(item.id)-carte")
-            quitInvestigation()
+            pauseInvestigation()
             wait(element("home.resume"), 10, "reprise proposée pour \(item.id)")
         }
     }
 
-    /// The four new opening sequences, each with its own place and phone.
-    func testNewCinematics() {
-        app.launchArguments = baseArguments + ["-UITestOnboarding", "skip"]
+    // MARK: - Settings: relaxed time, replay the tutorial
+
+    func testSettingsRelaxedTime() {
         app.launch()
-        wait(element("home.start"), 20, "Accueil")
-        for (n, item) in newCases.enumerated() {
-            openCaseScreen(item.id)
-            tapWhenReady(element("intro.start"), "Commencer \(item.id)")
-            wait(element("cinematic.shot.scene"), 6, "premier plan de \(item.id)")
-            sleep(3)
-            snap("C\(n)0-\(item.id)-plan1")
-            sleep(4)
-            snap("C\(n)1-\(item.id)-plan2")
-            wait(element("cinematic.shot.phone"), 25, "le téléphone de \(item.id)")
-            sleep(4)
-            snap("C\(n)2-\(item.id)-telephone")
-            wait(element("phone.timer"), 30, "fin de l'ouverture de \(item.id)")
-            snap("C\(n)3-\(item.id)-en-main")
-            quitInvestigation()
-            wait(element("home.resume"), 10, "retour à l'accueil")
-        }
+        wait(element("home.title"), 20, "Bureau")
+        tap(element("tab.investigator"), "Enquêteur", expecting: element("profile.view"))
+        let settings = element("menu.settings")
+        scrollTo(settings)
+        tap(settings, "Paramètres", expecting: element("settings.relaxedTime"))
+        sleep(1)
+        snap("S0-parametres")
+        let relaxed = element("settings.relaxedTime")
+        scrollTo(relaxed)
+        relaxed.tap()
+        let replay = element("settings.replayTutorial")
+        scrollTo(replay)
+        replay.tap()
+        sleep(1)
+        snap("S1-parametres-modifies")
+        tap(element("settings.back"), "retour", expecting: element("tab.bureau"))
+        tap(element("tab.bureau"), "Bureau", expecting: element("home.title"))
+
+        // « Temps détendu »: 08:00 becomes 12:00.
+        openCaseFile()
+        openPhone()
+        let left = secondsLeft()
+        XCTAssertTrue(left > 11 * 60 && left <= 12 * 60, "Temps détendu : 12:00 au lieu de 08:00 (\(left) s)")
+        // « Revoir le tutoriel »: bubble 1 is back in #001.
+        wait(element("coach.bubble.1"), 6, "bulle 1 après « Revoir le tutoriel »")
+        snap("S2-temps-detendu-bulle")
+        element("coach.close").tap()
+        XCTAssertTrue(element("coach.bubble.1").waitForNonExistence(timeout: 3), "La bulle se ferme")
     }
 
-    // MARK: - Time runs out, wrong accusation, reveal
+    // MARK: - Time runs out, wrong conclusion, « Reprendre l'enquête », the solution
 
-    func testTimeUpWrongAccusationThenReveal() {
-        app.launchArguments += ["-UITestDuration", "20"]
+    func testTimeUpWrongConclusionThenRetry() {
+        app.launchArguments += ["-UITestDuration", "30"]
         startCase()
-        snap("30-chrono-court")
+        openApp("messages")
+        let alibi = element("message.m_emma_2230")
+        tap(element("conversation.c_emma"), "conversation Emma", expecting: alibi)
+        file(alibi, "30-piece-avant-la-fin")
 
-        wait(app.staticTexts["00:00"], 40, "écran temps écoulé")
+        // 00:00: the conclusion is forced, « TEMPS ÉCOULÉ », no way back.
+        wait(element("accuse.timeUp"), 40, "« TEMPS ÉCOULÉ »")
+        XCTAssertFalse(element("accuse.back").exists, "Pas de retour possible après la fin du chrono")
         snap("31-temps-ecoule")
 
-        let lucas = wait(element("accuse.suspect.s_lucas"), 10, "accusation après le temps écoulé")
-        snap("32-accusation-forcee")
-        choose(lucas)
-        holdToAccuse()
+        // A wrong conclusion: Lucas.
+        choose(wait(element("accuse.suspect.s_lucas"), 10, "suspects"))
+        holdToConclude()
+        readReport("32-verification-non-resolu")
+        sleep(1)
+        snap("33-rapport-non-resolu")
 
+        // « Reprendre l'enquête »: the timer full again, the pieces kept.
+        let retry = element("result.retry")
+        scrollTo(retry)
+        tap(retry, "Reprendre l'enquête", expecting: element("phone.timer"))
+        XCTAssertTrue(secondsLeft() >= 20, "Chrono plein à la reprise (\(secondsLeft()) s)")
+        assertPieces(1)
+        snap("34-reprise-apres-echec")
+
+        // Second attempt, wrong again, then the solution on request.
+        wait(element("accuse.timeUp"), 45, "« TEMPS ÉCOULÉ » (2e fois)")
+        choose(wait(element("accuse.suspect.s_lucas"), 10, "suspects"))
+        holdToConclude()
+        readReport("35-verification-2")
         let reveal = element("result.reveal")
-        // The typed verification and the stamp play first (~4.5 s).
-        sleep(6)
-        snap("33-resultat-negatif")
         scrollTo(reveal)
         reveal.tap()
-        let confirm = app.sheets.buttons.matching(NSPredicate(format: "label BEGINSWITH 'Révéler'")).firstMatch
-        if !confirm.waitForExistence(timeout: 3) {
-            snap("retry-consulter-solution")
-            reveal.tap()
+        let confirmReveal = app.buttons.matching(NSPredicate(format: "label BEGINSWITH[c] 'Révéler' OR label BEGINSWITH[c] 'Consulter'")).firstMatch
+        if !reveal.waitForNonExistence(timeout: 3), confirmReveal.exists {
+            confirmReveal.tap()
         }
-        wait(confirm, 5, "confirmation de révélation")
-        snap("34-confirmation-revelation")
-        confirm.tap()
-
-        wait(element("result.primary"), 10, "solution révélée")
-        sleep(7)
-        snap("35-solution-revelee")
+        XCTAssertTrue(reveal.waitForNonExistence(timeout: 8), "La solution s'affiche")
+        sleep(2)
+        snap("36-solution-revelee")
     }
 }

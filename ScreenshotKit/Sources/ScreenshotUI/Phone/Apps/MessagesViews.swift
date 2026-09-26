@@ -196,13 +196,19 @@ enum Highlighter {
 }
 
 /// Screen 10 — one conversation. You read, you don't write: no input field.
+/// In case #001, bubble 2 « VERSER AU DOSSIER » comes above the first piece of the conversation
+/// after 2 s of reading (final handoff §D).
 struct ConversationView: View {
     let conversationID: String
     let focus: String?
     let session: GameSession
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
 
     /// Messages closer than this share one centered timestamp.
     private let groupGap: Int64 = 5 * 60
+    /// Width of the tutorial bubble over a message.
+    private let coachWidth: CGFloat = 260
 
     var body: some View {
         let game = session.game
@@ -210,6 +216,7 @@ struct ConversationView: View {
         let messages = game.loadedMessages(in: conversationID)
         let other = conversation.flatMap { $0.isGroup ? nil : game.contact($0.participants[0]) }
         let stopped = other.flatMap { contact in game.device.tracks.first { $0.contact == contact.id }?.sharingStoppedAt }
+        let coachTarget = session.coach.active == .file ? session.coach.fileTarget : nil
 
         ScrollViewReader { proxy in
             ScrollView {
@@ -256,13 +263,29 @@ struct ConversationView: View {
                         }
                         let lastOfGroup: Bool = next.map { $0.from != visible.message.from || $0.at.seconds - at.seconds > groupGap } ?? true
                         let showsSender: Bool = conversation?.isGroup == true && previous?.from != visible.message.from && !visible.message.isFromOwner
+                        let isCoachTarget: Bool = visible.id == coachTarget
+                        let mine: Bool = visible.message.isFromOwner
+                        // Bubble 2 sits above the message, its arrow ≈ 40 pt in from the message's side.
+                        let coachAlignment: Alignment = mine ? .topTrailing : .topLeading
+                        let coachArrow: CGFloat = mine ? coachWidth / 2 - 40 : 40 - coachWidth / 2
                         MessageBubble(visible: visible,
                                       senderName: showsSender ? game.name(of: visible.message.from) : nil,
                                       lastOfGroup: lastOfGroup,
                                       highlighted: visible.id == focus,
+                                      spotlight: isCoachTarget,
                                       session: session)
                             .id(visible.id)
                             .onAppear { session.markSeen(ItemRef(.message, visible.id)) }
+                            .overlay(alignment: coachAlignment) {
+                                if isCoachTarget {
+                                    CoachBubble(bubble: .file, arrow: .bottom, arrowOffset: coachArrow) {
+                                        session.coach.dismiss()
+                                    }
+                                    .frame(width: coachWidth)
+                                    .alignmentGuide(.top) { d in d[.bottom] + 16 }
+                                }
+                            }
+                            .zIndex(isCoachTarget ? 1 : 0)
                     }
                     // Like a real messenger: the owner's last message, if nothing came after it.
                     if let last = messages.last, last.message.isFromOwner, last.state != .removedBySender {
@@ -285,6 +308,16 @@ struct ConversationView: View {
             .defaultScrollAnchor(.bottom)
             .onAppear {
                 if let focus { proxy.scrollTo(focus, anchor: .center) }
+            }
+            // Bubble 2 appears: bring its message into view, with room above it for the bubble.
+            .onChange(of: session.coach.active) { _, active in
+                guard active == .file, let target = session.coach.fileTarget else { return }
+                let anchor = UnitPoint(x: 0.5, y: 0.66)
+                if systemReduceMotion || appReduceMotion {
+                    proxy.scrollTo(target, anchor: anchor)
+                } else {
+                    withAnimation(Theme.Motion.standard()) { proxy.scrollTo(target, anchor: anchor) }
+                }
             }
         }
         .background(Theme.Colors.bgBase)
@@ -309,6 +342,22 @@ struct ConversationView: View {
                 .accessibilityHint(Text(L10n.t("a11y.openContact")))
             }
         }
+        .onAppear {
+            session.coach.conversationOpened(evidenceMessage: session.coach.enabled ? firstPiece() : nil)
+        }
+        .onDisappear { session.coach.conversationClosed() }
+    }
+
+    /// The first message on screen that is a piece of the case (not a false lead): bubble 2 points at it.
+    private func firstPiece() -> String? {
+        let pieces = Set(session.caseFile.evidence
+            .filter { $0.importance != .falseLead }
+            .flatMap(\.refs)
+            .filter { $0.kind == .message }
+            .map(\.id))
+        return session.game.loadedMessages(in: conversationID)
+            .first { pieces.contains($0.message.id) && $0.state != .removedBySender }?
+            .message.id
     }
 
     private func meta(_ conversation: Conversation?, other: Contact?, game: Investigation) -> String {
@@ -336,12 +385,14 @@ struct SystemPill: View {
 }
 
 /// MessageBubble: received (grey, left) · sent (blue, right) · deleted (dashed, italic) ·
-/// recovered · pinned (amber ring + dot) · photo. Max 76 % width, r 19, 6 on the sender side of the last one.
+/// recovered · filed (« PIÈCE 0N » label) · photo. Max 76 % width, r 19, 6 on the sender side of the last one.
 struct MessageBubble: View {
     let visible: VisibleMessage
     let senderName: String?
     let lastOfGroup: Bool
     let highlighted: Bool
+    /// Bubble 2 of the tutorial points at it (ring + halo).
+    var spotlight = false
     let session: GameSession
 
     var body: some View {
@@ -361,7 +412,7 @@ struct MessageBubble: View {
                     .padding(.horizontal, 13)
                     .padding(.top, Theme.Spacing.s3)
             }
-            Group {
+            ZStack {
                 if visible.state == .removedBySender {
                     Text(L10n.t("messages.removed"))
                         .font(Theme.Fonts.body.italic())
@@ -397,6 +448,12 @@ struct MessageBubble: View {
                     )
                 }
             }
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel(Text("\(session.game.name(of: message.from)), \(PhoneFormat.time(message.at)) : \(message.text ?? L10n.t("item.photo"))"))
+            .accessibilityIdentifier("message.\(message.id)")
+            .overlay {
+                if spotlight { CoachRing(radius: Theme.Radius.bubble) }
+            }
             .pinnable(ItemRef(.message, message.id), session: session, radius: Theme.Radius.bubble)
             if visible.state == .recovered {
                 Text(L10n.t("messages.recovered"))
@@ -408,9 +465,6 @@ struct MessageBubble: View {
         .frame(maxWidth: .infinity, alignment: mine ? .trailing : .leading)
         .padding(mine ? .leading : .trailing, Theme.Spacing.s10)
         .padding(.bottom, lastOfGroup ? 6 : 0)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text("\(session.game.name(of: message.from)), \(PhoneFormat.time(message.at)) : \(message.text ?? L10n.t("item.photo"))"))
-        .accessibilityIdentifier("message.\(message.id)")
     }
 }
 

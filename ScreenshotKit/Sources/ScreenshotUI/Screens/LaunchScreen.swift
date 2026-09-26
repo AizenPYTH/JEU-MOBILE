@@ -15,18 +15,22 @@ struct BootData {
     var savedGame: SavedInvestigation?
 }
 
-/// The real start-up work, step by step: fonts, the player's saves, the rules, each case file
-/// (decoded off the main thread), the interface sounds, the delivered portraits. `progress` is the
-/// share of that work actually done; the loading bar follows it.
+/// The real start-up work: fonts, the player's saves, the rules, each case file (decoded off the
+/// main thread), the interface sounds, the portraits. `boot` is published as soon as the game can
+/// start (saves, rules, cases); `portraitsReady` once the pictures seen first (§F-01: case #001's
+/// suspects, the investigators) are decoded. The other cases' portraits follow in the background.
 @MainActor
 @Observable
 final class LaunchLoader {
-    private(set) var progress: Double = 0
     private(set) var boot: BootData?
+    private(set) var portraitsReady = false
 
-    private var done = 0.0
-    private var total = 1.0
     private var started = false
+
+    init() {
+        // Before the first frame, so the launch screen's label is already set in Plex Mono.
+        AppFonts.register()
+    }
 
     func run() async {
         guard !started else { return }
@@ -34,24 +38,19 @@ final class LaunchLoader {
         let caseURLs = (try? FileManager.default.contentsOfDirectory(at: CaseLibrary.casesDirectory, includingPropertiesForKeys: nil))?
             .filter { $0.pathExtension == "json" }
             .sorted { $0.lastPathComponent < $1.lastPathComponent } ?? []
-        // Weights: a case file is the heaviest step.
-        total = 1 + 1 + 1 + Double(caseURLs.count) * 3 + 1 + 1
         var data = BootData()
-
-        AppFonts.register()
-        await step(1)
 
         UITestHooks.applyAtLaunch()
         data.attempts = ProgressStore.attempts()
         data.savedGame = SavedInvestigationStore.load()
-        await step(1)
+        // Players of earlier versions keep their desk: already assigned to the BEN.
+        PlayerStore.migrate(attempts: data.attempts)
 
         do {
             data.rules = try await Task.detached(priority: .userInitiated) { try CaseLibrary.loadRules() }.value
         } catch {
             data.loadError = String(describing: error)
         }
-        await step(1)
 
         var cases: [CaseFile] = []
         for url in caseURLs {
@@ -64,150 +63,98 @@ final class LaunchLoader {
             } catch {
                 data.loadError = data.loadError ?? String(describing: error)
             }
-            await step(3)
         }
         if caseURLs.isEmpty { data.loadError = data.loadError ?? "Cases" }
         data.cases = data.loadError == nil ? cases.sorted { $0.number < $1.number } : []
         if data.loadError != nil { data.rules = nil }
 
         AudioDirector.shared.warmUp()
-        await step(1)
-
-        await ArtLibrary.warmUp(portraitsOf: data.cases)
-        await step(1)
-
-        boot = data
-    }
-
-    /// Records a finished step and gives the screen a frame to show it.
-    private func step(_ weight: Double) async {
-        done += weight
-        progress = min(1, done / total)
         await Task.yield()
+
+        // The game can start: the launch screen leaves once its minimum time is over.
+        boot = data
+
+        // First the pictures seen first: the case in progress (or #001), then the investigators.
+        let loaded = data.cases
+        let inProgress = data.savedGame.flatMap { game in loaded.first { $0.id == game.snapshot.caseID } }
+        let first = inProgress ?? loaded.first { $0.number == 1 } ?? loaded.first
+        await ArtLibrary.warmUp(names: ArtLibrary.launchNames(first: first))
+        portraitsReady = true
+
+        // Then every other case's portraits, once the next screen has faded in, one per turn.
+        Task {
+            try? await Task.sleep(for: .seconds(1.5))
+            await ArtLibrary.warmUp(portraitsOf: loaded)
+        }
     }
 }
 
-// MARK: - Loading screen
+// MARK: - 01 · Lancement
 
-/// The loading screen: the key art full screen, and over the bar drawn in the art, a real bar
-/// driven by `LaunchLoader`. It never finishes before the work is done, never flashes by on a fast
-/// device (minimum time), then fades into the game.
+/// Screen 01 (final handoff §F-01): the logo tile on #0A0908, exactly where the system launch
+/// screen drew it (188 pt, centred in the whole screen), and « NOREL GAMES » 58 pt from the bottom
+/// edge. No bar, no spinner. It stays at least 1.6 s; it leaves when the game can start and the
+/// first portraits are decoded, and never waits past 4 s for the portraits (they fall back to
+/// initials). Then the logo fades to black (250 ms) and RootView fades the next screen in (350 ms).
 struct LoadingScreen: View {
     let loader: LaunchLoader
     let onFinished: (BootData) -> Void
 
-    @State private var shown: Double = 0
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var leaving = false
 
-    /// The artwork and its drawn bar, in the artwork's pixels (941 × 1672).
-    private enum Art {
-        static let size = CGSize(width: 941, height: 1672)
-        static let bar = CGRect(x: 188, y: 1446, width: 566, height: 28)
-    }
-
-    /// Shortest time on screen, so the art is seen and the bar is read, even on a fast iPhone.
-    private static let minimumDuration: Double = 1.8
+    /// Shortest time on screen, so the brand is seen even on a fast iPhone.
+    private static let minimumDuration: Duration = .milliseconds(1600)
+    /// Longest wait for the portraits (the case files themselves are always waited for).
+    private static let maximumDuration: Duration = .seconds(4)
+    /// Fade to black before handing over.
+    private static let fadeOut: Duration = .milliseconds(250)
+    private static let tileSize: CGFloat = 188
+    private static let studioBottom: CGFloat = 58
+    /// The studio's name: not translated.
+    private static let studio = "NOREL GAMES"
+    /// Plex Mono 10, tracking +32 %.
+    private static let studioFont = Font.custom(Trace.FontName.mono, fixedSize: 10)
+    private static let studioTracking: CGFloat = 3.2
 
     var body: some View {
-        GeometryReader { geo in
-            let scale = max(geo.size.width / Art.size.width, geo.size.height / Art.size.height)
-            let origin = CGPoint(x: (geo.size.width - Art.size.width * scale) / 2,
-                                 y: (geo.size.height - Art.size.height * scale) / 2)
-            let bar = CGRect(x: origin.x + Art.bar.minX * scale, y: origin.y + Art.bar.minY * scale,
-                             width: Art.bar.width * scale, height: Art.bar.height * scale)
-            ZStack(alignment: .topLeading) {
-                background(size: geo.size)
-                LoadingBar(progress: shown, shine: !reduceMotion)
-                    .frame(width: bar.width, height: bar.height)
-                    .offset(x: bar.minX, y: bar.minY)
-            }
+        ZStack {
+            Trace.Colors.launch
+            LogoTile(size: Self.tileSize)
+                .opacity(leaving ? 0 : 1)
+            Text(verbatim: Self.studio)
+                .font(Self.studioFont)
+                .tracking(Self.studioTracking)
+                .foregroundStyle(Trace.Colors.bone3)
+                .opacity(leaving ? 0 : 1)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .padding(.bottom, Self.studioBottom)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(L10n.t("launch.loading")))
-        .accessibilityValue(Text("\(Int((shown * 100).rounded())) %"))
         .accessibilityIdentifier("launch.loading")
         .task { await loader.run() }
         .task { await drive() }
     }
 
-    @ViewBuilder
-    private func background(size: CGSize) -> some View {
-        if let image = ArtLibrary.image("loading_main") {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: size.width, height: size.height)
-                .clipped()
-        } else {
-            TraceDesk()
-        }
-    }
-
-    /// Moves the bar toward the real progress, never faster than the minimum time allows.
+    /// Waits for the case files (however long), the minimum time, and the first portraits (at most
+    /// until the maximum time), then fades to black and hands the boot data over.
     private func drive() async {
-        let start = Date()
+        let clock = ContinuousClock()
+        let start = clock.now
         while !Task.isCancelled {
-            let elapsed = Date().timeIntervalSince(start)
-            let target = min(loader.progress, elapsed / Self.minimumDuration)
-            let gap = target - shown
-            shown = gap < 0.002 ? max(shown, target) : shown + gap * 0.16
-            if loader.boot != nil, shown >= 0.998 { break }
-            try? await Task.sleep(for: .milliseconds(16))
-        }
-        shown = 1
-        try? await Task.sleep(for: .milliseconds(380))
-        if let boot = loader.boot { onFinished(boot) }
-    }
-}
-
-/// The bar, drawn to replace the one in the artwork: a black channel with a thin worn rim, filled
-/// with a deep red that brightens toward its leading edge, a faint glow, and (while loading) a slow
-/// light running along the red.
-struct LoadingBar: View {
-    let progress: Double
-    var shine = true
-
-    var body: some View {
-        GeometryReader { geo in
-            let inset = geo.size.height * 0.16
-            let width = max(geo.size.height - inset * 2, (geo.size.width - inset * 2) * progress)
-            ZStack(alignment: .leading) {
-                // Hides the bar and the red glow painted in the artwork.
-                Capsule().fill(Trace.Colors.loadingTrack)
-                    .padding(-geo.size.height * 0.35)
-                    .blur(radius: geo.size.height * 0.3)
-                Capsule().fill(Trace.Colors.loadingTrack)
-                Capsule()
-                    .fill(LinearGradient(colors: [Trace.Colors.loadingRedDeep, Trace.Colors.loadingRed, Trace.Colors.loadingRedHot],
-                                         startPoint: .leading, endPoint: .trailing))
-                    .frame(width: width)
-                    .padding(inset)
-                    .shadow(color: Trace.Colors.loadingRedHot.opacity(0.55), radius: geo.size.height * 0.35)
-                    .overlay(alignment: .leading) {
-                        if shine && progress < 1 {
-                            Shine().frame(width: width).clipShape(Capsule()).padding(inset)
-                        }
-                    }
-                    .opacity(progress > 0.001 ? 1 : 0)
-                Capsule().strokeBorder(Trace.Colors.loadingRim, lineWidth: max(1, geo.size.height * 0.07))
+            let elapsed = start.duration(to: clock.now)
+            if loader.boot != nil, elapsed >= Self.minimumDuration,
+               loader.portraitsReady || elapsed >= Self.maximumDuration {
+                break
             }
+            try? await Task.sleep(for: .milliseconds(40))
         }
-    }
-
-    /// A soft highlight crossing the filled part every 1.6 s.
-    private struct Shine: View {
-        var body: some View {
-            TimelineView(.animation) { timeline in
-                GeometryReader { geo in
-                    let phase = timeline.date.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: 1.6) / 1.6
-                    LinearGradient(colors: [.clear, Trace.Colors.label.opacity(0.28), .clear], startPoint: .leading, endPoint: .trailing)
-                        .frame(width: max(24, geo.size.width * 0.25))
-                        .offset(x: -geo.size.width * 0.25 + (geo.size.width * 1.25) * phase)
-                }
-            }
-            .allowsHitTesting(false)
-        }
+        guard !Task.isCancelled, let boot = loader.boot else { return }
+        withAnimation(.easeIn(duration: 0.25)) { leaving = true }
+        try? await Task.sleep(for: Self.fadeOut)
+        onFinished(boot)
     }
 }
 #endif

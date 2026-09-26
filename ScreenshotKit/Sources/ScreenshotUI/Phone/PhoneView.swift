@@ -2,16 +2,26 @@
 import SwiftUI
 import CaseEngine
 
-/// The seized phone — the whole screen. Only two game elements sit on top of the fictional OS:
-/// the timer (in place of the clock) and the "Carnet · Indice" capsule (at the thumb).
+/// The seized phone — the whole screen. Only three game elements sit on the fictional OS: the
+/// timer tag hanging under the camera island, the pause button, and the dossier bar at the thumb
+/// (« DOSSIER #00N · n pièces versées · CARNET »). A piece just filed flies into the bar (§F-07).
 struct PhoneView: View {
     let session: GameSession
     let onNotebook: () -> Void
-    let onHints: () -> Void
-    let onTimer: () -> Void
     let onQuit: () -> Void
     /// Apps open from (and close back into) their icon, like on iOS.
     @Namespace private var appZoom
+    /// The paper copy of the piece just filed, on its way to the dossier bar.
+    @State private var flight: GameSession.FiledPiece?
+    @State private var flightStage = FlightStage.hidden
+    /// The dossier bar's red border, for 600 ms after each filing.
+    @State private var barPulse = false
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
+
+    enum FlightStage { case hidden, shown, landed }
+
+    private var reduceMotion: Bool { systemReduceMotion || appReduceMotion }
 
     var body: some View {
         ZStack {
@@ -25,11 +35,17 @@ struct PhoneView: View {
         .statusBarHidden()
         .persistentSystemOverlays(.hidden)
         .defersSystemGestures(on: .bottom)
+        .onChange(of: session.lastFiled) { _, piece in
+            if let piece { fly(piece) }
+        }
     }
 
     /// Everything shown on the seized phone's glass.
     private var screen: some View {
-        ZStack(alignment: .top) {
+        let filed = session.game.notebook.count
+        // The counter moves when the flying copy lands in the bar.
+        let shown = max(0, filed - (flight == nil ? 0 : 1))
+        return ZStack(alignment: .top) {
             Theme.Colors.bgBase.ignoresSafeArea()
 
             VStack(spacing: 0) {
@@ -48,31 +64,25 @@ struct PhoneView: View {
             .ignoresSafeArea(edges: .top)
 
             // On the home screen the wallpaper shows through the status bar, like a real phone.
-            StatusBar(session: session, onTimer: onTimer)
+            StatusBar(session: session, onQuit: onQuit)
                 .background(session.path.isEmpty ? Color.clear : Theme.Colors.bgBase.opacity(0.94))
                 .ignoresSafeArea(edges: .top)
                 .zIndex(1)
 
-            // Bottom: scrim gradient 96 pt, capsule, home indicator.
+            // Bottom: scrim gradient, the dossier bar, the home indicator.
             VStack(spacing: Theme.Spacing.s3) {
                 Spacer()
-                HStack(spacing: Theme.Spacing.s3) {
-                    QuitButton(action: onQuit)
-                    CarnetBar(count: session.game.notebook.count, hintAvailable: session.game.nextHint != nil,
-                              onNotebook: onNotebook, onHints: onHints)
-                }
+                DossierBar(caseNumber: session.caseFile.number, shown: shown, filed: filed,
+                           pulse: barPulse, onNotebook: onNotebook)
+                    .padding(.horizontal, PhoneLayout.barMargin)
                 HomeIndicator { session.goHome() }
             }
             .background(alignment: .bottom) {
                 LinearGradient(colors: [.clear, Theme.Colors.bgBase.opacity(0.92)], startPoint: .top, endPoint: .bottom)
-                    .frame(height: 96 + Theme.Size.carnetBar)
+                    .frame(height: 96 + PhoneLayout.barHeight)
                     .allowsHitTesting(false)
             }
             .ignoresSafeArea(edges: .bottom)
-
-            if session.timerLevel == .critical {
-                CriticalVignette().allowsHitTesting(false)
-            }
 
             if let banner = session.banner {
                 if banner.level == .urgent {
@@ -87,19 +97,77 @@ struct PhoneView: View {
                     .zIndex(2)
             }
 
+            // Tips and confirmations: at the top, under the timer tag.
             if let toast = session.toast {
-                VStack {
-                    Spacer()
-                    ToastView(toast: toast)
-                        .padding(.bottom, Theme.Spacing.bottomInset)
+                ToastView(toast: toast)
+                    .padding(.top, PhoneLayout.toastTop)
+                    .transition(reduceMotion ? .opacity : .opacity.combined(with: .move(edge: .top)))
+                    .allowsHitTesting(false)
+                    .zIndex(3)
+            }
+
+            if let flight {
+                GeometryReader { geo in
+                    let landed = flightStage == .landed
+                    FiledPaperCopy(piece: flight, game: session.game)
+                        .scaleEffect(landed ? 0.2 : 1)
+                        .opacity(flightStage == .shown ? 1 : (landed ? 0.3 : 0))
+                        .position(x: landed ? geo.size.width * 0.3 : geo.size.width / 2,
+                                  y: landed ? geo.size.height - PhoneLayout.barCenterFromBottom : geo.size.height * 0.45)
                 }
-                .transition(.opacity.combined(with: .move(edge: .bottom)))
                 .allowsHitTesting(false)
-                .zIndex(3)
+                .zIndex(4)
+            }
+
+            // Back from the background (or the pause sheet): « EN PAUSE » until the first tap.
+            if session.isPaused {
+                Color.clear
+                    .contentShape(Rectangle())
+                    .onTapGesture { session.resume() }
+                    .accessibilityElement()
+                    .accessibilityLabel(Text(L10n.t("a11y.resume")))
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityAction { session.resume() }
+                    .zIndex(5)
             }
         }
         .animation(Theme.Motion.springNotification, value: session.banner)
         .animation(Theme.Motion.emphasized(0.2), value: session.toast)
+    }
+
+    /// §F-07: the copy appears over the middle of the phone, shrinks and slides into the bar
+    /// (420 ms, `paper`), then the bar pulses and its counter moves. Reduced motion: the pulse only.
+    private func fly(_ piece: GameSession.FiledPiece) {
+        guard !reduceMotion else {
+            pulseBar()
+            return
+        }
+        flightStage = .hidden
+        flight = piece
+        Task {
+            // Let the filing sheet slide away first.
+            try? await Task.sleep(for: .milliseconds(120))
+            guard flight?.id == piece.id else { return }
+            withAnimation(.easeOut(duration: 0.15)) { flightStage = .shown }
+            try? await Task.sleep(for: .milliseconds(330))
+            guard flight?.id == piece.id else { return }
+            withAnimation(Trace.Motion.paper) { flightStage = .landed }
+            try? await Task.sleep(for: .milliseconds(420))
+            guard flight?.id == piece.id else { return }
+            withAnimation(.easeOut(duration: 0.2)) {
+                flight = nil
+                flightStage = .hidden
+            }
+            pulseBar()
+        }
+    }
+
+    private func pulseBar() {
+        withAnimation(.easeOut(duration: 0.12)) { barPulse = true }
+        Task {
+            try? await Task.sleep(for: .milliseconds(600))
+            withAnimation(.easeIn(duration: 0.2)) { barPulse = false }
+        }
     }
 
     @ViewBuilder
@@ -117,6 +185,20 @@ struct PhoneView: View {
         case .browserEntry(let id): BrowserPageView(entryID: id, session: session)
         }
     }
+}
+
+/// Layout of the game elements on the phone's glass.
+enum PhoneLayout {
+    /// The dossier bar (§F-05): 64 pt high, 12 pt from the edges, radius 10.
+    static let barHeight: CGFloat = 64
+    static let barMargin: CGFloat = 12
+    static let barRadius: CGFloat = 10
+    /// Centre of the bar from the bottom of the glass (home indicator 24 + 8, gap 8, half bar).
+    static let barCenterFromBottom: CGFloat = 72
+    /// Top of the timer tag: it hangs just under the camera island.
+    static let tagTop: CGFloat = 38
+    /// Toasts sit under the timer tag.
+    static let toastTop: CGFloat = 72
 }
 
 /// Routes an app to its screen, or to its lock screen.
@@ -276,25 +358,19 @@ struct DeskBackground: View {
     }
 }
 
-// MARK: - Status bar with the timer
+// MARK: - Status bar, timer tag, pause button
 
-/// h 54. The timer pill replaces the clock: normal · low (≤ 01:00, amber, breathing halo) ·
-/// critical (≤ 00:10, red, opacity 1 ↔ .72). Never blinks. A 2 pt track shows the time left.
+/// h 54: the pause button where the clock would be, the network and battery on the right, and a
+/// 2 pt track of the time left. The timer tag hangs under the camera island, with the time an
+/// action just cost next to it.
 struct StatusBar: View {
     let session: GameSession
-    let onTimer: () -> Void
+    let onQuit: () -> Void
 
     var body: some View {
         let level = session.timerLevel
         HStack(spacing: Theme.Spacing.s3) {
-            Button(action: onTimer) {
-                TimerPill(remaining: session.remainingSeconds, level: level)
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text(L10n.f("a11y.timer", PhoneFormat.countdown(session.remainingSeconds))))
-            .accessibilityHint(Text(L10n.t("a11y.timerHint")))
-            .accessibilityIdentifier("phone.timer")
-
+            QuitButton(action: onQuit)
             Spacer()
             HStack(spacing: 5) {
                 Image(systemName: "cellularbars")
@@ -305,23 +381,7 @@ struct StatusBar: View {
             .foregroundStyle(Theme.Colors.textPrimary)
             .accessibilityHidden(true)
         }
-        .overlay(alignment: .bottomLeading) {
-            // The time an action just cost, under the timer (never hidden by the camera island).
-            if let cost = session.lastCost {
-                Text(L10n.f("bar.cost", cost.seconds))
-                    .font(Theme.Fonts.dataStrong)
-                    .foregroundStyle(Theme.Colors.alertText)
-                    .padding(.horizontal, Theme.Spacing.s3)
-                    .frame(height: 22)
-                    .background(Capsule().fill(Theme.Colors.alertTint))
-                    .background(Capsule().fill(Theme.Colors.bgBase))
-                    .id(cost.id)
-                    .offset(y: 26)
-                    .transition(.opacity.combined(with: .move(edge: .top)))
-                    .allowsHitTesting(false)
-            }
-        }
-        .padding(.leading, 26)
+        .padding(.leading, 14)
         .padding(.trailing, 30)
         .padding(.top, Theme.Spacing.s3)
         .frame(height: Theme.Size.statusBar)
@@ -337,6 +397,31 @@ struct StatusBar: View {
             .frame(height: Theme.Size.progressTrack)
             .offset(y: 4)
             .accessibilityHidden(true)
+        }
+        .overlay(alignment: .top) {
+            TimerTag(remaining: session.remainingSeconds,
+                     critical: level != .normal || session.remainingSeconds <= 60,
+                     paused: session.isPaused)
+                .overlay(alignment: .bottomTrailing) {
+                    // The time an action just cost (« −8 s »), beside the tag.
+                    if let cost = session.lastCost {
+                        Text(L10n.f("bar.cost", cost.seconds))
+                            .font(Theme.Fonts.dataStrong)
+                            .foregroundStyle(Theme.Colors.alertText)
+                            .padding(.horizontal, Theme.Spacing.s3)
+                            .frame(height: 22)
+                            .background(Capsule().fill(Theme.Colors.alertTint))
+                            .background(Capsule().fill(Theme.Colors.bgBase))
+                            .fixedSize()
+                            .alignmentGuide(.trailing) { d in d[.leading] - Theme.Spacing.s3 }
+                            .alignmentGuide(.bottom) { d in d[.bottom] - 4 }
+                            .id(cost.id)
+                            .transition(.opacity)
+                            .allowsHitTesting(false)
+                            .accessibilityHidden(true)
+                    }
+                }
+                .padding(.top, PhoneLayout.tagTop)
         }
         .animation(Theme.Motion.standard(Theme.Motion.fast), value: session.lastCost)
     }
@@ -358,134 +443,148 @@ struct BatteryIndicator: View {
     }
 }
 
-/// The timer as a paper tag hanging on the phone (the design's `TraceStatus`): tilted −2°, a
-/// punched hole, mono digits. ≤ 01:00: red outline and filled hole. ≤ 00:10: the tag turns red.
-struct TimerPill: View {
+/// The timer (§F-05): a paper label #ECE5D3, Plex Mono 13/700, tilted −1°, hanging under the camera
+/// island. Under 01:00 it turns red (colour change in 400 ms, never blinking; the session ticks each
+/// second and adds a light haptic under 00:10). Paused: outlined, « EN PAUSE ».
+struct TimerTag: View {
     let remaining: Double
-    let level: GameSession.TimerLevel
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    let critical: Bool
+    let paused: Bool
+
+    private static let digits = Font.custom(Trace.FontName.monoBold, fixedSize: 13)
+    private static let pausedLabel = Font.custom(Trace.FontName.monoBold, fixedSize: 9)
 
     var body: some View {
-        let critical = level == .critical
-        let low = level == .low
-        HStack(spacing: 7) {
-            Circle()
-                .fill(low || critical ? (critical ? Trace.Colors.stampText : Trace.Colors.stamp) : Trace.Colors.desk.opacity(0.85))
-                .overlay(Circle().strokeBorder(Trace.Colors.inkSoft.opacity(0.5), lineWidth: low || critical ? 0 : 1))
-                .frame(width: 6, height: 6)
+        let shape = RoundedRectangle(cornerRadius: 2, style: .continuous)
+        HStack(spacing: 6) {
             Text(PhoneFormat.countdown(remaining))
-                .font(.custom(Trace.FontName.monoBold, fixedSize: 14))
+                .font(Self.digits)
                 .monospacedDigit()
-                .foregroundStyle(critical ? Trace.Colors.stampText : Trace.Colors.ink)
+            if paused {
+                Text(L10n.t("timer.paused"))
+                    .font(Self.pausedLabel)
+                    .tracking(1.2)
+            }
         }
-        .padding(.horizontal, 9)
+        .foregroundStyle(paused ? Trace.Colors.paper : (critical ? Trace.Colors.criticalText : Trace.Colors.ink))
+        .padding(.horizontal, 10)
         .frame(height: 24)
-        .background(RoundedRectangle(cornerRadius: 2).fill(critical ? Trace.Colors.stamp : Trace.Colors.paper))
-        .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(Trace.Colors.stamp, lineWidth: low ? 1.5 : 0))
-        .shadow(color: .black.opacity(0.35), radius: 3, y: 2)
-        .rotationEffect(.degrees(-2))
-        .phaseAnimator(reduceMotion || !critical ? [1.0] : [1.0, 0.78]) { view, value in
-            view.opacity(value)
-        } animation: { _ in .easeInOut(duration: 0.5) }
+        .background(shape.fill(paused ? Trace.Colors.desk.opacity(0.7) : (critical ? Trace.Colors.stamp : Trace.Colors.paper)))
+        .overlay(shape.strokeBorder(Trace.Colors.paper, lineWidth: paused ? 1.5 : 0))
+        .shadow(color: .black.opacity(paused ? 0 : 0.35), radius: 3, y: 2)
+        .rotationEffect(.degrees(-1))
+        .animation(.easeInOut(duration: 0.4), value: critical)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(accessibilityText))
+        // The digits for UI tests; VoiceOver reads the spoken form of the label first.
+        .accessibilityValue(Text(PhoneFormat.countdown(remaining)))
+        .accessibilityIdentifier("phone.timer")
+    }
+
+    /// « Temps restant : 4 minutes et 12 secondes » (+ « En pause »).
+    private var accessibilityText: String {
+        let spoken = L10n.f("a11y.timer", SpokenDuration.text(remaining))
+        return paused ? spoken + ". " + L10n.t("timer.paused") : spoken
     }
 }
 
-/// Red inner vignette in the last 10 seconds.
-struct CriticalVignette: View {
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    var body: some View {
-        Rectangle()
-            .strokeBorder(Theme.Colors.alert.opacity(0.2), lineWidth: 90)
-            .blur(radius: 60)
-            .ignoresSafeArea()
-            .phaseAnimator(reduceMotion ? [1.0] : [1.0, 0.6]) { view, value in
-                view.opacity(value)
-            } animation: { _ in .easeInOut(duration: 0.5) }
+/// A countdown as VoiceOver should say it, in the interface language: « 4 minutes et 12 secondes ».
+enum SpokenDuration {
+    static func text(_ seconds: Double) -> String {
+        let total = max(0, Int(seconds.rounded(.up)))
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .full
+        formatter.allowedUnits = total >= 60 ? [.minute, .second] : [.second]
+        formatter.zeroFormattingBehavior = total == 0 ? .default : .dropAll
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.locale = Locale(identifier: Bundle.module.preferredLocalizations.first ?? "fr")
+        formatter.calendar = calendar
+        return formatter.string(from: TimeInterval(total)) ?? PhoneFormat.countdown(seconds)
     }
 }
 
-// MARK: - Notebook capsule & home indicator
+// MARK: - Dossier bar, pause button & home indicator
 
-/// The notebook's kraft tab sticking out at the bottom of the phone (the design's `CarnetTab`):
-/// « CARNET [n PIÈCES] | INDICE ». The counter flashes red for a moment when a piece is filed.
-struct CarnetBar: View {
-    let count: Int
-    let hintAvailable: Bool
+/// The dossier bar (§F-05), always on the phone: paper, 64 pt, radius 10. « DOSSIER #00N »,
+/// « n pièces versées » and the CARNET button (outlined while the file is empty, full ink from the
+/// first piece). A 2 pt red border pulses for 600 ms each time a piece lands in it.
+struct DossierBar: View {
+    let caseNumber: Int
+    /// Pieces shown: the counter moves when the flying copy lands.
+    let shown: Int
+    /// Pieces really in the file (what VoiceOver says).
+    let filed: Int
+    let pulse: Bool
     let onNotebook: () -> Void
-    let onHints: () -> Void
-    @State private var flash = false
 
     var body: some View {
-        HStack(spacing: 0) {
+        let shape = RoundedRectangle(cornerRadius: PhoneLayout.barRadius, style: .continuous)
+        let file = L10n.f("dossier.number", dossierNumber(caseNumber))
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 3) {
+                Text(file)
+                    .font(Trace.Fonts.kicker)
+                    .tracking(1.6)
+                    .foregroundStyle(Trace.Colors.inkSoft)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                Text(Self.count(shown))
+                    .font(Trace.Fonts.prose)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                    .contentTransition(.numericText())
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+            .onTapGesture(perform: onNotebook)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(file + ", " + Self.count(filed)))
+            .accessibilityAddTraits(.isButton)
+            .accessibilityAction { onNotebook() }
+            .accessibilityIdentifier("phone.bar")
+
             Button(action: onNotebook) {
-                HStack(spacing: 10) {
-                    Text(L10n.t("carnet.title").uppercased()).font(Trace.Fonts.button).tracking(2.4).foregroundStyle(Trace.Colors.kraftInk)
-                    Text(L10n.f("carnet.pieces", count))
-                        .font(Trace.Fonts.monoSmall.weight(.bold))
-                        .foregroundStyle(Trace.Colors.bone)
-                        .padding(.horizontal, 6).frame(height: 20)
-                        .background(RoundedRectangle(cornerRadius: 2).fill(flash ? Trace.Colors.stamp : Trace.Colors.ink))
-                        .contentTransition(.numericText())
-                }
-                .padding(.horizontal, 16)
-                .frame(maxHeight: .infinity)
-                .contentShape(Rectangle())
+                Text(L10n.t("carnet.title"))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text(L10n.f("a11y.carnet", count)))
+            .buttonStyle(CTAButtonStyle(kind: shown == 0 ? .outline : .primary, onPaper: true, height: 44))
+            .frame(width: 124)
+            .accessibilityLabel(Text(L10n.f("a11y.carnet", filed)))
             .accessibilityIdentifier("phone.carnet")
-
-            Rectangle().fill(Trace.Colors.kraftLabel.opacity(0.5)).frame(width: 1, height: 22)
-
-            Button(action: onHints) {
-                HStack(spacing: 6) {
-                    Text(L10n.t("bar.hint").uppercased()).font(Trace.Fonts.monoSmall.weight(.bold)).tracking(1.6)
-                    if hintAvailable { Circle().fill(Trace.Colors.stamp).frame(width: 6, height: 6) }
-                }
-                .foregroundStyle(Trace.Colors.kraftInk)
-                .padding(.horizontal, 14)
-                .frame(maxHeight: .infinity)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("phone.hints")
         }
-        .frame(height: Theme.Size.carnetBar)
-        .background(
-            UnevenRoundedRectangle(topLeadingRadius: 10, bottomLeadingRadius: 4, bottomTrailingRadius: 4, topTrailingRadius: 10)
-                .fill(Trace.Colors.kraft)
-                .overlay(PaperGrain(intensity: 0.05).clipShape(RoundedRectangle(cornerRadius: 10)))
-                .shadow(color: .black.opacity(0.45), radius: 10, y: -2)
-        )
-        // A small lift each time a piece is filed: "it went in the file".
-        .phaseAnimator([0.0, -6.0, 0.0], trigger: count) { view, y in
-            view.offset(y: y)
-        } animation: { _ in .spring(duration: 0.28, bounce: 0.35) }
-        .onChange(of: count) { old, new in
-            guard new > old else { return }
-            flash = true
-            Task { try? await Task.sleep(for: .seconds(1.5)); flash = false }
-        }
+        .padding(.leading, 16)
+        .padding(.trailing, 10)
+        .frame(minHeight: PhoneLayout.barHeight)
+        .paper(radius: PhoneLayout.barRadius)
+        .overlay(shape.strokeBorder(Trace.Colors.stamp, lineWidth: 2).opacity(pulse ? 1 : 0).allowsHitTesting(false))
+    }
+
+    /// « Aucune pièce versée » / « 1 pièce versée » / « 3 pièces versées ».
+    static func count(_ n: Int) -> String {
+        n == 0 ? L10n.t("bar.noPieces") : L10n.f("dossier.piecesCount", n)
     }
 }
 
-/// "Quitter l'enquête": a round button next to the notebook capsule (the investigation is saved).
+/// « Mettre l'enquête en pause » (top left, where a phone shows its clock): asks first, in a sheet.
 struct QuitButton: View {
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            Image(systemName: "chevron.backward")
-                .font(.system(size: 16, weight: .semibold))
+            Image(systemName: "pause.fill")
+                .font(.system(size: 11, weight: .bold))
                 .foregroundStyle(Theme.Colors.textPrimary)
-                .frame(width: Theme.Size.carnetBar, height: Theme.Size.carnetBar)
+                .frame(width: 30, height: 30)
                 .background(Circle().fill(Theme.Colors.bgBubbleIn.opacity(0.88)))
                 .background(.ultraThinMaterial, in: Circle())
-                .elevation1(Circle())
+                .overlay(Circle().strokeBorder(Theme.Colors.line2, lineWidth: 1))
+                .frame(width: Theme.Size.hit, height: Theme.Size.hit)
+                .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(Text(L10n.t("quit.a11y")))
+        .accessibilityLabel(Text(L10n.t("pause.a11y")))
         .accessibilityIdentifier("phone.quit")
     }
 }
@@ -548,7 +647,7 @@ struct NotificationBanner: View {
                         .buttonStyle(UrgentActionStyle(filled: true))
                         .accessibilityIdentifier("banner.open")
                     Button("◆ " + L10n.t("pin.add")) {
-                        if let ref = notification.opens { session.togglePin(ref) }
+                        if let ref = notification.opens { session.file(ref) }
                         session.dismissBanner()
                     }
                     .buttonStyle(UrgentActionStyle(filled: false))

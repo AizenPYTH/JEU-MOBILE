@@ -3,7 +3,8 @@
 Nom du jeu : **CONCLUDE : ENQUÊTES** (nom sous l'icône : « Conclude »). Anciens noms de travail : SCREENSHOT,
 TRACE — ils restent dans les identifiants internes (cible Xcode `Screenshot`, package `ScreenshotKit`,
 `Trace.*` pour le design, bundle `com.aizenpyth.screenshot`, à ne pas changer : TestFlight y est lié).
-Logo source : `docs/brand/conclude_logo_source.png` ; icône de l'app dérivée : `Screenshot/Assets.xcassets/AppIcon.appiconset`.
+Studio : NOREL GAMES. Logo maître : `docs/brand/logo_conclude_master.png` ; dérivés (handoff final §H) : icône
+`Screenshot/Assets.xcassets/AppIcon.appiconset`, tuile de lancement `LaunchTile`, `Art.xcassets/Brand/{logo_tile, logo_wordmark}`.
 
 Jeu iOS d'**enquête psychologique / investigation numérique** qui se joue entièrement dans
 l'interface d'un téléphone. Le joueur a un accès temporaire au téléphone d'une personne liée à une
@@ -36,12 +37,13 @@ affaire avant que le temps soit écoulé. »
 Screenshot.xcodeproj/     Coquille de l'app iOS (+ schéma partagé « Screenshot »)
 Screenshot/               App : ScreenshotApp.swift, Assets.xcassets (icône), InfoPlist.xcstrings
 ScreenshotUITests/        Tests d'interface (XCUITest) : parcours principal joué sur simulateur
-Configs/Screenshot.xcconfig  Bundle ID, version, signature (source unique)
+Configs/Screenshot.xcconfig  Bundle ID, version, signature (source unique) ; Configs/Info.plist = écran de lancement
 .github/workflows/        ios-build.yml (compilation iOS, chaque push) · tests-linux.yml (chaque push) ·
                           ios-testflight.yml (manuel + PR vers main). Contenu de référence : docs/CI_WORKFLOWS.md
 docs/TESTFLIGHT_SETUP.md  Signature et TestFlight sans Mac
 docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
-docs/CINEMATIQUES_VEO.md  Ouvertures des affaires #002–#005, plan par plan, avec prompts Veo 3.1
+docs/CINEMATIQUES_VEO.md  ARCHIVÉ — prompts Veo des anciennes cinématiques (retirées du jeu en V3)
+docs/design_final/        Handoff FINAL V3.0 (NE PAS MODIFIER) — parcours, écrans 01–15, tutoriel, états, critères
 docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — tokens du téléphone
 docs/brand/               Logo CONCLUDE : ENQUÊTES (source de l'icône)
 docs/design_trace/        Handoff TRACE v2 « dossier d'enquête » (NE PAS MODIFIER) — tout ce qui est hors du téléphone
@@ -54,17 +56,21 @@ ScreenshotKit/            Package Swift contenant tout le jeu
     Support/              GameClock (SystemClock / ManualClock)
   Sources/CaseLibrary/    Données : Resources/Cases/case_XXX.json + Resources/Rules/rules.json
   Sources/ScreenshotUI/   Interface SwiftUI (iOS uniquement, fichiers entourés de #if os(iOS))
-    Session/              GameSession (moteur, navigation, bannières, haptiques), ProgressStore (tentatives,
-                          meilleur résultat par niveau), Preferences (réglages), AudioDirector (sons, voix)
+    Session/              GameSession (moteur, navigation, versement, bannières, haptiques), ProgressStore (tentatives,
+                          meilleur résultat par niveau), Preferences (réglages, temps détendu), Player (enquêteur
+                          choisi, rangs, affectation), Tutorial (3 bulles du #001), AudioDirector (sons)
     Phone/                Le téléphone : barre d'état, accueil, bannières, et chaque app (Apps/)
-    Screens/              RootView (flux), CinematicView (séquence d'ouverture), DeskScreens (Bureau, Archives, Enquêteur),
-                          DossierView (dossier ouvert), MetaScreens (niveaux, archive, Paramètres),
-                          InvestigationView (téléphone + Carnet + Indices), EndScreens (temps écoulé,
-                          accusation, résultat, score)
-    Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (verser au dossier / l'accuse / le disculpe),
+    Screens/              RootView (flux), LaunchScreen (01), TitleScreens (02 titre, 02b reprise, 03 qui enquête ?),
+                          DossierView (04 briefing), CaseOpening (sachet → téléphone), InvestigationShell (téléphone,
+                          pause, versement), InvestigationView (Carnet + Indice), EndScreens (09 conclusion, 10
+                          vérification, 11 rapport, 12 affectation), DeskScreens (Bureau, Archives, Enquêteur),
+                          MetaScreens (niveaux, archive, Paramètres)
+    Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (appui long 0,4 s → FilingSheet « Verser au
+                          dossier »), CoachBubble (bulles du tutoriel),
                           Dossier (pièces à conviction, fiches suspects, chronologie), Controls (boutons,
                           maintien pour confirmer, segments, en-têtes, état vide)
-    Theme/, Support/      Tokens du téléphone (Theme.swift), direction TRACE (TraceDesign.swift), polices, L10n, dates
+    Theme/, Support/      Tokens du téléphone (Theme.swift), design papier (TraceDesign.swift + ConcludeKit.swift : boutons,
+                          logo, tampons PNG, post-it), polices, L10n, dates, ArtLibrary (images livrées)
     Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py), Fonts/ (Geist, JetBrains Mono,
                           Instrument Serif, Newsreader, IBM Plex Mono, Caveat — OFL)
   Sources/CaseLint/       CLI : valide chaque affaire et vérifie qu'elle est résolvable dans le temps
@@ -92,10 +98,21 @@ scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d
    affaire est écrit dans la langue du téléphone saisi.
 9. Pas de dépendance tierce sans accord du porteur de projet.
 
-## Design — TRACE v2 « papier dehors, verre dedans »
+## Design — « papier dehors, verre dedans » (handoff final V3)
 
-- Sources de vérité : `docs/design_trace/` (tout ce qui appartient à l'enquêteur : bureau, dossiers,
-  pièces, carnet, indices, vérification, rapports) et `docs/design/` (le téléphone saisi). Lecture seule.
+- Sources de vérité : `docs/design_final/` (V3.0 : parcours, écrans 01–15, tutoriel, états ; prime sur
+  les parcours des handoffs précédents), `docs/design_trace/` (matières : bureau, dossiers, pièces, carnet,
+  tampons) et `docs/design/` (le téléphone saisi). Lecture seule.
+- Premier lancement : Lancement → Titre → Qui enquête ? (Élise Morel / Vincent Delmas) → Dossier #001 →
+  téléphone, avec 3 bulles (EXPLORER · VERSER AU DOSSIER · RELIER) au #001 seulement. La couche carrière
+  (matricule, rang ENQUÊTEUR → INSPECTEUR → SENIOR → EXPÉRIMENTÉ, profil) n'apparaît qu'après l'écran 12
+  « Affectation » (après #001). Lancements suivants : Bureau, ou Titre-reprise si une enquête est en cours.
+- **Aucune cinématique** (décision du porteur de projet) : l'affaire est introduite par le briefing du
+  dossier et une courte ouverture (sachet de scellé → téléphone ; écran verrouillé pour #002–#005).
+  Le champ `introScene` des affaires reste dans les données mais n'est plus joué.
+- Trois verbes partout : EXPLORER · VERSER AU DOSSIER · CONCLURE (jamais « Épingler », « Accuser »,
+  « Recrue », « Stagiaire » : `LocalizationTests.bannedWordsAreGone`). Un seul bouton plein par écran.
+  Le logo n'apparaît que sur 01, 02, 02b et À propos.
   État et conflits : `DESIGN_INTEGRATION.md` (à tenir à jour). Si la maquette contredit le brief ou
   le moteur : noter le conflit et demander.
 - Hors du téléphone : `Trace.*` (TraceDesign.swift) — bureau sombre, papiers, kraft, encre, tampon
@@ -105,9 +122,10 @@ scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d
 - Dans le téléphone : tokens v1.0 `Theme.*` (6 noirs étagés, `textPrimary`, `signal`, `alert`,
   `trace`, `clear`), Geist / JetBrains Mono, aucune texture papier. Deux objets papier seulement sur
   le téléphone : l'étiquette du chrono et l'onglet kraft du Carnet.
-- Vocabulaire : Verser au dossier, L'accuse / Le disculpe, Vérification finale, Clore le dossier,
-  Rapport de clôture, Bureau, Archives, Enquêteur. Pièce n° = ordre de versement au dossier.
-- Clore le dossier = maintenir 1,2 s ; vérification tapée 2,4 s puis tampon RÉSOLU / NON RÉSOLU.
+- Vocabulaire : Verser au dossier, L'accuse / Le disculpe, Conclure l'enquête, « Qui est responsable ? »,
+  Rapport de clôture, Classer le dossier, Bureau, Archives, Enquêteur. Pièce n° = ordre de versement.
+- Conclure = maintenir 1,2 s « MAINTENIR : {PRÉNOM} EST RESPONSABLE » ; vérification tapée 1,4 s puis
+  tampon PNG RÉSOLU / NON RÉSOLU. Non résolu : « Reprendre l'enquête » (chrono plein, pièces gardées).
   Note finale = 60 · bon suspect + 25 · trouvées/total + 10 · temps restant/durée + 5 · pièces
   pertinentes/pièces − coût des indices (valeurs dans `rules.json` et l'affaire).
 
@@ -136,7 +154,7 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
   d'interface `ScreenshotUITests` (parcours complet) sur simulateur, à chaque push touchant l'app.
   Captures de chaque étape publiées sur la branche `ci/ui-screenshots` (+ `results.txt`).
   Options de lancement Debug pour les tests : `-UITestReset YES`, `-UITestDuration <s>`,
-  `-UITestCinematic skip`.
+  `-UITestFirstLaunch skip|show` (skip = joueur déjà affecté, tutoriel vu ; show = tout premier lancement).
 - `tests-linux.yml` : `swift test` + `CaseLint` (image Docker `swift:6.0-noble`), à chaque push.
 - `ios-testflight.yml` : macOS, manuel ou PR vers `main`. Tests, archive signée, export, envoi
   TestFlight via clé API. Build = `<run_number + BUILD_NUMBER_OFFSET>.<attempt>`. Sans secrets :
@@ -151,14 +169,16 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
       résultat narratif + score. Affaire #001 « LE DERNIER MESSAGE ».
 - [x] Intégration du handoff v1.0 : tokens, polices, composants, écrans méta, carnet, fin de partie
       (reste : voir DESIGN_INTEGRATION.md §3)
-- [x] Onboarding 3 étapes, reprise d'une enquête (sauvegarde locale), recherche globale (toutes apps)
+- [x] Reprise d'une enquête (sauvegarde locale), recherche globale (toutes apps)
 - [x] Quitter / reprendre, niveaux Enquêteur · Détective · Expert, carte réelle (MapKit) révélée par
-      les indices, photos réalistes (styles), séquence d'ouverture (`introScene`), sons
+      les indices, photos réalistes (styles), sons
 - [x] Affaires #002–#005 : « PREMIER MÉTRO », « APRÈS LA FÊTE », « 90 SECONDES », « ROUTE DE NUIT » — chacune
-      avec son téléphone (fond, batterie), ses lieux, sa structure d'indices et son ouverture (prompts Veo :
-      docs/CINEMATIQUES_VEO.md)
+      avec son téléphone (fond, batterie), ses lieux et sa structure d'indices
 - [x] Direction artistique TRACE v2 : Bureau, Archives, Enquêteur, dossier ouvert, pièces à conviction, fiches
       suspects, carnet de terrain, plis d'indices, vérification finale, tampons, rapports (docs/design_trace)
+- [x] Handoff final V3 : premier lancement en 4 écrans, choix de l'enquêteur, tutoriel en 3 bulles, appui long
+      + feuille « Verser au dossier » dans toutes les apps, barre du dossier, Carnet en 3 onglets, conclusion
+      nommée, rapport, affectation au BEN, rangs, temps détendu ; cinématiques retirées (docs/design_final)
 - [ ] Affaires #006–#015 (6 suspects, 8–10 min)
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
 - [ ] Monnaie / tickets d'indices, iCloud

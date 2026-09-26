@@ -139,6 +139,9 @@ struct PhotoDetailView: View {
                             .onEnded { value in scale = min(4, max(1, scale * value.magnification)) })
                         .onTapGesture(count: 2) { withAnimation(Theme.Motion.springApp) { scale = scale > 1 ? 1 : 2.5 } }
                         .clipped()
+                        // The photo itself is the piece (not the whole screen: the analysis panel
+                        // below is a piece of its own, and two nested long presses would both fire).
+                        .pinnable(ItemRef(.photo, photo.id), session: session, radius: 0)
 
                     VStack(alignment: .leading, spacing: Theme.Spacing.s3) {
                         HStack(alignment: .firstTextBaseline) {
@@ -188,7 +191,6 @@ struct PhotoDetailView: View {
                 .padding(.bottom, Theme.Spacing.s7)
             }
             .navigationBarTitleDisplayMode(.inline)
-            .pinnable(ItemRef(.photo, photo.id), session: session)
         }
     }
 }

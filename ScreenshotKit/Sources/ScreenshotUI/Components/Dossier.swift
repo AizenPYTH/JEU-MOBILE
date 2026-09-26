@@ -28,6 +28,52 @@ enum PieceFormat {
         if ref.kind == .message, game.index.message(ref.id)?.deletedAt != nil { return L10n.t("piece.kind.deleted") }
         return L10n.t("piece.kind.\(ref.kind.rawValue)")
     }
+
+    /// "12.09 22:47"
+    static func dayTime(_ m: Moment) -> String {
+        number(m.day) + "." + number(m.month) + " " + PhoneFormat.time(m)
+    }
+
+    /// Who the piece comes from, when the phone says it: sender, caller, photographer, contact.
+    static func source(_ ref: ItemRef, in game: Investigation) -> String? {
+        if ref.kind == .mail { return game.index.mail(ref.id)?.fromName }
+        return ItemDescriber.describe(ref, in: game).person.map { game.name(of: $0) }
+    }
+
+    /// "MESSAGE · LUCAS FERRAND · 12.09 22:47": {TYPE} · {SOURCE} · {DATE HEURE} (final handoff §F-06).
+    static func header(_ ref: ItemRef, in game: Investigation) -> String {
+        let at = ItemDescriber.describe(ref, in: game).at
+        return [kind(ref, in: game), source(ref, in: game)?.uppercased(), at.map { dayTime($0) }]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+    }
+
+    /// The piece in one line: the words of a message, a call, a caption, a title.
+    static func preview(_ ref: ItemRef, in game: Investigation) -> String {
+        switch ref.kind {
+        case .message:
+            if let message = game.index.message(ref.id) { return "« \(message.text ?? L10n.t("item.photo")) »" }
+        case .draft:
+            if let draft = game.device.conversations.compactMap(\.draft).first(where: { $0.id == ref.id }) { return "« \(draft.text) »" }
+        case .call:
+            if let call = game.index.call(ref.id) { return CallsFormat.label(call) }
+        case .app:
+            return AppID(rawValue: ref.id).map { L10n.t("app.\($0.rawValue)") } ?? ""
+        default:
+            break
+        }
+        let item = ItemDescriber.describe(ref, in: game)
+        return [item.label, item.place].compactMap { $0 }.joined(separator: " · ")
+    }
+
+    /// VoiceOver (final handoff §M): « Pièce 1, message, Lucas Ferrand, samedi 12 septembre 22:47 : « … » ».
+    static func spoken(_ ref: ItemRef, in game: Investigation, number: Int) -> String {
+        let at = ItemDescriber.describe(ref, in: game).at
+        let what = [kind(ref, in: game).lowercased(), source(ref, in: game), at.map { PhoneFormat.longDay($0) + " " + PhoneFormat.time($0) }]
+            .compactMap { $0 }
+            .joined(separator: ", ")
+        return L10n.f("carnet.a11y.piece", number, what, preview(ref, in: game))
+    }
 }
 
 // MARK: - Exhibit (a piece of the file)
@@ -44,7 +90,7 @@ struct ExhibitView: View {
         let number = game.pieceNumber(of: ref)
         let item = ItemDescriber.describe(ref, in: game)
         VStack(alignment: .leading, spacing: 8) {
-            support
+            ExhibitSupport(ref: ref, game: game, compact: compact)
             HStack(alignment: .firstTextBaseline) {
                 if let number {
                     Text(PieceFormat.title(number)).font(Trace.Fonts.pieceNumber).tracking(1).foregroundStyle(Trace.Colors.ink)
@@ -68,18 +114,27 @@ struct ExhibitView: View {
         default: Trace.Colors.paper
         }
     }
+}
 
-    @ViewBuilder
-    private var support: some View {
+/// What an exhibit shows, without its paper: the print, the capture, the record, the extract…
+/// Shared by the exhibits and the Carnet's piece cards (photos keep their print frame there, §G).
+struct ExhibitSupport: View {
+    let ref: ItemRef
+    let game: Investigation
+    var compact = true
+
+    var body: some View {
         let index = game.index
         switch ref.kind {
         case .photo, .photoInfo:
             if let photo = index.photo(ref.id) {
-                PhotoPrint(border: 4) {
-                    GeneratedPhoto(photo: photo).frame(height: compact ? 96 : 200)
-                }
-                if ref.kind == .photoInfo || !compact {
-                    Text(photo.caption).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.ink).lineLimit(compact ? 2 : nil)
+                VStack(alignment: .leading, spacing: 8) {
+                    PhotoPrint(border: 4) {
+                        GeneratedPhoto(photo: photo).frame(height: compact ? 96 : 200)
+                    }
+                    if ref.kind == .photoInfo || !compact {
+                        Text(photo.caption).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.ink).lineLimit(compact ? 2 : nil)
+                    }
                 }
             }
         case .message:
@@ -127,7 +182,7 @@ struct ExhibitView: View {
             if let entry = index.browserEntry(ref.id) {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(entry.url ?? L10n.t("piece.search")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft).lineLimit(1)
-                    Rectangle().fill(Trace.Colors.ruled.opacity(3)).frame(height: 1)
+                    Rectangle().fill(Trace.Colors.inkFaint.opacity(0.3)).frame(height: 1)
                     Text(entry.kind == .search ? "« \(entry.text) »" : entry.text)
                         .font(Trace.Fonts.proseSmall.weight(.semibold)).foregroundStyle(Trace.Colors.ink).lineLimit(3)
                     if let summary = entry.summary, !compact {
@@ -146,7 +201,7 @@ struct ExhibitView: View {
                 }
             }
         case .app:
-            Text(ref.id).font(Trace.Fonts.mono)
+            Text(PieceFormat.preview(ref, in: game)).font(Trace.Fonts.mono).foregroundStyle(Trace.Colors.ink)
         }
     }
 
@@ -155,14 +210,14 @@ struct ExhibitView: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(from.uppercased()).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft).lineLimit(1)
             Text(text)
-                .font(.custom(Theme.FontName.regular, size: 12.5))
-                .foregroundStyle(Trace.Colors.bone)
+                .font(.custom(Theme.FontName.regular, size: 12.5, relativeTo: .footnote))
+                .foregroundStyle(mine ? Theme.Colors.bubbleOutText : Theme.Colors.textPrimary)
                 .lineLimit(compact ? 4 : nil)
                 .padding(.horizontal, 10).padding(.vertical, 7)
-                .background(RoundedRectangle(cornerRadius: 12).fill(mine ? Color(hex: 0x2F6FDB) : Color(hex: 0x2C2C2E)))
+                .background(RoundedRectangle(cornerRadius: 12).fill(mine ? Theme.Colors.bubbleOut : Theme.Colors.bgBubbleIn))
                 .frame(maxWidth: .infinity, alignment: mine ? .trailing : .leading)
                 .padding(6)
-                .background(RoundedRectangle(cornerRadius: 6).fill(Color(hex: 0x141416)))
+                .background(RoundedRectangle(cornerRadius: 6).fill(Theme.Colors.bgBase))
         }
     }
 
@@ -210,6 +265,7 @@ struct ExhibitView: View {
                 }
             }
             .frame(height: compact ? 64 : 120)
+            .accessibilityHidden(true)
             Text(L10n.f("item.track", game.name(of: track.contact))).font(Trace.Fonts.proseSmall.weight(.semibold)).foregroundStyle(Trace.Colors.ink).lineLimit(1)
             if let last, let place = game.index.place(last.place) {
                 Text(place.name).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft).lineLimit(1)
@@ -220,8 +276,15 @@ struct ExhibitView: View {
 
 // MARK: - Suspect index card
 
-/// A bristol card: identity photo, SUSPECT A, name, age · link, what the player filed for / against.
-/// Crossed out when the player cleared them in their notes; red outline for the main suspect.
+/// One piece linked to a suspect, as listed on their index card: « ▲ PIÈCE 03 · MESSAGE · 22:47 ».
+struct LinkedPieceLine: Hashable {
+    let stance: NotebookEntry.Stance?
+    let text: String
+}
+
+/// A bristol card: identity photo, SUSPECT A, name, age · link, then what the player filed:
+/// « ▲n ▼n » (n pieces accuse / clear them) and, in the Carnet, the list of those pieces.
+/// Crossed out when the player cleared them in their notes; red outline when chosen (conclusion).
 struct SuspectIndexCard: View {
     let suspect: Suspect
     let letter: String
@@ -231,29 +294,50 @@ struct SuspectIndexCard: View {
     var cleared = false
     var principal = false
     var showCounts = true
+    /// The pieces the player linked to this suspect (Carnet › Suspects).
+    var pieces: [LinkedPieceLine] = []
 
     var body: some View {
-        HStack(alignment: .top, spacing: 14) {
-            IDPhoto(contact: contact, width: 62, height: 74)
-            VStack(alignment: .leading, spacing: 3) {
-                Text(L10n.f("suspect.letter", letter)).fieldLabel()
-                Text(contact?.name ?? suspect.contact)
-                    .font(Trace.Fonts.name)
-                    .foregroundStyle(Trace.Colors.ink)
-                    .strikethrough(cleared, color: Trace.Colors.ink)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-                Text(([suspect.age.map { L10n.f("suspect.ageShort", $0) }].compactMap { $0 } + [suspect.role]).joined(separator: " · ").uppercased())
-                    .font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft).lineLimit(2)
-                if showCounts {
-                    Text(against + favour == 0 ? L10n.t("suspect.noPiece") : L10n.f("suspect.counts", against, favour))
-                        .font(Trace.Fonts.monoSmall.weight(.semibold))
-                        .foregroundStyle(against > favour ? Trace.Colors.stamp : Trace.Colors.ink)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .top, spacing: 14) {
+                IDPhoto(contact: contact, width: 62, height: 74)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(L10n.f("suspect.letter", letter)).fieldLabel()
+                    Text(contact?.name ?? suspect.contact)
+                        .font(Trace.Fonts.name)
+                        .foregroundStyle(Trace.Colors.ink)
+                        .strikethrough(cleared, color: Trace.Colors.ink)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                    Text(([suspect.age.map { L10n.f("suspect.ageShort", $0) }].compactMap { $0 } + [suspect.role]).joined(separator: " · ").uppercased())
+                        .font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft).lineLimit(2)
+                    if showCounts {
+                        LinkTally(against: against, favour: favour)
+                            .padding(.top, 2)
+                    }
+                }
+                Spacer(minLength: 0)
+                if cleared {
+                    StampMark(text: L10n.t("stamp.cleared"), color: Trace.Colors.ink, size: 9, angle: -8)
                 }
             }
-            Spacer(minLength: 0)
-            if cleared {
-                StampMark(text: L10n.t("stamp.cleared"), color: Trace.Colors.ink, size: 9, angle: -8)
+            if !pieces.isEmpty {
+                Rectangle().fill(Trace.Colors.inkFaint.opacity(0.3)).frame(height: 1)
+                    .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 4) {
+                    ForEach(pieces, id: \.self) { line in
+                        HStack(alignment: .firstTextBaseline, spacing: 6) {
+                            Text(verbatim: LinkTally.glyph(line.stance))
+                                .foregroundStyle(line.stance == .incriminates ? Trace.Colors.stamp : Trace.Colors.ink)
+                            Text(line.text)
+                                .foregroundStyle(Trace.Colors.inkMid)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        .font(Trace.Fonts.monoSmall)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(Text(LinkTally.spokenStance(line.stance) + line.text))
+                    }
+                }
             }
         }
         .padding(12)
@@ -261,6 +345,53 @@ struct SuspectIndexCard: View {
         .paper(Trace.Colors.print, radius: 2)
         .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(principal ? Trace.Colors.stamp : .clear, lineWidth: 1.5))
         .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
+    }
+}
+
+/// « ▲2 ▼1 »: how many filed pieces accuse / clear a suspect — numbers, never colour alone (§M).
+struct LinkTally: View {
+    let against: Int
+    let favour: Int
+
+    var body: some View {
+        Group {
+            if against + favour == 0 {
+                Text(L10n.t("suspect.noPiece")).foregroundStyle(Trace.Colors.inkSoft)
+            } else {
+                HStack(spacing: 10) {
+                    Text(verbatim: "▲\(against)").foregroundStyle(against > 0 ? Trace.Colors.stamp : Trace.Colors.inkSoft)
+                    Text(verbatim: "▼\(favour)").foregroundStyle(favour > 0 ? Trace.Colors.ink : Trace.Colors.inkSoft)
+                }
+            }
+        }
+        .font(Trace.Fonts.monoStrong)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(Self.spoken(against: against, favour: favour)))
+    }
+
+    /// « 2 pièces l'accusent, 1 le disculpe ».
+    static func spoken(against: Int, favour: Int) -> String {
+        if against + favour == 0 { return L10n.t("suspect.noPiece") }
+        return L10n.f("carnet.a11y.accusedBy", against) + ", " + L10n.f("carnet.a11y.clearedBy", favour)
+    }
+
+    /// ▲ accuses, ▼ clears, · linked without a reading.
+    static func glyph(_ stance: NotebookEntry.Stance?) -> String {
+        switch stance {
+        case .incriminates: "▲"
+        case .clears: "▼"
+        case nil: "·"
+        }
+    }
+
+    /// « L'accuse, » / « Le disculpe, » before a spoken piece line.
+    static func spokenStance(_ stance: NotebookEntry.Stance?) -> String {
+        switch stance {
+        case .incriminates: L10n.t("suspect.stanceAgainst") + ", "
+        case .clears: L10n.t("suspect.stanceFavour") + ", "
+        case nil: ""
+        }
     }
 }
 
@@ -282,7 +413,15 @@ struct ChronologySheet: View {
             .filter { $0.item.at != nil }
             .sorted { $0.item.at! < $1.item.at! }
         if rows.isEmpty {
-            EmptyPage(title: L10n.t("chrono.empty"), tip: L10n.t("chrono.emptyTip"))
+            VStack(alignment: .leading, spacing: Trace.Spacing.s) {
+                Text(L10n.t("chrono.empty")).font(Trace.Fonts.prose).foregroundStyle(Trace.Colors.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(L10n.t("chrono.emptyTip")).font(Trace.Fonts.mono).foregroundStyle(Trace.Colors.inkSoft)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.vertical, 12)
+            .accessibilityElement(children: .combine)
         } else {
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(Array(rows.enumerated()), id: \.offset) { offset, row in
@@ -325,8 +464,9 @@ struct ChronologySheet: View {
                 Rectangle().fill(Trace.Colors.ink).frame(width: 8, height: 8).padding(.top, 4)
                 Rectangle().fill(Trace.Colors.ink).frame(width: 1.5).frame(minHeight: 26)
             }
+            .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 2) {
-                Text(item.label).font(.custom(Theme.FontName.regular, size: 14)).foregroundStyle(Trace.Colors.ink).lineLimit(2)
+                Text(item.label).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.ink).lineLimit(2)
                 Text([number.map(PieceFormat.title), PieceFormat.kind(entry.ref, in: game)].compactMap { $0 }.joined(separator: " · "))
                     .font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft)
             }

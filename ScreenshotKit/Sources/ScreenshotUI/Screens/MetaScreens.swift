@@ -1,9 +1,11 @@
 #if os(iOS)
 import SwiftUI
+import UIKit
 import CaseEngine
 
-// Desk screens that are not the Bureau, the Archives or the case folder (see DeskScreens.swift and
-// DossierView.swift): the level boxes of the case form, the archived reconstruction, the settings.
+// Desk screens that are not the Bureau, the Archives, the profile or the case folder (see
+// DeskScreens.swift and DossierView.swift): the level boxes of the case form, the archived
+// reconstruction, the settings and « À propos ».
 
 /// "001" style case number.
 func caseNumber(_ n: Int) -> String { dossierNumber(n) }
@@ -118,65 +120,174 @@ struct ArchivedCaseView: View {
 
 // MARK: - Settings
 
-/// Réglages: a paper form on the desk.
+/// Paramètres: one paper form on the desk, one column, rows of at least 44 pt. Sound, vibrations,
+/// accessibility (« Réduire les animations », legible handwriting, « Temps détendu »), « Revoir le
+/// tutoriel », and « À propos » — the only place with the logo tile outside the title screens.
 struct GameSettingsView: View {
     let onBack: () -> Void
-    let onReplayOnboarding: () -> Void
-    @AppStorage(Preferences.vibrationsKey) private var vibrations = true
     @AppStorage(Preferences.soundsKey) private var sounds = true
+    @AppStorage(Preferences.vibrationsKey) private var vibrations = true
     @AppStorage(Preferences.reduceMotionKey) private var reduceMotion = false
     @AppStorage(Preferences.legibleHandwritingKey) private var legible = false
+    @AppStorage(Preferences.relaxedTimeKey) private var relaxedTime = false
+    @State private var tutorialReplayed = false
+    @State private var showingAbout = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 18) {
+        VStack(alignment: .leading, spacing: 0) {
             Button(action: onBack) {
                 HStack(spacing: 4) {
                     Image(systemName: "chevron.backward").font(.system(size: 15, weight: .semibold))
-                    Text(L10n.t("tab.investigator")).font(.custom(Theme.FontName.regular, size: 17))
+                    Text(L10n.t("common.back")).font(Trace.Fonts.uiBody)
                 }
-                .foregroundStyle(Trace.Colors.bone).frame(minHeight: 44)
+                .foregroundStyle(Trace.Colors.bone)
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            Text(L10n.t("menu.settings")).font(Trace.Fonts.screenTitle).foregroundStyle(Trace.Colors.bone)
-            VStack(alignment: .leading, spacing: 0) {
-                section(L10n.t("settings.soundGroup"))
-                toggle(L10n.t("settings.sounds"), $sounds)
-                toggle(L10n.t("settings.vibrations"), $vibrations)
-                section(L10n.t("settings.accessibilityGroup"))
-                toggle(L10n.t("settings.reduceMotion"), $reduceMotion)
-                toggle(L10n.t("settings.legibleHandwriting"), $legible)
-                section(L10n.t("settings.helpGroup"))
-                Button(action: onReplayOnboarding) {
-                    HStack {
-                        Text(L10n.t("settings.replayOnboarding")).font(Trace.Fonts.prose).foregroundStyle(Trace.Colors.ink)
-                        Spacer()
-                        Image(systemName: "chevron.right").foregroundStyle(Trace.Colors.inkSoft)
-                    }
-                    .frame(minHeight: 48)
-                    .contentShape(Rectangle())
+            .padding(.horizontal, 16)
+            .accessibilityIdentifier("settings.back")
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    Text(L10n.t("menu.settings"))
+                        .font(Trace.Fonts.serifTitle(28))
+                        .foregroundStyle(Trace.Colors.bone)
+                        .accessibilityAddTraits(.isHeader)
+                    form
                 }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("settings.replayOnboarding")
+                .padding(.horizontal, 16)
+                .padding(.bottom, 24)
             }
-            .padding(18)
-            .paper(Trace.Colors.paper)
-            Spacer()
         }
-        .padding(.horizontal, 16)
-        .background(TraceDesk())
+        .background(DeskBackdrop())
+        .sheet(isPresented: $showingAbout) {
+            AboutSheet(onClose: { showingAbout = false })
+        }
+    }
+
+    private var form: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            section(L10n.t("settings.soundGroup"))
+            toggle(L10n.t("settings.soundEffects"), $sounds, id: "settings.sounds")
+            toggle(L10n.t("settings.vibrations"), $vibrations, id: "settings.vibrations")
+            section(L10n.t("settings.accessibilityGroup"))
+            toggle(L10n.t("settings.reduceMotion"), $reduceMotion, id: "settings.reduceMotion")
+            toggle(L10n.t("settings.legibleHandwriting"), $legible, id: "settings.legibleHandwriting")
+            toggle(L10n.t("settings.relaxedTime"), $relaxedTime, detail: L10n.t("settings.relaxedTimeDetail"),
+                   id: "settings.relaxedTime")
+            section(L10n.t("settings.helpGroup"))
+            row(L10n.t("settings.replayTutorial"), id: "settings.replayTutorial") { replayTutorial() }
+            if tutorialReplayed {
+                Text(L10n.t("settings.replayTutorialDone"))
+                    .font(Trace.Fonts.proseSmall)
+                    .foregroundStyle(Trace.Colors.inkMid)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.vertical, 8)
+                    .transition(.opacity)
+            }
+            row(L10n.t("settings.about"), id: "settings.about") { showingAbout = true }
+        }
+        .padding(18)
+        .paper(Trace.Colors.paper)
+    }
+
+    /// The three help bubbles come back on the next play of case #001.
+    private func replayTutorial() {
+        TutorialCoach.replay()
+        withAnimation(.easeOut(duration: 0.2)) { tutorialReplayed = true }
+        UIAccessibility.post(notification: .announcement, argument: L10n.t("settings.replayTutorialDone"))
     }
 
     private func section(_ title: String) -> some View {
-        Text(title).fieldLabel().padding(.top, 14).padding(.bottom, 4)
+        Text(title)
+            .fieldLabel()
+            .padding(.top, 14)
+            .padding(.bottom, 4)
+            .accessibilityAddTraits(.isHeader)
     }
 
-    private func toggle(_ title: String, _ value: Binding<Bool>) -> some View {
+    private func toggle(_ title: String, _ value: Binding<Bool>, detail: String? = nil, id: String) -> some View {
         Toggle(isOn: value) {
-            Text(title).font(Trace.Fonts.prose).foregroundStyle(Trace.Colors.ink)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(Trace.Fonts.prose)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                if let detail {
+                    Text(detail)
+                        .font(Trace.Fonts.proseSmall)
+                        .foregroundStyle(Trace.Colors.inkSoft)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
         }
         .tint(Trace.Colors.stamp)
+        .padding(.vertical, 6)
         .frame(minHeight: 48)
         .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
+        .accessibilityIdentifier(id)
+    }
+
+    private func row(_ title: String, id: String, action: @escaping @MainActor () -> Void) -> some View {
+        Button(action: action) {
+            HStack {
+                Text(title)
+                    .font(Trace.Fonts.prose)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundStyle(Trace.Colors.inkSoft)
+                    .accessibilityHidden(true)
+            }
+            .frame(minHeight: 48)
+            .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier(id)
+    }
+}
+
+/// Paramètres › À propos: the logo tile (96 pt) on the dark desk, the studio, the version.
+private struct AboutSheet: View {
+    let onClose: () -> Void
+
+    private static let studio = "NOREL GAMES"
+
+    var body: some View {
+        VStack(spacing: 14) {
+            Spacer(minLength: 24)
+            LogoTile(size: 96)
+                .padding(.bottom, 10)
+            Text(verbatim: Self.studio)
+                .font(Trace.Fonts.kicker)
+                .tracking(3)
+                .foregroundStyle(Trace.Colors.bone)
+            Text(Self.version)
+                .font(Trace.Fonts.mono)
+                .foregroundStyle(Trace.Colors.bone2)
+                .accessibilityIdentifier("about.version")
+            Spacer(minLength: 24)
+            Button(L10n.t("a11y.close"), action: onClose)
+                .buttonStyle(TextLinkStyle())
+                .accessibilityIdentifier("about.close")
+        }
+        .padding(.horizontal, 24)
+        .padding(.bottom, 10)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(DeskBackdrop())
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.visible)
+        .presentationBackground(Trace.Colors.launch)
+    }
+
+    /// « Version 1.2 (34) » from the app bundle.
+    private static var version: String {
+        let info = Bundle.main.infoDictionary
+        let short = info?["CFBundleShortVersionString"] as? String ?? "—"
+        let build = info?["CFBundleVersion"] as? String ?? "—"
+        return L10n.f("settings.version", "\(short) (\(build))")
     }
 }
 #endif

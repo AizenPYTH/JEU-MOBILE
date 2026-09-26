@@ -55,4 +55,28 @@ struct LocalizationTests {
         }
         #expect(missing.isEmpty, "Missing translations:\n\(missing.joined(separator: "\n"))")
     }
+
+    /// Final handoff, acceptance criterion 4 and the game's identity: the three verbs are EXPLORER ·
+    /// VERSER AU DOSSIER · CONCLURE. « Épingler », « Accuser » (the link label « L'ACCUSE » aside),
+    /// « Recrue », « Stagiaire » and the old working names never reach the player.
+    @Test func bannedWordsAreGone() throws {
+        let catalogURL = Self.uiSources.appendingPathComponent("Resources/Localizable.xcstrings")
+        let catalog = try JSONDecoder().decode(Catalog.self, from: Data(contentsOf: catalogURL))
+        let banned = try NSRegularExpression(
+            pattern: #"(?i)(?<![\p{L}'’])(épingl\p{L}*|pin(?:ned|ning)?|accuser|accusez|accusation|accuse (?:now|a suspect)|recrue\p{L}*|recruit\p{L}*|stagiaire\p{L}*|trainee\p{L}*|trace|moonwolf)(?![\p{L}])"#)
+        var findings: [String] = []
+        for (key, entry) in catalog.strings {
+            for (lang, localization) in entry.localizations ?? [:] {
+                var values = [localization.stringUnit?.value]
+                values += (localization.variations?.plural ?? [:]).values.map { $0.stringUnit.value }
+                for value in values.compactMap({ $0 }) {
+                    let range = NSRange(value.startIndex..., in: value)
+                    if let match = banned.firstMatch(in: value, range: range), let r = Range(match.range, in: value) {
+                        findings.append("\(key) [\(lang)]: « \(value[r]) » in « \(value) »")
+                    }
+                }
+            }
+        }
+        #expect(findings.isEmpty, "Banned words:\n\(findings.sorted().joined(separator: "\n"))")
+    }
 }

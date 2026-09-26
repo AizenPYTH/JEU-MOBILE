@@ -31,6 +31,15 @@ final class GameSession {
     /// (case start + everything spent: the same elapsed time as the timer); it is published here so
     /// that screens showing the time redraw when the minute changes.
     private(set) var phoneTime: Moment
+    /// The element whose « VERSER AU DOSSIER » sheet is open (final handoff §F-06).
+    private(set) var filingCandidate: ItemRef?
+    /// The last piece filed: its paper copy flies to the dossier bar (§F-07).
+    private(set) var lastFiled: FiledPiece?
+    /// The clock is stopped (app sent to the background, pause sheet): the timer tag reads
+    /// « EN PAUSE » until the player touches the phone again (§N).
+    private(set) var isPaused = false
+    /// The three bubbles of case #001 (§D).
+    let coach: TutorialCoach
 
     private let investigation: Investigation
     @ObservationIgnored private var loop: Task<Void, Never>?
@@ -39,7 +48,16 @@ final class GameSession {
     @ObservationIgnored private var bannerQueue: [PhoneNotification] = []
     @ObservationIgnored private var costTask: Task<Void, Never>?
     @ObservationIgnored private var toastTask: Task<Void, Never>?
+    /// Last whole second announced by the critical-time tick.
+    @ObservationIgnored private var lastTickSecond = -1
     private let onFinish: (Verdict) -> Void
+
+    /// A piece just put in the file (number = its place in filing order).
+    struct FiledPiece: Equatable, Identifiable {
+        let id: Int
+        let number: Int
+        let ref: ItemRef
+    }
 
     struct TimeCostFlash: Equatable, Identifiable {
         let id: Int
@@ -99,6 +117,8 @@ final class GameSession {
         self.phoneTime = Self.minute(of: investigation.phoneNow)
         self.path = path
         self.onFinish = onFinish
+        self.coach = TutorialCoach(caseNumber: investigation.caseFile.number)
+        coach.remaining = { [weak self] in self?.remainingSeconds ?? 0 }
     }
 
     /// The engine. Reading it through this property subscribes the view to `revision`.
@@ -115,12 +135,14 @@ final class GameSession {
     /// Starts a new investigation, or carries on with a restored one.
     func begin() {
         if investigation.phase == .briefing { investigation.start() } else { investigation.resume() }
+        isPaused = false
         if investigation.phase == .investigating { startLoop() }
         refresh()
     }
 
     func pause() {
         investigation.pause()
+        isPaused = phase == .investigating
         loop?.cancel()
         loop = nil
         save()
@@ -139,6 +161,7 @@ final class GameSession {
     func resume() {
         guard phase == .investigating else { return }
         investigation.resume()
+        isPaused = false
         startLoop()
     }
 
@@ -156,6 +179,10 @@ final class GameSession {
         investigation.tick()
         refresh(contentChanged: false)
         warnLowBatteryIfNeeded()
+        announceCriticalSecond()
+        if coach.shouldNudge(elapsed: investigation.elapsedSeconds, pieces: investigation.notebook.count) {
+            showToast(L10n.t("tutorial.nudge"), seconds: 4.5)
+        }
         ticksSinceSave += 1
         if ticksSinceSave >= 20 { save() } // every ~5 s, in case the app is killed without warning
     }
@@ -182,7 +209,12 @@ final class GameSession {
         if phase != investigation.phase {
             phase = investigation.phase
             changed = true
-            if phase != .investigating { loop?.cancel(); loop = nil }
+            if phase != .investigating {
+                loop?.cancel(); loop = nil
+                // Time up (or concluding): the filing sheet closes with everything else.
+                filingCandidate = nil
+                isPaused = false
+            }
         }
         let minute = Self.minute(of: investigation.phoneNow)
         if minute != phoneTime {
@@ -205,6 +237,16 @@ final class GameSession {
         Haptics.notification()
     }
 
+    /// Under 01:00, a discreet tick each second; under 00:10, a light haptic too (§F-05).
+    private func announceCriticalSecond() {
+        guard phase == .investigating, remainingSeconds > 0, remainingSeconds <= 60 else { return }
+        let second = Int(remainingSeconds.rounded(.up))
+        guard second != lastTickSecond else { return }
+        lastTickSecond = second
+        AudioDirector.shared.play(.tick, volume: 0.22)
+        if remainingSeconds <= 10 { Haptics.light() }
+    }
+
     private static func minute(of moment: Moment) -> Moment {
         moment.adding(seconds: -Int64(moment.second))
     }
@@ -223,6 +265,9 @@ final class GameSession {
     // MARK: Phone navigation (each opened screen costs its time)
 
     func setPath(_ newPath: [PhoneRoute]) {
+        // The finger that opened the filing sheet is lifted on the element behind it: its own tap
+        // (open a conversation, a photo…) must not fire too.
+        if filingCandidate != nil && newPath.count > path.count { return }
         let old = path
         path = newPath
         if newPath.count > old.count {
@@ -237,6 +282,7 @@ final class GameSession {
 
     /// Opens an app from the home screen or a notification (replaces the current stack).
     func launch(_ app: AppID, then route: PhoneRoute? = nil) {
+        guard filingCandidate == nil else { return }
         path = []
         setPath(route.map { [.app(app), $0] } ?? [.app(app)])
     }
@@ -284,6 +330,7 @@ final class GameSession {
     // MARK: Actions
 
     func perform(_ action: (Investigation) -> Void) {
+        guard filingCandidate == nil else { return } // see `setPath`
         action(investigation)
         refresh()
     }
@@ -337,15 +384,52 @@ final class GameSession {
 
     func isPinned(_ ref: ItemRef) -> Bool { game.isPinned(ref) }
 
-    func togglePin(_ ref: ItemRef) {
-        let pinned = investigation.togglePin(ref)
+    /// Long press recognised on an element of the phone: the filing sheet opens.
+    func requestFiling(_ ref: ItemRef) {
+        guard phase == .investigating, !isPaused, filingCandidate == nil else { return }
         Haptics.pin()
-        if pinned {
-            let label = ItemDescriber.describe(ref, in: investigation).label
-            AudioDirector.shared.play(.stamp, volume: 0.55)
-            showToast(L10n.f("toast.pinned", investigation.notebook.count), detail: label, kind: .pinned)
-        } else {
-            showToast(L10n.t("toast.unpinned"))
+        filingCandidate = ref
+    }
+
+    func cancelFiling() {
+        filingCandidate = nil
+    }
+
+    /// « VERSER AU DOSSIER » in the filing sheet.
+    func fileCandidate() {
+        guard let ref = filingCandidate else { return }
+        filingCandidate = nil
+        file(ref)
+    }
+
+    /// Puts an element in the file (it becomes « PIÈCE 0N »). Filing twice does nothing.
+    func file(_ ref: ItemRef) {
+        guard !investigation.isPinned(ref) else { return }
+        _ = investigation.togglePin(ref)
+        AudioDirector.shared.play(.paper, volume: 0.6)
+        Haptics.light()
+        lastFiled = FiledPiece(id: (lastFiled?.id ?? 0) + 1, number: investigation.notebook.count, ref: ref)
+        coach.pieceFiled()
+        refresh()
+    }
+
+    /// Takes a piece out of the file (Carnet › « Retirer du dossier »). The others are renumbered.
+    func togglePin(_ ref: ItemRef) {
+        guard investigation.isPinned(ref) else { file(ref); return }
+        _ = investigation.togglePin(ref)
+        Haptics.selection()
+        showToast(L10n.t("toast.unpinned"))
+        refresh()
+    }
+
+    /// « Reprendre l'enquête » after a wrong conclusion: the new investigation gets back the
+    /// pieces the player had filed, with their links and readings (nothing costs time).
+    func restoreNotebook(_ entries: [NotebookEntry]) {
+        for entry in entries {
+            investigation.markSeen(entry.ref)
+            if !investigation.isPinned(entry.ref) { _ = investigation.togglePin(entry.ref) }
+            if let suspect = entry.linkedTo { investigation.link(entry.ref, to: suspect) }
+            if let stance = entry.stance { investigation.setStance(stance, for: entry.ref) }
         }
         refresh()
     }
@@ -374,7 +458,8 @@ final class GameSession {
         investigation.link(ref, to: suspect)
         investigation.setStance(stance, for: ref)
         Haptics.pin()
-        if !wasPinned { AudioDirector.shared.play(.stamp, volume: 0.55) }
+        coach.linkMade()
+        if !wasPinned { AudioDirector.shared.play(.paper, volume: 0.55) }
         if let s = investigation.index.suspect(suspect) {
             showToast(L10n.f(stance == .incriminates ? "toast.accuses" : "toast.clears", investigation.name(of: s.contact)),
                       detail: investigation.pieceNumber(of: ref).map { PieceFormat.title($0) }, kind: .linked)
@@ -389,12 +474,13 @@ final class GameSession {
         refresh()
     }
 
-    private func showToast(_ text: String, detail: String? = nil, kind: Toast.Kind = .neutral) {
+    private func showToast(_ text: String, detail: String? = nil, kind: Toast.Kind = .neutral, seconds: Double? = nil) {
         let toast = Toast(id: (self.toast?.id ?? 0) + 1, text: text, detail: detail, kind: kind)
         self.toast = toast
         toastTask?.cancel()
+        let duration = seconds ?? (detail == nil ? 2 : 2.6)
         toastTask = Task { [weak self] in
-            try? await Task.sleep(for: .seconds(toast.detail == nil ? 2 : 2.6))
+            try? await Task.sleep(for: .seconds(duration))
             guard !Task.isCancelled, self?.toast == toast else { return }
             self?.toast = nil
         }
@@ -407,6 +493,7 @@ final class GameSession {
 
     func resumeInvestigation() {
         investigation.cancelAccusation()
+        isPaused = false
         if investigation.phase == .investigating { startLoop() }
         refresh()
     }
@@ -496,6 +583,20 @@ enum Haptics {
         guard Preferences.vibrations else { return }
         #if canImport(UIKit)
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+        #endif
+    }
+
+    static func light() {
+        guard Preferences.vibrations else { return }
+        #if canImport(UIKit)
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        #endif
+    }
+
+    static func rigid() {
+        guard Preferences.vibrations else { return }
+        #if canImport(UIKit)
+        UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
         #endif
     }
 

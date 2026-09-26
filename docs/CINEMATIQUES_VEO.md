@@ -1,5 +1,11 @@
 # Cinématiques des affaires #002 à #005 — prompts Veo 3.1
 
+> **Archivé (septembre 2026, handoff final V3).** Les cinématiques ont été retirées du jeu à la demande du
+> porteur de projet : chaque affaire est désormais introduite par son dossier (briefing : résumé, mission,
+> suspects, temps) puis une courte ouverture (sachet de scellé → téléphone, écran verrouillé pour #002–#005).
+> `CinematicView` n'existe plus ; le champ `introScene` des affaires est conservé dans les données mais n'est
+> plus joué. Ce document reste comme référence si des vidéos sont un jour produites hors du jeu (bande-annonce).
+
 Chaque affaire a sa propre séquence d'ouverture. Elle est **déjà jouable dans le jeu** : elle est décrite dans le
 fichier de l'affaire (`introScene`) et rendue par `CinematicView` avec des images générées et des sons synthétisés.
 Ce document sert à produire la **version filmée** avec Veo 3.1, plan par plan, pour remplacer ou enrichir la version

@@ -10,6 +10,8 @@ enum Trace {
     enum Colors {
         // Desk
         static let desk = Color(hex: 0x121110)
+        /// Launch screen and title (final handoff §F-01): same black as the LaunchScreen.
+        static let launch = Color(hex: 0x0A0908)
         static let deskLight = Color(hex: 0x1F1D1A)
         static let graphite = Color(hex: 0x2A2825)
         static let tabBar = Color(hex: 0x0E0D0C)
@@ -49,12 +51,6 @@ enum Trace {
         static let marginRed = Color(hex: 0xA3261E, opacity: 0.45)
         static let highlight = Color(hex: 0xC8573F, opacity: 0.16)
         static let shadow = Color(hex: 0x000000, opacity: 0.4)
-        // Loading screen bar (sampled from loading_main: the bar drawn in the artwork)
-        static let loadingTrack = Color(hex: 0x060606)
-        static let loadingRim = Color(hex: 0x7A7470, opacity: 0.85)
-        static let loadingRedDeep = Color(hex: 0x6A0000)
-        static let loadingRed = Color(hex: 0xA80A08)
-        static let loadingRedHot = Color(hex: 0xE0181C)
     }
 
     enum FontName {
@@ -102,6 +98,8 @@ enum Trace {
         static let stamp = Animation.timingCurve(0.5, 0, 0.75, 0, duration: 0.14)
         static let tab = Animation.spring(response: 0.3, dampingFraction: 0.82)
         static let sheet = Animation.spring(response: 0.26, dampingFraction: 0.86)
+        /// Screen changes on the desk (final handoff §J): a sheet of paper sliding into place.
+        static let paper = Animation.spring(response: 0.42, dampingFraction: 0.86)
         /// Hold to close a case (ms in the handoff: 1 200).
         static let holdToClose: Double = 1.2
         /// Verification typewriter: 2.4 s in total.
@@ -134,7 +132,7 @@ extension View {
         background(
             UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: radius, bottomTrailingRadius: radius, topTrailingRadius: radius)
                 .fill(color)
-                .overlay(PaperGrain(intensity: 0.05).clipShape(RoundedRectangle(cornerRadius: radius)))
+                .overlay(PaperGrain(intensity: 0.05, texture: "tex_kraft_fibers").clipShape(RoundedRectangle(cornerRadius: radius)))
                 .shadow(color: .black.opacity(0.55), radius: 22, y: 22)
         )
     }
@@ -153,18 +151,29 @@ extension View {
     func pressable() -> some View { buttonStyle(PressableStyle()) }
 }
 
-/// Paper grain: very light monochrome noise (3 %), drawn once per size.
+/// Paper grain: the delivered paper texture (`tex_paper_grain`, or `tex_kraft_fibers` on kraft),
+/// tiled and multiplied on the paper colour; a light drawn noise if the texture is missing.
 struct PaperGrain: View {
     var intensity: Double = 0.035
+    var texture = "tex_paper_grain"
 
     var body: some View {
-        Canvas(rendersAsynchronously: true) { context, size in
-            var rng = SeededRandom(seed: "grain")
-            let count = Int(size.width * size.height / 38)
-            for _ in 0..<min(count, 9000) {
-                let x = rng.next() * size.width, y = rng.next() * size.height
-                context.fill(Path(CGRect(x: x, y: y, width: 1, height: 1)),
-                             with: .color(Trace.Colors.ink.opacity(intensity * Double(0.5 + rng.next()))))
+        Group {
+            if let image = ArtLibrary.image(texture) {
+                Image(uiImage: image)
+                    .resizable(resizingMode: .tile)
+                    .blendMode(.multiply)
+                    .opacity(min(1, intensity * 28))
+            } else {
+                Canvas(rendersAsynchronously: true) { context, size in
+                    var rng = SeededRandom(seed: "grain")
+                    let count = Int(size.width * size.height / 38)
+                    for _ in 0..<min(count, 9000) {
+                        let x = rng.next() * size.width, y = rng.next() * size.height
+                        context.fill(Path(CGRect(x: x, y: y, width: 1, height: 1)),
+                                     with: .color(Trace.Colors.ink.opacity(intensity * Double(0.5 + rng.next()))))
+                    }
+                }
             }
         }
         .allowsHitTesting(false)

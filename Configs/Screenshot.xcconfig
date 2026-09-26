@@ -4,6 +4,10 @@
 // Must match the App ID created on developer.apple.com and the app in App Store Connect.
 PRODUCT_BUNDLE_IDENTIFIER = com.aizenpyth.screenshot
 
+// Info.plist: only the launch screen (UILaunchScreen dictionary, which has no build setting);
+// every other key is generated from the INFOPLIST_KEY_* settings of the target.
+INFOPLIST_FILE = Configs/Info.plist
+
 // Version shown on the App Store. The build number (CURRENT_PROJECT_VERSION) is set by CI.
 MARKETING_VERSION = 0.2.0
 CURRENT_PROJECT_VERSION = 1

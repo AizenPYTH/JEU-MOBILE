@@ -82,7 +82,14 @@ scénario, mêmes preuves, seul le temps change. Sans `challengeDurations`, les 
 `durationSeconds` × les facteurs de `rules.json` (`challenges`). Expert se débloque après une réussite
 en Détective. CaseLint vérifie que l'affaire reste résoluble au niveau le plus court.
 
-## Séquence d'ouverture (`introScene`)
+## Séquence d'ouverture (`introScene`) — plus jouée
+
+> Depuis le handoff final V3, le jeu n'a plus de cinématique : l'affaire est présentée par son dossier
+> (briefing : `dossier`, premier paragraphe de `synopsis`, `objective`, suspects, durée), puis une courte
+> ouverture commune (sachet de scellé → téléphone ; déverrouillage automatique au #001, écran verrouillé
+> — fond `wallpaper`, heure `phoneStartTime` — pour les autres). Le champ `introScene` reste accepté et
+> validé pour ne pas casser les fichiers existants, mais il n'est plus lu par l'interface : inutile d'en
+> écrire pour une nouvelle affaire. Description conservée pour mémoire :
 
 Une suite de plans joués avant de rendre le téléphone au joueur (le chrono ne tourne pas pendant ;
 « Passer » est toujours possible). Chaque plan : `kind`, `seconds`, `ambience` (sons en boucle :
@@ -101,7 +108,7 @@ système).
 
 Tous les décalages (`at`) sont relatifs au début du plan et doivent tenir dans sa durée (validé).
 La notification de l'écran verrouillé devrait exister dans le téléphone (même personne, même texte).
-Les versions filmées (Veo 3.1) des ouvertures #002–#005 sont décrites plan par plan dans `docs/CINEMATIQUES_VEO.md`.
+Les anciennes versions filmées (Veo 3.1) sont archivées dans `docs/CINEMATIQUES_VEO.md`.
 
 ## Suspects, preuves, indices, solution
 

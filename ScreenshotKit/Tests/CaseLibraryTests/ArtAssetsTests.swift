@@ -14,8 +14,22 @@ struct ArtAssetsTests {
         .appendingPathComponent("Sources/ScreenshotUI/Resources/Art.xcassets")
 
     static let metaNames: Set<String> = ["player_elise_a", "player_elise_b", "player_vincent_a", "player_vincent_b", "npc_lacaze"]
-    /// Full-screen artwork of the loading screen, and its size (the native bar is placed on it in pixels).
-    static let loadingScreens: [String: (Int, Int)] = ["loading_main": (941, 1672)]
+    /// Design assets of the final handoff (logo derivatives §H, stamps and seals, paper textures):
+    /// group, file extension and size in pixels.
+    static let designAssets: [String: (group: String, ext: String, size: (Int, Int))] = [
+        "logo_tile": ("Brand", "png", (564, 564)),
+        "logo_wordmark": ("Brand", "png", (990, 444)),
+        "stamp_resolu_rouge_marque": ("Stamps", "png", (558, 184)),
+        "stamp_non_resolu_noir_marque": ("Stamps", "png", (850, 184)),
+        "stamp_enqueteur_rouge": ("Stamps", "png", (777, 184)),
+        "stamp_inspecteur_rouge": ("Stamps", "png", (850, 184)),
+        "stamp_senior_rouge": ("Stamps", "png", (558, 184)),
+        "stamp_experimente_rouge": ("Stamps", "png", (923, 184)),
+        "seal_ben_bleu": ("Stamps", "png", (720, 720)),
+        "signature_lacaze_bleu": ("Stamps", "png", (900, 300)),
+        "tex_paper_grain": ("Textures", "jpg", (512, 512)),
+        "tex_kraft_fibers": ("Textures", "jpg", (512, 512)),
+    ]
 
     struct ImageSet {
         let name: String
@@ -41,6 +55,14 @@ struct ArtAssetsTests {
         return sets
     }
 
+    /// Width × height of a PNG (reads the IHDR chunk).
+    static func pngSize(_ url: URL) throws -> (width: Int, height: Int)? {
+        let bytes = [UInt8](try Data(contentsOf: url).prefix(24))
+        guard bytes.count == 24, bytes[0] == 0x89, bytes[1] == 0x50 else { return nil }
+        func int(_ i: Int) -> Int { bytes[i..<i + 4].reduce(0) { $0 << 8 | Int($1) } }
+        return (int(16), int(20))
+    }
+
     /// Width × height of a baseline or progressive JPEG (reads the SOF marker).
     static func jpegSize(_ url: URL) throws -> (width: Int, height: Int)? {
         let bytes = [UInt8](try Data(contentsOf: url))
@@ -63,12 +85,13 @@ struct ArtAssetsTests {
         let sets = try Self.imageSets()
         #expect(!sets.isEmpty)
         for set in sets {
-            #expect(set.file.lastPathComponent == set.name + ".jpg", "\(set.name): file \(set.file.lastPathComponent)")
             #expect(FileManager.default.fileExists(atPath: set.file.path), "\(set.name): missing file")
-            if Self.loadingScreens[set.name] != nil {
-                #expect(set.group == "Loading", "\(set.name) in \(set.group)")
+            if let design = Self.designAssets[set.name] {
+                #expect(set.group == design.group, "\(set.name) in \(set.group)")
+                #expect(set.file.lastPathComponent == set.name + "." + design.ext, "\(set.name): file \(set.file.lastPathComponent)")
                 continue
             }
+            #expect(set.file.lastPathComponent == set.name + ".jpg", "\(set.name): file \(set.file.lastPathComponent)")
             if Self.metaNames.contains(set.name) {
                 #expect(set.group == (set.name.hasPrefix("npc_") ? "NPC" : "Players"), "\(set.name) in \(set.group)")
                 continue
@@ -85,10 +108,22 @@ struct ArtAssetsTests {
 
     @Test func picturesHaveTheirSpecifiedSize() throws {
         for set in try Self.imageSets() {
+            if let design = Self.designAssets[set.name] {
+                let size = try #require(try design.ext == "png" ? Self.pngSize(set.file) : Self.jpegSize(set.file), "\(set.name): unreadable")
+                #expect(size.width == design.size.0 && size.height == design.size.1, "\(set.name): \(size.width)×\(size.height)")
+                continue
+            }
             let size = try #require(try Self.jpegSize(set.file), "\(set.name) is not a JPEG")
-            let expected = Self.loadingScreens[set.name] ?? (set.name.hasPrefix("avatar_") ? (512, 512) : (1024, 1280))
+            let expected = set.name.hasPrefix("avatar_") ? (512, 512) : (1024, 1280)
             #expect(size.width == expected.0 && size.height == expected.1, "\(set.name): \(size.width)×\(size.height)")
         }
+    }
+
+    /// Every design asset of the final handoff is in the catalogue.
+    @Test func designAssetsAreDelivered() throws {
+        let names = Set(try Self.imageSets().map(\.name))
+        let missing = Self.designAssets.keys.filter { !names.contains($0) }.sorted()
+        #expect(missing.isEmpty, "Missing design assets: \(missing)")
     }
 
     /// The test pictures of #001 land on the right people.

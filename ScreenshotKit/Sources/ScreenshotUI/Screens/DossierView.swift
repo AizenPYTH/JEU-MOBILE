@@ -2,14 +2,17 @@
 import SwiftUI
 import CaseEngine
 
-// MARK: - 04 · Dossier ouvert
+// MARK: - 04 · Dossier, briefing
 
-/// Opening a case = opening a folder: the kraft cover swings open on a stapled sheet. Divider tabs:
-/// Contexte · Suspects · Pièces · Chronologie (· Rapport once the case was closed). At the bottom,
-/// the seized phone as exhibit 01: « PIÈCE 01 · OUVRIR LE TÉLÉPHONE ».
+/// The case file on the desk (final handoff §F-04): a kraft folder « N° 00N » holding one typed
+/// sheet — the case, the person concerned, the mission and, for #001, the three steps — then one
+/// full button, [OUVRIR LE TÉLÉPHONE]. Everything else stays secondary: an investigation in
+/// progress ([REPRENDRE L'ENQUÊTE] + « Recommencer »), the challenge level (hidden on the very
+/// first case), the closing report of a case already played ([REJOUER] once it is archived).
 struct DossierView: View {
     let caseFile: CaseFile
     let rules: GameRules?
+    /// Duration of each level, « Temps détendu » included.
     let durations: [Challenge: Int]
     let unlocked: Set<Challenge>
     let levels: [Challenge: LevelProgress]
@@ -22,365 +25,603 @@ struct DossierView: View {
     let onResume: () -> Void
     let onClose: () -> Void
 
-    enum Tab: Hashable { case context, suspects, pieces, chronology, report }
-
-    @State private var tab: Tab = .context
-    @State private var selected: Challenge = .detective
-    @State private var confirmRestart = false
-    @State private var coverOpen = false
-    @State private var suspectOpen: SuspectID?
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    /// The saved game, rebuilt read-only to show what was filed.
-    private var game: Investigation? {
-        guard let saved, let rules else { return nil }
-        return Investigation(restoring: saved.snapshot, caseFile: caseFile, rules: rules, clock: ManualClock())
+    private enum Sheet: String, Identifiable {
+        case rules, report, restart
+        var id: String { rawValue }
     }
 
+    @State private var selected: Challenge = .detective
+    @State private var contextOpen = false
+    @State private var levelsOpen = false
+    @State private var sheet: Sheet?
+    @State private var appeared = false
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
+    @Environment(\.dynamicTypeSize) private var typeSize
+
+    private var noMotion: Bool { systemReduceMotion || appReduceMotion }
+    private var motion: Animation { noMotion ? Animation.easeOut(duration: 0.2) : Trace.Motion.paper }
+    /// Opening « Contexte » or the levels: the paper spring; with reduced motion, no animation.
+    private var expandMotion: Animation? { noMotion ? nil : Trace.Motion.paper }
+    private var facts: DossierFacts { DossierFacts(file: caseFile) }
+    private var seconds: Int { durations[selected] ?? caseFile.durationSeconds }
+    /// The level choice is not offered on the first play of #001, before the assignment.
+    private var showsLevels: Bool { !(caseFile.number == 1 && !PlayerStore.isAssigned) }
+
     var body: some View {
-        let game = self.game
         VStack(spacing: 0) {
             topBar
-            VStack(spacing: 0) {
-                DividerTabs(tabs: tabs(game), selection: $tab, identifier: "dossier.tab", sheetColor: Trace.Colors.paper)
-                    .padding(.top, 10)
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 18) {
-                        switch tab {
-                        case .context: context
-                        case .suspects: suspects(game)
-                        case .pieces: pieces(game)
-                        case .chronology: chronology(game)
-                        case .report: report
-                        }
-                    }
-                    .padding(.horizontal, Trace.Spacing.sheet)
-                    .padding(.vertical, 22)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .id(tab)
-                    .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .opacity))
-                }
-                .background(
-                    ZStack(alignment: .top) {
-                        Trace.Colors.paper
-                        PaperGrain()
-                        HStack(spacing: 60) { Staple(); Staple() }.padding(.top, 6)
-                    }
-                )
-                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 2, topTrailingRadius: 2))
-                .padding(.horizontal, 8)
-                .animation(Trace.Motion.sheet, value: tab)
+            ScrollView {
+                folder
+                    .padding(.horizontal, Metrics.folderMargin)
+                    .padding(.top, 6)
+                    .padding(.bottom, 20)
+                    .offset(y: appeared || noMotion ? 0 : 24)
+                    .opacity(appeared ? 1 : 0)
             }
-            .background(
-                UnevenRoundedRectangle(topLeadingRadius: 10, topTrailingRadius: 10)
-                    .fill(Trace.Colors.kraft)
-                    .shadow(color: .black.opacity(0.55), radius: 22, y: 10)
-            )
-            .padding(.horizontal, 8)
-            .overlay { cover }
+            .scrollIndicators(.hidden)
             actions
         }
-        .background(TraceDesk())
-        .confirmationDialog(L10n.t("intro.restartTitle"), isPresented: $confirmRestart, titleVisibility: .visible) {
-            Button(L10n.t("intro.restartConfirm"), role: .destructive) { onStart(selected) }
-        } message: {
-            Text(L10n.t("intro.restartMessage"))
-        }
-        .sheet(item: Binding(get: { suspectOpen.map(SuspectSheetID.init) }, set: { suspectOpen = $0?.id })) { item in
-            if let suspect = caseFile.suspects.first(where: { $0.id == item.id }) {
-                ScrollView { SuspectDossierPreview(suspect: suspect, caseFile: caseFile, game: game).padding(8) }
-                    .background(TraceDesk())
-                    .environment(\.caseNumber, caseFile.number)
+        .background(DeskBackdrop())
+        .sheet(item: $sheet) { which in
+            switch which {
+            case .rules:
+                rulesSheet
+                    .presentationDetents([.medium, .large])
+                    .presentationCornerRadius(Metrics.sheetRadius)
+            case .report:
+                reportSheet
+                    .presentationDetents([.large])
+                    .presentationCornerRadius(Metrics.sheetRadius)
                     .presentationDragIndicator(.visible)
+            case .restart:
+                PaperConfirmSheet(title: L10n.t("intro.restartTitle"),
+                                  message: L10n.t("intro.restartMessage"),
+                                  confirm: L10n.t("intro.restartConfirm"),
+                                  confirmID: "intro.restartConfirm",
+                                  destructive: true,
+                                  cancel: L10n.t("common.back"),
+                                  cancelID: "intro.restartCancel",
+                                  onConfirm: {
+                                      sheet = nil
+                                      onStart(selected)
+                                  },
+                                  onCancel: { sheet = nil })
+                    .presentationDetents([.medium, .large])
+                    .presentationCornerRadius(Metrics.sheetRadius)
             }
         }
         .task {
+            guard !appeared else { return }
+            if !unlocked.contains(selected), let first = Challenge.allCases.first(where: { unlocked.contains($0) }) {
+                selected = first
+            }
             AudioDirector.shared.play(.folder, volume: 0.45)
             Haptics.paper()
-            if reduceMotion { coverOpen = true; return }
-            try? await Task.sleep(for: .milliseconds(120))
-            withAnimation(.timingCurve(0.2, 0.8, 0.2, 1, duration: 0.52)) { coverOpen = true }
+            withAnimation(motion) { appeared = true }
         }
     }
 
-    private func tabs(_ game: Investigation?) -> [(value: Tab, label: String)] {
-        var list: [(value: Tab, label: String)] = [
-            (.context, L10n.t("dossier.tab.context")),
-            (.suspects, L10n.f("dossier.tab.suspects", caseFile.suspects.count)),
-            (.pieces, L10n.f("dossier.tab.pieces", game?.notebook.count ?? 0)),
-            (.chronology, L10n.t("dossier.tab.chronology")),
-        ]
-        if !attempts.isEmpty { list.append((.report, L10n.t("dossier.tab.report"))) }
-        return list
-    }
-
-    /// The kraft cover, swinging open around its spine.
-    private var cover: some View {
-        UnevenRoundedRectangle(topLeadingRadius: 2, bottomLeadingRadius: 2, bottomTrailingRadius: 10, topTrailingRadius: 10)
-            .fill(Trace.Colors.kraftLight)
-            .overlay(PaperGrain(intensity: 0.05))
-            .overlay(alignment: .topLeading) {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(L10n.f("dossier.number", dossierNumber(caseFile.number))).fieldLabel(Trace.Colors.kraftLabel)
-                    Text(caseFile.title).font(Trace.Fonts.caseTitle).foregroundStyle(Trace.Colors.kraftInk)
-                    StampMark(text: L10n.t("stamp.confidential"), size: 12)
-                }
-                .padding(28)
-            }
-            .padding(.horizontal, 8)
-            .rotation3DEffect(.degrees(coverOpen ? -160 : 0), axis: (x: 0, y: 1, z: 0), anchor: .leading, perspective: 0.45)
-            .opacity(coverOpen ? 0 : 1)
-            .allowsHitTesting(false)
-            .accessibilityHidden(true)
-    }
+    // MARK: Top
 
     private var topBar: some View {
-        HStack {
+        let assigned = PlayerStore.isAssigned
+        return HStack {
             Button(action: onClose) {
                 HStack(spacing: 4) {
-                    Image(systemName: "chevron.backward").font(.system(size: 15, weight: .semibold))
-                    Text(L10n.t("tab.bureau")).font(.custom(Theme.FontName.regular, size: 17))
+                    Image(systemName: "chevron.backward").font(Metrics.chevron)
+                    if assigned {
+                        Text(L10n.t("tab.bureau")).font(Trace.Fonts.link)
+                    }
                 }
-                .foregroundStyle(Trace.Colors.bone)
-                .frame(minHeight: 44)
+                .foregroundStyle(Trace.Colors.boneMid)
+                .frame(minWidth: 44, minHeight: 44, alignment: .leading)
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(Text(L10n.t("a11y.close")))
+            .accessibilityLabel(Text(assigned ? L10n.t("tab.bureau") : L10n.t("common.back")))
             .accessibilityIdentifier("intro.close")
             Spacer()
-            Text(saved.map { L10n.f("dossier.inProgress", PhoneFormat.countdown($0.remainingSeconds)) }
-                 ?? L10n.f("dossier.notStarted", PhoneFormat.countdown(Double(durations[selected] ?? caseFile.durationSeconds))))
-                .font(Trace.Fonts.monoSmall).tracking(1).foregroundStyle(Trace.Colors.bone2)
         }
         .padding(.horizontal, 16)
     }
 
-    // MARK: Contexte
+    // MARK: Folder
+
+    /// The kraft folder: its tab « N° 00N », and the sheet it holds.
+    private var folder: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(L10n.f("briefing.tab", dossierNumber(caseFile.number)))
+                .font(Trace.Fonts.kicker)
+                .tracking(1.6)
+                .foregroundStyle(Trace.Colors.kraftInk)
+                .padding(.horizontal, 16)
+                .frame(minHeight: 30)
+                .background(
+                    UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8)
+                        .fill(Trace.Colors.kraft)
+                        .overlay(PaperGrain(intensity: 0.05, texture: "tex_kraft_fibers")
+                            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8)))
+                )
+                .accessibilityHidden(true)
+            sheetContent
+                .padding(Metrics.kraftInset)
+                .kraft()
+        }
+    }
+
+    /// The typed sheet (#ECE5D3 + grain).
+    private var sheetContent: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            header
+            summary
+            mission
+            if caseFile.number == 1 {
+                steps
+            } else {
+                Button(L10n.t("briefing.rulesLink")) { sheet = .rules }
+                    .buttonStyle(TextLinkStyle(onPaper: true))
+                    .accessibilityIdentifier("briefing.rules")
+            }
+            footer
+            if showsLevels {
+                levelPicker
+            }
+            if let last = attempts.last {
+                reportLink(last)
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.top, 22)
+        .padding(.bottom, 16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .paper()
+    }
+
+    // MARK: Header
 
     @ViewBuilder
-    private var context: some View {
-        let facts = DossierFacts(file: caseFile)
-        HStack(alignment: .top) {
-            Text(L10n.f("dossier.numberLong", dossierNumber(caseFile.number))).fieldLabel()
-            Spacer()
-            StampMark(text: L10n.t("stamp.confidential"), size: 11, angle: -4)
-        }
-        Text(caseFile.title.capitalizedFirst).font(Trace.Fonts.caseTitle).foregroundStyle(Trace.Colors.ink)
-            .fixedSize(horizontal: false, vertical: true)
-            .accessibilityAddTraits(.isHeader)
-        HStack(alignment: .top, spacing: 14) {
-            VStack(alignment: .leading, spacing: 0) {
-                FieldRow(label: facts.subjectLabel, value: [facts.subject, facts.info?.subjectAge.map { L10n.f("suspect.ageShort", $0) }].compactMap { $0 }.joined(separator: ", "))
-                FieldRow(label: L10n.t("dossier.type"), value: facts.category)
-                FieldRow(label: L10n.t("dossier.place"), value: "\(facts.place) — \(facts.city)")
-                if let last = facts.lastContact { FieldRow(label: facts.lastContactLabel, value: last) }
-                FieldRow(label: L10n.t("dossier.status"), value: saved != nil ? L10n.t("status.open") : L10n.t("status.openFile"),
-                         valueColor: Trace.Colors.stamp, divider: false)
+    private var header: some View {
+        if typeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 16) {
+                subjectPrint
+                headerText
             }
-            VStack(spacing: 4) {
-                PhotoPrint(border: 5) {
-                    if let contact = facts.subjectContact() {
-                        Portrait(contact: contact, width: 96, height: 110).saturation(0.3)
-                    } else {
-                        GeneratedPhoto(scene: "vitrine", seed: caseFile.id).frame(width: 96, height: 110)
+        } else {
+            HStack(alignment: .top, spacing: 14) {
+                headerText
+                Spacer(minLength: 0)
+                subjectPrint
+            }
+        }
+    }
+
+    /// `DOSSIER #00N · CATÉGORIE` / city, then the title.
+    private var headerText: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(headerLine)
+                .font(Trace.Fonts.kicker)
+                .tracking(1.6)
+                .foregroundStyle(Trace.Colors.inkSoft)
+                .fixedSize(horizontal: false, vertical: true)
+            if let city = caseFile.dossier?.city, !city.isEmpty {
+                Text(city)
+                    .font(Trace.Fonts.fieldValue)
+                    .foregroundStyle(Trace.Colors.inkMid)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Text(Self.sentenceCase(caseFile.title))
+                .font(Trace.Fonts.serifTitle(26))
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+                .padding(.top, 10)
+        }
+    }
+
+    private var headerLine: String {
+        let number = L10n.f("dossier.number", dossierNumber(caseFile.number))
+        guard let category = caseFile.dossier?.category, !category.isEmpty else { return number }
+        return number + " · " + category
+    }
+
+    /// The person concerned, printed 84 × 104 (initials on BEN blue when the portrait is missing).
+    @ViewBuilder
+    private var subjectPrint: some View {
+        if let contact = facts.subjectContact() {
+            PortraitOrInitials(image: ArtLibrary.portrait(case: caseFile.number, contact: contact),
+                               initials: contact.initials,
+                               width: Metrics.printSize.width - 2 * Metrics.printBorder,
+                               height: Metrics.printSize.height - 2 * Metrics.printBorder)
+                .padding(Metrics.printBorder)
+                .background(Trace.Colors.printWhite)
+                .shadow(color: .black.opacity(0.25), radius: 5, y: 4)
+                .overlay(alignment: .top) { Tape(width: 40).offset(y: -8) }
+                .rotationEffect(.degrees(2))
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(Text(contact.name))
+                .accessibilityAddTraits(.isImage)
+        }
+    }
+
+    // MARK: Summary
+
+    /// The first paragraph of the synopsis; the others behind « Contexte ».
+    private var summary: some View {
+        let more = Array(caseFile.synopsis.dropFirst())
+        return VStack(alignment: .leading, spacing: 6) {
+            if let first = caseFile.synopsis.first {
+                paragraph(first)
+            }
+            if !more.isEmpty {
+                Button {
+                    withAnimation(expandMotion) { contextOpen.toggle() }
+                    Haptics.selection()
+                } label: {
+                    HStack(spacing: 6) {
+                        Text(L10n.t("dossier.tab.context"))
+                        Image(systemName: contextOpen ? "chevron.up" : "chevron.down").font(Trace.Fonts.kicker)
                     }
                 }
-                .overlay(alignment: .top) { Tape(width: 44).offset(y: -8) }
-                Text(facts.subject).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.ink).lineLimit(1)
-            }
-            .rotationEffect(.degrees(3))
-            .frame(width: 112)
-        }
-        ForEach(Array(caseFile.synopsis.enumerated()), id: \.offset) { _, line in
-            Text(line).font(Trace.Fonts.prose).foregroundStyle(Trace.Colors.ink).lineSpacing(4)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        VStack(alignment: .leading, spacing: 4) {
-            Text(L10n.t("carnet.objective")).fieldLabel(Trace.Colors.stamp)
-            Text(caseFile.objective).font(Trace.Fonts.prose.weight(.semibold)).foregroundStyle(Trace.Colors.ink)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(12)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(Trace.Colors.stamp.opacity(0.6), lineWidth: 1))
-        if let device = caseFile.devices.first {
-            FieldRow(label: L10n.t("dossier.exhibitOne"), value: L10n.f("intro.handedOver", device.label, PhoneFormat.dayAndTime(caseFile.phoneStartTime)), divider: false)
-        }
-        levelForm
-    }
-
-    /// NIVEAU D'ENQUÊTE: the three levels as boxes on the form.
-    private var levelForm: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(L10n.t("challenge.pick")).fieldLabel().padding(.top, 8)
-            ForEach(Challenge.allCases, id: \.self) { level in
-                ChallengeCard(level: level, seconds: durations[level] ?? caseFile.durationSeconds,
-                              progress: levels[level], locked: !unlocked.contains(level), selected: selected == level) {
-                    selected = level
-                    Haptics.selection()
+                .buttonStyle(TextLinkStyle(onPaper: true))
+                .accessibilityAddTraits(contextOpen ? .isSelected : [])
+                .accessibilityIdentifier("briefing.context")
+                if contextOpen {
+                    VStack(alignment: .leading, spacing: 10) {
+                        ForEach(Array(more.enumerated()), id: \.offset) { _, line in
+                            paragraph(line)
+                        }
+                    }
+                    .transition(.opacity)
                 }
             }
-            Handwritten(text: L10n.t("challenge.sameStory"), color: Trace.Colors.inkSoft, size: 18, angle: -1)
         }
     }
 
-    // MARK: Suspects
+    private func paragraph(_ text: String) -> some View {
+        Text(text)
+            .font(Metrics.summaryFont)
+            .foregroundStyle(Trace.Colors.ink)
+            .lineSpacing(3)
+            .fixedSize(horizontal: false, vertical: true)
+    }
 
-    @ViewBuilder
-    private func suspects(_ game: Investigation?) -> some View {
-        Text(L10n.t("dossier.suspectsIntro")).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.inkSoft)
+    // MARK: Mission
+
+    /// VOTRE MISSION: a red rule, the red kicker, the objective of the case.
+    private var mission: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Rectangle().fill(Trace.Colors.stamp).frame(height: 1.5)
+            Text(L10n.t("briefing.mission"))
+                .font(Trace.Fonts.kicker)
+                .tracking(1.6)
+                .foregroundStyle(Trace.Colors.stamp)
+            Text(caseFile.objective)
+                .font(Metrics.missionFont)
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    /// #001 only: EXPLORER · VERSER AU DOSSIER · CONCLURE, numbered.
+    private var steps: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            step(1, verb: L10n.t("briefing.verb.explore"), rest: exploreLine)
+            step(2, verb: L10n.t("briefing.verb.file"), rest: L10n.t("briefing.step.file"))
+            step(3, verb: L10n.t("briefing.verb.conclude"), rest: L10n.t("briefing.step.conclude"))
+        }
+    }
+
+    /// « 1 EXPLORER le téléphone… »: the verb in Plex Mono caps, the rest in Newsreader, one flow.
+    private func step(_ number: Int, verb: String, rest: String) -> some View {
+        let verbText: Text = Text(verb).font(Trace.Fonts.monoStrong).tracking(1.2).foregroundColor(Trace.Colors.ink)
+        let restText: Text = Text(verbatim: " " + rest).font(Trace.Fonts.prose).foregroundColor(Trace.Colors.inkMid)
+        return HStack(alignment: .firstTextBaseline, spacing: 10) {
+            Text(verbatim: "\(number)")
+                .font(Trace.Fonts.monoStrong)
+                .foregroundStyle(Trace.Colors.stamp)
+            (verbText + restText)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    /// « le téléphone d'Alex / de Clémence : … » (« Alex's phone: … » in English).
+    private var exploreLine: String {
+        guard let name = ownerFirstName else { return L10n.t("briefing.step.exploreNoName") }
+        if Self.elides(name) {
+            return L10n.f("briefing.step.exploreElided", name)
+        }
+        return L10n.f("briefing.step.explore", name)
+    }
+
+    /// First name of the phone's owner (the contact `me`).
+    private var ownerFirstName: String? {
         let contacts = caseFile.devices.first?.contacts ?? []
-        ForEach(Array(caseFile.suspects.enumerated()), id: \.element.id) { offset, suspect in
-            let entries = game?.linkedEntries(for: suspect.id) ?? []
-            Button { suspectOpen = suspect.id } label: {
-                SuspectIndexCard(suspect: suspect, letter: Suspect.letter(offset), contact: contacts.first { $0.id == suspect.contact },
-                                 against: entries.filter { $0.stance == .incriminates }.count,
-                                 favour: entries.filter { $0.stance == .clears }.count,
-                                 cleared: game?.marks[suspect.id]?.contains(.hasAlibi) == true,
-                                 showCounts: game != nil)
+        let owner = contacts.first(where: { $0.id == ownerContactID }) ?? contacts.first(where: { $0.isOwner == true })
+        guard let first = owner?.name.split(separator: " ").first, !first.isEmpty else { return nil }
+        return String(first)
+    }
+
+    /// French elision before a vowel or a mute h: « d'Alex », « d'Hugo », « de Clémence ».
+    private static func elides(_ name: String) -> Bool {
+        guard let first = name.first else { return false }
+        let plain = String(first).folding(options: [.diacriticInsensitive, .caseInsensitive], locale: nil)
+        return ["a", "e", "i", "o", "u", "h"].contains(plain)
+    }
+
+    /// « PREMIER MÉTRO » → « Premier métro ».
+    private static func sentenceCase(_ text: String) -> String {
+        let lower = text.lowercased()
+        return lower.prefix(1).uppercased() + lower.dropFirst()
+    }
+
+    // MARK: Footer, level, report
+
+    /// `4 SUSPECTS · TEMPS : 08:00`
+    private var footer: some View {
+        Text(L10n.f("cases.suspects", caseFile.suspects.count).uppercased() + " · " + timeLine)
+            .font(Trace.Fonts.fieldValue)
+            .tracking(1.2)
+            .foregroundStyle(Trace.Colors.inkMid)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, 12)
+            .overlay(alignment: .top) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
+    }
+
+    private var timeLine: String { L10n.f("briefing.time", PhoneFormat.countdown(Double(seconds))) }
+
+    /// « NIVEAU : DÉTECTIVE », which opens the three level boxes.
+    private var levelPicker: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Button {
+                withAnimation(expandMotion) { levelsOpen.toggle() }
+                Haptics.selection()
+            } label: {
+                HStack(spacing: 8) {
+                    Text(L10n.f("briefing.level", L10n.t("challenge.\(selected.rawValue)").uppercased()))
+                        .font(Trace.Fonts.monoStrong)
+                        .tracking(1.2)
+                        .foregroundStyle(Trace.Colors.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Spacer(minLength: 8)
+                    Image(systemName: levelsOpen ? "chevron.up" : "chevron.down")
+                        .font(Trace.Fonts.kicker)
+                        .foregroundStyle(Trace.Colors.inkSoft)
+                }
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
             }
-            .buttonStyle(PressableStyle())
-            .accessibilityIdentifier("dossier.suspect.\(suspect.id)")
-        }
-    }
-
-    // MARK: Pièces
-
-    @ViewBuilder
-    private func pieces(_ game: Investigation?) -> some View {
-        if let game, !game.notebook.isEmpty {
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible())], spacing: 14) {
-                ForEach(game.notebook, id: \.ref) { entry in ExhibitView(ref: entry.ref, game: game) }
+            .buttonStyle(.plain)
+            .accessibilityHint(Text(L10n.t("briefing.levelHint")))
+            .accessibilityIdentifier("briefing.level")
+            if levelsOpen {
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(Challenge.allCases, id: \.self) { level in
+                        ChallengeCard(level: level, seconds: durations[level] ?? caseFile.durationSeconds,
+                                      progress: levels[level], locked: !unlocked.contains(level),
+                                      selected: selected == level) {
+                            selected = level
+                            Haptics.selection()
+                        }
+                    }
+                    Text(L10n.t("challenge.sameStory"))
+                        .font(Trace.Fonts.proseSmall)
+                        .foregroundStyle(Trace.Colors.inkSoft)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 10)
+                }
+                .transition(.opacity)
             }
-        } else {
-            EmptyPage(title: L10n.t("dossier.noPieces"), tip: L10n.t("dossier.noPiecesTip"))
         }
     }
 
-    // MARK: Chronologie
-
-    @ViewBuilder
-    private func chronology(_ game: Investigation?) -> some View {
-        if let game {
-            ChronologySheet(game: game)
-        } else {
-            EmptyPage(title: L10n.t("chrono.empty"), tip: L10n.t("chrono.emptyTip"))
+    /// The closing report of the last attempt (read-only), with its stamp.
+    private func reportLink(_ last: Attempt) -> some View {
+        HStack(alignment: .center, spacing: 12) {
+            Button(L10n.t("report.title")) { sheet = .report }
+                .buttonStyle(TextLinkStyle(onPaper: true))
+                .accessibilityIdentifier("dossier.report")
+            Spacer(minLength: 8)
+            StampMark(text: last.solved ? L10n.t("stamp.solved") : L10n.t("stamp.unsolved"),
+                      size: 9, dashed: !last.solved, angle: -3)
         }
     }
 
-    // MARK: Rapport
+    // MARK: Actions
+
+    /// One full button on the desk: OUVRIR LE TÉLÉPHONE (REJOUER once archived), or REPRENDRE
+    /// L'ENQUÊTE with « Recommencer » as a link.
+    private var actions: some View {
+        VStack(spacing: 4) {
+            if let saved {
+                Text(inProgressLine(saved))
+                    .font(Trace.Fonts.monoSmall)
+                    .tracking(1)
+                    .foregroundStyle(Trace.Colors.bone2)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.bottom, 6)
+                Button(L10n.t("home.resume"), action: onResume)
+                    .buttonStyle(CTAButtonStyle())
+                    .accessibilityIdentifier("intro.resume")
+                Button(L10n.t("intro.restartConfirm")) { sheet = .restart }
+                    .buttonStyle(TextLinkStyle())
+                    .accessibilityIdentifier("intro.restart")
+            } else {
+                Button(startTitle) { onStart(selected) }
+                    .buttonStyle(CTAButtonStyle())
+                    .accessibilityLabel(Text(startTitle + ", " + timeLine))
+                    .accessibilityIdentifier("intro.start")
+            }
+        }
+        .padding(.horizontal, 24)
+        .padding(.top, 10)
+        .padding(.bottom, 10)
+    }
+
+    /// OUVRIR LE TÉLÉPHONE, or REJOUER for a case whose report is open in the Archives.
+    private var startTitle: String {
+        archiveOpen ? L10n.t("briefing.replay") : L10n.t("briefing.start")
+    }
+
+    /// « EN COURS · 05:12 RESTANTES · 2 PIÈCES VERSÉES »
+    private func inProgressLine(_ saved: SavedInvestigation) -> String {
+        let time = L10n.f("dossier.inProgress", PhoneFormat.countdown(saved.remainingSeconds))
+        let pieces = L10n.f("dossier.piecesCount", saved.snapshot.notebook.count).uppercased()
+        return time + " · " + pieces
+    }
+
+    // MARK: Sheets
+
+    /// « Rappel des règles » (#002–#005): the three verbs, one line each.
+    private var rulesSheet: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 18) {
+                Text(L10n.t("briefing.rulesLink"))
+                    .font(Trace.Fonts.serifTitle(22))
+                    .foregroundStyle(Trace.Colors.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityAddTraits(.isHeader)
+                rule(1, verb: L10n.t("briefing.verb.explore"), line: L10n.t("briefing.rule.cost"))
+                rule(2, verb: L10n.t("briefing.verb.file"), line: L10n.t("briefing.rule.file"))
+                rule(3, verb: L10n.t("briefing.verb.conclude"), line: L10n.t("briefing.rule.conclude"))
+                Button(L10n.t("briefing.rulesDone")) { sheet = nil }
+                    .buttonStyle(CTAButtonStyle(onPaper: true))
+                    .accessibilityIdentifier("briefing.rulesDone")
+                    .padding(.top, 6)
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 28)
+            .padding(.bottom, 16)
+        }
+        .background(Trace.Colors.paper.overlay(PaperGrain()).ignoresSafeArea())
+    }
+
+    private func rule(_ number: Int, verb: String, line: String) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 12) {
+            Text(verbatim: "0\(number)")
+                .font(Trace.Fonts.kicker)
+                .foregroundStyle(Trace.Colors.stamp)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(verb)
+                    .font(Trace.Fonts.monoStrong)
+                    .tracking(1.2)
+                    .foregroundStyle(Trace.Colors.ink)
+                Text(line)
+                    .font(Trace.Fonts.prose)
+                    .foregroundStyle(Trace.Colors.inkMid)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.top, 10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .overlay(alignment: .top) { Rectangle().fill(Trace.Colors.stamp.opacity(0.3)).frame(height: 1.5) }
+        .accessibilityElement(children: .combine)
+    }
+
+    /// The closing report of the last attempt; the reconstruction once the archive is open.
+    private var reportSheet: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Spacer()
+                Button { sheet = nil } label: {
+                    Image(systemName: "xmark")
+                        .font(Metrics.chevron)
+                        .foregroundStyle(Trace.Colors.inkSoft)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text(L10n.t("a11y.close")))
+                .accessibilityIdentifier("dossier.reportClose")
+            }
+            .padding(.horizontal, 8)
+            .padding(.top, 8)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 14) {
+                    reportContent
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 28)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .background(Trace.Colors.paper.overlay(PaperGrain()).ignoresSafeArea())
+    }
 
     @ViewBuilder
-    private var report: some View {
+    private var reportContent: some View {
         if let last = attempts.last {
             Text(L10n.t("report.title")).fieldLabel()
-            Text(L10n.f("report.caseTitle", dossierNumber(caseFile.number), caseFile.title.capitalizedFirst))
-                .font(Trace.Fonts.name).foregroundStyle(Trace.Colors.ink)
-            LedgerRow(label: L10n.t("report.date"), value: last.date.formatted(date: .abbreviated, time: .shortened))
-            LedgerRow(label: L10n.t("report.culpritFound"), value: last.solved ? L10n.t("report.yes") : L10n.t("report.no"))
-            LedgerRow(label: L10n.t("report.keyFound"), value: "\(last.found) / \(last.total)")
-            LedgerRow(label: L10n.t("report.hints"), value: "\(last.hintsUsed)")
+            Text(L10n.f("report.caseTitle", dossierNumber(caseFile.number), Self.sentenceCase(caseFile.title)))
+                .font(Trace.Fonts.name)
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+            VStack(spacing: 0) {
+                LedgerRow(label: L10n.t("report.date"), value: last.date.formatted(date: .abbreviated, time: .shortened))
+                LedgerRow(label: L10n.t("report.culpritFound"), value: last.solved ? L10n.t("report.yes") : L10n.t("report.no"))
+                LedgerRow(label: L10n.t("report.keyFound"), value: "\(last.found) / \(last.total)")
+                LedgerRow(label: L10n.t("report.hints"), value: "\(last.hintsUsed)")
+            }
             HStack(alignment: .firstTextBaseline) {
-                Text(last.ranked ? "\(last.score)" : "—").font(Trace.Fonts.score).foregroundStyle(Trace.Colors.ink)
-                Text("/100").font(Trace.Fonts.pieceTitle).foregroundStyle(Trace.Colors.inkSoft)
+                Text(verbatim: last.ranked ? "\(last.score)" : "—")
+                    .font(Trace.Fonts.score)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .minimumScaleFactor(0.5)
+                Text(verbatim: "/100")
+                    .font(Trace.Fonts.pieceTitle)
+                    .foregroundStyle(Trace.Colors.inkSoft)
                 Spacer()
                 StampMark(text: last.solved ? L10n.t("stamp.solved") : L10n.t("stamp.unsolved"), size: 14, dashed: !last.solved)
             }
             if archiveOpen {
                 VStack(alignment: .leading, spacing: 12) {
                     Text(L10n.t("report.reconstruction")).fieldLabel(Trace.Colors.stamp).padding(.top, 8)
-                    Text(caseFile.solution.headline).font(Trace.Fonts.name).foregroundStyle(Trace.Colors.ink)
-                    Text(caseFile.solution.summary).font(Trace.Fonts.quote).foregroundStyle(Trace.Colors.inkSoft)
-                    RevealTimeline(steps: caseFile.solution.reveal, found: Set(caseFile.solution.reveal.compactMap(\.evidence)), shown: caseFile.solution.reveal.count)
+                    Text(caseFile.solution.headline)
+                        .font(Trace.Fonts.name)
+                        .foregroundStyle(Trace.Colors.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text(caseFile.solution.summary)
+                        .font(Trace.Fonts.quote)
+                        .foregroundStyle(Trace.Colors.inkSoft)
+                        .fixedSize(horizontal: false, vertical: true)
+                    RevealTimeline(steps: caseFile.solution.reveal,
+                                   found: Set(caseFile.solution.reveal.compactMap(\.evidence)),
+                                   shown: caseFile.solution.reveal.count)
                     ForEach(Array(caseFile.solution.story.enumerated()), id: \.offset) { _, paragraph in
-                        Text(paragraph).font(Trace.Fonts.prose).foregroundStyle(Trace.Colors.ink)
+                        Text(paragraph)
+                            .font(Trace.Fonts.prose)
+                            .foregroundStyle(Trace.Colors.ink)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 .accessibilityIdentifier("dossier.reconstruction")
             } else {
-                Handwritten(text: L10n.t("report.locked"), color: Trace.Colors.stamp, size: 20)
+                Text(L10n.t("report.locked"))
+                    .font(Trace.Fonts.quote)
+                    .foregroundStyle(Trace.Colors.stamp)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
     }
 
-    // MARK: Actions
+    // MARK: Metrics
 
-    /// PIÈCE 01 · OUVRIR LE TÉLÉPHONE (or resume).
-    @ViewBuilder
-    private var actions: some View {
-        let seconds = durations[selected] ?? caseFile.durationSeconds
-        VStack(spacing: 8) {
-            if let saved {
-                Button(action: onResume) { exhibitLabel(L10n.t("home.resume"), time: PhoneFormat.countdown(saved.remainingSeconds)) }
-                    .buttonStyle(InkButtonStyle(height: 62))
-                    .accessibilityIdentifier("intro.resume")
-                Button { confirmRestart = true } label: {
-                    Text(L10n.f("intro.startLevel", L10n.t("challenge.\(selected.rawValue)"), PhoneFormat.countdown(Double(seconds))))
-                }
-                .buttonStyle(PaperButtonStyle(height: 44))
-                .accessibilityIdentifier("intro.start")
-            } else {
-                Button { onStart(selected) } label: {
-                    exhibitLabel(L10n.t("dossier.openPhone"), time: PhoneFormat.countdown(Double(seconds)),
-                                 level: L10n.t("challenge.\(selected.rawValue)"))
-                }
-                .buttonStyle(InkButtonStyle(height: 62))
-                .accessibilityIdentifier("intro.start")
-            }
-        }
-        .padding(.horizontal, 16)
-        .padding(.top, 12)
-        .padding(.bottom, 10)
-    }
-
-    private func exhibitLabel(_ title: String, time: String, level: String? = nil) -> some View {
-        HStack(spacing: 14) {
-            RoundedRectangle(cornerRadius: 5).strokeBorder(Trace.Colors.bone, lineWidth: 1.5).frame(width: 22, height: 36)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(L10n.t("dossier.pieceOne")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.stampOnDark)
-                Text(title)
-            }
-            Spacer()
-            VStack(alignment: .trailing, spacing: 2) {
-                if let level { Text(level).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.bone2) }
-                Text(time).font(.custom(Trace.FontName.monoBold, size: 18))
-            }
-        }
-        .padding(.horizontal, 16)
-    }
-}
-
-/// A suspect's file, read before (or between) investigations: identity, statement, what is filed.
-struct SuspectDossierPreview: View {
-    let suspect: Suspect
-    let caseFile: CaseFile
-    let game: Investigation?
-
-    var body: some View {
-        let contact = caseFile.devices.first?.contacts.first { $0.id == suspect.contact }
-        let index = caseFile.suspects.firstIndex { $0.id == suspect.id } ?? 0
-        VStack(alignment: .leading, spacing: 14) {
-            HStack {
-                Text(L10n.f("dossier.suspectFileHeader", dossierNumber(caseFile.number), Suspect.letter(index))).fieldLabel()
-                Spacer()
-            }
-            HStack(alignment: .top, spacing: 16) {
-                IDPhoto(contact: contact, width: 86, height: 100)
-                    .overlay(alignment: .topTrailing) { Paperclip().offset(x: -6, y: -14) }
-                    .rotationEffect(.degrees(-2))
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(contact?.name ?? suspect.contact).font(Trace.Fonts.nameLarge).foregroundStyle(Trace.Colors.ink)
-                    if let age = suspect.age { LedgerRow(label: L10n.t("suspect.ageLabel"), value: "\(age)") }
-                    LedgerRow(label: L10n.t("suspect.link"), value: suspect.role.uppercased())
-                    if let address = suspect.address { LedgerRow(label: L10n.t("suspect.address"), value: address.uppercased()) }
-                }
-            }
-            Text(L10n.t("suspect.statementLabel")).fieldLabel()
-            Text(suspect.statement).font(Trace.Fonts.quote).foregroundStyle(Trace.Colors.ink)
-        }
-        .padding(20)
-        .background(ZStack { Trace.Colors.paper; RuledLines(); PaperGrain() })
-        .shadow(color: .black.opacity(0.4), radius: 10, y: 8)
+    private enum Metrics {
+        static let folderMargin: CGFloat = 12
+        static let kraftInset: CGFloat = 10
+        static let sheetRadius: CGFloat = 16
+        static let printSize = CGSize(width: 84, height: 104)
+        static let printBorder: CGFloat = 4
+        static let chevron = Font.system(size: 15, weight: .semibold)
+        /// Summary: Newsreader 14.5.
+        static let summaryFont = Font.custom(Trace.FontName.serif, size: 14.5, relativeTo: .callout)
+        /// Objective: Newsreader 17/500.
+        static let missionFont = Font.custom(Trace.FontName.serifMedium, size: 17, relativeTo: .body)
     }
 }
 #endif

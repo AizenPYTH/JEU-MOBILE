@@ -2,186 +2,67 @@
 import SwiftUI
 import CaseEngine
 
-/// The timed session: the phone, plus the notebook / hints / "accuse now" sheets on top.
-/// The timer keeps running under the sheets; it pauses when the app goes to the background.
-struct InvestigationView: View {
-    let session: GameSession
-    let onQuit: () -> Void
-    @State private var sheet: Sheet?
-    @State private var askingToQuit = false
-    @Environment(\.scenePhase) private var scenePhase
+// MARK: - 08 · Carnet
 
-    enum Sheet: String, Identifiable {
-        case notebook, hints, accuseNow
+/// The Carnet (final handoff §F-08): a full-screen sheet on the desk, a kraft folder with three
+/// divider tabs — PIÈCES (the filed pieces, newest first; the player says what each one proves:
+/// « L'ACCUSE » / « LE DISCULPE » + a suspect), SUSPECTS (index cards, ▲n ▼n) and CHRONOLOGIE.
+/// It only holds what the player filed and decided — never a verdict. CONCLURE is always possible.
+struct NotebookView: View {
+    let session: GameSession
+    let onConclude: () -> Void
+
+    @State private var tab = 0
+    /// The piece card whose suspect chips are open, and for which reading.
+    @State private var picking: Picking?
+    @State private var sheet: PaperSheet?
+    @State private var showingHints = false
+    /// « Conclure quand même » was confirmed: conclude once its sheet is gone.
+    @State private var concludeAfterSheet = false
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.dynamicTypeSize) private var typeSize
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
+
+    /// From this many linked pieces, CONCLURE becomes the full button (§F-08).
+    private static let solidFile = 3
+
+    struct Picking: Equatable {
+        let ref: ItemRef
+        let stance: NotebookEntry.Stance
+    }
+
+    enum PaperSheet: String, Identifiable {
+        case dossier, concludeEmpty
         var id: String { rawValue }
     }
 
-    var body: some View {
-        PhoneView(session: session,
-                  onNotebook: { sheet = .notebook },
-                  onHints: { sheet = .hints },
-                  onTimer: { sheet = .accuseNow },
-                  onQuit: {
-                      // The clock stops while the player decides.
-                      session.pause()
-                      askingToQuit = true
-                  })
-            .alert(L10n.t("quit.title"), isPresented: $askingToQuit) {
-                Button(L10n.t("quit.continue"), role: .cancel) { session.resume() }
-                Button(L10n.t("quit.confirm"), action: onQuit)
-            } message: {
-                Text(L10n.t("quit.message"))
-            }
-            .sheet(item: $sheet) { which in
-                Group {
-                    switch which {
-                    case .notebook:
-                        NotebookView(session: session) { sheet = nil; session.requestAccusation() }
-                            .presentationDetents([.large])
-                    case .hints:
-                        HintsView(session: session)
-                            .presentationDetents([.medium, .large])
-                    case .accuseNow:
-                        AccuseNowSheet(session: session, onAccuse: { sheet = nil; session.requestAccusation() }, onCancel: { sheet = nil })
-                            .presentationDetents([.height(380), .medium])
-                    }
-                }
-                .environment(\.caseNumber, session.caseFile.number)
-                .presentationCornerRadius(Theme.Radius.sheet)
-                .presentationBackground(Trace.Colors.desk)
-                .presentationDragIndicator(.visible)
-            }
-            .overlay {
-                if scenePhase != .active {
-                    PauseOverlay()
-                }
-            }
-            .onChange(of: scenePhase) { _, phase in
-                switch phase {
-                case .active: session.resume()
-                case .inactive, .background: session.pause()
-                @unknown default: break
-                }
-            }
-            .onChange(of: session.phase) { _, phase in
-                if phase != .investigating { sheet = nil }
-            }
+    /// A filed piece and its number (filing order).
+    private struct PieceRow: Identifiable {
+        let entry: NotebookEntry
+        let number: Int
+        var id: ItemRef { entry.ref }
     }
-}
 
-
-/// "Enquête en pause" — the desk goes dark, a note is left on it.
-struct PauseOverlay: View {
-    var body: some View {
-        ZStack {
-            Rectangle().fill(.ultraThinMaterial).ignoresSafeArea()
-            Trace.Colors.desk.opacity(0.55).ignoresSafeArea()
-            VStack(alignment: .leading, spacing: 8) {
-                Text(L10n.t("pause.overline")).fieldLabel(Trace.Colors.stamp)
-                Text(L10n.t("pause.title")).font(Trace.Fonts.nameLarge).foregroundStyle(Trace.Colors.ink)
-            }
-            .padding(.horizontal, 28)
-            .padding(.vertical, 22)
-            .paper(Trace.Colors.noteYellow, lifted: true)
-            .overlay(alignment: .top) { Tape().offset(y: -8) }
-            .rotationEffect(.degrees(-2))
-        }
-    }
-}
-
-/// Tap on the timer: a service note — "Clore le dossier maintenant ?" with the time bonus.
-struct AccuseNowSheet: View {
-    let session: GameSession
-    let onAccuse: () -> Void
-    let onCancel: () -> Void
-
-    var body: some View {
-        let bonus = Int(session.remainingSeconds / session.game.durationSeconds * Double(session.rules.scoring.timeLeft))
-        VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 10) {
-                HStack(alignment: .top) {
-                    Text(L10n.f("accuseNow.overline", PhoneFormat.countdown(session.remainingSeconds))).fieldLabel(Trace.Colors.stamp)
-                    Spacer()
-                    StampMark(text: L10n.t("stamp.confidential"), size: 8, angle: 4)
-                }
-                Text(L10n.t("accuseNow.title")).font(Trace.Fonts.nameLarge).foregroundStyle(Trace.Colors.ink)
-                    .fixedSize(horizontal: false, vertical: true)
-                Text(L10n.f("accuseNow.bonus", bonus)).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.inkSoft)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            .padding(18)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .paper(Trace.Colors.paper)
-            Spacer(minLength: 0)
-            Button(L10n.t("accuseNow.confirm"), action: onAccuse)
-                .buttonStyle(InkButtonStyle(height: 52, fill: Trace.Colors.stamp, text: Trace.Colors.stampText))
-                .accessibilityIdentifier("accuseNow.confirm")
-            Button(action: onCancel) {
-                Text(L10n.t("accuseNow.cancel")).font(Trace.Fonts.button).tracking(1.4).textCase(.uppercase)
-                    .foregroundStyle(Trace.Colors.bone2).frame(maxWidth: .infinity, minHeight: 44)
-            }
-            .buttonStyle(.plain)
-        }
-        .padding(.horizontal, 18)
-        .padding(.top, 26)
-        .padding(.bottom, 12)
-        .background(TraceDesk())
-    }
-}
-
-// MARK: - Carnet (field notebook)
-
-/// The investigator's field notebook: a spiral notebook with blue lines and a red margin. Divider
-/// tabs: the suspects' index cards, the pieces put in the file, the chronology built from them, and
-/// the connections the player drew ("l'accuse →", "le disculpe →"). It only holds what the player
-/// found and decided — never a verdict.
-struct NotebookView: View {
-    let session: GameSession
-    let onAccuse: () -> Void
-    @State private var tab = 0
-    @Environment(\.dismiss) private var dismiss
+    private var reduceMotion: Bool { systemReduceMotion || appReduceMotion }
+    /// Changes that reflow the page (chips, a piece removed): none with reduced motion (§J).
+    private var layoutMotion: Animation? { reduceMotion ? nil : Trace.Motion.paper }
+    /// Sheets and veils: a 200 ms fade with reduced motion.
+    private var fadeMotion: Animation { reduceMotion ? .easeInOut(duration: 0.2) : Trace.Motion.paper }
 
     var body: some View {
         let game = session.game
         NavigationStack {
             VStack(spacing: 0) {
                 header
-                DividerTabs(tabs: [(0, L10n.t("carnet.suspects")),
-                                   (1, L10n.f("carnet.evidence", game.notebook.count)),
-                                   (2, L10n.t("carnet.timeline")),
-                                   (3, L10n.t("carnet.notes"))],
-                            selection: $tab, identifier: "notebook.tab", sheetColor: Trace.Colors.notebook)
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 18) {
-                        ObjectiveCard(objective: session.caseFile.objective)
-                            .accessibilityIdentifier("notebook.objective")
-                        switch tab {
-                        case 0: suspects(game)
-                        case 1: pieces(game)
-                        case 2: ChronologySheet(game: game)
-                        default: connections(game)
-                        }
-                    }
-                    .padding(.leading, 58)
-                    .padding(.trailing, 16)
-                    .padding(.vertical, 18)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(alignment: .top) { RuledLines(spacing: 30, color: Trace.Colors.notebookRule) }
-                    .animation(Trace.Motion.standard, value: tab)
-                }
-                .background(NotebookPaper())
-                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 6, bottomTrailingRadius: 6, topTrailingRadius: 6))
-                .padding(.horizontal, 8)
-                Button(action: onAccuse) {
-                    Text(L10n.t("carnet.accuse"))
-                }
-                .buttonStyle(InkButtonStyle(height: 52, fill: Trace.Colors.stamp, text: Trace.Colors.stampText))
-                .accessibilityIdentifier("notebook.accuse")
-                .padding(.horizontal, 16)
-                .padding(.top, 12)
-                .padding(.bottom, 8)
+                DividerTabs(tabs: [(0, L10n.f("carnet.tab.pieces", game.notebook.count)),
+                                   (1, L10n.t("carnet.suspects")),
+                                   (2, L10n.t("carnet.timeline"))],
+                            selection: $tab, identifier: "notebook.tab", sheetColor: Trace.Colors.kraft)
+                folder(game)
             }
-            .background(TraceDesk())
+            .background(DeskBackdrop())
             .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: SuspectID.self) { id in
                 SuspectFileView(suspectID: id, session: session) { app, route in
@@ -190,197 +71,550 @@ struct NotebookView: View {
                 }
             }
         }
+        .accessibilityHidden(showingHints)
+        .overlay { hintsLayer }
+        .sheet(item: $sheet, onDismiss: {
+            if concludeAfterSheet {
+                concludeAfterSheet = false
+                onConclude()
+            }
+        }, content: { which in
+            switch which {
+            case .dossier:
+                CaseBriefSheet(caseFile: session.caseFile) { sheet = nil }
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
+                    .presentationCornerRadius(16)
+                    .presentationBackground(Trace.Colors.paper)
+            case .concludeEmpty:
+                PaperConfirmSheet(title: L10n.t("carnet.emptyTitle"),
+                                  message: L10n.t("carnet.concludeAnyway"),
+                                  confirm: L10n.t("carnet.concludeConfirm"),
+                                  confirmID: "notebook.concludeAnyway",
+                                  cancel: L10n.t("common.back"),
+                                  cancelID: "notebook.concludeBack",
+                                  onConfirm: {
+                                      concludeAfterSheet = true
+                                      sheet = nil
+                                  },
+                                  onCancel: { sheet = nil })
+                    .presentationDetents(confirmDetents)
+                    .presentationCornerRadius(16)
+                    .presentationBackground(Trace.Colors.paper)
+            }
+        })
+        .environment(\.caseNumber, session.caseFile.number)
+        .onAppear { session.coach.carnetOpened() }
+        .onDisappear { session.coach.carnetClosed() }
     }
 
+    private var confirmDetents: Set<PresentationDetent> {
+        if typeSize.isAccessibilitySize { return [.large] }
+        return typeSize > .large ? [.medium] : [.height(300)]
+    }
+
+    // MARK: Header
+
+    @ViewBuilder
     private var header: some View {
-        HStack(alignment: .center) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(L10n.f("carnet.header", dossierNumber(session.caseFile.number))).fieldLabel(Trace.Colors.bone3)
-                Text(L10n.t("carnet.title")).font(Trace.Fonts.screenTitle).foregroundStyle(Trace.Colors.bone)
-                    .accessibilityIdentifier("notebook.title")
+        if typeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 4) {
+                    closeButton
+                    Spacer(minLength: 8)
+                    dossierLink
+                    hintButton
+                }
+                headerTitle.padding(.leading, 8)
             }
-            Spacer()
-            Button { dismiss() } label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(Trace.Colors.bone2)
-                    .frame(width: 44, height: 44)
-                    .background(Circle().strokeBorder(Trace.Colors.graphite, lineWidth: 1))
+            .padding(.horizontal, 8)
+            .padding(.top, 8)
+            .padding(.bottom, 6)
+        } else {
+            HStack(spacing: 4) {
+                closeButton
+                headerTitle
+                Spacer(minLength: 8)
+                dossierLink
+                hintButton
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text(L10n.t("a11y.close")))
-            .accessibilityIdentifier("notebook.close")
+            .padding(.horizontal, 8)
+            .padding(.top, 8)
+            .padding(.bottom, 6)
         }
-        .padding(.horizontal, 18)
-        .padding(.top, 18)
-        .padding(.bottom, 10)
     }
 
-    // Suspects: the index cards, with what the player filed for / against each one.
-    private func suspects(_ game: Investigation) -> some View {
-        let counts = session.caseFile.suspects.map { s in
-            let linked = game.linkedEntries(for: s.id)
-            return (against: linked.filter { $0.stance == .incriminates }.count, favour: linked.filter { $0.stance == .clears }.count)
+    private var headerTitle: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(L10n.f("dossier.number", dossierNumber(session.caseFile.number)))
+                .font(Trace.Fonts.kicker)
+                .tracking(1.6)
+                .foregroundStyle(Trace.Colors.bone2)
+            Text(L10n.t("carnet.title"))
+                .font(Trace.Fonts.monoTitle)
+                .tracking(2.4)
+                .textCase(.uppercase)
+                .foregroundStyle(Trace.Colors.bone)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier("notebook.title")
         }
-        let top = counts.map(\.against).max() ?? 0
-        let principal = top > 0 && counts.filter { $0.against == top }.count == 1 ? counts.firstIndex { $0.against == top } : nil
-        return VStack(alignment: .leading, spacing: 14) {
+    }
+
+    /// Back to the phone (the sheet goes down).
+    private var closeButton: some View {
+        Button { dismiss() } label: {
+            Image(systemName: "xmark")
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(Trace.Colors.bone)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(L10n.t("carnet.backToPhone")))
+        .accessibilityIdentifier("notebook.close")
+    }
+
+    /// « Dossier »: the objective and the context stay one tap away (the briefing's text).
+    private var dossierLink: some View {
+        Button(L10n.t("carnet.dossierLink")) {
+            sheet = .dossier
+            Haptics.selection()
+        }
+        .buttonStyle(TextLinkStyle())
+        .lineLimit(1)
+        .minimumScaleFactor(0.7)
+        .padding(.horizontal, 6)
+        .accessibilityIdentifier("notebook.dossier")
+    }
+
+    /// The lightbulb: screen 14 · Indice.
+    private var hintButton: some View {
+        Button {
+            showingHints = true
+            Haptics.selection()
+        } label: {
+            Image(systemName: "lightbulb")
+                .font(.system(size: 18, weight: .regular))
+                .foregroundStyle(Trace.Colors.bone)
+                .frame(width: 44, height: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(L10n.t("carnet.hint")))
+        .accessibilityIdentifier("notebook.hint")
+    }
+
+    // MARK: Folder
+
+    private var folderShape: UnevenRoundedRectangle {
+        UnevenRoundedRectangle(topLeadingRadius: 2, bottomLeadingRadius: 10, bottomTrailingRadius: 10, topTrailingRadius: 10)
+    }
+
+    /// The kraft folder under the divider tabs: the active page, then CONCLURE at the bottom.
+    private func folder(_ game: Investigation) -> some View {
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    switch tab {
+                    case 0: pieces(game)
+                    case 1: suspects(game)
+                    default: chronology(game)
+                    }
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 18)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .id(tab)
+                .transition(.opacity)
+            }
+            .animation(.easeInOut(duration: 0.2), value: tab)
+            footer(game)
+        }
+        .background(
+            folderShape
+                .fill(Trace.Colors.kraft)
+                .overlay(PaperGrain(intensity: 0.05, texture: "tex_kraft_fibers").clipShape(folderShape))
+                .shadow(color: .black.opacity(0.55), radius: 22, y: 12)
+                .ignoresSafeArea(edges: .bottom)
+        )
+        .padding(.horizontal, 8)
+    }
+
+    /// CONCLURE L'ENQUÊTE — always enabled; outline while the file is thin, full from 3 linked
+    /// pieces. Bubble 3 of the tutorial sits just above it, in the flow (it never covers a piece).
+    private func footer(_ game: Investigation) -> some View {
+        let linked = game.notebook.filter { $0.linkedTo != nil && $0.stance != nil }.count
+        return VStack(spacing: 12) {
+            if session.coach.active == .link {
+                CoachBubble(bubble: .link, arrow: .bottom, dark: true) { session.coach.dismiss() }
+                    .transition(.opacity)
+            }
+            Button(L10n.t("carnet.conclude")) { conclude(game) }
+                .buttonStyle(CTAButtonStyle(kind: linked >= Self.solidFile ? .primary : .outline, onPaper: true))
+                .accessibilityIdentifier("notebook.accuse")
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 10)
+        .padding(.bottom, 10)
+        .animation(reduceMotion ? nil : Animation.easeOut(duration: 0.2), value: session.coach.active)
+    }
+
+    private func conclude(_ game: Investigation) {
+        if game.notebook.isEmpty {
+            sheet = .concludeEmpty
+        } else {
+            onConclude()
+        }
+    }
+
+    // MARK: Pièces
+
+    @ViewBuilder
+    private func pieces(_ game: Investigation) -> some View {
+        if game.notebook.isEmpty {
+            emptyFile
+        } else {
+            let rows = game.notebook.enumerated().map { PieceRow(entry: $0.element, number: $0.offset + 1) }.reversed()
+            ForEach(Array(rows)) { row in
+                pieceCard(row.entry, number: row.number, game: game)
+                    .transition(.opacity)
+            }
+        }
+    }
+
+    /// §N: an empty file says what to do next.
+    private var emptyFile: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(L10n.t("carnet.empty.title"))
+                .font(Trace.Fonts.serifTitle(22))
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+            Text(L10n.t("carnet.empty.body"))
+                .font(Trace.Fonts.prose)
+                .foregroundStyle(Trace.Colors.inkMid)
+                .fixedSize(horizontal: false, vertical: true)
+            Button(L10n.t("carnet.backToPhone")) { dismiss() }
+                .buttonStyle(CTAButtonStyle(kind: .primary, onPaper: true))
+                .accessibilityIdentifier("notebook.backToPhone")
+                .padding(.top, 8)
+        }
+        .padding(20)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .paper(Trace.Colors.paper, radius: 0)
+    }
+
+    /// One filed piece: its kicker and preview, « CETTE PIÈCE… » [L'ACCUSE] [LE DISCULPE], the
+    /// suspect chips once a reading is chosen, the typed summary of the link, « Retirer du dossier ».
+    private func pieceCard(_ entry: NotebookEntry, number: Int, game: Investigation) -> some View {
+        let suspect = entry.linkedTo.flatMap { game.index.suspect($0) }
+        let open = picking?.ref == entry.ref ? picking : nil
+        return VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 10) {
+                (Text(PieceFormat.title(number)).foregroundColor(Trace.Colors.stamp)
+                    + Text(" · " + PieceFormat.header(entry.ref, in: game)).foregroundColor(Trace.Colors.inkSoft))
+                    .font(Trace.Fonts.kicker)
+                    .tracking(1.2)
+                    .fixedSize(horizontal: false, vertical: true)
+                ExhibitSupport(ref: entry.ref, game: game)
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(spokenPiece(entry, number: number, game: game)))
+            .accessibilityIdentifier("notebook.row")
+            .accessibilityActions {
+                ForEach(session.caseFile.suspects) { candidate in
+                    let name = NotebookText.firstName(game.name(of: candidate.contact))
+                    Button(L10n.f("carnet.linkAccuses", name)) {
+                        session.annotate(entry.ref, suspect: candidate.id, stance: .incriminates)
+                    }
+                    Button(L10n.f("carnet.linkClears", name)) {
+                        session.annotate(entry.ref, suspect: candidate.id, stance: .clears)
+                    }
+                }
+                Button(L10n.t("pin.remove")) { remove(entry) }
+            }
+
+            Rectangle().fill(Trace.Colors.inkFaint.opacity(0.3)).frame(height: 1)
+                .accessibilityHidden(true)
+            Text(L10n.t("carnet.thisPiece"))
+                .font(Trace.Fonts.kicker)
+                .tracking(1.6)
+                .textCase(.uppercase)
+                .foregroundStyle(Trace.Colors.inkSoft)
+            stanceButtons(entry, number: number)
+            if let open {
+                chips(entry, stance: open.stance, game: game)
+                    .transition(.opacity)
+            }
+            if let suspect, let stance = entry.stance {
+                Text(LinkTally.glyph(stance) + " " + NotebookText.link(stance, name: NotebookText.firstName(game.name(of: suspect.contact))))
+                    .font(Trace.Fonts.monoStrong)
+                    .foregroundStyle(stance == .incriminates ? Trace.Colors.stamp : Trace.Colors.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityHidden(true)
+            }
+            HStack {
+                Spacer(minLength: 0)
+                Button(L10n.t("pin.remove")) { remove(entry) }
+                    .buttonStyle(TextLinkStyle(onPaper: true))
+                    .accessibilityHidden(true) // a custom action of the piece for VoiceOver
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .paper(Trace.Colors.paper, radius: 0)
+        .accessibilityElement(children: .contain)
+    }
+
+    private func spokenPiece(_ entry: NotebookEntry, number: Int, game: Investigation) -> String {
+        var text = PieceFormat.spoken(entry.ref, in: game, number: number)
+        if let id = entry.linkedTo, let suspect = game.index.suspect(id), let stance = entry.stance {
+            text += ". " + NotebookText.link(stance, name: NotebookText.firstName(game.name(of: suspect.contact)))
+        }
+        return text
+    }
+
+    private func stanceButtons(_ entry: NotebookEntry, number: Int) -> some View {
+        let layout = typeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+            : AnyLayout(HStackLayout(spacing: 10))
+        return layout {
+            stanceButton(.incriminates, entry: entry)
+                .accessibilityIdentifier("notebook.accuses.\(number)")
+            stanceButton(.clears, entry: entry)
+                .accessibilityIdentifier("notebook.clears.\(number)")
+        }
+    }
+
+    /// Opens (or closes) the suspect chips for this reading.
+    private func stanceButton(_ stance: NotebookEntry.Stance, entry: NotebookEntry) -> some View {
+        let set = entry.linkedTo != nil && entry.stance == stance
+        let choice = Picking(ref: entry.ref, stance: stance)
+        let open = picking == choice
+        return Button {
+            withAnimation(layoutMotion) { picking = open ? nil : choice }
+            Haptics.selection()
+        } label: {
+            Text(LinkTally.glyph(stance) + " " + NotebookText.stance(stance))
+        }
+        .buttonStyle(StanceButtonStyle(stance: stance, filled: set, open: open))
+        .accessibilityAddTraits(set ? .isSelected : [])
+        .accessibilityValue(Text(open ? L10n.t("carnet.pickSuspect") : ""))
+    }
+
+    /// One chip per suspect: the engine links a piece to one suspect. Same again = undo.
+    private func chips(_ entry: NotebookEntry, stance: NotebookEntry.Stance, game: Investigation) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(L10n.t("carnet.pickSuspect"))
+                .font(Trace.Fonts.kicker)
+                .tracking(1.6)
+                .textCase(.uppercase)
+                .foregroundStyle(Trace.Colors.inkSoft)
+            FlowLayout(spacing: 8) {
+                ForEach(session.caseFile.suspects) { candidate in
+                    let chosen = entry.linkedTo == candidate.id && entry.stance == stance
+                    Button {
+                        withAnimation(layoutMotion) {
+                            session.annotate(entry.ref, suspect: candidate.id, stance: stance)
+                            picking = nil
+                        }
+                    } label: {
+                        Text((chosen ? "✓ " : "") + NotebookText.firstName(game.name(of: candidate.contact)))
+                    }
+                    .buttonStyle(SuspectChipStyle(stance: stance, chosen: chosen))
+                    .accessibilityAddTraits(chosen ? .isSelected : [])
+                    .accessibilityIdentifier("notebook.suspectChip.\(candidate.id)")
+                }
+            }
+        }
+    }
+
+    private func remove(_ entry: NotebookEntry) {
+        withAnimation(layoutMotion) {
+            if picking?.ref == entry.ref { picking = nil }
+            session.togglePin(entry.ref)
+        }
+    }
+
+    // MARK: Suspects
+
+    private func suspects(_ game: Investigation) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
             ForEach(Array(session.caseFile.suspects.enumerated()), id: \.element.id) { index, suspect in
+                let linked = game.linkedEntries(for: suspect.id)
                 NavigationLink(value: suspect.id) {
                     SuspectIndexCard(suspect: suspect, letter: Suspect.letter(index), contact: game.contact(suspect.contact),
-                                     against: counts[index].against, favour: counts[index].favour, principal: principal == index)
-                        .tilt(suspect.id, range: 0.8)
+                                     against: linked.filter { $0.stance == .incriminates }.count,
+                                     favour: linked.filter { $0.stance == .clears }.count,
+                                     pieces: linked.compactMap { pieceLine($0, game: game) })
                 }
                 .buttonStyle(PressableStyle())
                 .accessibilityIdentifier("notebook.suspect.\(suspect.id)")
             }
-            Handwritten(text: L10n.t("carnet.linkHelp"), color: Trace.Colors.pen, size: 19, angle: -1.5)
-                .padding(.top, 4)
         }
     }
 
-    // Pièces: every piece in the file, on its own support, in filing order.
-    @ViewBuilder
-    private func pieces(_ game: Investigation) -> some View {
-        if game.notebook.isEmpty {
-            EmptyPage(title: L10n.t("carnet.emptyTitle"), tip: L10n.t("carnet.emptyMessage"))
-        } else {
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], alignment: .leading, spacing: 18) {
-                ForEach(game.notebook, id: \.ref) { entry in
-                    piece(entry, game: game)
-                }
+    /// « PIÈCE 03 · MESSAGE · 22:47 » under a suspect's card.
+    private func pieceLine(_ entry: NotebookEntry, game: Investigation) -> LinkedPieceLine? {
+        guard let number = game.pieceNumber(of: entry.ref) else { return nil }
+        let time = ItemDescriber.describe(entry.ref, in: game).at.map { " · " + PhoneFormat.time($0) } ?? ""
+        return LinkedPieceLine(stance: entry.stance, text: PieceFormat.title(number) + " · " + PieceFormat.kind(entry.ref, in: game) + time)
+    }
+
+    // MARK: Chronologie
+
+    private func chronology(_ game: Investigation) -> some View {
+        ChronologySheet(game: game)
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .paper(Trace.Colors.paper, radius: 0)
+    }
+
+    // MARK: 14 · Indice
+
+    /// Screen 14 over a 50 % veil (opaque with Reduce Transparency). Two siblings so each keeps
+    /// its own transition: the veil fades, the sheet arrives (§J: y 24 → 0 + opacity; opacity only
+    /// with reduced motion).
+    private var hintsLayer: some View {
+        ZStack(alignment: .bottom) {
+            if showingHints {
+                (reduceTransparency ? Trace.Colors.launch : Trace.Colors.launch.opacity(0.5))
+                    .ignoresSafeArea()
+                    .contentShape(Rectangle())
+                    .onTapGesture { showingHints = false }
+                    .accessibilityHidden(true)
+                    .transition(.opacity)
+            }
+            if showingHints {
+                HintsView(session: session, onClose: { showingHints = false })
+                    .transition(reduceMotion ? AnyTransition.opacity : AnyTransition.opacity.combined(with: .offset(y: 24)))
             }
         }
+        .animation(fadeMotion, value: showingHints)
+    }
+}
+
+/// The Carnet's words for a link: « L'accuse », « L'accuse : Lucas », first names.
+private enum NotebookText {
+    static func stance(_ stance: NotebookEntry.Stance) -> String {
+        L10n.t(stance == .incriminates ? "suspect.stanceAgainst" : "suspect.stanceFavour")
     }
 
-    private func piece(_ entry: NotebookEntry, game: Investigation) -> some View {
-        let suspect = entry.linkedTo.flatMap { id in session.caseFile.suspects.first { $0.id == id } }
-        return VStack(alignment: .leading, spacing: 4) {
-            ExhibitView(ref: entry.ref, game: game)
+    static func link(_ stance: NotebookEntry.Stance, name: String) -> String {
+        L10n.f(stance == .incriminates ? "carnet.linkAccuses" : "carnet.linkClears", name)
+    }
+
+    /// « Lucas » from « Lucas Ferrand ».
+    static func firstName(_ name: String) -> String {
+        name.split(separator: " ").first.map(String.init) ?? name
+    }
+}
+
+/// [▲ L'ACCUSE] / [▼ LE DISCULPE] on a piece: outline; once set, filled red (accuses) or ink (clears).
+private struct StanceButtonStyle: ButtonStyle {
+    let stance: NotebookEntry.Stance
+    let filled: Bool
+    let open: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        let shape = RoundedRectangle(cornerRadius: 6, style: .continuous)
+        let fill = stance == .incriminates ? Trace.Colors.stamp : Trace.Colors.ink
+        let text = stance == .incriminates ? Trace.Colors.criticalText : Trace.Colors.bone
+        return configuration.label
+            .font(Trace.Fonts.monoStrong)
+            .tracking(1.4)
+            .textCase(.uppercase)
+            .lineLimit(1)
+            .minimumScaleFactor(0.7)
+            .foregroundStyle(filled ? text : Trace.Colors.ink)
+            .padding(.horizontal, 12)
+            .frame(maxWidth: .infinity, minHeight: 44)
+            .background(shape.fill(filled ? fill : Color.clear))
+            .overlay(shape.strokeBorder(filled ? fill : Trace.Colors.ink, lineWidth: open && !filled ? 2.5 : 1.5))
+            .contentShape(shape)
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
+    }
+}
+
+/// A suspect's first name on a paper chip; filled when this piece is linked to them that way.
+private struct SuspectChipStyle: ButtonStyle {
+    let stance: NotebookEntry.Stance
+    let chosen: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        let shape = RoundedRectangle(cornerRadius: 4, style: .continuous)
+        let fill = stance == .incriminates ? Trace.Colors.stamp : Trace.Colors.ink
+        let text = stance == .incriminates ? Trace.Colors.criticalText : Trace.Colors.bone
+        return configuration.label
+            .font(Trace.Fonts.monoStrong)
+            .tracking(1.2)
+            .textCase(.uppercase)
+            .lineLimit(1)
+            .foregroundStyle(chosen ? text : Trace.Colors.ink)
+            .padding(.horizontal, 14)
+            .frame(minHeight: 44)
+            .background(shape.fill(chosen ? fill : Trace.Colors.paperSelected))
+            .overlay(shape.strokeBorder(chosen ? fill : Trace.Colors.inkSoft, lineWidth: 1))
+            .contentShape(shape)
+            .opacity(configuration.isPressed ? 0.75 : 1)
+    }
+}
+
+// MARK: - Dossier (objective + context)
+
+/// « Dossier » from the Carnet: the case's objective and its context, as in the briefing.
+private struct CaseBriefSheet: View {
+    let caseFile: CaseFile
+    let onClose: () -> Void
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 14) {
+                Text(L10n.f("dossier.number", dossierNumber(caseFile.number)))
+                    .font(Trace.Fonts.kicker)
+                    .tracking(1.6)
+                    .foregroundStyle(Trace.Colors.inkSoft)
+                Text(caseFile.title)
+                    .font(Trace.Fonts.serifTitle(26))
+                    .foregroundStyle(Trace.Colors.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityAddTraits(.isHeader)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.t("carnet.objective"))
+                        .font(Trace.Fonts.kicker)
+                        .tracking(1.6)
+                        .foregroundStyle(Trace.Colors.stamp)
+                    Text(caseFile.objective)
+                        .font(Trace.Fonts.prose.weight(.semibold))
+                        .foregroundStyle(Trace.Colors.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(12)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .overlay(Rectangle().strokeBorder(Trace.Colors.stamp.opacity(0.6), lineWidth: 1))
                 .accessibilityElement(children: .combine)
-                .accessibilityIdentifier("notebook.row")
-            if let suspect {
-                Handwritten(text: StanceWords.arrow(entry.stance) + " " + game.name(of: suspect.contact),
-                            color: entry.stance == .incriminates ? Trace.Colors.stamp : Trace.Colors.pen, size: 17, angle: -2)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-            }
-        }
-        .contextMenu {
-            ForEach(session.caseFile.suspects) { suspect in
-                Menu(game.name(of: suspect.contact)) {
-                    Button(L10n.t("suspect.stanceAgainst")) { session.annotate(entry.ref, suspect: suspect.id, stance: .incriminates) }
-                    Button(L10n.t("suspect.stanceFavour")) { session.annotate(entry.ref, suspect: suspect.id, stance: .clears) }
+                ForEach(Array(caseFile.synopsis.enumerated()), id: \.offset) { _, line in
+                    Text(line)
+                        .font(Trace.Fonts.prose)
+                        .foregroundStyle(Trace.Colors.ink)
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
+                Button(L10n.t("a11y.close"), action: onClose)
+                    .buttonStyle(TextLinkStyle(onPaper: true))
+                    .frame(maxWidth: .infinity)
+                    .accessibilityIdentifier("notebook.dossierClose")
             }
-            if entry.linkedTo != nil {
-                Button(L10n.t("pin.unlink")) { session.setStance(nil, for: entry.ref); session.link(entry.ref, to: nil) }
-            }
-            Button(L10n.t("pin.remove"), role: .destructive) { session.togglePin(entry.ref) }
+            .padding(.horizontal, 20)
+            .padding(.top, 24)
+            .padding(.bottom, 16)
         }
-    }
-
-    // Connexions: per suspect, the pieces the player hung on them, in their own hand.
-    private func connections(_ game: Investigation) -> some View {
-        VStack(alignment: .leading, spacing: 22) {
-            Text(L10n.t("carnet.notesHelp")).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.inkSoft)
-            ForEach(Array(session.caseFile.suspects.enumerated()), id: \.element.id) { index, suspect in
-                NavigationLink(value: suspect.id) {
-                    ConnectionBlock(suspect: suspect, letter: Suspect.letter(index), game: game)
-                }
-                .buttonStyle(PressableStyle())
-            }
-        }
+        .background(Trace.Colors.paper.overlay(PaperGrain()).ignoresSafeArea())
     }
 }
 
-/// The notebook's page: cream paper, red margin, the spiral on the left.
-struct NotebookPaper: View {
-    var body: some View {
-        ZStack(alignment: .topLeading) {
-            Trace.Colors.notebook
-            PaperGrain(intensity: 0.03)
-            Canvas { context, size in
-                context.fill(Path(CGRect(x: 44, y: 0, width: 1.2, height: size.height)), with: .color(Trace.Colors.marginRed))
-                var y: CGFloat = 16
-                while y < size.height {
-                    context.fill(Path(ellipseIn: CGRect(x: 14, y: y, width: 9, height: 9)), with: .color(Trace.Colors.desk.opacity(0.85)))
-                    context.fill(Path(roundedRect: CGRect(x: 2, y: y + 3, width: 17, height: 3), cornerRadius: 1.5), with: .color(Trace.Colors.metal))
-                    y += 23
-                }
-            }
-        }
-        .allowsHitTesting(false)
-        .accessibilityHidden(true)
-    }
-}
-
-/// "l'accuse →" / "le disculpe →" / "→": the player's words for a link.
-enum StanceWords {
-    static func arrow(_ stance: NotebookEntry.Stance?) -> String {
-        switch stance {
-        case .incriminates: L10n.t("carnet.accusesArrow")
-        case .clears: L10n.t("carnet.clearsArrow")
-        case nil: "→"
-        }
-    }
-}
-
-/// One suspect in the "Connexions" page: name, then the piece labels the player drew to them.
-struct ConnectionBlock: View {
-    let suspect: Suspect
-    let letter: String
-    let game: Investigation
-
-    var body: some View {
-        let linked = game.linkedEntries(for: suspect.id)
-        let marks = SuspectMark.allCases.filter { game.marks[suspect.id]?.contains($0) == true }
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(L10n.f("suspect.letter", letter)).fieldLabel()
-                Text(game.name(of: suspect.contact)).font(Trace.Fonts.name).foregroundStyle(Trace.Colors.ink)
-                Spacer()
-                Image(systemName: "chevron.right").font(.system(size: 12, weight: .semibold)).foregroundStyle(Trace.Colors.inkFaint)
-            }
-            if linked.isEmpty && marks.isEmpty {
-                Handwritten(text: L10n.t("carnet.nothingYet"), color: Trace.Colors.inkFaint, size: 18, angle: -1)
-            }
-            row(.incriminates, linked.filter { $0.stance == .incriminates }, color: Trace.Colors.stamp)
-            row(.clears, linked.filter { $0.stance == .clears }, color: Trace.Colors.pen)
-            row(nil, linked.filter { $0.stance == nil }, color: Trace.Colors.inkSoft)
-            ForEach(marks, id: \.self) { mark in
-                HStack(spacing: 8) {
-                    CheckBox(on: true)
-                    Handwritten(text: L10n.t("mark.\(mark.rawValue)"), size: 18, angle: -1)
-                }
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
-    }
-
-    @ViewBuilder
-    private func row(_ stance: NotebookEntry.Stance?, _ entries: [NotebookEntry], color: Color) -> some View {
-        if !entries.isEmpty {
-            HStack(alignment: .top, spacing: 8) {
-                Handwritten(text: StanceWords.arrow(stance), color: color, size: 19, angle: -2)
-                    .fixedSize()
-                FlowLayout(spacing: 6) {
-                    ForEach(entries, id: \.ref) { entry in
-                        EvidenceLabel(text: label(entry), seed: entry.ref.id)
-                    }
-                }
-            }
-        }
-    }
-
-    private func label(_ entry: NotebookEntry) -> String {
-        let number = game.pieceNumber(of: entry.ref).map(PieceFormat.short) ?? ""
-        let time = ItemDescriber.describe(entry.ref, in: game).at.map { PhoneFormat.time($0) } ?? ""
-        return [number, time].filter { !$0.isEmpty }.joined(separator: " ")
-    }
-}
+// MARK: - Checkbox, flow layout
 
 /// A square box drawn in ink; a pen cross when ticked.
 struct CheckBox: View {
@@ -392,7 +626,7 @@ struct CheckBox: View {
             Rectangle().strokeBorder(Trace.Colors.ink, lineWidth: 1.3)
             if on {
                 Image(systemName: "xmark").font(.system(size: size * 0.7, weight: .heavy)).foregroundStyle(Trace.Colors.pen)
-                    .transition(.scale(scale: 1.4).combined(with: .opacity))
+                    .transition(.opacity)
             }
         }
         .frame(width: size, height: size)
@@ -400,7 +634,7 @@ struct CheckBox: View {
     }
 }
 
-/// Wraps its children onto several lines (labels glued on a page).
+/// Wraps its children onto several lines (chips, labels glued on a page).
 struct FlowLayout: Layout {
     var spacing: CGFloat = 6
 
@@ -429,31 +663,12 @@ struct FlowLayout: Layout {
     }
 }
 
-/// "Objectif" — clipped at the top of the notebook page, always one glance away.
-struct ObjectiveCard: View {
-    let objective: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(L10n.t("carnet.objective")).fieldLabel(Trace.Colors.stamp)
-            Text(objective).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.ink)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .padding(12)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .paper(Trace.Colors.noteYellow, radius: 1)
-        .overlay(alignment: .topTrailing) { Paperclip().rotationEffect(.degrees(8)).offset(x: -14, y: -16) }
-        .rotationEffect(.degrees(-0.6))
-        .accessibilityElement(children: .combine)
-    }
-}
-
 // MARK: - Suspect file
 
 /// A suspect's file, typed on paper: identity photo clipped on, identity lines, what the seized
-/// phone holds about them (shortcuts), their statement, the player's own notes (boxes), and the
-/// pieces the player hung on them — each annotated by hand "l'accuse" / "le disculpe".
-/// Nothing concludes for the player.
+/// phone holds about them (shortcuts), their statement, the pieces the player linked to them (with
+/// the player's reading, which can be changed here) and the player's own notes (boxes).
+/// Nothing concludes for the player: no highlight, no ranking, nothing written in their place.
 struct SuspectFileView: View {
     let suspectID: SuspectID
     let session: GameSession
@@ -470,18 +685,17 @@ struct SuspectFileView: View {
                     identity(suspect, game: game)
                     phoneFacts(suspect, game: game)
                     statement(suspect)
+                    linkedPieces(suspect, game: game)
                     marks(suspect, game: game)
-                    LinkedChain(suspect: suspect, session: session)
                 }
                 .padding(20)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(alignment: .top) { RuledLines(spacing: 28) }
-                .paper(Trace.Colors.paper)
+                .paper(Trace.Colors.paper, radius: 0)
                 .overlay(alignment: .top) { Staple().offset(y: 6) }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 14)
             }
-            .background(TraceDesk())
+            .background(DeskBackdrop())
             .toolbar(.visible, for: .navigationBar)
             .toolbarBackground(Trace.Colors.desk, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
@@ -499,8 +713,10 @@ struct SuspectFileView: View {
                 Text(L10n.f("suspect.fileHeader", letter)).fieldLabel(Trace.Colors.stamp)
                 Text(game.name(of: suspect.contact)).font(Trace.Fonts.nameLarge).foregroundStyle(Trace.Colors.ink)
                     .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityAddTraits(.isHeader)
                     .accessibilityIdentifier("suspect.name")
                 Text(suspect.role.uppercased()).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft)
+                    .fixedSize(horizontal: false, vertical: true)
                 StampMark(text: L10n.t("stamp.confidential"), size: 8, angle: -4).padding(.top, 4)
             }
             Spacer(minLength: 0)
@@ -534,7 +750,8 @@ struct SuspectFileView: View {
             }
             .disabled(calls == 0 || onOpenInPhone == nil)
             if onOpenInPhone != nil {
-                Text(L10n.t("suspect.shortcutHelp")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkFaint)
+                Text(L10n.t("suspect.shortcutHelp")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
     }
@@ -543,14 +760,16 @@ struct SuspectFileView: View {
         Button(action: action) {
             HStack(spacing: 10) {
                 Image(systemName: symbol).font(.system(size: 13)).foregroundStyle(Trace.Colors.inkSoft).frame(width: 20)
+                    .accessibilityHidden(true)
                 Text(value).font(Trace.Fonts.fieldValue).foregroundStyle(Trace.Colors.ink)
                 Spacer(minLength: 0)
                 if onOpenInPhone != nil {
                     Image(systemName: "arrow.up.forward").font(.system(size: 11, weight: .bold)).foregroundStyle(Trace.Colors.inkSoft)
+                        .accessibilityHidden(true)
                 }
             }
-            .frame(maxWidth: .infinity, minHeight: 40)
-            .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
+            .frame(maxWidth: .infinity, minHeight: 44)
+            .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.inkFaint.opacity(0.3)).frame(height: 1) }
             .contentShape(Rectangle())
         }
         .buttonStyle(PressableStyle())
@@ -564,24 +783,87 @@ struct SuspectFileView: View {
                 .padding(.leading, 12)
                 .overlay(alignment: .leading) { Rectangle().fill(Trace.Colors.ink).frame(width: 1.5) }
         }
+        .accessibilityElement(children: .combine)
+    }
+
+    /// PIÈCES LIÉES: the pieces the player linked to this suspect, in filing order, with their
+    /// reading. [L'ACCUSE] / [LE DISCULPE] switch it; the same one again unlinks the piece.
+    private func linkedPieces(_ suspect: Suspect, game: Investigation) -> some View {
+        let entries = game.linkedEntries(for: suspect.id)
+        let against = entries.filter { $0.stance == .incriminates }.count
+        let favour = entries.filter { $0.stance == .clears }.count
+        return VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(L10n.f("suspect.linked", entries.count)).fieldLabel()
+                Spacer()
+                if !entries.isEmpty { LinkTally(against: against, favour: favour) }
+            }
+            if entries.isEmpty {
+                Text(L10n.t("suspect.noPiece")).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.inkSoft)
+            } else {
+                ForEach(Array(entries.enumerated()), id: \.element.ref) { offset, entry in
+                    linkedRow(entry, suspect: suspect, index: offset, game: game)
+                }
+            }
+        }
+    }
+
+    private func linkedRow(_ entry: NotebookEntry, suspect: Suspect, index: Int, game: Investigation) -> some View {
+        let number = game.pieceNumber(of: entry.ref) ?? 0
+        return VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(PieceFormat.title(number) + " · " + PieceFormat.header(entry.ref, in: game))
+                    .font(Trace.Fonts.kicker)
+                    .tracking(1.2)
+                    .foregroundStyle(Trace.Colors.inkSoft)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(PieceFormat.preview(entry.ref, in: game))
+                    .font(Trace.Fonts.proseSmall)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .lineLimit(3)
+            }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(PieceFormat.spoken(entry.ref, in: game, number: number)))
+            HStack(spacing: 10) {
+                stanceButton(.incriminates, entry: entry, suspect: suspect)
+                    .accessibilityIdentifier("suspect.stance.incriminates.\(index)")
+                stanceButton(.clears, entry: entry, suspect: suspect)
+                    .accessibilityIdentifier("suspect.stance.clears.\(index)")
+            }
+        }
+        .padding(.vertical, 10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.inkFaint.opacity(0.3)).frame(height: 1) }
+    }
+
+    private func stanceButton(_ stance: NotebookEntry.Stance, entry: NotebookEntry, suspect: Suspect) -> some View {
+        let on = entry.stance == stance
+        return Button {
+            session.annotate(entry.ref, suspect: suspect.id, stance: stance)
+        } label: {
+            Text(LinkTally.glyph(stance) + " " + NotebookText.stance(stance))
+        }
+        .buttonStyle(StanceButtonStyle(stance: stance, filled: on, open: false))
+        .accessibilityAddTraits(on ? .isSelected : [])
     }
 
     private func marks(_ suspect: Suspect, game: Investigation) -> some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(L10n.t("suspect.marks")).fieldLabel()
-            Text(L10n.t("suspect.marksHelp")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkFaint)
+            Text(L10n.t("suspect.marksHelp")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft)
                 .fixedSize(horizontal: false, vertical: true)
             ForEach(SuspectMark.allCases, id: \.self) { mark in
                 let on = game.marks[suspect.id]?.contains(mark) == true
                 Button {
-                    withAnimation(Trace.Motion.stamp) { session.perform { $0.toggle(mark, for: suspect.id) } }
+                    withAnimation(.easeOut(duration: 0.15)) { session.perform { $0.toggle(mark, for: suspect.id) } }
                     AudioDirector.shared.play(.paper, volume: 0.3)
                     Haptics.selection()
                 } label: {
                     HStack(spacing: 12) {
                         CheckBox(on: on, size: 18)
                         Text(L10n.t("mark.\(mark.rawValue)")).font(Trace.Fonts.prose).foregroundStyle(Trace.Colors.ink)
-                        Spacer()
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
                     }
                     .frame(minHeight: 44)
                     .contentShape(Rectangle())
@@ -593,272 +875,201 @@ struct SuspectFileView: View {
     }
 }
 
-/// CONTRE / EN FAVEUR: the pieces the player hung on a suspect, in time order. Each carries its
-/// label and the two hand annotations "l'accuse" / "le disculpe" — the chosen one gets circled.
-struct LinkedChain: View {
-    let suspect: Suspect
-    let session: GameSession
+// MARK: - 14 · Indice
 
-    var body: some View {
-        let game = session.game
-        let entries = game.linkedEntries(for: suspect.id)
-            .map { (entry: $0, item: ItemDescriber.describe($0.ref, in: game)) }
-            .sorted { ($0.item.at ?? Moment(seconds: 0)) < ($1.item.at ?? Moment(seconds: 0)) }
-        let against = entries.filter { $0.entry.stance == .incriminates }.count
-        let favour = entries.filter { $0.entry.stance == .clears }.count
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(alignment: .firstTextBaseline) {
-                Text(L10n.f("suspect.linked", entries.count)).fieldLabel()
-                Spacer()
-                if !entries.isEmpty {
-                    Text(L10n.f("suspect.counts", against, favour)).font(Trace.Fonts.monoSmall.weight(.semibold))
-                        .foregroundStyle(Trace.Colors.ink)
-                }
-            }
-            if entries.isEmpty {
-                Handwritten(text: L10n.t("suspect.noLinked"), color: Trace.Colors.inkSoft, size: 18, angle: -1)
-            } else {
-                Text(L10n.t("suspect.stanceHelp")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkFaint)
-                    .fixedSize(horizontal: false, vertical: true)
-                ForEach(Array(entries.enumerated()), id: \.offset) { offset, row in
-                    chainRow(row.entry, item: row.item, index: offset, game: game)
-                }
-            }
-        }
-    }
-
-    private func chainRow(_ entry: NotebookEntry, item: ItemDescriber.Item, index: Int, game: Investigation) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack(spacing: 8) {
-                EvidenceLabel(text: game.pieceNumber(of: entry.ref).map(PieceFormat.short) ?? "P.—", seed: entry.ref.id)
-                Text([PieceFormat.kind(entry.ref, in: game), item.at.map { PhoneFormat.shortDay($0) + " · " + PhoneFormat.time($0) }]
-                        .compactMap { $0 }.joined(separator: " · "))
-                    .font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft).lineLimit(1)
-            }
-            Text(Self.withoutName(item.label, name: game.name(of: suspect.contact)))
-                .font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.ink).lineLimit(3)
-            if let place = item.place {
-                Text(place.uppercased()).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft)
-            }
-            HStack(spacing: 18) {
-                stanceButton(.incriminates, entry: entry)
-                    .accessibilityIdentifier("suspect.stance.incriminates.\(index)")
-                stanceButton(.clears, entry: entry)
-                    .accessibilityIdentifier("suspect.stance.clears.\(index)")
-            }
-        }
-        .padding(.vertical, 10)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .overlay(alignment: .leading) {
-            Rectangle().fill(color(entry.stance)).frame(width: 2).offset(x: -10)
-        }
-        .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
-    }
-
-    /// In the suspect's own file, "Emma Roussel · « … »" is just "« … »".
-    static func withoutName(_ label: String, name: String) -> String {
-        label.hasPrefix(name + " · ") ? String(label.dropFirst(name.count + 3)) : label
-    }
-
-    private func stanceButton(_ stance: NotebookEntry.Stance, entry: NotebookEntry) -> some View {
-        let on = entry.stance == stance
-        let color = stance == .incriminates ? Trace.Colors.stamp : Trace.Colors.pen
-        return Button {
-            withAnimation(Trace.Motion.emphasized) { session.setStance(on ? nil : stance, for: entry.ref) }
-            if !on { AudioDirector.shared.play(.paper, volume: 0.3) }
-        } label: {
-            Handwritten(text: L10n.t(stance == .incriminates ? "suspect.stanceAgainst" : "suspect.stanceFavour"),
-                        color: on ? color : Trace.Colors.inkFaint, size: 21, angle: -2)
-                .padding(.horizontal, 10)
-                .frame(minHeight: 40)
-                .overlay {
-                    if on {
-                        Ellipse().stroke(color, lineWidth: 1.6).rotationEffect(.degrees(-4))
-                            .transition(.scale(scale: 0.6).combined(with: .opacity))
-                    }
-                }
-                .contentShape(Rectangle())
-        }
-        .buttonStyle(PressableStyle())
-        .accessibilityLabel(Text(L10n.t(stance == .incriminates ? "suspect.stanceAgainst" : "suspect.stanceFavour")))
-        .accessibilityAddTraits(on ? .isSelected : [])
-    }
-
-    private func color(_ stance: NotebookEntry.Stance?) -> Color {
-        switch stance {
-        case .incriminates: Trace.Colors.stamp
-        case .clears: Trace.Colors.pen
-        case nil: Trace.Colors.inkFaint
-        }
-    }
-}
-
-// MARK: - Hints (sealed envelopes)
-
-/// "Aide à l'enquête": sealed envelopes from the supervisor. Each one says what it gives and what
-/// it costs — score points, never time — and what the best possible score becomes.
+/// « BESOIN D'AIDE ? » (final handoff §F-14): a paper sheet. The hints come in the case's order
+/// (direction → place → exact piece). No tickets in this game: each hint costs score points —
+/// never time — and the sheet says what the best possible mark has become. Revealed hints are
+/// yellow post-its (typed, never handwritten: the handwriting is the player's); the next one is
+/// closed, with its cost and, if it is not available yet, when it will be.
 struct HintsView: View {
     let session: GameSession
+    /// Closes the sheet (the Carnet's veil). nil: `dismiss()` (presented by the system).
+    var onClose: (() -> Void)? = nil
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
+
+    private var sheetShape: UnevenRoundedRectangle {
+        UnevenRoundedRectangle(topLeadingRadius: 16, topTrailingRadius: 16)
+    }
 
     var body: some View {
         let game = session.game
-        let maxScore = max(0, 100 - game.hintScoreCost)
-        ScrollView {
-            VStack(alignment: .leading, spacing: 18) {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(L10n.t("hints.overline")).fieldLabel(Trace.Colors.stampOnDark)
-                        Text(L10n.t("hints.title")).font(Trace.Fonts.screenTitle).foregroundStyle(Trace.Colors.bone)
-                    }
-                    Spacer()
-                    Button { dismiss() } label: {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundStyle(Trace.Colors.bone2)
-                            .frame(width: 44, height: 44)
-                            .background(Circle().strokeBorder(Trace.Colors.graphite, lineWidth: 1))
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityLabel(Text(L10n.t("a11y.close")))
-                    .accessibilityIdentifier("hints.close")
+        ViewThatFits(in: .vertical) {
+            content(game)
+            ScrollView { content(game) }
+        }
+        .background(
+            sheetShape
+                .fill(Trace.Colors.paper)
+                .overlay(PaperGrain().clipShape(sheetShape))
+                .shadow(color: .black.opacity(0.55), radius: 20, y: -2)
+                .ignoresSafeArea(edges: .bottom)
+        )
+        .accessibilityElement(children: .contain)
+        .accessibilityAddTraits(.isModal)
+        .accessibilityAction(.escape) { close() }
+    }
+
+    private func close() {
+        if let onClose { onClose() } else { dismiss() }
+    }
+
+    private func content(_ game: Investigation) -> some View {
+        let hints = game.caseFile.hints
+        let revealed = Array(hints.enumerated()).filter { game.state(of: $0.element) == .revealed }
+        let next = hints.firstIndex { game.state(of: $0) != .revealed }
+        let maxMark = max(0, 100 - game.hintScoreCost)
+        return VStack(alignment: .leading, spacing: 14) {
+            Capsule().fill(Trace.Colors.inkFaint.opacity(0.5)).frame(width: 36, height: 4)
+                .frame(maxWidth: .infinity)
+                .accessibilityHidden(true)
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(L10n.f("dossier.number", dossierNumber(game.caseFile.number)) + " · " + L10n.t("carnet.hint"))
+                        .font(Trace.Fonts.kicker)
+                        .tracking(1.6)
+                        .textCase(.uppercase)
+                        .foregroundStyle(Trace.Colors.stamp)
+                    Text(L10n.t("hints.need"))
+                        .font(Trace.Fonts.monoTitle)
+                        .tracking(1.2)
+                        .textCase(.uppercase)
+                        .foregroundStyle(Trace.Colors.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityAddTraits(.isHeader)
                 }
-                Text(L10n.t("hints.explain")).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.bone2)
+                Spacer(minLength: 8)
+                Button(action: close) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(Trace.Colors.ink)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .padding(.trailing, -10)
+                .accessibilityLabel(Text(L10n.t("a11y.close")))
+                .accessibilityIdentifier("hints.close")
+            }
+            Text(L10n.t("hints.explainShort"))
+                .font(Trace.Fonts.proseSmall)
+                .foregroundStyle(Trace.Colors.inkMid)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(L10n.f("hints.maxNow", maxMark))
+                .font(Trace.Fonts.monoStrong)
+                .tracking(0.8)
+                .foregroundStyle(maxMark < 100 ? Trace.Colors.stamp : Trace.Colors.ink)
+                .contentTransition(.numericText())
+                .fixedSize(horizontal: false, vertical: true)
+            ForEach(revealed, id: \.element.id) { offset, hint in
+                postIt(hint, number: offset + 1)
+                    .transition(.opacity)
+            }
+            if let next {
+                closedHint(hints[next], number: next + 1, state: game.state(of: hints[next]))
+                Button(L10n.f("hints.revealN", next + 1)) { reveal() }
+                    .buttonStyle(CTAButtonStyle(kind: .primary, onPaper: true))
+                    .disabled(game.state(of: hints[next]) != .available)
+                    .accessibilityIdentifier("hints.reveal")
+            } else if !hints.isEmpty {
+                Text(L10n.t("hints.allRevealed"))
+                    .font(Trace.Fonts.prose)
+                    .foregroundStyle(Trace.Colors.ink)
                     .fixedSize(horizontal: false, vertical: true)
-                HStack {
-                    Text(L10n.t("hints.maxScore")).font(Trace.Fonts.mono).textCase(.uppercase).tracking(0.8).foregroundStyle(Trace.Colors.bone2)
-                    Spacer()
-                    Text("\(maxScore) / 100")
-                        .font(Trace.Fonts.fieldValueLarge)
-                        .foregroundStyle(maxScore < 100 ? Trace.Colors.stampOnDark : Trace.Colors.bone)
-                        .contentTransition(.numericText())
-                        .animation(Trace.Motion.emphasized, value: maxScore)
-                }
-                .padding(.vertical, 10)
-                .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.graphite).frame(height: 1) }
-                ForEach(Array(game.caseFile.hints.enumerated()), id: \.element.id) { offset, hint in
-                    HintCard(number: offset + 1, hint: hint, state: game.state(of: hint), scoreAfter: maxScore - hint.scoreCost) {
-                        if session.useHint() != nil {
-                            AudioDirector.shared.play(.paper, volume: 0.6)
-                            Haptics.success()
-                        }
-                    }
-                }
             }
-            .padding(20)
+            Button(L10n.t("hints.continue"), action: close)
+                .buttonStyle(TextLinkStyle(onPaper: true))
+                .frame(maxWidth: .infinity)
+                .accessibilityIdentifier("hints.continue")
         }
-        .background(TraceDesk())
-    }
-}
-
-/// One hint: a kraft envelope with a wax seal (available), tied with a string (not yet), or the
-/// supervisor's note taken out of it (revealed).
-struct HintCard: View {
-    let number: Int
-    let hint: Hint
-    let state: Investigation.HintState
-    /// Best possible score once this hint is used.
-    let scoreAfter: Int
-    let onReveal: () -> Void
-
-    private var tierName: String { L10n.t("hints.tierName\(min(number, 3))") }
-    private var cost: String { hint.scoreCost == 0 ? L10n.t("hints.free") : L10n.f("hints.cost", hint.scoreCost) }
-
-    var body: some View {
-        Group {
-            switch state {
-            case .revealed: note
-            case .available: envelope(sealed: false, lockText: nil)
-            case .locked(let until):
-                envelope(sealed: true, lockText: until > 0 ? L10n.f("hints.lockedUntil", PhoneFormat.countdown(Double(until))) : L10n.t("hints.lockedPrevious"))
-            }
-        }
-        .tilt("hint\(number)", range: 1)
-        .animation(Trace.Motion.emphasized, value: state == .revealed)
+        .padding(.horizontal, 16)
+        .padding(.top, 10)
+        .padding(.bottom, 10)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private var note: some View {
-        VStack(alignment: .leading, spacing: 10) {
+    private func reveal() {
+        let reduced = systemReduceMotion || appReduceMotion
+        var revealed: Hint?
+        withAnimation(reduced ? nil : Trace.Motion.paper) {
+            revealed = session.useHint()
+        }
+        if revealed != nil {
+            AudioDirector.shared.play(.paper, volume: 0.6)
+            Haptics.light()
+        }
+    }
+
+    private func tierName(_ number: Int) -> String { L10n.t("hints.tierName\(min(max(number, 1), 3))") }
+
+    /// A revealed hint: a yellow post-it, the supervisor's words, typed.
+    private func postIt(_ hint: Hint, number: Int) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline) {
-                Text(L10n.f("hints.tier", number) + " · " + tierName).fieldLabel(Trace.Colors.stamp)
-                Spacer()
-                Text(cost).font(Trace.Fonts.monoSmall.weight(.semibold)).foregroundStyle(Trace.Colors.inkSoft)
+                Text(L10n.f("hints.number", number) + " · " + tierName(number))
+                    .font(Trace.Fonts.kicker)
+                    .tracking(1.4)
+                    .textCase(.uppercase)
+                    .foregroundStyle(Trace.Colors.stamp)
+                Spacer(minLength: 8)
+                Text(hint.scoreCost == 0 ? L10n.t("hints.free") : L10n.f("hints.cost", hint.scoreCost))
+                    .font(Trace.Fonts.monoSmall)
+                    .foregroundStyle(Trace.Colors.inkSoft)
             }
-            Text(hint.text).font(Trace.Fonts.quote).foregroundStyle(Trace.Colors.ink)
+            Text(hint.text)
+                .font(Trace.Fonts.quote)
+                .foregroundStyle(Trace.Colors.ink)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(16)
+        .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
         .paper(Trace.Colors.noteYellow, radius: 1)
-        .overlay(alignment: .top) { Tape().offset(y: -8) }
-        .transition(.move(edge: .top).combined(with: .opacity))
+        .rotationEffect(.degrees(Trace.tilt(hint.id, range: 0.8)))
+        .accessibilityElement(children: .combine)
     }
 
-    private func envelope(sealed: Bool, lockText: String?) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+    /// The next hint, still closed: what it gives, what it costs, when it opens.
+    private func closedHint(_ hint: Hint, number: Int, state: Investigation.HintState) -> some View {
+        let until = lockedUntil(state)
+        return VStack(alignment: .leading, spacing: 6) {
             HStack(alignment: .firstTextBaseline) {
-                Text(L10n.f("hints.tier", number)).fieldLabel(Trace.Colors.kraftLabel)
-                Spacer()
-                Text(cost).font(Trace.Fonts.monoSmall.weight(.bold)).foregroundStyle(Trace.Colors.kraftInk)
-            }
-            Text(tierName).font(Trace.Fonts.name).foregroundStyle(Trace.Colors.kraftInk)
-            Text(L10n.t("hints.what\(min(number, 3))")).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.kraftLabel)
-                .fixedSize(horizontal: false, vertical: true)
-            if let lockText {
-                Label(lockText, systemImage: "lock").font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.kraftInk.opacity(0.7))
-                    .padding(.top, 4)
-            } else {
-                Button(action: onReveal) {
-                    HStack {
-                        Text(L10n.t("hints.reveal"))
-                        Spacer()
-                        if hint.scoreCost > 0 { Text(L10n.f("hints.scoreAfter", max(0, scoreAfter))) }
-                    }
-                    .padding(.horizontal, 14)
+                Text(L10n.f("hints.number", number) + " · " + tierName(number))
+                    .font(Trace.Fonts.kicker)
+                    .tracking(1.4)
+                    .textCase(.uppercase)
+                    .foregroundStyle(Trace.Colors.ink)
+                Spacer(minLength: 8)
+                if until != nil {
+                    Image(systemName: "lock").font(.system(size: 12, weight: .semibold)).foregroundStyle(Trace.Colors.inkSoft)
+                        .accessibilityHidden(true)
                 }
-                .buttonStyle(InkButtonStyle(height: 44))
-                .accessibilityIdentifier("hints.reveal.\(number)")
-                .padding(.top, 4)
+            }
+            Text(L10n.t("hints.what\(min(max(number, 1), 3))"))
+                .font(Trace.Fonts.proseSmall)
+                .foregroundStyle(Trace.Colors.inkMid)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(hint.scoreCost == 0 ? L10n.t("hints.freeNote") : L10n.f("hints.costNote", hint.scoreCost))
+                .font(Trace.Fonts.monoStrong)
+                .foregroundStyle(hint.scoreCost == 0 ? Trace.Colors.ink : Trace.Colors.stamp)
+                .fixedSize(horizontal: false, vertical: true)
+            if let until {
+                Text(L10n.f("hints.lockedUntil", PhoneFormat.countdown(Double(until))))
+                    .font(Trace.Fonts.mono)
+                    .foregroundStyle(Trace.Colors.inkSoft)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .padding(16)
-        .padding(.top, 18)
+        .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            ZStack(alignment: .top) {
-                RoundedRectangle(cornerRadius: 3).fill(sealed ? Trace.Colors.kraftSealed : Trace.Colors.kraft)
-                EnvelopeFlap().fill(Trace.Colors.ink.opacity(0.07)).frame(height: 44)
-                EnvelopeFlap().stroke(Trace.Colors.kraftInk.opacity(0.25), lineWidth: 1).frame(height: 44)
-                PaperGrain(intensity: 0.05).clipShape(RoundedRectangle(cornerRadius: 3))
-            }
-            .shadow(color: .black.opacity(0.45), radius: 10, y: 8)
-        )
-        .overlay(alignment: .top) {
-            if sealed {
-                Rectangle().fill(Trace.Colors.kraftInk.opacity(0.55)).frame(width: 2).frame(maxHeight: .infinity)
-            } else {
-                Circle().fill(Trace.Colors.stamp)
-                    .overlay(Circle().strokeBorder(Trace.Colors.stampDeep.opacity(0.5), lineWidth: 2).padding(3))
-                    .overlay(Text("\(number)").font(Trace.Fonts.stamp(12)).foregroundStyle(Trace.Colors.stampText))
-                    .frame(width: 30, height: 30)
-                    .shadow(color: .black.opacity(0.3), radius: 2, y: 1)
-                    .offset(y: 28)
-                    .accessibilityHidden(true)
-            }
-        }
-        .opacity(sealed ? 0.8 : 1)
-        .transition(.opacity)
+        .overlay(Rectangle().strokeBorder(Trace.Colors.inkSoft, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
+        .accessibilityElement(children: .combine)
     }
-}
 
-/// The V of an envelope's flap.
-struct EnvelopeFlap: Shape {
-    func path(in rect: CGRect) -> Path {
-        var p = Path()
-        p.move(to: CGPoint(x: rect.minX, y: rect.minY))
-        p.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
-        p.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
-        return p
+    private func lockedUntil(_ state: Investigation.HintState) -> Int? {
+        if case .locked(let until) = state { return until }
+        return nil
     }
 }
 #endif
