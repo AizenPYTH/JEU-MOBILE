@@ -836,11 +836,12 @@ Seulement ce qui empêche une sortie **App Store** (TestFlight n'est pas concern
 2. **Langue annoncée non tenue** : interface anglaise, affaires en français. Publier en français seul, ou traduire (D2).
 
 **C. Défauts bloquants du produit** (Apple accepterait peut-être, mais on ne publie pas avec)
-1. **Valider `0fad7aa` sur la CI iOS et sur un iPhone SE** : clavier du code (P0), versement depuis la Corbeille,
-   confirmation avant d'écraser une enquête, photos de nuit. Ajouter le test UI qui tape « 1609 ». C'est aussi la
-   condition pour la prochaine build TestFlight.
+1. ~~**Valider `0fad7aa` sur la CI iOS**~~ : fait — CI iOS verte sur `68e5c52` (compilation + 10/10 tests d'interface,
+   dont la feuille « Une autre enquête est en cours »), et un test d'interface tape maintenant le code « 1609 » de Notes
+   (`testLockedNotesCode`). **Reste :** un essai sur un vrai iPhone SE (petit écran) et un coup d'œil aux photos de nuit.
 2. ~~**Musique du joueur coupée au lancement**~~ (`audio-warmup-coupe-musique-joueur`, P1) : corrigé après la rédaction de ce document.
-3. **Rejouer après avoir consulté la solution donne RÉSOLU et un rang** (`solution-consultee-sans-cout`, D6-c).
+3. ~~**Rejouer après avoir consulté la solution donne RÉSOLU et un rang**~~ (`solution-consultee-sans-cout`, D6-c) :
+   corrigé — après la solution, seul « Classer le dossier » reste (confirmation avant d'afficher la solution).
 
 Le reste relève de la qualité et peut suivre la v1 : portraits et photos réels, décisions D5 à D27, incohérences de
 textes des affaires, accessibilité avancée, CI multi-simulateurs. Dans l'ordre recommandé : D5 (≈ 10 lignes) avant les

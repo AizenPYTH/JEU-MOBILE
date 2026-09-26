@@ -777,6 +777,33 @@ final class MainFlowTests: XCTestCase {
         }
     }
 
+    // MARK: - A locked app: the code keypad, every key reachable above the dossier bar
+
+    func testLockedNotesCode() {
+        startCase()
+        openApp("notes")
+        let zero = wait(element("lock.key.0"), 5, "clavier du code de Notes")
+        sleep(1)
+        snap("95-notes-verrouillees")
+        XCTAssertTrue(zero.isHittable, "La touche « 0 » doit être accessible (pas sous la barre du dossier)")
+
+        // A wrong code costs time and keeps the app locked.
+        dismissUrgentBanner()
+        let before = secondsLeft()
+        for key in ["0", "0", "0", "0"] { element("lock.key.\(key)").tap() }
+        sleep(1)
+        XCTAssertTrue(element("lock.key.1").exists, "Un mauvais code laisse Notes verrouillée")
+        XCTAssertTrue(before - secondsLeft() >= 3, "Tenter un code coûte du temps")
+        snap("96-mauvais-code")
+
+        // Alex's birthday (JJMM): 1609.
+        dismissUrgentBanner()
+        for key in ["1", "6", "0", "9"] { element("lock.key.\(key)").tap() }
+        XCTAssertTrue(element("lock.key.1").waitForNonExistence(timeout: 5), "Le bon code ouvre Notes")
+        sleep(1)
+        snap("97-notes-ouvertes")
+    }
+
     // MARK: - Settings: relaxed time, replay the tutorial
 
     func testSettingsRelaxedTime() {
