@@ -452,6 +452,7 @@ struct DamagedFileView: View {
 /// `-UITestDuration <seconds>` shortens every case,
 /// `-UITestFirstLaunch skip|show`: `skip` = a returning, assigned player (Élise A, tutorial seen);
 /// `show` = a brand-new player (title, who investigates, tutorial bubbles).
+@MainActor
 enum UITestHooks {
     static func applyAtLaunch() {
         #if DEBUG
