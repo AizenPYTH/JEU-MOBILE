@@ -93,7 +93,7 @@ struct PhoneView: View {
                 NotificationBanner(notification: banner, session: session)
                     .padding(.horizontal, 10)
                     .padding(.top, Theme.Size.statusBar + Theme.Spacing.s3)
-                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .transition(reduceMotion ? .opacity : .move(edge: .top).combined(with: .opacity))
                     .zIndex(2)
             }
 
@@ -131,7 +131,7 @@ struct PhoneView: View {
                     .zIndex(5)
             }
         }
-        .animation(Theme.Motion.springNotification, value: session.banner)
+        .animation(reduceMotion ? .easeInOut(duration: 0.2) : Theme.Motion.springNotification, value: session.banner)
         .animation(Theme.Motion.emphasized(0.2), value: session.toast)
     }
 

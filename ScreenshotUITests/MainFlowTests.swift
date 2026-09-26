@@ -778,9 +778,13 @@ final class MainFlowTests: XCTestCase {
         tap(settings, "Paramètres", expecting: element("settings.relaxedTime"))
         sleep(1)
         snap("S0-parametres")
+        // A SwiftUI toggle flips on its switch, not on its label.
         let relaxed = element("settings.relaxedTime")
         scrollTo(relaxed)
-        relaxed.tap()
+        let toggle = relaxed.switches.firstMatch
+        (toggle.exists ? toggle : relaxed).coordinate(withNormalizedOffset: CGVector(dx: 0.93, dy: 0.5)).tap()
+        usleep(500_000)
+        XCTAssertEqual((toggle.exists ? toggle : relaxed).value as? String, "1", "« Temps détendu » activé")
         let replay = element("settings.replayTutorial")
         scrollTo(replay)
         replay.tap()

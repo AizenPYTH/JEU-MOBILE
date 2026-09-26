@@ -423,8 +423,10 @@ final class GameSession {
     }
 
     /// « Reprendre l'enquête » after a wrong conclusion: the new investigation gets back the
-    /// pieces the player had filed, with their links and readings (nothing costs time).
-    func restoreNotebook(_ entries: [NotebookEntry]) {
+    /// pieces the player had filed, with their links and readings, and what had been seen (so a
+    /// piece found by crossing several items stays found). Nothing costs time.
+    func restoreNotebook(_ entries: [NotebookEntry], seen: Set<ItemRef> = []) {
+        for ref in seen { investigation.markSeen(ref) }
         for entry in entries {
             investigation.markSeen(entry.ref)
             if !investigation.isPinned(entry.ref) { _ = investigation.togglePin(entry.ref) }

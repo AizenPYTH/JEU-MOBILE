@@ -3,8 +3,8 @@ import SwiftUI
 import UIKit
 
 /// A tutorial bubble of case #001 (final handoff §D): paper, 280 pt max, a diamond arrow, a red
-/// kicker « 1 / 3 · EXPLORER », one or two lines, an optional action hint. Never modal: it does not
-/// block anything around it; the × (or any tap on it) closes it for good.
+/// kicker « 1 / 3 · EXPLORER », one or two lines, an optional action hint. Never modal: only its ×
+/// takes touches (taps go through the rest of it); the × closes it for good.
 struct CoachBubble: View {
     let bubble: TutorialCoach.Bubble
     /// Where the arrow points.
@@ -36,6 +36,7 @@ struct CoachBubble: View {
                     .font(Trace.Fonts.pieceNumber)
                     .tracking(1.6)
                     .foregroundStyle(dark ? Trace.Colors.stampOnDark : Trace.Colors.stamp)
+                    .allowsHitTesting(false)
                 Spacer(minLength: 8)
                 Button(action: onClose) {
                     Image(systemName: "xmark")
@@ -55,10 +56,12 @@ struct CoachBubble: View {
                 .lineSpacing(3)
                 .foregroundStyle(dark ? Trace.Colors.bone : Trace.Colors.ink)
                 .fixedSize(horizontal: false, vertical: true)
+                .allowsHitTesting(false)
             if bubble == .explore {
                 Text(L10n.t("coach.explore.action"))
                     .font(Trace.Fonts.monoSmall)
                     .foregroundStyle(dark ? Trace.Colors.bone2 : Trace.Colors.inkSoft)
+                    .allowsHitTesting(false)
             }
         }
         .padding(.horizontal, 16)
@@ -75,9 +78,8 @@ struct CoachBubble: View {
                         .offset(x: arrowOffset, y: arrow == .top ? -7 : 7)
                 }
                 .shadow(color: .black.opacity(0.6), radius: 20, y: 18)
+                .allowsHitTesting(false)
         )
-        .contentShape(Rectangle())
-        .onTapGesture(perform: onClose)
         .scaleEffect(shown || reduceMotion ? 1 : 0.96)
         .opacity(shown ? 1 : 0)
         .onAppear { withAnimation(.easeOut(duration: 0.22)) { shown = true } }

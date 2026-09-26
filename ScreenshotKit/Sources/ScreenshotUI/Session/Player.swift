@@ -116,10 +116,11 @@ enum PlayerStore {
 
     static var assignedDate: Date? { UserDefaults.standard.object(forKey: assignedDateKey) as? Date }
 
-    /// Players of earlier versions (they already have finished cases) go straight to the desk,
-    /// already assigned, as Élise A until they choose otherwise in their profile.
+    /// Players of earlier versions (finished cases, but screen 03 never answered) go straight to the
+    /// desk, already assigned, as Élise A until they choose otherwise in their profile. A new player
+    /// is never assigned here: screen 12 does it.
     static func migrate(attempts: [Attempt]) {
-        guard !isAssigned, !attempts.isEmpty else { return }
+        guard !isAssigned, !hasChosen, !attempts.isEmpty else { return }
         isAssigned = true
     }
 

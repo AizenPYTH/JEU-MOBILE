@@ -63,9 +63,16 @@ struct BureauView: View {
                     } else {
                         DeskOverline(text: resumable != nil ? L10n.t("desk.openFile") : L10n.t("desk.nextInvestigation"))
                             .padding(.top, 10)
-                        FeaturedFolder(file: main,
-                                       status: main.map { status(of: $0) } ?? .new,
-                                       saved: main.flatMap { saved(for: $0) })
+                        Button {
+                            if let main { onOpen(main) }
+                        } label: {
+                            FeaturedFolder(file: main,
+                                           status: main.map { status(of: $0) } ?? .new,
+                                           saved: main.flatMap { saved(for: $0) })
+                        }
+                        .buttonStyle(PressableStyle())
+                        .disabled(main == nil)
+                        .accessibilityIdentifier(main.map { "case.\($0.id)" } ?? "home.folder")
                             .opacity(appeared ? 1 : 0)
                             .offset(y: appeared || still ? 0 : 24)
                     }
@@ -655,10 +662,6 @@ struct InvestigatorView: View {
                         .foregroundStyle(Trace.Colors.inkSoft)
                 }
             }
-            Text(identity.id.bio)
-                .font(Trace.Fonts.proseSmall)
-                .foregroundStyle(Trace.Colors.inkMid)
-                .fixedSize(horizontal: false, vertical: true)
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -694,6 +697,12 @@ struct InvestigatorView: View {
                 }
             }
             .padding(16)
+            Text(identity.id.bio)
+                .font(Trace.Fonts.proseSmall)
+                .foregroundStyle(Trace.Colors.inkMid)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 12)
             HStack(alignment: .center, spacing: 12) {
                 if let date = PlayerStore.assignedDate {
                     Text(assignedLine(Self.dotted(date)))

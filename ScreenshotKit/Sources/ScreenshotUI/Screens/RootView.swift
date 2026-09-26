@@ -92,9 +92,14 @@ struct GameRoot: View {
         rules = boot.rules
         loadError = boot.loadError
         let inProgress = boot.savedGame.map { saved in boot.cases.contains { $0.id == saved.snapshot.caseID } } ?? false
+        let firstID = (boot.cases.first { $0.number == 1 } ?? boot.cases.first)?.id
         let first: Stage
         if inProgress {
             first = .titleResume
+        } else if !PlayerStore.isAssigned, let firstID,
+                  PlayerStore.assignmentDue(attempts: boot.attempts, firstCaseID: firstID, filedAnyway: false) {
+            // #001 was concluded but the game was left before its report was filed: screen 12 is owed.
+            first = .assignment(solved: boot.attempts.contains { $0.caseID == firstID && $0.solved })
         } else if !PlayerStore.isAssigned {
             first = .title
         } else {
@@ -389,7 +394,14 @@ struct GameRoot: View {
         ProgressStore.record(attempt)
         attempts = ProgressStore.attempts()
         savedGame = nil
-        stage = .result(Play(session: session, verdict: verdict, attemptID: attempt.id, relaxed: Preferences.relaxedTime))
+        // The tutorial belongs to the first play of #001 only, even if some bubbles never showed.
+        if session.caseFile.number == 1 { TutorialCoach.markSeen() }
+        // « Temps détendu » is read from the duration the case was played with (the setting may
+        // have changed while it was paused).
+        let original = cases.first { $0.id == session.caseFile.id }
+        let normal = original.flatMap { file in rules.map { file.duration(for: session.game.challenge, rules: $0) } }
+        let relaxed = session.caseFile.durationSeconds > (normal ?? session.caseFile.durationSeconds)
+        stage = .result(Play(session: session, verdict: verdict, attemptID: attempt.id, relaxed: relaxed))
     }
 
     /// [CLASSER LE DOSSIER] / « Classer quand même »: the assignment (once, after #001), then the Bureau.
@@ -411,7 +423,7 @@ struct GameRoot: View {
         guard let session = makeSession(original, challenge: play.session.game.challenge) else { return }
         let entries = play.session.game.notebook
         session.begin()
-        session.restoreNotebook(entries)
+        session.restoreNotebook(entries, seen: play.session.game.seen)
         stage = .playing(session)
     }
 
@@ -460,6 +472,8 @@ enum UITestHooks {
         if defaults.bool(forKey: "UITestReset") {
             ProgressStore.reset()
             SavedInvestigationStore.clear()
+            defaults.removeObject(forKey: Preferences.relaxedTimeKey)
+            defaults.removeObject(forKey: Preferences.reduceMotionKey)
         }
         switch defaults.string(forKey: "UITestFirstLaunch") {
         case "skip":
