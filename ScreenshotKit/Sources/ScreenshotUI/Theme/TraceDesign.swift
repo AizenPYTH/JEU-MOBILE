@@ -1,5 +1,6 @@
 #if os(iOS)
 import SwiftUI
+import UIKit
 import CaseEngine
 
 /// CONCLUDE design (« TRACE » v2 handoff) — « dossier d'enquête ». Paper outside, glass inside: everything that belongs to
@@ -160,10 +161,11 @@ struct PaperGrain: View {
     var body: some View {
         Group {
             if let image = ArtLibrary.image(texture) {
-                Image(uiImage: image)
+                // A fine grain, not clouds: the 512 px tile is laid at 3 px per point (≈ 170 pt).
+                Image(uiImage: image.cgImage.map { UIImage(cgImage: $0, scale: 3, orientation: .up) } ?? image)
                     .resizable(resizingMode: .tile)
                     .blendMode(.multiply)
-                    .opacity(min(1, intensity * 28))
+                    .opacity(min(0.7, intensity * 12))
             } else {
                 Canvas(rendersAsynchronously: true) { context, size in
                     var rng = SeededRandom(seed: "grain")

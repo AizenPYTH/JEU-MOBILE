@@ -199,8 +199,9 @@ public enum Theme {
         public static let marginCompact: CGFloat = 16
         public static let marginList: CGFloat = 20
         public static let marginGame: CGFloat = 24
-        /// Bottom inset of scrollable content, above the notebook capsule.
-        public static let bottomInset: CGFloat = 110
+        /// Bottom inset of scrollable content: the last item scrolls clear of the dossier bar (64 pt,
+        /// its 12 pt margin and the home indicator).
+        public static let bottomInset: CGFloat = 150
     }
 
     public enum Radius {
