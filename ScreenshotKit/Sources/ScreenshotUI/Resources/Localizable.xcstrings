@@ -8622,6 +8622,40 @@
         }
       }
     },
+    "toast.accuses": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incriminates: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'accuse : %@"
+          }
+        }
+      }
+    },
+    "toast.clears": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clears: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le disculpe : %@"
+          }
+        }
+      }
+    },
     "toast.linked": {
       "extractionState": "manual",
       "localizations": {

@@ -41,10 +41,17 @@ struct LocalizationTests {
         let files = FileManager.default.enumerator(at: Self.uiSources, includingPropertiesForKeys: nil)?
             .compactMap { $0 as? URL }.filter { $0.pathExtension == "swift" } ?? []
         #expect(files.count > 10)
+        // Keys chosen by a condition: L10n.f(flag ? "a.b" : "a.c", …).
+        let ternary = try NSRegularExpression(pattern: #"L10n\.(?:t|f)\([^"\n]*\?\s*"([A-Za-z0-9_.]+)"\s*:\s*"([A-Za-z0-9_.]+)""#)
         for file in files {
             let text = try String(contentsOf: file, encoding: .utf8)
             for match in regex.matches(in: text, range: NSRange(text.startIndex..., in: text)) {
                 if let r = Range(match.range(at: 1), in: text) { keys.insert(String(text[r])) }
+            }
+            for match in ternary.matches(in: text, range: NSRange(text.startIndex..., in: text)) {
+                for group in 1...2 {
+                    if let r = Range(match.range(at: group), in: text) { keys.insert(String(text[r])) }
+                }
             }
         }
         var missing: [String] = []
