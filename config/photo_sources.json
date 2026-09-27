@@ -148,31 +148,9 @@
     },
     {
       "sourceId": "case001_src_marseille_street_sunny_day_01",
-      "status": "fetched",
+      "status": "missing",
       "case": "001",
-      "provider": "openverse",
-      "providerPhotoId": "4648110c-bd03-4241-9b97-6315b2a1f12a",
-      "photographer": "I Am birdsaspoetry.com  from Melbourne, Australia",
-      "photographerUrl": "https://www.flickr.com/people/78742710@N08",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=93783723",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/9/94/European_Goldfinch_Glowing_%2850257614467%29.jpg",
-      "license": "by",
-      "licenseVersion": "2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-      "origin": "wikimedia",
-      "title": "European Goldfinch Glowing",
-      "tags": [],
-      "queryUsed": "European street sunshine",
-      "dateFetched": "2026-09-27T08:56:27+00:00",
-      "width": 2500,
-      "height": 1667,
-      "score": 2.33,
-      "luminance": 126.8,
-      "file": "openverse_4648110c-bd03-4241-9b97-6315b2a1f12a.jpg",
-      "sha256": "be68447b552a1e7f7f5aa9e24d14c606edb1aca98e60ab43a4ae5e0109356112",
-      "attributionRequired": true,
-      "attributionText": "« European Goldfinch Glowing » by I Am birdsaspoetry.com  from Melbourne, Australia, CC BY 2.0",
-      "evidence": false
+      "reason": "aucun candidat acceptable sur 5 résultat(s) (3 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 1 × lieu étranger à l'affaire (placeRejectWords), 1 × image refusée à la relecture (selection.excluded))"
     },
     {
       "sourceId": "case001_src_blue_sky_airplane_contrail_01",
@@ -206,27 +184,27 @@
       "status": "fetched",
       "case": "001",
       "provider": "openverse",
-      "providerPhotoId": "8326195f-5dee-4967-b484-f7cf801ad7ae",
+      "providerPhotoId": "b5d5b199-0edf-434b-a532-c38f980b8df5",
       "photographer": "No Swan So Fine",
       "photographerUrl": "https://commons.wikimedia.org/wiki/User:No_Swan_So_Fine",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=147826385",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Entrance_to_The_Chilterns_underground_car_park%2C_Paddington_Street%2C_Marylebone%2C_October_2023_02.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=147826384",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Entrance_to_The_Chilterns_underground_car_park%2C_Paddington_Street%2C_Marylebone%2C_October_2023_01.jpg",
       "license": "by-sa",
       "licenseVersion": "4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "origin": "wikimedia",
-      "title": "Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 02",
+      "title": "Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 01",
       "tags": [],
       "queryUsed": "car parked on street",
-      "dateFetched": "2026-09-27T08:56:28+00:00",
+      "dateFetched": "2026-09-27T09:07:58+00:00",
       "width": 4032,
       "height": 3024,
       "score": 4.5,
-      "luminance": 176.9,
-      "file": "openverse_8326195f-5dee-4967-b484-f7cf801ad7ae.jpg",
-      "sha256": "bccabc0ec03f47c8b0bae0bc7d8b31b1cda4243c3f623b5ab207b23b965370d6",
+      "luminance": 167.2,
+      "file": "openverse_b5d5b199-0edf-434b-a532-c38f980b8df5.jpg",
+      "sha256": "ac78cd52d55c443258f3902877f0cdb606acbfd3bfc263769e5e0a56102a2ae0",
       "attributionRequired": true,
-      "attributionText": "« Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 02 » by No Swan So Fine, CC BY-SA 4.0",
+      "attributionText": "« Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 01 » by No Swan So Fine, CC BY-SA 4.0",
       "evidence": false
     },
     {
@@ -397,36 +375,36 @@
       "status": "fetched",
       "case": "001",
       "provider": "openverse",
-      "providerPhotoId": "318438f4-514d-448c-8c4c-e266cbc66b5f",
+      "providerPhotoId": "11a35d82-9872-449f-a23f-017eb68cf38e",
       "photographer": "",
       "photographerUrl": "",
-      "sourceUrl": "https://www.rawpixel.com/image/6043334/photo-image-public-domain-wood-house",
-      "downloadUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2ZsMTk1MTAyNjQ5NDktaW1hZ2Uta3liZW1xZnMuanBn.jpg",
+      "sourceUrl": "https://www.rawpixel.com/image/6043322/photo-image-public-domain-table-living-room",
+      "downloadUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2ZsMTk2OTY4ODIwODUtaW1hZ2Uta3liZW5maWguanBn.jpg",
       "license": "cc0",
       "licenseVersion": "1.0",
       "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
       "origin": "rawpixel",
-      "title": "Bedroom decor interior",
+      "title": "Modern apartment interior",
       "tags": [
         "apartment",
-        "bedroom",
-        "home",
-        "house",
+        "condo",
         "interior design",
         "interiors",
         "living room",
+        "luxury interior",
+        "modern living room",
         "room"
       ],
       "queryUsed": "apartment living room interior",
-      "dateFetched": "2026-09-27T08:56:29+00:00",
-      "width": 6000,
-      "height": 4350,
-      "score": 3.95,
-      "luminance": 162.8,
-      "file": "openverse_318438f4-514d-448c-8c4c-e266cbc66b5f.jpg",
-      "sha256": "a2a83200ff8adf7c2aec29b73eb3a47104d851dcf04c63ead822e5f80289f136",
+      "dateFetched": "2026-09-27T09:07:58+00:00",
+      "width": 5978,
+      "height": 4200,
+      "score": 3.91,
+      "luminance": 170.9,
+      "file": "openverse_11a35d82-9872-449f-a23f-017eb68cf38e.jpg",
+      "sha256": "e51f0cb8dfe38db51daf8d9fced52156f54e7d2ae46bd6928b34086a885387b7",
       "attributionRequired": false,
-      "attributionText": "« Bedroom decor interior » — auteur inconnu (CC0)",
+      "attributionText": "« Modern apartment interior » — auteur inconnu (CC0)",
       "evidence": false
     },
     {
@@ -666,36 +644,27 @@
       "status": "fetched",
       "case": "003",
       "provider": "openverse",
-      "providerPhotoId": "d7de5fa1-d23a-47e4-8ed1-6ee2b5cb9808",
-      "photographer": "",
-      "photographerUrl": "",
-      "sourceUrl": "https://www.rawpixel.com/image/5947922/free-public-domain-cc0-photo",
-      "downloadUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4NjM0NjAxLWltYWdlLWt3eW96MTl5LmpwZw.jpg",
-      "license": "cc0",
-      "licenseVersion": "1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "origin": "rawpixel",
-      "title": "",
-      "tags": [
-        "apartment interior",
-        "bedroom",
-        "green couch",
-        "hotel design",
-        "hotel room",
-        "interior bedroom",
-        "living room",
-        "living room interior"
-      ],
+      "providerPhotoId": "7f6ecc3b-5f62-41c3-87fa-bdd51e8703e3",
+      "photographer": "JIP",
+      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:JIP&action=edit&redlink=1",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=86396473",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/Soviet-era_Estonian_room_in_a_museum.jpg",
+      "license": "by-sa",
+      "licenseVersion": "4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "origin": "wikimedia",
+      "title": "Soviet-era Estonian room in a museum",
+      "tags": [],
       "queryUsed": "apartment living room interior",
-      "dateFetched": "2026-09-27T08:57:33+00:00",
-      "width": 5616,
-      "height": 3748,
-      "score": 3.08,
-      "luminance": 149.9,
-      "file": "openverse_d7de5fa1-d23a-47e4-8ed1-6ee2b5cb9808.jpg",
-      "sha256": "28b71a6c069ec8cf7063ff19d2a063fd4a2e6b62079f6f474fcf04827e2cf35c",
-      "attributionRequired": false,
-      "attributionText": "« Sans titre » — auteur inconnu (CC0)",
+      "dateFetched": "2026-09-27T09:09:02+00:00",
+      "width": 4608,
+      "height": 3456,
+      "score": 2.5,
+      "luminance": 102.0,
+      "file": "openverse_7f6ecc3b-5f62-41c3-87fa-bdd51e8703e3.jpg",
+      "sha256": "473fd995ea948092209794591ab0107d8a49ac1bac395051e3647d120a3aeb85",
+      "attributionRequired": true,
+      "attributionText": "« Soviet-era Estonian room in a museum » by JIP, CC BY-SA 4.0",
       "evidence": false
     },
     {
@@ -948,32 +917,6 @@
       },
       "sha256": "511925fdd1f4e872af4d038023628260cd6ba0ace2744098255e1b182edf97ba",
       "bytes": 51649
-    },
-    {
-      "assetId": "case001_photo_p_b04",
-      "sourceId": "case001_src_marseille_street_sunny_day_01",
-      "caseId": "001",
-      "photoId": "p_b04",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case001_photo_p_b04.imageset/case001_photo_p_b04.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_4648110c-bd03-4241-9b97-6315b2a1f12a.jpg",
-        "sourceSha256": "be68447b552a1e7f7f5aa9e24d14c606edb1aca98e60ab43a4ae5e0109356112",
-        "box": [
-          0,
-          0,
-          2222,
-          1667
-        ]
-      },
-      "sha256": "2c8f8d4264d98f4f2585a06314d0deee40180fc2c273c74ec57c4637fd655455",
-      "bytes": 72370
     },
     {
       "assetId": "case001_photo_p_b07",
@@ -1275,17 +1218,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_318438f4-514d-448c-8c4c-e266cbc66b5f.jpg",
-        "sourceSha256": "a2a83200ff8adf7c2aec29b73eb3a47104d851dcf04c63ead822e5f80289f136",
+        "source": "openverse_11a35d82-9872-449f-a23f-017eb68cf38e.jpg",
+        "sourceSha256": "e51f0cb8dfe38db51daf8d9fced52156f54e7d2ae46bd6928b34086a885387b7",
         "box": [
+          64,
           0,
-          0,
-          989,
-          742
+          1022,
+          719
         ]
       },
-      "sha256": "702a2f4062628887bf2d7f1d611d30b2ba3c81b111956387da26141f657efb41",
-      "bytes": 91961
+      "sha256": "8deed84471aea57c811562a52595e42c3eb3ef8663d1e90a17e2feff2800f63b",
+      "bytes": 104160
     },
     {
       "assetId": "case001_photo_p_old03",
@@ -1327,8 +1270,8 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_8326195f-5dee-4967-b484-f7cf801ad7ae.jpg",
-        "sourceSha256": "bccabc0ec03f47c8b0bae0bc7d8b31b1cda4243c3f623b5ab207b23b965370d6",
+        "source": "openverse_b5d5b199-0edf-434b-a532-c38f980b8df5.jpg",
+        "sourceSha256": "ac78cd52d55c443258f3902877f0cdb606acbfd3bfc263769e5e0a56102a2ae0",
         "box": [
           0,
           0,
@@ -1336,8 +1279,8 @@
           3024
         ]
       },
-      "sha256": "e5eddcadb46462f80cbbaf650cdf64aadb9835fe95cca97742e1ce3c5f36b001",
-      "bytes": 199035
+      "sha256": "f6eebfe3d371d92caf74a87e2e6765d262aebf69dbcba5dfe1998a84c79432f7",
+      "bytes": 211906
     },
     {
       "assetId": "case002_photo_p_berges01",
@@ -1457,17 +1400,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_d7de5fa1-d23a-47e4-8ed1-6ee2b5cb9808.jpg",
-        "sourceSha256": "28b71a6c069ec8cf7063ff19d2a063fd4a2e6b62079f6f474fcf04827e2cf35c",
+        "source": "openverse_7f6ecc3b-5f62-41c3-87fa-bdd51e8703e3.jpg",
+        "sourceSha256": "473fd995ea948092209794591ab0107d8a49ac1bac395051e3647d120a3aeb85",
         "box": [
-          113,
           0,
-          1024,
-          683
+          0,
+          4608,
+          3456
         ]
       },
-      "sha256": "92c311b35db9ea126c5a44de4106c564e06181c46adff74aa34a61d472fbbd99",
-      "bytes": 64948
+      "sha256": "69fcf436e506116999214c9f48543e4d041a8697fed843d7a22e41ed09d4c62d",
+      "bytes": 83448
     },
     {
       "assetId": "case003_photo_p_old_2019",
@@ -1602,10 +1545,10 @@
   ],
   "stats": {
     "requests": {
-      "openverse": 36
+      "openverse": 37
     },
-    "rejected": 336,
-    "lastRun": "2026-09-27T09:05:29+00:00"
+    "rejected": 434,
+    "lastRun": "2026-09-27T09:09:36+00:00"
   },
   "about": "Provenance of every external photo (generated by scripts/photos/pipeline.py). One `sources` entry per downloaded image, one `assets` entry per image shipped in the game."
 }

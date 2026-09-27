@@ -32,26 +32,13 @@
       "provider": "openverse",
       "photographer": "",
       "photographerUrl": "",
-      "sourceUrl": "https://www.rawpixel.com/image/6043334/photo-image-public-domain-wood-house",
+      "sourceUrl": "https://www.rawpixel.com/image/6043322/photo-image-public-domain-table-living-room",
       "license": "CC0 1.0",
       "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Bedroom decor interior",
-      "attribution": "« Bedroom decor interior » — auteur inconnu (CC0)",
+      "title": "Modern apartment interior",
+      "attribution": "« Modern apartment interior » — auteur inconnu (CC0)",
       "cases": [
         "001"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "",
-      "photographerUrl": "",
-      "sourceUrl": "https://www.rawpixel.com/image/5947922/free-public-domain-cc0-photo",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "",
-      "attribution": "« Sans titre » — auteur inconnu (CC0)",
-      "cases": [
-        "003"
       ]
     },
     {
@@ -121,15 +108,15 @@
     },
     {
       "provider": "openverse",
-      "photographer": "I Am birdsaspoetry.com  from Melbourne, Australia",
-      "photographerUrl": "https://www.flickr.com/people/78742710@N08",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=93783723",
-      "license": "BY 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-      "title": "European Goldfinch Glowing",
-      "attribution": "« European Goldfinch Glowing » by I Am birdsaspoetry.com  from Melbourne, Australia, CC BY 2.0",
+      "photographer": "JIP",
+      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:JIP&action=edit&redlink=1",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=86396473",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Soviet-era Estonian room in a museum",
+      "attribution": "« Soviet-era Estonian room in a museum » by JIP, CC BY-SA 4.0",
       "cases": [
-        "001"
+        "003"
       ]
     },
     {
@@ -253,11 +240,11 @@
       "provider": "openverse",
       "photographer": "No Swan So Fine",
       "photographerUrl": "https://commons.wikimedia.org/wiki/User:No_Swan_So_Fine",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=147826385",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=147826384",
       "license": "BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "title": "Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 02",
-      "attribution": "« Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 02 » by No Swan So Fine, CC BY-SA 4.0",
+      "title": "Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 01",
+      "attribution": "« Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 01 » by No Swan So Fine, CC BY-SA 4.0",
       "cases": [
         "001"
       ]
