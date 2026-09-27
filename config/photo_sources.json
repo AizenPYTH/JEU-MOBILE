@@ -611,40 +611,6 @@
       "evidence": false
     },
     {
-      "sourceId": "case001_src_mur_d_escalade_vu_d_en_bas_contre_jour_01",
-      "status": "fetched",
-      "case": "001",
-      "provider": "wikimedia",
-      "providerPhotoId": "65774894",
-      "photographer": "Elliott Brown from Birmingham, United Kingdom",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_(25989500198).jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_%2825989500198%29.jpg/1920px-Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_%2825989500198%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "by-sa",
-      "licenseVersion": "2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-      "origin": "Wikimedia Commons",
-      "title": "Climbing Wall - Hockley Circus - Hockley Flyover",
-      "tags": [
-        "Climbing Wall (William Mitchell)",
-        "Photographs by Elliott Brown",
-        "Flickr images reviewed by FlickreviewR 2",
-        "Files with coordinates missing SDC location of creation (52° N, 2° W)",
-        "Below the Hockley Flyover is the Hockley Circus. Certain walls have sculptures dating to 1968 by William Mitchell called Climbing Wall. Made of cast concrete. They are either side of the entrances / exits to the subways."
-      ],
-      "queryUsed": "climbing wall from below",
-      "dateFetched": "2026-09-27T12:41:47+00:00",
-      "width": 4608,
-      "height": 3456,
-      "score": 2.5,
-      "luminance": 128.4,
-      "file": "wikimedia_65774894.jpg",
-      "sha256": "953907d4c687348450cce944fefa25ce421d46b60fee71a66bf4e9a15fafb990",
-      "attributionRequired": false,
-      "attributionText": "« Climbing Wall - Hockley Circus - Hockley Flyover » by Elliott Brown from Birmingham, United Kingdom, CC BY-SA 2.0 — Wikimedia Commons",
-      "evidence": false
-    },
-    {
       "sourceId": "case001_src_mur_de_bloc_prises_bleues_magnesie_01",
       "status": "fetched",
       "case": "001",
@@ -1661,34 +1627,6 @@
       "evidence": false
     },
     {
-      "sourceId": "case002_src_passerelle_saint_vincent_lyon_coucher_de_01",
-      "status": "fetched",
-      "case": "002",
-      "provider": "openverse",
-      "providerPhotoId": "24c05893-82ad-4047-a44f-ddaa200d35f2",
-      "photographer": "Corentin Eustacchi",
-      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:Corentin_Eustacchi&action=edit&redlink=1",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=197306109",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Passerelle_Saint-Vincent_%28Lyon%2C_2026%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "license": "by-sa",
-      "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "origin": "wikimedia",
-      "title": "Passerelle Saint-Vincent (Lyon, 2026)",
-      "tags": [],
-      "queryUsed": "Quai Saint-Vincent Lyon",
-      "dateFetched": "2026-09-27T12:41:48+00:00",
-      "width": 4032,
-      "height": 3024,
-      "score": 4.5,
-      "luminance": 117.7,
-      "file": "openverse_24c05893-82ad-4047-a44f-ddaa200d35f2.jpg",
-      "sha256": "2324ba8c1216ae8c8e1152f1f358417f0697e0bdbe24df35d6e2b3782dc781d1",
-      "attributionRequired": true,
-      "attributionText": "« Passerelle Saint-Vincent (Lyon, 2026) » by Corentin Eustacchi, CC BY-SA 4.0",
-      "evidence": false
-    },
-    {
       "sourceId": "case002_src_pont_de_la_guillotiere_rhone_01",
       "status": "fetched",
       "case": "002",
@@ -2299,34 +2237,6 @@
       "evidence": false
     },
     {
-      "sourceId": "case003_src_chartrons_bordeaux_toits_01",
-      "status": "fetched",
-      "case": "003",
-      "provider": "openverse",
-      "providerPhotoId": "820aa9d2-9ec7-451e-9384-fa34989d8fd3",
-      "photographer": "PattayaPatrol",
-      "photographerUrl": "https://www.flickr.com/people/PattayaPatrol",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=197295549",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3f/DZ6_3012_Cityscape_of_Na_Kluea_Pattaya_-_a_mix_of_hotels_low-rise_buildings_and_the_seaside_Ferris_wheel_under_a_pale_afternoon_sky.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
-      "license": "by-sa",
-      "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "origin": "wikimedia",
-      "title": "DZ6 3012 Cityscape of Na Kluea Pattaya - a mix of hotels low-rise buildings and the seaside Ferris wheel under a pale afternoon sky",
-      "tags": [],
-      "queryUsed": "pink sky rooftops",
-      "dateFetched": "2026-09-27T12:41:50+00:00",
-      "width": 6048,
-      "height": 4024,
-      "score": 2.33,
-      "luminance": 116.6,
-      "file": "openverse_820aa9d2-9ec7-451e-9384-fa34989d8fd3.jpg",
-      "sha256": "493477f2e0bb92dfba6a85c40f26736ba557f0c5d374ff7098e39684641264ef",
-      "attributionRequired": true,
-      "attributionText": "« DZ6 3012 Cityscape of Na Kluea Pattaya - a mix of hotels low-rise buildings and the seaside Ferris wheel under a pale afternoon sky » by PattayaPatrol, CC BY-SA 4.0",
-      "evidence": false
-    },
-    {
       "sourceId": "case003_src_dune_du_pilat_01",
       "status": "fetched",
       "case": "003",
@@ -2657,34 +2567,6 @@
       "evidence": false
     },
     {
-      "sourceId": "case003_src_gateau_bougies_30_night_01",
-      "status": "fetched",
-      "case": "003",
-      "provider": "openverse",
-      "providerPhotoId": "c5840a7a-3655-4219-81b7-cbac36ed16ef",
-      "photographer": "JIP",
-      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:JIP&action=edit&redlink=1",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=40641888",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/1_year_old_birthday_cake.jpg",
-      "license": "by-sa",
-      "licenseVersion": "3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-      "origin": "wikimedia",
-      "title": "1 year old birthday cake",
-      "tags": [],
-      "queryUsed": "birthday cake number candles",
-      "dateFetched": "2026-09-27T12:41:52+00:00",
-      "width": 4032,
-      "height": 3024,
-      "score": 2.5,
-      "luminance": 104.1,
-      "file": "openverse_c5840a7a-3655-4219-81b7-cbac36ed16ef.jpg",
-      "sha256": "bf38d07b0f9de098c6263a7f105c19a84c4a4714d53c853ef4aae359b6aa0981",
-      "attributionRequired": true,
-      "attributionText": "« 1 year old birthday cake » by JIP, CC BY-SA 3.0",
-      "evidence": false
-    },
-    {
       "sourceId": "case003_src_huitres_cap_ferret_port_01",
       "status": "missing",
       "case": "003",
@@ -2808,12 +2690,6 @@
       "status": "missing",
       "case": "003",
       "reason": "aucun candidat acceptable sur 40 résultat(s) (33 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 1 × photo ancienne (1850) : pas crédible dans un téléphone récent, 1 × photo ancienne (1965) : pas crédible dans un téléphone récent, 1 × photo ancienne (1966) : pas crédible dans un téléphone récent, 1 × mot exclu dans le titre ou les tags, 1 × photo ancienne (1967) : pas crédible dans un téléphone récent, 1 × photo ancienne (1880) : pas crédible dans un téléphone récent, 1 × photo ancienne (1902) : pas crédible dans un téléphone récent)"
-    },
-    {
-      "sourceId": "case003_src_yellow_hoodie_on_chair_p_group_2340_01",
-      "status": "missing",
-      "case": "003",
-      "reason": "aucun candidat acceptable sur 24 résultat(s) (9 × une preuve ne montre jamais de personne identifiable, 3 × résolution trop faible (640×480), 3 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 2 × image refusée à la relecture (selection.excluded), 2 × personne identifiable au centre de l'image (strongPeopleWords), 2 × score trop bas, 1 × lieu étranger à l'affaire (placeRejectWords), 1 × résolution trop faible (815×1361), 1 × pas une photographie (dessin, carte, affiche, rendu…))"
     },
     {
       "sourceId": "case003_src_maison_nuit_etoiles_pose_longue_p_louise_0206_night_01",
@@ -3328,42 +3204,6 @@
       "evidence": false
     },
     {
-      "sourceId": "case004_src_cocktail_reception_crowd_from_behind_night_01",
-      "status": "fetched",
-      "case": "004",
-      "provider": "wikimedia",
-      "providerPhotoId": "130860380",
-      "photographer": "BWard 1997",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:GWR_4500_Class_Small_Prairie_4555_Severn_Valley_Railway_(1).jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/GWR_4500_Class_Small_Prairie_4555_Severn_Valley_Railway_%281%29.jpg/1920px-GWR_4500_Class_Small_Prairie_4555_Severn_Valley_Railway_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "by",
-      "licenseVersion": "3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-      "origin": "Wikimedia Commons",
-      "title": "GWR 4500 Class Small Prairie 4555 Severn Valley Railway (1)",
-      "tags": [
-        "GWR 4500 Class",
-        "GWR 4500 Class 4555",
-        "Self-published work",
-        "2023 in railway preservation in England",
-        "GWR 4500s on the Severn Valley Railway",
-        "Trains at Highley railway station",
-        "Last pic I took from this day as we went home soon after, GWR 4555 at Highley Station in the evening of 15th April 2023 at the Severn Valley Spring Steam Gala. This was one of 3 guest visitors to the event, along with 78018 from the BR Standard Class 2, and 4079 Pendennis Castle from the GWR 4073 Cl"
-      ],
-      "queryUsed": "gala evening guests",
-      "dateFetched": "2026-09-27T12:41:53+00:00",
-      "width": 5184,
-      "height": 3044,
-      "score": 2.23,
-      "luminance": 100.4,
-      "file": "wikimedia_130860380.jpg",
-      "sha256": "9534a6234e70d31aed1d4d4d9afdd58221a83baf932980f40f6a6da52935756e",
-      "attributionRequired": false,
-      "attributionText": "« GWR 4500 Class Small Prairie 4555 Severn Valley Railway (1) » by BWard 1997, CC BY 3.0 — Wikimedia Commons",
-      "evidence": false
-    },
-    {
       "sourceId": "case004_src_dinner_table_candle_wine_glasses_night_01",
       "status": "fetched",
       "case": "004",
@@ -3777,38 +3617,6 @@
       "evidence": false
     },
     {
-      "sourceId": "case005_src_autrans_ski_de_fond_01",
-      "status": "fetched",
-      "case": "005",
-      "provider": "wikimedia",
-      "providerPhotoId": "54911119",
-      "photographer": "Patafisik",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tremplin_Autrans_2.jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Tremplin_Autrans_2.jpg/1920px-Tremplin_Autrans_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "by-sa",
-      "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "origin": "Wikimedia Commons",
-      "title": "Tremplin Autrans 2",
-      "tags": [
-        "Tremplin du Claret",
-        "Self-published work",
-        "Tremplin au Claret, Autrans Méaudre en Vercors, Isère, AuRA, France."
-      ],
-      "queryUsed": "Autrans ski de fond",
-      "dateFetched": "2026-09-27T12:41:53+00:00",
-      "width": 2288,
-      "height": 1712,
-      "score": 3.5,
-      "luminance": 146.9,
-      "file": "wikimedia_54911119.jpg",
-      "sha256": "9c44e2eec3015b9456bfe9bc8428ffbdbce5ad0977894bd3275e565b9c8606d4",
-      "attributionRequired": false,
-      "attributionText": "« Tremplin Autrans 2 » by Patafisik, CC BY-SA 4.0 — Wikimedia Commons",
-      "evidence": false
-    },
-    {
       "sourceId": "case005_src_bois_barbu_villard_de_lans_01",
       "status": "fetched",
       "case": "005",
@@ -4067,34 +3875,6 @@
       "status": "missing",
       "case": "005",
       "reason": "0 téléchargement(s) échoué(s) ou rejeté(s)"
-    },
-    {
-      "sourceId": "case005_src_baby_tooth_matchbox_01",
-      "status": "fetched",
-      "case": "005",
-      "provider": "openverse",
-      "providerPhotoId": "a0a9118a-911b-4132-9fc5-ac841e755dd7",
-      "photographer": "Dan arndt",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Dan_arndt",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=52234820",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Kandy_Lake_-_Temple_of_the_Tooth.jpg",
-      "license": "by-sa",
-      "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "origin": "wikimedia",
-      "title": "Kandy Lake - Temple of the Tooth",
-      "tags": [],
-      "queryUsed": "milk tooth",
-      "dateFetched": "2026-09-27T12:41:54+00:00",
-      "width": 3936,
-      "height": 2624,
-      "score": 3.33,
-      "luminance": 90.7,
-      "file": "openverse_a0a9118a-911b-4132-9fc5-ac841e755dd7.jpg",
-      "sha256": "c713ed98d2aff94c8ef605378d6cab550451df34437f44110983a79e939011cc",
-      "attributionRequired": true,
-      "attributionText": "« Kandy Lake - Temple of the Tooth » by Dan arndt, CC BY-SA 4.0",
-      "evidence": false
     },
     {
       "sourceId": "case005_src_birthday_cake_candles_30_night_01",
@@ -5047,41 +4827,6 @@
       "evidence": false
     },
     {
-      "sourceId": "case103_src_stade_de_la_meinau_night_01",
-      "status": "fetched",
-      "case": "103",
-      "provider": "wikimedia",
-      "providerPhotoId": "12821004",
-      "photographer": "BrianKohn",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stade_de_la_Meinau_game.JPG",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Stade_de_la_Meinau_game.JPG/1920px-Stade_de_la_Meinau_game.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "by-sa",
-      "licenseVersion": "3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
-      "origin": "Wikimedia Commons",
-      "title": "Stade de la Meinau game",
-      "tags": [
-        "GFDL",
-        "Players of RC Lens",
-        "License migration redundant",
-        "Self-published work",
-        "Interior of Stade de la Meinau",
-        "Stade de la Meinau , Innenansicht beim Spiel gegen RC Lens (2007)."
-      ],
-      "queryUsed": "Stade de la Meinau",
-      "dateFetched": "2026-09-27T12:41:56+00:00",
-      "width": 2048,
-      "height": 1536,
-      "score": 5.5,
-      "luminance": 84.2,
-      "file": "wikimedia_12821004.jpg",
-      "sha256": "45c6da5ded06315cdcf859eaf1dac493c00f111831c1af3f111d78bf79138d9f",
-      "attributionRequired": false,
-      "attributionText": "« Stade de la Meinau game » by BrianKohn, CC BY-SA 3.0 — Wikimedia Commons",
-      "evidence": false
-    },
-    {
       "sourceId": "case103_src_tram_strasbourg_homme_de_fer_01",
       "status": "fetched",
       "case": "103",
@@ -5149,42 +4894,6 @@
       "sha256": "b706388fc13413d66e0b9d6a8f042bdb38a341a81e7fd84fba0e2cfadfce64bf",
       "attributionRequired": false,
       "attributionText": "« Bathroom splash back » by Smtzzz, CC BY-SA 4.0 — Wikimedia Commons",
-      "evidence": false
-    },
-    {
-      "sourceId": "case103_src_ceramic_tile_samples_01",
-      "status": "fetched",
-      "case": "103",
-      "provider": "wikimedia",
-      "providerPhotoId": "24959429",
-      "photographer": "Miia Ranta from Finland",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Palace_ceramic_tiles_(5337664600).jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Palace_ceramic_tiles_%285337664600%29.jpg/1920px-Palace_ceramic_tiles_%285337664600%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "by-sa",
-      "licenseVersion": "2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
-      "origin": "Wikimedia Commons",
-      "title": "Palace ceramic tiles",
-      "tags": [
-        "Vorderasiatisches Museum Berlin",
-        "Taken with Olympus E-PL1",
-        "Assur (city)",
-        "Photos uploaded from Flickr by Fæ using a script",
-        "Flickr images reviewed by File Upload Bot (Magnus Manske)",
-        "Photos by Miia Ranta",
-        "Palace ceramic tiles"
-      ],
-      "queryUsed": "ceramic tile samples",
-      "dateFetched": "2026-09-27T12:41:57+00:00",
-      "width": 4032,
-      "height": 3024,
-      "score": 3.5,
-      "luminance": 151.9,
-      "file": "wikimedia_24959429.jpg",
-      "sha256": "83d9d581a64075f9864dc7a25a8419413ca160c0f29495905458ebfefdfd8929",
-      "attributionRequired": false,
-      "attributionText": "« Palace ceramic tiles » by Miia Ranta from Finland, CC BY-SA 2.0 — Wikimedia Commons",
       "evidence": false
     },
     {
@@ -5675,32 +5384,6 @@
       },
       "sha256": "5b4c90d49e285416d1f6817dd51fbf6a0fb3e6dddf158dd54814ea858e3edf71",
       "bytes": 98174
-    },
-    {
-      "assetId": "case001_photo_p_b26",
-      "sourceId": "case001_src_mur_d_escalade_vu_d_en_bas_contre_jour_01",
-      "caseId": "001",
-      "photoId": "p_b26",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case001_photo_p_b26.imageset/case001_photo_p_b26.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "wikimedia_65774894.jpg",
-        "sourceSha256": "953907d4c687348450cce944fefa25ce421d46b60fee71a66bf4e9a15fafb990",
-        "box": [
-          0,
-          0,
-          1920,
-          1440
-        ]
-      },
-      "sha256": "2c4d769ec73ece8831f3d6568827313ae038c3b3b3cd2fcdbc521d356b549c58",
-      "bytes": 110782
     },
     {
       "assetId": "case001_photo_p_b28",
@@ -6431,32 +6114,6 @@
       "bytes": 113774
     },
     {
-      "assetId": "case002_photo_p_old04",
-      "sourceId": "case002_src_passerelle_saint_vincent_lyon_coucher_de_01",
-      "caseId": "002",
-      "photoId": "p_old04",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case002_photo_p_old04.imageset/case002_photo_p_old04.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_24c05893-82ad-4047-a44f-ddaa200d35f2.jpg",
-        "sourceSha256": "2324ba8c1216ae8c8e1152f1f358417f0697e0bdbe24df35d6e2b3782dc781d1",
-        "box": [
-          0,
-          0,
-          4032,
-          3024
-        ]
-      },
-      "sha256": "b9871d92e630596e27d8f7815c1a44b9bf5f9921d482557a15d043f7b3573ca2",
-      "bytes": 198333
-    },
-    {
       "assetId": "case002_photo_p_old05",
       "sourceId": "case002_src_table_de_reveillon_bougies_01",
       "caseId": "002",
@@ -6741,32 +6398,6 @@
       },
       "sha256": "f81f82bc4107a537dba7057137a0584b3dffdcac0241cba1700a2760d843ba83",
       "bytes": 187753
-    },
-    {
-      "assetId": "case003_photo_p_cake",
-      "sourceId": "case003_src_gateau_bougies_30_night_01",
-      "caseId": "003",
-      "photoId": "p_cake",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case003_photo_p_cake.imageset/case003_photo_p_cake.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_c5840a7a-3655-4219-81b7-cbac36ed16ef.jpg",
-        "sourceSha256": "bf38d07b0f9de098c6263a7f105c19a84c4a4714d53c853ef4aae359b6aa0981",
-        "box": [
-          0,
-          0,
-          4032,
-          3024
-        ]
-      },
-      "sha256": "0873f08483948e844b7ee8cca6d3919e37b3117cec388f8c38dfc74b141449f4",
-      "bytes": 52038
     },
     {
       "assetId": "case003_photo_p_cat",
@@ -7211,32 +6842,6 @@
       "bytes": 96539
     },
     {
-      "assetId": "case003_photo_p_sky_july",
-      "sourceId": "case003_src_chartrons_bordeaux_toits_01",
-      "caseId": "003",
-      "photoId": "p_sky_july",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case003_photo_p_sky_july.imageset/case003_photo_p_sky_july.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_820aa9d2-9ec7-451e-9384-fa34989d8fd3.jpg",
-        "sourceSha256": "493477f2e0bb92dfba6a85c40f26736ba557f0c5d374ff7098e39684641264ef",
-        "box": [
-          0,
-          0,
-          5365,
-          4024
-        ]
-      },
-      "sha256": "13afd31caf10c124ed8a138d01724d5173ca940378d9bb03b733abd5eadd49dc",
-      "bytes": 127675
-    },
-    {
       "assetId": "case003_photo_p_stairs_day",
       "sourceId": "case003_src_escalier_pierre_jardin_plage_01",
       "caseId": "003",
@@ -7573,32 +7178,6 @@
       },
       "sha256": "fb368ff66e86d317520f683eeed70b5a6857c2fb7c0391631997e8bc766f0c2b",
       "bytes": 176165
-    },
-    {
-      "assetId": "case004_photo_p_b23",
-      "sourceId": "case004_src_cocktail_reception_crowd_from_behind_night_01",
-      "caseId": "004",
-      "photoId": "p_b23",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case004_photo_p_b23.imageset/case004_photo_p_b23.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "wikimedia_130860380.jpg",
-        "sourceSha256": "9534a6234e70d31aed1d4d4d9afdd58221a83baf932980f40f6a6da52935756e",
-        "box": [
-          417,
-          0,
-          1920,
-          1127
-        ]
-      },
-      "sha256": "017e90f2abf88dc4ce09c6935b854c7da1f02316fa8a336a454deb86238d290a",
-      "bytes": 181632
     },
     {
       "assetId": "case004_photo_p_iris_look",
@@ -7991,32 +7570,6 @@
       "bytes": 102421
     },
     {
-      "assetId": "case005_photo_p_n16",
-      "sourceId": "case005_src_autrans_ski_de_fond_01",
-      "caseId": "005",
-      "photoId": "p_n16",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case005_photo_p_n16.imageset/case005_photo_p_n16.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "wikimedia_54911119.jpg",
-        "sourceSha256": "9c44e2eec3015b9456bfe9bc8428ffbdbce5ad0977894bd3275e565b9c8606d4",
-        "box": [
-          0,
-          0,
-          1916,
-          1437
-        ]
-      },
-      "sha256": "6e7698224dd9ae6fe172417c420f05805be05556fe9805f612ba8edef9b7bc7b",
-      "bytes": 117366
-    },
-    {
       "assetId": "case005_photo_p_n19",
       "sourceId": "case005_src_bois_barbu_villard_de_lans_01",
       "caseId": "005",
@@ -8249,32 +7802,6 @@
       },
       "sha256": "99189041d97b45ef2bb302102ede39dc5e54d05abdb959b936051d7e7735027d",
       "bytes": 68985
-    },
-    {
-      "assetId": "case005_photo_p_r_dent",
-      "sourceId": "case005_src_baby_tooth_matchbox_01",
-      "caseId": "005",
-      "photoId": "p_r_dent",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case005_photo_p_r_dent.imageset/case005_photo_p_r_dent.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_a0a9118a-911b-4132-9fc5-ac841e755dd7.jpg",
-        "sourceSha256": "c713ed98d2aff94c8ef605378d6cab550451df34437f44110983a79e939011cc",
-        "box": [
-          0,
-          0,
-          3498,
-          2624
-        ]
-      },
-      "sha256": "99b77e46001d0ebb38601a974a7be6e0fd0c344919e1a205d6cd843e50787d19",
-      "bytes": 159914
     },
     {
       "assetId": "case101_photo_p_chat",
@@ -8693,32 +8220,6 @@
       "bytes": 81614
     },
     {
-      "assetId": "case103_photo_p3_echantillons",
-      "sourceId": "case103_src_ceramic_tile_samples_01",
-      "caseId": "103",
-      "photoId": "p3_echantillons",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case103_photo_p3_echantillons.imageset/case103_photo_p3_echantillons.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "wikimedia_24959429.jpg",
-        "sourceSha256": "83d9d581a64075f9864dc7a25a8419413ca160c0f29495905458ebfefdfd8929",
-        "box": [
-          0,
-          0,
-          1920,
-          1440
-        ]
-      },
-      "sha256": "c5c2f5e913a01b9b55c6a2f5d620bfe7d5279a3534a7271a640d2c4de39c855b",
-      "bytes": 91546
-    },
-    {
       "assetId": "case103_photo_p3_kleber",
       "sourceId": "case103_src_place_kleber_strasbourg_pluie_p3_kleber_01",
       "caseId": "103",
@@ -8743,32 +8244,6 @@
       },
       "sha256": "4167bffbaa0b81c64efb83afd53ecac7684e939ab148f6bd2e833b6b2dc41156",
       "bytes": 115284
-    },
-    {
-      "assetId": "case103_photo_p3_meinau",
-      "sourceId": "case103_src_stade_de_la_meinau_night_01",
-      "caseId": "103",
-      "photoId": "p3_meinau",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case103_photo_p3_meinau.imageset/case103_photo_p3_meinau.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "wikimedia_12821004.jpg",
-        "sourceSha256": "45c6da5ded06315cdcf859eaf1dac493c00f111831c1af3f111d78bf79138d9f",
-        "box": [
-          0,
-          0,
-          1920,
-          1440
-        ]
-      },
-      "sha256": "8de8eff93a05c4077b27efc083002011dffc47015e5641002faa776ca62730f0",
-      "bytes": 139215
     },
     {
       "assetId": "case103_photo_p3_petitefrance",
@@ -8853,8 +8328,8 @@
     "requests": {
       "openverse": 303
     },
-    "rejected": 4932,
-    "lastRun": "2026-09-27T12:42:08+00:00"
+    "rejected": 5555,
+    "lastRun": "2026-09-27T12:48:57+00:00"
   },
   "about": "Provenance of every external photo (generated by scripts/photos/pipeline.py). One `sources` entry per downloaded image, one `assets` entry per image shipped in the game."
 }
