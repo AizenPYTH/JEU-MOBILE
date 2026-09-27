@@ -4,260 +4,1768 @@
   "items": [
     {
       "provider": "openverse",
-      "photographer": "",
-      "photographerUrl": "",
-      "sourceUrl": "https://www.rawpixel.com/image/5948199/free-public-domain-cc0-photo",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "",
-      "attribution": "« Sans titre » — auteur inconnu (CC0)",
+      "photographer": "fal0",
+      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:Fal0&action=edit&redlink=1",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=57952878",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Traînées d'avions en ciel de printemps",
+      "attribution": "« Traînées d'avions en ciel de printemps » by fal0, CC BY-SA 4.0",
       "cases": [
         "001"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "",
+      "provider": "wikimedia",
+      "photographer": ".Anja.",
       "photographerUrl": "",
-      "sourceUrl": "https://www.rawpixel.com/image/3290544/free-photo-image-alley-alleyway-asphalt",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Original public domain image Wikimedia",
-      "attribution": "« Original public domain image Wikimedia » — auteur inconnu (CC0)",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dentition_incompl%C3%A8te_d%27un_l%C3%A9vrier_irlandais.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Dentition incomplète d'un lévrier irlandais",
+      "attribution": "« Dentition incomplète d'un lévrier irlandais » by .Anja., CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Acabashi",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Feeringbury_Manor_garden_steps,_Feering_Essex_England_-_low_sun.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Feeringbury Manor garden steps, Feering Essex England - low sun",
+      "attribution": "« Feeringbury Manor garden steps, Feering Essex England - low sun » by Acabashi, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Alan Stanton",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hanbury_Street,_Spitalfields.jpg",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "title": "Hanbury Street, Spitalfields",
+      "attribution": "« Hanbury Street, Spitalfields » by Alan Stanton, CC BY-SA 2.0 — Wikimedia Commons",
       "cases": [
         "001"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "",
+      "provider": "wikimedia",
+      "photographer": "amrufm",
       "photographerUrl": "",
-      "sourceUrl": "https://www.rawpixel.com/image/6043322/photo-image-public-domain-table-living-room",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Modern apartment interior",
-      "attribution": "« Modern apartment interior » — auteur inconnu (CC0)",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Indoor_Climbing_Wall_Bouldering_Mats.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Indoor Climbing Wall Bouldering Mats",
+      "attribution": "« Indoor Climbing Wall Bouldering Mats » by amrufm, CC BY 2.0 — Wikimedia Commons",
       "cases": [
         "001"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "",
+      "provider": "wikimedia",
+      "photographer": "André Leroux, Lille",
       "photographerUrl": "",
-      "sourceUrl": "https://www.rawpixel.com/image/3286638/free-photo-image-cat-sleeping-bed",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Russian blue cat sleeping bed",
-      "attribution": "« Russian blue cat sleeping bed » — auteur inconnu (CC0)",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lille.GrandPlace2.JPG",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Lille.GrandPlace2",
+      "attribution": "« Lille.GrandPlace2 » — André Leroux, Lille (domaine public, Wikimedia Commons)",
+      "cases": [
+        "102"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Anthospace",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Saint-Nizier_du_Moucherotte_38.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Saint-Nizier du Moucherotte 38",
+      "attribution": "« Saint-Nizier du Moucherotte 38 » by Anthospace, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Arnaud 25",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Parc_Bor%C3%A9ly_000.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Parc Borély 000",
+      "attribution": "« Parc Borély 000 » by Arnaud 25, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Arnold Jaeger Werner",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:DJ_booth_with_DJ-Mixer,_two_turntables_and_two_CDJ-players_in_former_Bob_Beaman_nightclub_in_Munich.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "DJ booth with DJ-Mixer, two turntables and two CDJ-players in former Bob Beaman nightclub in Munich",
+      "attribution": "« DJ booth with DJ-Mixer, two turntables and two CDJ-players in former Bob Beaman nightclub in Munich » by Arnold Jaeger Werner, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Atelier de Nevers, maquettiste",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:La_Bastille,_PM98.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "La Bastille, PM98",
+      "attribution": "« La Bastille, PM98 » — Atelier de Nevers, maquettiste (CC0, Wikimedia Commons)",
       "cases": [
         "004"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "Anil Gurung",
-      "photographerUrl": "https://wordpress.org/photos/author/anil04/",
-      "sourceUrl": "https://wordpress.org/photos/photo/35967efbfc/",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "A spiky green succulent plant in a yellow pot placed indoors near a window. The background features a stone-textured wall and light switches.",
-      "attribution": "« A spiky green succulent plant in a yellow pot placed indoors near a window. The background features a stone-textured wall and light switches. » — Anil Gurung (CC0)",
+      "provider": "wikimedia",
+      "photographer": "B. Brassoud",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stade_de_neige_du_Semnoz-Chalet_nordique_de_la_For%C3%AAt_(2017).jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Stade de neige du Semnoz-Chalet nordique de la Forêt (2017)",
+      "attribution": "« Stade de neige du Semnoz-Chalet nordique de la Forêt (2017) » by B. Brassoud, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
-        "003"
+        "004"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "Candace McDaniel",
-      "photographerUrl": "https://stocksnap.io/author/133875",
-      "sourceUrl": "https://stocksnap.io/photo/water-glasses-TIPQRIT46G",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Water Glasses",
-      "attribution": "« Water Glasses » — Candace McDaniel (CC0)",
-      "cases": [
-        "001"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "Erik-Jan Leusink",
-      "photographerUrl": "https://stocksnap.io/author/34664",
-      "sourceUrl": "https://stocksnap.io/photo/cat-sleeping-4VZJQM2IVS",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Cat Sleeping",
-      "attribution": "« Cat Sleeping » — Erik-Jan Leusink (CC0)",
-      "cases": [
-        "003"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "FOCA Stock",
-      "photographerUrl": "https://focastock.com",
-      "sourceUrl": "https://stocksnap.io/photo/fireworks-background-UH5NW9PPL9",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Fireworks Background",
-      "attribution": "« Fireworks Background » — FOCA Stock (CC0)",
+      "provider": "wikimedia",
+      "photographer": "Beeblebrox",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lime_pothos_wine_bottle.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Lime pothos wine bottle",
+      "attribution": "« Lime pothos wine bottle » by Beeblebrox, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
         "001"
       ]
     },
     {
-      "provider": "openverse",
+      "provider": "wikimedia",
+      "photographer": "Benoît Prieur",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:March%C3%A9_de_la_Croix-Rousse_-_mars_2017.JPG",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Marché de la Croix-Rousse - mars 2017",
+      "attribution": "« Marché de la Croix-Rousse - mars 2017 » — Benoît Prieur (CC0, Wikimedia Commons)",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Benoît Prieur",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:H%C3%B4tel-Dieu_de_Lyon_depuis_le_pont_de_la_Guilloti%C3%A8re_en_septembre_2021_(5).jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Hôtel-Dieu de Lyon depuis le pont de la Guillotière en septembre 2021 (5)",
+      "attribution": "« Hôtel-Dieu de Lyon depuis le pont de la Guillotière en septembre 2021 (5) » — Benoît Prieur (CC0, Wikimedia Commons)",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Bushra Aamir",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Raindrops_on_my_car_window.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Raindrops on my car window",
+      "attribution": "« Raindrops on my car window » by Bushra Aamir, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "calflier001",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:BIERBROUWERIJ_DE_EEM_WEISSE_BEER_(HOLLAND)AT_THE_DE_WILDEMAN_BEER_BAR_AMSTERDAM_HOLLAND_APRIL_2012_(7099649607).jpg",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "title": "BIERBROUWERIJ DE EEM WEISSE BEER (HOLLAND)AT THE DE WILDEMAN BEER BAR AMSTERDAM HOLLAND APRIL 2012",
+      "attribution": "« BIERBROUWERIJ DE EEM WEISSE BEER (HOLLAND)AT THE DE WILDEMAN BEER BAR AMSTERDAM HOLLAND APRIL 2012 » by calflier001, CC BY-SA 2.0 — Wikimedia Commons",
+      "cases": [
+        "102"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Carolina Vigna-Mar%C3%BA",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sleeping_Bluepoint_cat.jpg",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Sleeping Bluepoint cat",
+      "attribution": "« Sleeping Bluepoint cat » — Carolina Vigna-Mar%C3%BA (domaine public, Wikimedia Commons)",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Chabe01",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Int%C3%A9rieur_Rame_vers_Station_Cuire_M%C3%A9tro_Lyon_Ligne_C_-_Caluire-et-Cuire_(FR69)_-_2023-12-28_-_1.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Intérieur Rame vers Station Cuire Métro Lyon Ligne C - Caluire-et-Cuire (FR69) - 2023-12-28 - 1",
+      "attribution": "« Intérieur Rame vers Station Cuire Métro Lyon Ligne C - Caluire-et-Cuire (FR69) - 2023-12-28 - 1 » by Chabe01, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Ciara Ní Riain",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tr%C3%A6_kontorhus_Sydhavn_The_Tr%C3%A6_office_block_Aarhus_Southern_Harbour_Denmark_01.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Træ kontorhus Sydhavn The Træ office block Aarhus Southern Harbour Denmark 01",
+      "attribution": "« Træ kontorhus Sydhavn The Træ office block Aarhus Southern Harbour Denmark 01 » by Ciara Ní Riain, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Cjp24",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phare_du_Cap-Ferret_et_panneaux.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Phare du Cap-Ferret et panneaux",
+      "attribution": "« Phare du Cap-Ferret et panneaux » by Cjp24, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "CORLIN",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hameau_Bois_barbu.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Hameau Bois barbu",
+      "attribution": "« Hameau Bois barbu » by CORLIN, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Crew crew",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Framed_wall_art_(Unsplash).jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Framed wall art (Unsplash)",
+      "attribution": "« Framed wall art (Unsplash) » — Crew crew (CC0, Wikimedia Commons)",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Daniel Larsen from Auckland, New Zealand",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:QU-Bit_modular_synthesizer_-_2016_NAMM_Show_(2016-01-24_11.34.07_by_Daniel_Larsen).jpg",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "title": "QU-Bit modular synthesizer - 2016 NAMM Show (2016-01-24 11.34.07 by Daniel Larsen)",
+      "attribution": "« QU-Bit modular synthesizer - 2016 NAMM Show (2016-01-24 11.34.07 by Daniel Larsen) » by Daniel Larsen from Auckland, New Zealand, CC BY-SA 2.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Dejan Krsmanovic",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Modern_Mixing_Console_(32961446438).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Modern Mixing Console",
+      "attribution": "« Modern Mixing Console » by Dejan Krsmanovic, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Derek Bridges",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windshield_Rain_on_Freret_St.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Windshield Rain on Freret St",
+      "attribution": "« Windshield Rain on Freret St » by Derek Bridges, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "103"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "DimiTalen",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aiguille_du_Fruit_and_C%C3%B4te_Brune_chairlift.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Aiguille du Fruit and Côte Brune chairlift",
+      "attribution": "« Aiguille du Fruit and Côte Brune chairlift » — DimiTalen (CC0, Wikimedia Commons)",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "ecom",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:From_window_at_night_-_panoramio.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "From window at night - panoramio",
+      "attribution": "« From window at night - panoramio » by ecom, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "EDG 543",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tabby-cat-sleeping.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Tabby-cat-sleeping",
+      "attribution": "« Tabby-cat-sleeping » by EDG 543, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Elliott Brown from Birmingham, United Kingdom",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_(25989512388).jpg",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "title": "Climbing Wall - Hockley Circus - Hockley Flyover",
+      "attribution": "« Climbing Wall - Hockley Circus - Hockley Flyover » by Elliott Brown from Birmingham, United Kingdom, CC BY-SA 2.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Emeric84",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Passerelle_Saint_Vincent_Lyon.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "title": "Passerelle Saint Vincent Lyon",
+      "attribution": "« Passerelle Saint Vincent Lyon » by Emeric84, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Eric Bajart",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paysage_de_neige_%C3%A0_Villard-de-Lans_(mars_2009)_-_panoramio.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Paysage de neige à Villard-de-Lans (mars 2009) - panoramio",
+      "attribution": "« Paysage de neige à Villard-de-Lans (mars 2009) - panoramio » by Eric Bajart, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Eric Fischer",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cars_on_the_sidewalk_(43756576250).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Cars on the sidewalk",
+      "attribution": "« Cars on the sidewalk » by Eric Fischer, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Ermell",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rain_on_window_pane_P1320871.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Rain on window pane P1320871",
+      "attribution": "« Rain on window pane P1320871 » by Ermell, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "ermell",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Blattadern-monstera-P7089773.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Blattadern-monstera-P7089773",
+      "attribution": "« Blattadern-monstera-P7089773 » by ermell, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Faldrian",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Show_The_Crowd_(114594159).jpeg",
+      "license": "BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "title": "Show The Crowd",
+      "attribution": "« Show The Crowd » by Faldrian, CC BY 3.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Famartin",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2016-11-30_03_01_52_A_parking_lot_along_Franklin_Farm_Road_at_Virginia_State_Route_286_(Fairfax_County_Parkway)_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia_on_a_foggy_night.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "2016-11-30 03 01 52 A parking lot along Franklin Farm Road at Virginia State Route 286 (Fairfax County Parkway) in the Franklin Farm section of Oak Hill, Fairfax County, Virginia on a foggy night",
+      "attribution": "« 2016-11-30 03 01 52 A parking lot along Franklin Farm Road at Virginia State Route 286 (Fairfax County Parkway) in the Franklin Farm section of Oak Hill, Fairfax County, Virginia on a foggy night » by Famartin, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Flammekueche",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cath%C3%A9drale_Notre-Dame_de_Strasbourg_au_cr%C3%A9puscule.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Cathédrale Notre-Dame de Strasbourg au crépuscule",
+      "attribution": "« Cathédrale Notre-Dame de Strasbourg au crépuscule » by Flammekueche, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "103"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Florian Pépellin",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dune_du_Pilat_depuis_Cap_Ferret.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Dune du Pilat depuis Cap Ferret",
+      "attribution": "« Dune du Pilat depuis Cap Ferret » by Florian Pépellin, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Franz Gstättner ( Fg68at )",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Strudlhofstiege-1090-Vienna-Austria-2005-02-19.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "title": "Strudlhofstiege-1090-Vienna-Austria-2005-02-19",
+      "attribution": "« Strudlhofstiege-1090-Vienna-Austria-2005-02-19 » by Franz Gstättner ( Fg68at ), CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Gerda Arendt",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Porto,_Beethoven_tile_on_house_facade.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Porto, Beethoven tile on house facade",
+      "attribution": "« Porto, Beethoven tile on house facade » — Gerda Arendt (CC0, Wikimedia Commons)",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Gonedelyon",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%27H%C3%B4tel_de_Ville_de_Lyon.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "L'Hôtel de Ville de Lyon",
+      "attribution": "« L'Hôtel de Ville de Lyon » by Gonedelyon, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Grand Parc - Bordeaux, France from France",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sunrise_Cap_Ferret_Banc_du_Toulinguet_-_Arcachon_-_Oc%C3%A9an_Atlantique_-_Picture_Image_Photography_-_Sunset_-_Coucher_de_soleil_-_Dune_du_pilat_pyla_-_Banc_d%27arguin_water_eau_vagues_waves_beach_plage_sky_colors_red_yellow_(14501089751).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Sunrise Cap Ferret Banc du Toulinguet - Arcachon - Océan Atlantique - Picture Image Photography - Sunset - Coucher de soleil - Dune du pilat pyla - Banc d'arguin water eau vagues waves beach plage sky colors red yellow",
+      "attribution": "« Sunrise Cap Ferret Banc du Toulinguet - Arcachon - Océan Atlantique - Picture Image Photography - Sunset - Coucher de soleil - Dune du pilat pyla - Banc d'arguin water eau vagues waves beach plage sky colors red yellow » by Grand Parc - Bordeaux, France from France, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Guilhem Vellut from Paris, France",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paris_75015_Quai_de_Grenelle_towards_Eiffel_Tower_20151213.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Paris 75015 Quai de Grenelle towards Eiffel Tower 20151213",
+      "attribution": "« Paris 75015 Quai de Grenelle towards Eiffel Tower 20151213 » by Guilhem Vellut from Paris, France, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "hesdes",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Place_Kl%C3%A9ber_on_a_rainy_day.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Place Kléber on a rainy day",
+      "attribution": "« Place Kléber on a rainy day » by hesdes, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "103"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "jean-louis Zimmermann from Orange, FRANCE",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:C%C3%B4t%C3%A9_gare_routi%C3%A8re,_hall_de_la_gare_SNCF_Marseille-Saint-Charles(MARSEILLE,FR13).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Côté gare routière, hall de la gare SNCF Marseille-Saint-Charles(MARSEILLE,FR13)",
+      "attribution": "« Côté gare routière, hall de la gare SNCF Marseille-Saint-Charles(MARSEILLE,FR13) » by jean-louis Zimmermann from Orange, FRANCE, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Jean-Pierre Bazard Jpbazard",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Photophore_en_verre_avec_eau_et_fleurs.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Photophore en verre avec eau et fleurs",
+      "attribution": "« Photophore en verre avec eau et fleurs » by Jean-Pierre Bazard Jpbazard, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Jebulon",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Escalier_plage,_%C3%8Ele_aux_Moines,_Morbihan,_France.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Escalier plage, Île aux Moines, Morbihan, France",
+      "attribution": "« Escalier plage, Île aux Moines, Morbihan, France » — Jebulon (CC0, Wikimedia Commons)",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Ji-Elle",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Strasbourg-33_rue_du_Bain-aux-Plantes_(3).jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Strasbourg-33 rue du Bain-aux-Plantes (3)",
+      "attribution": "« Strasbourg-33 rue du Bain-aux-Plantes (3) » by Ji-Elle, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "103"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "JIP",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Reception_desk_at_Hotel_Esplanade_in_Stockholm.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Reception desk at Hotel Esplanade in Stockholm",
+      "attribution": "« Reception desk at Hotel Esplanade in Stockholm » by JIP, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "joey zanotti from Rancho Palos Verdes, CA, USA",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beignet_Truck_at_the_Bar_Mitzvah!_(31398139165).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Beignet Truck at the Bar Mitzvah!",
+      "attribution": "« Beignet Truck at the Bar Mitzvah! » by joey zanotti from Rancho Palos Verdes, CA, USA, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "102"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "John Goldsmith",
-      "photographerUrl": "https://www.geograph.org.uk/profile/28123",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=105185420",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fallen_oak_as_natural_climbing_frame_-_geograph.org.uk_-_1996988.jpg",
       "license": "BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-      "title": "Sunset over City of Norwich School - geograph.org.uk - 1986384",
-      "attribution": "« Sunset over City of Norwich School - geograph.org.uk - 1986384 » by John Goldsmith, CC BY-SA 2.0",
-      "cases": [
-        "002"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "Julia Golomb",
-      "photographerUrl": "https://wordpress.org/photos/author/juliarosia/",
-      "sourceUrl": "https://wordpress.org/photos/photo/3565b94f9b/",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "A black and white tabby cat sleeping peacefully on its side on a bed.",
-      "attribution": "« A black and white tabby cat sleeping peacefully on its side on a bed. » — Julia Golomb (CC0)",
-      "cases": [
-        "001"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "Kristin Hardwick",
-      "photographerUrl": "https://www.kristinhardwick.com",
-      "sourceUrl": "https://stocksnap.io/photo/couch-furniture-TQNWBTLHLY",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Couch Furniture",
-      "attribution": "« Couch Furniture » — Kristin Hardwick (CC0)",
-      "cases": [
-        "004"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "Mary",
-      "photographerUrl": "https://www.instagram.com/maryroseandflowers",
-      "sourceUrl": "https://stocksnap.io/photo/park-trees-QXPYZ0JISB",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Park Trees",
-      "attribution": "« Park Trees » — Mary (CC0)",
-      "cases": [
-        "002"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "Michael Westley",
-      "photographerUrl": "https://www.geograph.org.uk/profile/42460",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=107868737",
-      "license": "BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-      "title": "Sunset over City - geograph.org.uk - 2388510",
-      "attribution": "« Sunset over City - geograph.org.uk - 2388510 » by Michael Westley, CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "title": "Fallen oak as natural climbing frame - geograph.org.uk - 1996988",
+      "attribution": "« Fallen oak as natural climbing frame - geograph.org.uk - 1996988 » by John Goldsmith, CC BY-SA 2.0 — Wikimedia Commons",
       "cases": [
         "003"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "mujuonly",
-      "photographerUrl": "https://twitter.com/mujuonly",
-      "sourceUrl": "https://wordpress.org/photos/photo/6776523e0a/",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "An indoor plant Money plant in pot near the window.",
-      "attribution": "« An indoor plant Money plant in pot near the window. » — mujuonly (CC0)",
+      "provider": "wikimedia",
+      "photographer": "JollyJamboree",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Calgary_Folk_Festival_2023_main_stage_at_night.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Calgary Folk Festival 2023 main stage at night",
+      "attribution": "« Calgary Folk Festival 2023 main stage at night » — JollyJamboree (CC0, Wikimedia Commons)",
       "cases": [
         "001"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "Nathalie E. Julien",
-      "photographerUrl": "https://stocksnap.io",
-      "sourceUrl": "https://stocksnap.io/photo/park-trees-RXMBBCVULZ",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Park Trees",
-      "attribution": "« Park Trees » — Nathalie E. Julien (CC0)",
+      "provider": "wikimedia",
+      "photographer": "Jon Konrath from Oakland, USA",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anchorage_laptop_and_cola_on_desk_(41893905942).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Anchorage laptop and cola on desk",
+      "attribution": "« Anchorage laptop and cola on desk » by Jon Konrath from Oakland, USA, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "José Luiz",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Basilique_Notre-Dame_de_la_Garde_-_Marseille_2014_(3).JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Basilique Notre-Dame de la Garde - Marseille 2014 (3)",
+      "attribution": "« Basilique Notre-Dame de la Garde - Marseille 2014 (3) » by José Luiz, CC BY-SA 3.0 — Wikimedia Commons",
       "cases": [
         "001"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "Nilo Velez",
-      "photographerUrl": "https://www.nilovelez.com",
-      "sourceUrl": "https://wordpress.org/photos/photo/159677adef/",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Indoor climbing facility featuring multiple climbing walls with various designs and difficulty levels. The walls include colorful, geometric holds and textures, offering diverse climbing challenges",
-      "attribution": "« Indoor climbing facility featuring multiple climbing walls with various designs and difficulty levels. The walls include colorful, geometric holds and textures, offering diverse climbing challenges » — Nilo Velez (CC0)",
+      "provider": "wikimedia",
+      "photographer": "JÄNNICK Jérémy",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lille_-_Les_Poussins,_Parc_de_la_Citadelle_(01).JPG",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Lille - Les Poussins, Parc de la Citadelle (01)",
+      "attribution": "« Lille - Les Poussins, Parc de la Citadelle (01) » — JÄNNICK Jérémy (domaine public, Wikimedia Commons)",
       "cases": [
-        "001"
+        "102"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "Nisnuwon",
-      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:Nisnuwon&action=edit&redlink=1",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=90548296",
+      "provider": "wikimedia",
+      "photographer": "Kevin Kandlbinder",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Raindrops_on_car_window_in_evening_sun.jpg",
+      "license": "BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "title": "Raindrops on car window in evening sun",
+      "attribution": "« Raindrops on car window in evening sun » by Kevin Kandlbinder, CC BY 4.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Kevin Näf",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stade_de_la_Meinau_inside.JPG",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Stade de la Meinau inside",
+      "attribution": "« Stade de la Meinau inside » — Kevin Näf (domaine public, Wikimedia Commons)",
+      "cases": [
+        "103"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Kevin.B",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Citadis_403_2e_g%C3%A9n%C3%A9ration,_Homme_de_Fer_Strasbourg.jpg",
       "license": "BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "title": "Sunset over city",
-      "attribution": "« Sunset over city » by Nisnuwon, CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Citadis 403 2e génération, Homme de Fer Strasbourg",
+      "attribution": "« Citadis 403 2e génération, Homme de Fer Strasbourg » by Kevin.B, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
-        "001"
+        "103"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "Sergei Gussev",
-      "photographerUrl": "https://www.flickr.com/sergeigussev",
-      "sourceUrl": "https://stocksnap.io/photo/water-sunset-AUQ1UHL1PG",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Water Sunset",
-      "attribution": "« Water Sunset » — Sergei Gussev (CC0)",
+      "provider": "wikimedia",
+      "photographer": "KPNO/NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kitt_Peak_National_Observatory_beneath_the_Milky_Way_(noirlab2610d).jpg",
+      "license": "BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "title": "Kitt Peak National Observatory beneath the Milky Way (noirlab2610d)",
+      "attribution": "« Kitt Peak National Observatory beneath the Milky Way (noirlab2610d) » by KPNO/NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava), CC BY 4.0 — Wikimedia Commons",
       "cases": [
-        "001"
+        "003"
       ]
     },
     {
-      "provider": "openverse",
-      "photographer": "shivamjhade",
-      "photographerUrl": "https://wordpress.org/photos/author/shivamjhade/",
-      "sourceUrl": "https://wordpress.org/photos/photo/3996946479/",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "A passenger plane high in a clear blue sky as seen from below, with its twin contrails extending out of frame and golden in color in the sunlight.",
-      "attribution": "« A passenger plane high in a clear blue sky as seen from below, with its twin contrails extending out of frame and golden in color in the sunlight. » — shivamjhade (CC0)",
-      "cases": [
-        "001"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "Wistula",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Wistula",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=175625064",
+      "provider": "wikimedia",
+      "photographer": "Krystall363",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:For%C3%AAt_en_automne.jpg",
       "license": "BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "title": "Street construction works, Jana Ciszewskiego, Warsaw Ursynów (13)",
-      "attribution": "« Street construction works, Jana Ciszewskiego, Warsaw Ursynów (13) » by Wistula, CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Forêt en automne",
+      "attribution": "« Forêt en automne » by Krystall363, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Krzysztof Golik",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Town_hall_of_Cournon-d%27Auvergne_(2).jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Town hall of Cournon-d'Auvergne (2)",
+      "attribution": "« Town hall of Cournon-d'Auvergne (2) » by Krzysztof Golik, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Lecturerealius",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golam_Rabbani_at_an_indoor_planning_meeting.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Golam Rabbani at an indoor planning meeting",
+      "attribution": "« Golam Rabbani at an indoor planning meeting » — Lecturerealius (CC0, Wikimedia Commons)",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Manolo Chrétien manolochretien",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nazar%C3%A9_Wall_Art_(Unsplash).jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Nazaré Wall Art (Unsplash)",
+      "attribution": "« Nazaré Wall Art (Unsplash) » — Manolo Chrétien manolochretien (CC0, Wikimedia Commons)",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Marlith",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Streetlights.JPG",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Streetlights",
+      "attribution": "« Streetlights » — Marlith (domaine public, Wikimedia Commons)",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Martin Vorel",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Programming_code.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Programming code",
+      "attribution": "« Programming code » by Martin Vorel, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "102"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "mattbuck ( category )",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Portishead_MMB_15_Marina.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Portishead MMB 15 Marina",
+      "attribution": "« Portishead MMB 15 Marina » by mattbuck ( category ), CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "101"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Matthew Paul Argall",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Happy_Birthday_Cake.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Happy Birthday Cake",
+      "attribution": "« Happy Birthday Cake » by Matthew Paul Argall, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Mattéo Gil",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coucher_de_soleil_vieux_port_Marseille.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Coucher de soleil vieux port Marseille",
+      "attribution": "« Coucher de soleil vieux port Marseille » by Mattéo Gil, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "MHM55",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grand_%C3%A9l%C3%A9phant,_Nantes-17.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Grand éléphant, Nantes-17",
+      "attribution": "« Grand éléphant, Nantes-17 » by MHM55, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "101"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Michaël D'AURIA",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Imgonline-com-ua-dexifc2xtutxmFX12.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Imgonline-com-ua-dexifc2xtutxmFX12",
+      "attribution": "« Imgonline-com-ua-dexifc2xtutxmFX12 » by Michaël D'AURIA, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "101"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "mikael altemark",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cat_attack_SH-1!!!.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Cat attack SH-1!!!",
+      "attribution": "« Cat attack SH-1!!! » by mikael altemark, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Mike Prince from Bangalore, India",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tiles_(5038930374).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Tiles",
+      "attribution": "« Tiles » by Mike Prince from Bangalore, India, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Milky",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arbre_remarquable_Parc_Paul-Mistral_-_Grenoble.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Arbre remarquable Parc Paul-Mistral - Grenoble",
+      "attribution": "« Arbre remarquable Parc Paul-Mistral - Grenoble » by Milky, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Mohamedzaka22",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Luxor_temple.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Luxor temple",
+      "attribution": "« Luxor temple » by Mohamedzaka22, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Mokkie",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Window_Plant_(Monstera_deliciosa)_1.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Window Plant (Monstera deliciosa) 1",
+      "attribution": "« Window Plant (Monstera deliciosa) 1 » by Mokkie, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Métroën",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:T%C3%A9l%C3%A9graphe_-_Ligne_11_-_2025_-_Acc%C3%A8s_n%C2%B02_de_nuit_1.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Télégraphe - Ligne 11 - 2025 - Accès n°2 de nuit 1",
+      "attribution": "« Télégraphe - Ligne 11 - 2025 - Accès n°2 de nuit 1 » — Métroën (CC0, Wikimedia Commons)",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "NASA",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pilot_Plant_Control_Room_Construction_(naca-cirt-c-9-d).jpg",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Pilot Plant Control Room Construction (naca-cirt-c-9-d)",
+      "attribution": "« Pilot Plant Control Room Construction (naca-cirt-c-9-d) » — NASA (domaine public, Wikimedia Commons)",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Nelson Pavlosky",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wrong_Side_of_Dawn_acoustic_guitar_recording_2008-12-28_-_My_hoodie_looks_yellow_with_flash_(by_Nelson_Pavlosky).jpg",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "title": "Wrong Side of Dawn acoustic guitar recording 2008-12-28 - My hoodie looks yellow with flash (by Nelson Pavlosky)",
+      "attribution": "« Wrong Side of Dawn acoustic guitar recording 2008-12-28 - My hoodie looks yellow with flash (by Nelson Pavlosky) » by Nelson Pavlosky, CC BY-SA 2.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "North Lincolnshire Museum, Martin Foreman, 2017-03-28 16:51:05",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Roman_Flue_Tile_fragment_(FindID_839537).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Roman Flue Tile fragment",
+      "attribution": "« Roman Flue Tile fragment » by North Lincolnshire Museum, Martin Foreman, 2017-03-28 16:51:05, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "103"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "OuiOuiBaguetteSyndicalist",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Key_lime_pie_slice_with_birthday_candle_in_Dutch_angle.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Key lime pie slice with birthday candle in Dutch angle",
+      "attribution": "« Key lime pie slice with birthday candle in Dutch angle » — OuiOuiBaguetteSyndicalist (CC0, Wikimedia Commons)",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Patafisik",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Autrans_DSCN4.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Autrans DSCN4",
+      "attribution": "« Autrans DSCN4 » by Patafisik, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Patafisik",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Panorama_depuis_Le_Champ-pr%C3%A8s-Froges_abc7.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Panorama depuis Le Champ-près-Froges abc7",
+      "attribution": "« Panorama depuis Le Champ-près-Froges abc7 » by Patafisik, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Patrick Nouhailler's…",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:La_plage_des_catalans,_Marseille_-_panoramio.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "La plage des catalans, Marseille - panoramio",
+      "attribution": "« La plage des catalans, Marseille - panoramio » by Patrick Nouhailler's…, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Patrick S. from BAZIEGE, FRANCE",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arcachon_(7818088846).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Arcachon",
+      "attribution": "« Arcachon » by Patrick S. from BAZIEGE, FRANCE, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "PattayaPatrol",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:DFC_1069_A_woman_browsing_a_street_vendors_display_of_shoes_under_colorful_neon_lights_at_night.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "DFC 1069 A woman browsing a street vendors display of shoes under colorful neon lights at night",
+      "attribution": "« DFC 1069 A woman browsing a street vendors display of shoes under colorful neon lights at night » by PattayaPatrol, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "PattayaPatrol",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:DFC_1691_A_cozy_neon-lit_bar_with_patrons_seated_at_the_counter_and_empty_tables_in_the_foreground_bathed_in_purple_and_pink_lighting.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "DFC 1691 A cozy neon-lit bar with patrons seated at the counter and empty tables in the foreground bathed in purple and pink lighting",
+      "attribution": "« DFC 1691 A cozy neon-lit bar with patrons seated at the counter and empty tables in the foreground bathed in purple and pink lighting » by PattayaPatrol, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "PattayaPatrol",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:DFC_4862_Nighttime_concert_vibes_in_Ban_Nong_Hin_Chon_Buri_-_a_band_lights_up_the_stage_as_colorful_beams_and_mist_fill_the_air.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "DFC 4862 Nighttime concert vibes in Ban Nong Hin Chon Buri - a band lights up the stage as colorful beams and mist fill the air",
+      "attribution": "« DFC 4862 Nighttime concert vibes in Ban Nong Hin Chon Buri - a band lights up the stage as colorful beams and mist fill the air » by PattayaPatrol, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "PattayaPatrol",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:DZ6_2628_Cozy_candlelit_dinner_for_two_elegant_Thai_restaurant_setting_with_twinkling_lights_and_a_delicate_orchid_centerpiece.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "DZ6 2628 Cozy candlelit dinner for two elegant Thai restaurant setting with twinkling lights and a delicate orchid centerpiece",
+      "attribution": "« DZ6 2628 Cozy candlelit dinner for two elegant Thai restaurant setting with twinkling lights and a delicate orchid centerpiece » by PattayaPatrol, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Pete Souza",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Barack_Obama_engrossed_in_reading_at_the_Resolute_Desk_while_illuminated_by_some_interesting,_autumnal,_western_sunlight_falling_through_the_garden_windows_(31901910102).jpg",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Barack Obama engrossed in reading at the Resolute Desk while illuminated by some interesting, autumnal, western sunlight falling through the garden windows",
+      "attribution": "« Barack Obama engrossed in reading at the Resolute Desk while illuminated by some interesting, autumnal, western sunlight falling through the garden windows » — Pete Souza (domaine public, Wikimedia Commons)",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Pierre Marshall",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Norfolk_Street_bus_stops_at_night_-_geograph.org.uk_-_6711650.jpg",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "title": "Norfolk Street bus stops at night - geograph.org.uk - 6711650",
+      "attribution": "« Norfolk Street bus stops at night - geograph.org.uk - 6711650 » by Pierre Marshall, CC BY-SA 2.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Pierre Poschadel",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arras_(62),_h%C3%B4tel_de_ville,_salle_du_conseil_municipal_1.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Arras (62), hôtel de ville, salle du conseil municipal 1",
+      "attribution": "« Arras (62), hôtel de ville, salle du conseil municipal 1 » by Pierre Poschadel, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Piotrus",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:White_sand_castle_Tenerife.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "White sand castle Tenerife",
+      "attribution": "« White sand castle Tenerife » by Piotrus, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Pj44300",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:March%C3%A9_de_Talensac_-_1.JPG",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Marché de Talensac - 1",
+      "attribution": "« Marché de Talensac - 1 » by Pj44300, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "101"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Pline",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dune_du_pyla_2009.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Dune du pyla 2009",
+      "attribution": "« Dune du pyla 2009 » by Pline, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Polarbear24",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Speed_climbing_start_holds.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Speed climbing start holds",
+      "attribution": "« Speed climbing start holds » by Polarbear24, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "PpPachy",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buttes_Chaumont_autumn_01.jpg",
+      "license": "BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "title": "Buttes Chaumont autumn 01",
+      "attribution": "« Buttes Chaumont autumn 01 » by PpPachy, CC BY 3.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Pseudopanax at English Wikipedia",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fireworks_over_the_Wellington_Harbour_from_Brooklyn_Hill.jpg",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Fireworks over the Wellington Harbour from Brooklyn Hill",
+      "attribution": "« Fireworks over the Wellington Harbour from Brooklyn Hill » — Pseudopanax at English Wikipedia (domaine public, Wikimedia Commons)",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Raya Sharbain",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Raindrops_on_Bus_Window.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Raindrops on Bus Window",
+      "attribution": "« Raindrops on Bus Window » by Raya Sharbain, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Robert Ashworth from Bellingham, WA., USA",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:More_than_just_another_living_room_(31819720676).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "More than just another living room",
+      "attribution": "« More than just another living room » by Robert Ashworth from Bellingham, WA., USA, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Romainbehar",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lyon_-_Vue_sur_la_Sa%C3%B4ne_depuis_le_toit_d%27un_immeuble_mont%C3%A9e_de_l%27Observance_-_Aval_en_hiver.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Lyon - Vue sur la Saône depuis le toit d'un immeuble montée de l'Observance - Aval en hiver",
+      "attribution": "« Lyon - Vue sur la Saône depuis le toit d'un immeuble montée de l'Observance - Aval en hiver » — Romainbehar (CC0, Wikimedia Commons)",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Saiphani02",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:OpenStreetMap_Cake_for_20th_anniversary_party_at_Swecha_AP.jpg",
+      "license": "BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "title": "OpenStreetMap Cake for 20th anniversary party at Swecha AP",
+      "attribution": "« OpenStreetMap Cake for 20th anniversary party at Swecha AP » by Saiphani02, CC BY 4.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Sebastian Wallroth",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Deciduous_teeths.jpg",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Deciduous teeths",
+      "attribution": "« Deciduous teeths » — Sebastian Wallroth (domaine public, Wikimedia Commons)",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Sebleouf",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lyon_6e_-_Berges_du_Rh%C3%B4ne,_panneau_%C3%AEles_jardins_(avril_2019).jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Lyon 6e - Berges du Rhône, panneau îles jardins (avril 2019)",
+      "attribution": "« Lyon 6e - Berges du Rhône, panneau îles jardins (avril 2019) » by Sebleouf, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Sebleouf",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lyon_1er_-_Quai_Saint-Vincent_(mars_2019).jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Lyon 1er - Quai Saint-Vincent (mars 2019)",
+      "attribution": "« Lyon 1er - Quai Saint-Vincent (mars 2019) » by Sebleouf, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Selena N. B. H. from Fayetteville, USA",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Candled_cake.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Candled cake",
+      "attribution": "« Candled cake » by Selena N. B. H. from Fayetteville, USA, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Ser Amantio di Nicolao",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Slice_of_chocolate_cloud_cake_at_Tous_les_Jours.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Slice of chocolate cloud cake at Tous les Jours",
+      "attribution": "« Slice of chocolate cloud cake at Tous les Jours » — Ser Amantio di Nicolao (CC0, Wikimedia Commons)",
+      "cases": [
+        "101"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Serge Melki from Indianapolis, USA",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_4_dancers_(2341701005).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "The 4 dancers",
+      "attribution": "« The 4 dancers » by Serge Melki from Indianapolis, USA, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Shixart1985",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Business_professional_engages_in_note-taking_during_a_meeting_at_a_modern_office_desk.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Business professional engages in note-taking during a meeting at a modern office desk",
+      "attribution": "« Business professional engages in note-taking during a meeting at a modern office desk » by Shixart1985, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Shixart1985",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Freshly_baked_pastries_with_coffee_and_cookies_on_a_table.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Freshly baked pastries with coffee and cookies on a table",
+      "attribution": "« Freshly baked pastries with coffee and cookies on a table » by Shixart1985, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Shreveport-Bossier: Louisiana's Other Side",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Greenwood_Flea_Market,_Greenwood_Louisiana,_Feb_2012_-_07.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Greenwood Flea Market, Greenwood Louisiana, Feb 2012 - 07",
+      "attribution": "« Greenwood Flea Market, Greenwood Louisiana, Feb 2012 - 07 » by Shreveport-Bossier: Louisiana's Other Side, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Silar",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:02014_Adventkirmes_Sanok.JPG",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "02014 Adventkirmes Sanok",
+      "attribution": "« 02014 Adventkirmes Sanok » by Silar, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Silar",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:020210821_135240_Sanok_County_in_the_20th_century,_Jewish_Shabbat_Table.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "020210821 135240 Sanok County in the 20th century, Jewish Shabbat Table",
+      "attribution": "« 020210821 135240 Sanok County in the 20th century, Jewish Shabbat Table » by Silar, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "101"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Skililipappa",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hall_1_Paris-Gare-de-Lyon.2.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Hall 1 Paris-Gare-de-Lyon.2",
+      "attribution": "« Hall 1 Paris-Gare-de-Lyon.2 » by Skililipappa, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Skimel",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vertou_coucher_du_soleil_1.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Vertou coucher du soleil 1",
+      "attribution": "« Vertou coucher du soleil 1 » by Skimel, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "101"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Smtzzz",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bathroom_splash_back.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Bathroom splash back",
+      "attribution": "« Bathroom splash back » by Smtzzz, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "103"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "solarisgirl",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bookshelf_Roald_Dahl.jpg",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "title": "Bookshelf Roald Dahl",
+      "attribution": "« Bookshelf Roald Dahl » by solarisgirl, CC BY-SA 2.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Sondoua",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boston_Common,_2005_December_Night.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Boston Common, 2005 December Night",
+      "attribution": "« Boston Common, 2005 December Night » by Sondoua, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Srishti Sethi",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Antarctic_peninsula_view_from_a_cruise_ship_cabin_balcony.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Antarctic peninsula view from a cruise ship cabin balcony",
+      "attribution": "« Antarctic peninsula view from a cruise ship cabin balcony » by Srishti Sethi, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Staff Sgt. Ian M. Terry",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Christmas_Dinner_at_Independence_Hall_Dining_Facility_DVIDS352939.jpg",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Christmas Dinner at Independence Hall Dining Facility DVIDS352939",
+      "attribution": "« Christmas Dinner at Independence Hall Dining Facility DVIDS352939 » — Staff Sgt. Ian M. Terry (domaine public, Wikimedia Commons)",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Staff Sgt. Ian M. Terry",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Christmas_Dinner_at_Independence_Hall_Dining_Facility_DVIDS352944.jpg",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Christmas Dinner at Independence Hall Dining Facility DVIDS352944",
+      "attribution": "« Christmas Dinner at Independence Hall Dining Facility DVIDS352944 » — Staff Sgt. Ian M. Terry (domaine public, Wikimedia Commons)",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Sunny Ripert from Paris, France",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Peach_and_the_snowy_balcony_(3295331258).jpg",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "title": "Peach and the snowy balcony",
+      "attribution": "« Peach and the snowy balcony » by Sunny Ripert from Paris, France, CC BY-SA 2.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Tess Mattew",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cornflower_Flutter_Glass_Exhibition_in_Belarus_National_Arts_Museum_2025_September_07.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Cornflower Flutter Glass Exhibition in Belarus National Arts Museum 2025 September 07",
+      "attribution": "« Cornflower Flutter Glass Exhibition in Belarus National Arts Museum 2025 September 07 » by Tess Mattew, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "The National Archives (United Kingdom)",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boxes_of_documents_on_repository_shelving_at_The_National_Archives.jpg",
+      "license": "BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "title": "Boxes of documents on repository shelving at The National Archives",
+      "attribution": "« Boxes of documents on repository shelving at The National Archives » by The National Archives (United Kingdom), CC BY 3.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "The original uploader was GiollaUidir at English Wikipedia .",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:ABC_Disco_Ball_1.jpg",
+      "license": "BY-SA 2.5",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+      "title": "ABC Disco Ball 1",
+      "attribution": "« ABC Disco Ball 1 » by The original uploader was GiollaUidir at English Wikipedia ., CC BY-SA 2.5 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "The original uploader was Mathsci at English Wikipedia .",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cours-julien-bryce-edwards.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Cours-julien-bryce-edwards",
+      "attribution": "« Cours-julien-bryce-edwards » by The original uploader was Mathsci at English Wikipedia ., CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Tova Hellberg",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Jono_(155566373).jpeg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Jono",
+      "attribution": "« Jono » by Tova Hellberg, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "TuRbO_J from Adelaide, Australia",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2015_Mitsubishi_Lancer_(CJ_MY15)_GSR_Sportback_hatchback_(17191795949).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "2015 Mitsubishi Lancer (CJ MY15) GSR Sportback hatchback",
+      "attribution": "« 2015 Mitsubishi Lancer (CJ MY15) GSR Sportback hatchback » by TuRbO_J from Adelaide, Australia, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "TWFHCOM",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cat_in_Laundry_Basket.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Cat in Laundry Basket",
+      "attribution": "« Cat in Laundry Basket » by TWFHCOM, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "U.S. Army photo by Chris House",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:GEN_Cavoli_delivers_remarks_to_the_Masquerade_Gala_(7181863).jpg",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "GEN Cavoli delivers remarks to the Masquerade Gala",
+      "attribution": "« GEN Cavoli delivers remarks to the Masquerade Gala » — U.S. Army photo by Chris House (domaine public, Wikimedia Commons)",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Ulrich Giraud",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lacanau_Beach_2_(242864655).jpeg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Lacanau Beach 2",
+      "attribution": "« Lacanau Beach 2 » by Ulrich Giraud, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Unknown author Unknown author",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Necklace_(AM_3295-3).jpg",
+      "license": "BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "title": "Necklace",
+      "attribution": "« Necklace » by Unknown author Unknown author, CC BY 4.0 — Wikimedia Commons",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "User:Mattes",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sleeping_Tabby_Cat.JPG",
+      "license": "PDM",
+      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "title": "Sleeping Tabby Cat",
+      "attribution": "« Sleeping Tabby Cat » — User:Mattes (domaine public, Wikimedia Commons)",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Vincent van Zeijst",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Netherlands,_Voorburg,_Cornelis_Voorhoevelaan_(01).jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Netherlands, Voorburg, Cornelis Voorhoevelaan (01)",
+      "attribution": "« Netherlands, Voorburg, Cornelis Voorhoevelaan (01) » by Vincent van Zeijst, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "102"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "W.carter",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Camera_zoom_burst_on_a_Microsoft_computer_keyboard_in_Tuntorp_8.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Camera zoom burst on a Microsoft computer keyboard in Tuntorp 8",
+      "attribution": "« Camera zoom burst on a Microsoft computer keyboard in Tuntorp 8 » by W.carter, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Wikinade",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paris_-_16_novembre_2024_-_Anniversaire_des_20_ans_de_Wikim%C3%A9dia_France_-_10.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Paris - 16 novembre 2024 - Anniversaire des 20 ans de Wikimédia France - 10",
+      "attribution": "« Paris - 16 novembre 2024 - Anniversaire des 20 ans de Wikimédia France - 10 » by Wikinade, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Yuriy Kvach",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mayakovskogo_Prov.,_9_(1).jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Mayakovskogo Prov., 9 (1)",
+      "attribution": "« Mayakovskogo Prov., 9 (1) » by Yuriy Kvach, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
         "001"
       ]
