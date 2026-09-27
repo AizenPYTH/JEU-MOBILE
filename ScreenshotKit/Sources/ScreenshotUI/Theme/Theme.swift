@@ -347,6 +347,16 @@ public enum Theme {
     public static func avatarColor(hue: Double) -> (top: Color, bottom: Color) {
         (top: Color(hue: hue, saturation: 0.38, brightness: 0.52), bottom: Color(hue: hue, saturation: 0.45, brightness: 0.34))
     }
+
+    /// Group chats: one clearly different colour per member (by their place in the group), so a
+    /// message is attributed at a glance — the name (in that colour), a thin bar and a tinted bubble.
+    public static func groupSenderColor(index: Int) -> Color {
+        let hues: [Double] = [0.58, 0.08, 0.36, 0.86, 0.15, 0.50, 0.99, 0.72]
+        return Color(hue: hues[((index % hues.count) + hues.count) % hues.count], saturation: 0.55, brightness: 0.95)
+    }
+
+    /// The tint laid over a received bubble in a group chat (dark UI: subtle, text stays legible).
+    public static let groupBubbleTintOpacity: Double = 0.22
 }
 
 // MARK: - Elevation & state modifiers (§E)

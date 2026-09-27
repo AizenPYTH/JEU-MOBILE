@@ -268,8 +268,13 @@ struct ConversationView: View {
                         // Bubble 2 sits above the message, its arrow ≈ 40 pt in from the message's side.
                         let coachAlignment: Alignment = mine ? .topTrailing : .topLeading
                         let coachArrow: CGFloat = mine ? coachWidth / 2 - 40 : 40 - coachWidth / 2
+                        // Group chats: each member keeps their own colour (name, bar, tinted bubble).
+                        let senderColor: Color? = conversation.flatMap { c in
+                            c.isGroup && !mine ? c.participants.firstIndex(of: visible.message.from).map(Theme.groupSenderColor(index:)) : nil
+                        }
                         MessageBubble(visible: visible,
                                       senderName: showsSender ? game.name(of: visible.message.from) : nil,
+                                      senderColor: senderColor,
                                       lastOfGroup: lastOfGroup,
                                       highlighted: visible.id == focus,
                                       spotlight: isCoachTarget,
@@ -389,6 +394,8 @@ struct SystemPill: View {
 struct MessageBubble: View {
     let visible: VisibleMessage
     let senderName: String?
+    /// Group chats: the sender's colour (nil in a one-to-one chat and for the owner's messages).
+    var senderColor: Color? = nil
     let lastOfGroup: Bool
     let highlighted: Bool
     /// Bubble 2 of the tutorial points at it (ring + halo).
@@ -407,8 +414,8 @@ struct MessageBubble: View {
         VStack(alignment: mine ? .trailing : .leading, spacing: 3) {
             if let senderName {
                 Text(senderName)
-                    .font(Theme.Fonts.caption)
-                    .foregroundStyle(Theme.Colors.textTertiary)
+                    .font(senderColor == nil ? Theme.Fonts.caption : Theme.Fonts.caption.weight(.semibold))
+                    .foregroundStyle(senderColor ?? Theme.Colors.textTertiary)
                     .padding(.horizontal, 13)
                     .padding(.top, Theme.Spacing.s3)
             }
@@ -442,6 +449,15 @@ struct MessageBubble: View {
                     .padding(.horizontal, message.text == nil ? 4 : 13)
                     .padding(.vertical, message.text == nil ? 4 : 9)
                     .background(shape.fill(mine ? Theme.Colors.bubbleOut : Theme.Colors.bgBubbleIn))
+                    .background {
+                        if let senderColor { shape.fill(senderColor.opacity(Theme.groupBubbleTintOpacity)) }
+                    }
+                    .overlay(alignment: .leading) {
+                        if let senderColor {
+                            Capsule().fill(senderColor).frame(width: 3).padding(.vertical, 7).padding(.leading, 3)
+                                .accessibilityHidden(true)
+                        }
+                    }
                     .overlay(
                         shape.stroke(visible.state == .recovered ? Theme.Colors.signalLine : (highlighted ? Theme.Colors.line3 : .clear),
                                      style: StrokeStyle(lineWidth: 1, dash: visible.state == .recovered ? [4, 3] : []))
