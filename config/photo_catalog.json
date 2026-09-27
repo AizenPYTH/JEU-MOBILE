@@ -257,42 +257,6 @@
       }
     },
     {
-      "id": "case001_src_car_parked_on_street_01",
-      "case": "001",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "car",
-      "query": "car parked on street",
-      "fallbackQueries": [
-        "parked car city",
-        "small car street"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "no-identifiable-people, no-brands",
-      "isEvidence": false,
-      "night": false,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case001_photo_p_quick02"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
       "id": "case001_src_cat_sleeping_01",
       "case": "001",
       "type": "ambient",
@@ -1308,42 +1272,6 @@
       "variants": 1,
       "photos": [
         "case003_photo_p_cat"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
-      "id": "case003_src_green_zellige_tiles_bathroom_01",
-      "case": "003",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "interior_warm",
-      "query": "green zellige tiles bathroom",
-      "fallbackQueries": [
-        "green tiled bathroom",
-        "apartment living room interior"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "no-identifiable-people, no-brands",
-      "isEvidence": false,
-      "night": false,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case003_photo_p_chantier"
       ],
       "transform": {
         "profile": "phone-photo",
@@ -2741,7 +2669,7 @@
       "caption": "Le Levant, verres sur la table.",
       "isEvidence": false,
       "decision": "CUSTOM_REQUIRED",
-      "reason": "Personne nommée à l'image (Lucas) : une photo générique montrerait un inconnu.",
+      "reason": "Personne nommée à l'image (Sarah) : une photo générique montrerait un inconnu.",
       "night": false,
       "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « bar »)",
@@ -3092,14 +3020,12 @@
       "takenAt": "2026-09-09 13:02",
       "caption": "Une voiture mal garée devant l'agence.",
       "isEvidence": false,
-      "decision": "REPLACE_BY_API",
-      "reason": "Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée.",
+      "decision": "CUSTOM_REQUIRED",
+      "reason": "Détail utile à l'enquête (règle manuelle) : « Une voiture mal garée devant l'agence » : les sources libres ne renvoient que des plaques et parkings anglais (texte lisible) ; rendu procédural conservé.",
       "night": false,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « car »)",
-      "source": "case001_src_car_parked_on_street_01",
-      "variant": 0,
-      "replacement": "case001_src_car_parked_on_street_01 (variante 1)"
+      "replacement": "image sur mesure à produire ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case001_photo_p_night01",
@@ -4682,14 +4608,12 @@
       "takenAt": "2026-08-13 15:10",
       "caption": "La salle de bain Laborde, terminée.",
       "isEvidence": false,
-      "decision": "REPLACE_BY_API",
-      "reason": "Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée.",
+      "decision": "CUSTOM_REQUIRED",
+      "reason": "Détail utile à l'enquête (règle manuelle) : « La salle de bain Laborde, terminée » (zellige vert) : aucune image libre ne correspond, les candidats sont des salons ; rendu procédural conservé.",
       "night": false,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « interior_warm »)",
-      "source": "case003_src_green_zellige_tiles_bathroom_01",
-      "variant": 0,
-      "replacement": "case003_src_green_zellige_tiles_bathroom_01 (variante 1)"
+      "replacement": "image sur mesure à produire ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case003_photo_p_meteo",

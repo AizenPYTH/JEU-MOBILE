@@ -138,7 +138,10 @@
       "lamborghini",
       "renault",
       "peugeot",
-      "volkswagen"
+      "volkswagen",
+      "plaque",
+      "inscription",
+      "memorial"
     ],
     "excluded": [
       "openverse:318438f4-514d-448c-8c4c-e266cbc66b5f",
@@ -328,7 +331,9 @@
       "003/p_night_garden": "Le lampadaire de l'escalier éteint : détail lié à la nuit de la chute.",
       "003/p_blur_party": "Le sweat jaune visible sur la photo floue est lié à la preuve e_yellow.",
       "004/p_b08": "Les vitrines livrées et leur rayure : détail lié au vol.",
-      "004/p_b23": "La vitrine 4 au fond de la salle pendant l'arrivée des invités : repère de la chronologie du vol."
+      "004/p_b23": "La vitrine 4 au fond de la salle pendant l'arrivée des invités : repère de la chronologie du vol.",
+      "001/p_quick02": "« Une voiture mal garée devant l'agence » : les sources libres ne renvoient que des plaques et parkings anglais (texte lisible) ; rendu procédural conservé.",
+      "003/p_chantier": "« La salle de bain Laborde, terminée » (zellige vert) : aucune image libre ne correspond, les candidats sont des salons ; rendu procédural conservé."
     }
   },
   "cases": {

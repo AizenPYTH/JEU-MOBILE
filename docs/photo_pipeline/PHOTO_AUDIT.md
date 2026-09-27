@@ -7,12 +7,12 @@ Ne pas éditer à la main : modifier `config/photo_pipeline.json` (règles, requ
 
 | Affaire | Photos | REPLACE_BY_API | DUPLICATE | CUSTOM_REQUIRED | PROCEDURAL | KEEP | UNUSED | Sources |
 |---|---|---|---|---|---|---|---|---|
-| #001 LE DERNIER MESSAGE | 58 | 25 | 0 | 23 | 10 | 0 | 0 | 21 |
+| #001 LE DERNIER MESSAGE | 58 | 24 | 0 | 24 | 10 | 0 | 0 | 20 |
 | #002 PREMIER MÉTRO | 38 | 15 | 0 | 17 | 6 | 0 | 0 | 12 |
-| #003 APRÈS LA FÊTE | 38 | 10 | 0 | 21 | 7 | 0 | 0 | 9 |
+| #003 APRÈS LA FÊTE | 38 | 9 | 0 | 22 | 7 | 0 | 0 | 8 |
 | #004 90 SECONDES | 40 | 13 | 0 | 19 | 8 | 0 | 0 | 11 |
 | #005 ROUTE DE NUIT | 38 | 9 | 0 | 22 | 7 | 0 | 0 | 7 |
-| **Total** | **212** | **72** | **0** | **102** | **38** | **0** | **0** | **60** |
+| **Total** | **212** | **70** | **0** | **104** | **38** | **0** | **0** | **58** |
 
 Décisions :
 
@@ -51,7 +51,7 @@ Décisions :
 | `p_b25` | Photos | plant — Le pothos du salon a doublé de taille. | non | procédural (GeneratedPhoto, scène « plant ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case001_src_houseplant_by_the_window_01 (variante 1) |
 | `p_b26` | Photos | climbing — Tom en haut du mur. | non | procédural (GeneratedPhoto, scène « climbing ») | **CUSTOM_REQUIRED** | Personne nommée à l'image (Tom) : une photo générique montrerait un inconnu. | image sur mesure à produire ; le rendu procédural reste en attendant |
 | `p_b27` | Photos | gallery — Le local Lumen, rangé après l'expo. | non | procédural (GeneratedPhoto, scène « gallery ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case001_src_photo_exhibition_room_white_walls_frames_01 (variante 3) |
-| `p_b28` | Photos | bar — Le Levant, verres sur la table. | non | procédural (GeneratedPhoto, scène « bar ») | **CUSTOM_REQUIRED** | Personne nommée à l'image (Lucas) : une photo générique montrerait un inconnu. | image sur mesure à produire ; le rendu procédural reste en attendant |
+| `p_b28` | Photos | bar — Le Levant, verres sur la table. | non | procédural (GeneratedPhoto, scène « bar ») | **CUSTOM_REQUIRED** | Personne nommée à l'image (Sarah) : une photo générique montrerait un inconnu. | image sur mesure à produire ; le rendu procédural reste en attendant |
 | `p_b29` | Photos | bar — Tom montre une vidéo à Lucas. | non | procédural (GeneratedPhoto, scène « bar ») | **CUSTOM_REQUIRED** | Personne nommée à l'image (Lucas) : une photo générique montrerait un inconnu. | image sur mesure à produire ; le rendu procédural reste en attendant |
 | `p_b30` | Photos | street_night · nuit — Arrêt de bus, ligne 12. | non | procédural (GeneratedPhoto, scène « street_night ») | **CUSTOM_REQUIRED** | Texte, écran ou marque précis décrit dans la photo (« « ») : une photo générique le contredirait. | image sur mesure à produire ; le rendu procédural reste en attendant |
 | `p_old01` | Photos | sky · nuit — Feu d'artifice du 14 juillet, 2019. | non | procédural (GeneratedPhoto, scène « sky ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case001_src_fireworks_over_harbor_night_01 (variante 1) |
@@ -68,7 +68,7 @@ Décisions :
 | `p_blur02` | Photos | ceiling — Le plafond de la chambre. | non | procédural (GeneratedPhoto, scène « ceiling ») | **PROCEDURAL** | Texte lisible exact ou photo ratée : le rendu du jeu (texte généré, flou) reste la bonne source. | aucun : rendu procédural conservé |
 | `p_blur03` | Photos | bar — Le Levant, photo ratée. | non | procédural (GeneratedPhoto, scène « bar ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case001_src_cocktail_bar_table_glasses_evening_01 (variante 1) |
 | `p_quick01` | Photos | street_day — Une affiche de concert, prise en passant. | non | procédural (GeneratedPhoto, scène « street_day ») | **CUSTOM_REQUIRED** | Texte, écran ou marque précis décrit dans la photo (« « ») : une photo générique le contredirait. | image sur mesure à produire ; le rendu procédural reste en attendant |
-| `p_quick02` | Photos | car — Une voiture mal garée devant l'agence. | non | procédural (GeneratedPhoto, scène « car ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case001_src_car_parked_on_street_01 (variante 1) |
+| `p_quick02` | Photos | car — Une voiture mal garée devant l'agence. | non | procédural (GeneratedPhoto, scène « car ») | **CUSTOM_REQUIRED** | Détail utile à l'enquête (règle manuelle) : « Une voiture mal garée devant l'agence » : les sources libres ne renvoient que des plaques et parkings anglais (texte lisible) ; rendu procédural conservé. | image sur mesure à produire ; le rendu procédural reste en attendant |
 | `p_night01` | Photos | street_night · nuit — La rue en bas, depuis la fenêtre. | non | procédural (GeneratedPhoto, scène « street_night ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case001_src_marseille_street_at_night_streetlights_01 (variante 2) |
 | `p_night02` | Photos | view · nuit — La ville depuis le toit de l'immeuble. | non | procédural (GeneratedPhoto, scène « view ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case001_src_marseille_city_lights_at_night_from_roof_01 (variante 1) |
 | `p_doc01` | Photos | receipt — Ticket de caisse — supérette. | non | procédural (GeneratedPhoto, scène « receipt ») | **PROCEDURAL** | Texte lisible exact ou photo ratée : le rendu du jeu (texte généré, flou) reste la bonne source. | aucun : rendu procédural conservé |
@@ -154,7 +154,7 @@ Décisions :
 | `p_laptop` | Photos | laptop — Plans 3D de la salle de bain Laborde. | non | procédural (GeneratedPhoto, scène « laptop ») | **CUSTOM_REQUIRED** | Détail utile à l'enquête (règle manuelle) : Rendu 3D du zellige vert sauge du chantier Laborde : contenu d'écran précis. | image sur mesure à produire ; le rendu procédural reste en attendant |
 | `p_ceiling` | Photos | ceiling — Le plafond de la chambre. | non | procédural (GeneratedPhoto, scène « ceiling ») | **PROCEDURAL** | Texte lisible exact ou photo ratée : le rendu du jeu (texte généré, flou) reste la bonne source. | aucun : rendu procédural conservé |
 | `p_plant` | Photos | plant — Le monstera a fait une nouvelle feuille !! | non | procédural (GeneratedPhoto, scène « plant ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case003_src_houseplant_by_the_window_01 (variante 1) |
-| `p_chantier` | Photos | interior_warm — La salle de bain Laborde, terminée. | non | procédural (GeneratedPhoto, scène « interior_warm ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case003_src_green_zellige_tiles_bathroom_01 (variante 1) |
+| `p_chantier` | Photos | interior_warm — La salle de bain Laborde, terminée. | non | procédural (GeneratedPhoto, scène « interior_warm ») | **CUSTOM_REQUIRED** | Détail utile à l'enquête (règle manuelle) : « La salle de bain Laborde, terminée » (zellige vert) : aucune image libre ne correspond, les candidats sont des salons ; rendu procédural conservé. | image sur mesure à produire ; le rendu procédural reste en attendant |
 | `p_meteo` | Photos | screenshot — Capture : météo marine du week-end. | non | procédural (GeneratedPhoto, scène « screenshot ») | **PROCEDURAL** | Texte lisible exact ou photo ratée : le rendu du jeu (texte généré, flou) reste la bonne source. | aucun : rendu procédural conservé |
 | `p_quick_car` | Photos | car — Bouchons à la sortie de Bordeaux. | non | procédural (GeneratedPhoto, scène « car ») | **REPLACE_BY_API** | Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée. | case003_src_traffic_jam_brake_lights_evening_01 (variante 1) |
 | `p_marees` | Photos | screenshot — Capture : horaires des marées. | non | procédural (GeneratedPhoto, scène « screenshot ») | **PROCEDURAL** | Texte lisible exact ou photo ratée : le rendu du jeu (texte généré, flou) reste la bonne source. | aucun : rendu procédural conservé |
