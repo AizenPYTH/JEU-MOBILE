@@ -16,6 +16,8 @@ struct LegacyWordsTests {
         "ri|so", "tyc|oon", "co|zy", "plat du jo|ur", "marm|ite",
     ].map { $0.replacingOccurrences(of: "|", with: "") }
 
+    static let thirdPartyText = ["config/photo_sources.json", "Resources/PhotoCredits.json", "docs/photo_pipeline/PHOTO_SOURCES.md"]
+
     static let textExtensions: Set<String> = ["swift", "json", "md", "yml", "yaml", "sh", "xcconfig", "pbxproj", "xcscheme",
                                                "xcstrings", "txt", "py", "js", "html", "plist", "gitignore"]
 
@@ -28,6 +30,8 @@ struct LegacyWordsTests {
         while let url = enumerator?.nextObject() as? URL {
             let path = url.path
             if path.contains("/.git/") || path.contains("/.build/") || path.contains("/.swiftpm/") { continue }
+            // Third-party photo titles, kept verbatim for attribution (generated provenance and credits).
+            if Self.thirdPartyText.contains(where: path.hasSuffix) || path.contains("/cache/") { continue }
             let ext = url.pathExtension.isEmpty ? url.lastPathComponent.trimmingCharacters(in: ["."]) : url.pathExtension
             guard Self.textExtensions.contains(ext), let text = try? String(contentsOf: url, encoding: .utf8) else { continue }
             scanned += 1
