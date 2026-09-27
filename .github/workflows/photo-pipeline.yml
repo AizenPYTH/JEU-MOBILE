@@ -51,7 +51,8 @@ jobs:
 
       - name: Run the pipeline
         env:
-          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          # The key may have been saved under a slightly different name: any of these works.
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY || secrets.PEXELS_KEY || secrets.PEXELS_API || secrets.PEXELS_TOKEN || secrets.PEXELS }}
         run: |
           set +e
           ./scripts/photos.sh all ${{ inputs.dry_run && '--dry-run' || '' }} | tee "$RUNNER_TEMP/photos.log"
