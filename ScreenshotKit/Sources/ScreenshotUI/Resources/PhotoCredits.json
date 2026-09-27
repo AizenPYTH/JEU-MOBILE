@@ -69,6 +69,71 @@
     },
     {
       "provider": "openverse",
+      "photographer": "",
+      "photographerUrl": "",
+      "sourceUrl": "https://www.rawpixel.com/image/6043121/photo-image-xmas-public-domain-tree",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "Christmas tree cozy living room",
+      "attribution": "« Christmas tree cozy living room » — auteur inconnu (CC0)",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "",
+      "photographerUrl": "",
+      "sourceUrl": "https://www.rawpixel.com/image/10067945/pier-table-c-1936-john-dieterich",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "Pier Table (c. 1936) John",
+      "attribution": "« Pier Table (c. 1936) John » — auteur inconnu (CC0)",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "",
+      "photographerUrl": "",
+      "sourceUrl": "https://www.rawpixel.com/image/5965571/pothos",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "Pothos",
+      "attribution": "« Pothos » — auteur inconnu (CC0)",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "Alina Kakshapati",
+      "photographerUrl": "https://wordpress.org/photos/author/aleenak19/",
+      "sourceUrl": "https://wordpress.org/photos/photo/8468bac8fd/",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "A small, white homemade birthday cake with “Happy Birthday” candles and various bowls of snacks, like chips and candy.",
+      "attribution": "« A small, white homemade birthday cake with “Happy Birthday” candles and various bowls of snacks, like chips and candy. » — Alina Kakshapati (CC0)",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "Anonyme, photographe",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=140230732",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
+      "title": "Pont et temple de la Sibylle, parc des Buttes-Chaumont, 19ème arrondissement, Paris, PH82622",
+      "attribution": "« Pont et temple de la Sibylle, parc des Buttes-Chaumont, 19ème arrondissement, Paris, PH82622 » — Anonyme, photographe (CC0)",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "openverse",
       "photographer": "Benoît Prieur",
       "photographerUrl": "https://www.wikidata.org/wiki/Q42790984",
       "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=81540979",
@@ -160,6 +225,19 @@
     },
     {
       "provider": "openverse",
+      "photographer": "Richebourg, Pierre Ambroise (Laignes, 28–11–1810 - Saint-Pierre-lès-Nemours, 28–12–1875), photographe",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=132036166",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
+      "title": "Architecture éphémère pour l'inauguration du boulevard du Prince-Eugène (actuel boulevard Voltaire), place de la Nation,, PH15671",
+      "attribution": "« Architecture éphémère pour l'inauguration du boulevard du Prince-Eugène (actuel boulevard Voltaire), place de la Nation,, PH15671 » — Richebourg, Pierre Ambroise (Laignes, 28–11–1810 - Saint-Pierre-lès-Nemours, 28–12–1875), photographe (CC0)",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "openverse",
       "photographer": "Romainbehar",
       "photographerUrl": "https://commons.wikimedia.org/wiki/User:Romainbehar",
       "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=124014566",
@@ -247,6 +325,19 @@
       "attribution": "« Lille.GrandPlace2 » — André Leroux, Lille (domaine public, Wikimedia Commons)",
       "cases": [
         "102"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Angwinar",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:OMG_Dahlia,_Annual_Dahlia_Festival_at_Swan_Island,_Dahlias_in_Canby,_Oregon_(2019).jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "OMG Dahlia, Annual Dahlia Festival at Swan Island, Dahlias in Canby, Oregon (2019)",
+      "attribution": "« OMG Dahlia, Annual Dahlia Festival at Swan Island, Dahlias in Canby, Oregon (2019) » — Angwinar (CC0, Wikimedia Commons)",
+      "cases": [
+        "201"
       ]
     },
     {
@@ -485,6 +576,19 @@
     },
     {
       "provider": "wikimedia",
+      "photographer": "DXR",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Donjon_of_Ch%C3%A2teau_de_Vincennes,_South-West_View_140308_1.jpg",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Donjon of Château de Vincennes, South-West View 140308 1",
+      "attribution": "« Donjon of Château de Vincennes, South-West View 140308 1 » by DXR, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "ecom",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:From_window_at_night_-_panoramio.jpg",
@@ -546,6 +650,19 @@
       "attribution": "« Paysage de neige à Villard-de-Lans (mars 2009) - panoramio » by Eric Bajart, CC BY-SA 3.0 — Wikimedia Commons",
       "cases": [
         "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Eric Bréchemier from Paris, France",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:F%C3%AAte_de_la_Musique_2011_(5864745368).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Fête de la Musique 2011",
+      "attribution": "« Fête de la Musique 2011 » by Eric Bréchemier from Paris, France, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "201"
       ]
     },
     {
@@ -667,6 +784,19 @@
     },
     {
       "provider": "wikimedia",
+      "photographer": "GO69",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paris_(75011)_Cirque_d%27hiver_05.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Paris (75011) Cirque d'hiver 05",
+      "attribution": "« Paris (75011) Cirque d'hiver 05 » by GO69, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "Gonedelyon",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:L%27H%C3%B4tel_de_Ville_de_Lyon.jpg",
@@ -706,6 +836,19 @@
     },
     {
       "provider": "wikimedia",
+      "photographer": "Guilhem Vellut from Paris, France",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lac_Daumesnil_@_Bois_de_Vincennes_@_Paris_(23833563121).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Lac Daumesnil @ Bois de Vincennes @ Paris",
+      "attribution": "« Lac Daumesnil @ Bois de Vincennes @ Paris » by Guilhem Vellut from Paris, France, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "hesdes",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Place_Kl%C3%A9ber_on_a_rainy_day.jpg",
@@ -715,6 +858,19 @@
       "attribution": "« Place Kléber on a rainy day » by hesdes, CC BY 2.0 — Wikimedia Commons",
       "cases": [
         "103"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "jean-louis Zimmermann from Moulins, FRANCE",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Promenade_plant%C3%A9e,_Paris_August_2009_(9).jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Promenade plantée, Paris August 2009 (9)",
+      "attribution": "« Promenade plantée, Paris August 2009 (9) » by jean-louis Zimmermann from Moulins, FRANCE, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "201"
       ]
     },
     {
@@ -927,6 +1083,19 @@
     },
     {
       "provider": "wikimedia",
+      "photographer": "LPLT",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vue_depuis_le_Parc_de_Belleville.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Vue depuis le Parc de Belleville",
+      "attribution": "« Vue depuis le Parc de Belleville » by LPLT, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "Manolo Chrétien manolochretien",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nazar%C3%A9_Wall_Art_(Unsplash).jpg",
@@ -975,6 +1144,19 @@
       "attribution": "« Portishead MMB 15 Marina » by mattbuck ( category ), CC BY-SA 3.0 — Wikimedia Commons",
       "cases": [
         "101"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Mattia PRNL",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arma_Jackson_en_concert_%C3%A0_La_Cigale,_Paris_-_18_mars_2026.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Arma Jackson en concert à La Cigale, Paris - 18 mars 2026",
+      "attribution": "« Arma Jackson en concert à La Cigale, Paris - 18 mars 2026 » by Mattia PRNL, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "201"
       ]
     },
     {
@@ -1096,6 +1278,19 @@
     },
     {
       "provider": "wikimedia",
+      "photographer": "Open Grid Scheduler / Grid Engine",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:HuaweiRH2288HV2.JPG",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "HuaweiRH2288HV2",
+      "attribution": "« HuaweiRH2288HV2 » — Open Grid Scheduler / Grid Engine (CC0, Wikimedia Commons)",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "OuiOuiBaguetteSyndicalist",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Key_lime_pie_slice_with_birthday_candle_in_Dutch_angle.jpg",
@@ -1187,6 +1382,19 @@
     },
     {
       "provider": "wikimedia",
+      "photographer": "Pergl Pergl from On the move",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Passerelle_de_la_Grange-aux-Belles,_Canal_Saint-Martin,_Paris_September_2015.jpg",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "title": "Passerelle de la Grange-aux-Belles, Canal Saint-Martin, Paris September 2015",
+      "attribution": "« Passerelle de la Grange-aux-Belles, Canal Saint-Martin, Paris September 2015 » by Pergl Pergl from On the move, CC BY 2.0 — Wikimedia Commons",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "Pierre Poschadel",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arras_(62),_h%C3%B4tel_de_ville,_salle_du_conseil_municipal_1.jpg",
@@ -1196,6 +1404,19 @@
       "attribution": "« Arras (62), hôtel de ville, salle du conseil municipal 1 » by Pierre Poschadel, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
         "005"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Pierre-Selim Huard",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paris_-_2017-12-01_-_Place_de_la_R%C3%A9publique_-_5517.jpg",
+      "license": "BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "title": "Paris - 2017-12-01 - Place de la République - 5517",
+      "attribution": "« Paris - 2017-12-01 - Place de la République - 5517 » by Pierre-Selim Huard, CC BY 4.0 — Wikimedia Commons",
+      "cases": [
+        "201"
       ]
     },
     {
@@ -1222,6 +1443,19 @@
       "attribution": "« Marché de Talensac - 1 » by Pj44300, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
         "101"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Platdujour",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:April_Cat_Loaf.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "April Cat Loaf",
+      "attribution": "« April Cat Loaf » — Platdujour (CC0, Wikimedia Commons)",
+      "cases": [
+        "201"
       ]
     },
     {
@@ -1326,6 +1560,19 @@
       "attribution": "« Lyon - Vue sur la Saône depuis le toit d'un immeuble montée de l'Observance - Aval en hiver » — Romainbehar (CC0, Wikimedia Commons)",
       "cases": [
         "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Roman Eisele",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Europ%C3%A4isch-Kurzhaar-Kater_Samanther_2011-05-22_schl%C3%A4ft_auf_Buch_%E2%80%9EWenn_Katzen_reden_k%C3%B6nnten%E2%80%9C.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Europäisch-Kurzhaar-Kater Samanther 2011-05-22 schläft auf Buch „Wenn Katzen reden könnten“",
+      "attribution": "« Europäisch-Kurzhaar-Kater Samanther 2011-05-22 schläft auf Buch „Wenn Katzen reden könnten“ » by Roman Eisele, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "201"
       ]
     },
     {
@@ -1564,6 +1811,19 @@
     },
     {
       "provider": "wikimedia",
+      "photographer": "Thomon",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:March%C3%A9_Beauvau.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Marché Beauvau",
+      "attribution": "« Marché Beauvau » by Thomon, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "201"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "TWFHCOM",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cat_in_Laundry_Basket.jpg",
@@ -1651,6 +1911,19 @@
       "attribution": "« Mayakovskogo Prov., 9 (1) » by Yuriy Kvach, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
         "001"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "Zairon",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%C3%89tretat_Falaises_d%27%C3%89tretat_Porte_d%27Aval_20.jpg",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "title": "Étretat Falaises d'Étretat Porte d'Aval 20",
+      "attribution": "« Étretat Falaises d'Étretat Porte d'Aval 20 » by Zairon, CC BY-SA 4.0 — Wikimedia Commons",
+      "cases": [
+        "201"
       ]
     }
   ]

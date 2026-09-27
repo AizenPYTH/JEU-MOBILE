@@ -3,8 +3,8 @@
 Généré par `./scripts/photos.sh report` à partir de `config/photo_sources.json` (manifeste complet, machine-lisible).
 Crédits visibles dans le jeu : Paramètres › À propos › Crédits photos (`ScreenshotUI/Resources/PhotoCredits.json`).
 
-- Sources récupérées : **127** (Wikimedia Commons : 112, Pexels : 0, Openverse : 15)
-- Images du jeu produites : **129**
+- Sources récupérées : **148** (Wikimedia Commons : 127, Pexels : 0, Openverse : 21)
+- Images du jeu produites : **150**
 - Sources sans image acceptable (MISSING → rendu procédural conservé) : **54**
 - Sources pas encore recherchées : **0**
 
@@ -137,6 +137,27 @@ Crédits visibles dans le jeu : Paramètres › À propos › Crédits photos (`
 | `case103_src_bathroom_renovation_tiling_01` | wikimedia | 128510150 | Smtzzz | [BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [lien](https://commons.wikimedia.org/wiki/File:Bathroom_splash_back.jpg) | « bathroom renovation tiling » | 2026-09-27 | `p3_chantier` |
 | `case103_src_place_kleber_strasbourg_pluie_p3_kleber_01` | wikimedia | 10600744 | hesdes | [BY 2.0](https://creativecommons.org/licenses/by/2.0) | [lien](https://commons.wikimedia.org/wiki/File:Place_Kl%C3%A9ber_on_a_rainy_day.jpg) | « Place Kléber Strasbourg » | 2026-09-27 | `p3_kleber` |
 | `case103_src_rain_on_windshield_p3_pluie_01` | wikimedia | 12174292 | Derek Bridges | [BY 2.0](https://creativecommons.org/licenses/by/2.0) | [lien](https://commons.wikimedia.org/wiki/File:Windshield_Rain_on_Freret_St.jpg) | « rain on windshield » | 2026-09-27 | `p3_pluie` |
+| `case201_src_canal_saint_martin_passerelle_01` | wikimedia | 43642400 | Pergl Pergl from On the move | [BY 2.0](https://creativecommons.org/licenses/by/2.0) | [lien](https://commons.wikimedia.org/wiki/File:Passerelle_de_la_Grange-aux-Belles,_Canal_Saint-Martin,_Paris_September_2015.jpg) | « Canal Saint-Martin passerelle » | 2026-09-27 | `p_canal` |
+| `case201_src_christmas_tree_living_room_01` | openverse · rawpixel | ea502d21-bb3a-4b03-bd18-beda6b91166f | ? | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | [lien](https://www.rawpixel.com/image/6043121/photo-image-xmas-public-domain-tree) | « Christmas tree living room » | 2026-09-27 | `p_old_sapin` |
+| `case201_src_chateau_de_vincennes_donjon_nuit_night_01` | wikimedia | 31564917 | DXR | [BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [lien](https://commons.wikimedia.org/wiki/File:Donjon_of_Ch%C3%A2teau_de_Vincennes,_South-West_View_140308_1.jpg) | « Donjon de Vincennes » | 2026-09-27 | `p_chateau` |
+| `case201_src_cirque_d_hiver_paris_01` | wikimedia | 35704370 | GO69 | [BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [lien](https://commons.wikimedia.org/wiki/File:Paris_(75011)_Cirque_d%27hiver_05.JPG) | « Cirque d'Hiver Paris » | 2026-09-27 | `p_cirque` |
+| `case201_src_falaises_d_etretat_porte_d_aval_01` | wikimedia | 91109570 | Zairon | [BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [lien](https://commons.wikimedia.org/wiki/File:%C3%89tretat_Falaises_d%27%C3%89tretat_Porte_d%27Aval_20.jpg) | « Falaises d'Étretat porte d'Aval » | 2026-09-27 | `p_old_etretat` |
+| `case201_src_fete_de_la_musique_paris_rue_night_01` | wikimedia | 27400346 | Eric Bréchemier from Paris, France | [BY 2.0](https://creativecommons.org/licenses/by/2.0) | [lien](https://commons.wikimedia.org/wiki/File:F%C3%AAte_de_la_Musique_2011_(5864745368).jpg) | « Fête de la musique Paris rue » | 2026-09-27 | `p_old_fete` |
+| `case201_src_lac_daumesnil_bois_de_vincennes_01` | wikimedia | 46888813 | Guilhem Vellut from Paris, France | [BY 2.0](https://creativecommons.org/licenses/by/2.0) | [lien](https://commons.wikimedia.org/wiki/File:Lac_Daumesnil_@_Bois_de_Vincennes_@_Paris_(23833563121).jpg) | « Lac Daumesnil bois de Vincennes » | 2026-09-27 | `p_daumesnil` |
+| `case201_src_marche_d_aligre_paris_01` | wikimedia | 70899509 | Thomon | [BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [lien](https://commons.wikimedia.org/wiki/File:March%C3%A9_Beauvau.jpg) | « Marché d'Aligre Paris » | 2026-09-27 | `p_aligre` |
+| `case201_src_parc_de_belleville_vue_paris_01` | wikimedia | 7574324 | LPLT | [BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [lien](https://commons.wikimedia.org/wiki/File:Vue_depuis_le_Parc_de_Belleville.JPG) | « Parc de Belleville vue Paris » | 2026-09-27 | `p_belleville` |
+| `case201_src_place_de_la_republique_paris_01` | wikimedia | 64695088 | Pierre-Selim Huard | [BY 4.0](https://creativecommons.org/licenses/by/4.0) | [lien](https://commons.wikimedia.org/wiki/File:Paris_-_2017-12-01_-_Place_de_la_R%C3%A9publique_-_5517.jpg) | « Place de la République Paris » | 2026-09-27 | `p_republique` |
+| `case201_src_promenade_plantee_paris_01` | wikimedia | 38342450 | jean-louis Zimmermann from Moulins, FRANCE | [BY 2.0](https://creativecommons.org/licenses/by/2.0) | [lien](https://commons.wikimedia.org/wiki/File:Promenade_plant%C3%A9e,_Paris_August_2009_(9).jpg) | « Promenade plantée Paris » | 2026-09-27 | `p_coulee` |
+| `case201_src_temple_de_la_sibylle_buttes_chaumont_01` | openverse · wikimedia | c5affabd-06bb-4efc-88ce-6721c33e50ac | Anonyme, photographe | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en/) | [lien](https://commons.wikimedia.org/w/index.php?curid=140230732) | « Temple de la Sibylle Buttes-Chaumont » | 2026-09-27 | `p_buttes` |
+| `case201_src_architectural_drawings_on_table_01` | openverse · rawpixel | dc1eae1c-0250-4a84-9473-d45f1515f549 | ? | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | [lien](https://www.rawpixel.com/image/10067945/pier-table-c-1936-john-dieterich) | « architectural drawings on table » | 2026-09-27 | `p_tirages` |
+| `case201_src_architectural_model_cardboard_01` | openverse · wikimedia | de77bb55-e422-4a97-8909-2a3ccd1756d5 | Richebourg, Pierre Ambroise (Laignes, 28–11–1810 - Saint-Pierre-lès-Nemours, 28–12–1875), photographe | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.en/) | [lien](https://commons.wikimedia.org/w/index.php?curid=132036166) | « maquette architecture carton » | 2026-09-27 | `p_maquette` |
+| `case201_src_dahlias_garden_01` | wikimedia | 191985995 | Angwinar | [CC0 ](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | [lien](https://commons.wikimedia.org/wiki/File:OMG_Dahlia,_Annual_Dahlia_Festival_at_Swan_Island,_Dahlias_in_Canby,_Oregon_(2019).jpg) | « dahlias garden » | 2026-09-27 | `p_dahlias` |
+| `case201_src_la_cigale_paris_salle_concert_p_adrien_cigale_night_01` | wikimedia | 199431319 | Mattia PRNL | [BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [lien](https://commons.wikimedia.org/wiki/File:Arma_Jackson_en_concert_%C3%A0_La_Cigale,_Paris_-_18_mars_2026.jpg) | « La Cigale Paris » | 2026-09-27 | `p_adrien_cigale` |
+| `case201_src_birthday_cake_candles_table_p_vincennes_2230_night_01` | openverse · wordpress | e07fc779-02da-45c5-9622-0a38942d9353 | [Alina Kakshapati](https://wordpress.org/photos/author/aleenak19/) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | [lien](https://wordpress.org/photos/photo/8468bac8fd/) | « birthday cake candles table » | 2026-09-27 | `p_vincennes_2230` |
+| `case201_src_pothos_plant_shelf_01` | openverse · rawpixel | 8d188ac6-0940-49ba-b592-5ae29404fd35 | ? | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | [lien](https://www.rawpixel.com/image/5965571/pothos) | « plante pothos » | 2026-09-27 | `p_plante` |
+| `case201_src_rain_drops_glass_roof_01` | wikimedia | 141450076 | Platdujour | [CC0 ](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | [lien](https://commons.wikimedia.org/wiki/File:April_Cat_Loaf.jpg) | « rain drops glass roof » | 2026-09-27 | `p_verriere` |
+| `case201_src_server_rack_small_office_01` | wikimedia | 38267117 | Open Grid Scheduler / Grid Engine | [CC0 ](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | [lien](https://commons.wikimedia.org/wiki/File:HuaweiRH2288HV2.JPG) | « network storage server rack » | 2026-09-27 | `p_nas_orange` |
+| `case201_src_tabby_cat_sleeping_sofa_01` | wikimedia | 118190823 | Roman Eisele | [BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [lien](https://commons.wikimedia.org/wiki/File:Europ%C3%A4isch-Kurzhaar-Kater_Samanther_2011-05-22_schl%C3%A4ft_auf_Buch_%E2%80%9EWenn_Katzen_reden_k%C3%B6nnten%E2%80%9C.jpg) | « tabby cat sleeping sofa » | 2026-09-27 | `p_lea_chat` |
 
 ## REAL PHOTO COMPLIANCE
 
@@ -144,13 +165,13 @@ Règle du studio : aucune image générée par IA dans les téléphones et les g
 
 | | |
 |---|---|
-| Photos des téléphones (toutes affaires) | 240 |
-| Vraies photos livrées (photographies réelles) | **129** |
-| — dont externes : openverse 15 · wikimedia 114 | 129 |
+| Photos des téléphones (toutes affaires) | 265 |
+| Vraies photos livrées (photographies réelles) | **150** |
+| — dont externes : openverse 21 · wikimedia 129 | 150 |
 | Vraies photos prises par le studio (CUSTOM_REAL livrées) | 0 |
 | Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | 58 |
 | Vraies photos à prendre nous-mêmes (CUSTOM_REAL) | 10 |
-| Rendus du jeu voulus (captures d'écran, documents, tickets — pas des photographies) | 43 |
+| Rendus du jeu voulus (captures d'écran, documents, tickets — pas des photographies) | 47 |
 | Images IA supprimées | 5 |
 | Images IA restantes dans les zones photo | 0 |
 
