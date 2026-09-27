@@ -420,8 +420,10 @@ scenes.append({
 
 # ---------------------------------------------------------------------------------------------
 # Checks: every answer path, played the way StoryDirector plays it.
+# The old concept's words are written split (« co|zy »), like LegacyWordsTests, so this file does not match itself.
+_OLD_WORDS = "|".join(w.replace("|", "") for w in ["co|zy", "cli|ents?", "resta|urants?"])
 BANNED = re.compile(r"(?i)(?<![\w'’])(épingl\w*|pin(?:ned|ning)?|accus\w*|recrue\w*|recruit\w*|stagiaire\w*|trainee\w*"
-                    r"|trace|cozy|clients?|restaurants?|épique|héroïque|gamer)(?![\w])")
+                    r"|trace|" + _OLD_WORDS + r"|épique|héroïque|gamer)(?![\w])")
 ANIMATIONS = {"stand", "sit", "nod", "gesture", "handover", "typing", "phone", "shrug", "read", "take", "put_down",
               "cross_arms", "lean_forward"}
 SOUNDS = {"steps_lino", "door_glass", "door_close", "chair", "drawer", "page", "paper_slide", "plastic_bag", "neon_buzz",
