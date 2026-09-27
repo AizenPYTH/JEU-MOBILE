@@ -281,39 +281,9 @@
     },
     {
       "sourceId": "case001_src_cartons_d_archives_empiles_01",
-      "status": "fetched",
+      "status": "missing",
       "case": "001",
-      "provider": "wikimedia",
-      "providerPhotoId": "16633884",
-      "photographer": "The National Archives (United Kingdom)",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boxes_of_documents_on_repository_shelving_at_The_National_Archives.jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Boxes_of_documents_on_repository_shelving_at_The_National_Archives.jpg/1920px-Boxes_of_documents_on_repository_shelving_at_The_National_Archives.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "by",
-      "licenseVersion": "3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-      "origin": "Wikimedia Commons",
-      "title": "Boxes of documents on repository shelving at The National Archives",
-      "tags": [
-        "Taken with Nikon D200",
-        "2008 in the London Borough of Richmond upon Thames",
-        "Archive boxes",
-        "Stacks (archive interiors)",
-        "London photographs taken on 2008-06-03",
-        "Interior of the National Archives building at Kew",
-        "Boxes of War Office documents on repository shelving at The National Archives in Kew"
-      ],
-      "queryUsed": "archive boxes stacked",
-      "dateFetched": "2026-09-27T12:09:55+00:00",
-      "width": 5378,
-      "height": 3600,
-      "score": 3.34,
-      "luminance": 136.2,
-      "file": "wikimedia_16633884.jpg",
-      "sha256": "bc1786f596d0713578cf439ae6b759e3877813056ddccec79b5212b07207b547",
-      "attributionRequired": false,
-      "attributionText": "« Boxes of documents on repository shelving at The National Archives » by The National Archives (United Kingdom), CC BY 3.0 — Wikimedia Commons",
-      "evidence": false
+      "reason": "aucun candidat acceptable sur 29 résultat(s) (8 × lieu étranger à l'affaire (placeRejectWords), 6 × score trop bas, 6 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 4 × résolution trop faible (1152×768), 2 × mot exclu dans le titre ou les tags, 1 × résolution trop faible (500×375), 1 × photo ancienne (2003) : pas crédible dans un téléphone récent, 1 × résolution trop faible (800×579))"
     },
     {
       "sourceId": "case001_src_chat_roux_endormi_paillasson_01",
@@ -645,11 +615,11 @@
       "status": "fetched",
       "case": "001",
       "provider": "wikimedia",
-      "providerPhotoId": "65774893",
+      "providerPhotoId": "65774894",
       "photographer": "Elliott Brown from Birmingham, United Kingdom",
       "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_(28083120859).jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_%2828083120859%29.jpg/1920px-Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_%2828083120859%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_(25989500198).jpg",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_%2825989500198%29.jpg/1920px-Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_%2825989500198%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "license": "by-sa",
       "licenseVersion": "2.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
@@ -663,13 +633,13 @@
         "Below the Hockley Flyover is the Hockley Circus. Certain walls have sculptures dating to 1968 by William Mitchell called Climbing Wall. Made of cast concrete. They are either side of the entrances / exits to the subways."
       ],
       "queryUsed": "climbing wall from below",
-      "dateFetched": "2026-09-27T12:33:34+00:00",
+      "dateFetched": "2026-09-27T12:41:47+00:00",
       "width": 4608,
       "height": 3456,
       "score": 2.5,
-      "luminance": 88.8,
-      "file": "wikimedia_65774893.jpg",
-      "sha256": "d642259ec05a5eeaa45eced0811a0eb292357ffdf59cfd1327baba744f09eb76",
+      "luminance": 128.4,
+      "file": "wikimedia_65774894.jpg",
+      "sha256": "953907d4c687348450cce944fefa25ce421d46b60fee71a66bf4e9a15fafb990",
       "attributionRequired": false,
       "attributionText": "« Climbing Wall - Hockley Circus - Hockley Flyover » by Elliott Brown from Birmingham, United Kingdom, CC BY-SA 2.0 — Wikimedia Commons",
       "evidence": false
@@ -930,38 +900,9 @@
     },
     {
       "sourceId": "case001_src_petite_voiture_grise_garage_01",
-      "status": "fetched",
+      "status": "missing",
       "case": "001",
-      "provider": "wikimedia",
-      "providerPhotoId": "39990044",
-      "photographer": "TuRbO_J from Adelaide, Australia",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2015_Mitsubishi_Lancer_(CJ_MY15)_GSR_Sportback_hatchback_(17191795949).jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/2015_Mitsubishi_Lancer_%28CJ_MY15%29_GSR_Sportback_hatchback_%2817191795949%29.jpg/1920px-2015_Mitsubishi_Lancer_%28CJ_MY15%29_GSR_Sportback_hatchback_%2817191795949%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "by",
-      "licenseVersion": "2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-      "origin": "Wikimedia Commons",
-      "title": "2015 Mitsubishi Lancer (CJ MY15) GSR Sportback hatchback",
-      "tags": [
-        "Flickr images reviewed by FlickreviewR",
-        "Mitsubishi Lancer Sportback",
-        "Grey Mitsubishi hatchbacks",
-        "2015 Mitsubishi automobiles",
-        "Photographs by TuRbO J",
-        "It's hard to believe the current Lancer has been around since 2007 and is now the oldest small car design of any manufacturer on the Australian market, that's 8 years and counting! At this stage, any replacement is around 2 years away, making Mitsubishi soldier on with the current car. There were st"
-      ],
-      "queryUsed": "small grey hatchback",
-      "dateFetched": "2026-09-27T12:10:06+00:00",
-      "width": 4576,
-      "height": 2576,
-      "score": 2.06,
-      "luminance": 105.1,
-      "file": "wikimedia_39990044.jpg",
-      "sha256": "578d021731b5d405080406564f854252e472b9a42c1830062f38a7811c7175d7",
-      "attributionRequired": false,
-      "attributionText": "« 2015 Mitsubishi Lancer (CJ MY15) GSR Sportback hatchback » by TuRbO_J from Adelaide, Australia, CC BY 2.0 — Wikimedia Commons",
-      "evidence": false
+      "reason": "aucun candidat acceptable sur 8 résultat(s) (6 × lieu étranger à l'affaire (placeRejectWords), 2 × mot exclu dans le titre ou les tags)"
     },
     {
       "sourceId": "case001_src_photographies_encadrees_mur_blanc_escabe_01",
@@ -1154,43 +1095,9 @@
     },
     {
       "sourceId": "case001_src_table_de_bar_verres_chaises_soiree_night_01",
-      "status": "fetched",
+      "status": "missing",
       "case": "001",
-      "provider": "wikimedia",
-      "providerPhotoId": "151997308",
-      "photographer": "Krzysztof Popławski",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sosnowiec,_Ma%C5%82achowskieog_9_-_hostel,_Kamienica_pub,_Maya_Tapas_Bar,_Dzie%C5%84_i_Noc,_Sierpie%C5%84_2024_KsP_096.jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Sosnowiec%2C_Ma%C5%82achowskieog_9_-_hostel%2C_Kamienica_pub%2C_Maya_Tapas_Bar%2C_Dzie%C5%84_i_Noc%2C_Sierpie%C5%84_2024_KsP_096.jpg/1920px-Sosnowiec%2C_Ma%C5%82achowskieog_9_-_hostel%2C_Kamienica_pub%2C_Maya_Tapas_Bar%2C_Dzie%C5%84_i_Noc%2C_Sierpie%C5%84_2024_KsP_096.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "by",
-      "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-      "origin": "Wikimedia Commons",
-      "title": "Sosnowiec, Małachowskieog 9 - hostel, Kamienica pub, Maya Tapas Bar, Dzień i Noc, Sierpień 2024 KsP 096",
-      "tags": [
-        "Małachowskiego Street in Sosnowiec",
-        "9 Małachowskiego Street in Sosnowiec",
-        "Buildings in Sosnowiec",
-        "Self-published work",
-        "Hostels in Poland",
-        "Restaurants in Silesian Voivodeship",
-        "On OSM",
-        "Open air restaurant and café areas in Poland",
-        "Files with coordinates missing SDC location of creation",
-        "2024 in Sosnowiec",
-        "Tenement house at 9 Stanisława Małachowskiego Street in Sosnowiec , in the city centre, Silesian Voivodeship , Poland , on 24 August 2024. The photograph shows the front façade of a multi-storey tenement house with service premises on the ground floor and a hostel on the upper floors: the “HOSTEL” s"
-      ],
-      "queryUsed": "pub table drinks evening",
-      "dateFetched": "2026-09-27T12:33:36+00:00",
-      "width": 7008,
-      "height": 4672,
-      "score": 2.93,
-      "luminance": 141.9,
-      "file": "wikimedia_151997308.jpg",
-      "sha256": "6d385267515b2b127008b44a48a38bbf175fd9b5b631c98a315f387e2e28b6e1",
-      "attributionRequired": false,
-      "attributionText": "« Sosnowiec, Małachowskieog 9 - hostel, Kamienica pub, Maya Tapas Bar, Dzień i Noc, Sierpień 2024 KsP 096 » by Krzysztof Popławski, CC BY 4.0 — Wikimedia Commons",
-      "evidence": false
+      "reason": "aucun candidat acceptable sur 12 résultat(s) (4 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 3 × lieu étranger à l'affaire (placeRejectWords), 2 × licence « ? » non autorisée (usage commercial + modification requis), 2 × image refusée à la relecture (selection.excluded), 1 × pas une photographie (dessin, carte, affiche, rendu…))"
     },
     {
       "sourceId": "case001_src_table_de_bar_verres_soiree_terrasse_night_01",
@@ -1757,35 +1664,28 @@
       "sourceId": "case002_src_passerelle_saint_vincent_lyon_coucher_de_01",
       "status": "fetched",
       "case": "002",
-      "provider": "wikimedia",
-      "providerPhotoId": "80434259",
-      "photographer": "Romainbehar",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lyon_1er_-_Quai_Saint_Vincent,_depuis_la_passerelle_Saint-Vincent.jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Lyon_1er_-_Quai_Saint_Vincent%2C_depuis_la_passerelle_Saint-Vincent.jpg/1920px-Lyon_1er_-_Quai_Saint_Vincent%2C_depuis_la_passerelle_Saint-Vincent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "cc0",
-      "licenseVersion": "",
-      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-      "origin": "Wikimedia Commons",
-      "title": "Lyon 1er - Quai Saint Vincent, depuis la passerelle Saint-Vincent",
-      "tags": [
-        "CC-Zero",
-        "Quai Saint-Vincent (Lyon)",
-        "Self-published work",
-        "Files with coordinates missing SDC location of creation",
-        "Saône River in Lyon",
-        "Depuis la passerelle Saint-Vincent."
-      ],
+      "provider": "openverse",
+      "providerPhotoId": "24c05893-82ad-4047-a44f-ddaa200d35f2",
+      "photographer": "Corentin Eustacchi",
+      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:Corentin_Eustacchi&action=edit&redlink=1",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=197306109",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Passerelle_Saint-Vincent_%28Lyon%2C_2026%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "license": "by-sa",
+      "licenseVersion": "4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "origin": "wikimedia",
+      "title": "Passerelle Saint-Vincent (Lyon, 2026)",
+      "tags": [],
       "queryUsed": "Quai Saint-Vincent Lyon",
-      "dateFetched": "2026-09-27T12:33:37+00:00",
-      "width": 4128,
-      "height": 3096,
+      "dateFetched": "2026-09-27T12:41:48+00:00",
+      "width": 4032,
+      "height": 3024,
       "score": 4.5,
-      "luminance": 124.2,
-      "file": "wikimedia_80434259.jpg",
-      "sha256": "c45d9d9d0c04cfb50cdf26a43230bf94ebf00ac9bd03f89f1908a215c0c23550",
-      "attributionRequired": false,
-      "attributionText": "« Lyon 1er - Quai Saint Vincent, depuis la passerelle Saint-Vincent » — Romainbehar (CC0, Wikimedia Commons)",
+      "luminance": 117.7,
+      "file": "openverse_24c05893-82ad-4047-a44f-ddaa200d35f2.jpg",
+      "sha256": "2324ba8c1216ae8c8e1152f1f358417f0697e0bdbe24df35d6e2b3782dc781d1",
+      "attributionRequired": true,
+      "attributionText": "« Passerelle Saint-Vincent (Lyon, 2026) » by Corentin Eustacchi, CC BY-SA 4.0",
       "evidence": false
     },
     {
@@ -2403,27 +2303,27 @@
       "status": "fetched",
       "case": "003",
       "provider": "openverse",
-      "providerPhotoId": "ae2352cd-e059-4a07-9f32-bae97289491d",
+      "providerPhotoId": "820aa9d2-9ec7-451e-9384-fa34989d8fd3",
       "photographer": "PattayaPatrol",
       "photographerUrl": "https://www.flickr.com/people/PattayaPatrol",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=196954178",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/5/53/DZ6_2952_Aerial_view_of_residential_and_low-rise_commercial_buildings_in_Nong_Pla_Lai_Pattaya_-_pastel-colored_apartments_narrow_streets_and_a_patchwork_of_rooftops_under_a_clear_sky.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=197295549",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3f/DZ6_3012_Cityscape_of_Na_Kluea_Pattaya_-_a_mix_of_hotels_low-rise_buildings_and_the_seaside_Ferris_wheel_under_a_pale_afternoon_sky.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
       "license": "by-sa",
       "licenseVersion": "4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "origin": "wikimedia",
-      "title": "DZ6 2952 Aerial view of residential and low-rise commercial buildings in Nong Pla Lai Pattaya - pastel-colored apartments narrow streets and a patchwork of rooftops under a clear sky",
+      "title": "DZ6 3012 Cityscape of Na Kluea Pattaya - a mix of hotels low-rise buildings and the seaside Ferris wheel under a pale afternoon sky",
       "tags": [],
       "queryUsed": "pink sky rooftops",
-      "dateFetched": "2026-09-27T12:33:40+00:00",
+      "dateFetched": "2026-09-27T12:41:50+00:00",
       "width": 6048,
       "height": 4024,
       "score": 2.33,
-      "luminance": 126.1,
-      "file": "openverse_ae2352cd-e059-4a07-9f32-bae97289491d.jpg",
-      "sha256": "00b9d8b667b3ec5572fff9df51a3fb7d77e321a9705c2ed9394bc3455e524017",
+      "luminance": 116.6,
+      "file": "openverse_820aa9d2-9ec7-451e-9384-fa34989d8fd3.jpg",
+      "sha256": "493477f2e0bb92dfba6a85c40f26736ba557f0c5d374ff7098e39684641264ef",
       "attributionRequired": true,
-      "attributionText": "« DZ6 2952 Aerial view of residential and low-rise commercial buildings in Nong Pla Lai Pattaya - pastel-colored apartments narrow streets and a patchwork of rooftops under a clear sky » by PattayaPatrol, CC BY-SA 4.0",
+      "attributionText": "« DZ6 3012 Cityscape of Na Kluea Pattaya - a mix of hotels low-rise buildings and the seaside Ferris wheel under a pale afternoon sky » by PattayaPatrol, CC BY-SA 4.0",
       "evidence": false
     },
     {
@@ -2676,44 +2576,40 @@
       "status": "fetched",
       "case": "003",
       "provider": "wikimedia",
-      "providerPhotoId": "57360310",
-      "photographer": "Staff Sgt. Ian M. Terry",
+      "providerPhotoId": "93855118",
+      "photographer": "Dennis Sylvester Hurd",
       "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Christmas_Dinner_at_Independence_Hall_Dining_Facility_DVIDS352939.jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Christmas_Dinner_at_Independence_Hall_Dining_Facility_DVIDS352939.jpg/1920px-Christmas_Dinner_at_Independence_Hall_Dining_Facility_DVIDS352939.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "pdm",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yule_log_Christmas_table.jpg",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Yule_log_Christmas_table.jpg/1920px-Yule_log_Christmas_table.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "license": "cc0",
       "licenseVersion": "",
-      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
       "origin": "Wikimedia Commons",
-      "title": "Christmas Dinner at Independence Hall Dining Facility DVIDS352939",
+      "title": "Yule log Christmas table",
       "tags": [
-        "PD US Army",
-        "Bûche de Noël",
-        "Christmas in Afghanistan",
-        "Files created by the United States Army with known IDs",
-        "Images from DoD uploaded by Fæ",
-        "2010 at Kandahar International Airport",
-        "Afghanistan photographs taken on 2010-12-25",
-        "4th Infantry Division Sustainment Brigade",
-        "A chocolate-covered yule log cake decorates a table at Independence Hall Dining Facility on Kandahar Airfield, Afghanistan, for Christmas dinner, Dec. 25. Unit: 4th Infantry Division Sustainment Brigade DVIDS Tags: soldier; Department of Defense; NATO; DoD; Kandahar Air Field; CO; GWOT; kandahar air"
+        "CC-Zero",
+        "Flickr images reviewed by FlickreviewR 2",
+        "Yule logs",
+        "Files from Dennis Sylvester Hurd Flickr stream",
+        "Yule log roll cake at a simple Christmas buffet"
       ],
-      "queryUsed": "bûche de Noël table",
-      "dateFetched": "2026-09-27T12:10:46+00:00",
-      "width": 4288,
-      "height": 2848,
-      "score": 5.33,
-      "luminance": 101.4,
-      "file": "wikimedia_57360310.jpg",
-      "sha256": "449c58e98ed071670d68c5653564c6a7f1b35adddf10f819b6cf8a5daad5ef71",
+      "queryUsed": "christmas log cake table",
+      "dateFetched": "2026-09-27T12:41:52+00:00",
+      "width": 3286,
+      "height": 2115,
+      "score": 3.28,
+      "luminance": 85.7,
+      "file": "wikimedia_93855118.jpg",
+      "sha256": "2cddb53f9b0a4ad0c05b63b33925da4591d3f60d80a22169c8897e5c75d06736",
       "attributionRequired": false,
-      "attributionText": "« Christmas Dinner at Independence Hall Dining Facility DVIDS352939 » — Staff Sgt. Ian M. Terry (domaine public, Wikimedia Commons)",
+      "attributionText": "« Yule log Christmas table » — Dennis Sylvester Hurd (CC0, Wikimedia Commons)",
       "evidence": false
     },
     {
       "sourceId": "case003_src_cartons_demenagement_appartement_01",
       "status": "missing",
       "case": "003",
-      "reason": "aucun candidat acceptable sur 27 résultat(s) (15 × lieu étranger à l'affaire (placeRejectWords), 7 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 3 × score trop bas, 1 × personne identifiable au centre de l'image (strongPeopleWords), 1 × résolution trop faible (1080×1623))"
+      "reason": "aucun candidat acceptable sur 27 résultat(s) (15 × lieu étranger à l'affaire (placeRejectWords), 7 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 3 × score trop bas, 1 × personne identifiable au centre de l'image (strongPeopleWords), 1 × mot exclu dans le titre ou les tags)"
     },
     {
       "sourceId": "case003_src_coupes_champagne_terrasse_01",
@@ -2765,27 +2661,27 @@
       "status": "fetched",
       "case": "003",
       "provider": "openverse",
-      "providerPhotoId": "30572659-d86b-4f63-94f7-954e0dd3896c",
-      "photographer": "Steven Pavlov",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Senapa",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=118458573",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/7/7c/2022-05-16%2C_Birthday_cake_with_48_number_candles.jpg",
+      "providerPhotoId": "c5840a7a-3655-4219-81b7-cbac36ed16ef",
+      "photographer": "JIP",
+      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:JIP&action=edit&redlink=1",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=40641888",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/1_year_old_birthday_cake.jpg",
       "license": "by-sa",
-      "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "licenseVersion": "3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
       "origin": "wikimedia",
-      "title": "2022-05-16, Birthday cake with 48 number candles",
+      "title": "1 year old birthday cake",
       "tags": [],
       "queryUsed": "birthday cake number candles",
-      "dateFetched": "2026-09-27T12:33:43+00:00",
+      "dateFetched": "2026-09-27T12:41:52+00:00",
       "width": 4032,
       "height": 3024,
       "score": 2.5,
-      "luminance": 111.3,
-      "file": "openverse_30572659-d86b-4f63-94f7-954e0dd3896c.jpg",
-      "sha256": "cdc9f448d8a746dce52408530a0fd672b09bd727a87911c875a7f032f4011b7a",
+      "luminance": 104.1,
+      "file": "openverse_c5840a7a-3655-4219-81b7-cbac36ed16ef.jpg",
+      "sha256": "bf38d07b0f9de098c6263a7f105c19a84c4a4714d53c853ef4aae359b6aa0981",
       "attributionRequired": true,
-      "attributionText": "« 2022-05-16, Birthday cake with 48 number candles » by Steven Pavlov, CC BY-SA 4.0",
+      "attributionText": "« 1 year old birthday cake » by JIP, CC BY-SA 3.0",
       "evidence": false
     },
     {
@@ -2915,31 +2811,9 @@
     },
     {
       "sourceId": "case003_src_yellow_hoodie_on_chair_p_group_2340_01",
-      "status": "fetched",
+      "status": "missing",
       "case": "003",
-      "provider": "openverse",
-      "providerPhotoId": "ed8025f6-37b9-4a01-8860-1841089241c9",
-      "photographer": "Nelson Pavlosky",
-      "photographerUrl": "https://www.flickr.com/people/41894169422@N01",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=39529435",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/7/72/Wrong_Side_of_Dawn_acoustic_guitar_recording_2008-12-28_-_My_hoodie_looks_yellow_with_flash_%28by_Nelson_Pavlosky%29.jpg",
-      "license": "by-sa",
-      "licenseVersion": "2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-      "origin": "wikimedia",
-      "title": "Wrong Side of Dawn acoustic guitar recording 2008-12-28 - My hoodie looks yellow with flash (by Nelson Pavlosky)",
-      "tags": [],
-      "queryUsed": "yellow hoodie",
-      "dateFetched": "2026-09-27T12:33:43+00:00",
-      "width": 3840,
-      "height": 2160,
-      "score": 4.06,
-      "luminance": 101.3,
-      "file": "openverse_ed8025f6-37b9-4a01-8860-1841089241c9.jpg",
-      "sha256": "4a86ccc19e2b50b8aa49aeb1ebbdd5dc8de9b6cd890030a8a4bfebe19b6747a8",
-      "attributionRequired": true,
-      "attributionText": "« Wrong Side of Dawn acoustic guitar recording 2008-12-28 - My hoodie looks yellow with flash (by Nelson Pavlosky) » by Nelson Pavlosky, CC BY-SA 2.0",
-      "evidence": false
+      "reason": "aucun candidat acceptable sur 24 résultat(s) (9 × une preuve ne montre jamais de personne identifiable, 3 × résolution trop faible (640×480), 3 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 2 × image refusée à la relecture (selection.excluded), 2 × personne identifiable au centre de l'image (strongPeopleWords), 2 × score trop bas, 1 × lieu étranger à l'affaire (placeRejectWords), 1 × résolution trop faible (815×1361), 1 × pas une photographie (dessin, carte, affiche, rendu…))"
     },
     {
       "sourceId": "case003_src_maison_nuit_etoiles_pose_longue_p_louise_0206_night_01",
@@ -3457,28 +3331,36 @@
       "sourceId": "case004_src_cocktail_reception_crowd_from_behind_night_01",
       "status": "fetched",
       "case": "004",
-      "provider": "openverse",
-      "providerPhotoId": "a2ba15d7-216d-46f7-aa41-b9b2c9a3fbb6",
-      "photographer": "Manfred Werner / Tsui",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Tsui",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=30488153",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Austria_Center_Vienna_Gala-Nacht_des_Sports_2013_c.jpg",
-      "license": "by-sa",
+      "provider": "wikimedia",
+      "providerPhotoId": "130860380",
+      "photographer": "BWard 1997",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:GWR_4500_Class_Small_Prairie_4555_Severn_Valley_Railway_(1).jpg",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/GWR_4500_Class_Small_Prairie_4555_Severn_Valley_Railway_%281%29.jpg/1920px-GWR_4500_Class_Small_Prairie_4555_Severn_Valley_Railway_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "license": "by",
       "licenseVersion": "3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-      "origin": "wikimedia",
-      "title": "Austria Center Vienna Gala-Nacht des Sports 2013 c",
-      "tags": [],
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "origin": "Wikimedia Commons",
+      "title": "GWR 4500 Class Small Prairie 4555 Severn Valley Railway (1)",
+      "tags": [
+        "GWR 4500 Class",
+        "GWR 4500 Class 4555",
+        "Self-published work",
+        "2023 in railway preservation in England",
+        "GWR 4500s on the Severn Valley Railway",
+        "Trains at Highley railway station",
+        "Last pic I took from this day as we went home soon after, GWR 4555 at Highley Station in the evening of 15th April 2023 at the Severn Valley Spring Steam Gala. This was one of 3 guest visitors to the event, along with 78018 from the BR Standard Class 2, and 4079 Pendennis Castle from the GWR 4073 Cl"
+      ],
       "queryUsed": "gala evening guests",
-      "dateFetched": "2026-09-27T12:33:43+00:00",
-      "width": 3600,
-      "height": 2400,
-      "score": 2.33,
-      "luminance": 109.0,
-      "file": "openverse_a2ba15d7-216d-46f7-aa41-b9b2c9a3fbb6.jpg",
-      "sha256": "676d39087670541083978a62a34aacf92d10b8bfe6e8ed4c3292d82b9e555127",
-      "attributionRequired": true,
-      "attributionText": "« Austria Center Vienna Gala-Nacht des Sports 2013 c » by Manfred Werner / Tsui, CC BY-SA 3.0",
+      "dateFetched": "2026-09-27T12:41:53+00:00",
+      "width": 5184,
+      "height": 3044,
+      "score": 2.23,
+      "luminance": 100.4,
+      "file": "wikimedia_130860380.jpg",
+      "sha256": "9534a6234e70d31aed1d4d4d9afdd58221a83baf932980f40f6a6da52935756e",
+      "attributionRequired": false,
+      "attributionText": "« GWR 4500 Class Small Prairie 4555 Severn Valley Railway (1) » by BWard 1997, CC BY 3.0 — Wikimedia Commons",
       "evidence": false
     },
     {
@@ -3565,7 +3447,7 @@
       "sourceId": "case004_src_exhibition_installation_ladders_display__01",
       "status": "missing",
       "case": "004",
-      "reason": "aucun candidat acceptable sur 23 résultat(s) (14 × lieu étranger à l'affaire (placeRejectWords), 3 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 2 × pas une photographie (dessin, carte, affiche, rendu…), 2 × score trop bas, 2 × licence « ? » non autorisée (usage commercial + modification requis))"
+      "reason": "aucun candidat acceptable sur 23 résultat(s) (16 × mot exclu dans le titre ou les tags, 3 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 2 × score trop bas, 2 × licence « ? » non autorisée (usage commercial + modification requis))"
     },
     {
       "sourceId": "case004_src_gala_hall_tables_black_tablecloths_night_01",
@@ -3829,31 +3711,9 @@
     },
     {
       "sourceId": "case004_src_scale_model_workshop_cardboard_01",
-      "status": "fetched",
+      "status": "missing",
       "case": "004",
-      "provider": "openverse",
-      "providerPhotoId": "d79fae11-aca2-4d19-87c1-080e77258359",
-      "photographer": "AMISOM Public Information",
-      "photographerUrl": "https://www.flickr.com/people/61765479@N08",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=48894467",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/2/26/2016_04_30_Somali_Journalists_Workshop-8_%2826702836416%29.jpg",
-      "license": "cc0",
-      "licenseVersion": "1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
-      "origin": "wikimedia",
-      "title": "2016 04 30 Somali Journalists Workshop-8",
-      "tags": [],
-      "queryUsed": "model making workshop",
-      "dateFetched": "2026-09-27T12:33:44+00:00",
-      "width": 7360,
-      "height": 4912,
-      "score": 3.08,
-      "luminance": 125.6,
-      "file": "openverse_d79fae11-aca2-4d19-87c1-080e77258359.jpg",
-      "sha256": "a26a7a9c7d2034c681f75fe9453cce0aea52e9c0e7651c708b43b3cf60960836",
-      "attributionRequired": false,
-      "attributionText": "« 2016 04 30 Somali Journalists Workshop-8 » — AMISOM Public Information (CC0)",
-      "evidence": false
+      "reason": "aucun candidat acceptable sur 74 résultat(s) (25 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 19 × personne identifiable au centre de l'image (strongPeopleWords), 11 × licence « ? » non autorisée (usage commercial + modification requis), 8 × personne identifiable (droit à l'image signalé), 8 × mot exclu dans le titre ou les tags, 2 × image refusée à la relecture (selection.excluded), 1 × lieu étranger à l'affaire (placeRejectWords))"
     },
     {
       "sourceId": "case004_src_sequin_dress_hanger_01",
@@ -3921,33 +3781,31 @@
       "status": "fetched",
       "case": "005",
       "provider": "wikimedia",
-      "providerPhotoId": "50334936",
+      "providerPhotoId": "54911119",
       "photographer": "Patafisik",
       "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Autrans_DSCN16.jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Autrans_DSCN16.jpg/1920px-Autrans_DSCN16.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tremplin_Autrans_2.jpg",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Tremplin_Autrans_2.jpg/1920px-Tremplin_Autrans_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "license": "by-sa",
       "licenseVersion": "4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
       "origin": "Wikimedia Commons",
-      "title": "Autrans DSCN16",
+      "title": "Tremplin Autrans 2",
       "tags": [
         "Tremplin du Claret",
         "Self-published work",
-        "Images from Été des Régions 2016",
-        "Uploaded via Campaign:Été des régions 2016",
-        "Autrans, Isère, France."
+        "Tremplin au Claret, Autrans Méaudre en Vercors, Isère, AuRA, France."
       ],
       "queryUsed": "Autrans ski de fond",
-      "dateFetched": "2026-09-27T12:33:46+00:00",
+      "dateFetched": "2026-09-27T12:41:53+00:00",
       "width": 2288,
       "height": 1712,
       "score": 3.5,
-      "luminance": 137.2,
-      "file": "wikimedia_50334936.jpg",
-      "sha256": "19441b689828439b3806284d46ee011d1f09604d87df4e69aabf55776832362f",
+      "luminance": 146.9,
+      "file": "wikimedia_54911119.jpg",
+      "sha256": "9c44e2eec3015b9456bfe9bc8428ffbdbce5ad0977894bd3275e565b9c8606d4",
       "attributionRequired": false,
-      "attributionText": "« Autrans DSCN16 » by Patafisik, CC BY-SA 4.0 — Wikimedia Commons",
+      "attributionText": "« Tremplin Autrans 2 » by Patafisik, CC BY-SA 4.0 — Wikimedia Commons",
       "evidence": false
     },
     {
@@ -4215,27 +4073,27 @@
       "status": "fetched",
       "case": "005",
       "provider": "openverse",
-      "providerPhotoId": "e399270d-8aca-486c-87ac-71630a381274",
-      "photographer": "Derek W. Larson, Philip J. Currie",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=150474830",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Small_theropod_tooth_morphotypes.png",
-      "license": "by",
-      "licenseVersion": "2.5",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
+      "providerPhotoId": "a0a9118a-911b-4132-9fc5-ac841e755dd7",
+      "photographer": "Dan arndt",
+      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Dan_arndt",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=52234820",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Kandy_Lake_-_Temple_of_the_Tooth.jpg",
+      "license": "by-sa",
+      "licenseVersion": "4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "origin": "wikimedia",
-      "title": "Small theropod tooth morphotypes",
+      "title": "Kandy Lake - Temple of the Tooth",
       "tags": [],
       "queryUsed": "milk tooth",
-      "dateFetched": "2026-09-27T12:33:47+00:00",
-      "width": 4137,
-      "height": 3036,
-      "score": 3.47,
-      "luminance": 230.4,
-      "file": "openverse_e399270d-8aca-486c-87ac-71630a381274.jpg",
-      "sha256": "f87d939b114da5d9b53363ed1fe9dcc48f3882fc496bb4a2ab13dcf221ddeafb",
+      "dateFetched": "2026-09-27T12:41:54+00:00",
+      "width": 3936,
+      "height": 2624,
+      "score": 3.33,
+      "luminance": 90.7,
+      "file": "openverse_a0a9118a-911b-4132-9fc5-ac841e755dd7.jpg",
+      "sha256": "c713ed98d2aff94c8ef605378d6cab550451df34437f44110983a79e939011cc",
       "attributionRequired": true,
-      "attributionText": "« Small theropod tooth morphotypes » by Derek W. Larson, Philip J. Currie, CC BY 2.5",
+      "attributionText": "« Kandy Lake - Temple of the Tooth » by Dan arndt, CC BY-SA 4.0",
       "evidence": false
     },
     {
@@ -4483,31 +4341,9 @@
     },
     {
       "sourceId": "case005_src_newsroom_desk_newspapers_coffee_01",
-      "status": "fetched",
+      "status": "missing",
       "case": "005",
-      "provider": "openverse",
-      "providerPhotoId": "b927178f-62a7-456c-98dd-24691c6eedff",
-      "photographer": "Uncredited author. No known copyright restrictions.",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=149025652",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/FHM-282358_Hitler_Youth_%28Hitlerjugend%29_HQ-building_Berlin_%28Haus_der_Reichsjugendfuhrung%3F_Ost-Berlin_c_1933-36%29_Press_office_uniformed_boys_HJ_swastika_flag_papers_BDM_chart._Nazi_propaganda_photo_%28Frihedsmuseet_Nationalmuseet_Denmark%29.jpg",
-      "license": "by-sa",
-      "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "origin": "wikimedia",
-      "title": "FHM-282358 Hitler Youth (Hitlerjugend) HQ-building Berlin (Haus der Reichsjugendfuhrung? Ost-Berlin c 1933-36) Press office uniformed boys HJ swastika flag papers BDM chart. Nazi propaganda photo (Frihedsmuseet Nationalmuseet Denmark)",
-      "tags": [],
-      "queryUsed": "newspaper office desk",
-      "dateFetched": "2026-09-27T12:33:49+00:00",
-      "width": 3798,
-      "height": 2774,
-      "score": 2.46,
-      "luminance": 110.9,
-      "file": "openverse_b927178f-62a7-456c-98dd-24691c6eedff.jpg",
-      "sha256": "93a6c2126e823ea9219fdaec2810a539ff7cefa30c19e0fd60f5f72bb60f9cf9",
-      "attributionRequired": true,
-      "attributionText": "« FHM-282358 Hitler Youth (Hitlerjugend) HQ-building Berlin (Haus der Reichsjugendfuhrung? Ost-Berlin c 1933-36) Press office uniformed boys HJ swastika flag papers BDM chart. Nazi propaganda photo (Frihedsmuseet Nationalmuseet Denmark) » by Uncredited author. No known copyright restrictions., CC BY-SA 4.0",
-      "evidence": false
+      "reason": "0 téléchargement(s) échoué(s) ou rejeté(s)"
     },
     {
       "sourceId": "case005_src_newsroom_whiteboard_meeting_01",
@@ -4519,13 +4355,13 @@
       "sourceId": "case005_src_office_party_table_drinks_01",
       "status": "missing",
       "case": "005",
-      "reason": "aucun candidat acceptable sur 23 résultat(s) (7 × mot exclu dans le titre ou les tags, 6 × lieu étranger à l'affaire (placeRejectWords), 2 × photo ancienne (1976) : pas crédible dans un téléphone récent, 1 × score trop bas, 1 × personne identifiable au centre de l'image (strongPeopleWords), 1 × pas une photographie (dessin, carte, affiche, rendu…), 1 × licence « ? » non autorisée (usage commercial + modification requis), 1 × photo ancienne (1860) : pas crédible dans un téléphone récent, 1 × photo ancienne (1903) : pas crédible dans un téléphone récent, 1 × photo ancienne (1887) : pas crédible dans un téléphone récent, 1 × le sujet demandé n'apparaît ni dans le titre ni dans les tags)"
+      "reason": "aucun candidat acceptable sur 23 résultat(s) (8 × mot exclu dans le titre ou les tags, 6 × lieu étranger à l'affaire (placeRejectWords), 2 × photo ancienne (1976) : pas crédible dans un téléphone récent, 1 × score trop bas, 1 × personne identifiable au centre de l'image (strongPeopleWords), 1 × licence « ? » non autorisée (usage commercial + modification requis), 1 × photo ancienne (1860) : pas crédible dans un téléphone récent, 1 × photo ancienne (1903) : pas crédible dans un téléphone récent, 1 × photo ancienne (1887) : pas crédible dans un téléphone récent, 1 × le sujet demandé n'apparaît ni dans le titre ni dans les tags)"
     },
     {
       "sourceId": "case005_src_bunk_beds_night_light_p_kids_2305_01",
       "status": "missing",
       "case": "005",
-      "reason": "aucun candidat acceptable sur 9 résultat(s) (4 × licence « ? » non autorisée (usage commercial + modification requis), 3 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 2 × lieu étranger à l'affaire (placeRejectWords))"
+      "reason": "aucun candidat acceptable sur 9 résultat(s) (4 × licence « ? » non autorisée (usage commercial + modification requis), 3 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 2 × mot exclu dans le titre ou les tags)"
     },
     {
       "sourceId": "case005_src_dark_grey_suv_parked_night_p_mairie_4x4_01",
@@ -4537,7 +4373,7 @@
       "sourceId": "case005_src_hopital_couloir_urgences_p_platre_01",
       "status": "missing",
       "case": "005",
-      "reason": "aucun candidat acceptable sur 27 résultat(s) (16 × photo ancienne (1918) : pas crédible dans un téléphone récent, 6 × licence « ? » non autorisée (usage commercial + modification requis), 2 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 1 × lieu étranger à l'affaire (placeRejectWords), 1 × mot exclu dans le titre ou les tags, 1 × score trop bas)"
+      "reason": "aucun candidat acceptable sur 27 résultat(s) (16 × photo ancienne (1918) : pas crédible dans un téléphone récent, 6 × licence « ? » non autorisée (usage commercial + modification requis), 3 × mot exclu dans le titre ou les tags, 1 × lieu étranger à l'affaire (placeRejectWords), 1 × score trop bas)"
     },
     {
       "sourceId": "case005_src_quarry_excavator_rock_face_01",
@@ -4877,7 +4713,7 @@
       "sourceId": "case101_src_poster_print_proofs_table_01",
       "status": "missing",
       "case": "101",
-      "reason": "aucun candidat acceptable sur 32 résultat(s) (19 × pas une photographie (dessin, carte, affiche, rendu…), 7 × lieu étranger à l'affaire (placeRejectWords), 2 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 1 × personne identifiable au centre de l'image (strongPeopleWords), 1 × photo ancienne (1890) : pas crédible dans un téléphone récent, 1 × licence « ? » non autorisée (usage commercial + modification requis), 1 × photo ancienne (1866) : pas crédible dans un téléphone récent)"
+      "reason": "aucun candidat acceptable sur 32 résultat(s) (18 × pas une photographie (dessin, carte, affiche, rendu…), 7 × lieu étranger à l'affaire (placeRejectWords), 2 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 1 × mot exclu dans le titre ou les tags, 1 × personne identifiable au centre de l'image (strongPeopleWords), 1 × photo ancienne (1890) : pas crédible dans un téléphone récent, 1 × licence « ? » non autorisée (usage commercial + modification requis), 1 × photo ancienne (1866) : pas crédible dans un téléphone récent)"
     },
     {
       "sourceId": "case102_src_citadelle_de_lille_parc_automne_01",
@@ -5215,34 +5051,34 @@
       "status": "fetched",
       "case": "103",
       "provider": "wikimedia",
-      "providerPhotoId": "1704119",
-      "photographer": "Kevin Näf",
+      "providerPhotoId": "12821004",
+      "photographer": "BrianKohn",
       "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stade_de_la_Meinau_fassade.JPG",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Stade_de_la_Meinau_fassade.JPG/1920px-Stade_de_la_Meinau_fassade.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-      "license": "pdm",
-      "licenseVersion": "",
-      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stade_de_la_Meinau_game.JPG",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Stade_de_la_Meinau_game.JPG/1920px-Stade_de_la_Meinau_game.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "license": "by-sa",
+      "licenseVersion": "3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
       "origin": "Wikimedia Commons",
-      "title": "Stade de la Meinau fassade",
+      "title": "Stade de la Meinau game",
       "tags": [
-        "Taken with Nikon Coolpix L1",
+        "GFDL",
+        "Players of RC Lens",
+        "License migration redundant",
         "Self-published work",
-        "PD-self",
-        "Photographs taken on 2006-10-08",
-        "Exterior of the Stade de la Meinau",
-        "Stade de la Meinau, Strassbourg Fassade"
+        "Interior of Stade de la Meinau",
+        "Stade de la Meinau , Innenansicht beim Spiel gegen RC Lens (2007)."
       ],
       "queryUsed": "Stade de la Meinau",
-      "dateFetched": "2026-09-27T12:34:08+00:00",
-      "width": 2816,
-      "height": 2112,
+      "dateFetched": "2026-09-27T12:41:56+00:00",
+      "width": 2048,
+      "height": 1536,
       "score": 5.5,
-      "luminance": 87.5,
-      "file": "wikimedia_1704119.jpg",
-      "sha256": "573da7ae5201d2f7009beeaa4ee073fbb9b03b54c2bfab933f8344e2facaa37c",
+      "luminance": 84.2,
+      "file": "wikimedia_12821004.jpg",
+      "sha256": "45c6da5ded06315cdcf859eaf1dac493c00f111831c1af3f111d78bf79138d9f",
       "attributionRequired": false,
-      "attributionText": "« Stade de la Meinau fassade » — Kevin Näf (domaine public, Wikimedia Commons)",
+      "attributionText": "« Stade de la Meinau game » by BrianKohn, CC BY-SA 3.0 — Wikimedia Commons",
       "evidence": false
     },
     {
@@ -5320,11 +5156,11 @@
       "status": "fetched",
       "case": "103",
       "provider": "wikimedia",
-      "providerPhotoId": "24959427",
+      "providerPhotoId": "24959429",
       "photographer": "Miia Ranta from Finland",
       "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Palace_ceramic_tiles_(5337043053).jpg",
-      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Palace_ceramic_tiles_%285337043053%29.jpg/1920px-Palace_ceramic_tiles_%285337043053%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Palace_ceramic_tiles_(5337664600).jpg",
+      "downloadUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Palace_ceramic_tiles_%285337664600%29.jpg/1920px-Palace_ceramic_tiles_%285337664600%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
       "license": "by-sa",
       "licenseVersion": "2.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
@@ -5334,20 +5170,19 @@
         "Vorderasiatisches Museum Berlin",
         "Taken with Olympus E-PL1",
         "Assur (city)",
-        "Assyrian ceramics",
         "Photos uploaded from Flickr by Fæ using a script",
         "Flickr images reviewed by File Upload Bot (Magnus Manske)",
         "Photos by Miia Ranta",
         "Palace ceramic tiles"
       ],
       "queryUsed": "ceramic tile samples",
-      "dateFetched": "2026-09-27T12:34:08+00:00",
+      "dateFetched": "2026-09-27T12:41:57+00:00",
       "width": 4032,
       "height": 3024,
       "score": 3.5,
-      "luminance": 158.0,
-      "file": "wikimedia_24959427.jpg",
-      "sha256": "85340455d86db6e5d6bca43005dbbfcb737c3c75f9b83bb0389204a0eb6cf7c8",
+      "luminance": 151.9,
+      "file": "wikimedia_24959429.jpg",
+      "sha256": "83d9d581a64075f9864dc7a25a8419413ca160c0f29495905458ebfefdfd8929",
       "attributionRequired": false,
       "attributionText": "« Palace ceramic tiles » by Miia Ranta from Finland, CC BY-SA 2.0 — Wikimedia Commons",
       "evidence": false
@@ -5855,8 +5690,8 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "wikimedia_65774893.jpg",
-        "sourceSha256": "d642259ec05a5eeaa45eced0811a0eb292357ffdf59cfd1327baba744f09eb76",
+        "source": "wikimedia_65774894.jpg",
+        "sourceSha256": "953907d4c687348450cce944fefa25ce421d46b60fee71a66bf4e9a15fafb990",
         "box": [
           0,
           0,
@@ -5864,34 +5699,8 @@
           1440
         ]
       },
-      "sha256": "9ae24b7882fea226b0450390333696d8e548e459bcb82661411921196e4285ee",
-      "bytes": 107564
-    },
-    {
-      "assetId": "case001_photo_p_b27",
-      "sourceId": "case001_src_cartons_d_archives_empiles_01",
-      "caseId": "001",
-      "photoId": "p_b27",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case001_photo_p_b27.imageset/case001_photo_p_b27.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "wikimedia_16633884.jpg",
-        "sourceSha256": "bc1786f596d0713578cf439ae6b759e3877813056ddccec79b5212b07207b547",
-        "box": [
-          200,
-          0,
-          1913,
-          1285
-        ]
-      },
-      "sha256": "9be3dd8bb766aa6a05b202cdbcdfc18a29a97d852d06478252ec35dc897f1627",
-      "bytes": 92746
+      "sha256": "2c4d769ec73ece8831f3d6568827313ae038c3b3b3cd2fcdbc521d356b549c58",
+      "bytes": 110782
     },
     {
       "assetId": "case001_photo_p_b28",
@@ -5946,32 +5755,6 @@
       "bytes": 89898
     },
     {
-      "assetId": "case001_photo_p_bar_selfie",
-      "sourceId": "case001_src_table_de_bar_verres_chaises_soiree_night_01",
-      "caseId": "001",
-      "photoId": "p_bar_selfie",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case001_photo_p_bar_selfie.imageset/case001_photo_p_bar_selfie.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "wikimedia_151997308.jpg",
-        "sourceSha256": "6d385267515b2b127008b44a48a38bbf175fd9b5b631c98a315f387e2e28b6e1",
-        "box": [
-          213,
-          0,
-          1920,
-          1280
-        ]
-      },
-      "sha256": "6834bcdea7aae8ab4812169402d4e62cadf392cb28928bede841af8a7de8a8f3",
-      "bytes": 139894
-    },
-    {
       "assetId": "case001_photo_p_karim_desk",
       "sourceId": "case001_src_reception_hotel_nuit_comptoir_p_karim_desk_night_01",
       "caseId": "001",
@@ -5996,32 +5779,6 @@
       },
       "sha256": "0acf07fdfbd6697fa0349b9a5c1283c5ad857424d9460772891990757ca1381a",
       "bytes": 60207
-    },
-    {
-      "assetId": "case001_photo_p_lucas_car",
-      "sourceId": "case001_src_petite_voiture_grise_garage_01",
-      "caseId": "001",
-      "photoId": "p_lucas_car",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case001_photo_p_lucas_car.imageset/case001_photo_p_lucas_car.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "wikimedia_39990044.jpg",
-        "sourceSha256": "578d021731b5d405080406564f854252e472b9a42c1830062f38a7811c7175d7",
-        "box": [
-          478,
-          0,
-          1920,
-          1081
-        ]
-      },
-      "sha256": "249cb55a4afc42d5274fc6a07fc67870c7b04b6b7d1ebee016405f3185e8446f",
-      "bytes": 101177
     },
     {
       "assetId": "case001_photo_p_night01",
@@ -6687,17 +6444,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "wikimedia_80434259.jpg",
-        "sourceSha256": "c45d9d9d0c04cfb50cdf26a43230bf94ebf00ac9bd03f89f1908a215c0c23550",
+        "source": "openverse_24c05893-82ad-4047-a44f-ddaa200d35f2.jpg",
+        "sourceSha256": "2324ba8c1216ae8c8e1152f1f358417f0697e0bdbe24df35d6e2b3782dc781d1",
         "box": [
           0,
           0,
-          1920,
-          1440
+          4032,
+          3024
         ]
       },
-      "sha256": "6d42619540d5fc24b3b0cae6c5d6c0e7fde5726bfa4cc507590ee14e215d54da",
-      "bytes": 130560
+      "sha256": "b9871d92e630596e27d8f7815c1a44b9bf5f9921d482557a15d043f7b3573ca2",
+      "bytes": 198333
     },
     {
       "assetId": "case002_photo_p_old05",
@@ -6999,8 +6756,8 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_30572659-d86b-4f63-94f7-954e0dd3896c.jpg",
-        "sourceSha256": "cdc9f448d8a746dce52408530a0fd672b09bd727a87911c875a7f032f4011b7a",
+        "source": "openverse_c5840a7a-3655-4219-81b7-cbac36ed16ef.jpg",
+        "sourceSha256": "bf38d07b0f9de098c6263a7f105c19a84c4a4714d53c853ef4aae359b6aa0981",
         "box": [
           0,
           0,
@@ -7008,8 +6765,8 @@
           3024
         ]
       },
-      "sha256": "524fafbf142fd0e234ff195ab8580efbc9ad11df28abb658363e8f08eedac7a9",
-      "bytes": 148417
+      "sha256": "0873f08483948e844b7ee8cca6d3919e37b3117cec388f8c38dfc74b141449f4",
+      "bytes": 52038
     },
     {
       "assetId": "case003_photo_p_cat",
@@ -7114,32 +6871,6 @@
       },
       "sha256": "83d7b0d0fd89e1632dd169a02fb3aa439144b8a646d7568fcf9b398916fef080",
       "bytes": 30773
-    },
-    {
-      "assetId": "case003_photo_p_group_2340",
-      "sourceId": "case003_src_yellow_hoodie_on_chair_p_group_2340_01",
-      "caseId": "003",
-      "photoId": "p_group_2340",
-      "evidence": true,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case003_photo_p_group_2340.imageset/case003_photo_p_group_2340.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_ed8025f6-37b9-4a01-8860-1841089241c9.jpg",
-        "sourceSha256": "4a86ccc19e2b50b8aa49aeb1ebbdd5dc8de9b6cd890030a8a4bfebe19b6747a8",
-        "box": [
-          960,
-          0,
-          3840,
-          2160
-        ]
-      },
-      "sha256": "b3d71d720b36be71500a30abdc31d36d052b2c3db427c0baca536b4136bacd33",
-      "bytes": 85863
     },
     {
       "assetId": "case003_photo_p_laptop",
@@ -7311,17 +7042,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "wikimedia_57360310.jpg",
-        "sourceSha256": "449c58e98ed071670d68c5653564c6a7f1b35adddf10f819b6cf8a5daad5ef71",
+        "source": "wikimedia_93855118.jpg",
+        "sourceSha256": "2cddb53f9b0a4ad0c05b63b33925da4591d3f60d80a22169c8897e5c75d06736",
         "box": [
+          272,
           0,
-          0,
-          1700,
-          1275
+          1920,
+          1236
         ]
       },
-      "sha256": "31addb09dcd477bf00c466f2fb408ec8d5a15749836354b07573286abb0d4587",
-      "bytes": 166262
+      "sha256": "c667e1de0b2312cd5458e5f61f8e3eedde6e41f1a4c33f14a584695389e9c55d",
+      "bytes": 132469
     },
     {
       "assetId": "case003_photo_p_old_2019",
@@ -7493,8 +7224,8 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_ae2352cd-e059-4a07-9f32-bae97289491d.jpg",
-        "sourceSha256": "00b9d8b667b3ec5572fff9df51a3fb7d77e321a9705c2ed9394bc3455e524017",
+        "source": "openverse_820aa9d2-9ec7-451e-9384-fa34989d8fd3.jpg",
+        "sourceSha256": "493477f2e0bb92dfba6a85c40f26736ba557f0c5d374ff7098e39684641264ef",
         "box": [
           0,
           0,
@@ -7502,8 +7233,8 @@
           4024
         ]
       },
-      "sha256": "c8ea88b28bfa032bafa043248f85c3cd02c072eb8f91fa54bf652016227db554",
-      "bytes": 168883
+      "sha256": "13afd31caf10c124ed8a138d01724d5173ca940378d9bb03b733abd5eadd49dc",
+      "bytes": 127675
     },
     {
       "assetId": "case003_photo_p_stairs_day",
@@ -7634,32 +7365,6 @@
       },
       "sha256": "9d31ccabb2643cc3239be3667e2b946936ca28c44322b995555ddd7cde468e9a",
       "bytes": 171236
-    },
-    {
-      "assetId": "case004_photo_p_b05",
-      "sourceId": "case004_src_scale_model_workshop_cardboard_01",
-      "caseId": "004",
-      "photoId": "p_b05",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case004_photo_p_b05.imageset/case004_photo_p_b05.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_d79fae11-aca2-4d19-87c1-080e77258359.jpg",
-        "sourceSha256": "a26a7a9c7d2034c681f75fe9453cce0aea52e9c0e7651c708b43b3cf60960836",
-        "box": [
-          0,
-          0,
-          6549,
-          4912
-        ]
-      },
-      "sha256": "cab10a08b6eb6e1179e6dde24c9c5259ea3464cda5b20caab296116a6639493e",
-      "bytes": 68965
     },
     {
       "assetId": "case004_photo_p_b06",
@@ -7883,17 +7588,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_a2ba15d7-216d-46f7-aa41-b9b2c9a3fbb6.jpg",
-        "sourceSha256": "676d39087670541083978a62a34aacf92d10b8bfe6e8ed4c3292d82b9e555127",
+        "source": "wikimedia_130860380.jpg",
+        "sourceSha256": "9534a6234e70d31aed1d4d4d9afdd58221a83baf932980f40f6a6da52935756e",
         "box": [
+          417,
           0,
-          0,
-          3200,
-          2400
+          1920,
+          1127
         ]
       },
-      "sha256": "6c0aa0b6e1cf296e93996a2e26995d847186f76bd32106fbdfa6422aa8e47bdb",
-      "bytes": 83326
+      "sha256": "017e90f2abf88dc4ce09c6935b854c7da1f02316fa8a336a454deb86238d290a",
+      "bytes": 181632
     },
     {
       "assetId": "case004_photo_p_iris_look",
@@ -8299,8 +8004,8 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "wikimedia_50334936.jpg",
-        "sourceSha256": "19441b689828439b3806284d46ee011d1f09604d87df4e69aabf55776832362f",
+        "source": "wikimedia_54911119.jpg",
+        "sourceSha256": "9c44e2eec3015b9456bfe9bc8428ffbdbce5ad0977894bd3275e565b9c8606d4",
         "box": [
           0,
           0,
@@ -8308,8 +8013,8 @@
           1437
         ]
       },
-      "sha256": "018bf92caea5a770cc488eadf4cf15148b4db40134adacebe221cb3efbee9228",
-      "bytes": 118390
+      "sha256": "6e7698224dd9ae6fe172417c420f05805be05556fe9805f612ba8edef9b7bc7b",
+      "bytes": 117366
     },
     {
       "assetId": "case005_photo_p_n19",
@@ -8336,32 +8041,6 @@
       },
       "sha256": "32aaccf2298324470abcd1fed7684800f3a8bdc3716c1dc812dc2d55e25e6243",
       "bytes": 223783
-    },
-    {
-      "assetId": "case005_photo_p_n21",
-      "sourceId": "case005_src_newsroom_desk_newspapers_coffee_01",
-      "caseId": "005",
-      "photoId": "p_n21",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case005_photo_p_n21.imageset/case005_photo_p_n21.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_b927178f-62a7-456c-98dd-24691c6eedff.jpg",
-        "sourceSha256": "93a6c2126e823ea9219fdaec2810a539ff7cefa30c19e0fd60f5f72bb60f9cf9",
-        "box": [
-          0,
-          0,
-          3698,
-          2774
-        ]
-      },
-      "sha256": "33486ec58243ff9194879b44e06ba4864182193ca6cbd8f7282d6f1ef283b702",
-      "bytes": 100752
     },
     {
       "assetId": "case005_photo_p_n23",
@@ -8585,17 +8264,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_e399270d-8aca-486c-87ac-71630a381274.jpg",
-        "sourceSha256": "f87d939b114da5d9b53363ed1fe9dcc48f3882fc496bb4a2ab13dcf221ddeafb",
+        "source": "openverse_a0a9118a-911b-4132-9fc5-ac841e755dd7.jpg",
+        "sourceSha256": "c713ed98d2aff94c8ef605378d6cab550451df34437f44110983a79e939011cc",
         "box": [
-          86,
           0,
-          4134,
-          3036
+          0,
+          3498,
+          2624
         ]
       },
-      "sha256": "455d70b2ea63fa37dd8bb6dc56dcba1e5c7694e19d3700405223427a729c3299",
-      "bytes": 71719
+      "sha256": "99b77e46001d0ebb38601a974a7be6e0fd0c344919e1a205d6cd843e50787d19",
+      "bytes": 159914
     },
     {
       "assetId": "case101_photo_p_chat",
@@ -9027,8 +8706,8 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "wikimedia_24959427.jpg",
-        "sourceSha256": "85340455d86db6e5d6bca43005dbbfcb737c3c75f9b83bb0389204a0eb6cf7c8",
+        "source": "wikimedia_24959429.jpg",
+        "sourceSha256": "83d9d581a64075f9864dc7a25a8419413ca160c0f29495905458ebfefdfd8929",
         "box": [
           0,
           0,
@@ -9036,8 +8715,8 @@
           1440
         ]
       },
-      "sha256": "6eef821a2c52cb5a35ab4cc97d3af68a6f1a5fbd2281743179011547faff24ab",
-      "bytes": 90341
+      "sha256": "c5c2f5e913a01b9b55c6a2f5d620bfe7d5279a3534a7271a640d2c4de39c855b",
+      "bytes": 91546
     },
     {
       "assetId": "case103_photo_p3_kleber",
@@ -9079,8 +8758,8 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "wikimedia_1704119.jpg",
-        "sourceSha256": "573da7ae5201d2f7009beeaa4ee073fbb9b03b54c2bfab933f8344e2facaa37c",
+        "source": "wikimedia_12821004.jpg",
+        "sourceSha256": "45c6da5ded06315cdcf859eaf1dac493c00f111831c1af3f111d78bf79138d9f",
         "box": [
           0,
           0,
@@ -9088,8 +8767,8 @@
           1440
         ]
       },
-      "sha256": "60fd64813e97c827886de694ef329c7049dd8a7f57b33942cea7389d2025a51a",
-      "bytes": 199100
+      "sha256": "8de8eff93a05c4077b27efc083002011dffc47015e5641002faa776ca62730f0",
+      "bytes": 139215
     },
     {
       "assetId": "case103_photo_p3_petitefrance",
@@ -9172,11 +8851,10 @@
   ],
   "stats": {
     "requests": {
-      "openverse": 297,
-      "wikimedia": 456
+      "openverse": 303
     },
-    "rejected": 4091,
-    "lastRun": "2026-09-27T12:34:23+00:00"
+    "rejected": 4932,
+    "lastRun": "2026-09-27T12:42:08+00:00"
   },
   "about": "Provenance of every external photo (generated by scripts/photos/pipeline.py). One `sources` entry per downloaded image, one `assets` entry per image shipped in the game."
 }

@@ -69,19 +69,6 @@
     },
     {
       "provider": "openverse",
-      "photographer": "AMISOM Public Information",
-      "photographerUrl": "https://www.flickr.com/people/61765479@N08",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=48894467",
-      "license": "CC0 1.0",
-      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en/",
-      "title": "2016 04 30 Somali Journalists Workshop-8",
-      "attribution": "« 2016 04 30 Somali Journalists Workshop-8 » — AMISOM Public Information (CC0)",
-      "cases": [
-        "004"
-      ]
-    },
-    {
-      "provider": "openverse",
       "photographer": "Benoît Prieur",
       "photographerUrl": "https://www.wikidata.org/wiki/Q42790984",
       "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=81540979",
@@ -95,13 +82,26 @@
     },
     {
       "provider": "openverse",
-      "photographer": "Derek W. Larson, Philip J. Currie",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=150474830",
-      "license": "BY 2.5",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.5/",
-      "title": "Small theropod tooth morphotypes",
-      "attribution": "« Small theropod tooth morphotypes » by Derek W. Larson, Philip J. Currie, CC BY 2.5",
+      "photographer": "Corentin Eustacchi",
+      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:Corentin_Eustacchi&action=edit&redlink=1",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=197306109",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Passerelle Saint-Vincent (Lyon, 2026)",
+      "attribution": "« Passerelle Saint-Vincent (Lyon, 2026) » by Corentin Eustacchi, CC BY-SA 4.0",
+      "cases": [
+        "002"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "Dan arndt",
+      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Dan_arndt",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=52234820",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Kandy Lake - Temple of the Tooth",
+      "attribution": "« Kandy Lake - Temple of the Tooth » by Dan arndt, CC BY-SA 4.0",
       "cases": [
         "005"
       ]
@@ -134,6 +134,19 @@
     },
     {
       "provider": "openverse",
+      "photographer": "JIP",
+      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:JIP&action=edit&redlink=1",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=40641888",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "title": "1 year old birthday cake",
+      "attribution": "« 1 year old birthday cake » by JIP, CC BY-SA 3.0",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "openverse",
       "photographer": "Kristin Hardwick",
       "photographerUrl": "https://www.kristinhardwick.com",
       "sourceUrl": "https://stocksnap.io/photo/coffee-table-8JQITZ05LX",
@@ -160,19 +173,6 @@
     },
     {
       "provider": "openverse",
-      "photographer": "Manfred Werner / Tsui",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Tsui",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=30488153",
-      "license": "BY-SA 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-      "title": "Austria Center Vienna Gala-Nacht des Sports 2013 c",
-      "attribution": "« Austria Center Vienna Gala-Nacht des Sports 2013 c » by Manfred Werner / Tsui, CC BY-SA 3.0",
-      "cases": [
-        "004"
-      ]
-    },
-    {
-      "provider": "openverse",
       "photographer": "Markus Spiske",
       "photographerUrl": "https://freeforcommercialuse.net",
       "sourceUrl": "https://stocksnap.io/photo/microphone-music-T97ISBWDU0",
@@ -182,19 +182,6 @@
       "attribution": "« Microphone Music » — Markus Spiske (CC0)",
       "cases": [
         "004"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "Nelson Pavlosky",
-      "photographerUrl": "https://www.flickr.com/people/41894169422@N01",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=39529435",
-      "license": "BY-SA 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-      "title": "Wrong Side of Dawn acoustic guitar recording 2008-12-28 - My hoodie looks yellow with flash (by Nelson Pavlosky)",
-      "attribution": "« Wrong Side of Dawn acoustic guitar recording 2008-12-28 - My hoodie looks yellow with flash (by Nelson Pavlosky) » by Nelson Pavlosky, CC BY-SA 2.0",
-      "cases": [
-        "003"
       ]
     },
     {
@@ -214,11 +201,11 @@
       "provider": "openverse",
       "photographer": "PattayaPatrol",
       "photographerUrl": "https://www.flickr.com/people/PattayaPatrol",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=196954178",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=197295549",
       "license": "BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "title": "DZ6 2952 Aerial view of residential and low-rise commercial buildings in Nong Pla Lai Pattaya - pastel-colored apartments narrow streets and a patchwork of rooftops under a clear sky",
-      "attribution": "« DZ6 2952 Aerial view of residential and low-rise commercial buildings in Nong Pla Lai Pattaya - pastel-colored apartments narrow streets and a patchwork of rooftops under a clear sky » by PattayaPatrol, CC BY-SA 4.0",
+      "title": "DZ6 3012 Cityscape of Na Kluea Pattaya - a mix of hotels low-rise buildings and the seaside Ferris wheel under a pale afternoon sky",
+      "attribution": "« DZ6 3012 Cityscape of Na Kluea Pattaya - a mix of hotels low-rise buildings and the seaside Ferris wheel under a pale afternoon sky » by PattayaPatrol, CC BY-SA 4.0",
       "cases": [
         "003"
       ]
@@ -238,19 +225,6 @@
     },
     {
       "provider": "openverse",
-      "photographer": "Steven Pavlov",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Senapa",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=118458573",
-      "license": "BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "title": "2022-05-16, Birthday cake with 48 number candles",
-      "attribution": "« 2022-05-16, Birthday cake with 48 number candles » by Steven Pavlov, CC BY-SA 4.0",
-      "cases": [
-        "003"
-      ]
-    },
-    {
-      "provider": "openverse",
       "photographer": "Tim Sullivan",
       "photographerUrl": "https://www.secretagencygroup.com",
       "sourceUrl": "https://stocksnap.io/photo/camera-flatlay-0RKABCSJA5",
@@ -260,19 +234,6 @@
       "attribution": "« Camera Flatlay » — Tim Sullivan (CC0)",
       "cases": [
         "001"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "Uncredited author. No known copyright restrictions.",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=149025652",
-      "license": "BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "title": "FHM-282358 Hitler Youth (Hitlerjugend) HQ-building Berlin (Haus der Reichsjugendfuhrung? Ost-Berlin c 1933-36) Press office uniformed boys HJ swastika flag papers BDM chart. Nazi propaganda photo (Frihedsmuseet Nationalmuseet Denmark)",
-      "attribution": "« FHM-282358 Hitler Youth (Hitlerjugend) HQ-building Berlin (Haus der Reichsjugendfuhrung? Ost-Berlin c 1933-36) Press office uniformed boys HJ swastika flag papers BDM chart. Nazi propaganda photo (Frihedsmuseet Nationalmuseet Denmark) » by Uncredited author. No known copyright restrictions., CC BY-SA 4.0",
-      "cases": [
-        "005"
       ]
     },
     {
@@ -433,6 +394,19 @@
     },
     {
       "provider": "wikimedia",
+      "photographer": "BrianKohn",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stade_de_la_Meinau_game.JPG",
+      "license": "BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "title": "Stade de la Meinau game",
+      "attribution": "« Stade de la Meinau game » by BrianKohn, CC BY-SA 3.0 — Wikimedia Commons",
+      "cases": [
+        "103"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "Bushra Aamir",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Raindrops_on_my_car_window.jpg",
@@ -442,6 +416,19 @@
       "attribution": "« Raindrops on my car window » by Bushra Aamir, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
         "002"
+      ]
+    },
+    {
+      "provider": "wikimedia",
+      "photographer": "BWard 1997",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:GWR_4500_Class_Small_Prairie_4555_Severn_Valley_Railway_(1).jpg",
+      "license": "BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "title": "GWR 4500 Class Small Prairie 4555 Severn Valley Railway (1)",
+      "attribution": "« GWR 4500 Class Small Prairie 4555 Severn Valley Railway (1) » by BWard 1997, CC BY 3.0 — Wikimedia Commons",
+      "cases": [
+        "004"
       ]
     },
     {
@@ -537,6 +524,19 @@
     },
     {
       "provider": "wikimedia",
+      "photographer": "Dennis Sylvester Hurd",
+      "photographerUrl": "",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yule_log_Christmas_table.jpg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "title": "Yule log Christmas table",
+      "attribution": "« Yule log Christmas table » — Dennis Sylvester Hurd (CC0, Wikimedia Commons)",
+      "cases": [
+        "003"
+      ]
+    },
+    {
+      "provider": "wikimedia",
       "photographer": "Derek Bridges",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windshield_Rain_on_Freret_St.jpg",
@@ -591,7 +591,7 @@
       "provider": "wikimedia",
       "photographer": "Elliott Brown from Birmingham, United Kingdom",
       "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_(28083120859).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Climbing_Wall_-_Hockley_Circus_-_Hockley_Flyover_(25989500198).jpg",
       "license": "BY-SA 2.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
       "title": "Climbing Wall - Hockley Circus - Hockley Flyover",
@@ -966,19 +966,6 @@
     },
     {
       "provider": "wikimedia",
-      "photographer": "Kevin Näf",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stade_de_la_Meinau_fassade.JPG",
-      "license": "PDM",
-      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
-      "title": "Stade de la Meinau fassade",
-      "attribution": "« Stade de la Meinau fassade » — Kevin Näf (domaine public, Wikimedia Commons)",
-      "cases": [
-        "103"
-      ]
-    },
-    {
-      "provider": "wikimedia",
       "photographer": "Kevin.B",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Citadis_403_2e_g%C3%A9n%C3%A9ration,_Homme_de_Fer_Strasbourg.jpg",
@@ -1014,19 +1001,6 @@
       "attribution": "« Forêt en automne » by Krystall363, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
         "005"
-      ]
-    },
-    {
-      "provider": "wikimedia",
-      "photographer": "Krzysztof Popławski",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sosnowiec,_Ma%C5%82achowskieog_9_-_hostel,_Kamienica_pub,_Maya_Tapas_Bar,_Dzie%C5%84_i_Noc,_Sierpie%C5%84_2024_KsP_096.jpg",
-      "license": "BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
-      "title": "Sosnowiec, Małachowskieog 9 - hostel, Kamienica pub, Maya Tapas Bar, Dzień i Noc, Sierpień 2024 KsP 096",
-      "attribution": "« Sosnowiec, Małachowskieog 9 - hostel, Kamienica pub, Maya Tapas Bar, Dzień i Noc, Sierpień 2024 KsP 096 » by Krzysztof Popławski, CC BY 4.0 — Wikimedia Commons",
-      "cases": [
-        "001"
       ]
     },
     {
@@ -1150,7 +1124,7 @@
       "provider": "wikimedia",
       "photographer": "Miia Ranta from Finland",
       "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Palace_ceramic_tiles_(5337043053).jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Palace_ceramic_tiles_(5337664600).jpg",
       "license": "BY-SA 2.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
       "title": "Palace ceramic tiles",
@@ -1241,11 +1215,11 @@
       "provider": "wikimedia",
       "photographer": "Patafisik",
       "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Autrans_DSCN16.jpg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tremplin_Autrans_2.jpg",
       "license": "BY-SA 4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-      "title": "Autrans DSCN16",
-      "attribution": "« Autrans DSCN16 » by Patafisik, CC BY-SA 4.0 — Wikimedia Commons",
+      "title": "Tremplin Autrans 2",
+      "attribution": "« Tremplin Autrans 2 » by Patafisik, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
         "005"
       ]
@@ -1473,19 +1447,6 @@
     },
     {
       "provider": "wikimedia",
-      "photographer": "Romainbehar",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lyon_1er_-_Quai_Saint_Vincent,_depuis_la_passerelle_Saint-Vincent.jpg",
-      "license": "CC0",
-      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
-      "title": "Lyon 1er - Quai Saint Vincent, depuis la passerelle Saint-Vincent",
-      "attribution": "« Lyon 1er - Quai Saint Vincent, depuis la passerelle Saint-Vincent » — Romainbehar (CC0, Wikimedia Commons)",
-      "cases": [
-        "002"
-      ]
-    },
-    {
-      "provider": "wikimedia",
       "photographer": "Saiphani02",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:OSM_20th_anniversary_cake_and_cracker.jpg",
@@ -1681,19 +1642,6 @@
     },
     {
       "provider": "wikimedia",
-      "photographer": "Staff Sgt. Ian M. Terry",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Christmas_Dinner_at_Independence_Hall_Dining_Facility_DVIDS352939.jpg",
-      "license": "PDM",
-      "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Public_domain",
-      "title": "Christmas Dinner at Independence Hall Dining Facility DVIDS352939",
-      "attribution": "« Christmas Dinner at Independence Hall Dining Facility DVIDS352939 » — Staff Sgt. Ian M. Terry (domaine public, Wikimedia Commons)",
-      "cases": [
-        "003"
-      ]
-    },
-    {
-      "provider": "wikimedia",
       "photographer": "Tess Mattew",
       "photographerUrl": "",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cornflower_Flutter_Glass_Exhibition_in_Belarus_National_Arts_Museum_2025_September_07.jpg",
@@ -1703,19 +1651,6 @@
       "attribution": "« Cornflower Flutter Glass Exhibition in Belarus National Arts Museum 2025 September 07 » by Tess Mattew, CC BY-SA 4.0 — Wikimedia Commons",
       "cases": [
         "004"
-      ]
-    },
-    {
-      "provider": "wikimedia",
-      "photographer": "The National Archives (United Kingdom)",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Boxes_of_documents_on_repository_shelving_at_The_National_Archives.jpg",
-      "license": "BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
-      "title": "Boxes of documents on repository shelving at The National Archives",
-      "attribution": "« Boxes of documents on repository shelving at The National Archives » by The National Archives (United Kingdom), CC BY 3.0 — Wikimedia Commons",
-      "cases": [
-        "001"
       ]
     },
     {
@@ -1740,19 +1675,6 @@
       "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
       "title": "Cours-julien-bryce-edwards",
       "attribution": "« Cours-julien-bryce-edwards » by The original uploader was Mathsci at English Wikipedia ., CC BY 2.0 — Wikimedia Commons",
-      "cases": [
-        "001"
-      ]
-    },
-    {
-      "provider": "wikimedia",
-      "photographer": "TuRbO_J from Adelaide, Australia",
-      "photographerUrl": "",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2015_Mitsubishi_Lancer_(CJ_MY15)_GSR_Sportback_hatchback_(17191795949).jpg",
-      "license": "BY 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
-      "title": "2015 Mitsubishi Lancer (CJ MY15) GSR Sportback hatchback",
-      "attribution": "« 2015 Mitsubishi Lancer (CJ MY15) GSR Sportback hatchback » by TuRbO_J from Adelaide, Australia, CC BY 2.0 — Wikimedia Commons",
       "cases": [
         "001"
       ]
