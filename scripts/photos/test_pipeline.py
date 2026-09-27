@@ -81,6 +81,11 @@ class FakeWorld:
             x = (seed * 37 + i * 190) % 2300
             y = (seed // 7 + i * 97) % 1400
             d.rectangle([x, y, x + 60 + seed % 90, y + 80 + (seed // 3) % 120], fill=((seed + i * 20) % 255, level, (seed // 11) % 255))
+        # A 48-bit barcode of the URL: two fake images are never identical.
+        bits = int(hashlib.sha1(url.encode()).hexdigest()[:12], 16)
+        for b in range(48):
+            if bits >> b & 1:
+                d.rectangle([40 + b * 40, 1500, 70 + b * 40, 1580], fill=(255 - level, 40, 200))
         dest.parent.mkdir(parents=True, exist_ok=True)
         im.save(dest, "JPEG", quality=90)
         return True
