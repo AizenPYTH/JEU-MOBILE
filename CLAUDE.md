@@ -83,7 +83,7 @@ ScreenshotKit/            Package Swift contenant tout le jeu
                           StoryStageView, scène (sous-titres, choix), écrans h01–h19, StoryRootView
     Theme/, Support/      Tokens du téléphone (Theme.swift), design papier (TraceDesign.swift + ConcludeKit.swift : boutons,
                           logo, tampons PNG, post-it), polices, L10n, dates, ArtLibrary (images livrées)
-    Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py), Fonts/ (Geist, JetBrains Mono,
+    Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py, sons du mode Histoire : gen_story_sounds.py), Fonts/ (Geist, JetBrains Mono,
                           Instrument Serif, Newsreader, IBM Plex Mono, Caveat — OFL)
   Sources/StoryEngine/    Mode Histoire, moteur en Swift pur (Foundation) : personnage, décors, scènes, campagne,
                           StoryDirector (déterministe), validateur, sauvegarde versionnée + migrations
