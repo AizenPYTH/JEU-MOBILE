@@ -357,7 +357,9 @@ def pexels_search(http: Http, cfg: dict, query: str, offline: bool) -> list[dict
     if not pcfg["enabled"] or not key or offline:
         return []
     url = pcfg["endpoint"] + "?" + urllib.parse.urlencode({"query": query, "orientation": "landscape", "per_page": pcfg["perPage"], "page": 1})
-    data = http.get_json("pexels", url, {"Authorization": key}, pcfg["minIntervalSeconds"]) or {}
+    data = http.get_json("pexels", url, {"Authorization": key}, pcfg["minIntervalSeconds"])
+    if data is None:
+        return []  # a failed request is not cached: the next run asks again
     results = []
     for p in data.get("photos", []):
         results.append({
@@ -384,7 +386,9 @@ def openverse_search(http: Http, cfg: dict, query: str, offline: bool) -> list[d
     params = {"q": query, "license_type": ocfg["licenseType"], "mature": "false", "page_size": ocfg["pageSize"],
               "aspect_ratio": "wide", "size": "large"}
     url = ocfg["endpoint"] + "?" + urllib.parse.urlencode(params)
-    data = http.get_json("openverse", url, {}, ocfg["minIntervalSeconds"]) or {}
+    data = http.get_json("openverse", url, {}, ocfg["minIntervalSeconds"])
+    if data is None:
+        return []  # a failed request is not cached: the next run asks again
     results = []
     for r in data.get("results", []):
         results.append({
@@ -506,7 +510,7 @@ def cmd_search(args, cfg, catalog, manifest, stats) -> None:
     for src in catalog["sources"]:
         if src["id"] in locked:
             continue
-        ranked, rejected = [], 0
+        ranked, rejected, reasons, seen = [], 0, {}, 0
         for query in [src["query"]] + src["fallbackQueries"]:
             for provider in src["providers"]:
                 try:
@@ -520,9 +524,12 @@ def cmd_search(args, cfg, catalog, manifest, stats) -> None:
                 for c in results:
                     if (c["provider"], c["providerPhotoId"]) in used:
                         continue
+                    seen += 1
                     sc, why = score(c, src, cfg, query)
                     if sc == -math.inf or sc < cfg["selection"]["minScore"]:
                         rejected += 1
+                        why = why or "score trop bas"
+                        reasons[why] = reasons.get(why, 0) + 1
                         continue
                     ranked.append({**c, "score": round(sc, 2), "queryUsed": query})
             if len(ranked) >= cfg["selection"]["candidatesToTry"]:
@@ -530,6 +537,9 @@ def cmd_search(args, cfg, catalog, manifest, stats) -> None:
         ranked.sort(key=lambda c: -c["score"])
         ranked = ranked[:cfg["selection"]["candidatesToTry"]]
         stats["rejected"] += rejected
+        if not ranked:
+            detail = ", ".join(f"{n} × {why}" for why, n in sorted(reasons.items(), key=lambda kv: -kv[1]))
+            stats.setdefault("why", {})[src["id"]] = f"aucun candidat acceptable sur {seen} résultat(s)" + (f" ({detail})" if detail else "")
         selection[src["id"]] = ranked
         if ranked:
             used.add((ranked[0]["provider"], ranked[0]["providerPhotoId"]))
@@ -602,7 +612,7 @@ def cmd_download(args, cfg, catalog, manifest, stats) -> None:
         else:
             if not args.dry_run and (src["id"] not in entries or entries[src["id"]].get("status") != "fetched"):
                 entries[src["id"]] = {"sourceId": src["id"], "status": "missing", "case": src["case"],
-                                      "reason": "aucun candidat acceptable" if not selection.get(src["id"]) else f"{tried} téléchargement(s) échoué(s) ou rejeté(s)"}
+                                      "reason": stats.get("why", {}).get(src["id"], "aucun candidat acceptable") if not selection.get(src["id"]) else f"{tried} téléchargement(s) échoué(s) ou rejeté(s)"}
     manifest["sources"] = [entries[s["id"]] for s in catalog["sources"] if s["id"] in entries]
     fetched = sum(1 for e in manifest["sources"] if e.get("status") == "fetched")
     log(f"download: {fetched}/{len(catalog['sources'])} sources fetched")
