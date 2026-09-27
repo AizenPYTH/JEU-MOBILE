@@ -36,43 +36,43 @@ Crédits visibles dans le jeu : Paramètres › À propos › Crédits photos (`
 
 ## Sans image acceptable
 
-- `case001_src_outdoor_concert_crowd_stage_lights_night_01` : aucun candidat acceptable
-- `case001_src_photo_exhibition_room_white_walls_frames_01` : aucun candidat acceptable
-- `case001_src_photography_books_on_shelf_01` : aucun candidat acceptable
-- `case001_src_raindrops_on_window_glass_01` : aucun candidat acceptable
-- `case001_src_snowy_fir_trees_ski_lift_01` : aucun candidat acceptable
-- `case001_src_sunrise_over_rooftops_pink_sky_01` : aucun candidat acceptable
-- `case002_src_lyon_market_vegetable_stalls_01` : aucun candidat acceptable
-- `case002_src_lyon_rooftops_fourviere_view_01` : aucun candidat acceptable
+- `case001_src_outdoor_concert_crowd_stage_lights_night_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case001_src_photo_exhibition_room_white_walls_frames_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case001_src_photography_books_on_shelf_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case001_src_raindrops_on_window_glass_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case001_src_snowy_fir_trees_ski_lift_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case001_src_sunrise_over_rooftops_pink_sky_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case002_src_lyon_market_vegetable_stalls_01` : aucun candidat acceptable sur 3 résultat(s) (2 × le sujet demandé n'apparaît ni dans le titre ni dans les tags, 1 × lieu étranger à l'affaire (placeRejectWords))
+- `case002_src_lyon_rooftops_fourviere_view_01` : aucun candidat acceptable sur 0 résultat(s)
 - `case002_src_lyon_street_at_night_streetlights_01` : 1 téléchargement(s) échoué(s) ou rejeté(s)
-- `case002_src_empty_metro_car_seats_01` : aucun candidat acceptable
-- `case002_src_empty_nightclub_stage_lights_speakers_01` : aucun candidat acceptable
-- `case002_src_industrial_warehouse_event_hall_empty_01` : aucun candidat acceptable
-- `case002_src_modular_synthesizer_cables_night_01` : aucun candidat acceptable
-- `case002_src_outdoor_concert_crowd_stage_lights_night_01` : aucun candidat acceptable
-- `case002_src_raindrops_on_window_glass_01` : aucun candidat acceptable
-- `case002_src_sound_mixing_console_faders_lights_night_01` : aucun candidat acceptable
+- `case002_src_empty_metro_car_seats_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case002_src_empty_nightclub_stage_lights_speakers_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case002_src_industrial_warehouse_event_hall_empty_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case002_src_modular_synthesizer_cables_night_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case002_src_outdoor_concert_crowd_stage_lights_night_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case002_src_raindrops_on_window_glass_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case002_src_sound_mixing_console_faders_lights_night_01` : aucun candidat acceptable sur 0 résultat(s)
 - `case003_src_bordeaux_street_at_night_terraces_01` : 1 téléchargement(s) échoué(s) ou rejeté(s)
-- `case003_src_oysters_platter_wine_glasses_01` : aucun candidat acceptable
-- `case003_src_pink_sky_over_rooftops_swifts_01` : aucun candidat acceptable
-- `case003_src_raindrops_on_window_glass_01` : aucun candidat acceptable
-- `case003_src_traffic_jam_brake_lights_evening_01` : aucun candidat acceptable
+- `case003_src_oysters_platter_wine_glasses_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case003_src_pink_sky_over_rooftops_swifts_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case003_src_raindrops_on_window_glass_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case003_src_traffic_jam_brake_lights_evening_01` : aucun candidat acceptable sur 0 résultat(s)
 - `case004_src_paris_street_at_night_streetlights_01` : 1 téléchargement(s) échoué(s) ou rejeté(s)
-- `case004_src_seine_river_morning_mist_paris_01` : aucun candidat acceptable
-- `case004_src_coffee_cups_croissant_cafe_table_01` : aucun candidat acceptable
-- `case004_src_courtyard_party_string_lights_night_01` : aucun candidat acceptable
-- `case004_src_empty_exhibition_hall_display_cases_01` : aucun candidat acceptable
-- `case004_src_gala_hall_chandeliers_high_tables_evenin_01` : aucun candidat acceptable
-- `case004_src_printed_proofs_pages_on_desk_01` : aucun candidat acceptable
-- `case004_src_raindrops_on_window_glass_01` : aucun candidat acceptable
-- `case004_src_snowy_chalet_wooden_wall_sled_01` : aucun candidat acceptable
-- `case005_src_vercors_mountain_clouds_01` : aucun candidat acceptable
-- `case005_src_cross_country_ski_trail_fresh_snow_01` : aucun candidat acceptable
-- `case005_src_mountain_village_street_rain_night_01` : aucun candidat acceptable
-- `case005_src_rainy_courtyard_evening_01` : aucun candidat acceptable
-- `case005_src_snow_on_roof_and_balcony_village_01` : aucun candidat acceptable
-- `case005_src_stone_quarry_in_forest_01` : aucun candidat acceptable
-- `case005_src_town_council_meeting_room_chairs_01` : aucun candidat acceptable
+- `case004_src_seine_river_morning_mist_paris_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case004_src_coffee_cups_croissant_cafe_table_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case004_src_courtyard_party_string_lights_night_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case004_src_empty_exhibition_hall_display_cases_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case004_src_gala_hall_chandeliers_high_tables_evenin_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case004_src_printed_proofs_pages_on_desk_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case004_src_raindrops_on_window_glass_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case004_src_snowy_chalet_wooden_wall_sled_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case005_src_vercors_mountain_clouds_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case005_src_cross_country_ski_trail_fresh_snow_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case005_src_mountain_village_street_rain_night_01` : aucun candidat acceptable sur 16 résultat(s) (16 × le sujet demandé n'apparaît ni dans le titre ni dans les tags)
+- `case005_src_rainy_courtyard_evening_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case005_src_snow_on_roof_and_balcony_village_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case005_src_stone_quarry_in_forest_01` : aucun candidat acceptable sur 0 résultat(s)
+- `case005_src_town_council_meeting_room_chairs_01` : aucun candidat acceptable sur 0 résultat(s)
 
 ## Incidents de la dernière exécution
 
