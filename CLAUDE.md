@@ -48,6 +48,9 @@ docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — t
 docs/brand/               Logo CONCLUDE : ENQUÊTES (source de l'icône)
 docs/design_trace/        Handoff TRACE v2 « dossier d'enquête » (NE PAS MODIFIER) — tout ce qui est hors du téléphone
 DESIGN_INTEGRATION.md     État de l'intégration du handoff + conflits à trancher
+config/                   photo_pipeline.json (réglages du pipeline photo, à la main), photo_catalog.json (décision
+                          par photo, généré puis éditable), photo_sources.json (provenance, généré)
+docs/photo_pipeline/      PHOTO_PIPELINE (fonctionnement), PHOTO_AUDIT, PHOTO_SOURCES (générés), PHOTO_INTEGRATION
 ScreenshotKit/            Package Swift contenant tout le jeu
   Sources/CaseEngine/     Moteur en Swift pur (Foundation). Testable sous Linux.
     Model/                CaseFile (affaire), Moment (heure murale), ItemRef, GameRules, loader, validateur
@@ -76,7 +79,8 @@ ScreenshotKit/            Package Swift contenant tout le jeu
   Sources/CaseLint/       CLI : valide chaque affaire et vérifie qu'elle est résolvable dans le temps
   Tests/                  CaseEngineTests (moteur), CaseLibraryTests (affaires, parties complètes,
                           traductions, absence de vocabulaire de l'ancien prototype)
-scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d'affaires), audio/ (sons)
+scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d'affaires), audio/ (sons),
+                          photos.sh + photos/ (pipeline photo : Pexels / Openverse → Art.xcassets/Photos)
 ```
 
 ## Architecture — règles
@@ -148,6 +152,14 @@ Sous Linux (conteneur cloud, pas de Xcode) : `./scripts/setup-linux-swift.sh` pu
 `export PATH=/opt/swift/usr/libexec/swift/bin:$PATH LD_LIBRARY_PATH=/opt/swift/usr/lib/x86_64-linux-gnu`.
 L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (macOS) qui la vérifie.
 
+## Photos (pipeline)
+
+- Les photos d'ambiance des téléphones viennent de Pexels (clé `PEXELS_API_KEY`, secret GitHub) ou d'Openverse
+  (CC0/PDM/BY/BY-SA), préparées par `./scripts/photos.sh all` (workflow `photo-pipeline.yml`, car le conteneur
+  n'accède pas à ces API) et livrées dans `Art.xcassets/Photos/caseNNN_photo_<id>` ; `GeneratedPhoto` les affiche à la
+  place du dessin. Les preuves, les personnes de l'affaire et les textes précis restent dessinés (CUSTOM_REQUIRED).
+  Jamais d'appel réseau dans le jeu ; crédits dans Paramètres › À propos. Voir docs/photo_pipeline/.
+
 ## CI / livraison
 
 - `ios-build.yml` : compilation de l'app pour le simulateur (sans signature) sur macOS, puis tests
@@ -156,6 +168,8 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
   Options de lancement Debug pour les tests : `-UITestReset YES`, `-UITestDuration <s>`,
   `-UITestFirstLaunch skip|show` (skip = joueur déjà affecté, tutoriel vu ; show = tout premier lancement).
 - `tests-linux.yml` : `swift test` + `CaseLint` (image Docker `swift:6.0-noble`), à chaque push.
+- `photo-pipeline.yml` : tests du pipeline puis `photos.sh all` à chaque modification de `config/photo_*.json` ou
+  `scripts/photos/` (ou à la main) ; commite images, manifeste, crédits et rapports sur la branche.
 - `ios-testflight.yml` : macOS, manuel ou PR vers `main`. Tests, archive signée, export, envoi
   TestFlight via clé API. Build = `<run_number + BUILD_NUMBER_OFFSET>.<attempt>`. Sans secrets :
   compile pour le simulateur seulement.

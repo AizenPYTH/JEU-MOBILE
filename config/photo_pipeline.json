@@ -128,7 +128,9 @@
       "weapon",
       "police",
       "logo"
-    ]
+    ],
+    "excluded": [],
+    "excludedAbout": "Images refused at review, as \"provider:id\" (e.g. \"pexels:123456\"): never chosen again."
   },
   "audit": {
     "proceduralScenes": [

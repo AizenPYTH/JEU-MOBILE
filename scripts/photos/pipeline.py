@@ -417,6 +417,8 @@ def score(c: dict, source: dict, cfg: dict) -> tuple[float, str]:
     ok, why = licence_ok(c, cfg)
     if not ok:
         return -math.inf, why
+    if f"{c['provider']}:{c['providerPhotoId']}" in sel.get("excluded", []):
+        return -math.inf, "image refusée à la relecture (selection.excluded)"
     if c.get("mature"):
         return -math.inf, "contenu signalé sensible"
     if not c.get("downloadUrl"):
