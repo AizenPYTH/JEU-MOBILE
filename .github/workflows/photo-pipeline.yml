@@ -79,6 +79,8 @@ jobs:
                   ScreenshotKit/Sources/ScreenshotUI/Resources/PhotoCredits.json
           if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
           git commit -q -m "Photo pipeline: prepared photos, provenance and credits (run ${{ github.run_number }})"
+          # The branch may have moved during the run (a push from a developer): replay on top of it.
+          git pull -q --rebase origin ${{ github.ref_name }}
           git push -q origin HEAD:${{ github.ref_name }}
 
       - name: Keep the dry-run report
