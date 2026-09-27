@@ -114,6 +114,16 @@ mots exclus (rejet : « watermark, logo, weapon… »), contenu signalé sensibl
 couleur moyenne), léger bonus Pexels. Seuil minimal 1,0 ; le meilleur score gagne ; une même image n'est jamais
 utilisée par deux sources. Les critères sont dans `config/photo_pipeline.json › selection`.
 
+Rejets fermes (aussi réappliqués aux images déjà récupérées à chaque `search`, qui sont alors retirées et remplacées) :
+- **lieu étranger** (`placeRejectWords` : China, Shanghai, Hong Kong, Myanmar, pagoda, New York…) — les affaires se
+  passent en France, une rue de Shanghai n'est pas crédible dans le téléphone d'une Marseillaise ;
+- **marques de voiture** et mots exclus (`rejectWords`) ;
+- **sujet absent** : au moins un mot de la requête, hors ville, moment de la journée et mots vides (`fillerWords`),
+  doit figurer dans le titre ou les tags (« Marseille beach » ne donne plus l'intérieur de la basilique) ;
+- **refus à la relecture** (`excluded`).
+
+Les titres des fournisseurs sont nettoyés (HTML, « File: », numéros, extension) avant d'entrer dans les crédits.
+
 Limites assumées (sans dépendance lourde) : pas de détection de visages ni de filigranes dans les pixels ; le filtre
 se fonde sur les métadonnées des fournisseurs, la luminance et l'exclusion des scènes à personnes dès l'audit.
 

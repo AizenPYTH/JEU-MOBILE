@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import datetime as _dt
 import hashlib
+import html
 import json
 import math
 import os
@@ -71,6 +72,15 @@ def fold(text: str) -> str:
 
 def tokens(text: str) -> set[str]:
     return {t for t in re.split(r"[^a-z0-9]+", fold(text)) if len(t) > 2}
+
+
+def clean_title(text: str) -> str:
+    """A provider title as a caption: no HTML, no « File: » prefix, no file extension."""
+    text = html.unescape(re.sub(r"<[^>]+>", " ", text or ""))
+    text = re.sub(r"^\s*File:\s*", "", text)
+    text = re.sub(r"\s*\(\d{6,}\)", "", text)
+    text = re.sub(r"\.(jpe?g|png|tiff?|webp)$", "", text.strip(), flags=re.I)
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def now_iso() -> str:
@@ -379,7 +389,7 @@ def openverse_search(http: Http, cfg: dict, query: str, offline: bool) -> list[d
     for r in data.get("results", []):
         results.append({
             "provider": "openverse", "providerPhotoId": r.get("id", ""), "width": r.get("width") or 0,
-            "height": r.get("height") or 0, "title": r.get("title") or "",
+            "height": r.get("height") or 0, "title": clean_title(r.get("title") or ""),
             "tags": [t.get("name", "") for t in (r.get("tags") or [])], "photographer": r.get("creator") or "",
             "photographerUrl": r.get("creator_url") or "", "sourceUrl": r.get("foreign_landing_url") or "",
             "downloadUrl": r.get("url") or "", "license": (r.get("license") or "").lower(),
@@ -413,21 +423,43 @@ def licence_ok(c: dict, cfg: dict) -> tuple[bool, str]:
     return True, ""
 
 
-def score(c: dict, source: dict, cfg: dict) -> tuple[float, str]:
+def hard_reject(c: dict, cfg: dict) -> str:
+    """Why a candidate (or an image already fetched) can never be used; "" when it can."""
+    sel = cfg["selection"]
+    words = tokens(clean_title(c.get("title", "")) + " " + " ".join(c.get("tags", [])))
+    if f"{c['provider']}:{c['providerPhotoId']}" in sel.get("excluded", []):
+        return "image refusée à la relecture (selection.excluded)"
+    if any(w in words for w in sel["rejectWords"]):
+        return "mot exclu dans le titre ou les tags"
+    if words & set(sel.get("placeRejectWords", [])):
+        return "lieu étranger à l'affaire (placeRejectWords)"
+    return ""
+
+
+def subject_words(source: dict, query: str, cfg: dict) -> set[str]:
+    """What the photo must show: the query without the city, the time of day and filler words."""
+    case = cfg["cases"].get(source.get("case", ""), {})
+    place = tokens(case.get("city", "") + " " + case.get("region", ""))
+    return tokens(query) - place - set(cfg["selection"].get("fillerWords", []))
+
+
+def score(c: dict, source: dict, cfg: dict, query: str | None = None) -> tuple[float, str]:
     """Score of a candidate for a source; (−inf, reason) when rejected."""
     sel = cfg["selection"]
     words = tokens(c.get("title", "") + " " + " ".join(c.get("tags", [])))
     ok, why = licence_ok(c, cfg)
     if not ok:
         return -math.inf, why
-    if f"{c['provider']}:{c['providerPhotoId']}" in sel.get("excluded", []):
-        return -math.inf, "image refusée à la relecture (selection.excluded)"
+    why = hard_reject(c, cfg)
+    if why:
+        return -math.inf, why
     if c.get("mature"):
         return -math.inf, "contenu signalé sensible"
     if not c.get("downloadUrl"):
         return -math.inf, "pas d'URL de téléchargement"
-    if any(w in words for w in sel["rejectWords"]):
-        return -math.inf, "mot exclu dans le titre ou les tags"
+    subject = subject_words(source, query or source["query"], cfg)
+    if subject and not (subject & words):
+        return -math.inf, "le sujet demandé n'apparaît ni dans le titre ni dans les tags"
     w, h = c.get("width") or 0, c.get("height") or 0
     if w < source["minWidth"] or h < source["minHeight"]:
         return -math.inf, f"résolution trop faible ({w}×{h})"
@@ -461,6 +493,12 @@ def score(c: dict, source: dict, cfg: dict) -> tuple[float, str]:
 def cmd_search(args, cfg, catalog, manifest, stats) -> None:
     """Chooses candidates for every source that has none yet (the manifest is the lock file)."""
     http = Http(cfg, stats)
+    for e in manifest.get("sources", []):
+        if e.get("status") == "fetched":
+            why = hard_reject(e, cfg)
+            if why:
+                log(f"  {e['sourceId']}: {e['provider']}:{e['providerPhotoId']} retiré — {why}")
+                e.update(status="rejected", reason=why)
     locked = {e["sourceId"] for e in manifest.get("sources", []) if e.get("status") == "fetched"}
     used = {(e["provider"], e["providerPhotoId"]) for e in manifest.get("sources", []) if e.get("status") == "fetched"}
     selection = load_json(CACHE / "selection.json", {}) or {}
@@ -482,7 +520,7 @@ def cmd_search(args, cfg, catalog, manifest, stats) -> None:
                 for c in results:
                     if (c["provider"], c["providerPhotoId"]) in used:
                         continue
-                    sc, why = score(c, src, cfg)
+                    sc, why = score(c, src, cfg, query)
                     if sc == -math.inf or sc < cfg["selection"]["minScore"]:
                         rejected += 1
                         continue
@@ -551,7 +589,7 @@ def cmd_download(args, cfg, catalog, manifest, stats) -> None:
                 "downloadUrl": cand.get("downloadUrl", ""), "license": cand.get("license", ""),
                 "licenseVersion": cand.get("licenseVersion", ""), "licenseUrl": cand.get("licenseUrl", ""),
                 "origin": cand.get("origin", "pexels.com" if cand["provider"] == "pexels" else ""),
-                "title": cand.get("title", ""), "queryUsed": cand.get("queryUsed", src["query"]),
+                "title": clean_title(cand.get("title", "")), "tags": cand.get("tags", [])[:20], "queryUsed": cand.get("queryUsed", src["query"]),
                 "dateFetched": now_iso(), "width": cand.get("width"), "height": cand.get("height"),
                 "score": cand.get("score"), "luminance": round(lum, 1), "file": fname,
                 "sha256": hashlib.sha256(dest.read_bytes()).hexdigest(),
@@ -571,6 +609,7 @@ def cmd_download(args, cfg, catalog, manifest, stats) -> None:
 
 
 def attribution_text(c: dict) -> str:
+    c = {**c, "title": clean_title(c.get("title", ""))}
     who = c.get("photographer") or "auteur inconnu"
     if c["provider"] == "pexels":
         return f"Photo by {who} on Pexels"

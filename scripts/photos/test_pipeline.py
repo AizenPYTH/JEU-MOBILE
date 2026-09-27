@@ -160,6 +160,19 @@ class ScoreTests(unittest.TestCase):
         self.assertGreater(night, day)
         self.assertGreater(night, people)
 
+    def test_rejects_foreign_places_brands_and_off_subject(self):
+        src = {**self.src, "case": "001"}
+        for title in ("Old Bagan, Myanmar, sunset over pagodas", "Crossing the busy street to Old Shanghai",
+                      "Apliu Street BMW black car at night"):
+            self.assertEqual(P.score(fake_candidate("1", title=title), src, self.cfg)[0], -math.inf, title)
+        # The subject (« street ») must be in the title or the tags; the city alone is not enough.
+        self.assertEqual(P.score(fake_candidate("2", title="Bonne Mère Marseille"), src, self.cfg)[0], -math.inf)
+        self.assertGreater(P.score(fake_candidate("3", title="Marseille, rue le soir", tags=["street", "night"]), src, self.cfg)[0], 0)
+
+    def test_titles_are_cleaned(self):
+        self.assertEqual(P.clean_title("<div class='fn'> Bonne Mère Marseille</div>"), "Bonne Mère Marseille")
+        self.assertEqual(P.clean_title("File:Quai du Rhône (36045409450).jpg"), "Quai du Rhône")
+
     def test_attribution_texts(self):
         self.assertEqual(P.attribution_text(fake_candidate("1")), "Photo by Jane Doe on Pexels")
         self.assertIn("CC BY", P.attribution_text(fake_candidate("1", provider="openverse", lic="by", licenseVersion="4.0", title="Port")))
