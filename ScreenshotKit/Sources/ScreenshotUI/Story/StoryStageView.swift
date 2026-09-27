@@ -102,7 +102,7 @@ final class StageDirectorView {
         camera.wantsHDR = true
         // ACES-like tonemapping, a light vignette (18 %), no bloom but on emissive screens.
         camera.wantsExposureAdaptation = false
-        camera.exposureOffset = -0.2
+        camera.exposureOffset = StageLighting.exposure
         camera.whitePoint = 1.2
         camera.minimumExposure = -1
         camera.bloomIntensity = 0.05
@@ -360,9 +360,10 @@ final class StageDirectorView {
             camera.wantsDepthOfField = true
             let d = CGFloat(simd_distance(SIMD3<Float>(focus), SIMD3<Float>(next.position)))
             camera.focusDistance = d
-            camera.fStop = snapshot.stage.shot?.kind == .focusObject ? 2.0 : 2.8
+            // A light bokeh (3D_DIRECTION §5): never a blurred picture.
+            camera.fStop = snapshot.stage.shot?.kind == .focusObject ? 4 : 8
             camera.apertureBladeCount = 6
-            camera.focalBlurSampleCount = 8
+            camera.focalBlurSampleCount = 6
         } else {
             camera.wantsDepthOfField = false
         }
@@ -440,7 +441,7 @@ struct CharacterPreview: UIViewRepresentable {
         key.light = SCNLight()
         key.light?.type = .spot
         key.light?.color = UIColor(red: 1.0, green: 0.95, blue: 0.9, alpha: 1)
-        key.light?.intensity = 1100
+        key.light?.intensity = 300
         key.light?.spotOuterAngle = 70
         key.light?.castsShadow = true
         key.light?.shadowRadius = 6
@@ -451,7 +452,7 @@ struct CharacterPreview: UIViewRepresentable {
         back.light = SCNLight()
         back.light?.type = .spot
         back.light?.color = StagePalette.lamp2700
-        back.light?.intensity = 900
+        back.light?.intensity = 220
         back.light?.spotOuterAngle = 60
         back.position = SCNVector3(-1.4, 2.4, -2.0)
         back.look(at: SCNVector3(0, 1.3, 0))
@@ -460,7 +461,7 @@ struct CharacterPreview: UIViewRepresentable {
         fill.light = SCNLight()
         fill.light?.type = .ambient
         fill.light?.color = UIColor(red: 0.11, green: 0.13, blue: 0.19, alpha: 1)
-        fill.light?.intensity = 380
+        fill.light?.intensity = 110
         scene.rootNode.addChildNode(fill)
         let camera = context.coordinator.camera
         camera.camera = SCNCamera()
@@ -491,13 +492,15 @@ struct CharacterPreview: UIViewRepresentable {
             // The first framing is set at once; later changes (face ⇄ full length) move in 0.45 s.
             let first = holder.closeUp == nil
             holder.closeUp = closeUp
-            let eye: Float = appearance.presentation == "presentation_f" ? 1.55 : 1.66
+            // Eyes of the rig (1.66 m at 1.75 m), at the base's height (1.68 / 1.80 m).
+            let eye: Float = 1.66 * (appearance.presentation == "presentation_f" ? 1.68 : 1.80) / 1.75
             SCNTransaction.begin()
             SCNTransaction.animationDuration = first ? 0 : 0.45
             if closeUp {
                 holder.camera.camera?.fieldOfView = CGFloat(2 * atan(18.0 / 85.0) * 180 / .pi)
-                holder.camera.position = SCNVector3(0, eye, 1.45)
-                holder.camera.look(at: SCNVector3(0, eye - 0.05, 0))
+                // Shoulders to head (85 mm at about 2 m).
+                holder.camera.position = SCNVector3(0, eye - 0.05, 2.05)
+                holder.camera.look(at: SCNVector3(0, eye - 0.12, 0))
             } else {
                 holder.camera.camera?.fieldOfView = CGFloat(2 * atan(18.0 / 50.0) * 180 / .pi)
                 holder.camera.position = SCNVector3(0, 1.1, 3.6)

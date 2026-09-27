@@ -21,6 +21,8 @@ Plans (`beats`) : `place`, `enter`, `move`, `exit`, `face`, `animate`, `camera`,
 caché apparaît : la chemise sortie du tiroir, le sachet de scellé, la carte BEN). `condition` sur un plan, une
 réplique ou un choix (`flag`, `notFlag`, `lastCaseSolved`, confiance d'un PNJ).
 
+Les scènes, décors et la campagne sont écrits par les générateurs de `scripts/story/` (voir son README).
+
 **Règles vérifiées par le validateur** (tests + CaseLint) : une scène = un lieu ; 3 personnes au plus ; premier plan
 WIDE ; jamais plus de 2 CLOSE d'affilée ; au moins un plan muet de 2 à 4 s ; uniquement des caméras nommées du
 décor ; OBJECT FOCUS juste avant le téléphone ; transitions CUT / DISSOLVE / FADE seulement ; références (ancres,
@@ -45,6 +47,9 @@ conséquence.
 | ENV_BEN_ARCHIVES | sous-sol, allées d'étagères | cam_arc_aisle, cam_arc_table, cam_arc_ms, cam_arc_cu, cam_arc_colette, cam_arc_box |
 | ENV_BEN_INTERROGATION | salle d'audition, miroir sans tain, voyant rouge | cam_int_wide, cam_int_os_suspect, cam_int_cu, cam_int_mirror, cam_int_table |
 | ENV_BEN_BRIEFING | salle de réunion, écran mural | cam_brf_wide, cam_brf_screen, cam_brf_ms |
+
+Cadrages vérifiés par le test `shotsFrameTheirSubject` : sujet dans le cadre, personne contre l'objectif, CLOSE
+« épaules → tête » (85 mm à ~1,9 m), épaule du joueur au bord du cadre en plan par-dessus l'épaule.
 
 Une caméra : position, point visé, focale (28, 35, 50, 85 ou 100 mm ; le côté 36 mm du capteur est vertical, cadre
 portrait). Mouvements : `pushIn` (≤ 12 cm) et `track` (travelling lent) ; avec « Réduire les animations » ou

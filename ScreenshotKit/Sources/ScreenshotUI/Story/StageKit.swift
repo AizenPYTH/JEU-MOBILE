@@ -50,7 +50,15 @@ enum StageQuality {
     static var shadowSamples: Int { profile == .high ? 16 : 8 }
     static var framesPerSecond: Int { profile == .high ? 60 : 30 }
     static var antialiasing: SCNAntialiasingMode { profile == .economy ? .none : .multisampling4X }
-    static var depthOfField: Bool { profile != .economy && StoryPreferences.depthOfField }
+    /// Only in « Haute » (the first captures were blurred everywhere in « Auto »).
+    static var depthOfField: Bool { profile == .high && StoryPreferences.depthOfField }
+}
+
+/// Global level of the sets' lights and of the stage camera's exposure.
+enum StageLighting {
+    static let scale: CGFloat = 0.4
+    /// Exposure offset of the stage and studio cameras (EV).
+    static let exposure: CGFloat = -0.8
 }
 
 extension UIColor {
@@ -237,6 +245,9 @@ enum StageBuilder {
         default:
             break
         }
+        // Physically based materials: the presets are written for a daylight studio; the BEN at
+        // night is darker (CI captures of the first build were blown out by about 6×).
+        for node in result { node.light?.intensity *= StageLighting.scale }
         return result
     }
 
@@ -309,8 +320,9 @@ enum StageBuilder {
             let bulb = SCNLight()
             bulb.type = .omni
             bulb.color = StagePalette.warmLight
-            bulb.intensity = 180
-            bulb.attenuationEndDistance = 2.5
+            bulb.intensity = 40
+            bulb.attenuationStartDistance = 0.2
+            bulb.attenuationEndDistance = 1.8
             let bulbNode = SCNNode()
             bulbNode.light = bulb
             node.addChildNode(bulbNode.at(0, 0.36, 0))
@@ -946,12 +958,12 @@ enum PortraitRenderer {
                                        details: RigDetails(height: feminine ? 1.68 : 1.80, rank: rank))
         player.childNode(withName: "lids", recursively: true)?.removeAction(forKey: "blink")
         scene.rootNode.addChildNode(player)
-        let eye: Float = feminine ? 1.55 : 1.66
+        let eye: Float = 1.66 * (feminine ? 1.68 : 1.80) / 1.75
         let key = SCNNode()
         key.light = SCNLight()
         key.light?.type = .spot
         key.light?.color = StagePalette.neon4000
-        key.light?.intensity = 1200
+        key.light?.intensity = 320
         key.light?.spotOuterAngle = 60
         key.position = SCNVector3(-1.2, eye + 0.6, 1.6)
         key.look(at: SCNVector3(0, eye - 0.1, 0))
@@ -960,7 +972,7 @@ enum PortraitRenderer {
         fill.light = SCNLight()
         fill.light?.type = .ambient
         fill.light?.color = UIColor(red: 0.11, green: 0.13, blue: 0.19, alpha: 1)
-        fill.light?.intensity = 300
+        fill.light?.intensity = 90
         scene.rootNode.addChildNode(fill)
         let camera = SCNNode()
         camera.camera = SCNCamera()

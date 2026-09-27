@@ -426,6 +426,7 @@ private struct SceneJournal: View {
                 .padding(.bottom, 12)
                 .accessibilityIdentifier("story.journal.quit")
         }
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("story.journal")
     }
 }

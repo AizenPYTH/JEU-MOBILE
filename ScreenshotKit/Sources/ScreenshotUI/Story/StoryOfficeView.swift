@@ -96,6 +96,8 @@ struct StoryOfficeView: View {
                     .presentationDragIndicator(.visible)
             }
         }
+        // A container's identifier must not replace its buttons' identifiers.
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("story.office.view")
         .onAppear {
             guard let focusUnlock, let prop = hotspots.first(where: { $0.requires == focusUnlock }) else { return }

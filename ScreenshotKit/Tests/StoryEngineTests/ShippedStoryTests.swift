@@ -95,6 +95,65 @@ struct ShippedStoryTests {
         }
     }
 
+    /// Every shot frames what it is about (STORY_SCENES §2), read from the named cameras and the
+    /// people's places: the subject's head is in the portrait frame, nobody stands against the lens,
+    /// a CLOSE shows shoulders to head (not a face filling the screen), and an over-the-shoulder
+    /// shot keeps the player's shoulder at the frame's edge with the other person in it.
+    @Test func shotsFrameTheirSubject() throws {
+        let content = try Self.content()
+        let aspect = 390.0 / 844.0
+        func head(_ actor: String, _ a: StageAnchor) -> (Double, Double, Double) {
+            let height = actor == "player" ? 1.74 : (content.npc(actor)?.height ?? 1.75)
+            return (a.x, (1.66 - (a.seated == true ? 0.42 : 0)) * height / 1.75 + 0.02, a.z)
+        }
+        /// (x across the width, y across the height, both −1…1; depth; head's share of the frame height)
+        func project(_ c: CameraAnchor, _ p: (Double, Double, Double)) -> (Double, Double, Double, Double)? {
+            var f = (c.lookX - c.x, c.lookY - c.y, c.lookZ - c.z)
+            let n = (f.0 * f.0 + f.1 * f.1 + f.2 * f.2).squareRoot()
+            f = (f.0 / n, f.1 / n, f.2 / n)
+            let rn = (f.2 * f.2 + f.0 * f.0).squareRoot()
+            guard rn > 1e-6 else { return nil }
+            let r = (-f.2 / rn, 0.0, f.0 / rn)
+            let u = (r.1 * f.2 - r.2 * f.1, r.2 * f.0 - r.0 * f.2, r.0 * f.1 - r.1 * f.0)
+            let d = (p.0 - c.x, p.1 - c.y, p.2 - c.z)
+            let depth = d.0 * f.0 + d.1 * f.1 + d.2 * f.2
+            guard depth > 0.05 else { return nil }
+            let th = tan(c.verticalFOV * .pi / 360), tw = th * aspect
+            return ((d.0 * r.0 + d.2 * r.2) / depth / tw, (d.0 * u.0 + d.1 * u.1 + d.2 * u.2) / depth / th, depth, 0.25 / (2 * th * depth))
+        }
+        var issues: [String] = []
+        for scene in content.scenes {
+            guard let location = content.location(scene.location) else { continue }
+            var places: [String: StageAnchor] = [:]
+            for (i, beat) in scene.beats.enumerated() {
+                switch beat.kind {
+                case .place, .enter, .move:
+                    if let actor = beat.actor, let anchor = beat.anchor.flatMap(location.anchor) { places[actor] = anchor }
+                case .exit:
+                    if let actor = beat.actor { places[actor] = nil }
+                default: break
+                }
+                guard beat.kind == .camera, let shot = beat.shot, let camera = shot.camera.flatMap(location.camera) else { continue }
+                let at = "\(scene.id) beat \(i + 1) \(shot.kind.rawValue) \(camera.id)"
+                for (actor, anchor) in places {
+                    guard let (x, y, depth, share) = project(camera, head(actor, anchor)) else { continue }
+                    let inside = abs(x) < 1 && abs(y) < 1
+                    if depth < 0.7 && abs(x) < 1.6 && abs(y) < 1.6 { issues.append("\(at): \(actor) against the camera") }
+                    if shot.kind == .overShoulder && actor == shot.subject {
+                        if inside && share > 0.45 { issues.append("\(at): \(actor)'s shoulder fills the frame") }
+                        else if !(0.6..<1.5).contains(abs(x)) { issues.append("\(at): \(actor)'s shoulder not at the edge") }
+                    } else if actor == shot.subject || (shot.kind == .overShoulder && actor == shot.other) {
+                        if !inside { issues.append("\(at): \(actor) out of frame") }
+                        if shot.kind == .closeUp && share > 0.42 { issues.append("\(at): CLOSE too tight on \(actor)") }
+                    } else if inside && share > 0.55 {
+                        issues.append("\(at): \(actor) fills the frame")
+                    }
+                }
+            }
+        }
+        #expect(issues.isEmpty, "\(issues.joined(separator: "\n"))")
+    }
+
     @Test func scenesStayShort() throws {
         for scene in try Self.content().scenes {
             let words = scene.dialogue.map { $0.text.split(separator: " ").count }.reduce(0, +)
