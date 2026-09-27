@@ -75,6 +75,25 @@ enum ArtLibrary {
     /// Names already decoded ahead of display (or found missing).
     private static var prepared: Set<String> = []
 
+    /// `case001_photo_p_b01`: a photo of the seized phone prepared by the photo pipeline
+    /// (scripts/photos, `Art.xcassets/Photos`). Most photos have none and stay painted by the game.
+    static func photoName(case number: Int, photo id: String) -> String {
+        "case\(dossierNumber(number))_photo_\(id)"
+    }
+
+    /// The prepared photo, if any. Not kept in `cache`: photos are many and large, the system's own
+    /// image cache (purged under memory pressure) is enough.
+    static func photo(case number: Int?, id: String) -> UIImage? {
+        guard let number else { return nil }
+        let name = photoName(case: number, photo: id)
+        if missing.contains(name) { return nil }
+        guard let image = UIImage(named: name, in: .module, with: nil) else {
+            missing.insert(name)
+            return nil
+        }
+        return image
+    }
+
     static func image(_ name: String) -> UIImage? {
         if let hit = cache[name] { return hit }
         if missing.contains(name) { return nil }

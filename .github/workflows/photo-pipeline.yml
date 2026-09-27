@@ -1,0 +1,82 @@
+# Photo asset pipeline (docs/photo_pipeline/PHOTO_PIPELINE.md): searches Pexels (secret PEXELS_API_KEY,
+# optional: without it only Openverse is used) and Openverse (anonymous, no key), then
+# downloads, crops and compresses the ambient photos of the cases, and commits the images, the
+# provenance manifest, the credits and the reports to the same branch. The game itself never calls
+# these APIs: the images are shipped in the app bundle.
+name: Photo pipeline
+
+on:
+  push:
+    paths:
+      - "config/photo_pipeline.json"
+      - "config/photo_catalog.json"
+      - "scripts/photos/**"
+      - "scripts/photos.sh"
+      - ".github/workflows/photo-pipeline.yml"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (report only, nothing committed)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: photo-pipeline-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  photos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Python and Pillow
+        run: python3 -m pip install --quiet "pillow>=10"
+
+      - name: Restore the pipeline cache (search results, originals)
+        uses: actions/cache@v4
+        with:
+          path: cache/photos
+          key: photo-cache-${{ hashFiles('config/photo_catalog.json', 'config/photo_pipeline.json') }}-${{ github.run_id }}
+          restore-keys: photo-cache-
+
+      - name: Pipeline tests (offline)
+        run: python3 scripts/photos/test_pipeline.py
+
+      - name: Run the pipeline
+        env:
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+        run: |
+          set +e
+          ./scripts/photos.sh all ${{ inputs.dry_run && '--dry-run' || '' }} | tee "$RUNNER_TEMP/photos.log"
+          status=${PIPESTATUS[0]}
+          echo '### Photo pipeline' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          grep -vE "rejeté|dry-run\]" "$RUNNER_TEMP/photos.log" | tail -40 >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+
+      - name: Commit the prepared photos
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add config/photo_catalog.json config/photo_sources.json docs/photo_pipeline \
+                  ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos \
+                  ScreenshotKit/Sources/ScreenshotUI/Resources/PhotoCredits.json
+          if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
+          git commit -q -m "Photo pipeline: prepared photos, provenance and credits (run ${{ github.run_number }})"
+          git push -q origin HEAD:${{ github.ref_name }}
+
+      - name: Keep the dry-run report
+        if: ${{ inputs.dry_run }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: photo-pipeline-dry-run
+          path: reports/photo_pipeline_dry_run.md

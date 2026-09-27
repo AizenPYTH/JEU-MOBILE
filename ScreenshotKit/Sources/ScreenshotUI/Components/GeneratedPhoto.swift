@@ -16,6 +16,9 @@ struct GeneratedPhoto: View, Equatable {
     var lines: [String] = []
     /// The date on an old print.
     var year: Int? = nil
+    /// The case photo it stands for: a prepared real photo replaces the painting when one exists.
+    var photoID: String? = nil
+    @Environment(\.caseNumber) private var caseNumber
 
     init(scene: String, seed: String, style: Photo.Style = .standard, lines: [String] = []) {
         self.scene = scene
@@ -30,15 +33,13 @@ struct GeneratedPhoto: View, Equatable {
         style = photo.style ?? PhotoPainter.defaultStyle(for: photo.scene)
         lines = photo.lines ?? []
         year = photo.takenAt.year
+        photoID = photo.id
     }
 
     var body: some View {
         let style = self.style
         ZStack {
-            Canvas(rendersAsynchronously: true) { context, size in
-                var rng = SeededRandom(seed: seed)
-                PhotoPainter.paint(scene: scene, style: style, lines: lines, in: &context, size: size, rng: &rng)
-            }
+            picture
             .blur(radius: style == .blurry ? 5 : style == .quick ? 1.2 : 0)
             .scaleEffect(style == .quick ? 1.12 : 1)
             .rotationEffect(.degrees(style == .quick ? PhotoPainter.tilt(seed) : 0))
@@ -80,8 +81,23 @@ struct GeneratedPhoto: View, Equatable {
         .accessibilityHidden(true)
     }
 
+    /// The prepared photo (fills the frame, never enlarges it), or the painted one.
+    @ViewBuilder
+    private var picture: some View {
+        if let photoID, let image = ArtLibrary.photo(case: caseNumber, id: photoID) {
+            Color.clear
+                .overlay { Image(uiImage: image).resizable().scaledToFill() }
+                .clipped()
+        } else {
+            Canvas(rendersAsynchronously: true) { context, size in
+                var rng = SeededRandom(seed: seed)
+                PhotoPainter.paint(scene: scene, style: style, lines: lines, in: &context, size: size, rng: &rng)
+            }
+        }
+    }
+
     nonisolated static func == (a: GeneratedPhoto, b: GeneratedPhoto) -> Bool {
-        a.scene == b.scene && a.seed == b.seed && a.style == b.style && a.lines == b.lines
+        a.scene == b.scene && a.seed == b.seed && a.style == b.style && a.lines == b.lines && a.photoID == b.photoID
     }
 }
 

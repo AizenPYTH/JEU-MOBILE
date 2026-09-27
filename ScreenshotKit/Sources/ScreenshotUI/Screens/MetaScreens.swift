@@ -252,6 +252,7 @@ struct GameSettingsView: View {
 /// Paramètres › À propos: the logo tile (96 pt) on the dark desk, the studio, the version.
 private struct AboutSheet: View {
     let onClose: () -> Void
+    @State private var showingCredits = false
 
     private static let studio = "NOREL GAMES"
 
@@ -268,6 +269,11 @@ private struct AboutSheet: View {
                 .font(Trace.Fonts.mono)
                 .foregroundStyle(Trace.Colors.bone2)
                 .accessibilityIdentifier("about.version")
+            if PhotoCredits.bundled != nil {
+                Button(L10n.t("credits.button")) { showingCredits = true }
+                    .buttonStyle(TextLinkStyle())
+                    .accessibilityIdentifier("about.photoCredits")
+            }
             Spacer(minLength: 24)
             Button(L10n.t("a11y.close"), action: onClose)
                 .buttonStyle(TextLinkStyle())
@@ -280,6 +286,12 @@ private struct AboutSheet: View {
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
         .presentationBackground(Trace.Colors.launch)
+        .sheet(isPresented: $showingCredits) {
+            if let credits = PhotoCredits.bundled {
+                PhotoCreditsView(credits: credits, onClose: { showingCredits = false })
+                    .presentationBackground(Trace.Colors.launch)
+            }
+        }
     }
 
     /// « Version 1.2 (34) » from the app bundle.

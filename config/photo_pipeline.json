@@ -1,0 +1,970 @@
+{
+  "version": 1,
+  "about": "Configuration of the photo asset pipeline (scripts/photos/pipeline.py). Docs: docs/photo_pipeline/PHOTO_PIPELINE.md. Only this file and photo_catalog.json are meant to be edited by hand.",
+  "providers": {
+    "order": [
+      "pexels",
+      "openverse"
+    ],
+    "pexels": {
+      "enabled": true,
+      "apiKeyEnv": "PEXELS_API_KEY",
+      "endpoint": "https://api.pexels.com/v1/search",
+      "perPage": 30,
+      "minIntervalSeconds": 1.0,
+      "download": "large2x",
+      "license": "Pexels License",
+      "licenseUrl": "https://www.pexels.com/license/"
+    },
+    "openverse": {
+      "enabled": true,
+      "endpoint": "https://api.openverse.org/v1/images/",
+      "pageSize": 20,
+      "minIntervalSeconds": 4.0,
+      "licenseType": "commercial,modification",
+      "allowedLicenses": [
+        "cc0",
+        "pdm",
+        "by",
+        "by-sa"
+      ],
+      "attributionRequiredFor": [
+        "by",
+        "by-sa"
+      ]
+    }
+  },
+  "network": {
+    "timeoutSeconds": 30,
+    "retries": 3,
+    "backoffSeconds": 5,
+    "userAgent": "NorelGames-ConcludePhotoPipeline/1.0 (asset preparation; contact via github.com/AizenPYTH/JEU-MOBILE)"
+  },
+  "profiles": {
+    "phone-photo": {
+      "about": "Every photo of the seized phone: Photos detail (4:3, full width ≈ 390 pt), message bubble (200 × 150 pt), gallery grid (square crop of it at runtime, ≈ 130 pt), Carnet exhibit (≤ 200 pt high), filing sheet (78 pt). One file serves them all; iOS downsamples.",
+      "width": 1024,
+      "height": 768,
+      "quality": 76,
+      "format": "jpeg"
+    }
+  },
+  "selection": {
+    "minSourceWidth": 1200,
+    "minSourceHeight": 800,
+    "minScore": 1.0,
+    "candidatesToTry": 6,
+    "photosPerSource": 3,
+    "darkMaxLuminance": 95,
+    "dayMinLuminance": 45,
+    "peopleWords": [
+      "person",
+      "people",
+      "man",
+      "men",
+      "woman",
+      "women",
+      "girl",
+      "boy",
+      "child",
+      "children",
+      "kid",
+      "kids",
+      "baby",
+      "face",
+      "portrait",
+      "selfie",
+      "couple",
+      "family",
+      "model",
+      "smiling",
+      "posing"
+    ],
+    "brandWords": [
+      "logo",
+      "brand",
+      "billboard",
+      "advertisement",
+      "advertising",
+      "coca",
+      "starbucks",
+      "mcdonald",
+      "nike",
+      "apple",
+      "iphone",
+      "samsung",
+      "text",
+      "sign",
+      "poster",
+      "neon sign"
+    ],
+    "nightWords": [
+      "night",
+      "evening",
+      "dark",
+      "lights",
+      "neon",
+      "illuminated",
+      "dusk",
+      "nocturnal",
+      "streetlight",
+      "lit"
+    ],
+    "dayWords": [
+      "day",
+      "sunny",
+      "morning",
+      "noon",
+      "daylight",
+      "midday",
+      "bright"
+    ],
+    "rejectWords": [
+      "watermark",
+      "nsfw",
+      "nude",
+      "blood",
+      "gun",
+      "weapon",
+      "police",
+      "logo"
+    ]
+  },
+  "audit": {
+    "proceduralScenes": [
+      "screenshot",
+      "document",
+      "receipt",
+      "pocket",
+      "ceiling"
+    ],
+    "proceduralStyles": [
+      "screenshot",
+      "document"
+    ],
+    "peopleScenes": [
+      "selfie",
+      "mirror",
+      "group"
+    ],
+    "peopleStyles": [
+      "selfie"
+    ],
+    "personWords": [
+      "silhouette",
+      "silhouettes",
+      "visage",
+      "enfant",
+      "enfants",
+      "garçon",
+      "fille",
+      "bébé",
+      "maman",
+      "papa",
+      "mamie",
+      "sœur",
+      "sœurs",
+      "frère",
+      "de dos",
+      "pouce levé",
+      "sourit",
+      "rit",
+      "essoufflé",
+      "déguisés",
+      "au pupitre",
+      "au micro"
+    ],
+    "readableTextPatterns": [
+      "«",
+      "\"",
+      "affiche",
+      "panneau",
+      "écran",
+      "étiquette",
+      "plaque",
+      "logo",
+      "banderole",
+      "thermomètre",
+      "horloge",
+      "tableau blanc"
+    ],
+    "nocturnalScenes": [
+      "street_night",
+      "parking_night",
+      "concert",
+      "desk_night",
+      "party",
+      "club",
+      "road_night"
+    ],
+    "outdoorScenes": [
+      "sunset",
+      "sky",
+      "rain",
+      "street_day",
+      "street_night",
+      "parking_night",
+      "concert",
+      "park",
+      "beach",
+      "snow",
+      "view",
+      "metro",
+      "road_night",
+      "forest",
+      "mountain",
+      "terrace",
+      "garden_stairs",
+      "car",
+      "station"
+    ],
+    "nightFromHour": 21,
+    "nightUntilHour": 6,
+    "nightByHourExcludes": [
+      "sunset",
+      "sky"
+    ],
+    "forceCustom": {
+      "002/p_issue_2": "Suite de la preuve p_issue_1 (fûts, porte verte « Sortie ») : même lieu, même objets, à produire avec elle.",
+      "002/p_pistache_synth": "Le chat sur le rack de modules (câble jaune, voyants) : une photo générique de chat le contredirait.",
+      "003/p_laptop": "Rendu 3D du zellige vert sauge du chantier Laborde : contenu d'écran précis.",
+      "003/p_stairs_day": "L'escalier du jardin, lieu de la chute : nombre de marches et rampe à droite comptent pour l'enquête.",
+      "003/p_night_garden": "Le lampadaire de l'escalier éteint : détail lié à la nuit de la chute.",
+      "003/p_blur_party": "Le sweat jaune visible sur la photo floue est lié à la preuve e_yellow.",
+      "004/p_b08": "Les vitrines livrées et leur rayure : détail lié au vol.",
+      "004/p_b23": "La vitrine 4 au fond de la salle pendant l'arrivée des invités : repère de la chronologie du vol."
+    }
+  },
+  "cases": {
+    "001": {
+      "city": "Marseille",
+      "region": "Provence",
+      "extraPeople": [
+        "Jade"
+      ]
+    },
+    "002": {
+      "city": "Lyon",
+      "region": "Rhône",
+      "extraPeople": [
+        "Lou"
+      ]
+    },
+    "003": {
+      "city": "Cap Ferret",
+      "region": "Arcachon bay",
+      "extraPeople": [
+        "Mme Laborde"
+      ]
+    },
+    "004": {
+      "city": "Paris",
+      "region": "Paris",
+      "extraPeople": [
+        "Jules",
+        "PY",
+        "Samir",
+        "Noémie",
+        "Hélène",
+        "Iris"
+      ]
+    },
+    "005": {
+      "city": "Vercors",
+      "region": "French Alps",
+      "extraPeople": [
+        "Léo",
+        "Nina",
+        "Lina",
+        "Béatrice",
+        "Agathe",
+        "Jacques"
+      ]
+    }
+  },
+  "scenes": {
+    "sunset": {
+      "query": "{city} sunset",
+      "fallbacks": [
+        "sunset over city",
+        "orange sunset sky"
+      ]
+    },
+    "sky": {
+      "query": "blue sky over rooftops",
+      "fallbacks": [
+        "blue sky contrail",
+        "clear blue sky"
+      ]
+    },
+    "rain": {
+      "query": "raindrops on window glass",
+      "fallbacks": [
+        "rain on window blurred street",
+        "rainy window"
+      ]
+    },
+    "street_day": {
+      "query": "{city} street sunny day",
+      "fallbacks": [
+        "French old town street day",
+        "European street sunshine"
+      ]
+    },
+    "street_night": {
+      "query": "{city} street at night streetlights",
+      "fallbacks": [
+        "French street at night",
+        "empty street night lamps"
+      ]
+    },
+    "parking_night": {
+      "query": "empty parking lot at night",
+      "fallbacks": [
+        "car park night lights",
+        "dark parking lot"
+      ]
+    },
+    "concert": {
+      "query": "outdoor concert crowd stage lights night",
+      "fallbacks": [
+        "concert lights crowd from behind",
+        "music festival night stage"
+      ]
+    },
+    "bar": {
+      "query": "cocktail bar table glasses evening",
+      "fallbacks": [
+        "bar interior night warm light",
+        "drinks on bar table"
+      ]
+    },
+    "party": {
+      "query": "party string lights balloons",
+      "fallbacks": [
+        "birthday party decorations",
+        "fairy lights party room"
+      ]
+    },
+    "gallery": {
+      "query": "empty art gallery white walls",
+      "fallbacks": [
+        "photo exhibition gallery interior",
+        "gallery frames wall"
+      ]
+    },
+    "climbing": {
+      "query": "indoor climbing wall holds",
+      "fallbacks": [
+        "bouldering gym wall",
+        "climbing gym"
+      ]
+    },
+    "cat": {
+      "query": "cat sleeping",
+      "fallbacks": [
+        "tabby cat curled up",
+        "cat resting home"
+      ]
+    },
+    "books": {
+      "query": "bookshelf photography books",
+      "fallbacks": [
+        "books on shelf",
+        "bookshelf home"
+      ]
+    },
+    "interior_warm": {
+      "query": "living room warm lamp light",
+      "fallbacks": [
+        "apartment living room interior",
+        "home interior evening lamp"
+      ]
+    },
+    "station": {
+      "query": "French train station platform morning",
+      "fallbacks": [
+        "railway station hall",
+        "train station departures"
+      ]
+    },
+    "laptop": {
+      "query": "laptop on desk design work",
+      "fallbacks": [
+        "laptop screen desk",
+        "workspace laptop"
+      ]
+    },
+    "desk_night": {
+      "query": "desk at night lamp",
+      "fallbacks": [
+        "dark desk screen glow",
+        "night workspace"
+      ]
+    },
+    "car": {
+      "query": "car parked on street",
+      "fallbacks": [
+        "parked car city",
+        "small car street"
+      ]
+    },
+    "park": {
+      "query": "{city} park trees autumn",
+      "fallbacks": [
+        "city park path trees",
+        "park autumn leaves"
+      ]
+    },
+    "plant": {
+      "query": "houseplant by the window",
+      "fallbacks": [
+        "pothos plant window",
+        "indoor plant"
+      ]
+    },
+    "beach": {
+      "query": "{city} beach summer",
+      "fallbacks": [
+        "French beach summer",
+        "sandy beach sea"
+      ]
+    },
+    "snow": {
+      "query": "snowy mountain village",
+      "fallbacks": [
+        "snow covered trees",
+        "snow landscape winter"
+      ]
+    },
+    "view": {
+      "query": "{city} city view rooftops",
+      "fallbacks": [
+        "city skyline view rooftops",
+        "panorama rooftops"
+      ]
+    },
+    "metro": {
+      "query": "empty metro car seats",
+      "fallbacks": [
+        "subway train interior",
+        "metro interior"
+      ]
+    },
+    "club": {
+      "query": "nightclub empty dance floor lights",
+      "fallbacks": [
+        "club stage lights dark",
+        "dj booth lights"
+      ]
+    },
+    "road_night": {
+      "query": "mountain road at night fog headlights",
+      "fallbacks": [
+        "foggy road night",
+        "dark road fog"
+      ]
+    },
+    "forest": {
+      "query": "autumn forest path",
+      "fallbacks": [
+        "forest trail leaves",
+        "woods autumn"
+      ]
+    },
+    "gala": {
+      "query": "gala hall chandeliers evening event",
+      "fallbacks": [
+        "elegant event hall tables",
+        "banquet hall lights"
+      ]
+    },
+    "vitrine": {
+      "query": "museum display case jewelry",
+      "fallbacks": [
+        "museum glass showcase",
+        "jewelry display case"
+      ]
+    },
+    "vitrine_empty": {
+      "query": "empty museum display case",
+      "fallbacks": [
+        "empty glass showcase",
+        "museum vitrine"
+      ]
+    },
+    "mountain": {
+      "query": "{city} mountains clouds",
+      "fallbacks": [
+        "French Alps mountain ridge clouds",
+        "mountain ridge mist"
+      ]
+    },
+    "office": {
+      "query": "newsroom office desks",
+      "fallbacks": [
+        "open space office",
+        "meeting room chairs"
+      ]
+    },
+    "terrace": {
+      "query": "cafe terrace table coffee",
+      "fallbacks": [
+        "coffee cups terrace table",
+        "outdoor cafe table"
+      ]
+    },
+    "garden_stairs": {
+      "query": "stone stairs garden path",
+      "fallbacks": [
+        "garden stone steps",
+        "stairs to the beach"
+      ]
+    },
+    "villa_morning": {
+      "query": "villa terrace morning",
+      "fallbacks": [
+        "holiday house terrace",
+        "villa garden morning"
+      ]
+    },
+    "bed": {
+      "query": "bedroom bed blanket",
+      "fallbacks": [
+        "warm bedroom",
+        "bed interior"
+      ]
+    },
+    "selfie": {
+      "query": "",
+      "fallbacks": []
+    },
+    "mirror": {
+      "query": "",
+      "fallbacks": []
+    },
+    "group": {
+      "query": "",
+      "fallbacks": []
+    },
+    "screenshot": {
+      "query": "",
+      "fallbacks": []
+    },
+    "document": {
+      "query": "",
+      "fallbacks": []
+    },
+    "receipt": {
+      "query": "",
+      "fallbacks": []
+    },
+    "pocket": {
+      "query": "",
+      "fallbacks": []
+    },
+    "ceiling": {
+      "query": "",
+      "fallbacks": []
+    }
+  },
+  "overrides": {
+    "001/p_old01": {
+      "query": "fireworks over harbor night",
+      "fallbacks": [
+        "fireworks night sky"
+      ]
+    },
+    "001/p_old02": {
+      "query": "moving boxes living room",
+      "fallbacks": [
+        "apartment moving boxes"
+      ]
+    },
+    "001/p_old04": {
+      "query": "christmas dinner table candles",
+      "fallbacks": [
+        "festive table candles"
+      ]
+    },
+    "001/p_old05": {
+      "query": "snowy fir trees ski lift",
+      "fallbacks": [
+        "snow mountain fir trees"
+      ]
+    },
+    "001/p_b09": {
+      "query": "photography books on shelf",
+      "fallbacks": [
+        "bookshelf art books"
+      ]
+    },
+    "001/p_b10": {
+      "query": "blue sky airplane contrail",
+      "fallbacks": [
+        "contrail blue sky"
+      ]
+    },
+    "001/p_b17": {
+      "query": "photo exhibition room white walls frames",
+      "fallbacks": [
+        "art gallery interior frames",
+        "empty gallery white walls"
+      ]
+    },
+    "001/p_b19": {
+      "query": "photo exhibition room white walls frames",
+      "fallbacks": [
+        "art gallery interior frames",
+        "empty gallery white walls"
+      ]
+    },
+    "001/p_b23": {
+      "query": "sunrise over rooftops pink sky",
+      "fallbacks": [
+        "pink sunrise rooftops"
+      ]
+    },
+    "001/p_b24": {
+      "query": "excavator roadworks sidewalk",
+      "fallbacks": [
+        "street construction work"
+      ]
+    },
+    "001/p_b27": {
+      "query": "photo exhibition room white walls frames",
+      "fallbacks": [
+        "art gallery interior frames",
+        "empty gallery white walls"
+      ]
+    },
+    "001/p_night02": {
+      "query": "Marseille city lights at night from rooftop",
+      "fallbacks": [
+        "city lights night view sea"
+      ]
+    },
+    "002/p_old04": {
+      "query": "Lyon Saone river sunset footbridge",
+      "fallbacks": [
+        "river footbridge sunset",
+        "Lyon sunset river"
+      ]
+    },
+    "002/p_old05": {
+      "query": "christmas dinner table candles",
+      "fallbacks": [
+        "festive table candles"
+      ]
+    },
+    "002/p_synth01": {
+      "query": "modular synthesizer cables",
+      "fallbacks": [
+        "synthesizer patch cables"
+      ]
+    },
+    "002/p_berges01": {
+      "query": "Lyon Rhone river banks plane trees",
+      "fallbacks": [
+        "river bank path trees"
+      ]
+    },
+    "002/p_vinyl01": {
+      "query": "vinyl records stack",
+      "fallbacks": [
+        "vinyl records"
+      ]
+    },
+    "002/p_view01": {
+      "query": "Lyon rooftops Fourviere view",
+      "fallbacks": [
+        "Lyon city view rooftops"
+      ]
+    },
+    "002/p_market01": {
+      "query": "Lyon market vegetable stalls",
+      "fallbacks": [
+        "French outdoor market stalls"
+      ]
+    },
+    "002/p_friche01": {
+      "query": "industrial warehouse event hall empty",
+      "fallbacks": [
+        "empty industrial hall"
+      ]
+    },
+    "002/p_console01": {
+      "query": "sound mixing console faders lights",
+      "fallbacks": [
+        "audio mixer faders"
+      ]
+    },
+    "002/p_club01": {
+      "query": "empty nightclub stage lights speakers",
+      "fallbacks": [
+        "empty club dance floor lights",
+        "dark concert hall stage"
+      ]
+    },
+    "002/p_club02": {
+      "query": "empty nightclub stage lights speakers",
+      "fallbacks": [
+        "empty club dance floor lights",
+        "dark concert hall stage"
+      ]
+    },
+    "003/p_sky_july": {
+      "query": "pink sky over rooftops swifts",
+      "fallbacks": [
+        "pink sky rooftops"
+      ]
+    },
+    "003/p_laptop": {
+      "query": "bathroom design 3d render on laptop",
+      "fallbacks": [
+        "laptop screen design"
+      ]
+    },
+    "003/p_chantier": {
+      "query": "green zellige tiles bathroom",
+      "fallbacks": [
+        "green tiled bathroom"
+      ]
+    },
+    "003/p_quick_car": {
+      "query": "traffic jam brake lights evening",
+      "fallbacks": [
+        "traffic jam highway"
+      ]
+    },
+    "003/p_sunset_bassin": {
+      "query": "Arcachon bay sunset dune boats",
+      "fallbacks": [
+        "Pyla dune sunset",
+        "bay sunset moored boats"
+      ]
+    },
+    "003/p_huitres": {
+      "query": "oysters platter wine glasses",
+      "fallbacks": [
+        "oysters on wooden board"
+      ]
+    },
+    "003/p_old_2019": {
+      "query": "Arcachon bay sunset dune boats",
+      "fallbacks": [
+        "Pyla dune sunset",
+        "bay sunset moored boats"
+      ]
+    },
+    "003/p_porto": {
+      "query": "Porto street azulejos",
+      "fallbacks": [
+        "Porto street tiles"
+      ]
+    },
+    "003/p_night_chartrons": {
+      "query": "Bordeaux street at night terraces",
+      "fallbacks": [
+        "French street at night"
+      ]
+    },
+    "003/p_night_garden": {
+      "query": "garden at night dark terrace",
+      "fallbacks": [
+        "dark garden night"
+      ]
+    },
+    "003/p_stairs_day": {
+      "query": "stone stairs down to the beach",
+      "fallbacks": [
+        "stone steps garden sea"
+      ]
+    },
+    "004/p_old01": {
+      "query": "glass vases exhibition pedestals",
+      "fallbacks": [
+        "museum vases display"
+      ]
+    },
+    "004/p_old02": {
+      "query": "courtyard party string lights",
+      "fallbacks": [
+        "outdoor party lights courtyard"
+      ]
+    },
+    "004/p_old04": {
+      "query": "snowy chalet wooden wall sled",
+      "fallbacks": [
+        "snow chalet"
+      ]
+    },
+    "004/p_old05": {
+      "query": "birthday table candles glasses",
+      "fallbacks": [
+        "table candles glasses party"
+      ]
+    },
+    "004/p_b01": {
+      "query": "empty exhibition hall display cases",
+      "fallbacks": [
+        "empty gallery room showcases",
+        "museum showcases empty room"
+      ]
+    },
+    "004/p_b05": {
+      "query": "artist workshop cardboard models paint",
+      "fallbacks": [
+        "workshop studio tools"
+      ]
+    },
+    "004/p_b07": {
+      "query": "coffee cups croissant cafe table",
+      "fallbacks": [
+        "cafe breakfast table"
+      ]
+    },
+    "004/p_b08": {
+      "query": "furniture wrapped in tarp delivery",
+      "fallbacks": [
+        "covered display cases"
+      ]
+    },
+    "004/p_b10": {
+      "query": "Buttes Chaumont park autumn",
+      "fallbacks": [
+        "Paris park autumn trees"
+      ]
+    },
+    "004/p_b13": {
+      "query": "printed proofs pages on desk",
+      "fallbacks": [
+        "magazine proofs desk"
+      ]
+    },
+    "004/p_b15": {
+      "query": "empty exhibition hall display cases",
+      "fallbacks": [
+        "empty gallery room showcases",
+        "museum showcases empty room"
+      ]
+    },
+    "004/p_b18": {
+      "query": "empty exhibition hall display cases",
+      "fallbacks": [
+        "empty gallery room showcases",
+        "museum showcases empty room"
+      ]
+    },
+    "004/p_b19": {
+      "query": "Seine river morning mist Paris",
+      "fallbacks": [
+        "Paris river morning fog"
+      ]
+    },
+    "004/p_b21": {
+      "query": "gala hall chandeliers high tables evening",
+      "fallbacks": [
+        "elegant event hall tables",
+        "banquet hall lights"
+      ]
+    },
+    "005/p_old01": {
+      "query": "snow on roof and balcony village",
+      "fallbacks": [
+        "snowy balcony railing",
+        "snow covered roof"
+      ]
+    },
+    "005/p_old04": {
+      "query": "spring park empty stroller",
+      "fallbacks": [
+        "park in spring"
+      ]
+    },
+    "005/p_old06": {
+      "query": "office farewell party cups",
+      "fallbacks": [
+        "office party"
+      ]
+    },
+    "005/p_n01": {
+      "query": "Vercors mountain clouds",
+      "fallbacks": [
+        "mountain ridge clouds light"
+      ]
+    },
+    "005/p_n03": {
+      "query": "town council meeting room chairs",
+      "fallbacks": [
+        "empty meeting room chairs"
+      ]
+    },
+    "005/p_n04": {
+      "query": "stone quarry in forest",
+      "fallbacks": [
+        "quarry trucks",
+        "stone quarry machinery"
+      ]
+    },
+    "005/p_n10": {
+      "query": "snow on roof and balcony village",
+      "fallbacks": [
+        "snowy balcony railing",
+        "snow covered roof"
+      ]
+    },
+    "005/p_n16": {
+      "query": "cross country ski trail fresh snow",
+      "fallbacks": [
+        "ski trail forest snow",
+        "snowy trail bench"
+      ]
+    },
+    "005/p_n17": {
+      "query": "stone quarry in forest",
+      "fallbacks": [
+        "quarry trucks",
+        "stone quarry machinery"
+      ]
+    },
+    "005/p_n19": {
+      "query": "cross country ski trail fresh snow",
+      "fallbacks": [
+        "ski trail forest snow",
+        "snowy trail bench"
+      ]
+    },
+    "005/p_n21": {
+      "query": "newsroom desk coffee newspapers",
+      "fallbacks": [
+        "newspapers stack desk"
+      ]
+    },
+    "005/p_n22": {
+      "query": "rainy courtyard evening",
+      "fallbacks": [
+        "rain courtyard"
+      ]
+    },
+    "005/p_n18": {
+      "query": "mountain village street rain night",
+      "fallbacks": [
+        "village street night rain"
+      ]
+    },
+    "001/p_b01": {
+      "query": "Marseille old port sunset",
+      "fallbacks": [
+        "harbor sunset boats France"
+      ]
+    },
+    "002/p_sunset01": {
+      "query": "Lyon Saone river sunset footbridge",
+      "fallbacks": [
+        "river footbridge sunset",
+        "Lyon sunset river"
+      ]
+    }
+  }
+}

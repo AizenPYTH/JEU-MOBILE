@@ -92,6 +92,15 @@ struct ArtAssetsTests {
                 continue
             }
             #expect(set.file.lastPathComponent == set.name + ".jpg", "\(set.name): file \(set.file.lastPathComponent)")
+            if set.group == "Photos" {
+                // Prepared by the photo pipeline: case<NNN>_photo_<photoId>, a photo of that case.
+                let m = set.name.split(separator: "_", maxSplits: 2).map(String.init)
+                try #require(m.count == 3 && m[0].hasPrefix("case") && m[1] == "photo", "Unexpected photo name \(set.name)")
+                let file = cases.first { "case" + String(format: "%03d", $0.number) == m[0] }
+                let caseFile = try #require(file, "\(set.name): no case \(m[0])")
+                #expect(caseFile.devices.flatMap(\.photos).contains { $0.id == m[2] }, "\(set.name): no photo « \(m[2]) »")
+                continue
+            }
             if Self.metaNames.contains(set.name) {
                 #expect(set.group == (set.name.hasPrefix("npc_") ? "NPC" : "Players"), "\(set.name) in \(set.group)")
                 continue
@@ -114,7 +123,7 @@ struct ArtAssetsTests {
                 continue
             }
             let size = try #require(try Self.jpegSize(set.file), "\(set.name) is not a JPEG")
-            let expected = set.name.hasPrefix("avatar_") ? (512, 512) : (1024, 1280)
+            let expected = set.group == "Photos" ? (1024, 768) : set.name.hasPrefix("avatar_") ? (512, 512) : (1024, 1280)
             #expect(size.width == expected.0 && size.height == expected.1, "\(set.name): \(size.width)×\(size.height)")
         }
     }

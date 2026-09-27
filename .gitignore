@@ -16,3 +16,7 @@ Package.resolved
 
 # Local reports
 reports/
+
+# Photo pipeline cache (search results, downloaded originals)
+cache/
+__pycache__/
