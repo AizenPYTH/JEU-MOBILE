@@ -6,6 +6,19 @@
       "provider": "openverse",
       "photographer": "",
       "photographerUrl": "",
+      "sourceUrl": "https://www.rawpixel.com/image/5948199/free-public-domain-cc0-photo",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "",
+      "attribution": "« Sans titre » — auteur inconnu (CC0)",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "",
+      "photographerUrl": "",
       "sourceUrl": "https://www.rawpixel.com/image/3290544/free-photo-image-alley-alleyway-asphalt",
       "license": "CC0 1.0",
       "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -13,6 +26,32 @@
       "attribution": "« Original public domain image Wikimedia » — auteur inconnu (CC0)",
       "cases": [
         "001"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "",
+      "photographerUrl": "",
+      "sourceUrl": "https://www.rawpixel.com/image/6043334/photo-image-public-domain-wood-house",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "Bedroom decor interior",
+      "attribution": "« Bedroom decor interior » — auteur inconnu (CC0)",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "",
+      "photographerUrl": "",
+      "sourceUrl": "https://www.rawpixel.com/image/5947922/free-public-domain-cc0-photo",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "",
+      "attribution": "« Sans titre » — auteur inconnu (CC0)",
+      "cases": [
+        "003"
       ]
     },
     {
@@ -39,19 +78,6 @@
       "attribution": "« A spiky green succulent plant in a yellow pot placed indoors near a window. The background features a stone-textured wall and light switches. » — Anil Gurung (CC0)",
       "cases": [
         "003"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "Antoine Lorin",
-      "photographerUrl": "https://500px.com/wind_du_34",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=71469504",
-      "license": "BY 3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "title": "<div class='fn'> Bonne Mère Marseille</div>",
-      "attribution": "« <div class='fn'> Bonne Mère Marseille</div> » by Antoine Lorin, CC BY 3.0",
-      "cases": [
-        "001"
       ]
     },
     {
@@ -95,15 +121,28 @@
     },
     {
       "provider": "openverse",
-      "photographer": "HAUMW LAMM 01",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:HAUMW_LAMM_01",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=117015639",
-      "license": "BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "title": "HK SSP 深水埗 Sham Shui Po 鴨寮街 Apliu Street BMW black car parking Kweilin Street April 2022 Px3 03",
-      "attribution": "« HK SSP 深水埗 Sham Shui Po 鴨寮街 Apliu Street BMW black car parking Kweilin Street April 2022 Px3 03 » by HAUMW LAMM 01, CC BY-SA 4.0",
+      "photographer": "I Am birdsaspoetry.com  from Melbourne, Australia",
+      "photographerUrl": "https://www.flickr.com/people/78742710@N08",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=93783723",
+      "license": "BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "title": "European Goldfinch Glowing",
+      "attribution": "« European Goldfinch Glowing » by I Am birdsaspoetry.com  from Melbourne, Australia, CC BY 2.0",
       "cases": [
         "001"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "John Goldsmith",
+      "photographerUrl": "https://www.geograph.org.uk/profile/28123",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=105185420",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "title": "Sunset over City of Norwich School - geograph.org.uk - 1986384",
+      "attribution": "« Sunset over City of Norwich School - geograph.org.uk - 1986384 » by John Goldsmith, CC BY-SA 2.0",
+      "cases": [
+        "002"
       ]
     },
     {
@@ -121,15 +160,41 @@
     },
     {
       "provider": "openverse",
-      "photographer": "Kaique Rocha",
-      "photographerUrl": "https://stocksnap.io/author/24615",
-      "sourceUrl": "https://stocksnap.io/photo/architecture-buildings-7M5EBWG9WA",
+      "photographer": "Kristin Hardwick",
+      "photographerUrl": "https://www.kristinhardwick.com",
+      "sourceUrl": "https://stocksnap.io/photo/couch-furniture-TQNWBTLHLY",
       "license": "CC0 1.0",
       "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-      "title": "Architecture Buildings",
-      "attribution": "« Architecture Buildings » — Kaique Rocha (CC0)",
+      "title": "Couch Furniture",
+      "attribution": "« Couch Furniture » — Kristin Hardwick (CC0)",
+      "cases": [
+        "004"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "Mary",
+      "photographerUrl": "https://www.instagram.com/maryroseandflowers",
+      "sourceUrl": "https://stocksnap.io/photo/park-trees-QXPYZ0JISB",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "title": "Park Trees",
+      "attribution": "« Park Trees » — Mary (CC0)",
       "cases": [
         "002"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "Michael Westley",
+      "photographerUrl": "https://www.geograph.org.uk/profile/42460",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=107868737",
+      "license": "BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "title": "Sunset over City - geograph.org.uk - 2388510",
+      "attribution": "« Sunset over City - geograph.org.uk - 2388510 » by Michael Westley, CC BY-SA 2.0",
+      "cases": [
+        "003"
       ]
     },
     {
@@ -173,6 +238,32 @@
     },
     {
       "provider": "openverse",
+      "photographer": "Nisnuwon",
+      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:Nisnuwon&action=edit&redlink=1",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=90548296",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Sunset over city",
+      "attribution": "« Sunset over city » by Nisnuwon, CC BY-SA 4.0",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "openverse",
+      "photographer": "No Swan So Fine",
+      "photographerUrl": "https://commons.wikimedia.org/wiki/User:No_Swan_So_Fine",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=147826385",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 02",
+      "attribution": "« Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 02 » by No Swan So Fine, CC BY-SA 4.0",
+      "cases": [
+        "001"
+      ]
+    },
+    {
+      "provider": "openverse",
       "photographer": "Sergei Gussev",
       "photographerUrl": "https://www.flickr.com/sergeigussev",
       "sourceUrl": "https://stocksnap.io/photo/water-sunset-AUQ1UHL1PG",
@@ -180,19 +271,6 @@
       "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
       "title": "Water Sunset",
       "attribution": "« Water Sunset » — Sergei Gussev (CC0)",
-      "cases": [
-        "001"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "shankar s. from Dubai, united arab emirates",
-      "photographerUrl": "https://www.flickr.com/people/77742560@N06",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=66622435",
-      "license": "BY 2.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-      "title": "File:Crossing the busy street to Old Shanghai (36045409450).jpg",
-      "attribution": "« File:Crossing the busy street to Old Shanghai (36045409450).jpg » by shankar s. from Dubai, united arab emirates, CC BY 2.0",
       "cases": [
         "001"
       ]
@@ -212,13 +290,13 @@
     },
     {
       "provider": "openverse",
-      "photographer": "Vyacheslav Argenberg",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Argenberg",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=98529029",
-      "license": "BY 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-      "title": "Old Bagan, Myanmar, Sunset over 12th century pagodas in Bagan plains",
-      "attribution": "« Old Bagan, Myanmar, Sunset over 12th century pagodas in Bagan plains » by Vyacheslav Argenberg, CC BY 4.0",
+      "photographer": "Wistula",
+      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Wistula",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=175625064",
+      "license": "BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "title": "Street construction works, Jana Ciszewskiego, Warsaw Ursynów (13)",
+      "attribution": "« Street construction works, Jana Ciszewskiego, Warsaw Ursynów (13) » by Wistula, CC BY-SA 4.0",
       "cases": [
         "001"
       ]

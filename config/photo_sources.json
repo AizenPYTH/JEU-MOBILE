@@ -5,26 +5,36 @@
       "status": "fetched",
       "case": "001",
       "provider": "openverse",
-      "providerPhotoId": "c1039be4-7079-4d0c-a293-3609822d996e",
-      "photographer": "Antoine Lorin",
-      "photographerUrl": "https://500px.com/wind_du_34",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=71469504",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/3/37/Bonne_M%C3%A8re_Marseille_%28195931677%29.jpeg",
-      "license": "by",
-      "licenseVersion": "3.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-      "origin": "wikimedia",
-      "title": "<div class='fn'> Bonne Mère Marseille</div>",
-      "queryUsed": "Marseille beach summer",
-      "dateFetched": "2026-09-27T08:20:38+00:00",
-      "width": 2048,
-      "height": 1536,
-      "score": 3.5,
-      "luminance": 145.0,
-      "file": "openverse_c1039be4-7079-4d0c-a293-3609822d996e.jpg",
-      "sha256": "3eb4b4cff291277c1fdac03ef3f5732c1a3a85b1a66bb35b530cf8c98c655662",
-      "attributionRequired": true,
-      "attributionText": "« <div class='fn'> Bonne Mère Marseille</div> » by Antoine Lorin, CC BY 3.0",
+      "providerPhotoId": "5a91bb97-4be1-48b2-a64c-bea7281b91a3",
+      "photographer": "",
+      "photographerUrl": "",
+      "sourceUrl": "https://www.rawpixel.com/image/5948199/free-public-domain-cc0-photo",
+      "downloadUrl": "https://images.rawpixel.com/editor_1024/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHg2NDM0NzMtaW1hZ2Uta3d5cDBoMGMuanBn.jpg",
+      "license": "cc0",
+      "licenseVersion": "1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "origin": "rawpixel",
+      "title": "",
+      "tags": [
+        "beach photo",
+        "bretagne",
+        "clouds",
+        "landscape",
+        "ocean",
+        "sea french coast",
+        "spring",
+        "summer"
+      ],
+      "queryUsed": "French beach summer",
+      "dateFetched": "2026-09-27T08:56:26+00:00",
+      "width": 6000,
+      "height": 4000,
+      "score": 4.33,
+      "luminance": 143.0,
+      "file": "openverse_5a91bb97-4be1-48b2-a64c-bea7281b91a3.jpg",
+      "sha256": "a44fc771e3462ed6802a643cf9d09375f04bd469735efc9d8148f205dbd6e5d5",
+      "attributionRequired": false,
+      "attributionText": "« Sans titre » — auteur inconnu (CC0)",
       "evidence": false
     },
     {
@@ -59,26 +69,27 @@
       "status": "fetched",
       "case": "001",
       "provider": "openverse",
-      "providerPhotoId": "d61ffc3d-bf59-419e-9958-e03e26385e53",
-      "photographer": "Vyacheslav Argenberg",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Argenberg",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=98529029",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/0/03/Old_Bagan%2C_Myanmar%2C_Sunset_over_12th_century_pagodas_in_Bagan_plains.jpg",
-      "license": "by",
+      "providerPhotoId": "94b24b99-38fa-4625-9363-af366bc6a051",
+      "photographer": "Nisnuwon",
+      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:Nisnuwon&action=edit&redlink=1",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=90548296",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Sunset_over_city.jpg",
+      "license": "by-sa",
       "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "origin": "wikimedia",
-      "title": "Old Bagan, Myanmar, Sunset over 12th century pagodas in Bagan plains",
+      "title": "Sunset over city",
+      "tags": [],
       "queryUsed": "sunset over city",
-      "dateFetched": "2026-09-27T08:20:39+00:00",
-      "width": 4000,
-      "height": 3000,
-      "score": 4.0,
-      "luminance": 88.5,
-      "file": "openverse_d61ffc3d-bf59-419e-9958-e03e26385e53.jpg",
-      "sha256": "ce753783120f51c7c801193118c76e4fa9477b9351bf1ce26a20175f3605fcb5",
+      "dateFetched": "2026-09-27T08:56:26+00:00",
+      "width": 3968,
+      "height": 2976,
+      "score": 3.25,
+      "luminance": 117.4,
+      "file": "openverse_94b24b99-38fa-4625-9363-af366bc6a051.jpg",
+      "sha256": "9a6845d74a824e833c7253edbf8f1864aea7896091677ff6a0a7dad98fa5c182",
       "attributionRequired": true,
-      "attributionText": "« Old Bagan, Myanmar, Sunset over 12th century pagodas in Bagan plains » by Vyacheslav Argenberg, CC BY 4.0",
+      "attributionText": "« Sunset over city » by Nisnuwon, CC BY-SA 4.0",
       "evidence": false
     },
     {
@@ -140,26 +151,27 @@
       "status": "fetched",
       "case": "001",
       "provider": "openverse",
-      "providerPhotoId": "aa623411-6adc-4ec7-9846-2449e1c370d5",
-      "photographer": "shankar s. from Dubai, united arab emirates",
-      "photographerUrl": "https://www.flickr.com/people/77742560@N06",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=66622435",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Crossing_the_busy_street_to_Old_Shanghai_%2836045409450%29.jpg",
+      "providerPhotoId": "4648110c-bd03-4241-9b97-6315b2a1f12a",
+      "photographer": "I Am birdsaspoetry.com  from Melbourne, Australia",
+      "photographerUrl": "https://www.flickr.com/people/78742710@N08",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=93783723",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/9/94/European_Goldfinch_Glowing_%2850257614467%29.jpg",
       "license": "by",
       "licenseVersion": "2.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
       "origin": "wikimedia",
-      "title": "File:Crossing the busy street to Old Shanghai (36045409450).jpg",
-      "queryUsed": "French old town street day",
-      "dateFetched": "2026-09-27T08:20:57+00:00",
-      "width": 4928,
-      "height": 3264,
-      "score": 3.07,
-      "luminance": 144.6,
-      "file": "openverse_aa623411-6adc-4ec7-9846-2449e1c370d5.jpg",
-      "sha256": "1c64589f61c724d9d0f19e795092403cc248c53d9375520a627637df70ecb517",
+      "title": "European Goldfinch Glowing",
+      "tags": [],
+      "queryUsed": "European street sunshine",
+      "dateFetched": "2026-09-27T08:56:27+00:00",
+      "width": 2500,
+      "height": 1667,
+      "score": 2.33,
+      "luminance": 126.8,
+      "file": "openverse_4648110c-bd03-4241-9b97-6315b2a1f12a.jpg",
+      "sha256": "be68447b552a1e7f7f5aa9e24d14c606edb1aca98e60ab43a4ae5e0109356112",
       "attributionRequired": true,
-      "attributionText": "« File:Crossing the busy street to Old Shanghai (36045409450).jpg » by shankar s. from Dubai, united arab emirates, CC BY 2.0",
+      "attributionText": "« European Goldfinch Glowing » by I Am birdsaspoetry.com  from Melbourne, Australia, CC BY 2.0",
       "evidence": false
     },
     {
@@ -194,26 +206,27 @@
       "status": "fetched",
       "case": "001",
       "provider": "openverse",
-      "providerPhotoId": "c3100263-c7f9-4ab1-9765-38403e876d6d",
-      "photographer": "HAUMW LAMM 01",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:HAUMW_LAMM_01",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=117015639",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/HK_SSP_%E6%B7%B1%E6%B0%B4%E5%9F%97_Sham_Shui_Po_%E9%B4%A8%E5%AF%AE%E8%A1%97_Apliu_Street_BMW_black_car_parking_Kweilin_Street_April_2022_Px3_03.jpg",
+      "providerPhotoId": "8326195f-5dee-4967-b484-f7cf801ad7ae",
+      "photographer": "No Swan So Fine",
+      "photographerUrl": "https://commons.wikimedia.org/wiki/User:No_Swan_So_Fine",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=147826385",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Entrance_to_The_Chilterns_underground_car_park%2C_Paddington_Street%2C_Marylebone%2C_October_2023_02.jpg",
       "license": "by-sa",
       "licenseVersion": "4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "origin": "wikimedia",
-      "title": "HK SSP 深水埗 Sham Shui Po 鴨寮街 Apliu Street BMW black car parking Kweilin Street April 2022 Px3 03",
+      "title": "Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 02",
+      "tags": [],
       "queryUsed": "car parked on street",
-      "dateFetched": "2026-09-27T08:21:03+00:00",
-      "width": 4000,
-      "height": 3000,
+      "dateFetched": "2026-09-27T08:56:28+00:00",
+      "width": 4032,
+      "height": 3024,
       "score": 4.5,
-      "luminance": 110.2,
-      "file": "openverse_c3100263-c7f9-4ab1-9765-38403e876d6d.jpg",
-      "sha256": "c8236ba556e909dfa5130251ac86aab3bd6968c1b4196f92edda3f2ec7c258ee",
+      "luminance": 176.9,
+      "file": "openverse_8326195f-5dee-4967-b484-f7cf801ad7ae.jpg",
+      "sha256": "bccabc0ec03f47c8b0bae0bc7d8b31b1cda4243c3f623b5ab207b23b965370d6",
       "attributionRequired": true,
-      "attributionText": "« HK SSP 深水埗 Sham Shui Po 鴨寮街 Apliu Street BMW black car parking Kweilin Street April 2022 Px3 03 » by HAUMW LAMM 01, CC BY-SA 4.0",
+      "attributionText": "« Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 02 » by No Swan So Fine, CC BY-SA 4.0",
       "evidence": false
     },
     {
@@ -272,9 +285,31 @@
     },
     {
       "sourceId": "case001_src_excavator_roadworks_sidewalk_01",
-      "status": "missing",
+      "status": "fetched",
       "case": "001",
-      "reason": "6 téléchargement(s) échoué(s) ou rejeté(s)"
+      "provider": "openverse",
+      "providerPhotoId": "a3ecbb71-942d-4985-b2bb-7645813572ef",
+      "photographer": "Wistula",
+      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Wistula",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=175625064",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/7/79/Street_construction_works%2C_Jana_Ciszewskiego%2C_Warsaw_Ursyn%C3%B3w_%2813%29.jpg",
+      "license": "by-sa",
+      "licenseVersion": "4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "origin": "wikimedia",
+      "title": "Street construction works, Jana Ciszewskiego, Warsaw Ursynów (13)",
+      "tags": [],
+      "queryUsed": "street construction work",
+      "dateFetched": "2026-09-27T08:56:28+00:00",
+      "width": 4032,
+      "height": 3024,
+      "score": 2.5,
+      "luminance": 129.3,
+      "file": "openverse_a3ecbb71-942d-4985-b2bb-7645813572ef.jpg",
+      "sha256": "37ae7fdb4e9d7db09bff7c5cfb156f7c3b2490ded1be7d28af8075e2ead61e40",
+      "attributionRequired": true,
+      "attributionText": "« Street construction works, Jana Ciszewskiego, Warsaw Ursynów (13) » by Wistula, CC BY-SA 4.0",
+      "evidence": false
     },
     {
       "sourceId": "case001_src_fireworks_over_harbor_night_01",
@@ -359,9 +394,40 @@
     },
     {
       "sourceId": "case001_src_moving_boxes_living_room_01",
-      "status": "missing",
+      "status": "fetched",
       "case": "001",
-      "reason": "6 téléchargement(s) échoué(s) ou rejeté(s)"
+      "provider": "openverse",
+      "providerPhotoId": "318438f4-514d-448c-8c4c-e266cbc66b5f",
+      "photographer": "",
+      "photographerUrl": "",
+      "sourceUrl": "https://www.rawpixel.com/image/6043334/photo-image-public-domain-wood-house",
+      "downloadUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2ZsMTk1MTAyNjQ5NDktaW1hZ2Uta3liZW1xZnMuanBn.jpg",
+      "license": "cc0",
+      "licenseVersion": "1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "origin": "rawpixel",
+      "title": "Bedroom decor interior",
+      "tags": [
+        "apartment",
+        "bedroom",
+        "home",
+        "house",
+        "interior design",
+        "interiors",
+        "living room",
+        "room"
+      ],
+      "queryUsed": "apartment living room interior",
+      "dateFetched": "2026-09-27T08:56:29+00:00",
+      "width": 6000,
+      "height": 4350,
+      "score": 3.95,
+      "luminance": 162.8,
+      "file": "openverse_318438f4-514d-448c-8c4c-e266cbc66b5f.jpg",
+      "sha256": "a2a83200ff8adf7c2aec29b73eb3a47104d851dcf04c63ead822e5f80289f136",
+      "attributionRequired": false,
+      "attributionText": "« Bedroom decor interior » — auteur inconnu (CC0)",
+      "evidence": false
     },
     {
       "sourceId": "case001_src_outdoor_concert_crowd_stage_lights_night_01",
@@ -404,39 +470,81 @@
       "status": "fetched",
       "case": "002",
       "provider": "openverse",
-      "providerPhotoId": "88b1eadd-77c5-433a-8b60-c5c00769099d",
-      "photographer": "Kaique Rocha",
-      "photographerUrl": "https://stocksnap.io/author/24615",
-      "sourceUrl": "https://stocksnap.io/photo/architecture-buildings-7M5EBWG9WA",
-      "downloadUrl": "https://cdn.stocksnap.io/img-thumbs/960w/7M5EBWG9WA.jpg",
+      "providerPhotoId": "4cab2079-8a99-4cce-8636-e766b8919cbb",
+      "photographer": "Mary",
+      "photographerUrl": "https://www.instagram.com/maryroseandflowers",
+      "sourceUrl": "https://stocksnap.io/photo/park-trees-QXPYZ0JISB",
+      "downloadUrl": "https://cdn.stocksnap.io/img-thumbs/960w/QXPYZ0JISB.jpg",
       "license": "cc0",
       "licenseVersion": "1.0",
       "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
       "origin": "stocksnap",
-      "title": "Architecture Buildings",
+      "title": "Park Trees",
+      "tags": [
+        "city",
+        "empty",
+        "fog",
+        "foggy",
+        "footpath",
+        "landscape",
+        "moody",
+        "natural",
+        "nature",
+        "outdoor",
+        "park",
+        "path",
+        "sidewalk",
+        "street",
+        "travel",
+        "tree",
+        "trees",
+        "urban"
+      ],
       "queryUsed": "city park path trees",
-      "dateFetched": "2026-09-27T08:29:05+00:00",
-      "width": 5472,
-      "height": 3648,
-      "score": 2.83,
-      "luminance": 90.0,
-      "file": "openverse_88b1eadd-77c5-433a-8b60-c5c00769099d.jpg",
-      "sha256": "7b4d820a1795570c80704f4dc2980dfd90de99a9d4eae07ed6053362bb261c85",
+      "dateFetched": "2026-09-27T08:56:29+00:00",
+      "width": 4592,
+      "height": 2584,
+      "score": 2.56,
+      "luminance": 86.9,
+      "file": "openverse_4cab2079-8a99-4cce-8636-e766b8919cbb.jpg",
+      "sha256": "db6039a78be906449fbe31fbb0d82f3a1464bc4b408c2532ea8df36d220b1aaf",
       "attributionRequired": false,
-      "attributionText": "« Architecture Buildings » — Kaique Rocha (CC0)",
+      "attributionText": "« Park Trees » — Mary (CC0)",
       "evidence": false
     },
     {
       "sourceId": "case002_src_lyon_saone_river_sunset_footbridge_01",
-      "status": "missing",
+      "status": "fetched",
       "case": "002",
-      "reason": "6 téléchargement(s) échoué(s) ou rejeté(s)"
+      "provider": "openverse",
+      "providerPhotoId": "eca8ac8f-8699-4b8d-b067-91f0d3f523b3",
+      "photographer": "John Goldsmith",
+      "photographerUrl": "https://www.geograph.org.uk/profile/28123",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=105185420",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/9/97/Sunset_over_City_of_Norwich_School_-_geograph.org.uk_-_1986384.jpg",
+      "license": "by-sa",
+      "licenseVersion": "2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "origin": "wikimedia",
+      "title": "Sunset over City of Norwich School - geograph.org.uk - 1986384",
+      "tags": [],
+      "queryUsed": "sunset over city",
+      "dateFetched": "2026-09-27T08:56:29+00:00",
+      "width": 2848,
+      "height": 2136,
+      "score": 3.1,
+      "luminance": 91.0,
+      "file": "openverse_eca8ac8f-8699-4b8d-b067-91f0d3f523b3.jpg",
+      "sha256": "1a83d9c80ba5b4e707b307a3758ccaab9e5214f7c8bf1a720300511dcfa0691d",
+      "attributionRequired": true,
+      "attributionText": "« Sunset over City of Norwich School - geograph.org.uk - 1986384 » by John Goldsmith, CC BY-SA 2.0",
+      "evidence": false
     },
     {
       "sourceId": "case002_src_lyon_market_vegetable_stalls_01",
       "status": "missing",
       "case": "002",
-      "reason": "2 téléchargement(s) échoué(s) ou rejeté(s)"
+      "reason": "aucun candidat acceptable"
     },
     {
       "sourceId": "case002_src_lyon_rooftops_fourviere_view_01",
@@ -448,7 +556,7 @@
       "sourceId": "case002_src_lyon_street_at_night_streetlights_01",
       "status": "missing",
       "case": "002",
-      "reason": "4 téléchargement(s) échoué(s) ou rejeté(s)"
+      "reason": "1 téléchargement(s) échoué(s) ou rejeté(s)"
     },
     {
       "sourceId": "case002_src_empty_metro_car_seats_01",
@@ -494,15 +602,37 @@
     },
     {
       "sourceId": "case003_src_arcachon_bay_sunset_dune_boats_01",
-      "status": "missing",
+      "status": "fetched",
       "case": "003",
-      "reason": "6 téléchargement(s) échoué(s) ou rejeté(s)"
+      "provider": "openverse",
+      "providerPhotoId": "a07e04ab-5ce5-4108-98f3-feaead1e0738",
+      "photographer": "Michael Westley",
+      "photographerUrl": "https://www.geograph.org.uk/profile/42460",
+      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=107868737",
+      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Sunset_over_City_-_geograph.org.uk_-_2388510.jpg",
+      "license": "by-sa",
+      "licenseVersion": "2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "origin": "wikimedia",
+      "title": "Sunset over City - geograph.org.uk - 2388510",
+      "tags": [],
+      "queryUsed": "sunset over city",
+      "dateFetched": "2026-09-27T08:57:01+00:00",
+      "width": 3648,
+      "height": 2736,
+      "score": 3.1,
+      "luminance": 78.7,
+      "file": "openverse_a07e04ab-5ce5-4108-98f3-feaead1e0738.jpg",
+      "sha256": "fab6c95f007fb80b0cc52c63168d3e102fb99b924cf12c625630bffa0f331813",
+      "attributionRequired": true,
+      "attributionText": "« Sunset over City - geograph.org.uk - 2388510 » by Michael Westley, CC BY-SA 2.0",
+      "evidence": false
     },
     {
       "sourceId": "case003_src_bordeaux_street_at_night_terraces_01",
       "status": "missing",
       "case": "003",
-      "reason": "5 téléchargement(s) échoué(s) ou rejeté(s)"
+      "reason": "1 téléchargement(s) échoué(s) ou rejeté(s)"
     },
     {
       "sourceId": "case003_src_cat_sleeping_01",
@@ -533,9 +663,40 @@
     },
     {
       "sourceId": "case003_src_green_zellige_tiles_bathroom_01",
-      "status": "missing",
+      "status": "fetched",
       "case": "003",
-      "reason": "aucun candidat acceptable"
+      "provider": "openverse",
+      "providerPhotoId": "d7de5fa1-d23a-47e4-8ed1-6ee2b5cb9808",
+      "photographer": "",
+      "photographerUrl": "",
+      "sourceUrl": "https://www.rawpixel.com/image/5947922/free-public-domain-cc0-photo",
+      "downloadUrl": "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9zdGF0aWMvaW1hZ2Uvd2Vic2l0ZS8yMDIyLTA0L2xyL3B4NjM0NjAxLWltYWdlLWt3eW96MTl5LmpwZw.jpg",
+      "license": "cc0",
+      "licenseVersion": "1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "origin": "rawpixel",
+      "title": "",
+      "tags": [
+        "apartment interior",
+        "bedroom",
+        "green couch",
+        "hotel design",
+        "hotel room",
+        "interior bedroom",
+        "living room",
+        "living room interior"
+      ],
+      "queryUsed": "apartment living room interior",
+      "dateFetched": "2026-09-27T08:57:33+00:00",
+      "width": 5616,
+      "height": 3748,
+      "score": 3.08,
+      "luminance": 149.9,
+      "file": "openverse_d7de5fa1-d23a-47e4-8ed1-6ee2b5cb9808.jpg",
+      "sha256": "28b71a6c069ec8cf7063ff19d2a063fd4a2e6b62079f6f474fcf04827e2cf35c",
+      "attributionRequired": false,
+      "attributionText": "« Sans titre » — auteur inconnu (CC0)",
+      "evidence": false
     },
     {
       "sourceId": "case003_src_houseplant_by_the_window_01",
@@ -592,7 +753,7 @@
       "sourceId": "case004_src_paris_street_at_night_streetlights_01",
       "status": "missing",
       "case": "004",
-      "reason": "6 téléchargement(s) échoué(s) ou rejeté(s)"
+      "reason": "1 téléchargement(s) échoué(s) ou rejeté(s)"
     },
     {
       "sourceId": "case004_src_seine_river_morning_mist_paris_01",
@@ -602,9 +763,52 @@
     },
     {
       "sourceId": "case004_src_birthday_table_candles_glasses_01",
-      "status": "missing",
+      "status": "fetched",
       "case": "004",
-      "reason": "aucun candidat acceptable"
+      "provider": "openverse",
+      "providerPhotoId": "273a0d7e-fc57-470d-8aaf-c4af132c2085",
+      "photographer": "Kristin Hardwick",
+      "photographerUrl": "https://www.kristinhardwick.com",
+      "sourceUrl": "https://stocksnap.io/photo/couch-furniture-TQNWBTLHLY",
+      "downloadUrl": "https://cdn.stocksnap.io/img-thumbs/960w/TQNWBTLHLY.jpg",
+      "license": "cc0",
+      "licenseVersion": "1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "origin": "stocksnap",
+      "title": "Couch Furniture",
+      "tags": [
+        "apartment",
+        "carpet",
+        "comfortable",
+        "contemporary",
+        "couch",
+        "design",
+        "furniture",
+        "home",
+        "house",
+        "indoor",
+        "interior",
+        "lifestyle",
+        "living",
+        "luxury",
+        "modern",
+        "office",
+        "pillow",
+        "plant",
+        "room",
+        "sofa"
+      ],
+      "queryUsed": "apartment living room interior",
+      "dateFetched": "2026-09-27T08:58:05+00:00",
+      "width": 5760,
+      "height": 3840,
+      "score": 3.08,
+      "luminance": 148.4,
+      "file": "openverse_273a0d7e-fc57-470d-8aaf-c4af132c2085.jpg",
+      "sha256": "02d3a47dd7a9c5d360045dce7626f44e790f2572d7d059f9cea9847d1dffbbe5",
+      "attributionRequired": false,
+      "attributionText": "« Couch Furniture » — Kristin Hardwick (CC0)",
+      "evidence": false
     },
     {
       "sourceId": "case004_src_cat_sleeping_01",
@@ -691,7 +895,7 @@
       "sourceId": "case005_src_mountain_village_street_rain_night_01",
       "status": "missing",
       "case": "005",
-      "reason": "6 téléchargement(s) échoué(s) ou rejeté(s)"
+      "reason": "aucun candidat acceptable"
     },
     {
       "sourceId": "case005_src_rainy_courtyard_evening_01",
@@ -733,17 +937,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_d61ffc3d-bf59-419e-9958-e03e26385e53.jpg",
-        "sourceSha256": "ce753783120f51c7c801193118c76e4fa9477b9351bf1ce26a20175f3605fcb5",
+        "source": "openverse_94b24b99-38fa-4625-9363-af366bc6a051.jpg",
+        "sourceSha256": "9a6845d74a824e833c7253edbf8f1864aea7896091677ff6a0a7dad98fa5c182",
         "box": [
           0,
           0,
-          4000,
-          3000
+          3968,
+          2976
         ]
       },
-      "sha256": "20f4de5ef0f79483f778a7e34f7aed672807372fa38a3dbae765dd524c56abbd",
-      "bytes": 31048
+      "sha256": "511925fdd1f4e872af4d038023628260cd6ba0ace2744098255e1b182edf97ba",
+      "bytes": 51649
     },
     {
       "assetId": "case001_photo_p_b04",
@@ -759,17 +963,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_aa623411-6adc-4ec7-9846-2449e1c370d5.jpg",
-        "sourceSha256": "1c64589f61c724d9d0f19e795092403cc248c53d9375520a627637df70ecb517",
+        "source": "openverse_4648110c-bd03-4241-9b97-6315b2a1f12a.jpg",
+        "sourceSha256": "be68447b552a1e7f7f5aa9e24d14c606edb1aca98e60ab43a4ae5e0109356112",
         "box": [
           0,
           0,
-          4352,
-          3264
+          2222,
+          1667
         ]
       },
-      "sha256": "90603885fc485eba6f1fbc5967f96265d21756c6beb30521c72c16e61b57b445",
-      "bytes": 152491
+      "sha256": "2c8f8d4264d98f4f2585a06314d0deee40180fc2c273c74ec57c4637fd655455",
+      "bytes": 72370
     },
     {
       "assetId": "case001_photo_p_b07",
@@ -902,6 +1106,32 @@
       "bytes": 132103
     },
     {
+      "assetId": "case001_photo_p_b24",
+      "sourceId": "case001_src_excavator_roadworks_sidewalk_01",
+      "caseId": "001",
+      "photoId": "p_b24",
+      "evidence": false,
+      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case001_photo_p_b24.imageset/case001_photo_p_b24.jpg",
+      "transformation": {
+        "profile": "phone-photo",
+        "width": 1024,
+        "height": 768,
+        "quality": 76,
+        "crop": "best",
+        "zoom": 1.0,
+        "source": "openverse_a3ecbb71-942d-4985-b2bb-7645813572ef.jpg",
+        "sourceSha256": "37ae7fdb4e9d7db09bff7c5cfb156f7c3b2490ded1be7d28af8075e2ead61e40",
+        "box": [
+          0,
+          0,
+          4032,
+          3024
+        ]
+      },
+      "sha256": "b30c8c3ee2d80139166ee7e443e41296980d4dee262eac9551f05fc05053102b",
+      "bytes": 179493
+    },
+    {
       "assetId": "case001_photo_p_b25",
       "sourceId": "case001_src_houseplant_by_the_window_01",
       "caseId": "001",
@@ -1032,6 +1262,32 @@
       "bytes": 86144
     },
     {
+      "assetId": "case001_photo_p_old02",
+      "sourceId": "case001_src_moving_boxes_living_room_01",
+      "caseId": "001",
+      "photoId": "p_old02",
+      "evidence": false,
+      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case001_photo_p_old02.imageset/case001_photo_p_old02.jpg",
+      "transformation": {
+        "profile": "phone-photo",
+        "width": 1024,
+        "height": 768,
+        "quality": 76,
+        "crop": "best",
+        "zoom": 1.0,
+        "source": "openverse_318438f4-514d-448c-8c4c-e266cbc66b5f.jpg",
+        "sourceSha256": "a2a83200ff8adf7c2aec29b73eb3a47104d851dcf04c63ead822e5f80289f136",
+        "box": [
+          0,
+          0,
+          989,
+          742
+        ]
+      },
+      "sha256": "702a2f4062628887bf2d7f1d611d30b2ba3c81b111956387da26141f657efb41",
+      "bytes": 91961
+    },
+    {
       "assetId": "case001_photo_p_old03",
       "sourceId": "case001_src_marseille_beach_summer_01",
       "caseId": "001",
@@ -1045,17 +1301,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_c1039be4-7079-4d0c-a293-3609822d996e.jpg",
-        "sourceSha256": "3eb4b4cff291277c1fdac03ef3f5732c1a3a85b1a66bb35b530cf8c98c655662",
+        "source": "openverse_5a91bb97-4be1-48b2-a64c-bea7281b91a3.jpg",
+        "sourceSha256": "a44fc771e3462ed6802a643cf9d09375f04bd469735efc9d8148f205dbd6e5d5",
         "box": [
+          113,
           0,
-          0,
-          2048,
-          1536
+          1024,
+          683
         ]
       },
-      "sha256": "15c539d9998fe587a48c787f0dab99582bb637c0d7961a3c537607093f1d4db7",
-      "bytes": 134853
+      "sha256": "5f8da2208e2c852e98e5b96dd13afd5f9505b6703ca50fe85d0a40db467c0dac",
+      "bytes": 137367
     },
     {
       "assetId": "case001_photo_p_quick02",
@@ -1071,17 +1327,17 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_c3100263-c7f9-4ab1-9765-38403e876d6d.jpg",
-        "sourceSha256": "c8236ba556e909dfa5130251ac86aab3bd6968c1b4196f92edda3f2ec7c258ee",
+        "source": "openverse_8326195f-5dee-4967-b484-f7cf801ad7ae.jpg",
+        "sourceSha256": "bccabc0ec03f47c8b0bae0bc7d8b31b1cda4243c3f623b5ab207b23b965370d6",
         "box": [
           0,
           0,
-          4000,
-          3000
+          4032,
+          3024
         ]
       },
-      "sha256": "c9931a039778412df3c78a8eb9e023bf7dad70a51869716328ff36dfcd7390ee",
-      "bytes": 157175
+      "sha256": "e5eddcadb46462f80cbbaf650cdf64aadb9835fe95cca97742e1ce3c5f36b001",
+      "bytes": 199035
     },
     {
       "assetId": "case002_photo_p_berges01",
@@ -1097,17 +1353,69 @@
         "quality": 76,
         "crop": "best",
         "zoom": 1.0,
-        "source": "openverse_88b1eadd-77c5-433a-8b60-c5c00769099d.jpg",
-        "sourceSha256": "7b4d820a1795570c80704f4dc2980dfd90de99a9d4eae07ed6053362bb261c85",
+        "source": "openverse_4cab2079-8a99-4cce-8636-e766b8919cbb.jpg",
+        "sourceSha256": "db6039a78be906449fbe31fbb0d82f3a1464bc4b408c2532ea8df36d220b1aaf",
         "box": [
-          50,
+          240,
           0,
-          903,
-          640
+          960,
+          540
         ]
       },
-      "sha256": "b866cb75fe9c037702930da4058a872c534c959088aed41d42e1c5cc01773116",
-      "bytes": 152174
+      "sha256": "f946cf5b2dceccf95503e478ca86ef62bef0b61369ba83c31f638cdcce3ba0e1",
+      "bytes": 143915
+    },
+    {
+      "assetId": "case002_photo_p_old04",
+      "sourceId": "case002_src_lyon_saone_river_sunset_footbridge_01",
+      "caseId": "002",
+      "photoId": "p_old04",
+      "evidence": false,
+      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case002_photo_p_old04.imageset/case002_photo_p_old04.jpg",
+      "transformation": {
+        "profile": "phone-photo",
+        "width": 1024,
+        "height": 768,
+        "quality": 76,
+        "crop": "best",
+        "zoom": 1.0,
+        "source": "openverse_eca8ac8f-8699-4b8d-b067-91f0d3f523b3.jpg",
+        "sourceSha256": "1a83d9c80ba5b4e707b307a3758ccaab9e5214f7c8bf1a720300511dcfa0691d",
+        "box": [
+          0,
+          0,
+          2848,
+          2136
+        ]
+      },
+      "sha256": "9dbb64af21f5959bca8f860c7ce412cd95d28f26c9cdf510a05802b09d3cc9ed",
+      "bytes": 76950
+    },
+    {
+      "assetId": "case002_photo_p_sunset01",
+      "sourceId": "case002_src_lyon_saone_river_sunset_footbridge_01",
+      "caseId": "002",
+      "photoId": "p_sunset01",
+      "evidence": false,
+      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case002_photo_p_sunset01.imageset/case002_photo_p_sunset01.jpg",
+      "transformation": {
+        "profile": "phone-photo",
+        "width": 1024,
+        "height": 768,
+        "quality": 76,
+        "crop": "left",
+        "zoom": 1.2,
+        "source": "openverse_eca8ac8f-8699-4b8d-b067-91f0d3f523b3.jpg",
+        "sourceSha256": "1a83d9c80ba5b4e707b307a3758ccaab9e5214f7c8bf1a720300511dcfa0691d",
+        "box": [
+          0,
+          118,
+          2373,
+          1898
+        ]
+      },
+      "sha256": "d26ee045a975ba58a122cee52cfdb23000856cae9fd6ae362e218475e34d8082",
+      "bytes": 79490
     },
     {
       "assetId": "case003_photo_p_cat",
@@ -1136,6 +1444,58 @@
       "bytes": 75847
     },
     {
+      "assetId": "case003_photo_p_chantier",
+      "sourceId": "case003_src_green_zellige_tiles_bathroom_01",
+      "caseId": "003",
+      "photoId": "p_chantier",
+      "evidence": false,
+      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case003_photo_p_chantier.imageset/case003_photo_p_chantier.jpg",
+      "transformation": {
+        "profile": "phone-photo",
+        "width": 1024,
+        "height": 768,
+        "quality": 76,
+        "crop": "best",
+        "zoom": 1.0,
+        "source": "openverse_d7de5fa1-d23a-47e4-8ed1-6ee2b5cb9808.jpg",
+        "sourceSha256": "28b71a6c069ec8cf7063ff19d2a063fd4a2e6b62079f6f474fcf04827e2cf35c",
+        "box": [
+          113,
+          0,
+          1024,
+          683
+        ]
+      },
+      "sha256": "92c311b35db9ea126c5a44de4106c564e06181c46adff74aa34a61d472fbbd99",
+      "bytes": 64948
+    },
+    {
+      "assetId": "case003_photo_p_old_2019",
+      "sourceId": "case003_src_arcachon_bay_sunset_dune_boats_01",
+      "caseId": "003",
+      "photoId": "p_old_2019",
+      "evidence": false,
+      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case003_photo_p_old_2019.imageset/case003_photo_p_old_2019.jpg",
+      "transformation": {
+        "profile": "phone-photo",
+        "width": 1024,
+        "height": 768,
+        "quality": 76,
+        "crop": "best",
+        "zoom": 1.0,
+        "source": "openverse_a07e04ab-5ce5-4108-98f3-feaead1e0738.jpg",
+        "sourceSha256": "fab6c95f007fb80b0cc52c63168d3e102fb99b924cf12c625630bffa0f331813",
+        "box": [
+          0,
+          0,
+          3648,
+          2736
+        ]
+      },
+      "sha256": "8b9d2db7f4a8a9e527e84d2d9982a2e543829e9d34179a1287a7f9e1ac577aa0",
+      "bytes": 56451
+    },
+    {
       "assetId": "case003_photo_p_plant",
       "sourceId": "case003_src_houseplant_by_the_window_01",
       "caseId": "003",
@@ -1162,6 +1522,32 @@
       "bytes": 87869
     },
     {
+      "assetId": "case003_photo_p_sunset_bassin",
+      "sourceId": "case003_src_arcachon_bay_sunset_dune_boats_01",
+      "caseId": "003",
+      "photoId": "p_sunset_bassin",
+      "evidence": false,
+      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case003_photo_p_sunset_bassin.imageset/case003_photo_p_sunset_bassin.jpg",
+      "transformation": {
+        "profile": "phone-photo",
+        "width": 1024,
+        "height": 768,
+        "quality": 76,
+        "crop": "left",
+        "zoom": 1.2,
+        "source": "openverse_a07e04ab-5ce5-4108-98f3-feaead1e0738.jpg",
+        "sourceSha256": "fab6c95f007fb80b0cc52c63168d3e102fb99b924cf12c625630bffa0f331813",
+        "box": [
+          266,
+          38,
+          3306,
+          2318
+        ]
+      },
+      "sha256": "577e8ea143b6ad89464279d3bd9c5bc77ed832f24e30da2b0651b065d87c83ed",
+      "bytes": 61937
+    },
+    {
       "assetId": "case004_photo_p_b03",
       "sourceId": "case004_src_cat_sleeping_01",
       "caseId": "004",
@@ -1186,14 +1572,40 @@
       },
       "sha256": "77287c9ed7b475543e23d8983b0897ec761c5abcd4de1077966cefbd4f44502b",
       "bytes": 49456
+    },
+    {
+      "assetId": "case004_photo_p_old05",
+      "sourceId": "case004_src_birthday_table_candles_glasses_01",
+      "caseId": "004",
+      "photoId": "p_old05",
+      "evidence": false,
+      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case004_photo_p_old05.imageset/case004_photo_p_old05.jpg",
+      "transformation": {
+        "profile": "phone-photo",
+        "width": 1024,
+        "height": 768,
+        "quality": 76,
+        "crop": "best",
+        "zoom": 1.0,
+        "source": "openverse_273a0d7e-fc57-470d-8aaf-c4af132c2085.jpg",
+        "sourceSha256": "02d3a47dd7a9c5d360045dce7626f44e790f2572d7d059f9cea9847d1dffbbe5",
+        "box": [
+          0,
+          0,
+          853,
+          640
+        ]
+      },
+      "sha256": "9c212fba669c2eaa139ff9011b689131ca11dde797e33006f774d9b69cdae4e8",
+      "bytes": 97973
     }
   ],
   "stats": {
     "requests": {
-      "openverse": 30
+      "openverse": 34
     },
-    "rejected": 19,
-    "lastRun": "2026-09-27T08:50:14+00:00"
+    "rejected": 196,
+    "lastRun": "2026-09-27T08:58:07+00:00"
   },
   "about": "Provenance of every external photo (generated by scripts/photos/pipeline.py). One `sources` entry per downloaded image, one `assets` entry per image shipped in the game."
 }
