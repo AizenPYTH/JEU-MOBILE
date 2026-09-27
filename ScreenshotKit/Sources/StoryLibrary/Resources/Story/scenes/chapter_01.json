@@ -1,0 +1,674 @@
+{
+  "scenes": [
+    {
+      "id": "S01-01",
+      "title": "Arrivée au BEN",
+      "location": "ENV_BEN_CORRIDOR",
+      "place": "BEN · 3ᵉ ÉTAGE · 21:04",
+      "participants": [
+        "player"
+      ],
+      "beats": [
+        {
+          "kind": "place",
+          "actor": "player",
+          "anchor": "entry"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_corr_wide",
+            "subject": "player"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "sound",
+          "sound": "door_glass"
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "hall"
+        },
+        {
+          "kind": "sound",
+          "sound": "steps_lino"
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_corr_follow",
+            "subject": "player",
+            "move": "track"
+          }
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "mid"
+        },
+        {
+          "kind": "sound",
+          "sound": "neon_buzz"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2.5
+        },
+        {
+          "kind": "sound",
+          "sound": "phone_distant"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_corr_door312",
+            "subject": "player"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "door312"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2.5
+        }
+      ],
+      "dialogue": []
+    },
+    {
+      "id": "S01-01B",
+      "title": "Bureau 312",
+      "location": "ENV_BEN_OFFICE_LACAZE",
+      "place": "BEN · BUREAU 312 · 21:06",
+      "participants": [
+        "player",
+        "lacaze"
+      ],
+      "beats": [
+        {
+          "kind": "place",
+          "actor": "lacaze",
+          "anchor": "lac_desk"
+        },
+        {
+          "kind": "place",
+          "actor": "player",
+          "anchor": "door_in"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_lac_door",
+            "subject": "lacaze"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "read"
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_lac_ms",
+            "subject": "lacaze"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_close_door"
+        },
+        {
+          "kind": "sound",
+          "sound": "door_close"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "overShoulder",
+            "camera": "cam_lac_os",
+            "subject": "player",
+            "other": "lacaze"
+          }
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "visitor"
+        },
+        {
+          "kind": "sound",
+          "sound": "chair"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "show",
+          "target": "agent_folder"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_lac_cu",
+            "subject": "lacaze"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "read"
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_twelve_years"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_lac_ms",
+            "subject": "lacaze"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "hide",
+          "target": "agent_folder"
+        },
+        {
+          "kind": "sound",
+          "sound": "drawer"
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "take"
+        },
+        {
+          "kind": "wait",
+          "seconds": 1.5
+        },
+        {
+          "kind": "show",
+          "target": "case_folder"
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "put_down"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_lac_desk_top",
+            "prop": "case_folder"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_marseille"
+        },
+        {
+          "kind": "sound",
+          "sound": "plastic_bag"
+        },
+        {
+          "kind": "show",
+          "target": "evidence_bag"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_lac_desk_top",
+            "prop": "evidence_bag",
+            "move": "pushIn"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_phone"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "l_close_door",
+          "speaker": "lacaze",
+          "text": "{player.lastName}. Fermez la porte.",
+          "emotion": "tired"
+        },
+        {
+          "id": "l_twelve_years",
+          "speaker": "lacaze",
+          "text": "Douze ans de terrain. Vous êtes là parce qu'on me l'a demandé.",
+          "emotion": "neutral",
+          "choices": [
+            {
+              "id": "c01_defiant",
+              "text": "Et vous, vous l'auriez demandé ?",
+              "kind": "relational",
+              "remember": "Vous avez demandé à Lacaze s'il vous aurait {g:choisi|choisie|choisi}.",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_lac_os",
+                "subject": "player",
+                "other": "lacaze"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c01_defiant"
+                },
+                {
+                  "kind": "respect",
+                  "npc": "lacaze",
+                  "amount": 1
+                }
+              ],
+              "next": "p_defiant"
+            },
+            {
+              "id": "c01_dutiful",
+              "text": "Je ferai le travail.",
+              "kind": "relational",
+              "remember": "Vous avez promis à Lacaze de faire le travail.",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_lac_os",
+                "subject": "player",
+                "other": "lacaze"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c01_dutiful"
+                },
+                {
+                  "kind": "trust",
+                  "npc": "lacaze",
+                  "amount": 1
+                }
+              ],
+              "next": "p_dutiful"
+            },
+            {
+              "id": "c01_silent",
+              "text": "Ne rien dire",
+              "kind": "narrative",
+              "silent": true,
+              "pause": 2,
+              "remember": "Vous n'avez rien répondu à Lacaze, et il a levé les yeux.",
+              "shot": {
+                "kind": "closeUp",
+                "camera": "cam_lac_cu",
+                "subject": "lacaze"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c01_silent"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "p_defiant",
+          "speaker": "player",
+          "text": "Et vous, vous l'auriez demandé ?",
+          "next": "l_not_yet"
+        },
+        {
+          "id": "l_not_yet",
+          "speaker": "lacaze",
+          "text": "Pas encore.",
+          "emotion": "neutral",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_lac_cu",
+            "subject": "lacaze"
+          }
+        },
+        {
+          "id": "p_dutiful",
+          "speaker": "player",
+          "text": "Je ferai le travail.",
+          "next": "l_we_will_see"
+        },
+        {
+          "id": "l_we_will_see",
+          "speaker": "lacaze",
+          "text": "On verra.",
+          "emotion": "tired",
+          "animation": "nod",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_lac_cu",
+            "subject": "lacaze"
+          }
+        },
+        {
+          "id": "l_marseille",
+          "speaker": "lacaze",
+          "text": "Marseille. Un homme de vingt-six ans.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "l_phone",
+          "speaker": "lacaze",
+          "text": "Son téléphone a été retrouvé ce matin. À vous.",
+          "emotion": "neutral"
+        }
+      ]
+    },
+    {
+      "id": "S01-02",
+      "title": "Retour",
+      "location": "ENV_BEN_OFFICE_LACAZE",
+      "place": "BEN · BUREAU 312 · 05:40",
+      "participants": [
+        "player",
+        "lacaze"
+      ],
+      "beats": [
+        {
+          "kind": "ambience",
+          "sound": "ben_office_dawn"
+        },
+        {
+          "kind": "place",
+          "actor": "lacaze",
+          "anchor": "lac_desk"
+        },
+        {
+          "kind": "place",
+          "actor": "player",
+          "anchor": "visitor"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_lac_wide",
+            "subject": "lacaze"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_lac_ms",
+            "subject": "lacaze"
+          }
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "read"
+        },
+        {
+          "kind": "sound",
+          "sound": "page"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_lac_cu",
+            "subject": "lacaze"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_good",
+          "condition": {
+            "lastCaseSolved": true
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_happens",
+          "condition": {
+            "lastCaseSolved": false
+          }
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "overShoulder",
+            "camera": "cam_lac_os",
+            "subject": "player",
+            "other": "lacaze"
+          }
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "handover"
+        },
+        {
+          "kind": "show",
+          "target": "ben_card"
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_card"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_lac_desk_top",
+            "prop": "ben_card",
+            "move": "pushIn"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "wait",
+          "seconds": 2.5
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_lac_ms",
+            "subject": "lacaze"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_office"
+        },
+        {
+          "kind": "transition",
+          "style": "fade",
+          "seconds": 1.3
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "l_good",
+          "speaker": "lacaze",
+          "text": "Bien.",
+          "emotion": "neutral",
+          "animation": "nod"
+        },
+        {
+          "id": "l_happens",
+          "speaker": "lacaze",
+          "text": "Ça arrive. Pas deux fois.",
+          "emotion": "tired"
+        },
+        {
+          "id": "l_card",
+          "speaker": "lacaze",
+          "text": "Elle est à votre nom. Ne la perdez pas.",
+          "emotion": "neutral",
+          "choices": [
+            {
+              "id": "c01_thanks",
+              "text": "Merci, commandant.",
+              "kind": "cosmetic",
+              "next": "l_nothing"
+            },
+            {
+              "id": "c01_first",
+              "text": "Et le dossier Moreau ?",
+              "kind": "relational",
+              "remember": "Vous avez demandé ce que deviendrait le dossier Moreau.",
+              "effects": [
+                {
+                  "kind": "respect",
+                  "npc": "lacaze",
+                  "amount": 1
+                }
+              ],
+              "next": "l_moreau"
+            },
+            {
+              "id": "c01_card_silent",
+              "text": "Ne rien dire",
+              "kind": "cosmetic",
+              "silent": true,
+              "pause": 2,
+              "shot": {
+                "kind": "closeUp",
+                "camera": "cam_lac_cu",
+                "subject": "lacaze"
+              }
+            }
+          ]
+        },
+        {
+          "id": "l_nothing",
+          "speaker": "lacaze",
+          "text": "Ne me remerciez pas. Ce n'est qu'une carte.",
+          "emotion": "tired"
+        },
+        {
+          "id": "l_moreau",
+          "speaker": "lacaze",
+          "text": "Il part au parquet de Marseille ce matin. Avec votre nom dessus.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "l_office",
+          "speaker": "lacaze",
+          "text": "Votre bureau est au bout du couloir.",
+          "emotion": "neutral"
+        }
+      ]
+    },
+    {
+      "id": "S01-03",
+      "title": "Mon bureau",
+      "location": "ENV_BEN_OFFICE_PLAYER",
+      "place": "BEN · BUREAU 327 · 06:05",
+      "participants": [
+        "player"
+      ],
+      "beats": [
+        {
+          "kind": "place",
+          "actor": "player",
+          "anchor": "po_entry"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_po_wide",
+            "subject": "player"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "wait",
+          "seconds": 2,
+          "silence": true
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "po_stand"
+        },
+        {
+          "kind": "animate",
+          "actor": "player",
+          "animation": "put_down"
+        },
+        {
+          "kind": "sound",
+          "sound": "paper_slide"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "sound",
+          "sound": "desk_phone_ring"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_po_obj_phone",
+            "prop": "desk_phone",
+            "move": "pushIn"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "wait",
+          "seconds": 2.5
+        },
+        {
+          "kind": "transition",
+          "style": "fade",
+          "seconds": 1.0
+        }
+      ],
+      "dialogue": []
+    }
+  ]
+}

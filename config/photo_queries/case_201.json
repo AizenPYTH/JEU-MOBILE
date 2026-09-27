@@ -1,0 +1,398 @@
+{
+  "case": "201",
+  "about": "STORY #001 « LE DOSSIER VARIN » — Paris 11e / Vincennes, 8–9 octobre 2026",
+  "photos": {
+    "p_old_etretat": {
+      "decision": "REAL",
+      "query": "Falaises d'Étretat porte d'Aval",
+      "fallbacks": [
+        "Étretat cliffs",
+        "Normandy chalk cliffs"
+      ],
+      "subject": [
+        "étretat",
+        "etretat",
+        "falaise",
+        "cliff",
+        "aval"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old_fete": {
+      "decision": "REAL",
+      "query": "Fête de la musique Paris rue",
+      "fallbacks": [
+        "Fête de la musique Paris night",
+        "Paris street crowd night"
+      ],
+      "subject": [
+        "fête",
+        "musique",
+        "music",
+        "crowd",
+        "foule",
+        "street"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old_sapin": {
+      "decision": "REAL",
+      "query": "Christmas tree living room",
+      "fallbacks": [
+        "sapin de Noël salon",
+        "decorated christmas tree"
+      ],
+      "subject": [
+        "christmas",
+        "noël",
+        "sapin",
+        "tree"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_canal": {
+      "decision": "REAL",
+      "query": "Canal Saint-Martin passerelle",
+      "fallbacks": [
+        "Canal Saint-Martin Paris",
+        "Paris canal footbridge"
+      ],
+      "subject": [
+        "canal",
+        "saint-martin",
+        "passerelle",
+        "footbridge"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_maquette": {
+      "decision": "REAL",
+      "query": "architectural model cardboard",
+      "fallbacks": [
+        "maquette architecture carton",
+        "architecture model building"
+      ],
+      "subject": [
+        "model",
+        "maquette",
+        "architectural",
+        "architecture"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_coulee": {
+      "decision": "REAL",
+      "query": "Promenade plantée Paris",
+      "fallbacks": [
+        "Coulée verte René-Dumont",
+        "Viaduc des Arts promenade"
+      ],
+      "subject": [
+        "promenade",
+        "plantée",
+        "coulée",
+        "verte",
+        "viaduc"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_aligre": {
+      "decision": "REAL",
+      "query": "Marché d'Aligre Paris",
+      "fallbacks": [
+        "Aligre market Paris",
+        "Paris open-air market stalls"
+      ],
+      "subject": [
+        "aligre",
+        "marché",
+        "market",
+        "stall",
+        "étal"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_dahlias": {
+      "decision": "REAL",
+      "query": "dahlias garden",
+      "fallbacks": [
+        "dahlia flowers red orange",
+        "dahlia jardin"
+      ],
+      "subject": [
+        "dahlia",
+        "flower",
+        "fleur",
+        "garden"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_planning": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    },
+    "p_lea_chat": {
+      "decision": "REAL",
+      "query": "tabby cat sleeping sofa",
+      "fallbacks": [
+        "chat tigré canapé",
+        "cat curled blanket"
+      ],
+      "subject": [
+        "cat",
+        "chat",
+        "tabby",
+        "kitten"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_buttes": {
+      "decision": "REAL",
+      "query": "Temple de la Sibylle Buttes-Chaumont",
+      "fallbacks": [
+        "Parc des Buttes-Chaumont",
+        "Buttes-Chaumont lake"
+      ],
+      "subject": [
+        "sibylle",
+        "buttes-chaumont",
+        "chaumont",
+        "parc",
+        "park"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_tirages": {
+      "decision": "REAL",
+      "query": "architectural drawings on table",
+      "fallbacks": [
+        "architect plans desk",
+        "blueprints table office"
+      ],
+      "subject": [
+        "plan",
+        "plans",
+        "drawing",
+        "blueprint",
+        "architect",
+        "architecture"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_verriere": {
+      "decision": "REAL",
+      "query": "rain drops glass roof",
+      "fallbacks": [
+        "rain on skylight",
+        "raindrops window grey sky"
+      ],
+      "subject": [
+        "rain",
+        "pluie",
+        "drops",
+        "gouttes",
+        "glass",
+        "window"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_ticket": {
+      "decision": "PROCEDURAL",
+      "reason": "ticket (document) rendu par le téléphone"
+    },
+    "p_daumesnil": {
+      "decision": "REAL",
+      "query": "Lac Daumesnil bois de Vincennes",
+      "fallbacks": [
+        "Lac Daumesnil barques",
+        "Bois de Vincennes lake autumn"
+      ],
+      "subject": [
+        "daumesnil",
+        "lac",
+        "lake",
+        "vincennes",
+        "barque"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_cirque": {
+      "decision": "REAL",
+      "query": "Cirque d'Hiver Paris",
+      "fallbacks": [
+        "Cirque d'Hiver façade",
+        "Paris rue Amelot"
+      ],
+      "subject": [
+        "cirque",
+        "hiver",
+        "circus",
+        "amelot"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_nas_orange": {
+      "decision": "REAL",
+      "query": "server rack small office",
+      "fallbacks": [
+        "network storage server rack",
+        "baie serveur câbles"
+      ],
+      "subject": [
+        "server",
+        "serveur",
+        "rack",
+        "nas",
+        "network",
+        "baie"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_plante": {
+      "decision": "REAL",
+      "query": "pothos plant shelf",
+      "fallbacks": [
+        "houseplant office window",
+        "plante pothos"
+      ],
+      "subject": [
+        "pothos",
+        "plant",
+        "plante",
+        "houseplant"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_belleville": {
+      "decision": "REAL",
+      "query": "Parc de Belleville vue Paris",
+      "fallbacks": [
+        "Belleville park view Paris sunset",
+        "Paris skyline from Belleville"
+      ],
+      "subject": [
+        "belleville",
+        "parc",
+        "view",
+        "vue",
+        "paris"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_republique": {
+      "decision": "REAL",
+      "query": "Place de la République Paris",
+      "fallbacks": [
+        "Statue de la République Paris",
+        "Paris Republique square"
+      ],
+      "subject": [
+        "république",
+        "republique",
+        "place",
+        "statue",
+        "square"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_vincennes_2230": {
+      "decision": "REAL",
+      "query": "birthday cake candles table",
+      "fallbacks": [
+        "gâteau d'anniversaire bougies",
+        "raspberry cake candles"
+      ],
+      "subject": [
+        "cake",
+        "gâteau",
+        "birthday",
+        "anniversaire",
+        "candles",
+        "bougies"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_adrien_cigale": {
+      "decision": "REAL",
+      "query": "La Cigale Paris salle concert",
+      "fallbacks": [
+        "La Cigale Paris",
+        "concert stage red lights crowd"
+      ],
+      "subject": [
+        "cigale",
+        "concert",
+        "stage",
+        "scène",
+        "salle"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_chateau": {
+      "decision": "REAL",
+      "query": "Château de Vincennes donjon nuit",
+      "fallbacks": [
+        "Donjon de Vincennes",
+        "Château de Vincennes night"
+      ],
+      "subject": [
+        "vincennes",
+        "donjon",
+        "château",
+        "chateau",
+        "castle"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_poche": {
+      "decision": "PROCEDURAL",
+      "reason": "photo ratée prise dans une poche"
+    },
+    "p_depot_capture": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    }
+  }
+}

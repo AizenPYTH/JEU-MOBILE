@@ -642,7 +642,9 @@ enum Brand {
 func dossierNumber(_ n: Int) -> String { n < 10 ? "00\(n)" : n < 100 ? "0\(n)" : "\(n)" }
 /// The number shown on a file: ALIBI checks are numbered from 101 in the data (one namespace for
 /// saves and assets), « ALIBI #001 » on screen.
-func shownNumber(_ n: Int) -> String { dossierNumber(n > 100 ? n - 100 : n) }
-/// « DOSSIER #004 » / « ALIBI #001 ».
-func fileLabel(_ n: Int) -> String { L10n.f(n > 100 ? "alibi.number" : "dossier.number", shownNumber(n)) }
+func shownNumber(_ n: Int) -> String { dossierNumber(n > 200 ? n - 200 : n > 100 ? n - 100 : n) }
+/// « DOSSIER #004 » / « ALIBI #001 » / « DOSSIER BEN #001 » (a story case).
+func fileLabel(_ n: Int) -> String {
+    L10n.f(n > 200 ? "story.caseNumber" : n > 100 ? "alibi.number" : "dossier.number", shownNumber(n))
+}
 #endif

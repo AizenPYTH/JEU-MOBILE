@@ -32,6 +32,8 @@ struct LegacyWordsTests {
             if path.contains("/.git/") || path.contains("/.build/") || path.contains("/.swiftpm/") { continue }
             // Third-party photo titles, kept verbatim for attribution (generated provenance and credits).
             if Self.thirdPartyText.contains(where: path.hasSuffix) || path.contains("/cache/") { continue }
+            // The story handoff, kept verbatim (read-only): « Cdt. Lacaze, [head] of the BEN » is police vocabulary.
+            if path.contains("/docs/design_story/") { continue }
             let ext = url.pathExtension.isEmpty ? url.lastPathComponent.trimmingCharacters(in: ["."]) : url.pathExtension
             guard Self.textExtensions.contains(ext), let text = try? String(contentsOf: url, encoding: .utf8) else { continue }
             scanned += 1

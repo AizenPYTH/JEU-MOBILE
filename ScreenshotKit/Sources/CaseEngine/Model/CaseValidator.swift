@@ -15,8 +15,10 @@ public enum CaseValidator {
 
         if file.durationSeconds <= 0 { fail("durationSeconds must be > 0") }
         if file.devices.isEmpty { fail("a case needs at least one device") }
-        // One number space: main cases 1–100, ALIBI checks from 101 (shown « ALIBI #001 »).
-        if file.isAlibi != (file.number > 100) { fail("main cases are numbered 1–100, ALIBI cases from 101") }
+        // One number space: main cases 1–100, ALIBI checks 101–200 (shown « ALIBI #001 »), story
+        // cases 201–300.
+        let range = file.isAlibi ? 101...200 : file.isStory ? 201...300 : 1...100
+        if !range.contains(file.number) { fail("case number \(file.number): main cases are 1–100, ALIBI 101–200, story 201–300") }
         if file.isAlibi {
             if file.suspects.count != 1 { fail("an ALIBI case has exactly one person (one suspect)") }
         } else if file.suspects.count < 2 {

@@ -8140,6 +8140,928 @@
           "best"
         ]
       }
+    },
+    {
+      "id": "case201_src_canal_saint_martin_passerelle_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "street_day",
+      "query": "Canal Saint-Martin passerelle",
+      "fallbackQueries": [
+        "Canal Saint-Martin Paris",
+        "Paris canal footbridge"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "canal",
+        "saint-martin",
+        "passerelle",
+        "footbridge"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_canal"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_christmas_tree_living_room_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "interior_warm",
+      "query": "Christmas tree living room",
+      "fallbackQueries": [
+        "sapin de Noël salon",
+        "decorated christmas tree"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "christmas",
+        "noël",
+        "sapin",
+        "tree"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_old_sapin"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_chateau_de_vincennes_donjon_nuit_night_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "street_night",
+      "query": "Château de Vincennes donjon nuit",
+      "fallbackQueries": [
+        "Donjon de Vincennes",
+        "Château de Vincennes night"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "vincennes",
+        "donjon",
+        "château",
+        "chateau",
+        "castle"
+      ],
+      "night": true,
+      "requireDark": true,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_chateau"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_cirque_d_hiver_paris_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "street_day",
+      "query": "Cirque d'Hiver Paris",
+      "fallbackQueries": [
+        "Cirque d'Hiver façade",
+        "Paris rue Amelot"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "cirque",
+        "hiver",
+        "circus",
+        "amelot"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_cirque"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_falaises_d_etretat_porte_d_aval_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "beach",
+      "query": "Falaises d'Étretat porte d'Aval",
+      "fallbackQueries": [
+        "Étretat cliffs",
+        "Normandy chalk cliffs"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "étretat",
+        "etretat",
+        "falaise",
+        "cliff",
+        "aval"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_old_etretat"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_fete_de_la_musique_paris_rue_night_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "street_night",
+      "query": "Fête de la musique Paris rue",
+      "fallbackQueries": [
+        "Fête de la musique Paris night",
+        "Paris street crowd night"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "fête",
+        "musique",
+        "music",
+        "crowd",
+        "foule",
+        "street"
+      ],
+      "night": true,
+      "requireDark": true,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_old_fete"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_lac_daumesnil_bois_de_vincennes_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "park",
+      "query": "Lac Daumesnil bois de Vincennes",
+      "fallbackQueries": [
+        "Lac Daumesnil barques",
+        "Bois de Vincennes lake autumn"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "daumesnil",
+        "lac",
+        "lake",
+        "vincennes",
+        "barque"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_daumesnil"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_marche_d_aligre_paris_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "street_day",
+      "query": "Marché d'Aligre Paris",
+      "fallbackQueries": [
+        "Aligre market Paris",
+        "Paris open-air market stalls"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "aligre",
+        "marché",
+        "market",
+        "stall",
+        "étal"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_aligre"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_parc_de_belleville_vue_paris_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "sunset",
+      "query": "Parc de Belleville vue Paris",
+      "fallbackQueries": [
+        "Belleville park view Paris sunset",
+        "Paris skyline from Belleville"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "belleville",
+        "parc",
+        "view",
+        "vue",
+        "paris"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_belleville"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_place_de_la_republique_paris_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "street_day",
+      "query": "Place de la République Paris",
+      "fallbackQueries": [
+        "Statue de la République Paris",
+        "Paris Republique square"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "république",
+        "republique",
+        "place",
+        "statue",
+        "square"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_republique"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_promenade_plantee_paris_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "park",
+      "query": "Promenade plantée Paris",
+      "fallbackQueries": [
+        "Coulée verte René-Dumont",
+        "Viaduc des Arts promenade"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "promenade",
+        "plantée",
+        "coulée",
+        "verte",
+        "viaduc"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_coulee"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_temple_de_la_sibylle_buttes_chaumont_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "park",
+      "query": "Temple de la Sibylle Buttes-Chaumont",
+      "fallbackQueries": [
+        "Parc des Buttes-Chaumont",
+        "Buttes-Chaumont lake"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "sibylle",
+        "buttes-chaumont",
+        "chaumont",
+        "parc",
+        "park"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_buttes"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_architectural_drawings_on_table_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "office",
+      "query": "architectural drawings on table",
+      "fallbackQueries": [
+        "architect plans desk",
+        "blueprints table office"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "plan",
+        "plans",
+        "drawing",
+        "blueprint",
+        "architect",
+        "architecture"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_tirages"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_architectural_model_cardboard_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "office",
+      "query": "architectural model cardboard",
+      "fallbackQueries": [
+        "maquette architecture carton",
+        "architecture model building"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "model",
+        "maquette",
+        "architectural",
+        "architecture"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_maquette"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_dahlias_garden_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "plant",
+      "query": "dahlias garden",
+      "fallbackQueries": [
+        "dahlia flowers red orange",
+        "dahlia jardin"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "dahlia",
+        "flower",
+        "fleur",
+        "garden"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_dahlias"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_la_cigale_paris_salle_concert_p_adrien_cigale_night_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "concert",
+      "query": "La Cigale Paris salle concert",
+      "fallbackQueries": [
+        "La Cigale Paris",
+        "concert stage red lights crowd"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": true,
+      "subject": [
+        "cigale",
+        "concert",
+        "stage",
+        "scène",
+        "salle"
+      ],
+      "night": true,
+      "requireDark": true,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_adrien_cigale"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_birthday_cake_candles_table_p_vincennes_2230_night_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "party",
+      "query": "birthday cake candles table",
+      "fallbackQueries": [
+        "gâteau d'anniversaire bougies",
+        "raspberry cake candles"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": true,
+      "subject": [
+        "cake",
+        "gâteau",
+        "birthday",
+        "anniversaire",
+        "candles",
+        "bougies"
+      ],
+      "night": true,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_vincennes_2230"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_pothos_plant_shelf_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "plant",
+      "query": "pothos plant shelf",
+      "fallbackQueries": [
+        "houseplant office window",
+        "plante pothos"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "pothos",
+        "plant",
+        "plante",
+        "houseplant"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_plante"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_rain_drops_glass_roof_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "rain",
+      "query": "rain drops glass roof",
+      "fallbackQueries": [
+        "rain on skylight",
+        "raindrops window grey sky"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "rain",
+        "pluie",
+        "drops",
+        "gouttes",
+        "glass",
+        "window"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_verriere"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_server_rack_small_office_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "office",
+      "query": "server rack small office",
+      "fallbackQueries": [
+        "network storage server rack",
+        "baie serveur câbles"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "server",
+        "serveur",
+        "rack",
+        "nas",
+        "network",
+        "baie"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_nas_orange"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
+    },
+    {
+      "id": "case201_src_tabby_cat_sleeping_sofa_01",
+      "case": "201",
+      "type": "ambient",
+      "usage": "phone-photo",
+      "scene": "cat",
+      "query": "tabby cat sleeping sofa",
+      "fallbackQueries": [
+        "chat tigré canapé",
+        "cat curled blanket"
+      ],
+      "orientation": "landscape",
+      "ratio": "4:3",
+      "minWidth": 1200,
+      "minHeight": 800,
+      "priority": 2,
+      "providers": [
+        "wikimedia",
+        "pexels",
+        "openverse"
+      ],
+      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
+      "isEvidence": false,
+      "subject": [
+        "cat",
+        "chat",
+        "tabby",
+        "kitten"
+      ],
+      "night": false,
+      "requireDark": false,
+      "variants": 1,
+      "photos": [
+        "case201_photo_p_lea_chat"
+      ],
+      "transform": {
+        "profile": "phone-photo",
+        "crop": "smart",
+        "variantCrops": [
+          "best"
+        ]
+      }
     }
   ],
   "photos": [
@@ -13780,6 +14702,600 @@
       "currentSource": "procédural (GeneratedPhoto, scène « interior_warm »)",
       "planned": true,
       "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
+    },
+    {
+      "assetId": "case201_photo_p_old_etretat",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_old_etretat",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "beach",
+      "style": "old",
+      "takenAt": "2024-08-14 17:20",
+      "caption": "Les falaises d'Étretat, août 2024.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « beach »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_falaises_d_etretat_porte_d_aval_01",
+      "variant": 0,
+      "replacement": "case201_src_falaises_d_etretat_porte_d_aval_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_old_fete",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_old_fete",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "street_night",
+      "style": "old",
+      "takenAt": "2025-06-21 22:40",
+      "caption": "Fête de la musique, rue Oberkampf.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": true,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « street_night »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_fete_de_la_musique_paris_rue_night_01",
+      "variant": 0,
+      "replacement": "case201_src_fete_de_la_musique_paris_rue_night_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_old_sapin",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_old_sapin",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "interior_warm",
+      "style": "old",
+      "takenAt": "2025-12-24 19:10",
+      "caption": "Le sapin chez les parents, Orléans.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « interior_warm »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_christmas_tree_living_room_01",
+      "variant": 0,
+      "replacement": "case201_src_christmas_tree_living_room_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_canal",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_canal",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "street_day",
+      "style": "standard",
+      "takenAt": "2026-09-13 10:15",
+      "caption": "Canal Saint-Martin, dimanche matin.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « street_day »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_canal_saint_martin_passerelle_01",
+      "variant": 0,
+      "replacement": "case201_src_canal_saint_martin_passerelle_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_maquette",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_maquette",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "office",
+      "style": "standard",
+      "takenAt": "2026-09-15 18:30",
+      "caption": "La maquette de la médiathèque, avant la mise en couleur.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « office »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_architectural_model_cardboard_01",
+      "variant": 0,
+      "replacement": "case201_src_architectural_model_cardboard_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_coulee",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_coulee",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "park",
+      "style": "standard",
+      "takenAt": "2026-09-18 12:50",
+      "caption": "La Coulée verte, pause de midi.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « park »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_promenade_plantee_paris_01",
+      "variant": 0,
+      "replacement": "case201_src_promenade_plantee_paris_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_aligre",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_aligre",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "street_day",
+      "style": "standard",
+      "takenAt": "2026-09-19 10:40",
+      "caption": "Marché d'Aligre, samedi.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « street_day »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_marche_d_aligre_paris_01",
+      "variant": 0,
+      "replacement": "case201_src_marche_d_aligre_paris_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_dahlias",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_dahlias",
+      "screens": [
+        "Photos",
+        "Messages › c_famille"
+      ],
+      "scene": "plant",
+      "style": "standard",
+      "takenAt": "2026-09-20 11:25",
+      "caption": "Les dahlias du jardin de maman.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « plant »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_dahlias_garden_01",
+      "variant": 0,
+      "replacement": "case201_src_dahlias_garden_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_planning",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_planning",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "screenshot",
+      "style": "screenshot",
+      "takenAt": "2026-09-22 09:10",
+      "caption": "Capture : le planning du rendu Montreuil.",
+      "isEvidence": false,
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone",
+      "night": false,
+      "required": false,
+      "currentSource": "procédural (GeneratedPhoto, scène « screenshot »)",
+      "planned": true,
+      "replacement": "aucun : rendu procédural conservé"
+    },
+    {
+      "assetId": "case201_photo_p_lea_chat",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_lea_chat",
+      "screens": [
+        "Photos",
+        "Messages › c_lea"
+      ],
+      "scene": "cat",
+      "style": "standard",
+      "takenAt": "2026-09-26 20:55",
+      "caption": "Pistou, le chat de Léa, sur le canapé.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « cat »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_tabby_cat_sleeping_sofa_01",
+      "variant": 0,
+      "replacement": "case201_src_tabby_cat_sleeping_sofa_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_buttes",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_buttes",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "park",
+      "style": "standard",
+      "takenAt": "2026-09-27 16:20",
+      "caption": "Parc des Buttes-Chaumont, le temple de la Sibylle.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « park »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_temple_de_la_sibylle_buttes_chaumont_01",
+      "variant": 0,
+      "replacement": "case201_src_temple_de_la_sibylle_buttes_chaumont_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_tirages",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_tirages",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "office",
+      "style": "standard",
+      "takenAt": "2026-09-29 17:10",
+      "caption": "Les tirages A0 étalés sur la grande table.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « office »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_architectural_drawings_on_table_01",
+      "variant": 0,
+      "replacement": "case201_src_architectural_drawings_on_table_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_verriere",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_verriere",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "rain",
+      "style": "standard",
+      "takenAt": "2026-10-01 08:50",
+      "caption": "Pluie sur la verrière de l'atelier.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « rain »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_rain_drops_glass_roof_01",
+      "variant": 0,
+      "replacement": "case201_src_rain_drops_glass_roof_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_ticket",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_ticket",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "receipt",
+      "style": "document",
+      "takenAt": "2026-10-02 12:30",
+      "caption": "Ticket de Voltaire Repro.",
+      "isEvidence": false,
+      "decision": "PROCEDURAL",
+      "reason": "ticket (document) rendu par le téléphone",
+      "night": false,
+      "required": false,
+      "currentSource": "procédural (GeneratedPhoto, scène « receipt »)",
+      "planned": true,
+      "replacement": "aucun : rendu procédural conservé"
+    },
+    {
+      "assetId": "case201_photo_p_daumesnil",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_daumesnil",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "park",
+      "style": "standard",
+      "takenAt": "2026-10-03 11:30",
+      "caption": "Le lac Daumesnil, samedi matin.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « park »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_lac_daumesnil_bois_de_vincennes_01",
+      "variant": 0,
+      "replacement": "case201_src_lac_daumesnil_bois_de_vincennes_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_cirque",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_cirque",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "street_day",
+      "style": "standard",
+      "takenAt": "2026-10-04 15:10",
+      "caption": "Le Cirque d'Hiver, en rentrant.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « street_day »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_cirque_d_hiver_paris_01",
+      "variant": 0,
+      "replacement": "case201_src_cirque_d_hiver_paris_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_nas_orange",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_nas_orange",
+      "screens": [
+        "Photos",
+        "Messages › c_thomas"
+      ],
+      "scene": "office",
+      "style": "standard",
+      "takenAt": "2026-10-05 09:38",
+      "caption": "Le serveur du local technique, voyant orange.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « office »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_server_rack_small_office_01",
+      "variant": 0,
+      "replacement": "case201_src_server_rack_small_office_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_plante",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_plante",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "plant",
+      "style": "standard",
+      "takenAt": "2026-10-06 08:55",
+      "caption": "Le pothos du bureau reprend.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « plant »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_pothos_plant_shelf_01",
+      "variant": 0,
+      "replacement": "case201_src_pothos_plant_shelf_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_belleville",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_belleville",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "sunset",
+      "style": "standard",
+      "takenAt": "2026-10-07 19:05",
+      "caption": "Coucher de soleil depuis le parc de Belleville.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « sunset »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_parc_de_belleville_vue_paris_01",
+      "variant": 0,
+      "replacement": "case201_src_parc_de_belleville_vue_paris_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_republique",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_republique",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "street_day",
+      "style": "standard",
+      "takenAt": "2026-10-08 13:15",
+      "caption": "Place de la République, pause de midi.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": false,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « street_day »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_place_de_la_republique_paris_01",
+      "variant": 0,
+      "replacement": "case201_src_place_de_la_republique_paris_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_vincennes_2230",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_vincennes_2230",
+      "screens": [
+        "Photos",
+        "Messages › c_famille"
+      ],
+      "scene": "party",
+      "style": "standard",
+      "takenAt": "2026-10-08 22:30",
+      "caption": "Le gâteau de Juliette, 36 bougies.",
+      "isEvidence": true,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet).",
+      "night": true,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « party »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_birthday_cake_candles_table_p_vincennes_2230_night_01",
+      "variant": 0,
+      "replacement": "case201_src_birthday_cake_candles_table_p_vincennes_2230_night_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_adrien_cigale",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_adrien_cigale",
+      "screens": [
+        "Photos",
+        "Messages › c_atelier"
+      ],
+      "scene": "concert",
+      "style": "standard",
+      "takenAt": "2026-10-08 22:31",
+      "caption": "La scène de La Cigale, vue du balcon.",
+      "isEvidence": true,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet).",
+      "night": true,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « concert »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_la_cigale_paris_salle_concert_p_adrien_cigale_night_01",
+      "variant": 0,
+      "replacement": "case201_src_la_cigale_paris_salle_concert_p_adrien_cigale_night_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_chateau",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_chateau",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "street_night",
+      "style": "standard",
+      "takenAt": "2026-10-08 23:33",
+      "caption": "Le donjon du château de Vincennes, en allant au RER.",
+      "isEvidence": false,
+      "decision": "REPLACE_REAL",
+      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "night": true,
+      "required": true,
+      "currentSource": "procédural (GeneratedPhoto, scène « street_night »)",
+      "planned": true,
+      "shareWith": null,
+      "source": "case201_src_chateau_de_vincennes_donjon_nuit_night_01",
+      "variant": 0,
+      "replacement": "case201_src_chateau_de_vincennes_donjon_nuit_night_01 (variante 1)"
+    },
+    {
+      "assetId": "case201_photo_p_poche",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_poche",
+      "screens": [
+        "Photos"
+      ],
+      "scene": "pocket",
+      "style": "blurry",
+      "takenAt": "2026-10-09 09:12",
+      "caption": "Photo prise par erreur.",
+      "isEvidence": false,
+      "decision": "PROCEDURAL",
+      "reason": "photo ratée prise dans une poche",
+      "night": false,
+      "required": false,
+      "currentSource": "procédural (GeneratedPhoto, scène « pocket »)",
+      "planned": true,
+      "replacement": "aucun : rendu procédural conservé"
+    },
+    {
+      "assetId": "case201_photo_p_depot_capture",
+      "case": "201",
+      "caseTitle": "LE DOSSIER VARIN",
+      "photoId": "p_depot_capture",
+      "screens": [
+        "Photos",
+        "Messages › c_atelier"
+      ],
+      "scene": "screenshot",
+      "style": "screenshot",
+      "takenAt": "2026-10-09 10:10",
+      "caption": "Capture envoyée par Sonia : l'avis de dépôt.",
+      "isEvidence": false,
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone",
+      "night": false,
+      "required": false,
+      "currentSource": "procédural (GeneratedPhoto, scène « screenshot »)",
+      "planned": true,
+      "replacement": "aucun : rendu procédural conservé"
     }
   ],
   "removedImages": [

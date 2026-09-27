@@ -13,26 +13,33 @@ struct SavedInvestigation: Codable {
     }
 }
 
-/// One file in Application Support, written atomically.
+/// Where an investigation in progress is kept. The story mode has its own slot: a case of the
+/// campaign never replaces (nor is replaced by) an ENQUÊTES / ALIBI investigation.
+enum SaveSlot: String, Sendable {
+    case main = "investigation-in-progress.json"
+    case story = "story-investigation-in-progress.json"
+}
+
+/// One file per slot in Application Support, written atomically.
 enum SavedInvestigationStore {
-    private static var url: URL? {
+    private static func url(_ slot: SaveSlot) -> URL? {
         guard let dir = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else { return nil }
         try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
-        return dir.appendingPathComponent("investigation-in-progress.json")
+        return dir.appendingPathComponent(slot.rawValue)
     }
 
-    static func load() -> SavedInvestigation? {
-        guard let url, let data = try? Data(contentsOf: url) else { return nil }
+    static func load(_ slot: SaveSlot = .main) -> SavedInvestigation? {
+        guard let url = url(slot), let data = try? Data(contentsOf: url) else { return nil }
         return try? JSONDecoder().decode(SavedInvestigation.self, from: data)
     }
 
-    static func save(_ saved: SavedInvestigation) {
-        guard let url, let data = try? JSONEncoder().encode(saved) else { return }
+    static func save(_ saved: SavedInvestigation, slot: SaveSlot = .main) {
+        guard let url = url(slot), let data = try? JSONEncoder().encode(saved) else { return }
         try? data.write(to: url, options: .atomic)
     }
 
-    static func clear() {
-        guard let url else { return }
+    static func clear(_ slot: SaveSlot = .main) {
+        guard let url = url(slot) else { return }
         try? FileManager.default.removeItem(at: url)
     }
 }

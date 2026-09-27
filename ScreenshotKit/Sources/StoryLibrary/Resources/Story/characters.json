@@ -1,0 +1,530 @@
+{
+  "variants": [
+    {
+      "id": "presentation_f",
+      "slot": "presentation",
+      "label": "Féminine",
+      "labelEn": "Feminine"
+    },
+    {
+      "id": "presentation_m",
+      "slot": "presentation",
+      "label": "Masculine",
+      "labelEn": "Masculine"
+    },
+    {
+      "id": "skin_01",
+      "slot": "skinTone",
+      "label": "Teint 1",
+      "labelEn": "Tone 1",
+      "color": "#F1D3BC"
+    },
+    {
+      "id": "skin_02",
+      "slot": "skinTone",
+      "label": "Teint 2",
+      "labelEn": "Tone 2",
+      "color": "#E2B593"
+    },
+    {
+      "id": "skin_03",
+      "slot": "skinTone",
+      "label": "Teint 3",
+      "labelEn": "Tone 3",
+      "color": "#C68E68"
+    },
+    {
+      "id": "skin_04",
+      "slot": "skinTone",
+      "label": "Teint 4",
+      "labelEn": "Tone 4",
+      "color": "#9C6644"
+    },
+    {
+      "id": "skin_05",
+      "slot": "skinTone",
+      "label": "Teint 5",
+      "labelEn": "Tone 5",
+      "color": "#6E4630"
+    },
+    {
+      "id": "skin_06",
+      "slot": "skinTone",
+      "label": "Teint 6",
+      "labelEn": "Tone 6",
+      "color": "#4A2F22"
+    },
+    {
+      "id": "face_01",
+      "slot": "face",
+      "label": "Ovale",
+      "labelEn": "Oval",
+      "shape": "oval"
+    },
+    {
+      "id": "face_02",
+      "slot": "face",
+      "label": "Long",
+      "labelEn": "Long",
+      "shape": "long"
+    },
+    {
+      "id": "face_03",
+      "slot": "face",
+      "label": "Carré",
+      "labelEn": "Square",
+      "shape": "square"
+    },
+    {
+      "id": "face_04",
+      "slot": "face",
+      "label": "Rond",
+      "labelEn": "Round",
+      "shape": "round"
+    },
+    {
+      "id": "face_05",
+      "slot": "face",
+      "label": "Anguleux",
+      "labelEn": "Angular",
+      "shape": "angular"
+    },
+    {
+      "id": "face_06",
+      "slot": "face",
+      "label": "Cœur",
+      "labelEn": "Heart",
+      "shape": "heart"
+    },
+    {
+      "id": "hair_f01",
+      "slot": "hairStyle",
+      "label": "Queue basse",
+      "labelEn": "Low ponytail",
+      "shape": "ponytail",
+      "presentations": [
+        "presentation_f"
+      ]
+    },
+    {
+      "id": "hair_f02",
+      "slot": "hairStyle",
+      "label": "Chignon bas",
+      "labelEn": "Low bun",
+      "shape": "bun",
+      "presentations": [
+        "presentation_f"
+      ]
+    },
+    {
+      "id": "hair_f03",
+      "slot": "hairStyle",
+      "label": "Carré court",
+      "labelEn": "Short bob",
+      "shape": "bob",
+      "presentations": [
+        "presentation_f"
+      ]
+    },
+    {
+      "id": "hair_f04",
+      "slot": "hairStyle",
+      "label": "Mi-longs détachés",
+      "labelEn": "Shoulder length",
+      "shape": "long",
+      "presentations": [
+        "presentation_f"
+      ]
+    },
+    {
+      "id": "hair_f05",
+      "slot": "hairStyle",
+      "label": "Tresse basse",
+      "labelEn": "Low braid",
+      "shape": "braid",
+      "presentations": [
+        "presentation_f"
+      ]
+    },
+    {
+      "id": "hair_f06",
+      "slot": "hairStyle",
+      "label": "Courts",
+      "labelEn": "Short",
+      "shape": "short",
+      "presentations": [
+        "presentation_f"
+      ]
+    },
+    {
+      "id": "hair_m01",
+      "slot": "hairStyle",
+      "label": "Courts dégradés",
+      "labelEn": "Short fade",
+      "shape": "crop",
+      "presentations": [
+        "presentation_m"
+      ]
+    },
+    {
+      "id": "hair_m02",
+      "slot": "hairStyle",
+      "label": "Très courts",
+      "labelEn": "Buzz cut",
+      "shape": "shaved",
+      "presentations": [
+        "presentation_m"
+      ]
+    },
+    {
+      "id": "hair_m03",
+      "slot": "hairStyle",
+      "label": "Mi-longs arrière",
+      "labelEn": "Swept back",
+      "shape": "swept",
+      "presentations": [
+        "presentation_m"
+      ]
+    },
+    {
+      "id": "hair_m04",
+      "slot": "hairStyle",
+      "label": "Ondulés courts",
+      "labelEn": "Short waves",
+      "shape": "curly",
+      "presentations": [
+        "presentation_m"
+      ]
+    },
+    {
+      "id": "hair_m05",
+      "slot": "hairStyle",
+      "label": "Rasé",
+      "labelEn": "Shaved",
+      "shape": "bald",
+      "presentations": [
+        "presentation_m"
+      ]
+    },
+    {
+      "id": "hair_m06",
+      "slot": "hairStyle",
+      "label": "Raie de côté",
+      "labelEn": "Side part",
+      "shape": "side",
+      "presentations": [
+        "presentation_m"
+      ]
+    },
+    {
+      "id": "haircolor_01",
+      "slot": "hairColor",
+      "label": "Noir",
+      "labelEn": "Black",
+      "color": "#1B1917"
+    },
+    {
+      "id": "haircolor_02",
+      "slot": "hairColor",
+      "label": "Brun foncé",
+      "labelEn": "Dark brown",
+      "color": "#3A281C"
+    },
+    {
+      "id": "haircolor_03",
+      "slot": "hairColor",
+      "label": "Châtain",
+      "labelEn": "Brown",
+      "color": "#6E4A2E"
+    },
+    {
+      "id": "haircolor_04",
+      "slot": "hairColor",
+      "label": "Blond foncé",
+      "labelEn": "Dark blond",
+      "color": "#A88A5A"
+    },
+    {
+      "id": "haircolor_05",
+      "slot": "hairColor",
+      "label": "Roux cuivré",
+      "labelEn": "Copper",
+      "color": "#8E4424"
+    },
+    {
+      "id": "haircolor_06",
+      "slot": "hairColor",
+      "label": "Gris",
+      "labelEn": "Grey",
+      "color": "#8F8D89"
+    },
+    {
+      "id": "beard_none",
+      "slot": "beard",
+      "label": "Rasé",
+      "labelEn": "Clean-shaven"
+    },
+    {
+      "id": "beard_02",
+      "slot": "beard",
+      "label": "Barbe de 3 jours",
+      "labelEn": "Stubble",
+      "shape": "stubble",
+      "presentations": [
+        "presentation_m"
+      ]
+    },
+    {
+      "id": "beard_01",
+      "slot": "beard",
+      "label": "Barbe courte",
+      "labelEn": "Short beard",
+      "shape": "full",
+      "presentations": [
+        "presentation_m"
+      ]
+    },
+    {
+      "id": "beard_03",
+      "slot": "beard",
+      "label": "Moustache",
+      "labelEn": "Moustache",
+      "shape": "moustache",
+      "presentations": [
+        "presentation_m"
+      ]
+    },
+    {
+      "id": "eyes_01",
+      "slot": "eyeColor",
+      "label": "Marron foncé",
+      "labelEn": "Dark brown",
+      "color": "#3A2418"
+    },
+    {
+      "id": "eyes_02",
+      "slot": "eyeColor",
+      "label": "Marron",
+      "labelEn": "Brown",
+      "color": "#5A3A22"
+    },
+    {
+      "id": "eyes_03",
+      "slot": "eyeColor",
+      "label": "Noisette",
+      "labelEn": "Hazel",
+      "color": "#7A5A2E"
+    },
+    {
+      "id": "eyes_04",
+      "slot": "eyeColor",
+      "label": "Vert-gris",
+      "labelEn": "Grey-green",
+      "color": "#66705A"
+    },
+    {
+      "id": "eyes_05",
+      "slot": "eyeColor",
+      "label": "Gris-bleu",
+      "labelEn": "Grey-blue",
+      "color": "#667888"
+    },
+    {
+      "id": "eyes_06",
+      "slot": "eyeColor",
+      "label": "Bleu",
+      "labelEn": "Blue",
+      "color": "#46688E"
+    },
+    {
+      "id": "outfit_01a",
+      "slot": "outfit",
+      "label": "Parka sombre, chemise · Marine",
+      "labelEn": "Dark parka, shirt · Navy",
+      "shape": "parka",
+      "color": "#232C3B",
+      "accent": "#D9D4C8",
+      "group": "outfit_01"
+    },
+    {
+      "id": "outfit_01b",
+      "slot": "outfit",
+      "label": "Parka sombre, chemise · Olive foncé",
+      "labelEn": "Dark parka, shirt · Dark olive",
+      "shape": "parka",
+      "color": "#3A3E2C",
+      "accent": "#D9D4C8",
+      "group": "outfit_01"
+    },
+    {
+      "id": "outfit_02a",
+      "slot": "outfit",
+      "label": "Manteau de laine, col roulé · Anthracite",
+      "labelEn": "Wool coat, roll-neck · Charcoal",
+      "shape": "coat",
+      "color": "#2A2D31",
+      "accent": "#2A2D31",
+      "group": "outfit_02"
+    },
+    {
+      "id": "outfit_02b",
+      "slot": "outfit",
+      "label": "Manteau de laine, col roulé · Camel",
+      "labelEn": "Wool coat, roll-neck · Camel",
+      "shape": "coat",
+      "color": "#9A7A55",
+      "accent": "#2A2D31",
+      "group": "outfit_02"
+    },
+    {
+      "id": "outfit_03a",
+      "slot": "outfit",
+      "label": "Veste de costume, chemise ouverte · Gris charbon",
+      "labelEn": "Suit jacket, open collar · Charcoal grey",
+      "shape": "suit",
+      "color": "#35383D",
+      "accent": "#E6E2DA",
+      "group": "outfit_03"
+    },
+    {
+      "id": "outfit_03b",
+      "slot": "outfit",
+      "label": "Veste de costume, chemise ouverte · Bleu nuit",
+      "labelEn": "Suit jacket, open collar · Midnight blue",
+      "shape": "suit",
+      "color": "#232B3A",
+      "accent": "#E6E2DA",
+      "group": "outfit_03"
+    },
+    {
+      "id": "outfit_04a",
+      "slot": "outfit",
+      "label": "Blouson de cuir mat, pull · Noir",
+      "labelEn": "Matte leather jacket, sweater · Black",
+      "shape": "leather",
+      "color": "#1C1C1E",
+      "accent": "#5A4F43",
+      "group": "outfit_04"
+    },
+    {
+      "id": "outfit_04b",
+      "slot": "outfit",
+      "label": "Blouson de cuir mat, pull · Brun",
+      "labelEn": "Matte leather jacket, sweater · Brown",
+      "shape": "leather",
+      "color": "#4A3426",
+      "accent": "#8A8A84",
+      "group": "outfit_04"
+    },
+    {
+      "id": "outfit_npc_lacaze",
+      "slot": "outfit",
+      "label": "Chemise blanche, cravate desserrée",
+      "labelEn": "White shirt, loosened tie",
+      "shape": "shirt",
+      "color": "#E4E0D6",
+      "accent": "#3A4250",
+      "npcOnly": true
+    },
+    {
+      "id": "outfit_npc_ines",
+      "slot": "outfit",
+      "label": "Sweat gris",
+      "labelEn": "Grey sweatshirt",
+      "shape": "sweat",
+      "color": "#8A8A84",
+      "accent": "#6B2B30",
+      "npcOnly": true
+    },
+    {
+      "id": "outfit_npc_aubrac",
+      "slot": "outfit",
+      "label": "Veste en velours, col roulé",
+      "labelEn": "Corduroy jacket, roll-neck",
+      "shape": "coat",
+      "color": "#5A4F43",
+      "accent": "#D9D4C8",
+      "npcOnly": true
+    },
+    {
+      "id": "outfit_npc_colette",
+      "slot": "outfit",
+      "label": "Cardigan",
+      "labelEn": "Cardigan",
+      "shape": "cardigan",
+      "color": "#B5A58A",
+      "accent": "#8A8A84",
+      "npcOnly": true
+    },
+    {
+      "id": "outfit_npc_agent",
+      "slot": "outfit",
+      "label": "Polo",
+      "labelEn": "Polo shirt",
+      "shape": "sweat",
+      "color": "#3A4250",
+      "accent": "#3A4250",
+      "npcOnly": true
+    },
+    {
+      "id": "hair_npc_receding",
+      "slot": "hairStyle",
+      "label": "Dégarni",
+      "labelEn": "Receding",
+      "shape": "receding",
+      "npcOnly": true
+    },
+    {
+      "id": "hair_npc_bob",
+      "slot": "hairStyle",
+      "label": "Carré gris",
+      "labelEn": "Grey bob",
+      "shape": "bob",
+      "npcOnly": true
+    }
+  ],
+  "defaultAppearance": {
+    "presentation": "presentation_f",
+    "skinTone": "skin_02",
+    "face": "face_01",
+    "hairStyle": "hair_f01",
+    "hairColor": "haircolor_03",
+    "beard": "beard_none",
+    "eyeColor": "eyes_04",
+    "outfit": "outfit_02a"
+  },
+  "templates": [
+    {
+      "id": "elise",
+      "firstName": "Élise",
+      "lastName": "Morel",
+      "agreement": "f",
+      "appearance": {
+        "presentation": "presentation_f",
+        "skinTone": "skin_02",
+        "face": "face_01",
+        "hairStyle": "hair_f01",
+        "hairColor": "haircolor_03",
+        "beard": "beard_none",
+        "eyeColor": "eyes_04",
+        "outfit": "outfit_02a"
+      }
+    },
+    {
+      "id": "vincent",
+      "firstName": "Vincent",
+      "lastName": "Delmas",
+      "agreement": "m",
+      "appearance": {
+        "presentation": "presentation_m",
+        "skinTone": "skin_03",
+        "face": "face_03",
+        "hairStyle": "hair_m01",
+        "hairColor": "haircolor_01",
+        "beard": "beard_02",
+        "eyeColor": "eyes_02",
+        "outfit": "outfit_01a"
+      }
+    }
+  ]
+}

@@ -46,6 +46,10 @@ public struct CaseFile: Codable, Sendable, Identifiable {
     public var minimalPath: [String]? = nil
 
     public var isAlibi: Bool { mode == .alibi }
+    /// An investigation written for the Story mode (played from a chapter, never listed in ENQUÊTES).
+    public var isStory: Bool { mode == .story }
+    /// Listed in the ENQUÊTES mode (not an ALIBI check, not a story case).
+    public var isMainInvestigation: Bool { mode == nil || mode == .investigation }
 }
 
 /// The two ways to play a case.
@@ -54,6 +58,9 @@ public enum CaseMode: String, Codable, Sendable {
     case investigation
     /// Does the statement hold? One person, one claim: « alibi confirmé » or « alibi contredit ».
     case alibi
+    /// Who is responsible? — like `investigation`, but only played inside a chapter of the Story
+    /// mode (its result belongs to the story's save).
+    case story
 }
 
 /// ALIBI mode: « Julien affirme être resté chez lui entre 22:00 et 23:00. »

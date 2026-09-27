@@ -8,7 +8,7 @@ import CaseLibrary
 @Suite("All cases")
 struct AllCasesTests {
     /// The main-mode cases (ALIBI cases have their own suite).
-    private static func cases() throws -> [CaseFile] { try CaseLibrary.loadCases().filter { !$0.isAlibi } }
+    private static func cases() throws -> [CaseFile] { try CaseLibrary.loadCases().filter(\.isMainInvestigation) }
 
     /// The app an item is found in.
     private static func app(of ref: ItemRef, in file: CaseFile) -> AppID? {

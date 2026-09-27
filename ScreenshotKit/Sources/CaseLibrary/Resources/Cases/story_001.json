@@ -1,0 +1,2475 @@
+{
+  "schemaVersion": 1,
+  "id": "story_001",
+  "number": 201,
+  "mode": "story",
+  "title": "LE DOSSIER VARIN",
+  "tagline": "Son code a ouvert l'atelier à 22:31. Elle dit qu'elle n'y était pas.",
+  "synopsis": [
+    "Jeudi 8 octobre, l'Atelier Varin, petite agence d'architecture de la rue de la Folie-Méricourt, boucle son dossier pour le concours de la médiathèque de Montreuil. Dépôt prévu vendredi avant midi. Vendredi à 9:00, le cabinet concurrent Laurier & Fils dépose un projet presque identique.",
+    "Les plans n'existaient que sur le serveur de l'atelier. Le journal de l'alarme montre que le code de Maëlle Rocher, l'office manager, a désarmé l'alarme jeudi à 22:31. Maëlle affirme qu'elle n'était pas là. Elle a remis son téléphone au BEN, avec son accord ; le laboratoire l'a extrait.",
+    "Vous avez quelques minutes pour retrouver qui est entré dans l'atelier jeudi soir."
+  ],
+  "objective": "Découvrir qui a ouvert l'Atelier Varin avec le code de Maëlle, jeudi à 22:31, et fait sortir les plans du concours.",
+  "difficulty": 1,
+  "durationSeconds": 420,
+  "challengeDurations": {
+    "investigator": 780,
+    "detective": 420,
+    "expert": 270
+  },
+  "dossier": {
+    "category": "FUITE DE DONNÉES",
+    "city": "Paris",
+    "place": "Atelier Varin — Paris 11e",
+    "subject": "Maëlle Rocher",
+    "subjectLabel": "TITULAIRE DU TÉLÉPHONE",
+    "subjectAge": 34,
+    "subjectContact": "me",
+    "lastContact": "2026-10-08 22:31",
+    "lastContactLabel": "CODE UTILISÉ",
+    "rating": 1
+  },
+  "phoneStartTime": "2026-10-09 15:00",
+  "devices": [
+    {
+      "id": "dev_maelle",
+      "label": "Téléphone de Maëlle",
+      "model": "iPhone 13",
+      "lockedApps": [],
+      "contacts": [
+        {
+          "id": "me",
+          "name": "Maëlle Rocher",
+          "phone": "+33 6 42 18 73 05",
+          "relation": "Moi",
+          "email": "m.rocher@atelier-varin.fr",
+          "birthday": "14/03/1992",
+          "avatarHue": 0.58,
+          "isOwner": true
+        },
+        {
+          "id": "thomas",
+          "name": "Thomas Bellec",
+          "phone": "+33 6 71 30 48 92",
+          "relation": "Informatique — Atelier",
+          "email": "t.bellec@bellec-informatique.fr",
+          "avatarHue": 0.12
+        },
+        {
+          "id": "adrien",
+          "name": "Adrien Kessler",
+          "phone": "+33 7 68 22 41 90",
+          "relation": "Atelier Varin",
+          "email": "a.kessler@atelier-varin.fr",
+          "birthday": "02/11/1998",
+          "avatarHue": 0.33
+        },
+        {
+          "id": "sonia",
+          "name": "Sonia Varin",
+          "phone": "+33 6 09 55 12 67",
+          "relation": "Atelier Varin — cofondatrice",
+          "email": "s.varin@atelier-varin.fr",
+          "avatarHue": 0.9
+        },
+        {
+          "id": "ines",
+          "name": "Inès Perrot",
+          "phone": "+33 6 58 03 27 14",
+          "relation": "Atelier Varin",
+          "email": "i.perrot@atelier-varin.fr",
+          "avatarHue": 0.46
+        },
+        {
+          "id": "karim",
+          "name": "Karim Belkacem",
+          "phone": "+33 6 25 81 64 39",
+          "relation": "Atelier Varin",
+          "email": "k.belkacem@atelier-varin.fr",
+          "birthday": "02/10/1987",
+          "avatarHue": 0.7
+        },
+        {
+          "id": "juliette",
+          "name": "Juliette Rocher",
+          "phone": "+33 6 33 90 17 58",
+          "relation": "Sœur",
+          "birthday": "08/10/1990",
+          "avatarHue": 0.02
+        },
+        {
+          "id": "maman",
+          "name": "Maman",
+          "phone": "+33 6 80 41 22 76",
+          "relation": "Mère",
+          "avatarHue": 0.08
+        },
+        {
+          "id": "papa",
+          "name": "Papa",
+          "phone": "+33 6 14 67 39 02",
+          "relation": "Père",
+          "avatarHue": 0.62
+        },
+        {
+          "id": "samuel",
+          "name": "Samuel ❤️",
+          "phone": "+33 6 47 29 85 10",
+          "relation": "Compagnon",
+          "avatarHue": 0.52
+        },
+        {
+          "id": "lea",
+          "name": "Léa Marchand",
+          "phone": "+33 6 91 38 06 44",
+          "relation": "Amie",
+          "avatarHue": 0.78
+        },
+        {
+          "id": "voltaire",
+          "name": "Voltaire Repro",
+          "phone": "+33 1 43 57 20 18",
+          "relation": "Imprimerie — bd Voltaire",
+          "avatarHue": 0.2
+        },
+        {
+          "id": "veilleur",
+          "name": "Veilleur Télésurveillance",
+          "phone": "+33 1 70 38 44 00",
+          "relation": "Alarme de l'atelier",
+          "email": "journal@veilleur-telesurveillance.fr",
+          "avatarHue": 0.4
+        },
+        {
+          "id": "ben",
+          "name": "BEN — accueil",
+          "phone": "+33 1 53 71 40 00",
+          "relation": "Bureau des Enquêtes Numériques",
+          "avatarHue": 0.0
+        }
+      ],
+      "conversations": [
+        {
+          "id": "c_thomas",
+          "participants": [
+            "thomas"
+          ],
+          "messages": [
+            {
+              "id": "m_th_001",
+              "from": "me",
+              "at": "2026-09-16 10:12",
+              "text": "Bonjour Thomas, l'imprimante de l'étage refuse encore les A3. Tu peux passer ?"
+            },
+            {
+              "id": "m_th_002",
+              "from": "thomas",
+              "at": "2026-09-16 10:40",
+              "text": "Jeudi matin. Redémarre-la en attendant."
+            },
+            {
+              "id": "m_th_003",
+              "from": "me",
+              "at": "2026-09-23 15:05",
+              "text": "Karim a besoin d'un accès VPN pour travailler de chez lui."
+            },
+            {
+              "id": "m_th_004",
+              "from": "thomas",
+              "at": "2026-09-23 15:30",
+              "text": "Je lui crée ce soir. Identifiants par mail."
+            },
+            {
+              "id": "m_th_005",
+              "from": "me",
+              "at": "2026-09-30 11:20",
+              "text": "Tu ne travailles pas aussi pour Laurier & Fils ? Sonia me demande."
+            },
+            {
+              "id": "m_th_006",
+              "from": "thomas",
+              "at": "2026-09-30 11:48",
+              "text": "Plus depuis l'an dernier. Longue histoire."
+            },
+            {
+              "id": "m_th_007",
+              "from": "me",
+              "at": "2026-10-05 09:40",
+              "photo": "p_nas_orange"
+            },
+            {
+              "id": "m_th_008",
+              "from": "me",
+              "at": "2026-10-05 09:40",
+              "text": "Le serveur clignote orange depuis ce matin."
+            },
+            {
+              "id": "m_th_009",
+              "from": "thomas",
+              "at": "2026-10-05 09:55",
+              "text": "Un disque fatigue. Je le change samedi pendant la maintenance, rien de grave."
+            },
+            {
+              "id": "m_th_010",
+              "from": "me",
+              "at": "2026-10-05 09:56",
+              "text": "OK, je préviens tout le monde pour samedi."
+            },
+            {
+              "id": "m_th_2152",
+              "from": "thomas",
+              "at": "2026-10-08 21:52",
+              "text": "Maintenance serveur ce soir, tu peux me redonner le code alarme ? Le mien ne passe plus."
+            },
+            {
+              "id": "m_th_2158",
+              "from": "me",
+              "at": "2026-10-08 21:58",
+              "text": "Ce soir ? Tu avais dit samedi."
+            },
+            {
+              "id": "m_th_2159",
+              "from": "thomas",
+              "at": "2026-10-08 21:59",
+              "text": "Le disque ne tiendra pas jusque-là. 1 h max."
+            },
+            {
+              "id": "m_th_2201",
+              "from": "me",
+              "at": "2026-10-08 22:01",
+              "text": "4719 puis OK. Tu réarmes en partant. Et tu fais changer ton code demain, je n'ai pas le droit de donner le mien."
+            },
+            {
+              "id": "m_th_2203",
+              "from": "thomas",
+              "at": "2026-10-08 22:03",
+              "text": "Merci, t'es la meilleure 👍"
+            },
+            {
+              "id": "m_th_2305",
+              "from": "thomas",
+              "at": "2026-10-08 23:05",
+              "text": "Envoyé. On est quittes.",
+              "deletedAt": "2026-10-08 23:06"
+            },
+            {
+              "id": "m_th_011",
+              "from": "thomas",
+              "at": "2026-10-09 12:34",
+              "text": "Sonia m'a appelé pour le serveur. Je passe lundi faire un audit complet."
+            }
+          ]
+        },
+        {
+          "id": "c_atelier",
+          "title": "Atelier Varin",
+          "participants": [
+            "sonia",
+            "adrien",
+            "ines",
+            "karim"
+          ],
+          "messages": [
+            {
+              "id": "m_at_001",
+              "from": "sonia",
+              "at": "2026-09-21 09:05",
+              "text": "Bonjour à tous. Semaine Montreuil en approche : rendu interne jeudi 8 à midi, dépôt vendredi 9 avant 12h. Pas de congés d'ici là, merci 🙏"
+            },
+            {
+              "id": "m_at_002",
+              "from": "karim",
+              "at": "2026-09-21 09:12",
+              "text": "Reçu."
+            },
+            {
+              "id": "m_at_003",
+              "from": "ines",
+              "at": "2026-09-21 09:20",
+              "text": "ok pour moi"
+            },
+            {
+              "id": "m_at_004",
+              "from": "adrien",
+              "at": "2026-09-21 09:41",
+              "text": "👍"
+            },
+            {
+              "id": "m_at_005",
+              "from": "me",
+              "at": "2026-09-22 13:10",
+              "text": "Qui a pris la clé du local vélo ? Elle n'est plus sur le tableau."
+            },
+            {
+              "id": "m_at_006",
+              "from": "karim",
+              "at": "2026-09-22 13:14",
+              "text": "Moi, pardon. Je la remets ce soir."
+            },
+            {
+              "id": "m_at_007",
+              "from": "ines",
+              "at": "2026-09-24 18:02",
+              "text": "Le grand format bourre encore. Je lance les A0 chez l'imprimeur ?"
+            },
+            {
+              "id": "m_at_008",
+              "from": "me",
+              "at": "2026-09-24 18:10",
+              "text": "Oui, sur le compte Varin, je préviens Voltaire Repro."
+            },
+            {
+              "id": "m_at_009",
+              "from": "sonia",
+              "at": "2026-09-25 17:45",
+              "text": "Pot vendredi prochain à 18h pour les 39 ans de Karim. Maëlle s'occupe du gâteau (merci !)."
+            },
+            {
+              "id": "m_at_010",
+              "from": "ines",
+              "at": "2026-09-25 17:47",
+              "text": "🎉"
+            },
+            {
+              "id": "m_at_011",
+              "from": "adrien",
+              "at": "2026-09-25 17:50",
+              "text": "Karim t'as quel âge déjà, 50 ?"
+            },
+            {
+              "id": "m_at_012",
+              "from": "karim",
+              "at": "2026-09-25 17:52",
+              "text": "39. Tu seras privé de gâteau."
+            },
+            {
+              "id": "m_at_013",
+              "from": "me",
+              "at": "2026-09-29 10:20",
+              "text": "Rappel : notes de frais de septembre avant jeudi, sinon ce sera en novembre."
+            },
+            {
+              "id": "m_at_014",
+              "from": "adrien",
+              "at": "2026-09-29 10:31",
+              "text": "Je fais ça ce soir promis"
+            },
+            {
+              "id": "m_at_015",
+              "from": "karim",
+              "at": "2026-10-01 08:55",
+              "text": "Ligne 9 en panne, je serai là vers 9h30."
+            },
+            {
+              "id": "m_at_016",
+              "from": "sonia",
+              "at": "2026-10-01 19:12",
+              "text": "Belle journée. Les façades sont enfin justes. Merci Inès."
+            },
+            {
+              "id": "m_at_017",
+              "from": "ines",
+              "at": "2026-10-01 19:20",
+              "text": "🙂"
+            },
+            {
+              "id": "m_at_018",
+              "from": "karim",
+              "at": "2026-10-02 18:40",
+              "text": "Merci pour le pot et pour le carnet 🙏 Vous êtes des gens bien."
+            },
+            {
+              "id": "m_at_019",
+              "from": "me",
+              "at": "2026-10-05 09:02",
+              "text": "Thomas passe samedi matin pour la maintenance du serveur (9h–12h). Enregistrez tout sur le serveur vendredi avant de partir."
+            },
+            {
+              "id": "m_at_020",
+              "from": "karim",
+              "at": "2026-10-05 09:15",
+              "text": "Samedi ça tombe bien, personne ne sera là."
+            },
+            {
+              "id": "m_at_021",
+              "from": "adrien",
+              "at": "2026-10-06 12:30",
+              "text": "Je m'absente cet aprèm, rdv perso, je rattrape ce soir."
+            },
+            {
+              "id": "m_at_022",
+              "from": "sonia",
+              "at": "2026-10-06 12:34",
+              "text": "Pas cette semaine, Adrien…"
+            },
+            {
+              "id": "m_at_023",
+              "from": "adrien",
+              "at": "2026-10-06 12:36",
+              "text": "Je sais. Désolé. Je reste jusqu'à 22h."
+            },
+            {
+              "id": "m_at_024",
+              "from": "karim",
+              "at": "2026-10-07 21:40",
+              "text": "Coupes finies. J'enregistre et je file."
+            },
+            {
+              "id": "m_at_025",
+              "from": "sonia",
+              "at": "2026-10-08 12:05",
+              "text": "Rendu interne validé. Bravo à tous. Tout est sur le serveur, dossier MONTREUIL_FINAL. Personne n'y touche jusqu'à demain."
+            },
+            {
+              "id": "m_at_026",
+              "from": "ines",
+              "at": "2026-10-08 12:08",
+              "text": "Enfin 😮‍💨"
+            },
+            {
+              "id": "m_at_027",
+              "from": "adrien",
+              "at": "2026-10-08 12:10",
+              "text": "On l'a fait !!!"
+            },
+            {
+              "id": "m_at_028",
+              "from": "me",
+              "at": "2026-10-08 12:30",
+              "text": "Je récupère le dossier papier de réserve chez Voltaire Repro à 16h. Sonia, tu signes l'acte d'engagement demain à 9h ?"
+            },
+            {
+              "id": "m_at_029",
+              "from": "sonia",
+              "at": "2026-10-08 12:41",
+              "text": "Oui. Je pars à Lyon à 14h pour le jury Confluence, retour ce soir tard. Demain 8h45 à l'atelier."
+            },
+            {
+              "id": "m_at_030",
+              "from": "me",
+              "at": "2026-10-08 19:50",
+              "text": "Je ferme. Alarme mise. Bonne soirée tout le monde !"
+            },
+            {
+              "id": "m_at_031",
+              "from": "ines",
+              "at": "2026-10-08 19:52",
+              "text": "Bonne soirée !"
+            },
+            {
+              "id": "m_at_032",
+              "from": "adrien",
+              "at": "2026-10-08 22:34",
+              "photo": "p_adrien_cigale"
+            },
+            {
+              "id": "m_at_033",
+              "from": "adrien",
+              "at": "2026-10-08 22:34",
+              "text": "Soirée off. Montreuil est fini, j'ai le droit 🎸"
+            },
+            {
+              "id": "m_at_034",
+              "from": "karim",
+              "at": "2026-10-08 22:36",
+              "text": "Profite !"
+            },
+            {
+              "id": "m_at_035",
+              "from": "sonia",
+              "at": "2026-10-08 22:41",
+              "text": "Dans le TGV, le wifi ne marche pas. Arrivée 23:02. À demain 8h45."
+            },
+            {
+              "id": "m_at_036",
+              "from": "sonia",
+              "at": "2026-10-09 10:12",
+              "photo": "p_depot_capture"
+            },
+            {
+              "id": "m_at_037",
+              "from": "sonia",
+              "at": "2026-10-09 10:13",
+              "text": "Laurier & Fils a déposé ce matin à 9:00. Regardez leurs planches. C'est notre projet."
+            },
+            {
+              "id": "m_at_038",
+              "from": "karim",
+              "at": "2026-10-09 10:15",
+              "text": "C'est une blague ?"
+            },
+            {
+              "id": "m_at_039",
+              "from": "ines",
+              "at": "2026-10-09 10:15",
+              "text": "C'est notre plan masse. Même le patio."
+            },
+            {
+              "id": "m_at_040",
+              "from": "adrien",
+              "at": "2026-10-09 10:17",
+              "text": "Comment c'est possible ??"
+            },
+            {
+              "id": "m_at_041",
+              "from": "sonia",
+              "at": "2026-10-09 10:20",
+              "text": "Personne ne parle à l'extérieur. Personne ne touche au serveur. Maëlle, tu demandes le journal d'alarme à Veilleur."
+            },
+            {
+              "id": "m_at_042",
+              "from": "karim",
+              "at": "2026-10-09 10:24",
+              "text": "Le dossier n'était que sur le serveur de l'atelier. Pas sur nos ordinateurs."
+            },
+            {
+              "id": "m_at_043",
+              "from": "sonia",
+              "at": "2026-10-09 11:52",
+              "text": "La police est prévenue. Le BEN va venir. Restez joignables."
+            },
+            {
+              "id": "m_at_044",
+              "from": "adrien",
+              "at": "2026-10-09 12:02",
+              "text": "OK."
+            }
+          ]
+        },
+        {
+          "id": "c_famille",
+          "title": "Famille Rocher 🏡",
+          "participants": [
+            "maman",
+            "papa",
+            "juliette"
+          ],
+          "messages": [
+            {
+              "id": "m_fa_001",
+              "from": "maman",
+              "at": "2026-09-20 11:30",
+              "photo": "p_dahlias"
+            },
+            {
+              "id": "m_fa_002",
+              "from": "maman",
+              "at": "2026-09-20 11:30",
+              "text": "Les dahlias ont survécu à l'été !"
+            },
+            {
+              "id": "m_fa_003",
+              "from": "juliette",
+              "at": "2026-09-20 11:42",
+              "text": "Magnifiques"
+            },
+            {
+              "id": "m_fa_004",
+              "from": "me",
+              "at": "2026-09-20 11:45",
+              "text": "Tu nous en apportes pour le 8 ?"
+            },
+            {
+              "id": "m_fa_005",
+              "from": "papa",
+              "at": "2026-09-27 19:05",
+              "text": "Qui vient à Orléans le dimanche 18 octobre ? Je réserve pour le déjeuner."
+            },
+            {
+              "id": "m_fa_006",
+              "from": "juliette",
+              "at": "2026-09-27 19:20",
+              "text": "Nous deux"
+            },
+            {
+              "id": "m_fa_007",
+              "from": "me",
+              "at": "2026-09-27 19:22",
+              "text": "Moi + Samuel"
+            },
+            {
+              "id": "m_fa_008",
+              "from": "maman",
+              "at": "2026-10-02 08:10",
+              "text": "Juliette, tu veux quoi pour tes 36 ans ? Ta sœur ne veut rien me dire."
+            },
+            {
+              "id": "m_fa_009",
+              "from": "juliette",
+              "at": "2026-10-02 08:40",
+              "text": "Rien du tout, venez jeudi c'est tout."
+            },
+            {
+              "id": "m_fa_010",
+              "from": "me",
+              "at": "2026-10-02 08:41",
+              "text": "Elle ment, elle veut un vélo."
+            },
+            {
+              "id": "m_fa_011",
+              "from": "juliette",
+              "at": "2026-10-02 08:41",
+              "text": "Maëlle !!!"
+            },
+            {
+              "id": "m_fa_012",
+              "from": "juliette",
+              "at": "2026-10-08 18:30",
+              "text": "Ce soir 20h ! Code de la porte 27B45, 3e gauche."
+            },
+            {
+              "id": "m_fa_013",
+              "from": "maman",
+              "at": "2026-10-08 18:35",
+              "text": "On part d'Orléans à 18h, on sera là vers 20h30."
+            },
+            {
+              "id": "m_fa_014",
+              "from": "me",
+              "at": "2026-10-08 20:05",
+              "text": "Je suis dans le RER, j'arrive"
+            },
+            {
+              "id": "m_fa_015",
+              "from": "me",
+              "at": "2026-10-08 22:32",
+              "photo": "p_vincennes_2230"
+            },
+            {
+              "id": "m_fa_016",
+              "from": "me",
+              "at": "2026-10-08 22:32",
+              "text": "36 ans ma grande ❤️"
+            },
+            {
+              "id": "m_fa_017",
+              "from": "maman",
+              "at": "2026-10-08 22:33",
+              "text": "Magnifique ce gâteau !"
+            },
+            {
+              "id": "m_fa_018",
+              "from": "papa",
+              "at": "2026-10-08 22:35",
+              "text": "Bravo à la pâtissière"
+            },
+            {
+              "id": "m_fa_019",
+              "from": "juliette",
+              "at": "2026-10-08 22:37",
+              "text": "C'est Maëlle qui l'a commandé 🙃"
+            },
+            {
+              "id": "m_fa_020",
+              "from": "maman",
+              "at": "2026-10-09 08:02",
+              "text": "Bien rentrés à Orléans. Merci les filles pour cette soirée."
+            },
+            {
+              "id": "m_fa_021",
+              "from": "juliette",
+              "at": "2026-10-09 08:30",
+              "text": "Merci d'être venus ❤️"
+            }
+          ]
+        },
+        {
+          "id": "c_sonia",
+          "participants": [
+            "sonia"
+          ],
+          "messages": [
+            {
+              "id": "m_so_001",
+              "from": "sonia",
+              "at": "2026-09-18 17:30",
+              "text": "Tu peux relancer la mairie de Bagnolet pour la facture de juin ? Trois mois de retard."
+            },
+            {
+              "id": "m_so_002",
+              "from": "me",
+              "at": "2026-09-18 17:45",
+              "text": "C'est fait ce matin, ils promettent fin septembre."
+            },
+            {
+              "id": "m_so_banque",
+              "from": "sonia",
+              "at": "2026-09-28 19:10",
+              "text": "La banque refuse la facilité de caisse. Si on n'a pas Montreuil, je ne sais pas comment on paie les salaires de janvier."
+            },
+            {
+              "id": "m_so_004",
+              "from": "me",
+              "at": "2026-09-28 19:25",
+              "text": "On va l'avoir. Le projet est très beau."
+            },
+            {
+              "id": "m_so_005",
+              "from": "sonia",
+              "at": "2026-09-28 19:30",
+              "text": "N'en parle pas aux autres, s'il te plaît."
+            },
+            {
+              "id": "m_so_006",
+              "from": "sonia",
+              "at": "2026-10-06 18:50",
+              "text": "Adrien est parti où cet après-midi ? En pleine semaine de rendu."
+            },
+            {
+              "id": "m_so_007",
+              "from": "me",
+              "at": "2026-10-06 19:02",
+              "text": "Rendez-vous perso, il m'a dit."
+            },
+            {
+              "id": "m_so_008",
+              "from": "sonia",
+              "at": "2026-10-08 13:55",
+              "text": "Je file à Lyon. Si le serveur fait des siennes, tu appelles Thomas."
+            },
+            {
+              "id": "m_so_009",
+              "from": "me",
+              "at": "2026-10-08 14:00",
+              "text": "Bon jury !"
+            },
+            {
+              "id": "m_so_010",
+              "from": "sonia",
+              "at": "2026-10-09 08:31",
+              "text": "Je t'ai transféré mon billet pour la note de frais."
+            },
+            {
+              "id": "m_so_011",
+              "from": "sonia",
+              "at": "2026-10-09 11:10",
+              "text": "Veilleur m'a mise en copie du journal. Ton code a désarmé l'alarme hier à 22h31. Tu étais où ?"
+            },
+            {
+              "id": "m_so_012",
+              "from": "me",
+              "at": "2026-10-09 11:14",
+              "text": "À Vincennes, chez ma sœur. Je n'ai pas bougé de la soirée, je te le jure."
+            },
+            {
+              "id": "m_so_013",
+              "from": "sonia",
+              "at": "2026-10-09 11:16",
+              "text": "Alors quelqu'un a ton code."
+            },
+            {
+              "id": "m_so_014",
+              "from": "me",
+              "at": "2026-10-09 11:30",
+              "text": "Je ne sais pas quoi te dire."
+            },
+            {
+              "id": "m_so_015",
+              "from": "sonia",
+              "at": "2026-10-09 12:05",
+              "text": "Le BEN demande ton téléphone. Donne-le, c'est le plus simple pour tout le monde."
+            },
+            {
+              "id": "m_so_016",
+              "from": "me",
+              "at": "2026-10-09 12:06",
+              "text": "D'accord."
+            }
+          ]
+        },
+        {
+          "id": "c_juliette",
+          "participants": [
+            "juliette"
+          ],
+          "messages": [
+            {
+              "id": "m_ju_001",
+              "from": "juliette",
+              "at": "2026-09-22 18:00",
+              "text": "Jeudi 8 : dîner à la maison, rien de chic. Tu m'aides pour la table ?"
+            },
+            {
+              "id": "m_ju_002",
+              "from": "me",
+              "at": "2026-09-22 18:05",
+              "text": "Je viens vers 20h, avant je rends le concours"
+            },
+            {
+              "id": "m_ju_003",
+              "from": "me",
+              "at": "2026-10-05 19:10",
+              "text": "Gâteau framboise commandé rue de Fontenay. Tu passes le chercher jeudi à 18h ?"
+            },
+            {
+              "id": "m_ju_004",
+              "from": "juliette",
+              "at": "2026-10-05 19:14",
+              "text": "Ok capitaine"
+            },
+            {
+              "id": "m_ju_005",
+              "from": "me",
+              "at": "2026-10-08 20:20",
+              "text": "En bas !"
+            },
+            {
+              "id": "m_ju_006",
+              "from": "me",
+              "at": "2026-10-08 23:31",
+              "text": "Merci pour la soirée, je file au RER"
+            },
+            {
+              "id": "m_ju_007",
+              "from": "juliette",
+              "at": "2026-10-08 23:35",
+              "text": "Merci d'être venue ❤️ Préviens quand tu es rentrée"
+            },
+            {
+              "id": "m_ju_008",
+              "from": "me",
+              "at": "2026-10-08 23:55",
+              "text": "Rentrée 😘"
+            },
+            {
+              "id": "m_ju_009",
+              "from": "juliette",
+              "at": "2026-10-09 11:50",
+              "text": "Maman dit que tu as un souci au travail ?"
+            },
+            {
+              "id": "m_ju_010",
+              "from": "me",
+              "at": "2026-10-09 11:58",
+              "text": "Oui, je t'expliquerai. La police va peut-être t'appeler pour savoir où j'étais hier soir."
+            },
+            {
+              "id": "m_ju_011",
+              "from": "juliette",
+              "at": "2026-10-09 12:01",
+              "text": "Chez moi, de 20h20 à 23h30. Je le dirai."
+            }
+          ]
+        },
+        {
+          "id": "c_samuel",
+          "participants": [
+            "samuel"
+          ],
+          "messages": [
+            {
+              "id": "m_sa_001",
+              "from": "samuel",
+              "at": "2026-09-19 12:10",
+              "text": "Ciné ce soir ? Le Louxor, séance de 21h"
+            },
+            {
+              "id": "m_sa_002",
+              "from": "me",
+              "at": "2026-09-19 12:30",
+              "text": "Oui !!"
+            },
+            {
+              "id": "m_sa_003",
+              "from": "me",
+              "at": "2026-09-24 18:40",
+              "text": "Tu peux prendre du pain ?"
+            },
+            {
+              "id": "m_sa_004",
+              "from": "samuel",
+              "at": "2026-09-24 18:41",
+              "text": "Déjà fait"
+            },
+            {
+              "id": "m_sa_005",
+              "from": "samuel",
+              "at": "2026-09-29 07:55",
+              "text": "Chaudière encore en panne. J'appelle le syndic."
+            },
+            {
+              "id": "m_sa_006",
+              "from": "me",
+              "at": "2026-09-29 08:10",
+              "text": "Merci 🙏"
+            },
+            {
+              "id": "m_sa_007",
+              "from": "samuel",
+              "at": "2026-10-03 10:20",
+              "text": "Balade au lac Daumesnil ?"
+            },
+            {
+              "id": "m_sa_008",
+              "from": "me",
+              "at": "2026-10-03 10:22",
+              "text": "Go, 11h ?"
+            },
+            {
+              "id": "m_sa_009",
+              "from": "me",
+              "at": "2026-10-06 19:30",
+              "text": "Semaine de rendu, je rentre tard tous les soirs 😩"
+            },
+            {
+              "id": "m_sa_010",
+              "from": "samuel",
+              "at": "2026-10-06 19:31",
+              "text": "Courage. Je fais des pâtes."
+            },
+            {
+              "id": "m_sa_011",
+              "from": "samuel",
+              "at": "2026-10-08 19:55",
+              "text": "Bonne soirée chez Juju, bisous à elle"
+            },
+            {
+              "id": "m_sa_012",
+              "from": "me",
+              "at": "2026-10-08 19:58",
+              "text": "Merci ! Tu es sûr de ne pas venir ?"
+            },
+            {
+              "id": "m_sa_013",
+              "from": "samuel",
+              "at": "2026-10-08 20:01",
+              "text": "Match avec les copains, je t'ai dit 😇"
+            },
+            {
+              "id": "m_sa_014",
+              "from": "samuel",
+              "at": "2026-10-08 23:20",
+              "text": "Je vais me coucher, laisse la lumière du couloir"
+            },
+            {
+              "id": "m_sa_015",
+              "from": "me",
+              "at": "2026-10-08 23:33",
+              "text": "Je prends le RER, 20 min"
+            },
+            {
+              "id": "m_sa_016",
+              "from": "samuel",
+              "at": "2026-10-09 11:35",
+              "text": "Ça va ? Tu avais l'air bizarre au téléphone."
+            },
+            {
+              "id": "m_sa_017",
+              "from": "me",
+              "at": "2026-10-09 11:40",
+              "text": "Un problème au travail. Je te raconte ce soir."
+            },
+            {
+              "id": "m_sa_018",
+              "from": "samuel",
+              "at": "2026-10-09 13:10",
+              "text": "Tu veux que je vienne ?"
+            },
+            {
+              "id": "m_sa_019",
+              "from": "me",
+              "at": "2026-10-09 13:12",
+              "text": "Non, ça va aller. On me demande mon téléphone, tu ne pourras pas me joindre cet aprèm."
+            }
+          ]
+        },
+        {
+          "id": "c_adrien",
+          "participants": [
+            "adrien"
+          ],
+          "messages": [
+            {
+              "id": "m_ad_001",
+              "from": "adrien",
+              "at": "2026-09-25 09:10",
+              "text": "Tu sais si mon remboursement Navigo est passé ?"
+            },
+            {
+              "id": "m_ad_002",
+              "from": "me",
+              "at": "2026-09-25 09:30",
+              "text": "Sur la paie d'octobre."
+            },
+            {
+              "id": "m_ad_003",
+              "from": "adrien",
+              "at": "2026-10-06 11:50",
+              "text": "Maëlle, je peux poser cet aprèm ? 14h-18h. Je rattrape ce soir."
+            },
+            {
+              "id": "m_ad_004",
+              "from": "me",
+              "at": "2026-10-06 11:52",
+              "text": "Tu le dis à Sonia ?"
+            },
+            {
+              "id": "m_ad_005",
+              "from": "adrien",
+              "at": "2026-10-06 11:53",
+              "text": "Je lui dis que c'est perso."
+            },
+            {
+              "id": "m_ad_laurier",
+              "from": "adrien",
+              "at": "2026-10-07 20:15",
+              "text": "Tu peux garder ça pour toi ? Hier j'étais chez Laurier & Fils. Entretien. Ils cherchent quelqu'un pour janvier. Sonia ne doit pas savoir."
+            },
+            {
+              "id": "m_ad_007",
+              "from": "me",
+              "at": "2026-10-07 20:31",
+              "text": "Je ne dirai rien. Mais pas cette semaine…"
+            },
+            {
+              "id": "m_ad_008",
+              "from": "adrien",
+              "at": "2026-10-07 20:33",
+              "text": "Je sais. Ils m'ont appelé, je n'ai pas pu dire non."
+            },
+            {
+              "id": "m_ad_009",
+              "from": "adrien",
+              "at": "2026-10-08 18:45",
+              "text": "Tu viens à La Cigale ce soir ? Il reste une place."
+            },
+            {
+              "id": "m_ad_010",
+              "from": "me",
+              "at": "2026-10-08 18:50",
+              "text": "Anniversaire de ma sœur. Amuse-toi !"
+            },
+            {
+              "id": "m_ad_011",
+              "from": "adrien",
+              "at": "2026-10-09 10:31",
+              "text": "Maëlle, je te jure que je n'ai rien donné à Laurier. Je n'ai même pas accès au dossier final."
+            },
+            {
+              "id": "m_ad_012",
+              "from": "me",
+              "at": "2026-10-09 10:40",
+              "text": "Personne ne t'a rien dit."
+            },
+            {
+              "id": "m_ad_013",
+              "from": "adrien",
+              "at": "2026-10-09 10:41",
+              "text": "Pas encore."
+            }
+          ]
+        },
+        {
+          "id": "c_lea",
+          "participants": [
+            "lea"
+          ],
+          "messages": [
+            {
+              "id": "m_le_001",
+              "from": "lea",
+              "at": "2026-09-17 20:10",
+              "text": "Yoga mardi 19h30 ?"
+            },
+            {
+              "id": "m_le_002",
+              "from": "me",
+              "at": "2026-09-17 20:15",
+              "text": "Oui"
+            },
+            {
+              "id": "m_le_003",
+              "from": "lea",
+              "at": "2026-09-26 21:00",
+              "photo": "p_lea_chat"
+            },
+            {
+              "id": "m_le_004",
+              "from": "lea",
+              "at": "2026-09-26 21:00",
+              "text": "Pistou a trouvé ta place"
+            },
+            {
+              "id": "m_le_005",
+              "from": "me",
+              "at": "2026-09-26 21:04",
+              "text": "Il est chez lui maintenant 😂"
+            },
+            {
+              "id": "m_le_006",
+              "from": "lea",
+              "at": "2026-10-04 14:00",
+              "text": "Tu viens au vide-grenier de la rue de Ménilmontant samedi prochain ?"
+            },
+            {
+              "id": "m_le_007",
+              "from": "me",
+              "at": "2026-10-04 14:12",
+              "text": "Si je survis au rendu, oui"
+            },
+            {
+              "id": "m_le_008",
+              "from": "lea",
+              "at": "2026-10-08 22:50",
+              "text": "Alors ce rendu ?"
+            },
+            {
+              "id": "m_le_009",
+              "from": "me",
+              "at": "2026-10-08 23:10",
+              "text": "Rendu fait !! Je suis chez Juliette, je t'appelle demain"
+            },
+            {
+              "id": "m_le_010",
+              "from": "lea",
+              "at": "2026-10-09 12:15",
+              "text": "Toujours ok pour le yoga mardi ?",
+              "unread": true
+            }
+          ]
+        },
+        {
+          "id": "c_ines",
+          "participants": [
+            "ines"
+          ],
+          "messages": [
+            {
+              "id": "m_in_001",
+              "from": "ines",
+              "at": "2026-09-30 13:00",
+              "text": "Tu as des pansements ? Je me suis coupée avec le cutter 🙄"
+            },
+            {
+              "id": "m_in_002",
+              "from": "me",
+              "at": "2026-09-30 13:02",
+              "text": "Tiroir du haut, à côté de la machine à café."
+            },
+            {
+              "id": "m_in_003",
+              "from": "ines",
+              "at": "2026-10-02 17:40",
+              "text": "On descend ? Le gâteau est là."
+            },
+            {
+              "id": "m_in_004",
+              "from": "me",
+              "at": "2026-10-02 17:41",
+              "text": "J'arrive avec les bougies."
+            },
+            {
+              "id": "m_in_laurier",
+              "from": "ines",
+              "at": "2026-10-09 10:45",
+              "text": "Tu sais qu'Adrien était chez Laurier mardi ? Une amie l'a vu sortir de chez eux. Je dis ça…"
+            },
+            {
+              "id": "m_in_006",
+              "from": "me",
+              "at": "2026-10-09 10:52",
+              "text": "Ne lance pas ça, Inès."
+            },
+            {
+              "id": "m_in_007",
+              "from": "ines",
+              "at": "2026-10-09 10:53",
+              "text": "Je dis juste ce que je sais."
+            }
+          ]
+        },
+        {
+          "id": "c_karim",
+          "participants": [
+            "karim"
+          ],
+          "messages": [
+            {
+              "id": "m_ka_001",
+              "from": "karim",
+              "at": "2026-09-23 17:00",
+              "text": "Tu me commandes un rouleau de calque A1 ?"
+            },
+            {
+              "id": "m_ka_002",
+              "from": "me",
+              "at": "2026-09-23 17:05",
+              "text": "Commandé, livraison lundi."
+            },
+            {
+              "id": "m_ka_003",
+              "from": "karim",
+              "at": "2026-10-05 16:00",
+              "text": "Le VPN marche, merci !"
+            },
+            {
+              "id": "m_ka_004",
+              "from": "me",
+              "at": "2026-10-05 16:02",
+              "text": "Remercie Thomas 😉"
+            },
+            {
+              "id": "m_ka_005",
+              "from": "karim",
+              "at": "2026-10-09 10:28",
+              "text": "Ça va ? Sonia a l'air de chercher un coupable."
+            },
+            {
+              "id": "m_ka_006",
+              "from": "me",
+              "at": "2026-10-09 10:35",
+              "text": "Ça va. Je ne comprends rien."
+            }
+          ]
+        },
+        {
+          "id": "c_voltaire",
+          "participants": [
+            "voltaire"
+          ],
+          "messages": [
+            {
+              "id": "m_vo_001",
+              "from": "voltaire",
+              "at": "2026-10-02 11:50",
+              "text": "VOLTAIRE REPRO : vos tirages A0 sont prêts. Retrait jusqu'à 19h."
+            },
+            {
+              "id": "m_vo_002",
+              "from": "voltaire",
+              "at": "2026-10-08 15:40",
+              "text": "VOLTAIRE REPRO : dossier de réserve ATELIER VARIN prêt (3 exemplaires reliés). Retrait jusqu'à 19h."
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "id": "k01",
+          "contact": "maman",
+          "direction": "incoming",
+          "at": "2026-09-20 11:00",
+          "durationSeconds": 910
+        },
+        {
+          "id": "k02",
+          "contact": "juliette",
+          "direction": "outgoing",
+          "at": "2026-09-22 18:10",
+          "durationSeconds": 420
+        },
+        {
+          "id": "k03",
+          "contact": "samuel",
+          "direction": "outgoing",
+          "at": "2026-09-29 12:30",
+          "durationSeconds": 120
+        },
+        {
+          "id": "k04",
+          "contact": "thomas",
+          "direction": "outgoing",
+          "at": "2026-10-05 09:42",
+          "durationSeconds": 180
+        },
+        {
+          "id": "k05",
+          "contact": "voltaire",
+          "direction": "incoming",
+          "at": "2026-10-07 11:15",
+          "durationSeconds": 95
+        },
+        {
+          "id": "k06",
+          "contact": "sonia",
+          "direction": "incoming",
+          "at": "2026-10-08 13:50",
+          "durationSeconds": 240
+        },
+        {
+          "id": "k07",
+          "contact": "samuel",
+          "direction": "incoming",
+          "at": "2026-10-08 17:30",
+          "durationSeconds": 64
+        },
+        {
+          "id": "k08",
+          "contact": "juliette",
+          "direction": "missed",
+          "at": "2026-10-08 20:10",
+          "durationSeconds": 0
+        },
+        {
+          "id": "k09",
+          "contact": "maman",
+          "direction": "outgoing",
+          "at": "2026-10-08 20:12",
+          "durationSeconds": 45
+        },
+        {
+          "id": "k10",
+          "contact": "lea",
+          "direction": "missed",
+          "at": "2026-10-08 22:55",
+          "durationSeconds": 0
+        },
+        {
+          "id": "k11",
+          "contact": "samuel",
+          "direction": "outgoing",
+          "at": "2026-10-08 23:34",
+          "durationSeconds": 70
+        },
+        {
+          "id": "k12",
+          "contact": "sonia",
+          "direction": "incoming",
+          "at": "2026-10-09 10:08",
+          "durationSeconds": 310
+        },
+        {
+          "id": "k13",
+          "contact": "veilleur",
+          "direction": "outgoing",
+          "at": "2026-10-09 10:25",
+          "durationSeconds": 415
+        },
+        {
+          "id": "k14",
+          "contact": "samuel",
+          "direction": "incoming",
+          "at": "2026-10-09 11:33",
+          "durationSeconds": 205
+        },
+        {
+          "id": "k15",
+          "contact": "juliette",
+          "direction": "incoming",
+          "at": "2026-10-09 11:52",
+          "durationSeconds": 380
+        },
+        {
+          "id": "k16",
+          "contact": "thomas",
+          "direction": "incoming",
+          "at": "2026-10-09 12:30",
+          "durationSeconds": 95
+        },
+        {
+          "id": "k17",
+          "contact": "adrien",
+          "direction": "missed",
+          "at": "2026-10-09 12:50",
+          "durationSeconds": 0
+        },
+        {
+          "id": "k18",
+          "contact": "ben",
+          "direction": "incoming",
+          "at": "2026-10-09 13:40",
+          "durationSeconds": 150
+        }
+      ],
+      "places": [
+        {
+          "id": "pl_atelier",
+          "name": "Atelier Varin — rue de la Folie-Méricourt",
+          "kind": "work",
+          "x": 0.338,
+          "y": 0.415,
+          "latitude": 48.8651,
+          "longitude": 2.3706
+        },
+        {
+          "id": "pl_home",
+          "name": "Domicile — rue des Pyrénées",
+          "kind": "home",
+          "x": 0.571,
+          "y": 0.407,
+          "latitude": 48.8656,
+          "longitude": 2.3985
+        },
+        {
+          "id": "pl_juliette",
+          "name": "Chez Juliette — rue du Midi, Vincennes",
+          "kind": "home",
+          "x": 0.907,
+          "y": 0.715,
+          "latitude": 48.8471,
+          "longitude": 2.4389
+        },
+        {
+          "id": "pl_rer_vincennes",
+          "name": "RER Vincennes",
+          "kind": "station",
+          "x": 0.859,
+          "y": 0.71,
+          "latitude": 48.8474,
+          "longitude": 2.4331
+        },
+        {
+          "id": "pl_cigale",
+          "name": "La Cigale — boulevard de Rochechouart",
+          "kind": "bar",
+          "x": 0.087,
+          "y": 0.13,
+          "latitude": 48.8822,
+          "longitude": 2.3404,
+          "revealedBy": [
+            "photoInfo:p_adrien_cigale",
+            "message:m_ad_009"
+          ]
+        },
+        {
+          "id": "pl_gare_lyon",
+          "name": "Paris Gare de Lyon — arrivée des TGV",
+          "kind": "station",
+          "x": 0.362,
+          "y": 0.753,
+          "latitude": 48.8448,
+          "longitude": 2.3735,
+          "revealedBy": [
+            "mail:mail_eticket"
+          ]
+        },
+        {
+          "id": "pl_laurier",
+          "name": "Laurier & Fils — rue du Faubourg-Saint-Denis",
+          "kind": "work",
+          "x": 0.203,
+          "y": 0.295,
+          "latitude": 48.8723,
+          "longitude": 2.3544,
+          "revealedBy": [
+            "browser:b09"
+          ]
+        },
+        {
+          "id": "pl_voltaire",
+          "name": "Voltaire Repro — boulevard Voltaire",
+          "kind": "shop",
+          "x": 0.407,
+          "y": 0.49,
+          "latitude": 48.8606,
+          "longitude": 2.3789
+        },
+        {
+          "id": "pl_montreuil",
+          "name": "Site de la future médiathèque — Montreuil",
+          "kind": "district",
+          "x": 0.881,
+          "y": 0.532,
+          "latitude": 48.8581,
+          "longitude": 2.4357
+        },
+        {
+          "id": "pl_daumesnil",
+          "name": "Lac Daumesnil — bois de Vincennes",
+          "kind": "park",
+          "x": 0.705,
+          "y": 0.938,
+          "latitude": 48.8337,
+          "longitude": 2.4146
+        }
+      ],
+      "tracks": [
+        {
+          "id": "t_me",
+          "contact": "me",
+          "points": [
+            {
+              "id": "tp_01",
+              "at": "2026-10-03 11:05",
+              "place": "pl_daumesnil"
+            },
+            {
+              "id": "tp_02",
+              "at": "2026-10-07 08:45",
+              "place": "pl_atelier"
+            },
+            {
+              "id": "tp_03",
+              "at": "2026-10-07 21:10",
+              "place": "pl_home"
+            },
+            {
+              "id": "tp_04",
+              "at": "2026-10-08 08:40",
+              "place": "pl_atelier"
+            },
+            {
+              "id": "tp_05",
+              "at": "2026-10-08 16:05",
+              "place": "pl_voltaire"
+            },
+            {
+              "id": "tp_06",
+              "at": "2026-10-08 16:30",
+              "place": "pl_atelier"
+            },
+            {
+              "id": "tp_07",
+              "at": "2026-10-08 19:53",
+              "place": "pl_atelier",
+              "note": "Départ"
+            },
+            {
+              "id": "tp_08",
+              "at": "2026-10-08 20:18",
+              "place": "pl_rer_vincennes"
+            },
+            {
+              "id": "tp_09",
+              "at": "2026-10-08 20:22",
+              "place": "pl_juliette"
+            },
+            {
+              "id": "tp_10",
+              "at": "2026-10-08 22:30",
+              "place": "pl_juliette"
+            },
+            {
+              "id": "tp_11",
+              "at": "2026-10-08 23:34",
+              "place": "pl_rer_vincennes"
+            },
+            {
+              "id": "tp_12",
+              "at": "2026-10-08 23:54",
+              "place": "pl_home"
+            },
+            {
+              "id": "tp_13",
+              "at": "2026-10-09 08:41",
+              "place": "pl_atelier"
+            }
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "id": "p_old_etretat",
+          "takenAt": "2024-08-14 17:20",
+          "source": "camera",
+          "scene": "beach",
+          "caption": "Les falaises d'Étretat, août 2024.",
+          "details": "La porte d'Aval, la mer vert pâle, des galets au premier plan.",
+          "place": "Étretat",
+          "device": "iPhone 11",
+          "style": "old"
+        },
+        {
+          "id": "p_old_fete",
+          "takenAt": "2025-06-21 22:40",
+          "source": "camera",
+          "scene": "street_night",
+          "caption": "Fête de la musique, rue Oberkampf.",
+          "details": "La rue noire de monde vue de loin, sous les lampadaires.",
+          "place": "Paris 11e",
+          "device": "iPhone 11",
+          "style": "old"
+        },
+        {
+          "id": "p_old_sapin",
+          "takenAt": "2025-12-24 19:10",
+          "source": "camera",
+          "scene": "interior_warm",
+          "caption": "Le sapin chez les parents, Orléans.",
+          "details": "Des guirlandes dorées, des paquets au pied du sapin.",
+          "place": "Orléans",
+          "device": "iPhone 11",
+          "style": "old"
+        },
+        {
+          "id": "p_canal",
+          "takenAt": "2026-09-13 10:15",
+          "source": "camera",
+          "scene": "street_day",
+          "caption": "Canal Saint-Martin, dimanche matin.",
+          "details": "Une passerelle en fer, l'eau verte, les premières feuilles jaunes.",
+          "place": "Canal Saint-Martin — Paris 10e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_maquette",
+          "takenAt": "2026-09-15 18:30",
+          "source": "camera",
+          "scene": "office",
+          "caption": "La maquette de la médiathèque, avant la mise en couleur.",
+          "details": "Carton gris, un patio au centre, des arbres en mousse.",
+          "place": "Atelier Varin — Paris 11e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_coulee",
+          "takenAt": "2026-09-18 12:50",
+          "source": "camera",
+          "scene": "park",
+          "caption": "La Coulée verte, pause de midi.",
+          "details": "Une allée sous les arbres, au-dessus de l'avenue Daumesnil.",
+          "place": "Promenade plantée — Paris 12e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_aligre",
+          "takenAt": "2026-09-19 10:40",
+          "source": "camera",
+          "scene": "street_day",
+          "caption": "Marché d'Aligre, samedi.",
+          "details": "Des cagettes de pommes, des étals sous les bâches.",
+          "place": "Place d'Aligre — Paris 12e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_dahlias",
+          "takenAt": "2026-09-20 11:25",
+          "source": "received",
+          "scene": "plant",
+          "caption": "Les dahlias du jardin de maman.",
+          "details": "Des dahlias rouges et orange contre un mur de pierre.",
+          "from": "maman",
+          "receivedAt": "2026-09-20 11:30",
+          "place": "Orléans",
+          "device": "Galaxy A52"
+        },
+        {
+          "id": "p_planning",
+          "takenAt": "2026-09-22 09:10",
+          "source": "screenshot",
+          "scene": "screenshot",
+          "caption": "Capture : le planning du rendu Montreuil.",
+          "details": "Un tableau partagé, les dates en rouge.",
+          "style": "screenshot",
+          "lines": [
+            "MONTREUIL — MÉDIATHÈQUE",
+            "Lun 05 : coupes",
+            "Mer 07 : façades + notice",
+            "Jeu 08 : rendu interne 12:00",
+            "Ven 09 : dépôt avant 12:00"
+          ]
+        },
+        {
+          "id": "p_lea_chat",
+          "takenAt": "2026-09-26 20:55",
+          "source": "received",
+          "scene": "cat",
+          "caption": "Pistou, le chat de Léa, sur le canapé.",
+          "details": "Un chat tigré roulé en boule sur un plaid gris.",
+          "from": "lea",
+          "receivedAt": "2026-09-26 21:00",
+          "device": "iPhone 15"
+        },
+        {
+          "id": "p_buttes",
+          "takenAt": "2026-09-27 16:20",
+          "source": "camera",
+          "scene": "park",
+          "caption": "Parc des Buttes-Chaumont, le temple de la Sibylle.",
+          "details": "Le belvédère sur son rocher, le lac en contrebas.",
+          "place": "Buttes-Chaumont — Paris 19e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_tirages",
+          "takenAt": "2026-09-29 17:10",
+          "source": "camera",
+          "scene": "office",
+          "caption": "Les tirages A0 étalés sur la grande table.",
+          "details": "Des plans, des règles métalliques, un cutter, un rouleau d'adhésif.",
+          "place": "Atelier Varin — Paris 11e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_verriere",
+          "takenAt": "2026-10-01 08:50",
+          "source": "camera",
+          "scene": "rain",
+          "caption": "Pluie sur la verrière de l'atelier.",
+          "details": "Des gouttes sur le verre, le ciel gris au-dessus de la cour.",
+          "place": "Atelier Varin — Paris 11e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_ticket",
+          "takenAt": "2026-10-02 12:30",
+          "source": "camera",
+          "scene": "receipt",
+          "caption": "Ticket de Voltaire Repro.",
+          "details": "Un ticket thermique un peu froissé.",
+          "place": "Paris 11e",
+          "device": "iPhone 13",
+          "style": "document",
+          "lines": [
+            "VOLTAIRE REPRO",
+            "Tirages A0 couleur x 12",
+            "Reliure x 3",
+            "TOTAL 186,40 €",
+            "Compte ATELIER VARIN"
+          ]
+        },
+        {
+          "id": "p_daumesnil",
+          "takenAt": "2026-10-03 11:30",
+          "source": "camera",
+          "scene": "park",
+          "caption": "Le lac Daumesnil, samedi matin.",
+          "details": "Des barques amarrées, l'île, les arbres qui jaunissent.",
+          "place": "Bois de Vincennes — Paris 12e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_cirque",
+          "takenAt": "2026-10-04 15:10",
+          "source": "camera",
+          "scene": "street_day",
+          "caption": "Le Cirque d'Hiver, en rentrant.",
+          "details": "La façade ronde, les colonnes, le ciel bleu.",
+          "place": "Rue Amelot — Paris 11e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_nas_orange",
+          "takenAt": "2026-10-05 09:38",
+          "source": "camera",
+          "scene": "office",
+          "caption": "Le serveur du local technique, voyant orange.",
+          "details": "Une baie noire, des câbles bleus, un voyant orange sur un des disques.",
+          "place": "Atelier Varin — Paris 11e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_plante",
+          "takenAt": "2026-10-06 08:55",
+          "source": "camera",
+          "scene": "plant",
+          "caption": "Le pothos du bureau reprend.",
+          "details": "Une plante sur une étagère blanche, près de la fenêtre.",
+          "place": "Atelier Varin — Paris 11e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_belleville",
+          "takenAt": "2026-10-07 19:05",
+          "source": "camera",
+          "scene": "sunset",
+          "caption": "Coucher de soleil depuis le parc de Belleville.",
+          "details": "Paris en contrebas, la tour Eiffel minuscule dans le ciel orange.",
+          "place": "Parc de Belleville — Paris 20e",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_republique",
+          "takenAt": "2026-10-08 13:15",
+          "source": "camera",
+          "scene": "street_day",
+          "caption": "Place de la République, pause de midi.",
+          "details": "La statue, les platanes, des skateurs au loin.",
+          "place": "Place de la République — Paris",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_vincennes_2230",
+          "takenAt": "2026-10-08 22:30",
+          "source": "camera",
+          "scene": "party",
+          "caption": "Le gâteau de Juliette, 36 bougies.",
+          "details": "Métadonnées : jeudi 8 octobre 2026, 22:30:12 — Vincennes, rue du Midi — iPhone 13. Un gâteau aux framboises, les bougies allumées, une table en désordre.",
+          "place": "Vincennes — rue du Midi",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_adrien_cigale",
+          "takenAt": "2026-10-08 22:31",
+          "source": "received",
+          "scene": "concert",
+          "caption": "La scène de La Cigale, vue du balcon.",
+          "details": "Métadonnées : jeudi 8 octobre 2026, 22:31 — La Cigale, boulevard de Rochechouart, Paris 18e — Pixel 8. Des projecteurs rouges, la salle pleine vue de dos.",
+          "from": "adrien",
+          "receivedAt": "2026-10-08 22:34",
+          "place": "La Cigale — Paris 18e",
+          "device": "Pixel 8"
+        },
+        {
+          "id": "p_chateau",
+          "takenAt": "2026-10-08 23:33",
+          "source": "camera",
+          "scene": "street_night",
+          "caption": "Le donjon du château de Vincennes, en allant au RER.",
+          "details": "Le donjon éclairé, l'avenue vide, un feu rouge.",
+          "place": "Vincennes",
+          "device": "iPhone 13"
+        },
+        {
+          "id": "p_poche",
+          "takenAt": "2026-10-09 09:12",
+          "source": "camera",
+          "scene": "pocket",
+          "caption": "Photo prise par erreur.",
+          "details": "Du noir, un peu de tissu, un reflet.",
+          "place": "Atelier Varin — Paris 11e",
+          "device": "iPhone 13",
+          "style": "blurry"
+        },
+        {
+          "id": "p_depot_capture",
+          "takenAt": "2026-10-09 10:10",
+          "source": "received",
+          "scene": "screenshot",
+          "caption": "Capture envoyée par Sonia : l'avis de dépôt.",
+          "details": "Une page de la plateforme des marchés publics.",
+          "from": "sonia",
+          "receivedAt": "2026-10-09 10:12",
+          "device": "iPhone 14",
+          "style": "screenshot",
+          "lines": [
+            "PLATEFORME DES MARCHÉS PUBLICS",
+            "Médiathèque de Montreuil — lot unique",
+            "Pli déposé : LAURIER & FILS ARCHITECTES",
+            "Date de dépôt : 09/10/2026 09:00:41"
+          ]
+        }
+      ],
+      "calendar": [
+        {
+          "id": "cal_yoga",
+          "start": "2026-09-22 19:30",
+          "end": "2026-09-22 20:45",
+          "title": "Yoga avec Léa",
+          "location": "Studio rue des Pyrénées"
+        },
+        {
+          "id": "cal_dentiste",
+          "start": "2026-09-24 08:30",
+          "end": "2026-09-24 09:00",
+          "title": "Dentiste",
+          "location": "Dr Lemaire — avenue Gambetta"
+        },
+        {
+          "id": "cal_pot_karim",
+          "start": "2026-10-02 18:00",
+          "end": "2026-10-02 19:30",
+          "title": "Pot — 39 ans de Karim",
+          "location": "Atelier"
+        },
+        {
+          "id": "cal_adrien_absent",
+          "start": "2026-10-06 14:00",
+          "end": "2026-10-06 18:00",
+          "title": "Adrien — absent (rdv perso)",
+          "notes": "Prévenu à 11h50. Rattrape le soir."
+        },
+        {
+          "id": "cal_rendu_interne",
+          "start": "2026-10-08 12:00",
+          "end": "2026-10-08 13:00",
+          "title": "Rendu interne Montreuil",
+          "location": "Atelier — grande table"
+        },
+        {
+          "id": "cal_sonia_lyon",
+          "start": "2026-10-08 14:00",
+          "end": "2026-10-08 23:02",
+          "title": "Sonia à Lyon — jury Confluence",
+          "notes": "Retour TGV 21:04 → 23:02."
+        },
+        {
+          "id": "cal_voltaire",
+          "start": "2026-10-08 16:00",
+          "end": "2026-10-08 16:20",
+          "title": "Retrait dossier de réserve",
+          "location": "Voltaire Repro — bd Voltaire"
+        },
+        {
+          "id": "cal_anniv_juliette",
+          "start": "2026-10-08 20:00",
+          "end": "2026-10-08 23:30",
+          "title": "Anniversaire Juliette 🎂",
+          "location": "12 rue du Midi, Vincennes",
+          "notes": "Code 27B45, 3e gauche. Gâteau : Juliette le récupère à 18h."
+        },
+        {
+          "id": "cal_depot",
+          "start": "2026-10-09 09:00",
+          "end": "2026-10-09 12:00",
+          "title": "DÉPÔT CONCOURS — Médiathèque de Montreuil",
+          "notes": "Sonia signe l'acte d'engagement à 9h. Dépôt sur la plateforme avant 12:00."
+        },
+        {
+          "id": "cal_maintenance",
+          "start": "2026-10-10 09:00",
+          "end": "2026-10-10 12:00",
+          "title": "Maintenance serveur — Thomas",
+          "location": "Atelier (fermé)",
+          "notes": "Changement du disque orange."
+        },
+        {
+          "id": "cal_videgrenier",
+          "start": "2026-10-10 10:00",
+          "end": "2026-10-10 13:00",
+          "title": "Vide-grenier Ménilmontant avec Léa"
+        },
+        {
+          "id": "cal_orleans",
+          "start": "2026-10-18 12:00",
+          "end": "2026-10-18 17:00",
+          "title": "Déjeuner à Orléans",
+          "location": "Chez les parents"
+        }
+      ],
+      "notes": [
+        {
+          "id": "n_atelier",
+          "title": "Atelier — à savoir",
+          "createdAt": "2026-03-10 09:20",
+          "modifiedAt": "2026-09-30 10:05",
+          "body": "Codes alarme : personnels, ne jamais les communiquer (règle Sonia, mars 2026). Perte ou oubli : appeler Veilleur, changement sous 48 h.\nClé du local vélo : tableau de l'entrée.\nServeur : Thomas Bellec — maintenance le 2e samedi du mois.\nRamassage papier : mardi.\nFontaine à eau : bonbonnes chez le gardien."
+        },
+        {
+          "id": "n_montreuil",
+          "title": "Montreuil — pièces du dossier",
+          "createdAt": "2026-09-21 10:00",
+          "modifiedAt": "2026-10-08 12:35",
+          "body": "✓ Lettre de candidature\n✓ Acte d'engagement (signature Sonia vendredi 9h)\n✓ Notice architecturale\n✓ Planches A0 x 4\n✓ Estimation\n✓ Dossier papier de réserve (Voltaire, jeudi 16h)\n→ Dépôt plateforme avant 12:00"
+        },
+        {
+          "id": "n_juliette",
+          "title": "Juliette 36 ans",
+          "createdAt": "2026-09-15 21:30",
+          "modifiedAt": "2026-10-05 19:12",
+          "body": "Vélo → trop cher, on se cotise avec papa et maman pour Noël ?\nCarnet en cuir + stylo\nFleurs\nGâteau framboise rue de Fontenay (commandé, Juliette le récupère)"
+        },
+        {
+          "id": "n_liste",
+          "title": "Liste",
+          "createdAt": "2026-10-04 10:00",
+          "modifiedAt": "2026-10-07 21:15",
+          "body": "Lessive\nPiles AA\nBougies anniversaire\nAmpoule couloir\nPapier cadeau"
+        },
+        {
+          "id": "n_conges",
+          "title": "Congés 2026",
+          "createdAt": "2026-01-12 09:00",
+          "modifiedAt": "2026-09-02 09:30",
+          "body": "Août : 3 semaines (fait)\nToussaint : 2 jours après le concours ?\nNoël : 24 → 2 janvier, Orléans"
+        }
+      ],
+      "mails": [
+        {
+          "id": "mail_mutuelle",
+          "folder": "inbox",
+          "fromName": "Mutuelle des Indépendants",
+          "fromAddress": "info@mutuelle-independants.fr",
+          "to": "m.rocher@atelier-varin.fr",
+          "at": "2026-09-15 08:05",
+          "subject": "Votre attestation de tiers payant 2026-2027",
+          "body": "Bonjour,\n\nVotre nouvelle attestation est disponible dans votre espace adhérent.\n\nBonne journée.",
+          "attachments": [
+            "Attestation_2026.pdf"
+          ]
+        },
+        {
+          "id": "mail_voltaire_devis",
+          "folder": "inbox",
+          "fromName": "Voltaire Repro",
+          "fromAddress": "devis@voltaire-repro.fr",
+          "to": "m.rocher@atelier-varin.fr",
+          "at": "2026-09-24 18:20",
+          "subject": "Devis 26-0912 — tirages A0 couleur",
+          "body": "Bonjour Madame Rocher,\n\nCi-joint notre devis pour 12 tirages A0 couleur et 3 reliures. Délai : 48 h.\n\nL'équipe Voltaire Repro",
+          "attachments": [
+            "Devis_26-0912.pdf"
+          ]
+        },
+        {
+          "id": "mail_banque",
+          "folder": "inbox",
+          "fromName": "Crédit du Faubourg — agence Oberkampf",
+          "fromAddress": "agence.oberkampf@credit-faubourg.fr",
+          "to": "compta@atelier-varin.fr",
+          "at": "2026-09-28 16:40",
+          "subject": "Votre demande de facilité de caisse",
+          "body": "Madame, Monsieur,\n\nAprès étude de votre dossier, nous ne sommes pas en mesure de donner une suite favorable à votre demande de facilité de caisse de 40 000 €.\n\nNous restons à votre disposition pour en parler lors d'un prochain rendez-vous.\n\nVotre conseiller"
+        },
+        {
+          "id": "mail_maison_archi",
+          "folder": "inbox",
+          "fromName": "Maison de l'architecture",
+          "fromAddress": "lettre@maison-architecture-idf.fr",
+          "to": "m.rocher@atelier-varin.fr",
+          "at": "2026-10-01 07:30",
+          "subject": "Octobre : conférences et visites",
+          "body": "Visite du chantier de la halle Pajol le 14 octobre, conférence sur les médiathèques de quartier le 21. Inscriptions ouvertes.",
+          "unread": true
+        },
+        {
+          "id": "mail_colis",
+          "folder": "inbox",
+          "fromName": "Service colis",
+          "fromAddress": "suivi@colis-express.fr",
+          "to": "m.rocher@atelier-varin.fr",
+          "at": "2026-10-03 12:10",
+          "subject": "Votre colis a été livré",
+          "body": "Votre colis (rouleau de calque A1) a été remis au gardien, 38 rue de la Folie-Méricourt."
+        },
+        {
+          "id": "mail_sent_serveur",
+          "folder": "sent",
+          "fromName": "Maëlle Rocher",
+          "fromAddress": "m.rocher@atelier-varin.fr",
+          "to": "t.bellec@bellec-informatique.fr",
+          "at": "2026-10-05 09:45",
+          "subject": "Serveur — voyant orange",
+          "body": "Bonjour Thomas,\n\nComme dit par SMS, le serveur clignote orange depuis ce matin. Photo jointe.\n\nMaëlle",
+          "attachments": [
+            "IMG_2051.jpg"
+          ]
+        },
+        {
+          "id": "mail_thomas_maintenance",
+          "folder": "inbox",
+          "fromName": "Thomas Bellec",
+          "fromAddress": "t.bellec@bellec-informatique.fr",
+          "to": "equipe@atelier-varin.fr",
+          "at": "2026-10-05 17:20",
+          "subject": "Maintenance serveur — samedi 10 octobre, 9h–12h",
+          "body": "Bonjour à tous,\n\nJe remplacerai le disque défectueux du serveur samedi 10 octobre, de 9h à 12h. Le serveur sera coupé pendant l'intervention.\n\nMerci d'enregistrer vos fichiers vendredi soir et de ne rien laisser tourner.\n\nBonne semaine,\n\n--\nThomas Bellec\nTechnicien informatique indépendant — réseaux, serveurs, sauvegardes\n+33 6 71 30 48 92\nRéférences : ex-prestataire informatique, affaire classée BEN-2019-114 — témoin"
+        },
+        {
+          "id": "mail_rappel_depot",
+          "folder": "inbox",
+          "fromName": "Plateforme des marchés publics",
+          "fromAddress": "ne-pas-repondre@marches-publics-idf.fr",
+          "to": "m.rocher@atelier-varin.fr",
+          "at": "2026-10-07 09:00",
+          "subject": "Rappel — Médiathèque de Montreuil : remise des offres avant le 09/10/2026 à 12:00",
+          "body": "Consultation n° 2026-MTR-041 — Maîtrise d'œuvre pour la construction d'une médiathèque de quartier, Montreuil.\n\nDate limite de remise des plis : vendredi 9 octobre 2026, 12:00. Aucun pli ne sera accepté après cette heure."
+        },
+        {
+          "id": "mail_eticket",
+          "folder": "inbox",
+          "fromName": "Sonia Varin",
+          "fromAddress": "s.varin@atelier-varin.fr",
+          "to": "m.rocher@atelier-varin.fr",
+          "at": "2026-10-09 08:31",
+          "subject": "TR: Votre e-billet — Lyon Part-Dieu → Paris Gare de Lyon — jeudi 8 octobre",
+          "body": "Pour la note de frais (jury Confluence). Merci ! S.\n\n----- Message transféré -----\nDe : Service e-billet TGV\n\nAller simple — jeudi 8 octobre 2026\nTGV 6694 — départ Lyon Part-Dieu 21:04 — arrivée Paris Gare de Lyon 23:02\nVoiture 14 — place 82 — seconde classe\nPassagère : Sonia VARIN\n\nBillet contrôlé à bord le 08/10/2026 à 21:37.",
+          "attachments": [
+            "e-billet_VARIN_0810.pdf"
+          ]
+        },
+        {
+          "id": "mail_alarm_log",
+          "folder": "inbox",
+          "fromName": "Veilleur Télésurveillance",
+          "fromAddress": "journal@veilleur-telesurveillance.fr",
+          "to": "m.rocher@atelier-varin.fr ; cc : s.varin@atelier-varin.fr",
+          "at": "2026-10-09 10:48",
+          "subject": "Journal d'alarme — jeudi 8 octobre",
+          "body": "Bonjour,\n\nSuite à votre appel de ce matin, voici le journal du site ATELIER VARIN — 38 rue de la Folie-Méricourt, 75011 Paris, pour le jeudi 8 octobre 2026.\n\n08:41  Désarmement — code 03 (ROCHER Maëlle)\n12:58  Porte d'entrée — ouverture (système désarmé)\n19:52  Armement total — code 03 (ROCHER Maëlle)\n22:31  Désarmement — code 03 (ROCHER Maëlle)\n22:33  Local technique — détecteur de mouvement (système désarmé)\n23:12  Armement total — code 03 (ROCHER Maëlle)\n\nAucune autre activité jusqu'au vendredi 9 octobre, 08:44 (désarmement — code 01, VARIN Sonia).\n\nCodes actifs sur le site :\n01 VARIN Sonia — 03 ROCHER Maëlle — 04 BELKACEM Karim — 07 BELLEC Thomas (technicien), dernier usage valide : mardi 6 octobre, 18:40.\n\nCordialement,\nVeilleur Télésurveillance — centre de réception des alarmes",
+          "attachments": [
+            "Journal_ATELIER-VARIN_2026-10-08.pdf"
+          ]
+        }
+      ],
+      "browser": [
+        {
+          "id": "b01",
+          "at": "2026-09-15 21:20",
+          "kind": "search",
+          "text": "idée cadeau soeur 36 ans"
+        },
+        {
+          "id": "b02",
+          "at": "2026-09-15 21:22",
+          "kind": "visit",
+          "text": "30 idées de cadeaux pour sa sœur",
+          "url": "cadeaux-malins.fr/soeur",
+          "summary": "Des carnets, des bijoux, un cours de poterie, un week-end… et le conseil de toujours : demandez à sa meilleure amie."
+        },
+        {
+          "id": "b03",
+          "at": "2026-09-22 12:40",
+          "kind": "search",
+          "text": "pâtisserie vincennes rue de fontenay"
+        },
+        {
+          "id": "b04",
+          "at": "2026-09-28 19:40",
+          "kind": "search",
+          "text": "facilité de caisse refusée que faire petite entreprise"
+        },
+        {
+          "id": "b05",
+          "at": "2026-10-03 10:25",
+          "kind": "search",
+          "text": "lac daumesnil location barque octobre"
+        },
+        {
+          "id": "b06",
+          "at": "2026-10-06 22:10",
+          "kind": "search",
+          "text": "horaires RER A Vincennes Nation nuit"
+        },
+        {
+          "id": "b07",
+          "at": "2026-10-08 18:47",
+          "kind": "visit",
+          "text": "La Cigale — programme d'octobre",
+          "url": "lacigale.fr/agenda",
+          "summary": "Jeudi 8 octobre : concert, ouverture des portes 19h30, début 20h30. Complet."
+        },
+        {
+          "id": "b08",
+          "at": "2026-10-09 10:30",
+          "kind": "search",
+          "text": "laurier & fils architectes"
+        },
+        {
+          "id": "b09",
+          "at": "2026-10-09 10:31",
+          "kind": "visit",
+          "text": "Laurier & Fils — architectes associés",
+          "url": "laurier-fils-architectes.fr",
+          "summary": "Agence d'architecture fondée en 1994 par Olivier Laurier. 22 rue du Faubourg-Saint-Denis, Paris 10e. Équipements publics, logements, réhabilitations."
+        },
+        {
+          "id": "b10",
+          "at": "2026-10-09 11:20",
+          "kind": "search",
+          "text": "qui peut utiliser mon code alarme"
+        },
+        {
+          "id": "b11",
+          "at": "2026-10-09 11:22",
+          "kind": "visit",
+          "text": "Code d'alarme : ce que prévoit votre contrat de télésurveillance",
+          "url": "securite-pratique.fr/code-alarme",
+          "summary": "Le code est personnel. Le journal enregistre chaque code utilisé, pas la personne qui le tape : un code communiqué engage son titulaire."
+        },
+        {
+          "id": "b12",
+          "at": "2026-10-09 12:20",
+          "kind": "search",
+          "text": "bureau des enquêtes numériques paris"
+        },
+        {
+          "id": "b13",
+          "at": "2026-10-09 12:21",
+          "kind": "visit",
+          "text": "BEN — Bureau des Enquêtes Numériques",
+          "url": "ben.interieur.gouv.fr",
+          "summary": "Service d'enquête spécialisé dans les preuves numériques. Remise volontaire d'un téléphone : l'extraction est réalisée au laboratoire, en présence d'une analyste. L'appareil est rendu après l'enquête."
+        }
+      ],
+      "liveEvents": [
+        {
+          "id": "lv01",
+          "level": "important",
+          "afterSeconds": 35,
+          "kind": "message",
+          "app": "messages",
+          "title": "Thomas Bellec",
+          "body": "Maëlle, j'ai appris pour Laurier. Si le BEN veut les journaux du serveur, je peux les sortir ce soir.",
+          "conversation": "c_thomas",
+          "message": {
+            "id": "m_live_thomas",
+            "from": "thomas",
+            "at": "2026-10-09 15:01",
+            "text": "Maëlle, j'ai appris pour Laurier. Si le BEN veut les journaux du serveur, je peux les sortir ce soir."
+          },
+          "opens": "message:m_live_thomas"
+        },
+        {
+          "id": "lv02",
+          "level": "normal",
+          "afterSeconds": 110,
+          "kind": "message",
+          "app": "messages",
+          "title": "Atelier Varin",
+          "body": "Sonia : Personne ne parle de Montreuil à l'extérieur. Même pas entre vous.",
+          "conversation": "c_atelier",
+          "message": {
+            "id": "m_live_sonia",
+            "from": "sonia",
+            "at": "2026-10-09 15:02",
+            "text": "Personne ne parle de Montreuil à l'extérieur. Même pas entre vous."
+          },
+          "opens": "message:m_live_sonia"
+        },
+        {
+          "id": "lv03",
+          "level": "normal",
+          "afterSeconds": 175,
+          "kind": "call",
+          "app": "phone",
+          "title": "Appel manqué",
+          "body": "Juliette Rocher",
+          "call": {
+            "id": "k_live_juliette",
+            "contact": "juliette",
+            "direction": "missed",
+            "at": "2026-10-09 15:03",
+            "durationSeconds": 0
+          },
+          "opens": "call:k_live_juliette"
+        },
+        {
+          "id": "lv04",
+          "level": "urgent",
+          "afterSeconds": 235,
+          "kind": "deletion",
+          "app": "messages",
+          "title": "Thomas Bellec",
+          "body": "Thomas Bellec a supprimé un message.",
+          "conversation": "c_thomas",
+          "deletesMessage": "m_th_2203",
+          "opens": "message:m_th_2203"
+        }
+      ],
+      "wallpaper": "dusk",
+      "batteryPercent": 41
+    }
+  ],
+  "suspects": [
+    {
+      "id": "s_thomas",
+      "contact": "thomas",
+      "role": "Technicien informatique indépendant de l'atelier",
+      "age": 41,
+      "address": "Paris 12e — rue de Charenton",
+      "statement": "« Je n'ai pas mis les pieds à l'atelier depuis mardi. Jeudi soir, j'étais chez moi. Ma maintenance est prévue samedi, tout le monde le sait. »",
+      "verdict": "Thomas Bellec a demandé le code de Maëlle à 21:52, en prétendant que le sien ne marchait plus : le journal d'alarme montre qu'il marchait encore mardi. À 22:31, il a ouvert l'atelier avec ce code et copié le dossier Montreuil sur le serveur. À 23:05, il écrit « Envoyé. On est quittes. » à la mauvaise personne et l'efface une minute plus tard. À 23:12, il réarme l'alarme, toujours avec le code de Maëlle."
+    },
+    {
+      "id": "s_adrien",
+      "contact": "adrien",
+      "role": "Architecte junior de l'atelier",
+      "age": 27,
+      "address": "Paris 19e — rue de Crimée",
+      "statement": "« Jeudi soir, j'étais à un concert à La Cigale. Je n'ai pas de code d'alarme, et je n'ai pas accès au dossier final. »",
+      "alibi": "À 22:31, le téléphone d'Adrien photographie la scène de La Cigale, boulevard de Rochechouart : la photo qu'il envoie au groupe à 22:34 est datée et localisée. À la même minute, l'alarme de l'atelier est désarmée, à trois kilomètres de là.",
+      "alibiEvidence": "e_adrien_alibi",
+      "trap": "Il a passé un entretien chez Laurier & Fils mardi, en pleine semaine de rendu, et il a demandé à Maëlle de le cacher. Il cherchait un poste, pas un acheteur.",
+      "verdict": "Adrien a caché son après-midi de mardi : il passait un entretien chez Laurier & Fils. Mais jeudi à 22:31, il était à La Cigale — sa photo, prise dans la salle à cette minute, le place là-bas. Il n'a ni code d'alarme ni accès au dossier final."
+    },
+    {
+      "id": "s_sonia",
+      "contact": "sonia",
+      "role": "Cofondatrice de l'Atelier Varin",
+      "age": 52,
+      "address": "Paris 11e — rue Saint-Maur",
+      "statement": "« J'étais à Lyon pour un jury. Je suis rentrée par le TGV de 21:04, arrivée 23:02 à Gare de Lyon. Ce concours devait sauver l'atelier : pourquoi l'aurais-je donné ? »",
+      "alibi": "Son billet, transféré à Maëlle pour la note de frais, a été contrôlé à bord du TGV 6694 à 21:37. Parti de Lyon à 21:04, le train n'arrive à Gare de Lyon qu'à 23:02 : à 22:31, Sonia était entre Lyon et Paris.",
+      "alibiEvidence": "e_sonia_alibi",
+      "trap": "L'atelier manque d'argent, la banque lui refuse une facilité de caisse et elle le cache à l'équipe : on pouvait croire qu'elle avait monnayé le projet. Sans ce concours, c'est pourtant son atelier qui ferme.",
+      "verdict": "Sonia cachait les difficultés de l'atelier, mais elle avait tout à perdre avec cette fuite. Jeudi à 22:31, elle était dans le TGV 6694, billet contrôlé à 21:37, loin de la rue de la Folie-Méricourt."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e_code_request",
+      "title": "« Tu peux me redonner le code alarme ? »",
+      "importance": "key",
+      "suspects": [
+        "s_thomas"
+      ],
+      "refs": [
+        "message:m_th_2152"
+      ],
+      "meaning": "Jeudi à 21:52, Thomas demande le code d'alarme de Maëlle pour une « maintenance ce soir ». Elle le lui donne à 22:01. Personne d'autre, dans tout le téléphone, ne connaît ce code ce soir-là."
+    },
+    {
+      "id": "e_alarm_2231",
+      "title": "22:31 : le code de Maëlle, sans Maëlle",
+      "importance": "key",
+      "suspects": [
+        "s_thomas"
+      ],
+      "refs": [
+        "mail:mail_alarm_log",
+        "photoInfo:p_vincennes_2230"
+      ],
+      "meaning": "Le journal de Veilleur montre le code 03 de Maëlle à 22:31 (désarmement), 22:33 (le local du serveur) et 23:12 (réarmement). À 22:30, Maëlle photographie le gâteau de sa sœur à Vincennes. Ce n'est pas elle qui a tapé le code : c'est la personne à qui elle l'a donné. Et le code de Thomas, qui « ne passait plus », fonctionnait encore mardi."
+    },
+    {
+      "id": "e_deleted_sent",
+      "title": "« Envoyé. On est quittes. »",
+      "importance": "key",
+      "suspects": [
+        "s_thomas"
+      ],
+      "refs": [
+        "message:m_th_2305"
+      ],
+      "meaning": "À 23:05, pendant que l'atelier est ouvert, Thomas écrit « Envoyé. On est quittes. » à Maëlle — un message destiné à quelqu'un d'autre — et l'efface à 23:06. Il était dans la Corbeille. Sept minutes plus tard, l'alarme est réarmée."
+    },
+    {
+      "id": "e_maintenance_saturday",
+      "title": "La maintenance prévue samedi",
+      "importance": "supporting",
+      "suspects": [
+        "s_thomas"
+      ],
+      "anyOf": true,
+      "refs": [
+        "mail:mail_thomas_maintenance",
+        "calendar:cal_maintenance",
+        "message:m_th_009"
+      ],
+      "meaning": "Thomas avait lui-même fixé l'intervention au samedi 10, de 9h à 12h, l'atelier fermé. La « maintenance ce soir » de jeudi n'était prévue nulle part."
+    },
+    {
+      "id": "e_adrien_alibi",
+      "title": "La photo de La Cigale",
+      "importance": "supporting",
+      "suspects": [
+        "s_adrien"
+      ],
+      "refs": [
+        "photoInfo:p_adrien_cigale"
+      ],
+      "meaning": "La photo envoyée par Adrien à 22:34 a été prise à 22:31, à La Cigale (Paris 18e), avec son propre téléphone. À cette minute, l'alarme de l'atelier est désarmée dans le 11e."
+    },
+    {
+      "id": "e_sonia_alibi",
+      "title": "Le billet de Sonia",
+      "importance": "supporting",
+      "suspects": [
+        "s_sonia"
+      ],
+      "anyOf": true,
+      "refs": [
+        "mail:mail_eticket",
+        "message:m_at_035"
+      ],
+      "meaning": "TGV 6694, Lyon Part-Dieu 21:04 → Paris Gare de Lyon 23:02, billet contrôlé à bord à 21:37. À 22:31, Sonia était dans le train."
+    },
+    {
+      "id": "f_adrien_interview",
+      "title": "L'entretien chez Laurier & Fils",
+      "importance": "falseLead",
+      "suspects": [
+        "s_adrien"
+      ],
+      "anyOf": true,
+      "refs": [
+        "message:m_ad_laurier",
+        "message:m_in_laurier",
+        "calendar:cal_adrien_absent"
+      ],
+      "meaning": "Adrien a bien passé un entretien chez le concurrent mardi, et il l'a caché. Il cherchait un poste pour janvier. Il n'a pas de code d'alarme, et jeudi soir il était à La Cigale."
+    },
+    {
+      "id": "f_sonia_money",
+      "title": "La banque dit non",
+      "importance": "falseLead",
+      "suspects": [
+        "s_sonia"
+      ],
+      "anyOf": true,
+      "refs": [
+        "message:m_so_banque",
+        "mail:mail_banque"
+      ],
+      "meaning": "L'atelier est à court d'argent et Sonia le cache. Mais c'est justement pour ça qu'elle avait besoin de gagner Montreuil : la fuite la ruine."
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "text": "Commencez par le journal d'alarme envoyé vendredi matin, dans Mail : à quelle heure, et avec quel code, l'atelier a-t-il été ouvert jeudi soir ? Puis cherchez où était Maëlle à cette heure-là.",
+      "scoreCost": 0
+    },
+    {
+      "id": "h2",
+      "text": "Mettez l'heure du journal en face d'une photo prise jeudi soir, puis relisez les messages de 21h à 23h : quelqu'un a-t-il eu besoin de ce code ? Pensez aussi à ce qui a été effacé.",
+      "scoreCost": 5
+    },
+    {
+      "id": "h3",
+      "text": "Un message de 21:52 demande le code, et un message effacé à 23:06 attend dans la Corbeille. Récupérez-le et comparez-le avec l'heure de réarmement de l'alarme.",
+      "scoreCost": 10,
+      "unlockAtRemainingSeconds": 200
+    }
+  ],
+  "minimalPath": [
+    "e_code_request",
+    "e_alarm_2231",
+    "e_deleted_sent"
+  ],
+  "solution": {
+    "culprit": "s_thomas",
+    "headline": "Thomas Bellec est entré dans l'atelier avec le code de Maëlle.",
+    "summary": "Il lui a demandé son code à 21:52. À 22:31, ce code ouvrait l'atelier pendant que Maëlle était à Vincennes. À 23:05, il écrivait « Envoyé. »",
+    "reveal": [
+      {
+        "at": "2026-10-05 17:20",
+        "text": "Thomas fixe lui-même la maintenance du serveur au samedi 10, de 9h à 12h",
+        "evidence": "e_maintenance_saturday"
+      },
+      {
+        "at": "2026-10-06 14:00",
+        "text": "Adrien passe un entretien chez Laurier & Fils et le cache",
+        "evidence": "f_adrien_interview"
+      },
+      {
+        "at": "2026-10-08 19:52",
+        "text": "Maëlle ferme l'atelier et arme l'alarme avec son code",
+        "evidence": "e_alarm_2231"
+      },
+      {
+        "at": "2026-10-08 21:04",
+        "text": "Sonia quitte Lyon Part-Dieu en TGV ; billet contrôlé à 21:37",
+        "evidence": "e_sonia_alibi"
+      },
+      {
+        "at": "2026-10-08 21:52",
+        "text": "« Maintenance serveur ce soir, tu peux me redonner le code alarme ? Le mien ne passe plus. »",
+        "evidence": "e_code_request"
+      },
+      {
+        "at": "2026-10-08 22:01",
+        "text": "Depuis Vincennes, Maëlle donne son code : « Tu réarmes en partant. »",
+        "evidence": "e_code_request"
+      },
+      {
+        "at": "2026-10-08 22:30",
+        "text": "Maëlle photographie le gâteau de sa sœur, rue du Midi, à Vincennes",
+        "evidence": "e_alarm_2231"
+      },
+      {
+        "at": "2026-10-08 22:31",
+        "text": "L'alarme de l'atelier est désarmée avec le code 03 de Maëlle ; Adrien photographie la scène de La Cigale",
+        "evidence": "e_adrien_alibi"
+      },
+      {
+        "at": "2026-10-08 22:33",
+        "text": "Le détecteur du local technique, celui du serveur, se déclenche",
+        "evidence": "e_alarm_2231"
+      },
+      {
+        "at": "2026-10-08 23:05",
+        "text": "« Envoyé. On est quittes. » — envoyé à Maëlle par erreur, effacé à 23:06",
+        "evidence": "e_deleted_sent"
+      },
+      {
+        "at": "2026-10-08 23:12",
+        "text": "L'alarme est réarmée, toujours avec le code de Maëlle",
+        "evidence": "e_alarm_2231"
+      },
+      {
+        "at": "2026-10-09 09:00",
+        "text": "Laurier & Fils dépose un projet presque identique à celui de l'Atelier Varin"
+      }
+    ],
+    "story": [
+      "Depuis 2025, Thomas Bellec doit 12 000 euros à Olivier Laurier, qui lui avait prêté de quoi sauver sa petite société quand il travaillait encore pour Laurier & Fils. En septembre, Laurier lui propose d'effacer la dette. En échange : le dossier de l'Atelier Varin pour la médiathèque de Montreuil, qui n'existe que sur le serveur de l'atelier.",
+      "Thomas a son propre code d'alarme, mais le journal de Veilleur enregistre chaque code. Il a fixé lui-même la maintenance au samedi. Jeudi soir, il sait que le rendu interne est validé et que Sonia est à Lyon. À 21:52, il écrit à Maëlle que son code « ne passe plus ». Attablée chez sa sœur, Maëlle lui donne le sien à 22:01, en lui demandant de réarmer en partant.",
+      "À 22:31, l'alarme de l'atelier est désarmée avec le code de Maëlle. Une minute plus tôt, Maëlle photographiait le gâteau de Juliette à Vincennes, à six kilomètres. À 22:33, le détecteur du local technique s'allume : Thomas copie le dossier MONTREUIL_FINAL.",
+      "À 23:05, il écrit « Envoyé. On est quittes. » — à Maëlle, au lieu d'Olivier Laurier. Il l'efface une minute plus tard, mais le message reste dans la Corbeille du téléphone. À 23:12, il réarme l'alarme, avec le code de Maëlle encore une fois.",
+      "Vendredi à 9:00, Laurier & Fils dépose un projet presque identique. Quand Sonia lui demande où elle était, Maëlle ne parle pas du SMS de Thomas : donner son code est interdit par le règlement de l'atelier, et elle a peur. Elle remet son téléphone au BEN, avec son accord. Les messages disent le reste."
+    ]
+  }
+}

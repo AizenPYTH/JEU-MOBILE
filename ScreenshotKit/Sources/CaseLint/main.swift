@@ -1,6 +1,8 @@
 import Foundation
 import CaseEngine
 import CaseLibrary
+import StoryEngine
+import StoryLibrary
 
 // CaseLint — checks every case shipped with the game.
 //
@@ -69,6 +71,33 @@ do {
     }
 } catch {
     print("Failed to load cases: \(error)")
+    failed = true
+}
+// The story mode (Resources/Story): valid, and a summary of what each chapter plays.
+do {
+    let story = try StoryLibrary.load()
+    let knownCases = Set((try? CaseLibrary.loadCases())?.map(\.id) ?? [])
+    let issues = StoryValidator.validate(story, knownCases: knownCases)
+    print("STORY · \(story.campaign.chapters.count) chapters · \(story.scenes.count) scenes · \(story.locations.count) sets · \(story.npcs.count) people")
+    for chapter in story.campaign.chapters {
+        let scenes = chapter.steps.compactMap { $0.scene.flatMap(story.scene) }
+        let seconds = scenes.map { scene -> Double in
+            let words = scene.dialogue.map { $0.text.split(separator: " ").count }.reduce(0, +)
+            return Double(words) / 2.5 + scene.beats.compactMap(\.seconds).reduce(0, +)
+        }
+        let cases = chapter.steps.compactMap(\.caseID)
+        print("  \(String(format: "%02d", chapter.number)) \(chapter.title) (\(chapter.status.rawValue)) · \(chapter.steps.count) steps · scenes: "
+              + zip(scenes, seconds).map { "\($0.id) ~\(Int($1)) s" }.joined(separator: ", ")
+              + (cases.isEmpty ? "" : " · cases: " + cases.joined(separator: ", ")))
+    }
+    if issues.isEmpty {
+        print("  ✓ story valid")
+    } else {
+        failed = true
+        issues.forEach { print("  ✗ \($0)") }
+    }
+} catch {
+    print("Failed to load the story: \(error)")
     failed = true
 }
 exit(failed ? 1 : 0)

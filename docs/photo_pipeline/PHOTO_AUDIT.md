@@ -15,7 +15,8 @@ Ne pas éditer à la main : modifier les fiches de requêtes ou `config/photo_pi
 | ALIBI #001 LE DÎNER | 10 | 0 | 9 | 0 | 1 | 0 | 9 |
 | ALIBI #002 LE DERNIER MÉTRO | 9 | 0 | 8 | 0 | 1 | 0 | 8 |
 | ALIBI #003 LE RENDEZ-VOUS | 9 | 0 | 6 | 2 | 1 | 0 | 6 |
-| **Total** | **240** | **0** | **187** | **10** | **43** | **0** | **181** |
+| ALIBI #101 LE DOSSIER VARIN | 25 | 0 | 21 | 0 | 4 | 0 | 21 |
+| **Total** | **265** | **0** | **208** | **10** | **47** | **0** | **202** |
 
 Décisions :
 
@@ -31,13 +32,13 @@ Règle du studio : aucune image générée par IA dans les téléphones et les g
 
 | | |
 |---|---|
-| Photos des téléphones (toutes affaires) | 240 |
-| Vraies photos livrées (photographies réelles) | **138** |
-| — dont externes : openverse 19 · wikimedia 119 | 138 |
+| Photos des téléphones (toutes affaires) | 265 |
+| Vraies photos livrées (photographies réelles) | **129** |
+| — dont externes : openverse 15 · wikimedia 114 | 129 |
 | Vraies photos prises par le studio (CUSTOM_REAL livrées) | 0 |
-| Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | 58 |
+| Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | 79 |
 | Vraies photos à prendre nous-mêmes (CUSTOM_REAL) | 10 |
-| Rendus du jeu voulus (captures d'écran, documents, tickets — pas des photographies) | 43 |
+| Rendus du jeu voulus (captures d'écran, documents, tickets — pas des photographies) | 47 |
 | Images IA supprimées | 5 |
 | Images IA restantes dans les zones photo | 0 |
 
@@ -123,6 +124,27 @@ Exceptions (photo réelle pas encore livrée) :
 | `case005_photo_p_platre` — Le couloir des urgences, vu depuis un brancard. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case005_photo_p_kids_2305` — La chambre des enfants, veilleuse allumée. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case005_photo_p_col_2314` — Un 4×4 se gare sur le parking du col. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
+| `case201_photo_p_old_etretat` — Les falaises d'Étretat, août 2024. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_old_fete` — Fête de la musique, rue Oberkampf. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_old_sapin` — Le sapin chez les parents, Orléans. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_canal` — Canal Saint-Martin, dimanche matin. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_maquette` — La maquette de la médiathèque, avant la mise en couleur. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_coulee` — La Coulée verte, pause de midi. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_aligre` — Marché d'Aligre, samedi. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_dahlias` — Les dahlias du jardin de maman. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_lea_chat` — Pistou, le chat de Léa, sur le canapé. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_buttes` — Parc des Buttes-Chaumont, le temple de la Sibylle. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_tirages` — Les tirages A0 étalés sur la grande table. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_verriere` — Pluie sur la verrière de l'atelier. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_daumesnil` — Le lac Daumesnil, samedi matin. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_cirque` — Le Cirque d'Hiver, en rentrant. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_nas_orange` — Le serveur du local technique, voyant orange. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_plante` — Le pothos du bureau reprend. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_belleville` — Coucher de soleil depuis le parc de Belleville. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_republique` — Place de la République, pause de midi. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case201_photo_p_vincennes_2230` — Le gâteau de Juliette, 36 bougies. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
+| `case201_photo_p_adrien_cigale` — La scène de La Cigale, vue du balcon. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
+| `case201_photo_p_chateau` — Le donjon du château de Vincennes, en allant au RER. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 
 ## #001 LE DERNIER MESSAGE
 
@@ -403,4 +425,34 @@ Exceptions (photo réelle pas encore livrée) :
 | `p3_chantier` | Photos | interior_warm — Une salle de bains en chantier, carrelage à moitié posé. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case103_src_bathroom_renovation_tiling_01 (variante 1) |
 | `p3_pluie` | Photos, Messages › c3_jonas | rain — La pluie sur un pare-brise, des voitures garées floues derrière. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case103_src_rain_on_windshield_p3_pluie_01 (variante 1) |
 | `p3_kleber` | Photos | street_day — La place Kléber sous la pluie, pavés luisants. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case103_src_place_kleber_strasbourg_pluie_p3_kleber_01 (variante 1) |
+
+## ALIBI #101 LE DOSSIER VARIN
+
+| ID | Écran | Fonction | Preuve | Décision | Raison | Remplacement |
+|---|---|---|---|---|---|---|
+| `p_old_etretat` | Photos | beach — Les falaises d'Étretat, août 2024. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_falaises_d_etretat_porte_d_aval_01 (variante 1) |
+| `p_old_fete` | Photos | street_night · nuit — Fête de la musique, rue Oberkampf. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_fete_de_la_musique_paris_rue_night_01 (variante 1) |
+| `p_old_sapin` | Photos | interior_warm — Le sapin chez les parents, Orléans. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_christmas_tree_living_room_01 (variante 1) |
+| `p_canal` | Photos | street_day — Canal Saint-Martin, dimanche matin. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_canal_saint_martin_passerelle_01 (variante 1) |
+| `p_maquette` | Photos | office — La maquette de la médiathèque, avant la mise en couleur. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_architectural_model_cardboard_01 (variante 1) |
+| `p_coulee` | Photos | park — La Coulée verte, pause de midi. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_promenade_plantee_paris_01 (variante 1) |
+| `p_aligre` | Photos | street_day — Marché d'Aligre, samedi. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_marche_d_aligre_paris_01 (variante 1) |
+| `p_dahlias` | Photos, Messages › c_famille | plant — Les dahlias du jardin de maman. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_dahlias_garden_01 (variante 1) |
+| `p_planning` | Photos | screenshot — Capture : le planning du rendu Montreuil. | non | **PROCEDURAL** | capture d'écran rendue par le téléphone | aucun : rendu procédural conservé |
+| `p_lea_chat` | Photos, Messages › c_lea | cat — Pistou, le chat de Léa, sur le canapé. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_tabby_cat_sleeping_sofa_01 (variante 1) |
+| `p_buttes` | Photos | park — Parc des Buttes-Chaumont, le temple de la Sibylle. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_temple_de_la_sibylle_buttes_chaumont_01 (variante 1) |
+| `p_tirages` | Photos | office — Les tirages A0 étalés sur la grande table. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_architectural_drawings_on_table_01 (variante 1) |
+| `p_verriere` | Photos | rain — Pluie sur la verrière de l'atelier. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_rain_drops_glass_roof_01 (variante 1) |
+| `p_ticket` | Photos | receipt — Ticket de Voltaire Repro. | non | **PROCEDURAL** | ticket (document) rendu par le téléphone | aucun : rendu procédural conservé |
+| `p_daumesnil` | Photos | park — Le lac Daumesnil, samedi matin. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_lac_daumesnil_bois_de_vincennes_01 (variante 1) |
+| `p_cirque` | Photos | street_day — Le Cirque d'Hiver, en rentrant. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_cirque_d_hiver_paris_01 (variante 1) |
+| `p_nas_orange` | Photos, Messages › c_thomas | office — Le serveur du local technique, voyant orange. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_server_rack_small_office_01 (variante 1) |
+| `p_plante` | Photos | plant — Le pothos du bureau reprend. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_pothos_plant_shelf_01 (variante 1) |
+| `p_belleville` | Photos | sunset — Coucher de soleil depuis le parc de Belleville. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_parc_de_belleville_vue_paris_01 (variante 1) |
+| `p_republique` | Photos | street_day — Place de la République, pause de midi. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_place_de_la_republique_paris_01 (variante 1) |
+| `p_vincennes_2230` | Photos, Messages › c_famille | party · nuit — Le gâteau de Juliette, 36 bougies. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case201_src_birthday_cake_candles_table_p_vincennes_2230_night_01 (variante 1) |
+| `p_adrien_cigale` | Photos, Messages › c_atelier | concert · nuit — La scène de La Cigale, vue du balcon. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case201_src_la_cigale_paris_salle_concert_p_adrien_cigale_night_01 (variante 1) |
+| `p_chateau` | Photos | street_night · nuit — Le donjon du château de Vincennes, en allant au RER. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case201_src_chateau_de_vincennes_donjon_nuit_night_01 (variante 1) |
+| `p_poche` | Photos | pocket — Photo prise par erreur. | non | **PROCEDURAL** | photo ratée prise dans une poche | aucun : rendu procédural conservé |
+| `p_depot_capture` | Photos, Messages › c_atelier | screenshot — Capture envoyée par Sonia : l'avis de dépôt. | non | **PROCEDURAL** | capture d'écran rendue par le téléphone | aucun : rendu procédural conservé |
 

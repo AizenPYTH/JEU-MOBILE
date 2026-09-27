@@ -1,0 +1,114 @@
+{
+  "npcs": [
+    {
+      "id": "lacaze",
+      "firstName": "Bernard",
+      "lastName": "Lacaze",
+      "title": "Cdt.",
+      "role": "Commandant",
+      "height": 1.88,
+      "build": 0.9,
+      "extras": [
+        "halfmoon_glasses",
+        "tie"
+      ],
+      "appearance": {
+        "presentation": "presentation_m",
+        "skinTone": "skin_02",
+        "face": "face_02",
+        "hairStyle": "hair_npc_receding",
+        "hairColor": "haircolor_06",
+        "beard": "beard_none",
+        "eyeColor": "eyes_05",
+        "outfit": "outfit_npc_lacaze"
+      },
+      "bio": "58 ans. Commande le BEN. Trente ans de police judiciaire ; parle peu, sans élever la voix."
+    },
+    {
+      "id": "ines",
+      "firstName": "Inès",
+      "lastName": "Carvalho",
+      "title": "Analyste",
+      "role": "Analyste numérique",
+      "height": 1.6,
+      "build": 0.92,
+      "extras": [
+        "lanyard",
+        "headset"
+      ],
+      "appearance": {
+        "presentation": "presentation_f",
+        "skinTone": "skin_03",
+        "face": "face_06",
+        "hairStyle": "hair_f01",
+        "hairColor": "haircolor_01",
+        "beard": "beard_none",
+        "eyeColor": "eyes_02",
+        "outfit": "outfit_npc_ines"
+      },
+      "bio": "31 ans. Analyste du laboratoire d'extraction : personne ne touche un téléphone saisi avant elle."
+    },
+    {
+      "id": "aubrac",
+      "firstName": "Marc",
+      "lastName": "Aubrac",
+      "title": "Insp. senior",
+      "role": "Inspecteur senior",
+      "height": 1.74,
+      "build": 1.15,
+      "appearance": {
+        "presentation": "presentation_m",
+        "skinTone": "skin_02",
+        "face": "face_04",
+        "hairStyle": "hair_m02",
+        "hairColor": "haircolor_06",
+        "beard": "beard_01",
+        "eyeColor": "eyes_01",
+        "outfit": "outfit_npc_aubrac"
+      },
+      "bio": "49 ans. Inspecteur senior, sceptique par principe. Rival bienveillant."
+    },
+    {
+      "id": "colette",
+      "firstName": "Colette",
+      "lastName": "Vidal",
+      "title": "Archiviste",
+      "role": "Archiviste",
+      "height": 1.57,
+      "build": 0.85,
+      "extras": [
+        "glasses_chain"
+      ],
+      "appearance": {
+        "presentation": "presentation_f",
+        "skinTone": "skin_01",
+        "face": "face_01",
+        "hairStyle": "hair_npc_bob",
+        "hairColor": "haircolor_06",
+        "beard": "beard_none",
+        "eyeColor": "eyes_05",
+        "outfit": "outfit_npc_colette"
+      },
+      "bio": "63 ans. Archiviste du BEN depuis sa création. Se souvient de chaque carton."
+    },
+    {
+      "id": "agent_a",
+      "firstName": "Julien",
+      "lastName": "Roche",
+      "title": "Agent",
+      "role": "Agent",
+      "height": 1.78,
+      "appearance": {
+        "presentation": "presentation_m",
+        "skinTone": "skin_04",
+        "face": "face_03",
+        "hairStyle": "hair_m01",
+        "hairColor": "haircolor_02",
+        "beard": "beard_none",
+        "eyeColor": "eyes_01",
+        "outfit": "outfit_npc_agent"
+      },
+      "bio": "Un agent de l'open space."
+    }
+  ]
+}

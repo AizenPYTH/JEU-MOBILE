@@ -51,6 +51,8 @@ final class GameSession {
     /// Last whole second announced by the critical-time tick.
     @ObservationIgnored private var lastTickSecond = -1
     private let onFinish: (Verdict) -> Void
+    /// The save file of this investigation (the story mode keeps its own).
+    let slot: SaveSlot
 
     /// A piece just put in the file (number = its place in filing order).
     struct FiledPiece: Equatable, Identifiable {
@@ -98,20 +100,23 @@ final class GameSession {
 
     /// `caseFile` is the case as played at `challenge` (see `CaseFile.configured(for:rules:)`).
     convenience init(caseFile: CaseFile, rules: GameRules, challenge: Challenge = .detective,
-                     clock: any GameClock = SystemClock(), onFinish: @escaping (Verdict) -> Void) {
+                     clock: any GameClock = SystemClock(), slot: SaveSlot = .main,
+                     onFinish: @escaping (Verdict) -> Void) {
         self.init(investigation: Investigation(caseFile: caseFile, rules: rules, clock: clock, challenge: challenge),
-                  path: [], onFinish: onFinish)
+                  path: [], slot: slot, onFinish: onFinish)
     }
 
     /// Resumes a saved investigation on the screen the player left (opening it again costs nothing).
     convenience init?(restoring saved: SavedInvestigation, caseFile: CaseFile, rules: GameRules,
-                      clock: any GameClock = SystemClock(), onFinish: @escaping (Verdict) -> Void) {
+                      clock: any GameClock = SystemClock(), slot: SaveSlot = .main,
+                      onFinish: @escaping (Verdict) -> Void) {
         guard let investigation = Investigation(restoring: saved.snapshot, caseFile: caseFile, rules: rules, clock: clock) else { return nil }
-        self.init(investigation: investigation, path: saved.path, onFinish: onFinish)
+        self.init(investigation: investigation, path: saved.path, slot: slot, onFinish: onFinish)
     }
 
-    private init(investigation: Investigation, path: [PhoneRoute], onFinish: @escaping (Verdict) -> Void) {
+    private init(investigation: Investigation, path: [PhoneRoute], slot: SaveSlot, onFinish: @escaping (Verdict) -> Void) {
         self.investigation = investigation
+        self.slot = slot
         self.remainingSeconds = investigation.remainingSeconds
         self.phase = investigation.phase
         self.phoneTime = Self.minute(of: investigation.phoneNow)
@@ -152,9 +157,9 @@ final class GameSession {
     func save() {
         ticksSinceSave = 0
         if let snapshot = investigation.snapshot() {
-            SavedInvestigationStore.save(SavedInvestigation(snapshot: snapshot, path: path))
+            SavedInvestigationStore.save(SavedInvestigation(snapshot: snapshot, path: path), slot: slot)
         } else {
-            SavedInvestigationStore.clear()
+            SavedInvestigationStore.clear(slot)
         }
     }
 

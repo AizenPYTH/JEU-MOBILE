@@ -110,7 +110,7 @@ def hour_of(moment: str) -> int:
 
 def load_cases() -> list[dict]:
     cases = []
-    for path in sorted(list(CASES_DIR.glob("case_*.json")) + list(CASES_DIR.glob("alibi_*.json"))):
+    for path in sorted(list(CASES_DIR.glob("case_*.json")) + list(CASES_DIR.glob("alibi_*.json")) + list(CASES_DIR.glob("story_*.json"))):
         data = load_json(path)
         cases.append(data)
     return cases

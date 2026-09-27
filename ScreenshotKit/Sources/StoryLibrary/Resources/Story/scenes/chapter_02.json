@@ -1,0 +1,1826 @@
+{
+  "scenes": [
+    {
+      "id": "S02-01",
+      "title": "Open space",
+      "location": "ENV_BEN_OPENSPACE",
+      "place": "BEN · OPEN SPACE · 08:15",
+      "participants": [
+        "player",
+        "ines",
+        "aubrac"
+      ],
+      "beats": [
+        {
+          "kind": "place",
+          "actor": "ines",
+          "anchor": "ines_desk"
+        },
+        {
+          "kind": "place",
+          "actor": "aubrac",
+          "anchor": "aubrac_desk"
+        },
+        {
+          "kind": "place",
+          "actor": "player",
+          "anchor": "entry"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_os_wide",
+            "subject": "player"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "sound",
+          "sound": "door_glass"
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "aisle"
+        },
+        {
+          "kind": "sound",
+          "sound": "steps_lino"
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "sound",
+          "sound": "phone_distant"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2.5
+        },
+        {
+          "kind": "animate",
+          "actor": "ines",
+          "animation": "typing"
+        },
+        {
+          "kind": "sound",
+          "sound": "keyboard"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_os_ines",
+            "subject": "ines"
+          }
+        },
+        {
+          "kind": "wait",
+          "seconds": 3.5
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "ines_side"
+        },
+        {
+          "kind": "dialogue",
+          "node": "i_hello"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "face",
+          "actor": "ines",
+          "target": "player"
+        },
+        {
+          "kind": "dialogue",
+          "node": "i_extracted"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_os_aubrac_desk",
+            "subject": "aubrac"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "a_new"
+        },
+        {
+          "kind": "face",
+          "actor": "aubrac",
+          "target": "player"
+        },
+        {
+          "kind": "animate",
+          "actor": "aubrac",
+          "animation": "cross_arms"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_os_aubrac_turn",
+            "subject": "aubrac"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "a_marseille"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_os_ines",
+            "subject": "ines"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "i_varin"
+        },
+        {
+          "kind": "sound",
+          "sound": "paper_slide"
+        },
+        {
+          "kind": "animate",
+          "actor": "ines",
+          "animation": "put_down"
+        },
+        {
+          "kind": "show",
+          "target": "alarm_log"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_os_log",
+            "prop": "alarm_log",
+            "move": "pushIn"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "i_alarm"
+        },
+        {
+          "kind": "face",
+          "actor": "player",
+          "target": "aubrac"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "overShoulder",
+            "camera": "cam_os_ots_aubrac",
+            "subject": "player",
+            "other": "aubrac"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "a_question"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_os_ines",
+            "subject": "ines"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "i_lacaze"
+        },
+        {
+          "kind": "animate",
+          "actor": "ines",
+          "animation": "typing"
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "aisle"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_os_wide",
+            "subject": "player"
+          }
+        },
+        {
+          "kind": "wait",
+          "seconds": 3
+        },
+        {
+          "kind": "exit",
+          "actor": "player",
+          "anchor": "entry"
+        },
+        {
+          "kind": "sound",
+          "sound": "door_glass"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "transition",
+          "style": "fade",
+          "seconds": 1.3
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "i_hello",
+          "speaker": "ines",
+          "text": "Vous êtes {player.lastName}. Deux secondes.",
+          "emotion": "neutral",
+          "animation": "typing"
+        },
+        {
+          "id": "i_extracted",
+          "speaker": "ines",
+          "text": "Le téléphone de Maëlle Rocher. Extrait samedi, copie intégrale.",
+          "emotion": "neutral",
+          "next": "i_rule"
+        },
+        {
+          "id": "i_rule",
+          "speaker": "ines",
+          "text": "Personne ne touche un téléphone saisi avant moi. Pas même Lacaze.",
+          "emotion": "amused",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_os_ines_cu",
+            "subject": "ines"
+          }
+        },
+        {
+          "id": "a_new",
+          "speaker": "aubrac",
+          "text": "C'est donc vous, {g:le nouveau|la nouvelle|le nouvel agent} de Lacaze.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "a_marseille",
+          "speaker": "aubrac",
+          "text": "Un dossier à Marseille, et on vous confie déjà celui-là.",
+          "emotion": "tired"
+        },
+        {
+          "id": "i_varin",
+          "speaker": "ines",
+          "text": "Atelier Varin. Des architectes, rue de la Folie-Méricourt, dans le 11ᵉ.",
+          "emotion": "neutral",
+          "next": "i_contest"
+        },
+        {
+          "id": "i_contest",
+          "speaker": "ines",
+          "text": "Un concours public : la médiathèque de Montreuil. Leur dossier partait vendredi avant midi.",
+          "emotion": "neutral",
+          "next": "a_laurier"
+        },
+        {
+          "id": "a_laurier",
+          "speaker": "aubrac",
+          "text": "Vendredi à neuf heures, un concurrent dépose presque le même projet. Laurier & Fils.",
+          "emotion": "neutral",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_os_aubrac_turn",
+            "subject": "aubrac"
+          }
+        },
+        {
+          "id": "i_alarm",
+          "speaker": "ines",
+          "text": "Le journal de l'alarme. Jeudi, 22 h 31 : le code de Maëlle Rocher, l'office manager.",
+          "emotion": "neutral",
+          "next": "i_denies"
+        },
+        {
+          "id": "i_denies",
+          "speaker": "ines",
+          "text": "Elle dit qu'elle n'y était pas. Elle nous a confié son téléphone elle-même.",
+          "emotion": "neutral",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_os_ines",
+            "subject": "ines"
+          }
+        },
+        {
+          "id": "a_question",
+          "speaker": "aubrac",
+          "text": "Quelques minutes sur son téléphone, et vous nous direz qui a ouvert cette porte ?",
+          "emotion": "tense",
+          "choices": [
+            {
+              "id": "c02_promise",
+              "text": "Oui. Avec les preuves.",
+              "kind": "relational",
+              "remember": "Vous avez promis un nom à Aubrac avant d'avoir ouvert le téléphone.",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_os_ots_aubrac",
+                "subject": "player",
+                "other": "aubrac"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c02_promised"
+                },
+                {
+                  "kind": "respect",
+                  "npc": "aubrac",
+                  "amount": 1
+                }
+              ],
+              "next": "p_promise"
+            },
+            {
+              "id": "c02_phone",
+              "text": "Je vous dirai ce que dit le téléphone.",
+              "kind": "relational",
+              "remember": "Vous avez répondu à Aubrac que le téléphone parlerait pour vous.",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_os_ots_aubrac",
+                "subject": "player",
+                "other": "aubrac"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c02_phone_speaks"
+                },
+                {
+                  "kind": "trust",
+                  "npc": "ines",
+                  "amount": 1
+                }
+              ],
+              "next": "p_phone"
+            },
+            {
+              "id": "c02_quiet",
+              "text": "Ne rien dire",
+              "kind": "narrative",
+              "silent": true,
+              "pause": 2,
+              "remember": "Vous avez laissé Aubrac douter, sans lui répondre.",
+              "shot": {
+                "kind": "closeUp",
+                "camera": "cam_os_aubrac_cu",
+                "subject": "aubrac"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c02_silent_aubrac"
+                }
+              ],
+              "next": "a_quiet"
+            }
+          ]
+        },
+        {
+          "id": "p_promise",
+          "speaker": "player",
+          "text": "Oui. Avec les preuves.",
+          "next": "a_note"
+        },
+        {
+          "id": "a_note",
+          "speaker": "aubrac",
+          "text": "Alors je note l'heure.",
+          "emotion": "neutral",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_os_aubrac_cu",
+            "subject": "aubrac"
+          }
+        },
+        {
+          "id": "p_phone",
+          "speaker": "player",
+          "text": "Je vous dirai ce que dit le téléphone.",
+          "next": "i_good"
+        },
+        {
+          "id": "i_good",
+          "speaker": "ines",
+          "text": "Bonne réponse.",
+          "emotion": "amused",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_os_ines_cu",
+            "subject": "ines"
+          },
+          "next": "a_shrug"
+        },
+        {
+          "id": "a_shrug",
+          "speaker": "aubrac",
+          "text": "Un téléphone dit ce qu'on veut bien y lire.",
+          "emotion": "neutral",
+          "animation": "shrug",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_os_aubrac_turn",
+            "subject": "aubrac"
+          }
+        },
+        {
+          "id": "a_quiet",
+          "speaker": "aubrac",
+          "text": "Au moins, vous ne promettez rien.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "i_lacaze",
+          "speaker": "ines",
+          "text": "Je l'ai remis sous scellé. Lacaze vous attend, bureau 312.",
+          "emotion": "neutral"
+        }
+      ]
+    },
+    {
+      "id": "S02-02",
+      "title": "Le dossier C02-A",
+      "location": "ENV_BEN_OFFICE_LACAZE",
+      "place": "BEN · BUREAU 312 · 08:40",
+      "participants": [
+        "player",
+        "lacaze"
+      ],
+      "beats": [
+        {
+          "kind": "ambience",
+          "sound": "ben_office_dawn"
+        },
+        {
+          "kind": "place",
+          "actor": "lacaze",
+          "anchor": "lac_window"
+        },
+        {
+          "kind": "place",
+          "actor": "player",
+          "anchor": "door_in"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_lac_door",
+            "subject": "lacaze"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "sound",
+          "sound": "door_glass"
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_enter"
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "visitor"
+        },
+        {
+          "kind": "wait",
+          "seconds": 1.5
+        },
+        {
+          "kind": "move",
+          "actor": "lacaze",
+          "anchor": "lac_desk"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_lac_wide",
+            "subject": "lacaze"
+          }
+        },
+        {
+          "kind": "sound",
+          "sound": "chair"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_lac_ms",
+            "subject": "lacaze"
+          }
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "read"
+        },
+        {
+          "kind": "sound",
+          "sound": "page"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_heard_promise"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_lac_cu",
+            "subject": "lacaze"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_plans"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_lac_ms",
+            "subject": "lacaze"
+          }
+        },
+        {
+          "kind": "sound",
+          "sound": "drawer"
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "take"
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_c01_defiant"
+        },
+        {
+          "kind": "wait",
+          "seconds": 1
+        },
+        {
+          "kind": "show",
+          "target": "case_folder_c02"
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "put_down"
+        },
+        {
+          "kind": "sound",
+          "sound": "paper_slide"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_lac_desk_top",
+            "prop": "case_folder_c02"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_varin"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "overShoulder",
+            "camera": "cam_lac_os",
+            "subject": "player",
+            "other": "lacaze"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_maelle"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_lac_player_cu",
+            "subject": "player"
+          }
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "sound",
+          "sound": "plastic_bag"
+        },
+        {
+          "kind": "animate",
+          "actor": "lacaze",
+          "animation": "handover"
+        },
+        {
+          "kind": "show",
+          "target": "evidence_bag"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_lac_desk_top",
+            "prop": "evidence_bag",
+            "move": "pushIn"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "l_seal"
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "l_enter",
+          "speaker": "lacaze",
+          "text": "Entrez. Asseyez-vous.",
+          "emotion": "tired"
+        },
+        {
+          "id": "l_heard_promise",
+          "speaker": "lacaze",
+          "text": "Aubrac m'a dit que vous lui aviez promis un nom.",
+          "emotion": "neutral",
+          "condition": {
+            "flag": "c02_promised"
+          },
+          "next": "l_heard_phone"
+        },
+        {
+          "id": "l_heard_phone",
+          "speaker": "lacaze",
+          "text": "Inès dit que vous écoutez. Elle ne le dit de personne.",
+          "emotion": "neutral",
+          "condition": {
+            "flag": "c02_phone_speaks"
+          },
+          "next": "l_heard_quiet"
+        },
+        {
+          "id": "l_heard_quiet",
+          "speaker": "lacaze",
+          "text": "Aubrac dit que vous ne répondez pas. Ici, ce n'est pas un défaut.",
+          "emotion": "neutral",
+          "condition": {
+            "flag": "c02_silent_aubrac"
+          }
+        },
+        {
+          "id": "l_plans",
+          "speaker": "lacaze",
+          "text": "Des plans d'architecte. Pas de mort, pas de sang.",
+          "emotion": "tired",
+          "next": "l_money"
+        },
+        {
+          "id": "l_money",
+          "speaker": "lacaze",
+          "text": "Mais un concours public, et des mois de travail sortis en une nuit.",
+          "emotion": "neutral",
+          "next": "l_questions"
+        },
+        {
+          "id": "l_questions",
+          "speaker": "lacaze",
+          "text": "Des questions ?",
+          "emotion": "neutral",
+          "choices": [
+            {
+              "id": "c02_why",
+              "text": "Pourquoi le BEN, pour des plans ?",
+              "kind": "cosmetic",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_lac_os",
+                "subject": "player",
+                "other": "lacaze"
+              },
+              "next": "p_why"
+            },
+            {
+              "id": "c02_none",
+              "text": "Aucune.",
+              "kind": "cosmetic",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_lac_os",
+                "subject": "player",
+                "other": "lacaze"
+              },
+              "next": "p_none"
+            },
+            {
+              "id": "c02_q_silent",
+              "text": "Ne rien dire",
+              "kind": "cosmetic",
+              "silent": true,
+              "pause": 2,
+              "shot": {
+                "kind": "closeUp",
+                "camera": "cam_lac_cu",
+                "subject": "lacaze"
+              }
+            }
+          ]
+        },
+        {
+          "id": "p_why",
+          "speaker": "player",
+          "text": "Pourquoi le BEN, pour des plans ?",
+          "next": "l_why"
+        },
+        {
+          "id": "l_why",
+          "speaker": "lacaze",
+          "text": "Parce que la seule preuve est dans un téléphone.",
+          "emotion": "neutral",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_lac_cu",
+            "subject": "lacaze"
+          },
+          "next": "l_why_2"
+        },
+        {
+          "id": "l_why_2",
+          "speaker": "lacaze",
+          "text": "Et que les téléphones, ici, on sait les lire.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "p_none",
+          "speaker": "player",
+          "text": "Aucune.",
+          "next": "l_fine"
+        },
+        {
+          "id": "l_fine",
+          "speaker": "lacaze",
+          "text": "Bien.",
+          "emotion": "neutral",
+          "animation": "nod",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_lac_cu",
+            "subject": "lacaze"
+          }
+        },
+        {
+          "id": "l_c01_defiant",
+          "speaker": "lacaze",
+          "text": "Vous m'aviez demandé si je vous aurais {g:choisi|choisie|choisi}. Je ne sais toujours pas.",
+          "emotion": "neutral",
+          "condition": {
+            "flag": "c01_defiant"
+          },
+          "next": "l_c01_dutiful"
+        },
+        {
+          "id": "l_c01_dutiful",
+          "speaker": "lacaze",
+          "text": "Vous m'aviez promis de faire le travail. En voilà.",
+          "emotion": "neutral",
+          "condition": {
+            "flag": "c01_dutiful"
+          },
+          "next": "l_c01_silent"
+        },
+        {
+          "id": "l_c01_silent",
+          "speaker": "lacaze",
+          "text": "Vous ne parlez toujours pas beaucoup. Gardez ça pour les témoins.",
+          "emotion": "neutral",
+          "condition": {
+            "flag": "c01_silent"
+          }
+        },
+        {
+          "id": "l_varin",
+          "speaker": "lacaze",
+          "text": "Plainte de Sonia Varin, la cofondatrice. Déposée vendredi midi.",
+          "emotion": "neutral",
+          "next": "l_three"
+        },
+        {
+          "id": "l_three",
+          "speaker": "lacaze",
+          "text": "Trois noms dans le dossier. Et un code d'alarme qui n'était à aucun d'eux.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "l_maelle",
+          "speaker": "lacaze",
+          "text": "Maëlle Rocher nous a remis son téléphone vendredi, à quinze heures. De son plein gré.",
+          "emotion": "neutral",
+          "next": "l_not_yet"
+        },
+        {
+          "id": "l_not_yet",
+          "speaker": "lacaze",
+          "text": "Personne ne la met en cause. Pour l'instant.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "l_seal",
+          "speaker": "lacaze",
+          "text": "Vous signerez le registre des scellés en sortant.",
+          "emotion": "neutral",
+          "next": "l_phone"
+        },
+        {
+          "id": "l_phone",
+          "speaker": "lacaze",
+          "text": "Le téléphone de Maëlle Rocher. À vous.",
+          "emotion": "neutral"
+        }
+      ]
+    },
+    {
+      "id": "S02-03",
+      "title": "Salle d'audition",
+      "location": "ENV_BEN_INTERROGATION",
+      "place": "BEN · SALLE D'AUDITION · 19:40",
+      "participants": [
+        "player",
+        "aubrac",
+        "ines"
+      ],
+      "beats": [
+        {
+          "kind": "place",
+          "actor": "aubrac",
+          "anchor": "suspect"
+        },
+        {
+          "kind": "place",
+          "actor": "ines",
+          "anchor": "mirror_side"
+        },
+        {
+          "kind": "place",
+          "actor": "player",
+          "anchor": "door_in"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_int_wide",
+            "subject": "aubrac"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "animate",
+          "actor": "aubrac",
+          "animation": "read"
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "animate",
+          "actor": "ines",
+          "animation": "gesture"
+        },
+        {
+          "kind": "hide",
+          "target": "red_light"
+        },
+        {
+          "kind": "sound",
+          "sound": "door_close"
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "investigator"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "sound",
+          "sound": "chair"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "overShoulder",
+            "camera": "cam_int_os_suspect",
+            "subject": "player",
+            "other": "aubrac"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "a_solved"
+        },
+        {
+          "kind": "animate",
+          "actor": "aubrac",
+          "animation": "put_down"
+        },
+        {
+          "kind": "show",
+          "target": "pv_bellec"
+        },
+        {
+          "kind": "sound",
+          "sound": "paper_slide"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_int_table",
+            "prop": "pv_bellec"
+          }
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_int_ines",
+            "subject": "ines"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "i_quits"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_int_ines",
+            "subject": "ines"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "i_maelle"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "overShoulder",
+            "camera": "cam_int_os_suspect",
+            "subject": "player",
+            "other": "aubrac"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "a_write"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_int_mirror",
+            "subject": "player"
+          }
+        },
+        {
+          "kind": "wait",
+          "seconds": 2
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_int_ms",
+            "subject": "aubrac"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "a_sleep"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_int_wide",
+            "subject": "aubrac"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "animate",
+          "actor": "player",
+          "animation": "stand"
+        },
+        {
+          "kind": "exit",
+          "actor": "player",
+          "anchor": "door_in"
+        },
+        {
+          "kind": "sound",
+          "sound": "door_close"
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "transition",
+          "style": "fade",
+          "seconds": 1.3
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "a_solved",
+          "speaker": "aubrac",
+          "text": "Bellec a parlé. Votre rapport tenait.",
+          "emotion": "neutral",
+          "condition": {
+            "lastCaseSolved": true
+          },
+          "next": "a_unsolved"
+        },
+        {
+          "id": "a_unsolved",
+          "speaker": "aubrac",
+          "text": "Votre rapport désignait quelqu'un d'autre. Inès a repris la corbeille derrière vous.",
+          "emotion": "tired",
+          "condition": {
+            "lastCaseSolved": false
+          },
+          "next": "a_unsolved_2"
+        },
+        {
+          "id": "a_unsolved_2",
+          "speaker": "aubrac",
+          "text": "Bellec est venu à quinze heures. Il a parlé.",
+          "emotion": "neutral",
+          "condition": {
+            "lastCaseSolved": false
+          },
+          "next": "a_promise_ok"
+        },
+        {
+          "id": "a_promise_ok",
+          "speaker": "aubrac",
+          "text": "J'avais noté l'heure. Votre nom est arrivé à temps.",
+          "emotion": "neutral",
+          "condition": {
+            "flag": "c02_promised",
+            "lastCaseSolved": true
+          },
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_int_cu",
+            "subject": "aubrac"
+          },
+          "next": "a_promise_ko"
+        },
+        {
+          "id": "a_promise_ko",
+          "speaker": "aubrac",
+          "text": "J'avais noté l'heure. Le nom n'était pas le bon.",
+          "emotion": "tired",
+          "condition": {
+            "flag": "c02_promised",
+            "lastCaseSolved": false
+          },
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_int_cu",
+            "subject": "aubrac"
+          },
+          "next": "a_debt"
+        },
+        {
+          "id": "a_debt",
+          "speaker": "aubrac",
+          "text": "Douze mille euros. Il les devait à Olivier Laurier depuis l'an dernier.",
+          "emotion": "neutral",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_int_ms",
+            "subject": "aubrac"
+          },
+          "next": "a_deal"
+        },
+        {
+          "id": "a_deal",
+          "speaker": "aubrac",
+          "text": "Laurier lui a proposé d'effacer la dette. Contre le dossier Montreuil.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "i_quits",
+          "speaker": "ines",
+          "text": "« On est quittes. » C'était pour Laurier. Il l'a envoyé à Maëlle.",
+          "emotion": "neutral",
+          "next": "a_deleted"
+        },
+        {
+          "id": "a_deleted",
+          "speaker": "aubrac",
+          "text": "Une minute plus tard, il l'effaçait. Il croyait que ça suffisait.",
+          "emotion": "neutral",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_int_ms",
+            "subject": "aubrac"
+          },
+          "next": "i_always"
+        },
+        {
+          "id": "i_always",
+          "speaker": "ines",
+          "text": "Ils le croient tous.",
+          "emotion": "amused",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_int_ines_cu",
+            "subject": "ines"
+          }
+        },
+        {
+          "id": "i_maelle",
+          "speaker": "ines",
+          "text": "Maëlle Rocher a confirmé. Elle lui a donné son code, puis elle s'est tue.",
+          "emotion": "tired",
+          "next": "i_afraid"
+        },
+        {
+          "id": "i_afraid",
+          "speaker": "ines",
+          "text": "Donner son code est interdit, à l'atelier. Elle avait peur pour sa place.",
+          "emotion": "tired"
+        },
+        {
+          "id": "a_write",
+          "speaker": "aubrac",
+          "text": "Elle a donné son code à un homme qui mentait. On l'écrit, dans la synthèse ?",
+          "emotion": "tense",
+          "choices": [
+            {
+              "id": "c02_write",
+              "text": "Oui. Elle a donné son code.",
+              "kind": "relational",
+              "remember": "Vous avez fait écrire que Maëlle Rocher avait donné son code.",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_int_os_suspect",
+                "subject": "player",
+                "other": "aubrac"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c02_maelle_written"
+                },
+                {
+                  "kind": "respect",
+                  "npc": "aubrac",
+                  "amount": 1
+                }
+              ],
+              "next": "p_write"
+            },
+            {
+              "id": "c02_spare",
+              "text": "Elle s'est fait avoir. On écrit ça.",
+              "kind": "relational",
+              "remember": "Vous avez écrit que Maëlle Rocher s'était fait avoir.",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_int_os_suspect",
+                "subject": "player",
+                "other": "aubrac"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c02_maelle_spared"
+                },
+                {
+                  "kind": "trust",
+                  "npc": "ines",
+                  "amount": 1
+                }
+              ],
+              "next": "p_spare"
+            },
+            {
+              "id": "c02_maelle_silent",
+              "text": "Ne rien dire",
+              "kind": "narrative",
+              "silent": true,
+              "pause": 2,
+              "remember": "Vous n'avez rien dit quand Aubrac a parlé de Maëlle Rocher.",
+              "shot": {
+                "kind": "closeUp",
+                "camera": "cam_int_cu",
+                "subject": "aubrac"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c02_maelle_silent"
+                }
+              ],
+              "next": "a_facts"
+            }
+          ]
+        },
+        {
+          "id": "p_write",
+          "speaker": "player",
+          "text": "Oui. Elle a donné son code.",
+          "next": "a_procedure"
+        },
+        {
+          "id": "a_procedure",
+          "speaker": "aubrac",
+          "text": "C'est la procédure. Le parquet fera le tri.",
+          "emotion": "neutral",
+          "animation": "nod",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_int_cu",
+            "subject": "aubrac"
+          }
+        },
+        {
+          "id": "p_spare",
+          "speaker": "player",
+          "text": "Elle s'est fait avoir. On écrit ça.",
+          "next": "i_thanks"
+        },
+        {
+          "id": "i_thanks",
+          "speaker": "ines",
+          "text": "Merci.",
+          "emotion": "warm",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_int_ines_cu",
+            "subject": "ines"
+          },
+          "next": "a_both"
+        },
+        {
+          "id": "a_both",
+          "speaker": "aubrac",
+          "text": "On écrira les deux. Le parquet choisira.",
+          "emotion": "tired",
+          "animation": "shrug",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_int_ms",
+            "subject": "aubrac"
+          }
+        },
+        {
+          "id": "a_facts",
+          "speaker": "aubrac",
+          "text": "Alors j'écris les faits. Rien d'autre.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "a_sleep",
+          "speaker": "aubrac",
+          "text": "Rentrez dormir, {player.lastName}. Lacaze lira tout ça demain.",
+          "emotion": "tired"
+        }
+      ]
+    },
+    {
+      "id": "S02-04",
+      "title": "Cent quatorze",
+      "location": "ENV_BEN_ARCHIVES",
+      "place": "BEN · ARCHIVES · 20:10",
+      "participants": [
+        "player",
+        "colette"
+      ],
+      "beats": [
+        {
+          "kind": "place",
+          "actor": "colette",
+          "anchor": "colette_desk"
+        },
+        {
+          "kind": "place",
+          "actor": "player",
+          "anchor": "entry"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_arc_table",
+            "subject": "colette"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "animate",
+          "actor": "colette",
+          "animation": "read"
+        },
+        {
+          "kind": "sound",
+          "sound": "neon_buzz"
+        },
+        {
+          "kind": "sound",
+          "sound": "steps_lino"
+        },
+        {
+          "kind": "move",
+          "actor": "player",
+          "anchor": "table_other"
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "face",
+          "actor": "colette",
+          "target": "player"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_arc_colette",
+            "subject": "colette"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "c_closing"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "overShoulder",
+            "camera": "cam_arc_os_desk",
+            "subject": "player",
+            "other": "colette"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "c_show"
+        },
+        {
+          "kind": "animate",
+          "actor": "player",
+          "animation": "put_down"
+        },
+        {
+          "kind": "sound",
+          "sound": "paper_slide"
+        },
+        {
+          "kind": "show",
+          "target": "mail_print"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_arc_desk_top",
+            "prop": "mail_print",
+            "move": "pushIn"
+          }
+        },
+        {
+          "kind": "wait",
+          "seconds": 3
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_arc_colette",
+            "subject": "colette"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "animate",
+          "actor": "colette",
+          "animation": "read"
+        },
+        {
+          "kind": "dialogue",
+          "node": "c_reads"
+        },
+        {
+          "kind": "wait",
+          "seconds": 2.5
+        },
+        {
+          "kind": "dialogue",
+          "node": "c_114"
+        },
+        {
+          "kind": "animate",
+          "actor": "colette",
+          "animation": "stand"
+        },
+        {
+          "kind": "move",
+          "actor": "colette",
+          "anchor": "aisle"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "wide",
+            "camera": "cam_arc_aisle",
+            "subject": "colette"
+          }
+        },
+        {
+          "kind": "sound",
+          "sound": "steps_lino"
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "wait",
+          "seconds": 2.5
+        },
+        {
+          "kind": "animate",
+          "actor": "colette",
+          "animation": "take"
+        },
+        {
+          "kind": "sound",
+          "sound": "paper_slide"
+        },
+        {
+          "kind": "wait",
+          "seconds": 1.5
+        },
+        {
+          "kind": "move",
+          "actor": "colette",
+          "anchor": "table"
+        },
+        {
+          "kind": "sound",
+          "sound": "steps_lino"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_arc_player",
+            "subject": "player"
+          }
+        },
+        {
+          "kind": "wait",
+          "seconds": 4
+        },
+        {
+          "kind": "show",
+          "target": "box_114"
+        },
+        {
+          "kind": "animate",
+          "actor": "colette",
+          "animation": "put_down"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_arc_box",
+            "prop": "box_114"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "wait",
+          "seconds": 2.5
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "overShoulder",
+            "camera": "cam_arc_os_table",
+            "subject": "player",
+            "other": "colette"
+          }
+        },
+        {
+          "kind": "dialogue",
+          "node": "c_request"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "medium",
+            "camera": "cam_arc_player",
+            "subject": "player"
+          }
+        },
+        {
+          "kind": "wait",
+          "seconds": 2.5
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_arc_colette_cu",
+            "subject": "colette"
+          },
+          "keyframe": true
+        },
+        {
+          "kind": "dialogue",
+          "node": "c_nobody"
+        },
+        {
+          "kind": "animate",
+          "actor": "colette",
+          "animation": "take"
+        },
+        {
+          "kind": "dialogue",
+          "node": "c_light"
+        },
+        {
+          "kind": "camera",
+          "shot": {
+            "kind": "focusObject",
+            "camera": "cam_arc_box",
+            "prop": "box_114",
+            "move": "pushIn"
+          }
+        },
+        {
+          "kind": "wait",
+          "seconds": 3,
+          "silence": true
+        },
+        {
+          "kind": "effect",
+          "effects": [
+            {
+              "kind": "flag",
+              "flag": "c02_box_114"
+            }
+          ]
+        },
+        {
+          "kind": "transition",
+          "style": "fade",
+          "seconds": 1.3
+        }
+      ],
+      "dialogue": [
+        {
+          "id": "c_closing",
+          "speaker": "colette",
+          "text": "Je fermais.",
+          "emotion": "tired",
+          "next": "c_moreau"
+        },
+        {
+          "id": "c_moreau",
+          "speaker": "colette",
+          "text": "Le dossier Moreau, c'était vous. Je l'ai rangé la semaine dernière.",
+          "emotion": "warm"
+        },
+        {
+          "id": "c_show",
+          "speaker": "colette",
+          "text": "Montrez.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "c_reads",
+          "speaker": "colette",
+          "text": "« Affaire classée BEN-2019-114 — témoin. »",
+          "emotion": "neutral"
+        },
+        {
+          "id": "c_114",
+          "speaker": "colette",
+          "text": "Cent quatorze.",
+          "emotion": "neutral",
+          "next": "c_where"
+        },
+        {
+          "id": "c_where",
+          "speaker": "colette",
+          "text": "Allée F. Je sais où il est.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "c_request",
+          "speaker": "colette",
+          "text": "Pour l'ouvrir, il me faut une demande signée du commandant.",
+          "emotion": "neutral",
+          "choices": [
+            {
+              "id": "c02_ask_lacaze",
+              "text": "Je la demanderai demain à Lacaze.",
+              "kind": "narrative",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_arc_os_table",
+                "subject": "player",
+                "other": "colette"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c02_archive_lacaze"
+                },
+                {
+                  "kind": "trust",
+                  "npc": "colette",
+                  "amount": 1
+                }
+              ],
+              "next": "p_ask"
+            },
+            {
+              "id": "c02_only_exists",
+              "text": "Je voulais savoir s'il existait.",
+              "kind": "narrative",
+              "shot": {
+                "kind": "overShoulder",
+                "camera": "cam_arc_os_table",
+                "subject": "player",
+                "other": "colette"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c02_archive_quiet"
+                }
+              ],
+              "next": "p_exists"
+            },
+            {
+              "id": "c02_archive_silent",
+              "text": "Ne rien dire",
+              "kind": "narrative",
+              "silent": true,
+              "pause": 2,
+              "shot": {
+                "kind": "closeUp",
+                "camera": "cam_arc_colette_cu",
+                "subject": "colette"
+              },
+              "effects": [
+                {
+                  "kind": "flag",
+                  "flag": "c02_archive_silent"
+                }
+              ],
+              "next": "c_aside"
+            }
+          ]
+        },
+        {
+          "id": "p_ask",
+          "speaker": "player",
+          "text": "Je la demanderai demain à Lacaze.",
+          "next": "c_tomorrow"
+        },
+        {
+          "id": "c_tomorrow",
+          "speaker": "colette",
+          "text": "Demain, alors. Il reste ici.",
+          "emotion": "neutral",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_arc_colette_cu",
+            "subject": "colette"
+          }
+        },
+        {
+          "id": "p_exists",
+          "speaker": "player",
+          "text": "Je voulais savoir s'il existait.",
+          "next": "c_exists"
+        },
+        {
+          "id": "c_exists",
+          "speaker": "colette",
+          "text": "Il existe.",
+          "emotion": "neutral",
+          "shot": {
+            "kind": "closeUp",
+            "camera": "cam_arc_colette_cu",
+            "subject": "colette"
+          }
+        },
+        {
+          "id": "c_aside",
+          "speaker": "colette",
+          "text": "Je le garde de côté. Le soir, personne ne descend.",
+          "emotion": "warm"
+        },
+        {
+          "id": "c_nobody",
+          "speaker": "colette",
+          "text": "Personne ne l'a demandé en sept ans. Vous êtes {g:le premier|la première|la première personne}.",
+          "emotion": "neutral"
+        },
+        {
+          "id": "c_light",
+          "speaker": "colette",
+          "text": "Il est léger.",
+          "emotion": "neutral"
+        }
+      ]
+    }
+  ]
+}
