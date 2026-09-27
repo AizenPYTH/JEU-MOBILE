@@ -4876,7 +4876,7 @@
       "caption": "Le cadeau de Louise : un tirage encadré.",
       "isEvidence": false,
       "decision": "CUSTOM_REQUIRED",
-      "reason": "Personne nommée à l'image (Jeanne) : une photo générique montrerait un inconnu.",
+      "reason": "Personne nommée à l'image (Louise) : une photo générique montrerait un inconnu.",
       "night": false,
       "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « gallery »)",
