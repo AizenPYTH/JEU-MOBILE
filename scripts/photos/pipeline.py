@@ -692,6 +692,13 @@ def image_luminance(path: Path) -> float:
         return ImageStat.Stat(small).mean[0]
 
 
+def image_saturation(path: Path) -> float:
+    """Mean saturation (0–255): ~0 for a black-and-white picture."""
+    from PIL import Image, ImageStat
+    with Image.open(path) as im:
+        return ImageStat.Stat(im.convert("RGB").resize((64, 48)).convert("HSV")).mean[1]
+
+
 def cmd_download(args, cfg, catalog, manifest, stats) -> None:
     """Downloads the best candidate of each source, checks it (night photos really dark), locks it."""
     http = Http(cfg, stats)
@@ -721,6 +728,10 @@ def cmd_download(args, cfg, catalog, manifest, stats) -> None:
             if src["requireDark"] and lum > cfg["selection"]["darkMaxLuminance"]:
                 stats["rejected"] += 1
                 log(f"  {src['id']}: {fname} rejeté — trop clair pour une photo de nuit (luminance {lum:.0f})")
+                continue
+            if image_saturation(dest) < cfg["selection"].get("minSaturation", 0):
+                stats["rejected"] += 1
+                log(f"  {src['id']}: {fname} rejeté — noir et blanc (pas une photo de téléphone récent)")
                 continue
             if not src["night"] and lum < cfg["selection"]["dayMinLuminance"]:
                 stats["rejected"] += 1

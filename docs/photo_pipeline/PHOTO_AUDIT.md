@@ -32,10 +32,10 @@ Règle du studio : aucune image générée par IA dans les téléphones et les g
 | | |
 |---|---|
 | Photos des téléphones (toutes affaires) | 240 |
-| Vraies photos livrées (photographies réelles) | **138** |
-| — dont externes : openverse 1 · wikimedia 137 | 138 |
+| Vraies photos livrées (photographies réelles) | **144** |
+| — dont externes : openverse 22 · wikimedia 122 | 144 |
 | Vraies photos prises par le studio (CUSTOM_REAL livrées) | 0 |
-| Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | 59 |
+| Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | 53 |
 | Vraies photos à prendre nous-mêmes (CUSTOM_REAL) | 0 |
 | Rendus du jeu voulus (captures d'écran, documents, tickets — pas des photographies) | 43 |
 | Images IA supprimées | 5 |
@@ -57,7 +57,6 @@ Exceptions (photo réelle pas encore livrée) :
 |---|---|---|
 | `case101_photo_p_affiche` — Des épreuves d'affiches étalées sur une grande table du studio. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case101_photo_p_grue` — La grue jaune éclairée, de nuit, au bord de la Loire. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
-| `case102_photo_p2_velo` — Un vélo appuyé contre le mur d'une entrée d'appartement. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case102_photo_p2_rame` — L'intérieur d'une rame de métro presque vide. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case001_photo_p_b06` — Le Levant, terrasse du fond. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_b12` — Le canapé de Lucas, enfin monté. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
@@ -65,17 +64,14 @@ Exceptions (photo réelle pas encore livrée) :
 | `case001_photo_p_b19` — Fin du vernissage : la table de la buvette. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_b23` — Lever de soleil depuis la fenêtre. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_b29` — La vidéo que Tom fait tourner à table. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case001_photo_p_self01` — Le café du matin, à l'agence. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_self02` — Plage des Catalans, fin d'après-midi avec Lucas. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case001_photo_p_self03` — Le lendemain du vernissage : café et fatigue. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case001_photo_p_vernissage` — Vernissage Lumen, vu du fond de la salle. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case001_photo_p_blur03` — Le Levant, photo ratée. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_emma_couch` — « Chez moi » : la couette, une tasse fumante, la télé allumée. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
+| `case001_photo_p_sarah_jade` — L'anniversaire de Jade : ballons et guirlandes. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case002_photo_p_loge01` — Le miroir de la loge, avant le service. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case002_photo_p_quick01` — Des affiches collées sur un poteau, pentes de la Croix-Rousse. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case002_photo_p_friche01` — La grande salle de La Friche Nord, vide. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case002_photo_p_night01` — La montée de la Grande-Côte, de nuit. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case002_photo_p_club02` — Le Silo avant la soirée Basses Fréquences. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case002_photo_p_selfie01` — La salle vue depuis la régie, soirée Basses Fréquences. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case002_photo_p_issue_1` — La cour du Silo, de nuit : des fûts empilés. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case002_photo_p_issue_2` — La cour du Silo, encore les fûts. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case002_photo_p_apero_keys` — Apéro chez Mathilde : des verres sur la table basse. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
@@ -86,11 +82,11 @@ Exceptions (photo réelle pas encore livrée) :
 | `case003_photo_p_old_2022` — Emménagement aux Chartrons, juin 2022. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case003_photo_p_selfie_mirror` — L'agence, 8h10 : premier café. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case003_photo_p_night_chartrons` — La rue Notre-Dame, la nuit. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case003_photo_p_chantier` — La salle de bain Laborde, terminée. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case003_photo_p_quick_car` — Bouchons à la sortie de Bordeaux. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case003_photo_p_huitres` — Pause huîtres au port. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case003_photo_p_selfie_louise` — L'apéro sur la terrasse : des paillettes partout. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case003_photo_p_blur_party` — Tout le monde danse dans le salon. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case004_photo_p_b02` — Le plan v1 à l'écran, en réunion. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case004_photo_p_b08` — Livraison des vitrines. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case004_photo_p_b13` — Épreuves du catalogue. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case004_photo_p_b15` — Essais lumière en salle 2. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
@@ -101,14 +97,12 @@ Exceptions (photo réelle pas encore livrée) :
 | `case004_photo_p_vitrine_2216` — La vitrine 4, vide, sous la poursuite. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case004_photo_p_room_2213` — La salle 2 pendant la présentation d'Iris. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case004_photo_p_regie_2215` — La console de la régie, dans le noir. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
-| `case004_photo_p_iris_look` — La robe noire à sequins pour jeudi. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_old06` — Pot de départ de l'ancien secrétaire de rédaction. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_n05` — Halloween : la citrouille devant la porte des voisins. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_n07` — Conférence de rédaction. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_n08` — Les dessins de Nina sur le frigo. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_n17` — La carrière depuis le chemin forestier. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_n18` — Villard, la grande rue sous la pluie. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case005_photo_p_n21` — La rédaction, avant la conf. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_n22` — La cour sous la pluie. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_mairie_4x4` — La cour de la mairie de Vallières, avant le conseil. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case005_photo_p_platre` — Le couloir des urgences, vu depuis un brancard. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
