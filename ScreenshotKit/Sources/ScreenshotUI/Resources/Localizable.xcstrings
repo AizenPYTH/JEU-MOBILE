@@ -3834,13 +3834,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Some ambient photos on the phones come from free image libraries. Thanks to their authors."
+            "value": "Every photo on the phones is a real photograph under a free licence (Wikimedia Commons, Pexels, Openverse). None is AI-generated. Thanks to their authors."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Certaines photos d'ambiance des téléphones viennent de banques d'images libres. Merci à leurs auteurs."
+            "value": "Toutes les photos des téléphones sont de vraies photographies, sous licence libre (Wikimedia Commons, Pexels, Openverse). Aucune n'est générée par IA. Merci à leurs auteurs."
           }
         }
       }
