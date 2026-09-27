@@ -42,6 +42,8 @@ struct BureauView: View {
     var onAlibi: () -> Void = {}
     let onProfile: () -> Void
     let onTab: (DeskTab) -> Void
+    /// h02: « ‹ Bureau » back to the three modes.
+    var onBack: (() -> Void)? = nil
 
     @State private var appeared = false
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
@@ -114,7 +116,11 @@ struct BureauView: View {
     private var header: some View {
         HStack(alignment: .center, spacing: 12) {
             VStack(alignment: .leading, spacing: 4) {
-                Text(L10n.t("tab.bureau"))
+                if let onBack {
+                    BackChevron(label: L10n.t("tab.bureau"), color: Trace.Colors.boneMid, action: onBack)
+                        .accessibilityIdentifier("investigations.back")
+                }
+                Text(L10n.t(onBack == nil ? "tab.bureau" : "mode.investigations.title"))
                     .font(Trace.Fonts.serifTitle(28))
                     .foregroundStyle(Trace.Colors.bone)
                     .accessibilityAddTraits(.isHeader)

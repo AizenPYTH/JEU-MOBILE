@@ -48,6 +48,9 @@ docs/design_final/        Handoff FINAL V3.0 (NE PAS MODIFIER) — parcours, éc
 docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — tokens du téléphone
 docs/brand/               Logo CONCLUDE : ENQUÊTES (source de l'icône)
 docs/design_trace/        Handoff TRACE v2 « dossier d'enquête » (NE PAS MODIFIER) — tout ce qui est hors du téléphone
+docs/design_story/        Handoff « Mode Histoire » (NE PAS MODIFIER) — Bureau à 3 modes, écrans h01–h19, 3D, décors, PNJ
+docs/game_modes/          ALIBI.md, STORY.md (mode Histoire) ; docs/story/ : architecture, personnages, scènes,
+                          progression, sauvegarde du mode Histoire (comment ajouter chapitre, scène, PNJ, décor…)
 DESIGN_INTEGRATION.md     État de l'intégration du handoff + conflits à trancher
 config/                   photo_pipeline.json (réglages du pipeline photo, à la main), photo_catalog.json (décision
                           par photo, généré puis éditable), photo_sources.json (provenance, généré)
@@ -76,13 +79,18 @@ ScreenshotKit/            Package Swift contenant tout le jeu
                           dossier »), CoachBubble (bulles du tutoriel),
                           Dossier (pièces à conviction, fiches suspects, chronologie), Controls (boutons,
                           maintien pour confirmer, segments, en-têtes, état vide)
+    Story/                Mode Histoire (SceneKit) : StoryCoordinator, StageKit (décors, personnages, caméras),
+                          StoryStageView, scène (sous-titres, choix), écrans h01–h19, StoryRootView
     Theme/, Support/      Tokens du téléphone (Theme.swift), design papier (TraceDesign.swift + ConcludeKit.swift : boutons,
                           logo, tampons PNG, post-it), polices, L10n, dates, ArtLibrary (images livrées)
     Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py), Fonts/ (Geist, JetBrains Mono,
                           Instrument Serif, Newsreader, IBM Plex Mono, Caveat — OFL)
-  Sources/CaseLint/       CLI : valide chaque affaire et vérifie qu'elle est résolvable dans le temps
+  Sources/StoryEngine/    Mode Histoire, moteur en Swift pur (Foundation) : personnage, décors, scènes, campagne,
+                          StoryDirector (déterministe), validateur, sauvegarde versionnée + migrations
+  Sources/StoryLibrary/   Données de l'histoire : Resources/Story/{characters,npcs,locations,campaign}.json + scenes/
+  Sources/CaseLint/       CLI : valide chaque affaire et vérifie qu'elle est résolvable dans le temps (+ l'histoire)
   Tests/                  CaseEngineTests (moteur), CaseLibraryTests (affaires, parties complètes,
-                          traductions, absence de vocabulaire de l'ancien prototype)
+                          traductions, absence de vocabulaire de l'ancien prototype), StoryEngineTests (histoire)
 scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d'affaires), audio/ (sons),
                           photos.sh + photos/ (pipeline photo : Pexels / Openverse → Art.xcassets/Photos)
 ```
@@ -97,7 +105,7 @@ scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d
 
 ## Architecture — règles
 
-1. **CaseEngine n'importe jamais SwiftUI/UIKit.** Foundation uniquement.
+1. **CaseEngine et StoryEngine n'importent jamais SwiftUI/UIKit/SceneKit.** Foundation uniquement.
 2. **Aucune affaire dans le code.** Une affaire = un fichier JSON. Ajouter une affaire ne touche jamais
    le moteur (voir docs/CASE_AUTHORING.md). Les ids sont uniques dans toute l'affaire.
 3. **Aucun réglage en dur.** Coûts en temps, taille des pages, score : `rules.json`.
@@ -212,6 +220,10 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
       nommée, rapport, affectation au BEN, rangs, temps détendu ; cinématiques retirées (docs/design_final)
 - [x] Retour testeurs : difficulté inutile retirée (chemin minimal, indices en 3 plis, Carnet orienté), photos réelles
       uniquement (Wikimedia Commons, portraits IA supprimés), mode ALIBI (3 vérifications)
+- [x] Mode ALIBI (vérifications courtes) et photos réelles (Wikimedia Commons / Openverse)
+- [x] Mode HISTOIRE (handoff docs/design_story) : Bureau à 3 modes, création de l'enquêteur, scènes 3D SceneKit,
+      chapitres 01–02 jouables (03–05 annoncés), carrière commune, bureau à 4 niveaux, sauvegarde séparée versionnée
+- [ ] Mode HISTOIRE : modèles 3D / animations / voix (docs/story/SCENE_SYSTEM.md), chapitres 03–05
 - [ ] Affaires #006–#015 (6 suspects, 8–10 min), vérifications ALIBI #004+
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
 - [ ] Monnaie / tickets d'indices, iCloud

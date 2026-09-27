@@ -3,6 +3,51 @@
 Sources : `docs/design_final/` (V3, parcours), `docs/design_trace/`, `docs/design/` (non modifiés). Ce document dit ce qui est intégré, ce qui reste à faire, et
 les points où le handoff contredit le brief ou le moteur — **à trancher par le porteur de projet**.
 
+## Mode Histoire — handoff « Mode Histoire » (27 septembre 2026)
+
+Source : `docs/design_story/` (écrans h01–h19, bible 3D, décors, PNJ, dialogues, transitions, assets). Détail
+technique : `docs/story/`.
+
+### Intégré
+- h01 Bureau à trois chemises ENQUÊTES · ALIBI · HISTOIRE (mode en cours en premier) ; h02 = l'ancien Bureau
+  d'ENQUÊTES avec « ‹ Bureau » ; h03 = la liste ALIBI existante.
+- h04 hub (rendu 3D du couloir, travelling lent), h05 création en 4 étapes (+ h05b dossier d'enquêteur, maintien
+  1,2 s), h06 studio / « Voir en 3D », h07 profil, h08 carrière (frise), h09 mon bureau (4 niveaux, points
+  interactifs), h10 chapitre, h11/h12 sous-titres, choix et silence, JOURNAL · AUTO · PASSER, h13/h14 transitions
+  scène ⇄ téléphone (fondu au noir, nouveau dossier h15 puis briefing existant), h16 fin de chapitre, h17 état de
+  service, h18 récompense, h19 réglages (lecture, 3D, carrière, réinitialisation 1,6 s).
+- Chapitre 01 exactement selon STORY_SCENES §5 (S01-01, S01-02, S01-03 ; l'affaire est #001) ; chapitre 02
+  (affaire C02-A « Le dossier Varin », propre à l'histoire) ; chapitres 03–05 annoncés.
+- 7 décors du BEN avec caméras nommées et focales ; PNJ Lacaze, Inès Carvalho, Marc Aubrac, Colette Vidal, un agent.
+- Grammaire des plans vérifiée automatiquement (WIDE d'abord, ≤ 2 CLOSE d'affilée, plan muet, OBJECT FOCUS avant
+  le téléphone, CUT / DISSOLVE / FADE, caméras du décor uniquement).
+
+### Écarts assumés (décisions)
+- **3D** : SceneKit (natif, aucune dépendance), personnages et décors construits en formes simples (réalisme
+  stylisé, matériaux mats) en attendant les modèles du manifeste d'assets. Aucune vidéo, aucune IA générative.
+- **Note de Lacaze (h17)** : le handoff la met en Caveat ; la règle du projet réserve l'écriture manuscrite au
+  joueur. Elle est en Newsreader italique. À trancher si besoin.
+- **Seuils de rang 1 / 20 / 30 + chapitre** : appliqués au joueur qui a créé son enquêteur (carrière commune,
+  affaires ENQUÊTES comptées). Sans enquêteur créé, ENQUÊTES garde l'échelle 0 / 1 / 2–3 / 4–5 (comme le demande
+  CHARACTER_CUSTOMIZATION §6 tant que le mode n'est pas utilisé).
+- **Fusion d'identité** : le personnage créé apparaît sur le Bureau (h01 : nom, rang, portrait) et partout dans
+  l'histoire. Les écrans d'ENQUÊTES (profil « Enquêteur », « AFFECTÉ À » des dossiers) gardent encore l'identité
+  choisie à « Qui enquête ? » : fusion complète à faire.
+- **Reprise d'une scène** : à la réplique exacte (plus fin que « au dernier plan-clé ») ; les `keyframe` sont
+  présents dans les données pour un futur rendu précalculé.
+- **HISTOIRE / ALIBI « verrouillés jusqu'à #001 »** : le Bureau n'est atteint qu'après l'affectation (donc après
+  #001) ; l'état verrouillé existe dans la chemise mais ne se voit pas en pratique.
+- **Colonne ALIBI « DÉCLARÉ / TRACÉ »** : « RELEVÉ » à la place de « TRACÉ » (mot interdit par les tests de
+  vocabulaire hérités de TRACE).
+- **Qualité 3D** : Auto / Économie / Haute règlent l'anticrénelage, les ombres et la profondeur de champ ; pas de
+  détection automatique de la mémoire de l'appareil ni du passage en mode texte sous 24 fps.
+
+### Reste à faire (Histoire)
+- Modèles 3D, animations faciales, voix, musiques, tampons NOUVEAU / CLASSÉ en PNG (voir
+  docs/story/SCENE_SYSTEM.md › Assets encore nécessaires).
+- « Montrer une pièce » (EvidenceChip) pendant un dialogue ; mode « Lire en texte » en cas d'échec 3D.
+- Chapitres 03 à 05, PNJ d'affaire en salle d'audition.
+
 ## V3 — Handoff final « CONCLUDE » (26 septembre 2026)
 
 Source : `docs/design_final/FINAL_DESIGN_HANDOFF_CONCLUDE.md` (lecture seule) et le logo maître
