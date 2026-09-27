@@ -124,7 +124,7 @@ struct PhotoDetailView: View {
     let photoID: String
     let session: GameSession
     @State private var scale: CGFloat = 1
-    @GestureState private var pinch: CGFloat = 1
+    @State private var pinch: CGFloat = 1
 
     var body: some View {
         let game = session.game
@@ -134,9 +134,10 @@ struct PhotoDetailView: View {
                     GeneratedPhoto(photo: photo)
                         .aspectRatio(4 / 3, contentMode: .fit)
                         .scaleEffect(min(4, max(1, scale * pinch)))
-                        .gesture(MagnifyGesture()
-                            .updating($pinch) { value, state, _ in state = value.magnification }
-                            .onEnded { value in scale = min(4, max(1, scale * value.magnification)) })
+                        .phonePinch { pinch = $0 } ended: { value in
+                            scale = min(4, max(1, scale * value))
+                            pinch = 1
+                        }
                         .onTapGesture(count: 2) { withAnimation(Theme.Motion.springApp) { scale = scale > 1 ? 1 : 2.5 } }
                         .clipped()
                         // The photo itself is the piece (not the whole screen: the analysis panel

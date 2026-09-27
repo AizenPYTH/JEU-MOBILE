@@ -9,14 +9,18 @@ import CaseEngine
 /// the player has not filed.
 ///
 /// The long press is simultaneous with the element's own gestures, so a Button or a row keeps its
-/// tap and a ScrollView keeps scrolling (the press fails beyond 12 pt of movement). The tap that
+/// tap and a ScrollView keeps scrolling (the press fails beyond 12 pt of movement). On iOS 18+ it is
+/// a UIKit recognizer (`PressRecognizer`): SwiftUI's LongPressGesture there blocks a scroll that
+/// starts on the element. The tap that
 /// follows a recognised press (the finger lifted on the element) is ignored by the session while
 /// the filing sheet is open.
 struct Pinnable: ViewModifier {
     let ref: ItemRef
     let session: GameSession
     var radius: CGFloat = Theme.Radius.lg
-    @GestureState(resetTransaction: Transaction(animation: .easeOut(duration: 0.15))) private var pressing = false
+    @GestureState(resetTransaction: Transaction(animation: .easeOut(duration: 0.15))) private var legacyPressing = false
+    @State private var touching = false
+    private var pressing: Bool { legacyPressing || touching }
     /// The element's size: a big element (a photo, a whole note or mail screen) keeps its label
     /// inside its corner, and a whole screen does not grow.
     @State private var size: CGSize = .zero
@@ -59,15 +63,32 @@ struct Pinnable: ViewModifier {
                 }
             }
             .onGeometryChange(for: CGSize.self) { $0.size } action: { size = $0 }
-            .simultaneousGesture(
+            .modifier(PressAttachment(legacyPressing: $legacyPressing, touching: $touching) { session.requestFiling(ref) })
+    }
+}
+
+/// The 0.4 s press of `Pinnable`: UIKit on iOS 18+, SwiftUI before.
+private struct PressAttachment: ViewModifier {
+    let legacyPressing: GestureState<Bool>
+    @Binding var touching: Bool
+    let recognized: () -> Void
+
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *) {
+            content.gesture(PressRecognizer(minimumDuration: 0.4, maximumDistance: 12, onPressing: { down in
+                // A short delay on the way in: a finger that starts a scroll does not light the element up.
+                withAnimation(down ? .easeOut(duration: 0.15).delay(0.1) : .easeOut(duration: 0.15)) { touching = down }
+            }, onRecognized: recognized))
+        } else {
+            content.simultaneousGesture(
                 LongPressGesture(minimumDuration: 0.4, maximumDistance: 12)
-                    .updating($pressing) { value, state, transaction in
+                    .updating(legacyPressing) { value, state, transaction in
                         state = value
-                        // A short delay: a finger that starts a scroll does not light the element up.
                         transaction.animation = .easeOut(duration: 0.15).delay(0.1)
                     }
-                    .onEnded { _ in session.requestFiling(ref) }
+                    .onEnded { _ in recognized() }
             )
+        }
     }
 }
 
