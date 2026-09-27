@@ -141,8 +141,12 @@
       "volkswagen"
     ],
     "excluded": [
+      "openverse:318438f4-514d-448c-8c4c-e266cbc66b5f",
+      "openverse:4648110c-bd03-4241-9b97-6315b2a1f12a",
+      "openverse:8326195f-5dee-4967-b484-f7cf801ad7ae",
       "openverse:88b1eadd-77c5-433a-8b60-c5c00769099d",
-      "openverse:c1039be4-7079-4d0c-a293-3609822d996e"
+      "openverse:c1039be4-7079-4d0c-a293-3609822d996e",
+      "openverse:d7de5fa1-d23a-47e4-8ed1-6ee2b5cb9808"
     ],
     "excludedAbout": "Images refused at review, as \"provider:id\" (e.g. \"pexels:123456\"): never chosen again.",
     "placeRejectWords": [
@@ -216,7 +220,9 @@
       "france",
       "old",
       "town",
-      "photo"
+      "photo",
+      "european",
+      "europe"
     ],
     "fillerAbout": "Mots ignorés pour vérifier le sujet : il faut qu'au moins un autre mot de la requête figure dans le titre ou les tags du candidat."
   },
