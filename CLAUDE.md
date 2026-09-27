@@ -29,7 +29,8 @@ affaire avant que le temps soit écoulé. »
   La solution complète n'est montrée que sur demande, pour garder l'envie de rejouer.
 - **Identité** : mystérieuse, moderne, réaliste, légèrement sombre, premium, adulte (16–40 ans).
   Noir, blanc, gris, quelques accents, transparences, flou, lignes fines. Aucune illustration de
-  personnage, aucun style enfantin ou cartoon. Avatars = initiales, photos = images générées.
+  personnage, aucun style enfantin ou cartoon. Avatars = initiales (aucun portrait). **Photos = vraies photographies
+  uniquement** (jamais d'image IA) : voir « Photos (pipeline) ».
 
 ## Structure du dépôt
 
@@ -50,20 +51,23 @@ docs/design_trace/        Handoff TRACE v2 « dossier d'enquête » (NE PAS MODI
 DESIGN_INTEGRATION.md     État de l'intégration du handoff + conflits à trancher
 config/                   photo_pipeline.json (réglages du pipeline photo, à la main), photo_catalog.json (décision
                           par photo, généré puis éditable), photo_sources.json (provenance, généré)
+config/photo_queries/     une fiche par affaire : décision et requêtes de chaque photo (REAL / PROCEDURAL / CUSTOM)
 docs/photo_pipeline/      PHOTO_PIPELINE (fonctionnement), PHOTO_AUDIT, PHOTO_SOURCES (générés), PHOTO_INTEGRATION
+docs/game_modes/          ALIBI.md (le mode), ALIBI_CASES.md (les vérifications livrées, écrire la suivante)
+docs/game_design/         difficulté et chemin minimal de chaque affaire (README + case_00N.md)
 ScreenshotKit/            Package Swift contenant tout le jeu
   Sources/CaseEngine/     Moteur en Swift pur (Foundation). Testable sous Linux.
     Model/                CaseFile (affaire), Moment (heure murale), ItemRef, GameRules, loader, validateur
     Engine/               Investigation (timer, coûts, données visibles, événements live, verdict),
                           MessageSearch, Verdict/score, CaseIndex, CaseAnalysis (résolvabilité)
     Support/              GameClock (SystemClock / ManualClock)
-  Sources/CaseLibrary/    Données : Resources/Cases/case_XXX.json + Resources/Rules/rules.json
+  Sources/CaseLibrary/    Données : Resources/Cases/case_XXX.json (enquêtes) + alibi_XXX.json (mode ALIBI) + Resources/Rules/rules.json
   Sources/ScreenshotUI/   Interface SwiftUI (iOS uniquement, fichiers entourés de #if os(iOS))
     Session/              GameSession (moteur, navigation, versement, bannières, haptiques), ProgressStore (tentatives,
                           meilleur résultat par niveau), Preferences (réglages, temps détendu), Player (enquêteur
                           choisi, rangs, affectation), Tutorial (3 bulles du #001), AudioDirector (sons)
     Phone/                Le téléphone : barre d'état, accueil, bannières, et chaque app (Apps/)
-    Screens/              RootView (flux), LaunchScreen (01), TitleScreens (02 titre, 02b reprise, 03 qui enquête ?),
+    Screens/              RootView (flux), AlibiScreens (mode ALIBI), LaunchScreen (01), TitleScreens (02 titre, 02b reprise, 03 qui enquête ?),
                           DossierView (04 briefing), CaseOpening (sachet → téléphone), InvestigationShell (téléphone,
                           pause, versement), InvestigationView (Carnet + Indice), EndScreens (09 conclusion, 10
                           vérification, 11 rapport, 12 affectation), DeskScreens (Bureau, Archives, Enquêteur),
@@ -82,6 +86,14 @@ ScreenshotKit/            Package Swift contenant tout le jeu
 scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d'affaires), audio/ (sons),
                           photos.sh + photos/ (pipeline photo : Pexels / Openverse → Art.xcassets/Photos)
 ```
+
+## Deux modes
+
+- **Enquêtes** (le cœur) : « Qui est responsable ? », 4 suspects, 8 min. Difficulté progressive #001 (très accessible,
+  tutoriel) → #005 (intermédiaire +). Chaque affaire a son `minimalPath` (docs/game_design).
+- **ALIBI** (« VÉRIFIER. CROISER. CONCLURE. ») : une personne, une déclaration, 3–6 min, verdict ALIBI CONFIRMÉ /
+  ALIBI CONTREDIT. Carte secondaire sur le Bureau. `mode: "alibi"`, `claim`, `solution.alibiHolds`, numéros ≥ 101
+  (affichés ALIBI #001). Voir docs/game_modes/ALIBI.md.
 
 ## Architecture — règles
 
@@ -154,11 +166,16 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
 
 ## Photos (pipeline)
 
-- Les photos d'ambiance des téléphones viennent de Pexels (clé `PEXELS_API_KEY`, secret GitHub) ou d'Openverse
-  (CC0/PDM/BY/BY-SA), préparées par `./scripts/photos.sh all` (workflow `photo-pipeline.yml`, car le conteneur
-  n'accède pas à ces API) et livrées dans `Art.xcassets/Photos/caseNNN_photo_<id>` ; `GeneratedPhoto` les affiche à la
-  place du dessin. Les preuves, les personnes de l'affaire et les textes précis restent dessinés (CUSTOM_REQUIRED).
-  Jamais d'appel réseau dans le jeu ; crédits dans Paramètres › À propos. Voir docs/photo_pipeline/.
+- **Vraies photos uniquement, jamais d'image IA** (décision non négociable). Sources : Wikimedia Commons (API officielle),
+  Pexels (si le secret `PEXELS_API_KEY` existe), Openverse ; licences CC0 / domaine public / CC BY / CC BY-SA ; rejet
+  ferme des images IA, dessins, cartes, photos anciennes, personnes identifiables. Préparées par
+  `./scripts/photos.sh all` (workflow `photo-pipeline.yml`, le conteneur n'accède pas à ces API), livrées dans
+  `Art.xcassets/Photos/caseNNN_photo_<id>` ; `GeneratedPhoto` les affiche à la place du dessin.
+- Chaque affaire a sa fiche `config/photo_queries/case_NNN.json` (REAL / PROCEDURAL / CUSTOM). Si une vraie photo est
+  impossible, on **adapte le scénario** (lieu, objet, légende) sans toucher à la solution. Une photo ne montre jamais un
+  personnage de l'affaire. Captures d'écran, documents, tickets : rendus du téléphone (PROCEDURAL).
+- Jamais d'appel réseau dans le jeu ; crédits dans Paramètres › À propos. Voir docs/photo_pipeline/ (rapport REAL PHOTO
+  COMPLIANCE).
 
 ## CI / livraison
 
@@ -193,7 +210,9 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
 - [x] Handoff final V3 : premier lancement en 4 écrans, choix de l'enquêteur, tutoriel en 3 bulles, appui long
       + feuille « Verser au dossier » dans toutes les apps, barre du dossier, Carnet en 3 onglets, conclusion
       nommée, rapport, affectation au BEN, rangs, temps détendu ; cinématiques retirées (docs/design_final)
-- [ ] Affaires #006–#015 (6 suspects, 8–10 min)
+- [x] Retour testeurs : difficulté inutile retirée (chemin minimal, indices en 3 plis, Carnet orienté), photos réelles
+      uniquement (Wikimedia Commons, portraits IA supprimés), mode ALIBI (3 vérifications)
+- [ ] Affaires #006–#015 (6 suspects, 8–10 min), vérifications ALIBI #004+
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
 - [ ] Monnaie / tickets d'indices, iCloud
 - [ ] Sons, haptiques fines, finitions d'animation, accessibilité avancée

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """CONCLUDE : ENQUÊTES — photo asset pipeline.
 
-Turns the photos of the case files into real, credited, offline images:
+Turns the photos of the case files into REAL photographs, credited, offline (never an AI image):
 
-    case JSON ──audit──▶ config/photo_catalog.json (one decision per photo, a few shared sources)
-              ──search──▶ Pexels / Openverse candidates (cached), scored, best picked
+    case JSON + config/photo_queries ──audit──▶ config/photo_catalog.json (one decision per photo)
+              ──search──▶ Wikimedia Commons / Pexels / Openverse candidates (cached), scored, best picked
               ──download─▶ originals (cached)
               ──process──▶ Art.xcassets/Photos/caseNNN_photo_<id>.imageset (crop, resize, JPEG)
               ──validate─▶ checks (files, sizes, provenance, licences, no key, no duplicate)
@@ -44,7 +44,12 @@ DOCS = ROOT / "docs" / "photo_pipeline"
 CACHE = ROOT / "cache" / "photos"
 REPORTS = ROOT / "reports"
 
-DECISIONS = ["KEEP", "REPLACE_BY_API", "CUSTOM_REQUIRED", "PROCEDURAL", "DUPLICATE", "UNUSED"]
+QUERIES_DIR = ROOT / "config" / "photo_queries"
+
+# KEEP_REAL: a real photo already shipped and kept · REPLACE_REAL: a real photo from a free library ·
+# CUSTOM_REAL: a real photo we have to take ourselves · PROCEDURAL: drawn by the game on purpose (screenshots,
+# documents, receipts: not photographs) · REMOVE: an image to delete (AI, placeholder, unused).
+DECISIONS = ["KEEP_REAL", "REPLACE_REAL", "CUSTOM_REAL", "PROCEDURAL", "REMOVE"]
 
 
 # ─────────────────────────────────────────────────────────── helpers
@@ -105,7 +110,7 @@ def hour_of(moment: str) -> int:
 
 def load_cases() -> list[dict]:
     cases = []
-    for path in sorted(CASES_DIR.glob("case_*.json")):
+    for path in sorted(list(CASES_DIR.glob("case_*.json")) + list(CASES_DIR.glob("alibi_*.json"))):
         data = load_json(path)
         cases.append(data)
     return cases
@@ -159,27 +164,27 @@ def classify(photo: dict, case: dict, ev_index: dict, names: list[str], cfg: dic
     folded = fold(text)
     forced = rules.get("forceCustom", {}).get(f"{case['number']:03d}/{pid}")
     if pid in ev_index:
-        return "CUSTOM_REQUIRED", f"Preuve ({', '.join(ev_index[pid])}) : le cadrage, l'heure ou le contenu sert le raisonnement ; jamais de photo de banque d'images."
+        return "CUSTOM_REAL", f"Preuve ({', '.join(ev_index[pid])}) : le cadrage, l'heure ou le contenu sert le raisonnement ; jamais de photo de banque d'images."
     if forced:
-        return "CUSTOM_REQUIRED", f"Détail utile à l'enquête (règle manuelle) : {forced}"
+        return "CUSTOM_REAL", f"Détail utile à l'enquête (règle manuelle) : {forced}"
     if scene in rules["proceduralScenes"] or style in rules["proceduralStyles"] or photo.get("lines"):
         return "PROCEDURAL", "Texte lisible exact ou photo ratée : le rendu du jeu (texte généré, flou) reste la bonne source."
     if scene in rules["peopleScenes"] or style in rules["peopleStyles"]:
-        return "CUSTOM_REQUIRED", "Personnes de l'affaire à l'image (selfie, groupe, miroir) : une photo générique montrerait des inconnus."
+        return "CUSTOM_REAL", "Personnes de l'affaire à l'image (selfie, groupe, miroir) : une photo générique montrerait des inconnus."
     for name in names:
         if re.search(r"(?<![\wÀ-ÿ])" + re.escape(name) + r"(?![\wÀ-ÿ])", text):
-            return "CUSTOM_REQUIRED", f"Personne nommée à l'image ({name}) : une photo générique montrerait un inconnu."
+            return "CUSTOM_REAL", f"Personne nommée à l'image ({name}) : une photo générique montrerait un inconnu."
     for word in rules["personWords"]:
         if re.search(r"(?<![a-z])" + re.escape(fold(word)) + r"(?![a-z])", folded):
-            return "CUSTOM_REQUIRED", f"Personne reconnaissable décrite (« {word} ») : une photo générique la contredirait."
+            return "CUSTOM_REAL", f"Personne reconnaissable décrite (« {word} ») : une photo générique la contredirait."
     for pattern in rules["readableTextPatterns"]:
         if pattern in text or fold(pattern) in folded:
-            return "CUSTOM_REQUIRED", f"Texte, écran ou marque précis décrit dans la photo (« {pattern} ») : une photo générique le contredirait."
+            return "CUSTOM_REAL", f"Texte, écran ou marque précis décrit dans la photo (« {pattern} ») : une photo générique le contredirait."
     key = (scene, fold(photo.get("caption", "")))
     if key in seen:
-        return "DUPLICATE", f"Même scène et même légende que {seen[key]} : réutilise sa source avec un autre cadrage."
+        return "REPLACE_REAL", f"Même scène et même légende que {seen[key]} : même photo réelle, autre cadrage."
     seen[key] = pid
-    return "REPLACE_BY_API", "Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée."
+    return "REPLACE_REAL", "Photo d'ambiance sans rôle dans le raisonnement : vraie photo sous licence libre, recadrée."
 
 
 def build_queries(case_key: str, photo: dict, cfg: dict) -> tuple[str, list[str]]:
@@ -206,6 +211,7 @@ def cmd_audit(args, cfg) -> dict:
         cfg["cases"].setdefault(case_key, ctx)
         ev_index, usage = evidence_index(case), photo_usage(case)
         names = people_names(case, ctx.get("extraPeople", []))
+        planned = (load_json(QUERIES_DIR / f"case_{case_key}.json", {}) or {}).get("photos", {})
         seen: dict = {}
         for dev in case["devices"]:
             for photo in dev["photos"]:
@@ -213,9 +219,16 @@ def cmd_audit(args, cfg) -> dict:
                 if aid in manual:
                     photos.append(manual[aid])
                     continue
-                decision, reason = classify(photo, case, ev_index, names, cfg, seen)
-                night = is_night(photo, cfg["audit"])
-                if photo["id"] and decision in ("REPLACE_BY_API", "DUPLICATE"):
+                plan = planned.get(photo["id"])
+                if plan:
+                    decision = {"REAL": "REPLACE_REAL", "PROCEDURAL": "PROCEDURAL"}.get(plan.get("decision"), "CUSTOM_REAL")
+                    reason = plan.get("reason") or ("Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire"
+                                                    + (" (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet)" if photo["id"] in ev_index else "") + ".")
+                    night = bool(plan.get("night")) or is_night(photo, cfg["audit"])
+                else:
+                    decision, reason = classify(photo, case, ev_index, names, cfg, seen)
+                    night = is_night(photo, cfg["audit"])
+                if not plan and decision == "REPLACE_REAL":
                     q, _ = build_queries(case_key, photo, cfg)
                     night = night or bool(re.search(r"\b(night|fireworks)\b", q))
                 entry = {
@@ -223,35 +236,64 @@ def cmd_audit(args, cfg) -> dict:
                     "screens": ["Photos"] + usage.get(photo["id"], []), "scene": photo["scene"],
                     "style": photo.get("style") or "standard", "takenAt": photo.get("takenAt"),
                     "caption": photo.get("caption"), "isEvidence": photo["id"] in ev_index,
-                    "decision": decision, "reason": reason, "night": night, "required": decision == "REPLACE_BY_API",
+                    "decision": decision, "reason": reason, "night": night, "required": decision == "REPLACE_REAL",
                     "currentSource": "procédural (GeneratedPhoto, scène « %s »)" % photo["scene"],
+                    "planned": bool(plan),
                 }
-                if decision in ("REPLACE_BY_API", "DUPLICATE"):
-                    query, fallbacks = build_queries(case_key, photo, cfg)
-                    gkey = (case_key, query, night)
-                    groups.setdefault(gkey, {"query": query, "fallbacks": fallbacks, "night": night, "case": case_key,
-                                             "scene": photo["scene"], "photos": []})
-                    groups[gkey]["photos"].append(aid)
+                if decision == "REPLACE_REAL":
+                    if plan:
+                        query, fallbacks = plan.get("query", "").strip(), [q for q in plan.get("fallbacks", []) if q.strip()]
+                        share = plan.get("shareWith")
+                        # Evidence gets its own photograph; the same place/object shown twice shares one
+                        # (two crops); ambient photos with the same query share one, as before.
+                        gkey = (case_key, "share", share) if share else ((case_key, "own", photo["id"]) if photo["id"] in ev_index else (case_key, query, night))
+                    else:
+                        query, fallbacks = build_queries(case_key, photo, cfg)
+                        gkey = (case_key, query, night)
+                    group = groups.get(gkey) or {"query": query, "fallbacks": fallbacks, "night": night, "case": case_key,
+                                                  "scene": photo["scene"], "photos": [], "subject": (plan or {}).get("subject", []),
+                                                  "evidence": False, "key": gkey}
+                    group["evidence"] = group["evidence"] or photo["id"] in ev_index
+                    group["photos"].append(aid)
+                    groups[gkey] = group
+                    entry["shareWith"] = (plan or {}).get("shareWith")
                 photos.append(entry)
     # Sources: a group of photos with the same query shares 1 source per `photosPerSource` photos.
     per_source = cfg["selection"]["photosPerSource"]
     sources = []
     assignment = {}
-    for (case_key, query, night), g in sorted(groups.items(), key=lambda kv: (kv[0][0], kv[0][1], kv[0][2])):
+    # A photo shared with another (`shareWith`) joins that one's group.
+    for gkey, g in list(groups.items()):
+        if gkey[1] == "share":
+            owner = next((q for k, q in groups.items() if q and k[1] != "share" and asset_name(gkey[0], gkey[2]) in q["photos"]), None)
+            if g and owner:
+                owner["photos"] += g["photos"]
+                owner["evidence"] = owner["evidence"] or g["evidence"]
+                owner["single"] = True  # the same photograph for all of them
+            elif g:
+                groups[(gkey[0], "own", gkey[2])] = g
+            groups.pop(gkey)
+    for key, g in sorted(groups.items(), key=lambda kv: tuple(str(x) for x in kv[0])):
+        case_key, query, night = g["case"], g["query"], g["night"]
         slug = re.sub(r"[^a-z0-9]+", "_", fold(query)).strip("_")[:40]
-        count = math.ceil(len(g["photos"]) / per_source)
+        if key[1] == "own":
+            slug = f"{slug}_{re.sub(r'[^a-z0-9]+', '_', key[2])}"
+        single = key[1] == "own" or g.get("single")
+        count = 1 if single else math.ceil(len(g["photos"]) / per_source)
+        size = len(g["photos"]) if single else per_source
         for i in range(count):
             sid = f"case{case_key}_src_{slug}{'_night' if night and 'night' not in slug else ''}_{i + 1:02d}"
-            members = g["photos"][i * per_source:(i + 1) * per_source]
+            members = g["photos"][i * size:(i + 1) * size]
             outdoor_dark = night and g["scene"] in cfg["audit"]["outdoorScenes"] + ["club", "concert"]
             sources.append({
                 "id": sid, "case": case_key, "type": "ambient", "usage": "phone-photo", "scene": g["scene"],
                 "query": query, "fallbackQueries": g["fallbacks"], "orientation": "landscape", "ratio": "4:3",
                 "minWidth": cfg["selection"]["minSourceWidth"], "minHeight": cfg["selection"]["minSourceHeight"],
                 "priority": 1 if len(members) > 1 else 2, "providers": cfg["providers"]["order"],
-                "sensitivity": "no-identifiable-people, no-brands", "isEvidence": False,
+                "sensitivity": "real photograph, no identifiable people, no brands, no AI image", "isEvidence": g["evidence"],
+                "subject": g.get("subject", []),
                 "night": night, "requireDark": outdoor_dark, "variants": len(members), "photos": members,
-                "transform": {"profile": "phone-photo", "crop": "smart", "variantCrops": ["best", "left", "right"][:len(members)]},
+                "transform": {"profile": "phone-photo", "crop": "smart", "variantCrops": [VARIANTS[v % len(VARIANTS)][0] for v in range(len(members))]},
             })
             for v, aid in enumerate(members):
                 assignment[aid] = (sid, v)
@@ -259,13 +301,13 @@ def cmd_audit(args, cfg) -> dict:
         if p["assetId"] in assignment:
             p["source"], p["variant"] = assignment[p["assetId"]]
             p["replacement"] = f"{p['source']} (variante {p['variant'] + 1})"
-        elif p["decision"] == "CUSTOM_REQUIRED":
-            p["replacement"] = "image sur mesure à produire ; le rendu procédural reste en attendant"
+        elif p["decision"] == "CUSTOM_REAL":
+            p["replacement"] = "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
         elif p["decision"] == "PROCEDURAL":
             p["replacement"] = "aucun : rendu procédural conservé"
     catalog = {
         "about": "Generated by `scripts/photos.sh audit` from the case files, then editable: set \"manual\": true on a photo entry to keep your edits. One entry per photo of the game; ambient photos share `sources`.",
-        "version": 1, "sources": sources, "photos": photos,
+        "version": 2, "sources": sources, "photos": photos, "removedImages": cfg.get("removedImages", []),
     }
     if not args.dry_run:
         write_json(CATALOG, catalog)
@@ -405,6 +447,77 @@ def openverse_search(http: Http, cfg: dict, query: str, offline: bool) -> list[d
     return results
 
 
+WIKI_LICENCES = [  # Commons « LicenseShortName » → our licence code (anything else is refused)
+    (re.compile(r"^cc0\b|^cc-zero", re.I), "cc0"),
+    (re.compile(r"^public domain|^pd\b|^pdm", re.I), "pdm"),
+    (re.compile(r"^cc[ -]by[ -]sa[ -]?(\d(\.\d)?)?", re.I), "by-sa"),
+    (re.compile(r"^cc[ -]by[ -]?(\d(\.\d)?)?$", re.I), "by"),
+]
+
+
+def strip_html(text: str) -> str:
+    return re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", text or ""))).strip()
+
+
+def wikimedia_licence(short_name: str) -> tuple[str, str]:
+    """(code, version) of a Commons licence name, ("", "") when it is not one we accept."""
+    name = (short_name or "").strip()
+    for pattern, code in WIKI_LICENCES:
+        if pattern.search(name):
+            version = re.search(r"(\d\.\d|\d)", name)
+            return code, (version.group(1) if version and code in ("by", "by-sa") else "")
+    return "", ""
+
+
+def wikimedia_search(http: Http, cfg: dict, query: str, offline: bool) -> list[dict]:
+    """Wikimedia Commons, official MediaWiki API: JPEG files matching the query, with their licence,
+    author, categories and date (extmetadata). No key needed; one request per query."""
+    wcfg = cfg["providers"]["wikimedia"]
+    cpath = cache_path("wikimedia", query, "v1")
+    cached = load_json(cpath)
+    if cached is not None:
+        http.stats["cacheHits"] = http.stats.get("cacheHits", 0) + 1
+        return cached
+    if not wcfg["enabled"] or offline:
+        return []
+    params = {"action": "query", "format": "json", "formatversion": "2", "generator": "search",
+              "gsrsearch": f"{query} filemime:image/jpeg", "gsrnamespace": "6", "gsrlimit": wcfg["pageSize"],
+              "prop": "imageinfo", "iiprop": "url|size|mime|extmetadata", "iiurlwidth": wcfg["thumbWidth"],
+              "iiextmetadatafilter": "LicenseShortName|LicenseUrl|Artist|ImageDescription|DateTimeOriginal|Restrictions|Categories|ObjectName"}
+    data = http.get_json("wikimedia", wcfg["endpoint"] + "?" + urllib.parse.urlencode(params), {}, wcfg["minIntervalSeconds"])
+    if data is None:
+        return []
+    results = []
+    for page in (data.get("query") or {}).get("pages", []):
+        info = (page.get("imageinfo") or [{}])[0]
+        meta = {k: str((v or {}).get("value", "") if isinstance(v, dict) else v or "") for k, v in (info.get("extmetadata") or {}).items()}
+        code, version = wikimedia_licence(strip_html(meta.get("LicenseShortName", "")))
+        categories = [c.strip() for c in strip_html(meta.get("Categories", "")).split("|") if c.strip()]
+        year = re.search(r"(1[89]\d\d|20\d\d)", strip_html(meta.get("DateTimeOriginal", "")))
+        artist = strip_html(meta.get("Artist", ""))
+        results.append({
+            "provider": "wikimedia", "providerPhotoId": str(page.get("pageid", "")), "width": info.get("width") or 0,
+            "height": info.get("height") or 0, "title": clean_title(meta.get("ObjectName") or page.get("title", "")),
+            "tags": categories[:40] + [strip_html(meta.get("ImageDescription", ""))[:300]],
+            "photographer": artist[:120], "photographerUrl": "", "sourceUrl": info.get("descriptionurl") or "",
+            "downloadUrl": info.get("thumburl") or info.get("url") or "", "license": code, "licenseVersion": version,
+            "licenseUrl": meta.get("LicenseUrl", "") or ("https://creativecommons.org/publicdomain/zero/1.0/" if code == "cc0" else
+                                                          "https://commons.wikimedia.org/wiki/Commons:Public_domain" if code == "pdm" else ""),
+            "licenseCode": code, "origin": "Wikimedia Commons", "mature": False, "mime": info.get("mime", ""),
+            "year": int(year.group(1)) if year else None, "restrictions": strip_html(meta.get("Restrictions", "")),
+        })
+    write_json(cpath, results)
+    return results
+
+
+def search_provider(provider: str, http: Http, cfg: dict, query: str, offline: bool) -> list[dict]:
+    if provider == "pexels":
+        return pexels_search(http, cfg, query, offline)
+    if provider == "wikimedia":
+        return wikimedia_search(http, cfg, query, offline)
+    return openverse_search(http, cfg, query, offline)
+
+
 def hex_luminance(hex_color: str | None) -> float | None:
     if not hex_color or not re.match(r"^#?[0-9a-fA-F]{6}$", hex_color):
         return None
@@ -416,7 +529,7 @@ def hex_luminance(hex_color: str | None) -> float | None:
 def licence_ok(c: dict, cfg: dict) -> tuple[bool, str]:
     if c["provider"] == "pexels":
         return True, ""
-    ocfg = cfg["providers"]["openverse"]
+    ocfg = cfg["providers"]["wikimedia" if c["provider"] == "wikimedia" else "openverse"]
     code = c.get("licenseCode", "")
     if code not in ocfg["allowedLicenses"]:
         return False, f"licence « {code or '?'} » non autorisée (usage commercial + modification requis)"
@@ -437,11 +550,26 @@ def hard_reject(c: dict, cfg: dict) -> str:
         return "mot exclu dans le titre ou les tags"
     if words & set(sel.get("placeRejectWords", [])):
         return "lieu étranger à l'affaire (placeRejectWords)"
+    text = " " + fold(clean_title(c.get("title", "")) + " " + " ".join(c.get("tags", []))) + " "
+    for phrase in sel.get("aiPhrases", []):
+        if f" {fold(phrase)} " in re.sub(r"[^a-z0-9]+", " ", text) + " ":
+            return "image générée par IA (jamais dans le jeu)"
+    for phrase in sel.get("notPhotoPhrases", []):
+        if f" {fold(phrase)} " in re.sub(r"[^a-z0-9]+", " ", text) + " ":
+            return "pas une photographie (dessin, carte, affiche, rendu…)"
+    if c.get("mime") and c["mime"] != "image/jpeg":
+        return "pas une photographie JPEG"
+    if c.get("year") and c["year"] < sel.get("minYear", 2000):
+        return f"photo ancienne ({c['year']}) : pas crédible dans un téléphone récent"
+    if "personality" in fold(c.get("restrictions", "")):
+        return "personne identifiable (droit à l'image signalé)"
     return ""
 
 
 def subject_words(source: dict, query: str, cfg: dict) -> set[str]:
     """What the photo must show: the query without the city, the time of day and filler words."""
+    if source.get("subject"):
+        return set().union(*(tokens(w) for w in source["subject"]))
     case = cfg["cases"].get(source.get("case", ""), {})
     place = tokens(case.get("city", "") + " " + case.get("region", ""))
     return tokens(query) - place - set(cfg["selection"].get("fillerWords", []))
@@ -489,6 +617,8 @@ def score(c: dict, source: dict, cfg: dict, query: str | None = None) -> tuple[f
         s -= 1.0 if words & {"night", "dark", "neon"} else 0
     if c["provider"] == "pexels":
         s += 0.5  # consistent quality, no attribution ambiguity
+    if source.get("isEvidence") and words & set(sel["peopleWords"]):
+        return -math.inf, "une preuve ne montre jamais de personne identifiable"
     return s, ""
 
 
@@ -514,7 +644,7 @@ def cmd_search(args, cfg, catalog, manifest, stats) -> None:
         for query in [src["query"]] + src["fallbackQueries"]:
             for provider in src["providers"]:
                 try:
-                    results = pexels_search(http, cfg, query, args.offline) if provider == "pexels" else openverse_search(http, cfg, query, args.offline)
+                    results = search_provider(provider, http, cfg, query, args.offline)
                 except RateLimited as e:
                     stats["errors"].append(f"{provider}: {e}")
                     results = []
@@ -625,8 +755,10 @@ def attribution_text(c: dict) -> str:
         return f"Photo by {who} on Pexels"
     lic = (c.get("licenseCode") or "").upper()
     if lic in ("CC0", "PDM"):
-        return f"« {c.get('title') or 'Sans titre'} » — {who} ({lic})"
-    return f"« {c.get('title') or 'Sans titre'} » by {who}, CC {lic} {c.get('licenseVersion', '')}".strip()
+        via = ", Wikimedia Commons" if c["provider"] == "wikimedia" else ""
+        return f"« {c.get('title') or 'Sans titre'} » — {who} ({'domaine public' if lic == 'PDM' else lic}{via})"
+    via = " — Wikimedia Commons" if c["provider"] == "wikimedia" else ""
+    return f"« {c.get('title') or 'Sans titre'} » by {who}, CC {lic} {c.get('licenseVersion', '')}".strip() + via
 
 
 # ─────────────────────────────────────────────────────────── process
@@ -713,7 +845,7 @@ def cmd_process(args, cfg, catalog, manifest, stats) -> None:
                                                "info": {"author": "xcode", "version": 1}})
         assets[p["assetId"]] = {
             "assetId": p["assetId"], "sourceId": src_id, "caseId": p["case"], "photoId": p["photoId"],
-            "evidence": False, "finalAssetPath": str(out_file.relative_to(ROOT)), "transformation": transform,
+            "evidence": bool(p.get("isEvidence")), "finalAssetPath": str(out_file.relative_to(ROOT)), "transformation": transform,
             "sha256": hashlib.sha256(out_file.read_bytes()).hexdigest(), "bytes": out_file.stat().st_size,
         }
         produced += 1
@@ -747,8 +879,8 @@ def cmd_validate(args, cfg, catalog, manifest, stats) -> list[str]:
     for p in catalog["photos"]:
         if p["decision"] not in DECISIONS:
             problems.append(f"{p['assetId']}: décision inconnue {p['decision']}")
-        if p["isEvidence"] and p["decision"] in ("REPLACE_BY_API", "DUPLICATE"):
-            problems.append(f"{p['assetId']}: une preuve ne peut pas venir d'une banque d'images")
+        if p["isEvidence"] and p["decision"] == "REPLACE_REAL" and not p.get("planned"):
+            problems.append(f"{p['assetId']}: une preuve ne vient d'une bibliothèque que si config/photo_queries la décrit")
     for s in catalog["sources"]:
         if not s["query"].strip():
             problems.append(f"{s['id']}: source sans requête")
@@ -757,7 +889,7 @@ def cmd_validate(args, cfg, catalog, manifest, stats) -> list[str]:
         for field in ("provider", "providerPhotoId", "sourceUrl", "license", "licenseUrl", "queryUsed", "dateFetched", "attributionText"):
             if not e.get(field):
                 problems.append(f"{e['sourceId']}: provenance incomplète ({field})")
-        if e["provider"] == "openverse" and e.get("license") not in cfg["providers"]["openverse"]["allowedLicenses"]:
+        if e["provider"] in ("openverse", "wikimedia") and e.get("license") not in cfg["providers"][e["provider"]]["allowedLicenses"]:
             problems.append(f"{e['sourceId']}: licence non autorisée {e.get('license')}")
     hashes = {}
     try:
@@ -821,33 +953,82 @@ def credits_payload(manifest: dict) -> dict:
             "pexels": any(i["provider"] == "pexels" for i in items), "items": items}
 
 
-def write_audit_doc(catalog: dict) -> None:
+def compliance_lines(catalog: dict, manifest: dict) -> list[str]:
+    """REAL PHOTO COMPLIANCE: what the phones show, photo by photo category."""
     photos = catalog["photos"]
+    shipped = {a["assetId"] for a in manifest.get("assets", [])}
+    sources = {e["sourceId"]: e for e in manifest.get("sources", []) if e.get("status") == "fetched"}
+    by_provider: dict[str, int] = {}
+    for a in manifest.get("assets", []):
+        prov = sources.get(a["sourceId"], {}).get("provider", "?")
+        by_provider[prov] = by_provider.get(prov, 0) + 1
+    real = [p for p in photos if p["assetId"] in shipped]
+    waiting = [p for p in photos if p["decision"] == "REPLACE_REAL" and p["assetId"] not in shipped]
+    custom = [p for p in photos if p["decision"] == "CUSTOM_REAL"]
+    procedural = [p for p in photos if p["decision"] == "PROCEDURAL"]
+    removed = catalog.get("removedImages", [])
+    lines = ["## REAL PHOTO COMPLIANCE", "",
+             "Règle du studio : aucune image générée par IA dans les téléphones et les galeries ; toute photo montrée comme une "
+             "photographie est une vraie photographie (bibliothèque libre documentée, ou prise par nous).", "",
+             "| | |", "|---|---|",
+             f"| Photos des téléphones (toutes affaires) | {len(photos)} |",
+             f"| Vraies photos livrées (photographies réelles) | **{len(real)}** |",
+             f"| — dont externes : " + " · ".join(f"{k} {v}" for k, v in sorted(by_provider.items())) + f" | {len(real)} |",
+             f"| Vraies photos prises par le studio (CUSTOM_REAL livrées) | 0 |",
+             f"| Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | {len(waiting)} |",
+             f"| Vraies photos à prendre nous-mêmes (CUSTOM_REAL) | {len(custom)} |",
+             f"| Rendus du jeu voulus (captures d'écran, documents, tickets — pas des photographies) | {len(procedural)} |",
+             f"| Images IA supprimées | {len(removed)} |",
+             f"| Images IA restantes dans les zones photo | 0 |", ""]
+    if removed:
+        lines += ["Images IA supprimées :", ""] + [f"- `{r['name']}` — {r['what']} ({r['why']})" for r in removed] + [""]
+    lines += ["Tant qu'une vraie photo n'est pas livrée, le téléphone montre un rendu dessiné par le jeu, stylisé, qui ne se "
+              "fait pas passer pour une photographie réelle (aucune image IA n'est jamais utilisée).", ""]
+    exceptions = custom + waiting
+    if exceptions:
+        lines += ["Exceptions (photo réelle pas encore livrée) :", "", "| Photo | Décision | Justification |", "|---|---|---|"]
+        for p in exceptions:
+            lines.append(f"| `{p['assetId']}` — {str(p.get('caption', '')).replace('|', '/')} | {p['decision']} | {p['reason'].replace('|', '/')} |")
+        lines.append("")
+    return lines
+
+
+def write_audit_doc(catalog: dict, manifest: dict | None = None) -> None:
+    photos = catalog["photos"]
+    manifest = manifest if manifest is not None else (load_json(MANIFEST, {}) or {})
     lines = ["# Audit des photos du jeu", "",
-             "Généré par `./scripts/photos.sh audit` à partir des 5 affaires (`ScreenshotKit/Sources/CaseLibrary/Resources/Cases`).",
-             "Ne pas éditer à la main : modifier `config/photo_pipeline.json` (règles, requêtes) ou marquer une entrée `\"manual\": true` dans `config/photo_catalog.json`, puis relancer.",
-             "", "## Synthèse", "", "| Affaire | Photos | REPLACE_BY_API | DUPLICATE | CUSTOM_REQUIRED | PROCEDURAL | KEEP | UNUSED | Sources |", "|---|---|---|---|---|---|---|---|---|"]
+             "Généré par `./scripts/photos.sh audit` à partir des affaires (`ScreenshotKit/Sources/CaseLibrary/Resources/Cases`, "
+             "mode principal et ALIBI) et des fiches `config/photo_queries/case_NNN.json`.",
+             "Ne pas éditer à la main : modifier les fiches de requêtes ou `config/photo_pipeline.json`, ou marquer une entrée "
+             "`\"manual\": true` dans `config/photo_catalog.json`, puis relancer.",
+             "", "## Synthèse", "", "| Affaire | Photos | KEEP_REAL | REPLACE_REAL | CUSTOM_REAL | PROCEDURAL | REMOVE | Sources |", "|---|---|---|---|---|---|---|---|"]
     by_case = {}
     for p in photos:
         by_case.setdefault((p["case"], p["caseTitle"]), []).append(p)
     for (case, title), ps in sorted(by_case.items()):
         c = {d: sum(1 for p in ps if p["decision"] == d) for d in DECISIONS}
         n_src = sum(1 for s in catalog["sources"] if s["case"] == case)
-        lines.append(f"| #{case} {title} | {len(ps)} | {c['REPLACE_BY_API']} | {c['DUPLICATE']} | {c['CUSTOM_REQUIRED']} | {c['PROCEDURAL']} | {c['KEEP']} | {c['UNUSED']} | {n_src} |")
+        label = f"ALIBI #{int(case) - 100:03d}" if int(case) > 100 else f"#{case}"
+        lines.append(f"| {label} {title} | {len(ps)} | {c['KEEP_REAL']} | {c['REPLACE_REAL']} | {c['CUSTOM_REAL']} | {c['PROCEDURAL']} | {c['REMOVE']} | {n_src} |")
     tot = {d: sum(1 for p in photos if p["decision"] == d) for d in DECISIONS}
-    lines.append(f"| **Total** | **{len(photos)}** | **{tot['REPLACE_BY_API']}** | **{tot['DUPLICATE']}** | **{tot['CUSTOM_REQUIRED']}** | **{tot['PROCEDURAL']}** | **{tot['KEEP']}** | **{tot['UNUSED']}** | **{len(catalog['sources'])}** |")
+    lines.append(f"| **Total** | **{len(photos)}** | **{tot['KEEP_REAL']}** | **{tot['REPLACE_REAL']}** | **{tot['CUSTOM_REAL']}** | **{tot['PROCEDURAL']}** | **{tot['REMOVE']}** | **{len(catalog['sources'])}** |")
     lines += ["", "Décisions :", "",
-              "- **REPLACE_BY_API** — photo d'ambiance : image externe (Pexels, sinon Openverse sous licence libre) recadrée, une source servant jusqu'à 3 photos.",
-              "- **DUPLICATE** — même scène et même légende qu'une autre photo de l'affaire : même source, autre cadrage.",
-              "- **CUSTOM_REQUIRED** — preuve, personne de l'affaire, ou texte/écran précis décrit : une image générique trahirait l'enquête. Le rendu procédural reste en attendant une image sur mesure.",
-              "- **PROCEDURAL** — capture d'écran, document, ticket (texte exact généré par le jeu) ou photo ratée (poche, plafond) : le rendu du jeu est la bonne source.",
-              "- **KEEP** — image existante conservée (aucune photo réelle n'existait avant le pipeline). **UNUSED** — photo jamais affichée (aucune : toutes sont dans la galerie).",
+              "- **KEEP_REAL** — vraie photographie déjà livrée, provenance documentée, conservée.",
+              "- **REPLACE_REAL** — vraie photographie d'une bibliothèque libre (Wikimedia Commons, Pexels, Openverse), choisie par la "
+              "fiche de requêtes de l'affaire, vérifiée (sujet, lieu, nuit/jour, licence, pas d'IA) et recadrée. Une preuve n'y a droit "
+              "que si sa fiche le dit (ce qu'elle prouve tient à son heure, son lieu ou son sujet) ; deux photos de la même chose partagent "
+              "la même photographie (deux cadrages).",
+              "- **CUSTOM_REAL** — vraie photo à prendre nous-mêmes (aucune photo libre ne peut montrer ce que l'affaire décrit).",
+              "- **PROCEDURAL** — capture d'écran, document, ticket, photo ratée : un rendu du téléphone, pas une photographie.",
+              "- **REMOVE** — image à supprimer (IA, provisoire, inutilisée).",
               ""]
+    lines += compliance_lines(catalog, manifest)
     for (case, title), ps in sorted(by_case.items()):
-        lines += [f"## #{case} {title}", "", "| ID | Écran | Fonction | Preuve | Source actuelle | Décision | Raison | Remplacement |", "|---|---|---|---|---|---|---|---|"]
+        label = f"ALIBI #{int(case) - 100:03d}" if int(case) > 100 else f"#{case}"
+        lines += [f"## {label} {title}", "", "| ID | Écran | Fonction | Preuve | Décision | Raison | Remplacement |", "|---|---|---|---|---|---|---|"]
         for p in ps:
             fonction = f"{p['scene']}{' · nuit' if p['night'] else ''} — {p['caption']}".replace("|", "/")
-            lines.append(f"| `{p['photoId']}` | {', '.join(p['screens'])} | {fonction} | {'oui' if p['isEvidence'] else 'non'} | {p['currentSource']} | **{p['decision']}** | {p['reason']} | {p.get('replacement', '')} |")
+            lines.append(f"| `{p['photoId']}` | {', '.join(p['screens'])} | {fonction} | {'oui' if p['isEvidence'] else 'non'} | **{p['decision']}** | {p['reason'].replace('|', '/')} | {p.get('replacement', '')} |")
         lines.append("")
     DOCS.mkdir(parents=True, exist_ok=True)
     (DOCS / "PHOTO_AUDIT.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -863,7 +1044,7 @@ def cmd_report(args, cfg, catalog, manifest, stats) -> None:
     lines = ["# Provenance des photos externes", "",
              "Généré par `./scripts/photos.sh report` à partir de `config/photo_sources.json` (manifeste complet, machine-lisible).",
              "Crédits visibles dans le jeu : Paramètres › À propos › Crédits photos (`ScreenshotUI/Resources/PhotoCredits.json`).", "",
-             f"- Sources récupérées : **{len(fetched)}** (Pexels : {sum(1 for e in fetched if e['provider'] == 'pexels')}, Openverse : {sum(1 for e in fetched if e['provider'] == 'openverse')})",
+             f"- Sources récupérées : **{len(fetched)}** (Wikimedia Commons : {sum(1 for e in fetched if e['provider'] == 'wikimedia')}, Pexels : {sum(1 for e in fetched if e['provider'] == 'pexels')}, Openverse : {sum(1 for e in fetched if e['provider'] == 'openverse')})",
              f"- Images du jeu produites : **{len(manifest.get('assets', []))}**",
              f"- Sources sans image acceptable (MISSING → rendu procédural conservé) : **{len(missing)}**",
              f"- Sources pas encore recherchées : **{len(pending)}**", ""]
@@ -874,6 +1055,7 @@ def cmd_report(args, cfg, catalog, manifest, stats) -> None:
             author = f"[{e.get('photographer') or '?'}]({e.get('photographerUrl')})" if e.get("photographerUrl") else (e.get("photographer") or "?")
             lines.append(f"| `{e['sourceId']}` | {e['provider']}{' · ' + e['origin'] if e.get('origin') and e['provider'] == 'openverse' else ''} | {e['providerPhotoId']} | {author} | {lic} | [lien]({e.get('sourceUrl')}) | « {e.get('queryUsed')} » | {e.get('dateFetched', '')[:10]} | {', '.join(f'`{x}`' for x in used.get(e['sourceId'], []))} |")
         lines.append("")
+    lines += compliance_lines(catalog, manifest)
     if missing:
         lines += ["## Sans image acceptable", ""] + [f"- `{e['sourceId']}` : {e.get('reason', '')}" for e in missing] + [""]
     if pending:
@@ -900,10 +1082,10 @@ def status_counts(catalog: dict, manifest: dict, stats: dict) -> dict:
         "sourcesMissing": sum(1 for e in manifest.get("sources", []) if e.get("status") == "missing"),
         "assetsReady": len(manifest.get("assets", [])),
         "assetsExpected": sum(1 for p in catalog["photos"] if p.get("source")),
-        "customRequired": sum(1 for p in catalog["photos"] if p["decision"] == "CUSTOM_REQUIRED"),
+        "customRequired": sum(1 for p in catalog["photos"] if p["decision"] == "CUSTOM_REAL"),
         "procedural": sum(1 for p in catalog["photos"] if p["decision"] == "PROCEDURAL"),
         "rejectedCandidates": stats.get("rejected", 0) + manifest.get("stats", {}).get("rejected", 0),
-        "apiRequests": {k: v + manifest.get("stats", {}).get("requests", {}).get(k, 0) for k, v in {**{"pexels": 0, "openverse": 0}, **stats.get("requests", {})}.items()},
+        "apiRequests": {k: v + manifest.get("stats", {}).get("requests", {}).get(k, 0) for k, v in {**{"wikimedia": 0, "pexels": 0, "openverse": 0}, **stats.get("requests", {})}.items()},
         "bytes": sum(a.get("bytes", 0) for a in manifest.get("assets", [])),
     }
 
@@ -917,8 +1099,8 @@ def cmd_status(args, cfg, catalog, manifest, stats) -> None:
     log(f"  images prêtes / attendues  {c['assetsReady']} / {c['assetsExpected']}   ({c['bytes'] / 1e6:.1f} Mo)")
     log(f"  validées ................. {c['assetsReady'] if not cmd_validate_quiet(cfg, catalog, manifest) else 0}")
     log(f"  candidats rejetés ........ {c['rejectedCandidates']}")
-    log(f"  image sur mesure requise . {c['customRequired']}   (procédural conservé : {c['procedural']})")
-    log(f"  requêtes API ............. pexels {c['apiRequests'].get('pexels', 0)} · openverse {c['apiRequests'].get('openverse', 0)}")
+    log(f"  vraie photo à prendre .... {c['customRequired']}   (procédural voulu : {c['procedural']})")
+    log(f"  requêtes API ............. wikimedia {c['apiRequests'].get('wikimedia', 0)} · pexels {c['apiRequests'].get('pexels', 0)} · openverse {c['apiRequests'].get('openverse', 0)}")
     key = "présente" if os.environ.get(cfg["providers"]["pexels"]["apiKeyEnv"]) else "absente (Pexels ignoré)"
     log(f"  clé Pexels ............... {key}")
 

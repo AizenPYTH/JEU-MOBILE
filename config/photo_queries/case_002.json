@@ -1,0 +1,633 @@
+{
+  "case": "002",
+  "about": "PREMIER MÉTRO — Lyon (Croix-Rousse, Confluence, berges du Rhône et de la Saône), septembre–octobre 2026 ; aucun personnage de l'affaire à l'image.",
+  "photos": {
+    "p_old01": {
+      "decision": "REAL",
+      "query": "festival lasers foule nuit",
+      "fallbacks": [
+        "music festival lasers crowd",
+        "open air concert night stage"
+      ],
+      "subject": [
+        "festival",
+        "concert",
+        "laser",
+        "foule",
+        "crowd",
+        "stage",
+        "scène"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old02": {
+      "decision": "REAL",
+      "query": "Fête de la musique Lyon",
+      "fallbacks": [
+        "rue de la République Lyon nuit",
+        "street party sound system night"
+      ],
+      "subject": [
+        "fête de la musique",
+        "musique",
+        "music",
+        "street",
+        "rue",
+        "party"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old03": {
+      "decision": "REAL",
+      "query": "gâteau d'anniversaire bougies",
+      "fallbacks": [
+        "birthday cake candles",
+        "birthday cake number candles"
+      ],
+      "subject": [
+        "gâteau",
+        "cake",
+        "anniversaire",
+        "birthday",
+        "bougie",
+        "candle"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old04": {
+      "decision": "REAL",
+      "query": "Passerelle Saint-Vincent Lyon coucher de soleil",
+      "fallbacks": [
+        "Saône Lyon coucher de soleil",
+        "Quai Saint-Vincent Lyon"
+      ],
+      "subject": [
+        "saône",
+        "saone",
+        "passerelle",
+        "sunset",
+        "coucher",
+        "lyon",
+        "quai"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old05": {
+      "decision": "REAL",
+      "query": "table de réveillon bougies",
+      "fallbacks": [
+        "christmas dinner table candles",
+        "festive table candlelight"
+      ],
+      "subject": [
+        "table",
+        "réveillon",
+        "christmas",
+        "noël",
+        "candle",
+        "bougie",
+        "dinner"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old06": {
+      "decision": "REAL",
+      "query": "DJ booth turntables red light",
+      "fallbacks": [
+        "platines vinyle cabine DJ",
+        "DJ mixer turntables club"
+      ],
+      "subject": [
+        "dj",
+        "turntable",
+        "platine",
+        "booth",
+        "cabine",
+        "mixer"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_synth01": {
+      "decision": "REAL",
+      "query": "eurorack modular synthesizer",
+      "fallbacks": [
+        "modular synthesizer patch cables",
+        "synthétiseur modulaire"
+      ],
+      "subject": [
+        "synthesizer",
+        "synthétiseur",
+        "modular",
+        "modulaire",
+        "eurorack",
+        "patch"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_club01": {
+      "decision": "REAL",
+      "query": "empty nightclub disco ball",
+      "fallbacks": [
+        "boule à facettes",
+        "empty dance floor club"
+      ],
+      "subject": [
+        "club",
+        "disco",
+        "dance floor",
+        "boule",
+        "nightclub",
+        "piste"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_berges01": {
+      "decision": "REAL",
+      "query": "Berges du Rhône Lyon",
+      "fallbacks": [
+        "Rhône Lyon quai platanes",
+        "Lyon riverbank cycling path"
+      ],
+      "subject": [
+        "rhône",
+        "rhone",
+        "berges",
+        "quai",
+        "lyon",
+        "river",
+        "fleuve"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_vinyl01": {
+      "decision": "REAL",
+      "query": "vinyl records sleeves",
+      "fallbacks": [
+        "disques vinyle pochettes",
+        "vinyl records on floor"
+      ],
+      "subject": [
+        "vinyl",
+        "vinyle",
+        "record",
+        "disque",
+        "lp"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_loge01": {
+      "decision": "REAL",
+      "query": "backstage mirror lights",
+      "fallbacks": [
+        "dressing room mirror bulbs",
+        "loge miroir ampoules"
+      ],
+      "subject": [
+        "mirror",
+        "miroir",
+        "dressing",
+        "loge",
+        "backstage"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_view01": {
+      "decision": "REAL",
+      "query": "Montée de la Grande-Côte Lyon vue",
+      "fallbacks": [
+        "Croix-Rousse vue Fourvière",
+        "Lyon toits Fourvière"
+      ],
+      "subject": [
+        "lyon",
+        "croix-rousse",
+        "fourvière",
+        "fourviere",
+        "grande-côte",
+        "vue",
+        "view",
+        "toits"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_sunset01": {
+      "decision": "REAL",
+      "query": "Passerelle Saint-Vincent Lyon",
+      "fallbacks": [
+        "Saône Lyon sunset footbridge",
+        "quais de Saône coucher de soleil"
+      ],
+      "subject": [
+        "passerelle",
+        "saône",
+        "saone",
+        "lyon",
+        "sunset",
+        "coucher",
+        "footbridge"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_plant01": {
+      "decision": "REAL",
+      "query": "monstera plant window",
+      "fallbacks": [
+        "monstera deliciosa leaf",
+        "plante monstera fenêtre"
+      ],
+      "subject": [
+        "monstera",
+        "plant",
+        "plante",
+        "leaf",
+        "feuille"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_ceiling01": {
+      "decision": "PROCEDURAL",
+      "reason": "photo prise par erreur (plafond flou) rendue par le téléphone"
+    },
+    "p_quick01": {
+      "decision": "REAL",
+      "query": "affiches collées poteau Lyon",
+      "fallbacks": [
+        "torn posters pole",
+        "wild posting street poles"
+      ],
+      "subject": [
+        "affiche",
+        "poster",
+        "poteau",
+        "pole",
+        "street"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_rain01": {
+      "decision": "REAL",
+      "query": "raindrops on window street",
+      "fallbacks": [
+        "pluie fenêtre gouttes",
+        "rain window blurred street"
+      ],
+      "subject": [
+        "rain",
+        "pluie",
+        "window",
+        "fenêtre",
+        "drops",
+        "gouttes"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_friche01": {
+      "decision": "REAL",
+      "query": "Usines Fagor Lyon halle",
+      "fallbacks": [
+        "empty industrial hall catwalks",
+        "ancienne usine hall intérieur"
+      ],
+      "subject": [
+        "hall",
+        "halle",
+        "usine",
+        "factory",
+        "industrial",
+        "industriel",
+        "fagor"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_night01": {
+      "decision": "REAL",
+      "query": "Montée de la Grande-Côte nuit",
+      "fallbacks": [
+        "Croix-Rousse escaliers nuit",
+        "Lyon stairs street lamps night"
+      ],
+      "subject": [
+        "grande-côte",
+        "croix-rousse",
+        "stairs",
+        "escalier",
+        "montée",
+        "night",
+        "nuit"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_berges02": {
+      "decision": "REAL",
+      "query": "Pont de la Guillotière Rhône",
+      "fallbacks": [
+        "Berges du Rhône Lyon matin",
+        "Rhône Lyon quai platanes"
+      ],
+      "subject": [
+        "guillotière",
+        "guillotiere",
+        "rhône",
+        "rhone",
+        "berges",
+        "pont",
+        "bridge"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_market01": {
+      "decision": "REAL",
+      "query": "Marché de la Croix-Rousse",
+      "fallbacks": [
+        "marché boulevard de la Croix-Rousse",
+        "French street market vegetables"
+      ],
+      "subject": [
+        "marché",
+        "market",
+        "croix-rousse",
+        "étal",
+        "stall",
+        "légumes",
+        "vegetables"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_metro01": {
+      "decision": "REAL",
+      "query": "Métro de Lyon rame intérieur",
+      "fallbacks": [
+        "Lyon metro car interior",
+        "empty metro car"
+      ],
+      "subject": [
+        "métro",
+        "metro",
+        "subway",
+        "rame",
+        "wagon",
+        "train"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_club02": {
+      "decision": "REAL",
+      "query": "sound system speakers stage empty",
+      "fallbacks": [
+        "empty club stage speakers",
+        "enceintes scène concert"
+      ],
+      "subject": [
+        "speaker",
+        "enceinte",
+        "sound system",
+        "stage",
+        "scène",
+        "club"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_console01": {
+      "decision": "REAL",
+      "query": "mixing console faders",
+      "fallbacks": [
+        "table de mixage",
+        "audio mixing desk"
+      ],
+      "subject": [
+        "mixing",
+        "console",
+        "mixage",
+        "fader",
+        "audio",
+        "desk"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_selfie01": {
+      "decision": "REAL",
+      "query": "nightclub crowd blue light",
+      "fallbacks": [
+        "club dance floor crowd from behind",
+        "foule concert lumière bleue"
+      ],
+      "subject": [
+        "crowd",
+        "foule",
+        "club",
+        "dance",
+        "concert",
+        "night"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_receipt01": {
+      "decision": "PROCEDURAL",
+      "reason": "ticket de caisse rendu par le téléphone"
+    },
+    "p_invoice01": {
+      "decision": "PROCEDURAL",
+      "reason": "document (facture) rendu par le téléphone"
+    },
+    "p_run_screen": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    },
+    "p_contract": {
+      "decision": "PROCEDURAL",
+      "reason": "document (contrat) rendu par le téléphone"
+    },
+    "p_meteo": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    },
+    "p_issue_1": {
+      "decision": "REAL",
+      "query": "beer kegs stacked courtyard night",
+      "fallbacks": [
+        "fûts de bière empilés",
+        "beer kegs door"
+      ],
+      "subject": [
+        "keg",
+        "kegs",
+        "fût",
+        "fûts",
+        "barrel",
+        "tonneau",
+        "beer"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_issue_2": {
+      "decision": "REAL",
+      "query": "beer kegs stacked courtyard night",
+      "fallbacks": [
+        "fûts de bière empilés",
+        "beer kegs door"
+      ],
+      "subject": [
+        "keg",
+        "kegs",
+        "fût",
+        "fûts",
+        "barrel",
+        "tonneau",
+        "beer"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": "p_issue_1"
+    },
+    "p_pistache": {
+      "decision": "REAL",
+      "query": "tabby cat sleeping blue fabric",
+      "fallbacks": [
+        "chat tigré endormi",
+        "tabby cat curled up"
+      ],
+      "subject": [
+        "cat",
+        "chat",
+        "tabby",
+        "tigré",
+        "kitten"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_pistache_synth": {
+      "decision": "REAL",
+      "query": "cat synthesizer",
+      "fallbacks": [
+        "cat on desk cables",
+        "cat music keyboard"
+      ],
+      "subject": [
+        "cat",
+        "chat",
+        "kitten"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_apero_keys": {
+      "decision": "REAL",
+      "query": "apéritif table basse verres de vin",
+      "fallbacks": [
+        "wine glasses coffee table candles",
+        "aperitif living room"
+      ],
+      "subject": [
+        "verre",
+        "glass",
+        "wine",
+        "vin",
+        "table",
+        "apéritif",
+        "aperitif"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_booth_0248": {
+      "decision": "REAL",
+      "query": "DJ booth red lasers crowd",
+      "fallbacks": [
+        "DJ silhouette red light club",
+        "club dance floor red lasers"
+      ],
+      "subject": [
+        "dj",
+        "booth",
+        "cabine",
+        "laser",
+        "club",
+        "platine",
+        "turntable"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_door_0304": {
+      "decision": "REAL",
+      "query": "file d'attente boîte de nuit",
+      "fallbacks": [
+        "nightclub queue night",
+        "Quai Rambaud Lyon nuit"
+      ],
+      "subject": [
+        "queue",
+        "file",
+        "attente",
+        "crowd",
+        "foule",
+        "nightclub",
+        "night",
+        "nuit"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_pocket_0309": {
+      "decision": "PROCEDURAL",
+      "reason": "photo prise par erreur dans le noir (flou de poche) rendue par le téléphone ; l'indice est dans les métadonnées (03:09, quai Arloing) et les détails",
+      "evidence": true
+    }
+  }
+}

@@ -416,6 +416,7 @@ struct ContactsListView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("contact.\(contact.id)")
     }
 }
 

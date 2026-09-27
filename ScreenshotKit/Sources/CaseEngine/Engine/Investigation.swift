@@ -575,9 +575,21 @@ public final class Investigation {
     /// Final answer. Possible while investigating or once the time is up.
     @discardableResult
     public func accuse(_ suspect: SuspectID) -> Verdict? {
-        guard phase == .investigating || phase == .accusing, index.suspect(suspect) != nil else { return nil }
+        guard !caseFile.isAlibi, phase == .investigating || phase == .accusing, index.suspect(suspect) != nil else { return nil }
         tick()
         let verdict = Verdict.make(for: self, accused: suspect)
+        self.verdict = verdict
+        phase = .finished
+        return verdict
+    }
+
+    /// ALIBI mode: the final answer — `holds` true for « alibi confirmé », false for « contredit ».
+    @discardableResult
+    public func concludeAlibi(holds: Bool) -> Verdict? {
+        guard caseFile.isAlibi, phase == .investigating || phase == .accusing,
+              let person = caseFile.suspects.first?.id else { return nil }
+        tick()
+        let verdict = Verdict.make(for: self, accused: person, alibiAnswer: holds)
         self.verdict = verdict
         phase = .finished
         return verdict

@@ -104,7 +104,7 @@ struct AccusationView: View {
     }
 
     private var kicker: some View {
-        Text(L10n.f("accuse.kicker", dossierNumber(session.caseFile.number)))
+        Text(L10n.f("accuse.kicker", shownNumber(session.caseFile.number)))
             .font(Trace.Fonts.kicker)
             .tracking(1.6)
             .foregroundStyle(Trace.Colors.bone2)
@@ -249,7 +249,7 @@ struct SuspectSheetID: Identifiable {
 /// « MAINTENIR : … »: a dark track that fills linearly with the stamp's red while held (1.2 s);
 /// released early, it drains in 250 ms and nothing is sent. Light haptic at the start, rigid at
 /// the end. Assistive technologies get a custom action « Conclure ».
-private struct ConclusionHoldButton: View {
+struct ConclusionHoldButton: View {
     let title: String
     let enabled: Bool
     let actionName: String
@@ -338,7 +338,8 @@ private struct ConclusionPrint: View {
 struct VerificationView: View {
     let caseNumber: Int
     let caseTitle: String
-    let accusedName: String
+    /// « RESPONSABLE DÉSIGNÉ : … » / « VOTRE VERDICT : … », under the stamp.
+    let designation: String
     let solved: Bool
     let onRead: () -> Void
 
@@ -364,7 +365,7 @@ struct VerificationView: View {
         VStack(spacing: 28) {
             Spacer(minLength: 12)
             folder
-            Text(L10n.f("verify.designated", accusedName.uppercased()))
+            Text(designation)
                 .font(Trace.Fonts.monoStrong)
                 .tracking(1.4)
                 .foregroundStyle(Trace.Colors.bone)
@@ -420,7 +421,7 @@ struct VerificationView: View {
     private var openSheet: some View {
         let cursor = typed < line.count ? "▌" : ""
         return VStack(alignment: .leading, spacing: 12) {
-            Text(L10n.f("dossier.number", dossierNumber(caseNumber)))
+            Text(fileLabel(caseNumber))
                 .font(Trace.Fonts.kicker)
                 .tracking(1.6)
                 .foregroundStyle(Trace.Colors.stamp)
@@ -447,7 +448,7 @@ struct VerificationView: View {
 
     private var cover: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(L10n.f("dossier.number", dossierNumber(caseNumber)))
+            Text(fileLabel(caseNumber))
                 .font(Trace.Fonts.kicker)
                 .tracking(2)
                 .foregroundStyle(Trace.Colors.kraftInk)
@@ -562,7 +563,7 @@ struct ResultView: View {
                     .transition(reportTransition)
             } else {
                 VerificationView(caseNumber: caseFile.number, caseTitle: caseFile.title,
-                                 accusedName: accusedName, solved: solved) {
+                                 designation: L10n.f("verify.designated", accusedName.uppercased()), solved: solved) {
                     AudioDirector.shared.play(.paper, volume: 0.4)
                     withAnimation(reduced ? .easeInOut(duration: 0.2) : Trace.Motion.paper) { reading = true }
                 }
@@ -627,7 +628,7 @@ struct ResultView: View {
     private var reportHeader: some View {
         HStack(alignment: .top, spacing: 12) {
             VStack(alignment: .leading, spacing: 6) {
-                Text(L10n.f("result.header", dossierNumber(caseFile.number)))
+                Text(L10n.f("result.header", shownNumber(caseFile.number)))
                     .font(Trace.Fonts.kicker)
                     .tracking(1.6)
                     .foregroundStyle(Trace.Colors.inkSoft)

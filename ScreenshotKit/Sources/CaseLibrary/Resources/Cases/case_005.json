@@ -18,10 +18,10 @@
  "synopsis": [
   "Vendredi 27 novembre, 23h48. Sur la route du col de la Croix-Perrin, dans le Vercors, un agent de déneigement trouve une voiture arrêtée sur le bas-côté : feux de détresse, moteur allumé, portière ouverte.",
   "La conductrice, Solène Marchetti, 34 ans, journaliste à L'Écho des Alpes, a disparu. Son téléphone était sur le siège passager. Elle enquêtait depuis des mois sur l'extension d'une carrière.",
-  "Cinq personnes avaient une raison de la croiser cette nuit. Il pleut. Le temps presse."
+  "Cinq personnes avaient une raison de la croiser cette nuit. Le brouillard est tombé sur le plateau. Le temps presse."
  ],
  "objective": "Identifier la personne qui a donné rendez-vous à Solène au col.",
- "difficulty": 1,
+ "difficulty": 3,
  "durationSeconds": 480,
  "phoneStartTime": "2026-11-28 00:50",
  "challengeDurations": {
@@ -193,7 +193,7 @@
      "id": "julien",
      "name": "Julien Faure",
      "phone": "+33 6 71 30 45 18",
-     "relation": "Carrière",
+     "relation": "Carrière Brassac — conducteur d'engins",
      "avatarHue": 0.16
     },
     {
@@ -406,7 +406,7 @@
        "id": "m_julien_platre",
        "from": "julien",
        "at": "2026-11-27 18:40",
-       "text": "le bijou 😩",
+       "text": "vue de mon brancard. platre jusqu au genou 😩",
        "photo": "p_platre"
       },
       {
@@ -1482,9 +1482,9 @@
     {
      "id": "k_new_2252",
      "contact": "jnew",
-     "direction": "incoming",
+     "direction": "missed",
      "at": "2026-11-27 22:52",
-     "durationSeconds": 70
+     "durationSeconds": 0
     },
     {
      "id": "k_new_2346",
@@ -1780,8 +1780,8 @@
      "takenAt": "2020-07-12 16:45",
      "source": "camera",
      "scene": "garden_stairs",
-     "caption": "Léo, deux ans, dans l'escalier du jardin.",
-     "details": "Une petite silhouette floue qui monte les marches. Été 2020.",
+     "caption": "L'escalier du jardin, le jour où Léo l'a monté tout seul.",
+     "details": "Des marches en pierre au soleil, un petit seau oublié en haut. Été 2020.",
      "style": "old",
      "place": "Villard-de-Lans",
      "device": "iPhone 8"
@@ -1791,8 +1791,8 @@
      "takenAt": "2022-03-14 20:30",
      "source": "camera",
      "scene": "party",
-     "caption": "Mes 30 ans — 14 mars 2022.",
-     "details": "Des bougies en forme de 3 et de 0, des silhouettes autour d'une table.",
+     "caption": "Le gâteau de mes 30 ans — 14 mars 2022.",
+     "details": "Des bougies en forme de 3 et de 0 plantées dans un gâteau au chocolat.",
      "style": "old",
      "place": "Villard-de-Lans",
      "device": "iPhone 12"
@@ -1802,8 +1802,8 @@
      "takenAt": "2023-06-03 10:15",
      "source": "camera",
      "scene": "park",
-     "caption": "Nina fait ses premiers pas au parc.",
-     "details": "Un parc au printemps, une poussette vide au premier plan.",
+     "caption": "Le parc Paul-Mistral, le jour des premiers pas de Nina.",
+     "details": "Une allée au printemps, une poussette vide au premier plan.",
      "style": "old",
      "place": "Grenoble",
      "device": "iPhone 12"
@@ -1816,7 +1816,8 @@
      "caption": "Réveillon chez Maman.",
      "details": "Une table dressée, un sapin clignotant dans le coin.",
      "style": "old",
-     "device": "iPhone 12"
+     "device": "iPhone 12",
+     "place": "Voiron"
     },
     {
      "id": "p_old06",
@@ -1824,7 +1825,7 @@
      "source": "camera",
      "scene": "office",
      "caption": "Pot de départ de l'ancien secrétaire de rédaction.",
-     "details": "Des gobelets, une banderole « Bonne retraite Jacques ».",
+     "details": "Des gobelets, des chips et une bouteille de crémant sur la table de réunion.",
      "style": "old",
      "place": "L'Écho des Alpes",
      "device": "iPhone 12"
@@ -1845,7 +1846,7 @@
      "source": "camera",
      "scene": "forest",
      "caption": "Balade en forêt avec les enfants.",
-     "details": "Deux petites silhouettes en bottes, des feuilles rousses.",
+     "details": "Un sentier couvert de feuilles rousses, les troncs dans la lumière d'octobre.",
      "place": "Bois Barbu",
      "device": "iPhone 12"
     },
@@ -1874,10 +1875,11 @@
      "takenAt": "2026-10-31 18:20",
      "source": "camera",
      "scene": "party",
-     "caption": "Halloween : un squelette et une citrouille.",
-     "details": "Léo et Nina de dos, déguisés, devant la porte des voisins.",
+     "caption": "Halloween : la citrouille devant la porte des voisins.",
+     "details": "Une citrouille sculptée, une bougie allumée à l'intérieur, sur le pas de la porte.",
      "place": "Villard-de-Lans",
-     "device": "iPhone 12"
+     "device": "iPhone 12",
+     "style": "night"
     },
     {
      "id": "p_n06",
@@ -1913,7 +1915,7 @@
      "source": "camera",
      "scene": "interior_warm",
      "caption": "Les dessins de Nina sur le frigo.",
-     "details": "Un soleil violet, une maison, quatre bonshommes dont un « papa » barré puis réécrit.",
+     "details": "Des dessins d'enfant aux feutres, tenus par des aimants sur la porte du frigo.",
      "place": "Villard-de-Lans",
      "device": "iPhone 12"
     },
@@ -1948,12 +1950,11 @@
     },
     {
      "id": "p_n11",
-     "takenAt": "2026-11-13 18:40",
+     "takenAt": "2026-10-30 18:40",
      "source": "camera",
-     "scene": "group",
-     "caption": "Pot d'anniversaire de Lina.",
-     "details": "Cinq silhouettes autour d'un gâteau, Béatrice fait des cornes à Olivier.",
-     "style": "selfie",
+     "scene": "party",
+     "caption": "Le gâteau d'anniversaire de Lina, en salle de conf.",
+     "details": "Un gâteau entamé, des gobelets et des serviettes en papier sur la table.",
      "place": "L'Écho des Alpes",
      "device": "iPhone 12"
     },
@@ -2029,7 +2030,7 @@
      "source": "camera",
      "scene": "mountain",
      "caption": "La carrière depuis le chemin forestier.",
-     "details": "Un front de taille, une pelleteuse jaune, une barrière « Accès interdit ».",
+     "details": "Un front de taille gris, une pelleteuse jaune, une barrière fermée en travers du chemin.",
      "place": "Carrière Brassac Granulats",
      "device": "iPhone 12"
     },
@@ -2089,15 +2090,16 @@
      "caption": "La cour sous la pluie.",
      "details": "Une pluie froide, la lampe du voisin allumée.",
      "place": "Villard-de-Lans",
-     "device": "iPhone 12"
+     "device": "iPhone 12",
+     "style": "night"
     },
     {
      "id": "p_n23",
      "takenAt": "2026-11-27 22:36",
      "source": "camera",
      "scene": "car",
-     "caption": "Le tableau de bord avant de partir.",
-     "details": "Le thermomètre affiche 3 °C. Réservoir au quart. Une pochette cartonnée sur le siège passager.",
+     "caption": "Le siège passager avant de partir.",
+     "details": "Le tableau de bord allumé dans la nuit. Une pochette cartonnée posée sur le siège passager.",
      "style": "quick",
      "place": "Villard-de-Lans",
      "device": "iPhone 12"
@@ -2108,8 +2110,8 @@
      "source": "camera",
      "scene": "road_night",
      "caption": "Le parking du col : rien que du brouillard.",
-     "details": "Aucune autre voiture. Un panneau « Col de la Croix-Perrin — 1220 m ».",
-     "style": "blurry",
+     "details": "Aucune autre voiture. Le brouillard avale la lumière des phares à dix mètres.",
+     "style": "night",
      "place": "Col de la Croix-Perrin",
      "device": "iPhone 12"
     },
@@ -2119,7 +2121,7 @@
      "source": "camera",
      "scene": "parking_night",
      "caption": "La cour de la mairie de Vallières, avant le conseil.",
-     "details": "Dans la cour, un 4×4 gris foncé garé sur la place « Adjoint à l'urbanisme », un macaron « ÉLU » derrière le pare-brise et un autocollant du club de ski de Vallières sur la vitre arrière.",
+     "details": "Un seul véhicule dans la cour : un 4×4 gris foncé, garé sur la place réservée à l'adjoint à l'urbanisme, sous le lampadaire.",
      "style": "night",
      "place": "Mairie de Vallières-en-Vercors",
      "device": "iPhone 12"
@@ -2150,8 +2152,8 @@
      "takenAt": "2026-11-27 18:38",
      "source": "received",
      "scene": "bed",
-     "caption": "Une jambe plâtrée sur un brancard, sous un néon.",
-     "details": "Au poignet, un bracelet d'identification du CHU : « FAURE Julien — 27/11/2026 18:31 ». Au fond, un couloir d'urgences.",
+     "caption": "Le couloir des urgences, vu depuis un brancard.",
+     "details": "Des néons, des brancards alignés le long du mur. Métadonnées : 18:38, CHU de Grenoble — urgences.",
      "place": "CHU de Grenoble",
      "from": "julien",
      "receivedAt": "2026-11-27 18:40",
@@ -2162,8 +2164,8 @@
      "takenAt": "2026-11-27 23:04",
      "source": "received",
      "scene": "bed",
-     "caption": "Deux enfants endormis dans des lits superposés.",
-     "details": "Une veilleuse en forme de lune. Métadonnées : 23:04, Grenoble — Île Verte.",
+     "caption": "La chambre des enfants, veilleuse allumée.",
+     "details": "Des lits superposés dans la pénombre, une veilleuse en forme de lune. Métadonnées : 23:04, Grenoble — Île Verte.",
      "style": "night",
      "place": "Grenoble — Île Verte",
      "from": "romain",
@@ -2195,8 +2197,8 @@
      "takenAt": "2026-11-27 23:14",
      "source": "camera",
      "scene": "road_night",
-     "caption": "Des phares dans le brouillard, sur le parking du col.",
-     "details": "Des phares dans le brouillard. Un 4×4 gris foncé ; derrière le pare-brise, un macaron « ÉLU ». Un autocollant de club de ski sur la vitre arrière. La plaque est illisible.",
+     "caption": "Un 4×4 se gare sur le parking du col.",
+     "details": "Photo prise à la volée à 23:14. Un 4×4 gris foncé, feux allumés, garé à quelques mètres. La plaque est illisible dans le brouillard.",
      "style": "night",
      "place": "Col de la Croix-Perrin",
      "device": "iPhone 12"
@@ -2218,8 +2220,8 @@
      "takenAt": "2026-11-21 19:38",
      "source": "received",
      "scene": "interior_warm",
-     "caption": "Léo montre le trou de sa dent.",
-     "details": "Une silhouette d'enfant sourit, une dent posée dans une boîte d'allumettes.",
+     "caption": "La dent de Léo dans une boîte d'allumettes.",
+     "details": "Une petite dent de lait posée dans une boîte d'allumettes ouverte.",
      "place": "Grenoble — Île Verte",
      "from": "romain",
      "receivedAt": "2026-11-21 19:40",
@@ -2364,7 +2366,7 @@
      "to": "solene.marchetti@echodesalpes.fr",
      "at": "2024-03-08 10:14",
      "subject": "Invitation presse — inauguration du parking relais du Pré-Long",
-     "body": "Madame,\n\nLa commune de Vallières-en-Vercors a le plaisir de vous convier à l'inauguration du parking relais du Pré-Long, samedi 16 mars 2024 à 11h, en présence du conseil municipal.\n\nUn verre de l'amitié suivra.\n\nBien cordialement,\n\nGilles Arnaud\nAdjoint à l'urbanisme, Vallières-en-Vercors\nTél. direct : 07 58 11 20 94"
+     "body": "Madame,\n\nLa commune de Vallières-en-Vercors a le plaisir de vous convier à l'inauguration du parking relais du Pré-Long, samedi 16 mars 2024 à 11h, en présence du conseil municipal.\n\nUn verre de l'amitié suivra.\n\nBien cordialement,\n\nGilles Arnaud\nAdjoint à l'urbanisme, Vallières-en-Vercors\nPortable (ligne directe) : +33 7 58 11 20 94"
     },
     {
      "id": "mail_demande_arnaud",
@@ -2719,7 +2721,7 @@
    "age": 54,
    "address": "Vallières-en-Vercors",
    "statement": "« J'ai présidé le conseil municipal jusqu'à 23h, puis je suis rentré chez moi. Je ne connais cette journaliste que de loin. »",
-   "verdict": "Gilles Arnaud a signé l'extension de la carrière huit jours après un virement de 25 000 € à « G.A. ». Avec une vieille ligne prépayée — son ancien numéro direct — il s'est fait passer pour Julien, a attiré Solène au col et a levé le conseil à 21h10 pour être au rendez-vous. Son 4×4 d'élu est sur la photo de 23:14."
+   "verdict": "Gilles Arnaud a signé l'extension de la carrière huit jours après un virement de 25 000 € à « G.A. ». Avec une vieille ligne prépayée — son ancien numéro direct — il s'est fait passer pour Julien, a attiré Solène au col et a levé le conseil à 21h10 pour être au rendez-vous. Son 4×4, déjà photographié dans la cour de la mairie, est sur la photo de 23:14."
   },
   {
    "id": "s_thierry",
@@ -2739,11 +2741,11 @@
    "role": "Ex-mari de Solène",
    "age": 37,
    "address": "Île Verte, Grenoble",
-   "alibi": "La position partagée de Romain le place à Grenoble toute la soirée, et il envoie à 23:05 une photo des enfants endormis, prise à 23:04 chez lui.",
+   "alibi": "La position partagée de Romain le place à Grenoble toute la soirée, et il envoie à 23:05 une photo de la chambre des enfants endormis, prise à 23:04 chez lui.",
    "alibiEvidence": "e_romain_alibi",
    "trap": "Des menaces sur la garde, la veille, et il savait que Solène sortait ce soir-là : un coupable tout trouvé.",
    "statement": "« J'étais chez moi à Grenoble avec les enfants toute la soirée. »",
-   "verdict": "Romain voulait faire pression sur Solène à travers la garde des enfants. Mais il n'a pas quitté Grenoble : à 23:04 il photographiait Léo et Nina endormis, à quarante minutes de route du col."
+   "verdict": "Romain voulait faire pression sur Solène à travers la garde des enfants. Mais il n'a pas quitté Grenoble : à 23:04 il photographiait la chambre où dormaient Léo et Nina, à quarante minutes de route du col."
   },
   {
    "id": "s_agathe",
@@ -2763,7 +2765,7 @@
    "role": "Conducteur d'engins à la carrière — la source de Solène",
    "age": 29,
    "address": "Lans-en-Vercors",
-   "alibi": "Julien s'est cassé la cheville à 17:20. Le bracelet du CHU (18:31), son appel de 19:12 et son message de 21:03 le placent aux urgences, gardé pour la nuit.",
+   "alibi": "Julien s'est cassé la cheville au travail en fin d'après-midi. Sa photo des urgences (18:38, CHU de Grenoble), son appel de 19:12 et son message de 21:03 le placent aux urgences, gardé pour la nuit.",
    "alibiEvidence": "e_julien_alibi",
    "trap": "C'est « Julien » qui a fixé le rendez-vous et « Julien » qui écrit à 23:47 qu'il attend au col. Mais ce n'est pas son numéro.",
    "statement": "« Je me suis cassé la cheville au travail vendredi, j'étais aux urgences à Grenoble jusqu'à 1h du matin. »",
@@ -2796,7 +2798,7 @@
     "contact:jnew",
     "mail:mail_arnaud_2024"
    ],
-   "meaning": "Le 07 58 11 20 94 du « nouveau » Julien est le « Tél. direct » de Gilles Arnaud dans son invitation presse de 2024."
+   "meaning": "Le +33 7 58 11 20 94 du « nouveau » Julien est la ligne directe de Gilles Arnaud dans son invitation presse de 2024."
   },
   {
    "id": "e_4x4",
@@ -2808,7 +2810,7 @@
    "refs": [
     "photoInfo:p_col_2314"
    ],
-   "meaning": "Le véhicule du rendez-vous, photographié à 23:14 : un 4×4 gris foncé, un macaron « ÉLU », un autocollant de club de ski."
+   "meaning": "Le véhicule du rendez-vous, photographié à 23:14 : un 4×4 gris foncé. Pas le Berlingo blanc de Julien."
   },
   {
    "id": "e_motive",
@@ -2835,7 +2837,7 @@
    "refs": [
     "photoInfo:p_mairie_4x4"
    ],
-   "meaning": "Le 23 octobre, le même 4×4 était garé sur la place « Adjoint à l'urbanisme » : macaron ÉLU, autocollant du club de ski de Vallières."
+   "meaning": "Le 23 octobre, le même 4×4 gris foncé était garé dans la cour de la mairie, sur la place réservée à l'adjoint à l'urbanisme."
   },
   {
    "id": "e_council_early",
@@ -2861,7 +2863,7 @@
     "photoInfo:p_platre",
     "call:k_julien_1912"
    ],
-   "meaning": "Bracelet du CHU daté de 18:31, appel de 19:12 depuis son numéro habituel : Julien est plâtré, aux urgences."
+   "meaning": "Photo prise aux urgences du CHU à 18:38, appel de 19:12 depuis son numéro habituel, message de 21:03 : Julien est plâtré, gardé pour la nuit."
   },
   {
    "id": "e_thierry_alibi",
@@ -2879,7 +2881,7 @@
   },
   {
    "id": "e_romain_alibi",
-   "title": "Les enfants endormis",
+   "title": "La chambre des enfants",
    "importance": "supporting",
    "suspects": [
     "s_romain"
@@ -2889,7 +2891,7 @@
     "track:t_romain",
     "photoInfo:p_kids_2305"
    ],
-   "meaning": "Romain était chez lui, à l'Île Verte, de 18:30 à minuit : position partagée et photo prise à 23:04."
+   "meaning": "Romain était chez lui, à l'Île Verte, de 18:30 à minuit : position partagée et photo de la chambre des enfants prise à 23:04."
   },
   {
    "id": "e_agathe_alibi",
@@ -2957,20 +2959,26 @@
  "hints": [
   {
    "id": "h1",
-   "text": "Deux « Julien » écrivent à Solène le même soir. Sont-ils vraiment la même personne ?",
+   "text": "Tout commence dans les Messages : relisez côte à côte les deux conversations « Julien », surtout ce qui s'écrit vendredi soir.",
    "scoreCost": 0
   },
   {
    "id": "h2",
-   "text": "Comparez le numéro du « nouveau » Julien avec ceux que vous trouvez ailleurs dans le téléphone : les vieux mails gardent des signatures.",
-   "scoreCost": 8
+   "text": "Comparez deux choses : les heures (où est Julien à 21:03, que dit l'autre numéro à 21:40 ?) et les numéros de téléphone. Un numéro peut réapparaître dans la signature d'un vieux mail.",
+   "scoreCost": 5
   },
   {
    "id": "h3",
-   "text": "Solène a photographié la voiture qui arrivait au col à 23:14. Où a-t-elle déjà vu ce 4×4 ?",
-   "scoreCost": 15,
-   "unlockAtRemainingSeconds": 120
+   "text": "La voiture photographiée au col à 23:14 n'est pas celle de Julien. Cherchez plus tôt dans la pellicule un soir où Solène a déjà photographié ce 4×4, et demandez-vous qui a quitté sa réunion en avance vendredi.",
+   "scoreCost": 10,
+   "unlockAtRemainingSeconds": 180
   }
+ ],
+ "minimalPath": [
+  "e_two_juliens",
+  "e_signature",
+  "e_4x4",
+  "e_same_car"
  ],
  "solution": {
   "culprit": "s_gilles",
@@ -2979,12 +2987,12 @@
   "reveal": [
    {
     "at": "2024-03-08 10:14",
-    "text": "Gilles Arnaud signe une invitation presse : « Tél. direct : 07 58 11 20 94 »",
+    "text": "Gilles Arnaud signe une invitation presse : « Portable (ligne directe) : +33 7 58 11 20 94 »",
     "evidence": "e_signature"
    },
    {
     "at": "2026-10-23 19:48",
-    "text": "Solène photographie le 4×4 de l'adjoint dans la cour de la mairie",
+    "text": "Solène photographie le 4×4 garé sur la place de l'adjoint, dans la cour de la mairie",
     "evidence": "e_same_car"
    },
    {
@@ -2994,7 +3002,7 @@
    },
    {
     "at": "2026-11-25 21:12",
-    "text": "« C'est Julien. Nouveau numéro » — depuis le 07 58 11 20 94",
+    "text": "« C'est Julien. Nouveau numéro » — depuis le +33 7 58 11 20 94",
     "evidence": "e_signature"
    },
    {
@@ -3014,7 +3022,7 @@
    },
    {
     "at": "2026-11-27 23:14",
-    "text": "Solène photographie le 4×4 qui arrive : macaron ÉLU, autocollant de club de ski",
+    "text": "Solène photographie le 4×4 qui se gare au col : le même que dans la cour de la mairie",
     "evidence": "e_4x4"
    },
    {

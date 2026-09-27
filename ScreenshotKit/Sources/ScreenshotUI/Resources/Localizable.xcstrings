@@ -566,6 +566,754 @@
         }
       }
     },
+    "alibi.choose": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a verdict"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisissez un verdict"
+          }
+        }
+      }
+    },
+    "alibi.claimLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "STATEMENT TO CHECK"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DÉCLARATION À VÉRIFIER"
+          }
+        }
+      }
+    },
+    "alibi.confirmed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ALIBI CONFIRMED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ALIBI CONFIRMÉ"
+          }
+        }
+      }
+    },
+    "alibi.confirmedHelp": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The phone's traces agree with the statement."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les traces du téléphone s'accordent avec ce qu'il affirme."
+          }
+        }
+      }
+    },
+    "alibi.contradicted": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ALIBI CONTRADICTED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ALIBI CONTREDIT"
+          }
+        }
+      }
+    },
+    "alibi.contradictedHelp": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something on the phone contradicts the statement."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un élément du téléphone contredit ce qu'il affirme."
+          }
+        }
+      }
+    },
+    "alibi.duration": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %ld min"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %ld min"
+          }
+        }
+      }
+    },
+    "alibi.hold": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenir : %@"
+          }
+        }
+      }
+    },
+    "alibi.how1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explore their phone: messages, calls, photos, map, calendar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Explorez son téléphone : messages, appels, photos, carte, agenda."
+          }
+        }
+      }
+    },
+    "alibi.how2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File what confirms or contradicts the statement (long press)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versez au dossier ce qui confirme ou contredit sa déclaration (appui long)."
+          }
+        }
+      }
+    },
+    "alibi.how3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Give your verdict: alibi confirmed, or contradicted."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rendez votre verdict : alibi confirmé, ou contredit."
+          }
+        }
+      }
+    },
+    "alibi.inProgress": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A check is in progress."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une vérification est en cours."
+          }
+        }
+      }
+    },
+    "alibi.linkConfirms": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirms the statement"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirme sa déclaration"
+          }
+        }
+      }
+    },
+    "alibi.linkContradicts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contradicts the statement"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contredit sa déclaration"
+          }
+        }
+      }
+    },
+    "alibi.list": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checks"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifications"
+          }
+        }
+      }
+    },
+    "alibi.mode": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ALIBI"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ALIBI"
+          }
+        }
+      }
+    },
+    "alibi.number": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ALIBI #%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ALIBI #%@"
+          }
+        }
+      }
+    },
+    "alibi.personLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Declarant"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déclarant"
+          }
+        }
+      }
+    },
+    "alibi.piecesFound": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key pieces found: %1$ld / %2$ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièces clés trouvées : %1$ld / %2$ld"
+          }
+        }
+      }
+    },
+    "alibi.pitch": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check a statement against the traces left on a phone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifiez une déclaration à partir des traces laissées sur un téléphone."
+          }
+        }
+      }
+    },
+    "alibi.placeLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stated place"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lieu déclaré"
+          }
+        }
+      }
+    },
+    "alibi.progress": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld of %2$ld checked"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld sur %2$ld vérifiées"
+          }
+        }
+      }
+    },
+    "alibi.question": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Does the alibi hold?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son alibi est-il fiable ?"
+          }
+        }
+      }
+    },
+    "alibi.report": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "REPORT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RAPPORT"
+          }
+        }
+      }
+    },
+    "alibi.retry": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check again"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprendre la vérification"
+          }
+        }
+      }
+    },
+    "alibi.rightAnswer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The answer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La réponse"
+          }
+        }
+      }
+    },
+    "alibi.showAnswer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show the answer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir la réponse"
+          }
+        }
+      }
+    },
+    "alibi.stanceConfirms": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirms"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirme"
+          }
+        }
+      }
+    },
+    "alibi.stanceContradicts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contradicts"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contredit"
+          }
+        }
+      }
+    },
+    "alibi.start": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer"
+          }
+        }
+      }
+    },
+    "alibi.status.done": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CHECKED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VÉRIFIÉ"
+          }
+        }
+      }
+    },
+    "alibi.status.inProgress": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IN PROGRESS"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EN COURS"
+          }
+        }
+      }
+    },
+    "alibi.status.new": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEW"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NOUVEAU"
+          }
+        }
+      }
+    },
+    "alibi.status.tried": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TO REDO"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À REPRENDRE"
+          }
+        }
+      }
+    },
+    "alibi.tab.claim": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Statement"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déclaration"
+          }
+        }
+      }
+    },
+    "alibi.tagline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CHECK. CROSS. CONCLUDE."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VÉRIFIER. CROISER. CONCLURE."
+          }
+        }
+      }
+    },
+    "alibi.tallyConfirms": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "confirm"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "confirment"
+          }
+        }
+      }
+    },
+    "alibi.tallyContradicts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "contradict"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "contredisent"
+          }
+        }
+      }
+    },
+    "alibi.time": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temps : %@"
+          }
+        }
+      }
+    },
+    "alibi.verdict": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VERDICT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VERDICT"
+          }
+        }
+      }
+    },
+    "alibi.windowLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time window"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créneau"
+          }
+        }
+      }
+    },
+    "alibi.wrong": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your verdict does not stand against the phone's traces. Check again: the timer is full again, your pieces stay in the file."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre verdict ne tient pas face aux traces du téléphone. Reprenez la vérification : le chrono repart plein, vos pièces restent au dossier."
+          }
+        }
+      }
+    },
+    "alibi.yourAnswer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your verdict"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre verdict"
+          }
+        }
+      }
+    },
+    "alibi.yourVerdict": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "YOUR VERDICT: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "VOTRE VERDICT : %@"
+          }
+        }
+      }
+    },
     "app.browser": {
       "extractionState": "manual",
       "localizations": {
@@ -2250,6 +2998,74 @@
         }
       }
     },
+    "carnet.next.conclude": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The file is solid: conclude when you are ready."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier est solide : concluez quand vous êtes prêt."
+          }
+        }
+      }
+    },
+    "carnet.next.link": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For each piece, say what it shows: AGAINST or IN FAVOUR, then pick the person."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour chaque pièce, dites ce qu'elle montre : L'ACCUSE ou LE DISCULPE, puis choisissez la personne."
+          }
+        }
+      }
+    },
+    "carnet.next.linkAlibi": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For each piece, say whether it CONTRADICTS or CONFIRMS the statement."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour chaque pièce, dites si elle CONTREDIT ou CONFIRME la déclaration."
+          }
+        }
+      }
+    },
+    "carnet.next.progress": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld piece(s) filed · %2$ld linked. Keep going, or conclude when ready."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$ld pièce(s) versée(s) · %2$ld reliée(s). Continuez, ou concluez quand vous êtes prêt."
+          }
+        }
+      }
+    },
     "carnet.objective": {
       "extractionState": "manual",
       "localizations": {
@@ -3199,6 +4015,23 @@
         }
       }
     },
+    "desk.otherMode": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other mode"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autre mode"
+          }
+        }
+      }
+    },
     "dossier.defaultCategory": {
       "extractionState": "manual",
       "localizations": {
@@ -3950,13 +4783,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A lead"
+            "value": "Where to look"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une piste"
+            "value": "Où regarder"
           }
         }
       }
@@ -3967,13 +4800,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Where to look"
+            "value": "What to compare"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Où chercher"
+            "value": "Quoi comparer"
           }
         }
       }
@@ -3984,13 +4817,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The evidence"
+            "value": "What does not fit"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La preuve"
+            "value": "Ce qui cloche"
           }
         }
       }
@@ -4001,13 +4834,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A direction to think in, with no name or place."
+            "value": "The part of the phone to explore."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une direction de réflexion, sans nom ni lieu."
+            "value": "La zone du téléphone à explorer."
           }
         }
       }
@@ -4018,13 +4851,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The app or part of the phone to search."
+            "value": "The kind of information to compare."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L'app ou l'endroit du téléphone à fouiller."
+            "value": "Le type d'information à comparer."
           }
         }
       }
@@ -4035,13 +4868,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The exact item that turns the case."
+            "value": "A strong pointer, without giving the name."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "L'élément précis qui fait basculer l'affaire."
+            "value": "Une orientation forte, sans donner le nom."
           }
         }
       }

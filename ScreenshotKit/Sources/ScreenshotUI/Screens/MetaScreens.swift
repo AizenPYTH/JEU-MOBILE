@@ -8,7 +8,7 @@ import CaseEngine
 // reconstruction, the settings and « À propos ».
 
 /// "001" style case number.
-func caseNumber(_ n: Int) -> String { dossierNumber(n) }
+func caseNumber(_ n: Int) -> String { shownNumber(n) }
 
 // MARK: - Level box (on the case form)
 
@@ -100,7 +100,7 @@ struct ArchivedCaseView: View {
             .padding(.horizontal, 16)
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text(L10n.f("dossier.numberLong", dossierNumber(caseFile.number))).fieldLabel(Trace.Colors.stamp)
+                    Text(L10n.f("dossier.numberLong", shownNumber(caseFile.number))).fieldLabel(Trace.Colors.stamp)
                     Text(caseFile.solution.headline).font(Trace.Fonts.nameLarge).foregroundStyle(Trace.Colors.ink)
                     Text(caseFile.solution.summary).font(Trace.Fonts.quote).foregroundStyle(Trace.Colors.inkSoft)
                     RevealTimeline(steps: caseFile.solution.reveal, found: Set(caseFile.solution.reveal.compactMap(\.evidence)), shown: caseFile.solution.reveal.count)

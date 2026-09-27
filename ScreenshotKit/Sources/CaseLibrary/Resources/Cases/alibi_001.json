@@ -1,0 +1,985 @@
+{
+  "schemaVersion": 1,
+  "id": "alibi_001",
+  "number": 101,
+  "mode": "alibi",
+  "title": "LE DÎNER",
+  "tagline": "Un dîner entre amis, de 20h à minuit. Vraiment toute la soirée ?",
+  "synopsis": [
+    "Vendredi 6 novembre, entre 21h45 et 22h30, l'ordinateur portable de l'Atelier des Antilles, un atelier partagé de l'Île de Nantes, a disparu. La porte n'a pas été forcée : seuls les membres connaissent le code.",
+    "Mathis Lebreton, graphiste, 31 ans, est membre de l'atelier. Il affirme avoir passé toute la soirée à un dîner chez des amis, à Trentemoult, de l'autre côté de la Loire.",
+    "Il a remis son téléphone au Bureau. Vérifiez ce qu'il affirme."
+  ],
+  "objective": "Vérifiez l'alibi de Mathis : était-il au dîner, à Rezé, entre 20h et minuit ?",
+  "difficulty": 1,
+  "durationSeconds": 300,
+  "challengeDurations": {
+    "investigator": 540,
+    "detective": 300,
+    "expert": 210
+  },
+  "phoneStartTime": "2026-11-07 10:15",
+  "claim": {
+    "person": "me",
+    "statement": "« J'étais au dîner chez Coline, à Rezé, de 20h à minuit. Je n'ai pas quitté la table. »",
+    "place": "Chez Coline et Arthur, à Trentemoult (Rezé)",
+    "from": "2026-11-06 20:00",
+    "to": "2026-11-07 00:00"
+  },
+  "minimalPath": [
+    "e_left",
+    "e_calls",
+    "e_grue"
+  ],
+  "dossier": {
+    "category": "VÉRIFICATION D'ALIBI",
+    "city": "Nantes",
+    "place": "Atelier des Antilles — Île de Nantes",
+    "subject": "Mathis Lebreton",
+    "subjectLabel": "DÉCLARANT",
+    "subjectAge": 31,
+    "subjectContact": "me",
+    "rating": 1
+  },
+  "devices": [
+    {
+      "id": "d_mathis",
+      "label": "Téléphone de Mathis",
+      "model": "iPhone 14",
+      "wallpaper": "dusk",
+      "batteryPercent": 58,
+      "lockedApps": [],
+      "contacts": [
+        {
+          "id": "me",
+          "name": "Mathis Lebreton",
+          "phone": "+33 6 12 58 40 73",
+          "relation": "Moi",
+          "email": "mathis.lebreton@mailo.fr",
+          "birthday": "14/03/1995",
+          "avatarHue": 0.58,
+          "isOwner": true
+        },
+        {
+          "id": "coline",
+          "name": "Coline Rivet",
+          "phone": "+33 6 74 20 31 88",
+          "relation": "Amie",
+          "email": "coline.rivet@mailo.fr",
+          "birthday": "02/07/1994",
+          "avatarHue": 0.08
+        },
+        {
+          "id": "arthur",
+          "name": "Arthur Guillou",
+          "phone": "+33 6 45 91 07 32",
+          "relation": "Ami (le compagnon de Coline)",
+          "avatarHue": 0.33
+        },
+        {
+          "id": "lise",
+          "name": "Lise Tanguy",
+          "phone": "+33 7 68 12 44 90",
+          "relation": "Amie",
+          "avatarHue": 0.82
+        },
+        {
+          "id": "yoann",
+          "name": "Yoann Le Goff",
+          "phone": "+33 6 03 85 26 14",
+          "relation": "Atelier des Antilles",
+          "email": "yoann@atelier-antilles.fr",
+          "avatarHue": 0.15
+        },
+        {
+          "id": "maman",
+          "name": "Maman",
+          "phone": "+33 6 80 47 19 65",
+          "relation": "Mère",
+          "avatarHue": 0.95
+        },
+        {
+          "id": "nadia",
+          "name": "Nadia Cherki",
+          "phone": "+33 6 29 73 58 01",
+          "relation": "Collègue (studio graphique)",
+          "email": "nadia.cherki@studio-graslin.fr",
+          "avatarHue": 0.46
+        }
+      ],
+      "conversations": [
+        {
+          "id": "c_coline",
+          "participants": [
+            "coline"
+          ],
+          "messages": [
+            {
+              "id": "m_c01",
+              "from": "coline",
+              "at": "2026-11-02 18:12",
+              "text": "Vendredi 20h chez nous, ça tient toujours ? Arthur fait son gratin légendaire"
+            },
+            {
+              "id": "m_c02",
+              "from": "me",
+              "at": "2026-11-02 18:15",
+              "text": "Évidemment. J'apporte quoi ?"
+            },
+            {
+              "id": "m_c03",
+              "from": "coline",
+              "at": "2026-11-02 18:16",
+              "text": "Du vin. Et ta bonne humeur 😌"
+            },
+            {
+              "id": "m_c04",
+              "from": "me",
+              "at": "2026-11-02 18:16",
+              "text": "Deal"
+            },
+            {
+              "id": "m_c05",
+              "from": "coline",
+              "at": "2026-11-05 21:02",
+              "text": "Lise vient finalement !"
+            },
+            {
+              "id": "m_c06",
+              "from": "me",
+              "at": "2026-11-05 21:10",
+              "text": "Top 👌"
+            },
+            {
+              "id": "m_c07",
+              "from": "me",
+              "at": "2026-11-06 19:41",
+              "text": "Je pars, 20 min"
+            },
+            {
+              "id": "m_c08",
+              "from": "coline",
+              "at": "2026-11-06 19:43",
+              "text": "Parfait, on n'a pas commencé"
+            },
+            {
+              "id": "m_c_2140",
+              "from": "coline",
+              "at": "2026-11-06 21:40",
+              "text": "Mathis t'es où ? Arthur dit que t'es sorti avec tes clés de voiture"
+            },
+            {
+              "id": "m_c_2142",
+              "from": "me",
+              "at": "2026-11-06 21:42",
+              "text": "Petit truc à régler, je reviens dans 30-40 min. Gardez-moi du gâteau"
+            },
+            {
+              "id": "m_c_2151",
+              "from": "coline",
+              "at": "2026-11-06 21:51",
+              "text": "Il reste une part. Pour l'instant 👀",
+              "photo": "p_gateau"
+            },
+            {
+              "id": "m_c09",
+              "from": "coline",
+              "at": "2026-11-06 22:11",
+              "text": "Tu réponds plus ??"
+            },
+            {
+              "id": "m_c10",
+              "from": "me",
+              "at": "2026-11-06 22:38",
+              "text": "Je suis en bas, tu m'ouvres ?"
+            },
+            {
+              "id": "m_c11",
+              "from": "me",
+              "at": "2026-11-06 23:58",
+              "text": "Merci pour ce soir 🙏 le gratin était dingue"
+            },
+            {
+              "id": "m_c12",
+              "from": "coline",
+              "at": "2026-11-07 00:04",
+              "text": "Rentre bien !"
+            }
+          ]
+        },
+        {
+          "id": "c_diner",
+          "title": "Dîner vendredi 🍷",
+          "participants": [
+            "coline",
+            "arthur",
+            "lise"
+          ],
+          "messages": [
+            {
+              "id": "m_g01",
+              "from": "arthur",
+              "at": "2026-11-01 20:15",
+              "text": "Bon, vendredi on fait quoi ? raclette ou gratin ?"
+            },
+            {
+              "id": "m_g02",
+              "from": "lise",
+              "at": "2026-11-01 20:17",
+              "text": "Gratin, la raclette c'est pour décembre"
+            },
+            {
+              "id": "m_g03",
+              "from": "me",
+              "at": "2026-11-01 20:18",
+              "text": "Gratin validé"
+            },
+            {
+              "id": "m_g04",
+              "from": "coline",
+              "at": "2026-11-01 20:30",
+              "text": "20h chez nous à Trentemoult. Garez-vous sur le quai, la rue est en travaux"
+            },
+            {
+              "id": "m_g05",
+              "from": "lise",
+              "at": "2026-11-01 20:31",
+              "text": "👍"
+            },
+            {
+              "id": "m_g06",
+              "from": "lise",
+              "at": "2026-11-06 20:02",
+              "text": "Je suis en retard de 10 min dsl"
+            },
+            {
+              "id": "m_g07",
+              "from": "arthur",
+              "at": "2026-11-06 20:03",
+              "text": "Pas grave, Mathis est déjà là et il a ouvert le vin"
+            },
+            {
+              "id": "m_g_2347",
+              "from": "arthur",
+              "at": "2026-11-06 23:47",
+              "text": "Merci d'être venus 🙌 prochaine fois chez Lise"
+            },
+            {
+              "id": "m_g08",
+              "from": "lise",
+              "at": "2026-11-06 23:48",
+              "text": "Avec plaisir 😊 je note"
+            },
+            {
+              "id": "m_g09",
+              "from": "me",
+              "at": "2026-11-06 23:49",
+              "text": "Merci à vous, top soirée"
+            }
+          ]
+        },
+        {
+          "id": "c_yoann",
+          "participants": [
+            "yoann"
+          ],
+          "messages": [
+            {
+              "id": "m_y01",
+              "from": "yoann",
+              "at": "2026-10-28 10:02",
+              "text": "Réunion de l'atelier mardi 19h, tu seras là ?"
+            },
+            {
+              "id": "m_y02",
+              "from": "me",
+              "at": "2026-10-28 10:30",
+              "text": "Oui"
+            },
+            {
+              "id": "m_y_1820",
+              "from": "yoann",
+              "at": "2026-11-04 18:20",
+              "text": "Le nouveau portable de l'atelier est arrivé. Je l'ai rangé dans l'armoire du fond, code du cadenas = celui de la porte"
+            },
+            {
+              "id": "m_y03",
+              "from": "me",
+              "at": "2026-11-04 18:24",
+              "text": "Ok noté"
+            },
+            {
+              "id": "m_y04",
+              "from": "yoann",
+              "at": "2026-11-07 08:40",
+              "text": "Mathis, le portable de l'atelier a disparu cette nuit. La porte n'a pas été forcée. Tu peux m'appeler ?"
+            },
+            {
+              "id": "m_y05",
+              "from": "me",
+              "at": "2026-11-07 08:52",
+              "text": "Quoi ?? Je t'appelle"
+            }
+          ]
+        },
+        {
+          "id": "c_maman",
+          "participants": [
+            "maman"
+          ],
+          "messages": [
+            {
+              "id": "m_m01",
+              "from": "maman",
+              "at": "2026-11-01 12:10",
+              "text": "Tu viens dimanche prochain ? Ton père veut te montrer le jardin"
+            },
+            {
+              "id": "m_m02",
+              "from": "me",
+              "at": "2026-11-01 12:40",
+              "text": "Oui normalement"
+            },
+            {
+              "id": "m_m03",
+              "from": "maman",
+              "at": "2026-11-04 19:30",
+              "text": "Tu as pensé à appeler ta tante pour son anniversaire ?"
+            },
+            {
+              "id": "m_m04",
+              "from": "me",
+              "at": "2026-11-04 19:55",
+              "text": "Oui c'est fait"
+            },
+            {
+              "id": "m_m05",
+              "from": "maman",
+              "at": "2026-11-06 18:05",
+              "text": "Bon week-end ! Couvre-toi il fait froid"
+            },
+            {
+              "id": "m_m06",
+              "from": "me",
+              "at": "2026-11-06 18:20",
+              "text": "Merci maman 😘"
+            }
+          ]
+        },
+        {
+          "id": "c_nadia",
+          "participants": [
+            "nadia"
+          ],
+          "messages": [
+            {
+              "id": "m_n01",
+              "from": "nadia",
+              "at": "2026-11-05 09:15",
+              "text": "Tu peux relire l'affiche du festival avant 11h ?"
+            },
+            {
+              "id": "m_n02",
+              "from": "me",
+              "at": "2026-11-05 09:20",
+              "text": "Je regarde"
+            },
+            {
+              "id": "m_n03",
+              "from": "me",
+              "at": "2026-11-05 10:42",
+              "text": "Deux coquilles en bas à droite, sinon c'est bon"
+            },
+            {
+              "id": "m_n04",
+              "from": "nadia",
+              "at": "2026-11-06 17:02",
+              "text": "Le fichier final est parti chez l'imprimeur. Bon week-end !"
+            },
+            {
+              "id": "m_n05",
+              "from": "me",
+              "at": "2026-11-06 17:05",
+              "text": "Top merci, bon week-end"
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "id": "k_maman_1103",
+          "contact": "maman",
+          "direction": "outgoing",
+          "at": "2026-11-03 18:40",
+          "durationSeconds": 312
+        },
+        {
+          "id": "k_yoann_1104",
+          "contact": "yoann",
+          "direction": "outgoing",
+          "at": "2026-11-04 17:10",
+          "durationSeconds": 64
+        },
+        {
+          "id": "k_nadia_1105",
+          "contact": "nadia",
+          "direction": "incoming",
+          "at": "2026-11-05 12:30",
+          "durationSeconds": 95
+        },
+        {
+          "id": "k_coline_1939",
+          "contact": "coline",
+          "direction": "incoming",
+          "at": "2026-11-06 19:39",
+          "durationSeconds": 40
+        },
+        {
+          "id": "k_coline_2155",
+          "contact": "coline",
+          "direction": "missed",
+          "at": "2026-11-06 21:55",
+          "durationSeconds": 0
+        },
+        {
+          "id": "k_coline_2210",
+          "contact": "coline",
+          "direction": "missed",
+          "at": "2026-11-06 22:10",
+          "durationSeconds": 0
+        },
+        {
+          "id": "k_coline_2236",
+          "contact": "coline",
+          "direction": "outgoing",
+          "at": "2026-11-06 22:36",
+          "durationSeconds": 22
+        },
+        {
+          "id": "k_yoann_0853",
+          "contact": "yoann",
+          "direction": "outgoing",
+          "at": "2026-11-07 08:53",
+          "durationSeconds": 240
+        }
+      ],
+      "places": [
+        {
+          "id": "pl_home",
+          "name": "Domicile — rue de Talensac",
+          "kind": "home",
+          "x": 0.708,
+          "y": 0.209,
+          "latitude": 47.2206,
+          "longitude": -1.5575
+        },
+        {
+          "id": "pl_studio",
+          "name": "Studio graphique — place Graslin",
+          "kind": "work",
+          "x": 0.623,
+          "y": 0.369,
+          "latitude": 47.2134,
+          "longitude": -1.5626
+        },
+        {
+          "id": "pl_coline",
+          "name": "Chez Coline et Arthur — Trentemoult",
+          "kind": "district",
+          "x": 0.297,
+          "y": 0.807,
+          "latitude": 47.1937,
+          "longitude": -1.5822
+        },
+        {
+          "id": "pl_atelier",
+          "name": "Atelier des Antilles — quai des Antilles",
+          "kind": "work",
+          "x": 0.473,
+          "y": 0.653,
+          "latitude": 47.2006,
+          "longitude": -1.5716
+        },
+        {
+          "id": "pl_pont",
+          "name": "Pont des Trois-Continents",
+          "kind": "road",
+          "x": 0.723,
+          "y": 0.729,
+          "latitude": 47.1972,
+          "longitude": -1.5566
+        },
+        {
+          "id": "pl_machines",
+          "name": "Machines de l'île",
+          "kind": "park",
+          "x": 0.595,
+          "y": 0.52,
+          "latitude": 47.2066,
+          "longitude": -1.5643,
+          "revealedBy": [
+            "photo:p_elephant"
+          ]
+        }
+      ],
+      "tracks": [
+        {
+          "id": "t_me",
+          "contact": "me",
+          "points": [
+            {
+              "id": "tp01",
+              "at": "2026-10-18 15:05",
+              "place": "pl_machines"
+            },
+            {
+              "id": "tp02",
+              "at": "2026-11-03 18:55",
+              "place": "pl_atelier",
+              "note": "Réunion mensuelle"
+            },
+            {
+              "id": "tp03",
+              "at": "2026-11-06 09:10",
+              "place": "pl_studio"
+            },
+            {
+              "id": "tp04",
+              "at": "2026-11-06 19:44",
+              "place": "pl_home",
+              "note": "Départ"
+            },
+            {
+              "id": "tp05",
+              "at": "2026-11-06 20:01",
+              "place": "pl_coline"
+            },
+            {
+              "id": "tp06",
+              "at": "2026-11-06 21:46",
+              "place": "pl_pont"
+            },
+            {
+              "id": "tp07",
+              "at": "2026-11-06 22:01",
+              "place": "pl_atelier"
+            },
+            {
+              "id": "tp08",
+              "at": "2026-11-06 22:30",
+              "place": "pl_pont"
+            },
+            {
+              "id": "tp09",
+              "at": "2026-11-06 22:37",
+              "place": "pl_coline"
+            },
+            {
+              "id": "tp10",
+              "at": "2026-11-07 00:21",
+              "place": "pl_home"
+            }
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "id": "p_elephant",
+          "takenAt": "2026-10-18 15:20",
+          "source": "camera",
+          "place": "Nantes — Île de Nantes, Machines de l'île",
+          "device": "iPhone 14",
+          "scene": "street_day",
+          "caption": "Le Grand Éléphant qui sort de sa galerie.",
+          "details": "Un dimanche d'octobre, en plein jour. Du monde au loin, derrière les barrières."
+        },
+        {
+          "id": "p_loire",
+          "takenAt": "2026-10-25 17:40",
+          "source": "camera",
+          "place": "Nantes — quai de la Fosse",
+          "device": "iPhone 14",
+          "scene": "sunset",
+          "caption": "La Loire au coucher du soleil.",
+          "details": "Le ciel orange, les grues de l'île au loin."
+        },
+        {
+          "id": "p_velo",
+          "takenAt": "2026-10-30 08:50",
+          "source": "camera",
+          "place": "Nantes — place Graslin",
+          "device": "iPhone 14",
+          "scene": "street_day",
+          "caption": "Un vélo attaché à un arceau, pneu arrière à plat.",
+          "details": "Le pneu est complètement à plat. Photo prise en arrivant au studio."
+        },
+        {
+          "id": "p_marche",
+          "takenAt": "2026-10-31 10:20",
+          "source": "camera",
+          "place": "Nantes — marché de Talensac",
+          "device": "iPhone 14",
+          "scene": "street_day",
+          "caption": "Les halles du marché de Talensac, un samedi matin.",
+          "details": "Des étals de légumes, des cagettes empilées."
+        },
+        {
+          "id": "p_chat",
+          "takenAt": "2026-11-02 22:10",
+          "source": "camera",
+          "place": "Nantes — rue de Talensac",
+          "device": "iPhone 14",
+          "scene": "cat",
+          "caption": "Pixel, le chat, roulé en boule sur le canapé.",
+          "details": "Rien de particulier. Un plaid gris."
+        },
+        {
+          "id": "p_tram",
+          "takenAt": "2026-11-05 08:12",
+          "source": "screenshot",
+          "scene": "screenshot",
+          "style": "screenshot",
+          "caption": "Capture : info trafic du tram.",
+          "details": "Capture d'écran faite un matin de semaine.",
+          "lines": [
+            "Tram ligne 2 — Commerce",
+            "Trafic interrompu",
+            "entre 8h et 10h"
+          ]
+        },
+        {
+          "id": "p_affiche",
+          "takenAt": "2026-11-05 10:40",
+          "source": "camera",
+          "place": "Nantes — place Graslin",
+          "device": "iPhone 14",
+          "scene": "office",
+          "caption": "Des épreuves d'affiches étalées sur une grande table du studio.",
+          "details": "Des feuilles imprimées, un cutter, une règle en métal."
+        },
+        {
+          "id": "p_table",
+          "takenAt": "2026-11-06 20:41",
+          "source": "camera",
+          "place": "Rezé — Trentemoult",
+          "device": "iPhone 14",
+          "scene": "interior_warm",
+          "caption": "La table du dîner chez Coline et Arthur : bougies, verres, bouteilles.",
+          "details": "Métadonnées : 06/11/2026, 20:41, Rezé — Trentemoult. Prise avec cet iPhone. Quatre couverts, le repas vient d'être servi."
+        },
+        {
+          "id": "p_gateau",
+          "takenAt": "2026-11-06 21:50",
+          "source": "received",
+          "from": "coline",
+          "receivedAt": "2026-11-06 21:51",
+          "place": "Rezé — Trentemoult",
+          "device": "iPhone 13",
+          "scene": "interior_warm",
+          "caption": "Une part de gâteau au chocolat, seule sur une assiette.",
+          "details": "Reçue de Coline à 21:51. Prise par son téléphone à 21:50, à Trentemoult."
+        },
+        {
+          "id": "p_grue",
+          "takenAt": "2026-11-06 22:07",
+          "source": "camera",
+          "place": "Nantes — Île de Nantes, quai des Antilles",
+          "device": "iPhone 14",
+          "scene": "street_night",
+          "style": "night",
+          "caption": "La grue jaune éclairée, de nuit, au bord de la Loire.",
+          "details": "Métadonnées : 06/11/2026, 22:07, Nantes — Île de Nantes, quai des Antilles. Prise avec cet iPhone. Le quai est mouillé, la photo a été prise vite."
+        }
+      ],
+      "calendar": [
+        {
+          "id": "cal_atelier",
+          "start": "2026-11-03 19:00",
+          "end": "2026-11-03 21:00",
+          "title": "Réunion mensuelle de l'atelier",
+          "location": "Atelier des Antilles, quai des Antilles"
+        },
+        {
+          "id": "cal_diner",
+          "start": "2026-11-06 20:00",
+          "end": "2026-11-06 23:30",
+          "title": "Dîner chez Coline & Arthur",
+          "location": "Trentemoult, Rezé",
+          "notes": "Apporter 2 bouteilles"
+        },
+        {
+          "id": "cal_dentiste",
+          "start": "2026-11-12 09:00",
+          "end": "2026-11-12 09:30",
+          "title": "Dentiste",
+          "location": "Cabinet du Cours Cambronne"
+        }
+      ],
+      "notes": [
+        {
+          "id": "n_courses",
+          "title": "Courses",
+          "createdAt": "2026-11-04 20:10",
+          "modifiedAt": "2026-11-06 18:30",
+          "body": "vin x2 (vendredi)\npâtes\nlitière Pixel\npiles télécommande\nsacs poubelle"
+        },
+        {
+          "id": "n_cadeau",
+          "title": "Idées cadeau Maman",
+          "createdAt": "2026-10-12 21:00",
+          "modifiedAt": "2026-10-20 22:15",
+          "body": "- livre de jardinage\n- places pour le Lieu Unique\n- une plante pour le salon ?"
+        }
+      ],
+      "mails": [
+        {
+          "id": "ml_affiche",
+          "folder": "inbox",
+          "fromName": "Nadia Cherki",
+          "fromAddress": "nadia.cherki@studio-graslin.fr",
+          "to": "mathis.lebreton@mailo.fr",
+          "at": "2026-11-05 10:05",
+          "subject": "Affiche festival — v7",
+          "body": "Voilà la v7 avec les corrections d'hier. Dis-moi avant 11h si ça te va.\nNadia",
+          "attachments": [
+            "affiche_festival_v7.pdf"
+          ]
+        },
+        {
+          "id": "ml_atelier",
+          "folder": "inbox",
+          "fromName": "Yoann Le Goff",
+          "fromAddress": "yoann@atelier-antilles.fr",
+          "to": "membres@atelier-antilles.fr",
+          "at": "2026-11-03 22:30",
+          "subject": "Compte rendu — réunion du 3/11",
+          "body": "Merci à tous d'être venus.\n- Le portable neuf arrive cette semaine (partagé, à réserver sur le planning).\n- Cotisation de décembre : 25 €.\n- Ménage de l'atelier : samedi 14.\nYoann"
+        }
+      ],
+      "browser": [
+        {
+          "id": "b_serigraphie",
+          "at": "2026-11-04 12:05",
+          "kind": "visit",
+          "text": "Sérigraphie : bien choisir son écran",
+          "url": "https://www.atelier-serigraphie.fr/ecran",
+          "summary": "Un guide sur les mailles, les cadres et les émulsions."
+        },
+        {
+          "id": "b_meteo",
+          "at": "2026-11-06 19:30",
+          "kind": "search",
+          "text": "météo Nantes ce soir"
+        },
+        {
+          "id": "b_pont",
+          "at": "2026-11-06 21:36",
+          "kind": "search",
+          "text": "pont des Trois-Continents circulation"
+        }
+      ],
+      "liveEvents": [
+        {
+          "id": "lv_coline",
+          "afterSeconds": 40,
+          "kind": "message",
+          "app": "messages",
+          "level": "important",
+          "title": "Coline Rivet",
+          "body": "La police m'a appelée. Je leur ai dit que t'étais avec nous vendredi soir…",
+          "conversation": "c_coline",
+          "message": {
+            "id": "m_live_coline",
+            "from": "coline",
+            "at": "2026-11-07 10:16",
+            "text": "La police m'a appelée. Je leur ai dit que t'étais avec nous vendredi soir…"
+          },
+          "opens": "message:m_live_coline"
+        },
+        {
+          "id": "lv_maman",
+          "afterSeconds": 120,
+          "kind": "call",
+          "app": "phone",
+          "level": "normal",
+          "title": "Appel manqué",
+          "body": "Maman",
+          "call": {
+            "id": "k_live_maman",
+            "contact": "maman",
+            "direction": "missed",
+            "at": "2026-11-07 10:18",
+            "durationSeconds": 0
+          },
+          "opens": "call:k_live_maman"
+        }
+      ]
+    }
+  ],
+  "suspects": [
+    {
+      "id": "s_mathis",
+      "contact": "me",
+      "role": "Déclarant — membre de l'Atelier des Antilles",
+      "age": 31,
+      "address": "Rue de Talensac, Nantes",
+      "statement": "« J'étais au dîner chez Coline, à Rezé, de 20h à minuit. Je n'ai pas quitté la table. »",
+      "verdict": "Mathis était bien au dîner à 20h, mais il l'a quitté vers 21h40. Coline lui écrit, l'appelle deux fois sans réponse ; à 22:07, son propre téléphone photographie la grue jaune du quai des Antilles, à deux pas de l'atelier. Il est revenu à Trentemoult à 22:38. L'ordinateur a été retrouvé dans le coffre de sa voiture.",
+      "trap": "La photo de la table à 20:41, le « Mathis est déjà là » d'Arthur et les remerciements de 23h47 donnent l'impression d'une soirée entière à table. Ils disent vrai — sauf pour l'heure du milieu."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e_left",
+      "title": "« Petit truc à régler »",
+      "importance": "key",
+      "suspects": [
+        "s_mathis"
+      ],
+      "refs": [
+        "message:m_c_2140",
+        "message:m_c_2142"
+      ],
+      "meaning": "À 21:40, Coline demande où il est : il est sorti avec ses clés de voiture. Il répond qu'il revient « dans 30-40 min ». Il a donc quitté la table pendant la soirée."
+    },
+    {
+      "id": "e_calls",
+      "title": "Deux appels manqués de Coline",
+      "importance": "key",
+      "suspects": [
+        "s_mathis"
+      ],
+      "refs": [
+        "call:k_coline_2155",
+        "call:k_coline_2210"
+      ],
+      "anyOf": true,
+      "meaning": "À 21:55 et 22:10, Coline appelle Mathis sans réponse. On n'appelle pas quelqu'un qui est assis à sa table."
+    },
+    {
+      "id": "e_grue",
+      "title": "La grue jaune, 22:07",
+      "importance": "key",
+      "suspects": [
+        "s_mathis"
+      ],
+      "refs": [
+        "photoInfo:p_grue"
+      ],
+      "meaning": "Prise avec son téléphone à 22:07, quai des Antilles, sur l'Île de Nantes — le quai de l'atelier, de l'autre côté de la Loire, en plein dans le créneau de la disparition."
+    },
+    {
+      "id": "e_track",
+      "title": "L'historique de position",
+      "importance": "supporting",
+      "suspects": [
+        "s_mathis"
+      ],
+      "refs": [
+        "track:t_me"
+      ],
+      "meaning": "Le téléphone quitte Trentemoult vers 21:40, passe à 21:46 sur le pont des Trois-Continents, est au quai des Antilles à 22:01 et revient à 22:37."
+    },
+    {
+      "id": "e_portable",
+      "title": "Le portable neuf de l'atelier",
+      "importance": "supporting",
+      "suspects": [
+        "s_mathis"
+      ],
+      "refs": [
+        "message:m_y_1820"
+      ],
+      "meaning": "Deux jours avant, Yoann dit à tous les membres où le portable est rangé et comment ouvrir l'armoire."
+    },
+    {
+      "id": "f_table",
+      "title": "La table du dîner, 20:41",
+      "importance": "falseLead",
+      "suspects": [
+        "s_mathis"
+      ],
+      "refs": [
+        "photoInfo:p_table"
+      ],
+      "meaning": "Vraie : Mathis était bien à Trentemoult à 20:41. Mais la photo ne dit rien de ce qui se passe entre 21:40 et 22:38."
+    },
+    {
+      "id": "f_merci",
+      "title": "« Merci d'être venus »",
+      "importance": "falseLead",
+      "suspects": [
+        "s_mathis"
+      ],
+      "refs": [
+        "message:m_g_2347"
+      ],
+      "meaning": "À 23:47, Arthur remercie tout le monde, Mathis compris : il était revenu. Un remerciement de fin de soirée ne couvre pas toute la soirée."
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "text": "Commencez par vérifier les horaires.",
+      "scoreCost": 0
+    },
+    {
+      "id": "h2",
+      "text": "Comparez les traces du téléphone avec ce qu'il affirme.",
+      "scoreCost": 5
+    },
+    {
+      "id": "h3",
+      "text": "Entre 21h40 et 22h40, qui le cherche, et où son téléphone prend-il une photo ?",
+      "scoreCost": 10
+    }
+  ],
+  "solution": {
+    "culprit": "s_mathis",
+    "alibiHolds": false,
+    "headline": "Mathis a quitté le dîner pendant une heure.",
+    "summary": "Il était bien à table à 20h et à minuit. Entre les deux, son téléphone était sur l'Île de Nantes.",
+    "reveal": [
+      {
+        "at": "2026-11-04 18:20",
+        "text": "Yoann dit aux membres où est rangé le portable neuf de l'atelier",
+        "evidence": "e_portable"
+      },
+      {
+        "at": "2026-11-06 20:41",
+        "text": "Mathis photographie la table du dîner, à Trentemoult",
+        "evidence": "f_table"
+      },
+      {
+        "at": "2026-11-06 21:40",
+        "text": "« Mathis t'es où ? » — « Petit truc à régler, je reviens dans 30-40 min »",
+        "evidence": "e_left"
+      },
+      {
+        "at": "2026-11-06 21:55",
+        "text": "Coline l'appelle. Pas de réponse. Puis encore à 22:10",
+        "evidence": "e_calls"
+      },
+      {
+        "at": "2026-11-06 22:07",
+        "text": "Son téléphone photographie la grue jaune, quai des Antilles",
+        "evidence": "e_grue"
+      },
+      {
+        "at": "2026-11-06 22:37",
+        "text": "Le téléphone revient à Trentemoult ; « Je suis en bas, tu m'ouvres ? »",
+        "evidence": "e_track"
+      },
+      {
+        "at": "2026-11-06 23:47",
+        "text": "« Merci d'être venus » : il est de retour à table",
+        "evidence": "f_merci"
+      }
+    ],
+    "story": [
+      "Mathis est arrivé à Trentemoult un peu avant 20h. Il a ouvert le vin, photographié la table, et tout le monde s'en souvient.",
+      "Vers 21h40, il est sorti avec ses clés de voiture. Coline lui a écrit, puis l'a appelé deux fois sans réponse. À 22:07, son téléphone a pris une photo de la grue jaune, quai des Antilles — à quelques mètres de l'atelier.",
+      "Il est revenu à 22:38 et a fini la soirée à table. Pour ses amis, il n'était « jamais vraiment parti ». Son téléphone, lui, dit le contraire."
+    ]
+  }
+}

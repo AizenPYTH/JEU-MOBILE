@@ -131,7 +131,7 @@ struct DossierView: View {
     /// The kraft folder: its tab « N° 00N », and the sheet it holds.
     private var folder: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(L10n.f("briefing.tab", dossierNumber(caseFile.number)))
+            Text(L10n.f("briefing.tab", shownNumber(caseFile.number)))
                 .font(Trace.Fonts.kicker)
                 .tracking(1.6)
                 .foregroundStyle(Trace.Colors.kraftInk)
@@ -220,7 +220,7 @@ struct DossierView: View {
     }
 
     private var headerLine: String {
-        let number = L10n.f("dossier.number", dossierNumber(caseFile.number))
+        let number = fileLabel(caseFile.number)
         guard let category = caseFile.dossier?.category, !category.isEmpty else { return number }
         return number + " · " + category
     }
@@ -556,7 +556,7 @@ struct DossierView: View {
     private var reportContent: some View {
         if let last = attempts.last {
             Text(L10n.t("report.title")).fieldLabel()
-            Text(L10n.f("report.caseTitle", dossierNumber(caseFile.number), Self.sentenceCase(caseFile.title)))
+            Text(L10n.f("report.caseTitle", shownNumber(caseFile.number), Self.sentenceCase(caseFile.title)))
                 .font(Trace.Fonts.name)
                 .foregroundStyle(Trace.Colors.ink)
                 .fixedSize(horizontal: false, vertical: true)

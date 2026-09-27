@@ -889,4 +889,108 @@ final class MainFlowTests: XCTestCase {
         sleep(2)
         snap("37-solution-revelee")
     }
+
+    // MARK: - ALIBI mode
+
+    /// Bureau → ALIBI → « Le dîner » → the phone → file a call → Carnet (« Contredit », no suspect
+    /// to pick) → « Son alibi est-il fiable ? » → hold « Alibi contredit » → verification → report.
+    func testAlibiModeFirstCheck() {
+        app.launch()
+        wait(element("home.title"), 20, "Bureau")
+        let card = element("home.alibi")
+        scrollTo(card)
+        snap("A0-bureau-carte-alibi")
+        tap(card, "ALIBI", expecting: element("alibi.title"))
+        sleep(1)
+        snap("A1-alibi-liste")
+        tap(element("alibi.start"), "Commencer", expecting: element("alibi.claim"))
+        sleep(1)
+        snap("A2-alibi-dossier")
+
+        tapWhenReady(element("alibi.briefingStart"), "Commencer la vérification")
+        let timer = element("phone.timer")
+        let unlock = element("opening.unlock")
+        if !timer.waitForExistence(timeout: 5), unlock.waitForExistence(timeout: 3) {
+            tapWhenReady(unlock, "déverrouiller")
+        }
+        wait(timer, 10, "le téléphone de la vérification")
+        XCTAssertTrue(secondsLeft() <= 5 * 60 && secondsLeft() > 4 * 60, "Une vérification dure 5 min (\(secondsLeft()) s)")
+        dismissUrgentBanner()
+        snap("A3-alibi-telephone")
+
+        // A call of the evening, filed.
+        openApp("phone")
+        let call = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "call.")).firstMatch
+        wait(call, 5, "journal d'appels")
+        file(call, "A4-alibi-verser")
+        assertPieces(1)
+
+        // Carnet: the statement is in sight; one tap says what the piece does (one person, no chip).
+        openCarnet()
+        wait(element("notebook.goal"), 5, "rappel de la déclaration")
+        snap("A5-alibi-carnet")
+        tapWhenReady(element("notebook.accuses.1"), "Contredit")
+        element("notebook.tab.1").tap()
+        wait(element("notebook.claim"), 5, "onglet Déclaration")
+        snap("A6-alibi-declaration")
+
+        // Verdict.
+        element("notebook.tab.0").tap()
+        tapWhenReady(element("notebook.accuse"), "Conclure")
+        wait(element("alibi.question"), 8, "« Son alibi est-il fiable ? »")
+        snap("A7-alibi-verdict")
+        tapWhenReady(element("alibi.answer.contradicted"), "Alibi contredit")
+        holdToConclude()
+        readReport("A8-alibi-verification")
+        sleep(1)
+        snap("A9-alibi-rapport")
+        let fileIt = element("result.file")
+        scrollTo(fileIt)
+        fileIt.tap()
+        wait(element("alibi.title"), 10, "retour à la liste ALIBI")
+        snap("A10-alibi-liste-apres")
+    }
+
+    // MARK: - Scrolling starts anywhere (a swipe that begins on a row or a photo scrolls the page)
+
+    /// Swipes that start ON an element (photo, conversation, message, call, contact) move the page:
+    /// the long press « Verser au dossier » must never capture a scroll.
+    func testScrollStartsOnItems() {
+        startCase()
+        dismissUrgentBanner()
+        func first(_ prefix: String) -> XCUIElement {
+            app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", prefix)).firstMatch
+        }
+        func assertScrolls(_ prefix: String, _ what: String, up: Bool = true) {
+            let item = wait(first(prefix), 6, what)
+            let before = item.frame.minY
+            if up { item.swipeUp(velocity: .slow) } else { item.swipeDown(velocity: .slow) }
+            sleep(1)
+            let moved = !item.exists || abs(item.frame.minY - before) > 40
+            XCTAssertTrue(moved, "Glisser en partant de \(what) ne fait pas défiler la page")
+            XCTAssertFalse(element("filing.confirm").exists, "Un glissement a ouvert « Verser au dossier » (\(what))")
+        }
+        openApp("photos")
+        assertScrolls("photo.p_", "une photo de la galerie")
+        snap("S1-photos-defilent")
+        openApp("messages")
+        assertScrolls("conversation.", "une conversation")
+        // The group chat (39 messages): a swipe down that starts on the last visible message scrolls back.
+        app.swipeDown(); app.swipeDown()
+        tap(element("conversation.c_group"), "le groupe", expecting: first("message."))
+        let messages = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "message."))
+        let last = messages.element(boundBy: max(0, messages.count - 1))
+        let before = last.frame.minY
+        last.swipeDown(velocity: .slow)
+        sleep(1)
+        XCTAssertTrue(!last.exists || abs(last.frame.minY - before) > 40, "Glisser en partant d'un message ne fait pas défiler la conversation")
+        XCTAssertFalse(element("filing.confirm").exists, "Un glissement a ouvert « Verser au dossier » (message)")
+        snap("S2-messages-defilent")
+        openApp("phone")
+        assertScrolls("call.", "une ligne du journal d'appels")
+        snap("S3-appels-defilent")
+        openApp("contacts")
+        assertScrolls("contact.", "un contact")
+        snap("S4-contacts-defilent")
+    }
 }

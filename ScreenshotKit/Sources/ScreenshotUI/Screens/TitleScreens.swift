@@ -226,7 +226,7 @@ private struct ResumeCard: View {
                 .font(Trace.Fonts.kicker)
                 .tracking(1.6)
                 .foregroundStyle(Trace.Colors.stamp)
-            Text(verbatim: "#\(dossierNumber(caseFile.number)) · \(caseFile.title)")
+            Text(verbatim: "#\(shownNumber(caseFile.number)) · \(caseFile.title)")
                 .font(Trace.Fonts.serifTitle(22))
                 .foregroundStyle(Trace.Colors.ink)
                 .fixedSize(horizontal: false, vertical: true)

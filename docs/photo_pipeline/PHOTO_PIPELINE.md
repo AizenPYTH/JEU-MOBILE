@@ -1,16 +1,47 @@
 # Pipeline photo — CONCLUDE : ENQUÊTES
 
-Objectif : passer de « il nous faut 200 photos » à « un catalogue de 30 à 60 sources, quelques preuves sur mesure, et
-le pipeline fait le reste ». Les photos sont **préparées avant le build et embarquées dans l'app** : le jeu ne contacte
-jamais Pexels ni Openverse, il se joue hors ligne.
+Objectif : **100 % de vraies photographies** dans les téléphones et les galeries du jeu, sans jamais une image générée
+par IA. Les photos sont **préparées avant le build et embarquées dans l'app** : le jeu ne contacte jamais une API photo,
+il se joue hors ligne.
+
+## Version 2 — photos réelles uniquement (décision du studio)
+
+```
+SOURCE RÉELLE ─▶ VALIDATION ─▶ PROVENANCE ─▶ TRAITEMENT ─▶ INTÉGRATION ─▶ CRÉDITS
+```
+
+- **Aucune image IA**, jamais : les candidats dont le titre, la description ou les catégories signalent une génération
+  (« AI-generated », « Stable Diffusion », « Midjourney », « DALL-E »…, `selection.aiPhrases`) sont rejetés ; les
+  dessins, cartes, affiches, rendus 3D, gravures (`notPhotoPhrases`), les fichiers non JPEG et les photos anciennes
+  (avant `minYear`, 2005) aussi. Les 5 portraits générés par IA du pack personnages (suspects de #001, enquêteurs,
+  commandant) ont été **supprimés** : le jeu montre les initiales (liste dans `config/photo_pipeline.json ›
+  removedImages`, vérifiée par `PhotoPipelineTests.noAIImageIsShipped`).
+- **Une fiche de requêtes par affaire** : `config/photo_queries/case_NNN.json` (écrite avec l'affaire) décide pour
+  chaque photo : `REAL` (requête, requêtes de repli, mots du sujet, nuit, preuve, `shareWith`), `PROCEDURAL` (capture
+  d'écran, document, ticket : rendus du téléphone, pas des photographies) ou `CUSTOM` (vraie photo à prendre nous-mêmes).
+  Les scénarios ont été adaptés pour que chaque photo — preuves comprises — puisse être une vraie photographie sans
+  personnage identifiable (voir `docs/game_design/case_00N.md`).
+- **Wikimedia Commons** devient la première source (API MediaWiki officielle, sans clé) : ses photos de lieux réels
+  (Vieux-Port, Fourvière, Cap Ferret, Vercors…) collent aux villes des affaires. Puis Pexels (si `PEXELS_API_KEY` est un
+  secret du dépôt), puis Openverse.
+- **Décisions** : `KEEP_REAL` (vraie photo déjà livrée), `REPLACE_REAL` (vraie photo d'une bibliothèque libre),
+  `CUSTOM_REAL` (vraie photo à prendre nous-mêmes), `PROCEDURAL` (rendu voulu du téléphone), `REMOVE` (à supprimer).
+- **Preuves** : une preuve peut être une vraie photo de bibliothèque seulement si sa fiche le dit (ce qu'elle prouve
+  tient à son heure, son lieu ou son sujet) ; elle ne montre jamais de personne (mot « personne » dans les métadonnées =
+  rejet ; droit à l'image signalé = rejet). Deux photos d'une même chose (`shareWith`) partagent la même photographie,
+  en deux cadrages.
+- **Rapport « REAL PHOTO COMPLIANCE »** dans PHOTO_AUDIT.md et PHOTO_SOURCES.md : photos réelles, externes, à prendre,
+  procédurales, images IA supprimées, exceptions justifiées une à une.
+- Tant qu'une vraie photo n'est pas livrée, le téléphone montre le rendu dessiné du jeu (stylisé, jamais présenté comme
+  une photographie réelle, jamais une image IA).
 
 ## Architecture
 
 ```
-case_00N.json ─┐
-               ├─ audit ──▶ config/photo_catalog.json   (1 décision par photo, sources partagées)
-config/photo_pipeline.json ┘        │
-                                    ├─ search ───▶ cache/photos/search/…   (Pexels puis Openverse, résultats en cache)
+case_00N.json, alibi_00N.json ─┐
+config/photo_queries/case_NNN.json├─ audit ──▶ config/photo_catalog.json (1 décision par photo, sources)
+config/photo_pipeline.json ─────┘        │
+                                    ├─ search ───▶ cache/photos/search/…   (Wikimedia Commons, Pexels, Openverse ; en cache)
                                     │               cache/photos/selection.json (candidats classés par score)
                                     ├─ download ─▶ cache/photos/originals/… (+ contrôle de luminosité jour / nuit)
                                     │               config/photo_sources.json  (manifeste = provenance + verrou)
@@ -47,13 +78,20 @@ python3 scripts/photos/test_pipeline.py   # tests hors ligne du pipeline
 
 Aucune commande n'est interactive. `--dry-run` n'écrit ni image, ni manifeste, ni cache d'originaux.
 
-**Où le lancer.** Le conteneur de développement n'a pas accès à `api.pexels.com` ni `api.openverse.org`. Le
+**Où le lancer.** Le conteneur de développement n'a pas accès à `commons.wikimedia.org`, `api.pexels.com` ni `api.openverse.org`. Le
 workflow GitHub **`photo-pipeline.yml`** le fait : il se lance à chaque modification de `config/photo_*.json` ou
 de `scripts/photos/`, ou à la main (Actions › Photo pipeline › Run workflow, option « dry run »). Il exécute les tests,
 puis `all`, et commite les images, le manifeste, les crédits et les rapports sur la même branche. Le cache
 (`cache/photos`) est conservé entre deux exécutions par `actions/cache`.
 
 ## Fournisseurs
+
+0. **Wikimedia Commons** (premier) — API officielle `GET https://commons.wikimedia.org/w/api.php` (`action=query`,
+   `generator=search` sur l'espace « Fichier », `filemime:image/jpeg`, `prop=imageinfo` avec `extmetadata` :
+   licence, auteur, description, catégories, date de prise de vue, restrictions). User-Agent identifiant le projet,
+   une requête par seconde. Licences acceptées : CC0, domaine public, CC BY, CC BY-SA (jamais NC ni ND ni GFDL seule).
+   Image téléchargée : la vignette officielle de 1600 px (`thumburl`). Attribution : « Titre » by Auteur, licence —
+   Wikimedia Commons, avec le lien de la page du fichier.
 
 1. **Pexels** (principal) — API officielle `GET https://api.pexels.com/v1/search`, en-tête `Authorization`,
    paramètres `query`, `orientation=landscape`, `per_page=30`. Image téléchargée : `src.large2x`. Licence Pexels

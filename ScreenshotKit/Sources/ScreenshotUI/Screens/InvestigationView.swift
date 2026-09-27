@@ -57,7 +57,7 @@ struct NotebookView: View {
             VStack(spacing: 0) {
                 header
                 DividerTabs(tabs: [(0, L10n.f("carnet.tab.pieces", game.notebook.count)),
-                                   (1, L10n.t("carnet.suspects")),
+                                   (1, L10n.t(session.caseFile.isAlibi ? "alibi.tab.claim" : "carnet.suspects")),
                                    (2, L10n.t("carnet.timeline"))],
                             selection: $tab, identifier: "notebook.tab", sheetColor: Trace.Colors.kraft)
                 folder(game)
@@ -146,7 +146,7 @@ struct NotebookView: View {
 
     private var headerTitle: some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text(L10n.f("dossier.number", dossierNumber(session.caseFile.number)))
+            Text(fileLabel(session.caseFile.number))
                 .font(Trace.Fonts.kicker)
                 .tracking(1.6)
                 .foregroundStyle(Trace.Colors.bone2)
@@ -217,7 +217,8 @@ struct NotebookView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     switch tab {
                     case 0: pieces(game)
-                    case 1: suspects(game)
+                    case 1:
+                        if session.caseFile.isAlibi { claimPage(game) } else { suspects(game) }
                     default: chronology(game)
                     }
                 }
@@ -274,12 +275,79 @@ struct NotebookView: View {
         if game.notebook.isEmpty {
             emptyFile
         } else {
+            goalStrip(game)
             let rows = game.notebook.enumerated().map { PieceRow(entry: $0.element, number: $0.offset + 1) }.reversed()
             ForEach(Array(rows)) { row in
                 pieceCard(row.entry, number: row.number, game: game)
                     .transition(.opacity)
             }
         }
+    }
+
+    /// What the file is for, always in sight above the pieces (the objective, or the claim to
+    /// check), and the next step in one line: file, then say what each piece shows, then conclude.
+    /// Never a clue: it only repeats the briefing and counts what the player did.
+    private func goalStrip(_ game: Investigation) -> some View {
+        let file = session.caseFile
+        let linked = game.notebook.filter { $0.linkedTo != nil && $0.stance != nil }.count
+        let next: String = linked == 0
+            ? L10n.t(file.isAlibi ? "carnet.next.linkAlibi" : "carnet.next.link")
+            : linked >= Self.solidFile ? L10n.t("carnet.next.conclude") : L10n.f("carnet.next.progress", game.notebook.count, linked)
+        return VStack(alignment: .leading, spacing: 6) {
+            Text(L10n.t(file.isAlibi ? "alibi.claimLabel" : "carnet.objective"))
+                .font(Trace.Fonts.kicker)
+                .tracking(1.6)
+                .foregroundStyle(Trace.Colors.stamp)
+            Text(file.isAlibi ? (file.claim.map { AlibiText.claimLine($0, game: game) } ?? file.objective) : file.objective)
+                .font(Trace.Fonts.proseSmall.weight(.semibold))
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(next)
+                .font(Trace.Fonts.monoSmall)
+                .foregroundStyle(Trace.Colors.inkSoft)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("notebook.nextStep")
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Trace.Colors.paperSelected)
+        .overlay(Rectangle().strokeBorder(Trace.Colors.stamp.opacity(0.5), lineWidth: 1))
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("notebook.goal")
+    }
+
+    /// ALIBI: the statement to check, and how many filed pieces the player said confirm or contradict it.
+    private func claimPage(_ game: Investigation) -> some View {
+        let person = session.caseFile.suspects.first
+        let linked = person.map { game.linkedEntries(for: $0.id) } ?? []
+        return VStack(alignment: .leading, spacing: 12) {
+            if let claim = session.caseFile.claim {
+                Text(game.name(of: claim.person))
+                    .font(Trace.Fonts.serifTitle(22))
+                    .foregroundStyle(Trace.Colors.ink)
+                    .accessibilityAddTraits(.isHeader)
+                Text(claim.statement)
+                    .font(Trace.Fonts.quote)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                LedgerRow(label: L10n.t("alibi.placeLabel"), value: claim.place)
+                LedgerRow(label: L10n.t("alibi.windowLabel"), value: AlibiText.window(claim))
+            }
+            Rectangle().fill(Trace.Colors.inkFaint.opacity(0.3)).frame(height: 1)
+            HStack(spacing: 18) {
+                Text(verbatim: "▲ \(linked.filter { $0.stance == .incriminates }.count) " + L10n.t("alibi.tallyContradicts"))
+                    .foregroundStyle(Trace.Colors.stamp)
+                Text(verbatim: "▼ \(linked.filter { $0.stance == .clears }.count) " + L10n.t("alibi.tallyConfirms"))
+                    .foregroundStyle(Trace.Colors.ink)
+            }
+            .font(Trace.Fonts.monoStrong)
+            .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .paper(Trace.Colors.paper, radius: 0)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("notebook.claim")
     }
 
     /// §N: an empty file says what to do next.
@@ -324,10 +392,10 @@ struct NotebookView: View {
             .accessibilityActions {
                 ForEach(session.caseFile.suspects) { candidate in
                     let name = NotebookText.firstName(game.name(of: candidate.contact))
-                    Button(L10n.f("carnet.linkAccuses", name)) {
+                    Button(NotebookText.link(.incriminates, name: name, alibi: session.caseFile.isAlibi)) {
                         session.annotate(entry.ref, suspect: candidate.id, stance: .incriminates)
                     }
-                    Button(L10n.f("carnet.linkClears", name)) {
+                    Button(NotebookText.link(.clears, name: name, alibi: session.caseFile.isAlibi)) {
                         session.annotate(entry.ref, suspect: candidate.id, stance: .clears)
                     }
                 }
@@ -347,7 +415,8 @@ struct NotebookView: View {
                     .transition(.opacity)
             }
             if let suspect, let stance = entry.stance {
-                Text(LinkTally.glyph(stance) + " " + NotebookText.link(stance, name: NotebookText.firstName(game.name(of: suspect.contact))))
+                Text(LinkTally.glyph(stance) + " " + NotebookText.link(stance, name: NotebookText.firstName(game.name(of: suspect.contact)),
+                                                                      alibi: session.caseFile.isAlibi))
                     .font(Trace.Fonts.monoStrong)
                     .foregroundStyle(stance == .incriminates ? Trace.Colors.stamp : Trace.Colors.ink)
                     .fixedSize(horizontal: false, vertical: true)
@@ -369,7 +438,7 @@ struct NotebookView: View {
     private func spokenPiece(_ entry: NotebookEntry, number: Int, game: Investigation) -> String {
         var text = PieceFormat.spoken(entry.ref, in: game, number: number)
         if let id = entry.linkedTo, let suspect = game.index.suspect(id), let stance = entry.stance {
-            text += ". " + NotebookText.link(stance, name: NotebookText.firstName(game.name(of: suspect.contact)))
+            text += ". " + NotebookText.link(stance, name: NotebookText.firstName(game.name(of: suspect.contact)), alibi: session.caseFile.isAlibi)
         }
         return text
     }
@@ -392,10 +461,15 @@ struct NotebookView: View {
         let choice = Picking(ref: entry.ref, stance: stance)
         let open = picking == choice
         return Button {
-            withAnimation(layoutMotion) { picking = open ? nil : choice }
+            if session.caseFile.isAlibi, let person = session.caseFile.suspects.first {
+                // One person: the reading is the link (same again = undo).
+                withAnimation(layoutMotion) { session.annotate(entry.ref, suspect: person.id, stance: stance) }
+            } else {
+                withAnimation(layoutMotion) { picking = open ? nil : choice }
+            }
             Haptics.selection()
         } label: {
-            Text(LinkTally.glyph(stance) + " " + NotebookText.stance(stance))
+            Text(LinkTally.glyph(stance) + " " + NotebookText.stance(stance, alibi: session.caseFile.isAlibi))
         }
         .buttonStyle(StanceButtonStyle(stance: stance, filled: set, open: open))
         .accessibilityAddTraits(set ? .isSelected : [])
@@ -496,12 +570,15 @@ struct NotebookView: View {
 
 /// The Carnet's words for a link: « L'accuse », « L'accuse : Lucas », first names.
 private enum NotebookText {
-    static func stance(_ stance: NotebookEntry.Stance) -> String {
-        L10n.t(stance == .incriminates ? "suspect.stanceAgainst" : "suspect.stanceFavour")
+    /// « L'ACCUSE » / « LE DISCULPE » — in ALIBI mode « CONTREDIT » / « CONFIRME » (the statement).
+    static func stance(_ stance: NotebookEntry.Stance, alibi: Bool = false) -> String {
+        if alibi { return L10n.t(stance == .incriminates ? "alibi.stanceContradicts" : "alibi.stanceConfirms") }
+        return L10n.t(stance == .incriminates ? "suspect.stanceAgainst" : "suspect.stanceFavour")
     }
 
-    static func link(_ stance: NotebookEntry.Stance, name: String) -> String {
-        L10n.f(stance == .incriminates ? "carnet.linkAccuses" : "carnet.linkClears", name)
+    static func link(_ stance: NotebookEntry.Stance, name: String, alibi: Bool = false) -> String {
+        if alibi { return L10n.t(stance == .incriminates ? "alibi.linkContradicts" : "alibi.linkConfirms") }
+        return L10n.f(stance == .incriminates ? "carnet.linkAccuses" : "carnet.linkClears", name)
     }
 
     /// « Lucas » from « Lucas Ferrand ».
@@ -571,7 +648,7 @@ private struct CaseBriefSheet: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
-                Text(L10n.f("dossier.number", dossierNumber(caseFile.number)))
+                Text(fileLabel(caseFile.number))
                     .font(Trace.Fonts.kicker)
                     .tracking(1.6)
                     .foregroundStyle(Trace.Colors.inkSoft)
@@ -589,6 +666,17 @@ private struct CaseBriefSheet: View {
                         .font(Trace.Fonts.prose.weight(.semibold))
                         .foregroundStyle(Trace.Colors.ink)
                         .fixedSize(horizontal: false, vertical: true)
+                    if let claim = caseFile.claim {
+                        Text(claim.statement)
+                            .font(Trace.Fonts.quote)
+                            .foregroundStyle(Trace.Colors.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.top, 6)
+                        Text(claim.place + " · " + AlibiText.window(claim))
+                            .font(Trace.Fonts.monoSmall)
+                            .foregroundStyle(Trace.Colors.inkSoft)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                 }
                 .padding(12)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -927,7 +1015,7 @@ struct HintsView: View {
                 .accessibilityHidden(true)
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(L10n.f("dossier.number", dossierNumber(game.caseFile.number)) + " · " + L10n.t("carnet.hint"))
+                    Text(fileLabel(game.caseFile.number) + " · " + L10n.t("carnet.hint"))
                         .font(Trace.Fonts.kicker)
                         .tracking(1.6)
                         .textCase(.uppercase)

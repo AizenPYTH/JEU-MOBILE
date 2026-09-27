@@ -48,6 +48,9 @@ struct GameRoot: View {
         case settings
         /// 04 · the case file, briefing first.
         case intro(CaseFile)
+        /// ALIBI: the list of checks, then one check's mini-file.
+        case alibi
+        case alibiIntro(CaseFile)
         /// From the case file to the phone: the sealed bag, the zoom, the lock screen.
         case opening(GameSession)
         case playing(GameSession)
@@ -137,7 +140,7 @@ struct GameRoot: View {
             begin(pending.file, challenge: pending.challenge)
         }) { pending in
             PaperConfirmSheet(title: L10n.t("start.replaceTitle"),
-                              message: L10n.f("start.replaceMessage", dossierNumber(pending.inProgress)),
+                              message: L10n.f("start.replaceMessage", shownNumber(pending.inProgress)),
                               confirm: L10n.t("start.replaceConfirm"),
                               confirmID: "start.confirmReplace",
                               destructive: true,
@@ -191,19 +194,39 @@ struct GameRoot: View {
                                       onBack: { stage = .title })
                     .transition(push)
             case .home:
-                BureauView(cases: cases, progress: progress, resumable: resumable, featured: resumable?.file ?? nextCase,
+                BureauView(cases: mainCases, progress: progress, resumable: mainResumable, featured: mainResumable?.file ?? nextCase,
                            identity: identity, rank: rank, assigned: assigned,
+                           alibi: alibiCases.isEmpty ? nil : AlibiSummary(total: alibiCases.count,
+                                                                         done: alibiCases.filter { progress[$0.id]?.solved == true }.count,
+                                                                         inProgress: resumable?.file.isAlibi == true),
                            onOpen: { stage = .intro($0) },
                            onResume: resumeSaved,
+                           onAlibi: { stage = .alibi },
                            onProfile: { selectTab(.investigator) },
                            onTab: selectTab)
                     .transition(.opacity)
+            case .alibi:
+                AlibiDeskView(cases: alibiCases, progress: progress,
+                              inProgressID: resumable?.file.isAlibi == true ? resumable?.file.id : nil,
+                              onOpen: { stage = .alibiIntro($0) },
+                              onResume: resumeSaved,
+                              onBack: goHome)
+                    .transition(push)
+            case .alibiIntro(let file):
+                AlibiBriefingView(caseFile: file,
+                                  durationSeconds: durations(of: file)[.detective] ?? file.durationSeconds,
+                                  inProgress: resumable?.file.id == file.id,
+                                  onStart: { start(file, challenge: .detective) },
+                                  onResume: resumeSaved,
+                                  onClose: { stage = .alibi })
+                    .environment(\.caseNumber, file.number)
+                    .transition(push)
             case .cases, .archive:
-                ArchivesView(cases: cases, progress: progress, attempts: attempts, savedCaseID: resumable?.file.id,
+                ArchivesView(cases: mainCases, progress: progress, attempts: attempts, savedCaseID: resumable?.file.id,
                              onOpen: { stage = .intro($0) }, onTab: selectTab)
                     .transition(.opacity)
             case .profile:
-                InvestigatorView(attempts: attempts, cases: cases, identity: identity, assigned: assigned,
+                InvestigatorView(attempts: attempts, cases: mainCases, identity: identity, assigned: assigned,
                                  onChangeIdentity: { chosen in
                                      PlayerStore.identity = chosen
                                      identity = chosen
@@ -238,6 +261,14 @@ struct GameRoot: View {
                 PlayingView(session: session, onQuit: { quit(session) })
                     .environment(\.caseNumber, session.caseFile.number)
                     .transition(.opacity)
+            case .result(let play) where play.session.caseFile.isAlibi:
+                AlibiResultView(verdict: play.verdict, caseFile: play.session.caseFile, revealed: play.revealed,
+                                onFile: { fileAway(play, anyway: false) },
+                                onRetry: { retry(play) },
+                                onReveal: { reveal(play) })
+                    .id(play.revealed)
+                    .environment(\.caseNumber, play.session.caseFile.number)
+                    .transition(.opacity)
             case .result(let play):
                 ResultView(verdict: play.verdict, caseFile: play.session.caseFile, names: names(play.session),
                            revealed: play.revealed,
@@ -253,7 +284,7 @@ struct GameRoot: View {
                     .transition(.opacity)
             case .assignment(let solved):
                 AssignmentView(identity: identity, rank: rank, solved: solved,
-                               remainingCases: max(0, cases.count - 1),
+                               remainingCases: max(0, mainCases.count - 1),
                                onDesk: {
                                    PlayerStore.isAssigned = true
                                    assigned = true
@@ -270,8 +301,14 @@ struct GameRoot: View {
 
     private var progress: [String: CaseProgress] { ProgressStore.summary(of: attempts) }
 
-    /// Rank from the number of cases solved (ENQUÊTEUR → INSPECTEUR → SENIOR → EXPÉRIMENTÉ).
-    private var rank: Rank { Rank.forSolved(progress.values.filter(\.solved).count) }
+    /// The investigations (main mode) and the ALIBI checks.
+    private var mainCases: [CaseFile] { cases.filter { !$0.isAlibi } }
+    private var alibiCases: [CaseFile] { cases.filter(\.isAlibi) }
+
+    /// Rank from the number of investigations solved (ENQUÊTEUR → INSPECTEUR → SENIOR → EXPÉRIMENTÉ).
+    private var rank: Rank {
+        Rank.forSolved(mainCases.filter { progress[$0.id]?.solved == true }.count)
+    }
 
     private func selectTab(_ tab: DeskTab) {
         attempts = ProgressStore.attempts()
@@ -290,10 +327,10 @@ struct GameRoot: View {
 
     /// The first case not solved yet (or the last one).
     private var nextCase: CaseFile? {
-        cases.first { progress[$0.id]?.solved != true } ?? cases.last
+        mainCases.first { progress[$0.id]?.solved != true } ?? mainCases.last
     }
 
-    private var firstCase: CaseFile? { cases.first { $0.number == 1 } ?? cases.first }
+    private var firstCase: CaseFile? { mainCases.first { $0.number == 1 } ?? mainCases.first }
 
     private var stageKey: String {
         switch stage {
@@ -306,6 +343,8 @@ struct GameRoot: View {
         case .profile: "profile"
         case .settings: "settings"
         case .intro(let f): "intro-\(f.id)"
+        case .alibi: "alibi"
+        case .alibiIntro(let f): "alibiIntro-\(f.id)"
         case .opening: "opening"
         case .playing: "playing"
         case .result(let p): "result-\(p.revealed)"
@@ -339,6 +378,11 @@ struct GameRoot: View {
         attempts = ProgressStore.attempts()
         savedGame = SavedInvestigationStore.load()
         stage = .home
+    }
+
+    /// The saved investigation when it is a main-mode case (the Bureau's big folder).
+    private var mainResumable: (saved: SavedInvestigation, file: CaseFile)? {
+        resumable.flatMap { $0.file.isAlibi ? nil : $0 }
     }
 
     /// The saved investigation and its case, when it belongs to a case of this version.
@@ -450,6 +494,12 @@ struct GameRoot: View {
 
     /// [CLASSER LE DOSSIER] / « Classer quand même »: the assignment (once, after #001), then the Bureau.
     private func fileAway(_ play: Play, anyway: Bool) {
+        if play.session.caseFile.isAlibi {
+            attempts = ProgressStore.attempts()
+            savedGame = SavedInvestigationStore.load()
+            stage = .alibi
+            return
+        }
         if anyway { filedAnyway = true }
         attempts = ProgressStore.attempts()
         if let firstCase, play.session.caseFile.id == firstCase.id,
@@ -554,6 +604,9 @@ struct PlayingView: View {
     var body: some View {
         if session.phase == .investigating {
             InvestigationView(session: session, onQuit: onQuit)
+                .transition(.opacity)
+        } else if session.caseFile.isAlibi {
+            AlibiVerdictView(session: session)
                 .transition(.opacity)
         } else {
             AccusationView(session: session)

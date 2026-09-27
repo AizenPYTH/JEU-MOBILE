@@ -1,0 +1,174 @@
+{
+  "case": "101",
+  "about": "ALIBI #001 « LE DÎNER » — Nantes / Rezé (Trentemoult), novembre 2026",
+  "photos": {
+    "p_elephant": {
+      "decision": "REAL",
+      "query": "Grand Éléphant Machines de l'île",
+      "fallbacks": [
+        "Machines de l'île Nantes",
+        "Grand Elephant Nantes"
+      ],
+      "subject": [
+        "éléphant",
+        "elephant",
+        "machines",
+        "nantes"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_loire": {
+      "decision": "REAL",
+      "query": "Loire Nantes coucher de soleil",
+      "fallbacks": [
+        "Loire Nantes sunset",
+        "Quai de la Fosse Nantes"
+      ],
+      "subject": [
+        "loire",
+        "sunset",
+        "coucher",
+        "river",
+        "fleuve"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_velo": {
+      "decision": "REAL",
+      "query": "bicycle flat tyre",
+      "fallbacks": [
+        "vélo pneu crevé",
+        "bicycle parked rack"
+      ],
+      "subject": [
+        "bicycle",
+        "vélo",
+        "bike",
+        "tyre",
+        "tire",
+        "pneu"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_marche": {
+      "decision": "REAL",
+      "query": "Marché de Talensac Nantes",
+      "fallbacks": [
+        "Talensac market Nantes",
+        "covered market France"
+      ],
+      "subject": [
+        "talensac",
+        "market",
+        "marché",
+        "halle",
+        "halles"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_chat": {
+      "decision": "REAL",
+      "query": "cat sleeping sofa",
+      "fallbacks": [
+        "chat endormi canapé",
+        "sleeping cat"
+      ],
+      "subject": [
+        "cat",
+        "chat",
+        "kitten",
+        "chaton"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_tram": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    },
+    "p_affiche": {
+      "decision": "REAL",
+      "query": "poster print proofs table",
+      "fallbacks": [
+        "graphic design studio desk",
+        "printed posters table"
+      ],
+      "subject": [
+        "poster",
+        "affiche",
+        "print",
+        "desk",
+        "design",
+        "paper"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_table": {
+      "decision": "REAL",
+      "query": "dinner table candles",
+      "fallbacks": [
+        "table dressée bougies",
+        "candlelit dinner table",
+        "wine glasses table"
+      ],
+      "subject": [
+        "table",
+        "dinner",
+        "dîner",
+        "candle",
+        "bougie",
+        "glasses"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_gateau": {
+      "decision": "REAL",
+      "query": "chocolate cake slice",
+      "fallbacks": [
+        "gâteau au chocolat part",
+        "chocolate cake"
+      ],
+      "subject": [
+        "cake",
+        "gâteau",
+        "chocolate",
+        "chocolat"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_grue": {
+      "decision": "REAL",
+      "query": "Grue Titan jaune Nantes",
+      "fallbacks": [
+        "Grue jaune Nantes nuit",
+        "Île de Nantes nuit",
+        "harbour crane night"
+      ],
+      "subject": [
+        "grue",
+        "crane",
+        "titan",
+        "antilles",
+        "nantes"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    }
+  }
+}

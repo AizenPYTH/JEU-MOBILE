@@ -135,14 +135,11 @@ struct ArtAssetsTests {
         #expect(missing.isEmpty, "Missing design assets: \(missing)")
     }
 
-    /// The test pictures of #001 land on the right people.
-    @Test func firstCasePortraitsMatchTheirSuspects() throws {
-        let file = try #require(try CaseLibrary.loadCases().first { $0.number == 1 })
-        let contacts = file.devices.flatMap(\.contacts)
-        let names = Set(try Self.imageSets().map(\.name))
-        #expect(contacts.first { $0.id == "sarah" }?.name == "Sarah Vasseur")
-        #expect(contacts.first { $0.id == "karim" }?.name == "Karim Haddad")
-        #expect(names.contains("portrait_001_sarah") && names.contains("portrait_001_karim"))
-        #expect(file.suspects.contains { $0.contact == "sarah" } && file.suspects.contains { $0.contact == "karim" })
+    /// No person is pictured: the generated portraits of the art pack are gone (the game shows
+    /// initials), only design assets and the real photos of the phones remain.
+    @Test func noPortraitOfAPerson() throws {
+        for set in try Self.imageSets() {
+            #expect(!["Portraits", "Avatars", "Players", "NPC"].contains(set.group), "\(set.name) pictures a person")
+        }
     }
 }

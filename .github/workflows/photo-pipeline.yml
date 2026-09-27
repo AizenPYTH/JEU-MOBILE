@@ -10,6 +10,8 @@ on:
     paths:
       - "config/photo_pipeline.json"
       - "config/photo_catalog.json"
+      - "config/photo_queries/**"
+      - "ScreenshotKit/Sources/CaseLibrary/Resources/Cases/**"
       - "scripts/photos/**"
       - "scripts/photos.sh"
       - ".github/workflows/photo-pipeline.yml"

@@ -1,0 +1,650 @@
+{
+  "case": "004",
+  "about": "90 SECONDES — gala d'une exposition de joaillerie au Pavillon Mercure (avenue du Président-Wilson, Paris 16e), novembre : vitrines, collier de perles, régie, salle de gala ; ambiance Belleville, Buttes-Chaumont, gare de Lyon, tour Eiffel.",
+  "photos": {
+    "p_old01": {
+      "decision": "REAL",
+      "query": "glass vases exhibition plinths",
+      "fallbacks": [
+        "vases verre exposition",
+        "glass art exhibition"
+      ],
+      "subject": [
+        "vase",
+        "vases",
+        "verre",
+        "glass",
+        "exhibition",
+        "exposition"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old02": {
+      "decision": "REAL",
+      "query": "guirlandes cour pavée soirée",
+      "fallbacks": [
+        "string lights courtyard night",
+        "fairy lights courtyard"
+      ],
+      "subject": [
+        "guirlande",
+        "lights",
+        "courtyard",
+        "cour",
+        "string",
+        "fairy"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old03": {
+      "decision": "REAL",
+      "query": "château de sable plage seau",
+      "fallbacks": [
+        "sandcastle beach bucket",
+        "sand castle"
+      ],
+      "subject": [
+        "sable",
+        "sand",
+        "sandcastle",
+        "castle",
+        "château",
+        "plage",
+        "beach"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old04": {
+      "decision": "REAL",
+      "query": "chalet neige luge",
+      "fallbacks": [
+        "wooden chalet snow sled",
+        "snowy fir trees chalet"
+      ],
+      "subject": [
+        "chalet",
+        "neige",
+        "snow",
+        "luge",
+        "sled",
+        "sledge"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old05": {
+      "decision": "REAL",
+      "query": "birthday candles table glasses",
+      "fallbacks": [
+        "bougies anniversaire table",
+        "birthday candles"
+      ],
+      "subject": [
+        "candle",
+        "candles",
+        "bougie",
+        "bougies",
+        "birthday",
+        "anniversaire"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b01": {
+      "decision": "REAL",
+      "query": "empty exhibition room parquet",
+      "fallbacks": [
+        "salle d'exposition vide",
+        "empty gallery room"
+      ],
+      "subject": [
+        "empty",
+        "vide",
+        "gallery",
+        "exhibition",
+        "exposition",
+        "room",
+        "salle"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b02": {
+      "decision": "REAL",
+      "query": "laptop floor plan meeting table",
+      "fallbacks": [
+        "laptop on table meeting",
+        "architect laptop plan"
+      ],
+      "subject": [
+        "laptop",
+        "ordinateur",
+        "computer",
+        "plan",
+        "table"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b03": {
+      "decision": "REAL",
+      "query": "tabby cat sleeping on papers",
+      "fallbacks": [
+        "tabby cat sleeping",
+        "chat tigré"
+      ],
+      "subject": [
+        "cat",
+        "chat",
+        "tabby",
+        "kitten",
+        "tigré"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b04": {
+      "decision": "PROCEDURAL",
+      "reason": "document rendu par le téléphone (convention de prêt, texte lisible)"
+    },
+    "p_b05": {
+      "decision": "REAL",
+      "query": "scale model workshop cardboard",
+      "fallbacks": [
+        "maquette carton atelier",
+        "model making workshop"
+      ],
+      "subject": [
+        "maquette",
+        "model",
+        "workshop",
+        "atelier",
+        "cardboard",
+        "carton"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b06": {
+      "decision": "REAL",
+      "query": "Belleville Paris rue nuit",
+      "fallbacks": [
+        "Rue de Belleville night",
+        "Paris sloping street night lamps"
+      ],
+      "subject": [
+        "belleville",
+        "rue",
+        "street",
+        "nuit",
+        "night",
+        "réverbère"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b07": {
+      "decision": "REAL",
+      "query": "café terrasse Paris croissant",
+      "fallbacks": [
+        "coffee cups croissant table",
+        "Paris café table sun"
+      ],
+      "subject": [
+        "café",
+        "cafe",
+        "coffee",
+        "croissant",
+        "terrasse",
+        "terrace"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b08": {
+      "decision": "REAL",
+      "query": "museum display cases wrapped delivery",
+      "fallbacks": [
+        "vitrines emballées",
+        "art handling crates loading dock"
+      ],
+      "subject": [
+        "vitrine",
+        "display",
+        "case",
+        "showcase",
+        "crate",
+        "caisse",
+        "emballage"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b09": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone (plan de salle v3)"
+    },
+    "p_b10": {
+      "decision": "REAL",
+      "query": "Temple de la Sibylle Buttes-Chaumont automne",
+      "fallbacks": [
+        "Parc des Buttes-Chaumont autumn",
+        "Buttes-Chaumont lac"
+      ],
+      "subject": [
+        "buttes-chaumont",
+        "buttes",
+        "chaumont",
+        "sibylle",
+        "parc",
+        "park"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b11": {
+      "decision": "PROCEDURAL",
+      "reason": "reçu de taxi rendu par le téléphone (texte lisible)"
+    },
+    "p_b12": {
+      "decision": "PROCEDURAL",
+      "reason": "épreuve de cartel rendue par le téléphone (texte lisible)"
+    },
+    "p_b13": {
+      "decision": "REAL",
+      "query": "page proofs sticky notes desk",
+      "fallbacks": [
+        "épreuves imprimées post-it",
+        "printed proofs desk"
+      ],
+      "subject": [
+        "proof",
+        "proofs",
+        "épreuve",
+        "post-it",
+        "sticky",
+        "pages",
+        "papers"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b14": {
+      "decision": "REAL",
+      "query": "rain window Paris rooftops",
+      "fallbacks": [
+        "pluie fenêtre toits Paris",
+        "raindrops window"
+      ],
+      "subject": [
+        "rain",
+        "pluie",
+        "window",
+        "fenêtre",
+        "raindrops",
+        "gouttes"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b15": {
+      "decision": "REAL",
+      "query": "empty display case spotlight dark",
+      "fallbacks": [
+        "vitrine vide éclairage",
+        "museum showcase spotlight"
+      ],
+      "subject": [
+        "vitrine",
+        "display",
+        "case",
+        "showcase",
+        "spotlight",
+        "projecteur"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": "p_vitrine_2216"
+    },
+    "p_b16": {
+      "decision": "REAL",
+      "query": "Gare de Lyon hall Paris",
+      "fallbacks": [
+        "Gare de Lyon Paris",
+        "Paris Gare de Lyon clock tower"
+      ],
+      "subject": [
+        "gare",
+        "lyon",
+        "station",
+        "hall",
+        "train"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b17": {
+      "decision": "REAL",
+      "query": "dinner table candle wine glasses",
+      "fallbacks": [
+        "table bougie verres de vin",
+        "candlelit table two glasses"
+      ],
+      "subject": [
+        "candle",
+        "bougie",
+        "wine",
+        "vin",
+        "glasses",
+        "verres",
+        "dinner",
+        "dîner"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b18": {
+      "decision": "REAL",
+      "query": "exhibition installation ladders display cases",
+      "fallbacks": [
+        "montage exposition escabeau",
+        "museum installation ladder"
+      ],
+      "subject": [
+        "installation",
+        "montage",
+        "ladder",
+        "escabeau",
+        "exhibition",
+        "exposition",
+        "vitrine"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b19": {
+      "decision": "REAL",
+      "query": "Tour Eiffel brume Seine",
+      "fallbacks": [
+        "Eiffel Tower fog Seine",
+        "Eiffel Tower mist morning"
+      ],
+      "subject": [
+        "eiffel",
+        "tour",
+        "tower",
+        "seine",
+        "brume",
+        "fog",
+        "mist"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b20": {
+      "decision": "REAL",
+      "query": "pearl necklace display case velvet",
+      "fallbacks": [
+        "collier de perles vitrine",
+        "pearl necklace bust"
+      ],
+      "subject": [
+        "pearl",
+        "pearls",
+        "perle",
+        "perles",
+        "necklace",
+        "collier"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": "p_vitrine_1752"
+    },
+    "p_b21": {
+      "decision": "REAL",
+      "query": "gala hall tables black tablecloths",
+      "fallbacks": [
+        "salle de réception tables hautes",
+        "reception hall cocktail tables"
+      ],
+      "subject": [
+        "gala",
+        "reception",
+        "réception",
+        "tables",
+        "hall",
+        "salle"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b22": {
+      "decision": "REAL",
+      "query": "dressing room mirror lights",
+      "fallbacks": [
+        "loge miroir ampoules",
+        "backstage makeup mirror bulbs"
+      ],
+      "subject": [
+        "mirror",
+        "miroir",
+        "dressing",
+        "loge",
+        "backstage",
+        "makeup"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b23": {
+      "decision": "REAL",
+      "query": "cocktail reception crowd from behind",
+      "fallbacks": [
+        "soirée réception foule",
+        "gala evening guests"
+      ],
+      "subject": [
+        "reception",
+        "réception",
+        "crowd",
+        "foule",
+        "gala",
+        "guests",
+        "cocktail"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b24": {
+      "decision": "REAL",
+      "query": "lectern spotlight stage",
+      "fallbacks": [
+        "pupitre scène projecteur",
+        "podium speech spotlight"
+      ],
+      "subject": [
+        "lectern",
+        "pupitre",
+        "podium",
+        "stage",
+        "scène",
+        "speech"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_blur01": {
+      "decision": "PROCEDURAL",
+      "reason": "photo accidentelle floue (plafond), rendue par le téléphone"
+    },
+    "p_blur02": {
+      "decision": "PROCEDURAL",
+      "reason": "photo accidentelle dans le noir (poche), rendue par le téléphone"
+    },
+    "p_scr01": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran météo rendue par le téléphone"
+    },
+    "p_scr02": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran de la liste des badges rendue par le téléphone"
+    },
+    "p_vitrine_1752": {
+      "decision": "REAL",
+      "query": "pearl necklace display case velvet",
+      "fallbacks": [
+        "collier de perles vitrine",
+        "pearl necklace black velvet"
+      ],
+      "subject": [
+        "pearl",
+        "pearls",
+        "perle",
+        "perles",
+        "necklace",
+        "collier"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_vitrine_2216": {
+      "decision": "REAL",
+      "query": "empty museum display case spotlight",
+      "fallbacks": [
+        "vitrine vide musée",
+        "empty glass showcase"
+      ],
+      "subject": [
+        "vitrine",
+        "display",
+        "case",
+        "showcase",
+        "empty",
+        "vide"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_room_2213": {
+      "decision": "REAL",
+      "query": "gala evening hall stage crowd",
+      "fallbacks": [
+        "soirée gala salle scène",
+        "reception hall stage spotlight"
+      ],
+      "subject": [
+        "gala",
+        "hall",
+        "salle",
+        "stage",
+        "scène",
+        "crowd",
+        "foule"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_stage_2214": {
+      "decision": "REAL",
+      "query": "microphone stand spotlight dark stage",
+      "fallbacks": [
+        "micro sur pied scène",
+        "microphone stage spotlight"
+      ],
+      "subject": [
+        "microphone",
+        "micro",
+        "stage",
+        "scène",
+        "spotlight"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_regie_2215": {
+      "decision": "REAL",
+      "query": "lighting console dark",
+      "fallbacks": [
+        "console lumière régie",
+        "lighting desk theatre"
+      ],
+      "subject": [
+        "lighting",
+        "console",
+        "desk",
+        "régie",
+        "lumière",
+        "control"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_iris_look": {
+      "decision": "REAL",
+      "query": "sequin dress hanger",
+      "fallbacks": [
+        "robe à sequins",
+        "black sequin dress"
+      ],
+      "subject": [
+        "sequin",
+        "sequins",
+        "dress",
+        "robe",
+        "paillettes"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_jules": {
+      "decision": "REAL",
+      "query": "milk tooth",
+      "fallbacks": [
+        "dent de lait",
+        "baby tooth"
+      ],
+      "subject": [
+        "tooth",
+        "teeth",
+        "dent",
+        "milk",
+        "lait"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    }
+  }
+}

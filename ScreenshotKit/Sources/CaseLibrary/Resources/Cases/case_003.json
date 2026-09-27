@@ -20,8 +20,8 @@
   "Dimanche à 7h10, son frère Paul, 33 ans, est retrouvé inconscient au pied de l'escalier de pierre qui descend du jardin à la plage. Il est dans le coma. Tous disent avoir dormi.",
   "Jeanne vous confie son téléphone : sa soirée y est entière, heure par heure."
  ],
- "objective": "Établir qui était avec Paul sur l'escalier de la plage vers 2h10.",
- "difficulty": 1,
+ "objective": "Paul n'est pas tombé seul. Établir qui l'a rejoint sur l'escalier de la plage, entre 2h10 et 2h20.",
+ "difficulty": 2,
  "durationSeconds": 480,
  "phoneStartTime": "2026-08-23 11:40",
  "challengeDurations": {
@@ -833,14 +833,15 @@
        "id": "m_louise_018",
        "from": "louise",
        "at": "2026-08-23 02:34",
-       "text": "ton ciel de 30 ans ✨",
+       "text": "ton ciel de 30 ans ✨ (Diane dort sur le canapé du salon depuis 2h, je la vois par la baie, elle a pas bougé 😴)",
        "photo": "p_louise_0206"
       },
       {
        "id": "m_louise_019",
        "from": "louise",
        "at": "2026-08-23 02:34",
-       "photo": "p_louise_0214"
+       "photo": "p_louise_0214",
+       "text": "celle-là est gâchée : le lampadaire de l'escalier s'est allumé en pleine pose 🙄 quelqu'un en jaune qui descendait, et il y avait déjà quelqu'un en bas. des baigneurs je suppose"
       },
       {
        "id": "m_louise_020",
@@ -1072,6 +1073,12 @@
        "deletedAt": "2026-08-23 01:50"
       },
       {
+       "id": "m_family_mamie_0850",
+       "from": "mamie",
+       "at": "2026-08-23 08:50",
+       "text": "Diane ma chérie... J'ai vu passer un message de toi cette nuit dans la voiture de Grégoire, et puis il a disparu... Je n'ai pas eu le temps de le lire... Mamie"
+      },
+      {
        "id": "m_family_014",
        "from": "mamie",
        "at": "2026-08-23 09:31",
@@ -1224,6 +1231,12 @@
        "from": "me",
        "at": "2026-08-23 00:33",
        "text": "merci d'être venus 🥹❤️ rentrez bien !!"
+      },
+      {
+       "id": "m_party_yellow",
+       "from": "basile",
+       "at": "2026-08-23 00:36",
+       "text": "mention spéciale au sweat moutarde, seul jaune au milieu des chemises blanches, on le voyait depuis Arcachon 😂"
       },
       {
        "id": "m_party_019",
@@ -1803,6 +1816,7 @@
      "longitude": -1.2455,
      "revealedBy": [
       "photoInfo:p_louise_0214",
+      "message:m_louise_019",
       "message:m_fam_0149"
      ]
     },
@@ -1995,9 +2009,9 @@
      "id": "p_group_2340",
      "takenAt": "2026-08-22 23:40",
      "source": "camera",
-     "scene": "group",
-     "caption": "Photo de groupe devant la baie vitrée, au retardateur.",
-     "details": "Tout le monde pose devant la baie vitrée. Maxime porte un sweat jaune moutarde — le seul vêtement jaune de la photo. Paul est en chemise de lin blanche, Diane en robe bleue, Louise tient son appareil photo. Mamie est assise au premier rang, Grégoire derrière elle, Nour et Basile sur le côté.",
+     "scene": "interior_warm",
+     "caption": "Le sweat moutarde que j'ai offert à Maxime à Noël. Il l'a enfin sorti 🙄",
+     "details": "Posé sur le dossier d'une chaise du salon, près de la baie vitrée. Jaune moutarde, capuche, poche kangourou : Maxime le porte depuis que le vent s'est levé sur la terrasse.",
      "place": "Villa Les Oyats",
      "device": "iPhone 15"
     },
@@ -2007,7 +2021,7 @@
      "source": "received",
      "scene": "sky",
      "caption": "La Voie lactée au-dessus du toit de la villa, pose longue.",
-     "details": "Pose de 20 secondes, appareil sur trépied, prise depuis la terrasse. En bas du cadre, à travers la baie vitrée, dans le salon éclairé par une lampe, Diane dort sur le canapé, un plaid sur les jambes.",
+     "details": "Pose de 20 secondes, appareil sur trépied, prise depuis la terrasse. En bas du cadre, la baie vitrée du salon, où une petite lampe est restée allumée près du canapé.",
      "style": "night",
      "place": "Villa Les Oyats — terrasse",
      "from": "louise",
@@ -2019,8 +2033,8 @@
      "takenAt": "2026-08-23 02:14",
      "source": "received",
      "scene": "garden_stairs",
-     "caption": "Le ciel au-dessus du bassin, pose longue depuis la terrasse.",
-     "details": "Pose de 25 secondes. Au fond, en bas du jardin, deux silhouettes floues sur l'escalier de la plage. L'une porte un sweat clair, jaune dans la lumière du lampadaire. L'autre, plus grande, en blanc.",
+     "caption": "Le bas du jardin et l'escalier de la plage, pose longue : le lampadaire s'est allumé.",
+     "details": "Pose de 25 secondes, 02:14, depuis la terrasse. Le lampadaire à détecteur de présence de l'escalier de la plage est allumé : quelqu'un passait sur les marches à ce moment-là. Sur les poses de 02:06 et de 02:27, il est éteint.",
      "style": "night",
      "place": "Villa Les Oyats — terrasse",
      "from": "louise",
@@ -2032,8 +2046,8 @@
      "takenAt": "2026-08-23 02:27",
      "source": "received",
      "scene": "terrace",
-     "caption": "Étoiles au-dessus de la terrasse, le trépied dans le cadre.",
-     "details": "Horodatage 02:27, même cadrage que la série commencée à 02:06 : le trépied n'a pas bougé. Au premier plan, la table en teck et le reflet de la lampe frontale de Louise. L'escalier, au fond, est de nouveau dans le noir.",
+     "caption": "Le toit de la villa sous les étoiles, même cadrage qu'à 02:06.",
+     "details": "Horodatage 02:27. Le cadrage est identique à celui de 02:06 : l'appareil n'a pas quitté son trépied, sur la terrasse. La lampe du salon est toujours allumée derrière la baie vitrée.",
      "style": "night",
      "place": "Villa Les Oyats — terrasse",
      "from": "louise",
@@ -2046,7 +2060,7 @@
      "source": "received",
      "scene": "terrace",
      "caption": "« Week-end entre filles » : un café en terrasse face à l'océan.",
-     "details": "Deux cafés sur la table d'un café de la Côte des Basques, une paire de lunettes de soleil d'homme à monture écaille, et une veste de costume bleu marine sur le dossier d'une chaise.",
+     "details": "Deux tasses sur la table d'un café de la Côte des Basques, et une paire de lunettes de soleil d'homme à monture écaille. L'océan derrière.",
      "place": "Biarritz — Côte des Basques",
      "from": "diane",
      "receivedAt": "2026-07-12 11:02",
@@ -2056,10 +2070,10 @@
      "id": "p_max_sunglasses",
      "takenAt": "2026-08-01 16:20",
      "source": "camera",
-     "scene": "beach",
-     "caption": "Maxime lit sur la plage Pereire, à Arcachon.",
-     "details": "Il porte ses lunettes de soleil à monture écaille, celles qu'il ne quitte pas de l'été. Une serviette rayée, un livre ouvert, sa montre posée sur son sac.",
-     "place": "Arcachon — plage Pereire",
+     "scene": "terrace",
+     "caption": "Maxime a encore oublié ses lunettes sur la table du balcon.",
+     "details": "Ses lunettes de soleil à monture écaille, celles qu'il ne quitte pas de l'été, posées à côté d'une tasse.",
+     "place": "Chartrons, Bordeaux",
      "device": "iPhone 15"
     },
     {
@@ -2067,8 +2081,8 @@
      "takenAt": "2026-07-25 11:32",
      "source": "received",
      "scene": "beach",
-     "caption": "Jeanne debout sur une planche (presque).",
-     "details": "Une silhouette en combinaison, bras écartés, une vague minuscule. Grégoire, au fond, applaudit.",
+     "caption": "Moi debout sur une planche (presque), vue de très loin.",
+     "details": "La plage centrale de Lacanau, une vague minuscule, une silhouette en combinaison au loin, trop petite pour qu'on la reconnaisse.",
      "place": "Lacanau — plage centrale",
      "from": "paul",
      "receivedAt": "2026-07-25 12:10",
@@ -2079,8 +2093,8 @@
      "takenAt": "2003-07-20 15:30",
      "source": "received",
      "scene": "beach",
-     "caption": "Jeanne et Paul enfants, dune du Pilat, été 2003.",
-     "details": "Paul, 10 ans, un bob trop grand et un seau rouge. Jeanne, 6 ans, pleure parce qu'elle a du sable dans les yeux.",
+     "caption": "La dune du Pilat, été 2003 : le seau rouge de Paul.",
+     "details": "Un seau rouge et une pelle plantés dans le sable, la dune immense derrière. Au dos du tirage, l'écriture de Maman : « Paul 10 ans, Jeanne 6 ans, elle a pleuré tout l'après-midi ».",
      "style": "old",
      "place": "Pyla-sur-Mer",
      "from": "maman",
@@ -2093,7 +2107,7 @@
      "source": "received",
      "scene": "interior_warm",
      "caption": "Noël 2005 chez Mamie, à Arcachon.",
-     "details": "Une nappe rouge, des bougies, Paul fait une grimace derrière Jeanne. Mamie coupe la bûche.",
+     "details": "Une nappe rouge, des bougies, la bûche entamée au milieu de la table.",
      "style": "old",
      "place": "Arcachon",
      "from": "maman",
@@ -2106,7 +2120,7 @@
      "source": "received",
      "scene": "street_day",
      "caption": "Une rue de Porto, des nappes brodées en vitrine.",
-     "details": "Des azulejos bleus, une boutique de linge de maison. Maman, de dos, un sac à la main.",
+     "details": "Des azulejos bleus sur une façade, une boutique de linge de maison, des nappes brodées suspendues à l'entrée.",
      "place": "Porto",
      "from": "papa",
      "receivedAt": "2026-08-15 13:02",
@@ -2116,7 +2130,7 @@
      "id": "p_zellige",
      "takenAt": "2026-07-16 11:15",
      "source": "received",
-     "scene": "document",
+     "scene": "interior_warm",
      "caption": "Deux échantillons de zellige, blanc et vert sauge.",
      "details": "Posés sur le plan de travail de Mme Laborde. Le vert est plus foncé qu'en catalogue.",
      "place": "Caudéran, Bordeaux",
@@ -2130,7 +2144,7 @@
      "source": "camera",
      "scene": "interior_warm",
      "caption": "Emménagement aux Chartrons, juin 2022.",
-     "details": "Des cartons partout, une plante sur le rebord de la fenêtre, Maxime assis par terre.",
+     "details": "Des cartons partout, une plante sur le rebord de la fenêtre, un parquet qui brille.",
      "style": "old",
      "place": "Chartrons, Bordeaux",
      "device": "iPhone 12"
@@ -2169,10 +2183,9 @@
      "id": "p_selfie_mirror",
      "takenAt": "2026-07-13 08:10",
      "source": "camera",
-     "scene": "mirror",
-     "caption": "Selfie dans le miroir de l'agence.",
-     "details": "Jeanne, une tasse à la main, un échantillon de papier peint sous le bras.",
-     "style": "selfie",
+     "scene": "office",
+     "caption": "L'agence, 8h10 : premier café.",
+     "details": "Une tasse fumante et un échantillon de papier peint posés sur le bureau, la lumière du matin sur les plans.",
      "place": "Castaing Intérieurs",
      "device": "iPhone 15"
     },
@@ -2342,7 +2355,7 @@
      "source": "camera",
      "scene": "view",
      "caption": "Le phare du Cap Ferret, vu d'en bas.",
-     "details": "Le phare blanc et rouge, un ciel sans nuage. Maxime, de dos, lit le panneau des horaires.",
+     "details": "Le phare blanc au sommet rouge, un ciel sans nuage, des pins autour.",
      "place": "Phare du Cap Ferret",
      "device": "iPhone 15"
     },
@@ -2372,7 +2385,7 @@
      "source": "camera",
      "scene": "beach",
      "caption": "La dune du Pilat, en face, de l'autre côté du bassin.",
-     "details": "Du sable très blanc, des bateaux au mouillage, Paul et Grégoire à l'eau avec les planches.",
+     "details": "Du sable très blanc, des bateaux au mouillage, deux planches de surf plantées dans le sable au premier plan.",
      "place": "Plage de la Pointe",
      "device": "iPhone 15"
     },
@@ -2380,10 +2393,9 @@
      "id": "p_selfie_louise",
      "takenAt": "2026-08-22 19:30",
      "source": "camera",
-     "scene": "selfie",
-     "caption": "Jeanne et Louise, joue contre joue.",
-     "details": "Des paillettes sur les joues, la baie vitrée derrière.",
-     "style": "selfie",
+     "scene": "terrace",
+     "caption": "L'apéro sur la terrasse : des paillettes partout.",
+     "details": "Des coupes alignées sur la table en teck, un pot de paillettes renversé, la baie vitrée derrière.",
      "place": "Villa Les Oyats",
      "device": "iPhone 15"
     },
@@ -2403,7 +2415,7 @@
      "source": "camera",
      "scene": "party",
      "caption": "Le gâteau et ses deux bougies « 3 » et « 0 ».",
-     "details": "Des visages éclairés par les bougies, Mamie applaudit.",
+     "details": "Deux bougies allumées dans le noir, la crème qui brille, des mains qui applaudissent en bordure du cadre.",
      "place": "Villa Les Oyats",
      "device": "iPhone 15"
     },
@@ -2413,7 +2425,7 @@
      "source": "camera",
      "scene": "gallery",
      "caption": "Le cadeau de Louise : un tirage encadré.",
-     "details": "Une photo de Jeanne et Paul enfants sur la dune, retirée en grand format, cadre en chêne.",
+     "details": "La photo de la dune du Pilat avec le seau rouge, été 2003, retirée en grand format, cadre en chêne.",
      "place": "Villa Les Oyats",
      "device": "iPhone 15"
     },
@@ -2423,7 +2435,7 @@
      "source": "camera",
      "scene": "party",
      "caption": "Tout le monde danse dans le salon.",
-     "details": "Photo floue : des bras levés, une guirlande, un sweat jaune au milieu.",
+     "details": "Photo floue : des bras levés, une guirlande lumineuse, une tache jaune moutarde au milieu.",
      "style": "blurry",
      "place": "Villa Les Oyats",
      "device": "iPhone 15"
@@ -2871,7 +2883,7 @@
    "age": 34,
    "address": "Chartrons, Bordeaux",
    "statement": "« J'ai rejoint Jeanne vers 1h45 et je ne me suis pas relevé de la nuit. »",
-   "verdict": "Maxime Rivière a menti. À 02:21, il n'était pas dans le lit : il remontait du jardin. Descendu retrouver Diane sur l'escalier de la plage, il y a trouvé Paul. Le sweat jaune de la photo de Louise, à 02:14, c'est le sien."
+   "verdict": "Maxime Rivière a menti. À 02:21, il n'était pas dans le lit : il remontait du jardin. Descendu retrouver Diane sur l'escalier de la plage, il y a trouvé Paul. La silhouette jaune que Louise a vue passer sous le lampadaire à 02:14, c'est son sweat moutarde."
   },
   {
    "id": "s_diane",
@@ -2880,10 +2892,10 @@
    "age": 31,
    "address": "Lacanau",
    "statement": "« J'ai dormi avec Paul dans notre chambre. Je ne l'ai pas entendu se lever. »",
-   "alibi": "À 02:06, la photo de Louise la montre endormie sur le canapé du salon, un plaid sur les jambes. Sur l'escalier, à 02:14, personne ne porte de robe bleue.",
+   "alibi": "Louise, sur la terrasse face à la baie vitrée, la voit dormir sur le canapé du salon de 2h à 2h34. Et sur l'escalier, à 02:14, Louise voit passer du jaune, pas une robe bleue.",
    "alibiEvidence": "e_diane_alibi",
    "trap": "Elle a menti sur sa nuit et c'est elle qui a donné rendez-vous sur l'escalier. Mais après la dispute avec Paul, elle est descendue dormir sur le canapé et n'est jamais allée au rendez-vous.",
-   "verdict": "Diane a menti, par honte : après une dispute avec Paul, elle a dormi sur le canapé du salon. Son message effacé donnait bien rendez-vous sur l'escalier… à Maxime. Elle n'y est pas allée : à 02:06, elle dormait."
+   "verdict": "Diane a menti, par honte : après une dispute avec Paul, elle a dormi sur le canapé du salon. Son message effacé donnait bien rendez-vous sur l'escalier… à Maxime. Elle n'y est pas allée : Louise la voyait dormir."
   },
   {
    "id": "s_louise",
@@ -2891,11 +2903,11 @@
    "role": "Meilleure amie de Jeanne — doit 3 000 € à Paul",
    "age": 30,
    "address": "Saint-Michel, Bordeaux",
-   "statement": "« J'étais sur la terrasse à photographier les étoiles de 2h à 2h30, avec mes écouteurs. Je n'ai rien vu ni entendu. »",
-   "alibi": "Sa série de photos est continue, depuis la terrasse, de 02:06 à 02:27, le trépied au même endroit. C'est même elle qui a photographié, sans le voir, ce qui se passait sur l'escalier.",
+   "statement": "« J'étais sur la terrasse à photographier les étoiles de 2h à 2h30, avec mes écouteurs. Je n'ai rien entendu. Pendant une pose, le lampadaire de l'escalier s'est allumé : j'ai cru à des baigneurs. »",
+   "alibi": "Sa série de photos est continue, depuis la terrasse, de 02:06 à 02:27, le trépied au même endroit. À 02:14, elle était derrière son appareil : c'est même elle qui a vu, sans comprendre, quelqu'un en jaune descendre l'escalier.",
    "alibiEvidence": "e_louise_alibi",
    "trap": "Une dette de 3 000 €, un échange tendu devant tout le monde au dîner, et elle était dehors au moment des faits.",
-   "verdict": "Louise avait un différend réel avec Paul, mais elle n'a pas quitté la terrasse : ses photos le prouvent, heure par heure. Sans le savoir, elle a fixé l'instant où deux silhouettes se faisaient face sur l'escalier."
+   "verdict": "Louise avait un différend réel avec Paul, mais elle n'a pas quitté la terrasse : ses photos le prouvent, heure par heure. Sans le savoir, elle a vu passer sous le lampadaire la personne qui allait rejoindre Paul."
   },
   {
    "id": "s_gregoire",
@@ -2922,31 +2934,33 @@
     "message:m_max_0221",
     "message:m_max_0223"
    ],
-   "meaning": "À 02:21, Maxime n'est pas dans le lit, contrairement à ce qu'il affirme. « Je bois un verre d'eau » : le salon, lui, était occupé par Diane endormie."
+   "meaning": "À 02:21, Maxime n'est pas dans le lit, contrairement à ce qu'il déclare. Deux minutes plus tard, il répond qu'il est « en bas » : sept minutes après le passage sous le lampadaire de l'escalier."
   },
   {
    "id": "e_stairs_photo",
-   "title": "Deux silhouettes sur l'escalier",
+   "title": "Quelqu'un en jaune sous le lampadaire",
    "importance": "key",
    "suspects": [
     "s_maxime"
    ],
+   "anyOf": true,
    "refs": [
+    "message:m_louise_019",
     "photoInfo:p_louise_0214"
    ],
-   "meaning": "À 02:14, la pose longue de Louise saisit deux silhouettes sur l'escalier de la plage : l'une en jaune, l'autre, plus grande, en blanc — la chemise de lin de Paul."
+   "meaning": "À 02:14, le lampadaire à détecteur de l'escalier s'allume en pleine pose de Louise : quelqu'un en jaune descend les marches, et quelqu'un attend déjà en bas. Paul, en chemise blanche, attendait."
   },
   {
    "id": "e_yellow",
-   "title": "Le sweat jaune",
+   "title": "Le sweat moutarde",
    "importance": "key",
    "suspects": [
     "s_maxime"
    ],
    "refs": [
-    "photoInfo:p_group_2340"
+    "photo:p_group_2340"
    ],
-   "meaning": "Sur la photo de groupe de 23:40, le seul vêtement jaune de la soirée est le sweat moutarde de Maxime."
+   "meaning": "Le sweat jaune moutarde de la soirée est celui de Maxime : Jeanne le lui a offert. Les invités le remarquent tous, « seul jaune au milieu des chemises blanches »."
   },
   {
    "id": "e_rdv_deleted",
@@ -2959,7 +2973,7 @@
    "refs": [
     "message:m_fam_0149"
    ],
-   "meaning": "Diane donne rendez-vous à quelqu'un sur l'escalier de la plage, « il dort » : Paul. Un message qu'on efface en une minute. Il ne visait ni Mamie ni Jeanne : dans ce groupe, il ne reste que Maxime."
+   "meaning": "Diane donne rendez-vous à quelqu'un sur l'escalier de la plage, « il dort » : Paul. Un message effacé en une minute, que Mamie a vu passer. Il ne visait ni Mamie ni Jeanne : dans ce groupe, il ne reste que Maxime."
   },
   {
    "id": "e_paul_awake",
@@ -2987,7 +3001,7 @@
     "calendar:c_biarritz",
     "photoInfo:p_diane_biarritz"
    ],
-   "meaning": "Le « séminaire » de Maxime et le « week-end entre filles » de Diane tombent le même week-end, au même endroit. Sur la table de Diane : les lunettes écaille de Maxime et une veste de costume bleu marine."
+   "meaning": "Le « séminaire » de Maxime et le « week-end entre filles » de Diane tombent le même week-end, au même endroit. Sur la table de Diane : des lunettes de soleil d'homme à monture écaille, les mêmes que celles que Maxime oublie sur le balcon."
   },
   {
    "id": "e_diane_alibi",
@@ -2996,10 +3010,12 @@
    "suspects": [
     "s_diane"
    ],
+   "anyOf": true,
    "refs": [
+    "message:m_louise_018",
     "photoInfo:p_louise_0206"
    ],
-   "meaning": "À 02:06, à travers la baie vitrée, Diane dort sur le canapé du salon. Elle n'est pas allée à son propre rendez-vous."
+   "meaning": "De 2h à 2h34, Louise a la baie vitrée du salon sous les yeux : Diane dort sur le canapé, la lampe allumée. Elle n'est pas allée à son propre rendez-vous."
   },
   {
    "id": "e_louise_alibi",
@@ -3013,7 +3029,7 @@
     "photoInfo:p_louise_0227",
     "photo:p_louise_0206"
    ],
-   "meaning": "De 02:06 à 02:27, Louise photographie le ciel depuis la terrasse sans déplacer son trépied."
+   "meaning": "02:06, 02:14, 02:27 : même trépied, sur la terrasse, et le même cadrage à 02:06 et 02:27. À 02:14, Louise était derrière son appareil, à quarante mètres de l'escalier."
   },
   {
    "id": "e_gregoire_alibi",
@@ -3071,20 +3087,26 @@
  "hints": [
   {
    "id": "h1",
-   "text": "Tout le monde dit avoir dormi. Les photos, elles, ne dorment pas : regardez à quelle heure chacune a été prise.",
+   "text": "Tout se joue la nuit du 22 au 23, entre 01:45 et 02:35. Commencez par les conversations de ceux qui ne dormaient pas à cette heure-là.",
    "scoreCost": 0
   },
   {
    "id": "h2",
-   "text": "Louise a photographié le ciel toute la nuit depuis la terrasse. Analysez sa série, puis la grande photo de groupe.",
-   "scoreCost": 8
+   "text": "Comparez ce que chacun déclare avec l'heure de ses propres messages. Et ce que Louise a vu depuis la terrasse avec la façon dont chacun était habillé ce soir-là.",
+   "scoreCost": 5
   },
   {
    "id": "h3",
-   "text": "À 02:21, Jeanne cherche quelqu'un dans son lit. Qui portait du jaune ce soir-là ?",
-   "scoreCost": 15,
-   "unlockAtRemainingSeconds": 120
+   "text": "À 02:14, quelqu'un en jaune descend l'escalier sous le lampadaire. Trouvez à qui appartient ce vêtement, puis relisez ce que cette personne a écrit à Jeanne à 02:23.",
+   "scoreCost": 10,
+   "unlockAtRemainingSeconds": 180
   }
+ ],
+ "minimalPath": [
+  "e_stairs_photo",
+  "e_yellow",
+  "e_not_in_bed",
+  "e_paul_awake"
  ],
  "solution": {
   "culprit": "s_maxime",
@@ -3098,12 +3120,12 @@
    },
    {
     "at": "2026-08-22 23:40",
-    "text": "Photo de groupe : Maxime est le seul à porter du jaune",
+    "text": "Le sweat moutarde de Maxime, seul jaune de la soirée",
     "evidence": "e_yellow"
    },
    {
     "at": "2026-08-23 01:49",
-    "text": "Diane se trompe de conversation : « tu descends ? il dort. escalier de la plage » — effacé à 01:50",
+    "text": "Diane se trompe de conversation : « tu descends ? il dort. escalier de la plage » — effacé à 01:50, mais Mamie l'a vu passer",
     "evidence": "e_rdv_deleted"
    },
    {
@@ -3118,12 +3140,12 @@
    },
    {
     "at": "2026-08-23 02:06",
-    "text": "Diane dort sur le canapé du salon",
+    "text": "Diane dort sur le canapé du salon, sous les yeux de Louise",
     "evidence": "e_diane_alibi"
    },
    {
     "at": "2026-08-23 02:14",
-    "text": "Sur l'escalier : une silhouette en blanc, une autre en jaune",
+    "text": "Le lampadaire de l'escalier s'allume : quelqu'un en jaune descend rejoindre Paul",
     "evidence": "e_stairs_photo"
    },
    {
@@ -3138,10 +3160,10 @@
    }
   ],
   "story": [
-   "Depuis le printemps, Maxime et Diane se voient en secret. Le week-end du 11 juillet, lui est « en séminaire » à Biarritz, elle en « week-end entre filles » à Biarritz. Sur la photo qu'elle poste dans le groupe de la famille : ses lunettes écaille et sa veste de costume.",
-   "Samedi 22 août, Jeanne fête ses trente ans au Cap Ferret. À 01:05, Grégoire raccompagne Mamie à Arcachon. À 01:45, Jeanne monte se coucher ; Maxime la suit. À 01:49, Diane, qui croit écrire à Maxime, poste dans le groupe de la famille : « tu descends ? il dort. escalier de la plage ». Elle l'efface une minute plus tard. Trop tard : Paul l'a lu.",
+   "Depuis le printemps, Maxime et Diane se voient en secret. Le week-end du 11 juillet, lui est « en séminaire » à Biarritz, elle en « week-end entre filles » à Biarritz. Sur la photo qu'elle poste dans le groupe de la famille : les lunettes écaille de Maxime, sur la table du café.",
+   "Samedi 22 août, Jeanne fête ses trente ans au Cap Ferret. À 01:05, Grégoire raccompagne Mamie à Arcachon. À 01:45, Jeanne monte se coucher ; Maxime la suit. À 01:49, Diane, qui croit écrire à Maxime, poste dans le groupe de la famille : « tu descends ? il dort. escalier de la plage ». Elle l'efface une minute plus tard. Trop tard : Paul l'a lu, et Mamie, dans la voiture de Grégoire, l'a vu passer.",
    "Paul et Diane se disputent ; elle descend dormir sur le canapé du salon. Paul écrit à sa sœur — « Faut que je te parle. C'est grave. » — puis « je règle ça moi-même ». Il l'appelle une dernière fois à 02:09, sans réponse, et descend attendre sur l'escalier de la plage.",
-   "Maxime, qui a vu le message, se glisse hors du lit et descend retrouver Diane. C'est Paul qui l'attend. Ils se battent sur les marches. Maxime le repousse ; Paul tombe. Sur la terrasse, écouteurs sur les oreilles, Louise photographie le ciel : sa pose longue de 02:14 enregistre deux silhouettes sous le lampadaire, l'une en blanc, l'autre en jaune.",
+   "Maxime, qui a vu le message, se glisse hors du lit, enfile son sweat moutarde et descend retrouver Diane. C'est Paul qui l'attend. Ils se battent sur les marches. Maxime le repousse ; Paul tombe. Sur la terrasse, écouteurs sur les oreilles, Louise photographie le ciel : à 02:14, le lampadaire à détecteur s'allume en pleine pose et elle voit passer quelqu'un en jaune. Elle croit à des baigneurs.",
    "Maxime remonte par le jardin. À 02:21, Jeanne se réveille seule et lui écrit. « En bas, je bois un verre d'eau. » Il se recouche à 02:26. Au matin, Grégoire, parti nager, trouve Paul au pied de l'escalier.",
    "Transporté au CHU de Bordeaux, Paul se réveille trois jours plus tard et confirme. Maxime avoue : il est descendu retrouver Diane, Paul l'attendait, ils se sont battus, il l'a repoussé. Il n'a appelé personne."
   ]

@@ -15,7 +15,13 @@ public enum CaseValidator {
 
         if file.durationSeconds <= 0 { fail("durationSeconds must be > 0") }
         if file.devices.isEmpty { fail("a case needs at least one device") }
-        if file.suspects.count < 2 { fail("a case needs at least two suspects") }
+        // One number space: main cases 1–100, ALIBI checks from 101 (shown « ALIBI #001 »).
+        if file.isAlibi != (file.number > 100) { fail("main cases are numbered 1–100, ALIBI cases from 101") }
+        if file.isAlibi {
+            if file.suspects.count != 1 { fail("an ALIBI case has exactly one person (one suspect)") }
+        } else if file.suspects.count < 2 {
+            fail("a case needs at least two suspects")
+        }
 
         // Global id uniqueness (all references share one namespace).
         var seen: [String: String] = [:]
@@ -231,9 +237,32 @@ public enum CaseValidator {
             if let e = step.evidence, !evidenceIDs.contains(e) { fail("reveal step references unknown evidence '\(e)'") }
         }
         if file.solution.reveal.isEmpty { fail("the solution needs reveal steps") }
+        for id in file.minimalPath ?? [] {
+            guard let evidence = file.evidence.first(where: { $0.id == id }) else { fail("minimalPath references unknown evidence '\(id)'"); continue }
+            if evidence.importance == .falseLead { fail("minimalPath contains the false lead '\(id)'") }
+        }
+        if let path = file.minimalPath {
+            let keys = file.evidence.filter { path.contains($0.id) && $0.importance == .key && $0.suspects.contains(file.solution.culprit) }
+            if keys.count < 2 { fail("minimalPath needs at least 2 key pieces about the culprit") }
+        }
+        if file.isAlibi {
+            if file.claim == nil { fail("an ALIBI case needs a 'claim'") }
+            if file.solution.alibiHolds == nil { fail("an ALIBI case needs 'solution.alibiHolds'") }
+            if let claim = file.claim {
+                if claim.to <= claim.from { fail("the claim ends before it starts") }
+                if !file.devices.contains(where: { $0.contacts.contains { $0.id == claim.person } }) {
+                    fail("the claim's person '\(claim.person)' is not a contact")
+                }
+                if let suspect = file.suspects.first, suspect.contact != claim.person {
+                    fail("the ALIBI suspect must be the person of the claim")
+                }
+            }
+        } else if file.claim != nil || file.solution.alibiHolds != nil {
+            fail("'claim' and 'alibiHolds' belong to ALIBI cases")
+        }
         for suspect in file.suspects {
             if let e = suspect.alibiEvidence, !evidenceIDs.contains(e) { fail("suspect '\(suspect.id)' alibi references unknown evidence '\(e)'") }
-            if suspect.id != file.solution.culprit && suspect.alibi == nil { fail("innocent suspect '\(suspect.id)' needs an alibi") }
+            if !file.isAlibi && suspect.id != file.solution.culprit && suspect.alibi == nil { fail("innocent suspect '\(suspect.id)' needs an alibi") }
         }
         for device in file.devices {
             for event in device.liveEvents {

@@ -1,0 +1,157 @@
+{
+  "case": "103",
+  "about": "ALIBI #003 « LE RENDEZ-VOUS » — Strasbourg (Neudorf, place Kléber), novembre 2026",
+  "photos": {
+    "p3_petitefrance": {
+      "decision": "REAL",
+      "query": "Petite France Strasbourg colombages",
+      "fallbacks": [
+        "Petite France Strasbourg",
+        "Strasbourg Ill half-timbered"
+      ],
+      "subject": [
+        "petite france",
+        "strasbourg",
+        "colombages",
+        "half-timbered",
+        "ill"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p3_meinau": {
+      "decision": "REAL",
+      "query": "Stade de la Meinau",
+      "fallbacks": [
+        "Stade de la Meinau nuit",
+        "football stadium stands night"
+      ],
+      "subject": [
+        "meinau",
+        "stade",
+        "stadium",
+        "tribune",
+        "stand"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p3_tram": {
+      "decision": "REAL",
+      "query": "Tram Strasbourg Homme de Fer",
+      "fallbacks": [
+        "Strasbourg tramway",
+        "tram station Strasbourg"
+      ],
+      "subject": [
+        "tram",
+        "tramway",
+        "homme de fer",
+        "strasbourg"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p3_cathedrale": {
+      "decision": "REAL",
+      "query": "Cathédrale de Strasbourg crépuscule",
+      "fallbacks": [
+        "Strasbourg cathedral dusk",
+        "Cathédrale Notre-Dame de Strasbourg"
+      ],
+      "subject": [
+        "cathédrale",
+        "cathedral",
+        "strasbourg",
+        "dusk",
+        "crépuscule"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p3_simulation": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    },
+    "p3_echantillons": {
+      "decision": "REAL",
+      "query": "ceramic tile samples",
+      "fallbacks": [
+        "échantillons carrelage",
+        "floor tiles samples table"
+      ],
+      "subject": [
+        "tile",
+        "tiles",
+        "carrelage",
+        "carreau",
+        "ceramic",
+        "sample"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p3_chantier": {
+      "decision": "REAL",
+      "query": "bathroom renovation tiling",
+      "fallbacks": [
+        "salle de bains travaux carrelage",
+        "bathroom construction tiles"
+      ],
+      "subject": [
+        "bathroom",
+        "salle de bains",
+        "renovation",
+        "tiling",
+        "tiles",
+        "carrelage"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p3_pluie": {
+      "decision": "REAL",
+      "query": "rain on windshield",
+      "fallbacks": [
+        "pluie pare-brise",
+        "raindrops car windscreen",
+        "rain car window"
+      ],
+      "subject": [
+        "rain",
+        "pluie",
+        "windshield",
+        "windscreen",
+        "pare-brise",
+        "raindrops"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p3_kleber": {
+      "decision": "REAL",
+      "query": "Place Kléber Strasbourg pluie",
+      "fallbacks": [
+        "Place Kléber Strasbourg",
+        "Strasbourg square rain"
+      ],
+      "subject": [
+        "kléber",
+        "kleber",
+        "place",
+        "square",
+        "strasbourg"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    }
+  }
+}

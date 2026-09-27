@@ -1,0 +1,160 @@
+{
+  "case": "102",
+  "about": "ALIBI #002 « LE DERNIER MÉTRO » — Lille / Villeneuve-d'Ascq, octobre 2026",
+  "photos": {
+    "p2_citadelle": {
+      "decision": "REAL",
+      "query": "Citadelle de Lille parc automne",
+      "fallbacks": [
+        "Parc de la Citadelle Lille",
+        "autumn park path leaves"
+      ],
+      "subject": [
+        "citadelle",
+        "park",
+        "parc",
+        "autumn",
+        "automne",
+        "leaves"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p2_grandplace": {
+      "decision": "REAL",
+      "query": "Vieille Bourse Lille Grand-Place",
+      "fallbacks": [
+        "Grand-Place Lille",
+        "Lille Grand Place"
+      ],
+      "subject": [
+        "bourse",
+        "grand-place",
+        "grand place",
+        "lille",
+        "square"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p2_velo": {
+      "decision": "REAL",
+      "query": "bicycle hallway apartment",
+      "fallbacks": [
+        "vélo entrée appartement",
+        "bicycle leaning wall indoor"
+      ],
+      "subject": [
+        "bicycle",
+        "vélo",
+        "bike",
+        "hallway",
+        "couloir"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p2_code": {
+      "decision": "REAL",
+      "query": "computer screen source code",
+      "fallbacks": [
+        "laptop code screen desk",
+        "programming monitor"
+      ],
+      "subject": [
+        "code",
+        "screen",
+        "écran",
+        "computer",
+        "laptop",
+        "monitor"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p2_virement": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    },
+    "p2_pintes": {
+      "decision": "REAL",
+      "query": "two pints beer bar counter",
+      "fallbacks": [
+        "beer glasses bar",
+        "pintes bière comptoir"
+      ],
+      "subject": [
+        "beer",
+        "bière",
+        "pint",
+        "pinte",
+        "bar",
+        "glass"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p2_rame": {
+      "decision": "REAL",
+      "query": "Métro de Lille VAL intérieur",
+      "fallbacks": [
+        "Lille metro interior",
+        "empty metro car interior"
+      ],
+      "subject": [
+        "metro",
+        "métro",
+        "val",
+        "rame",
+        "wagon",
+        "subway"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p2_rue": {
+      "decision": "REAL",
+      "query": "Rue Masséna Lille nuit",
+      "fallbacks": [
+        "Lille rue nuit bar",
+        "street at night crowd bar"
+      ],
+      "subject": [
+        "masséna",
+        "massena",
+        "street",
+        "rue",
+        "night",
+        "nuit"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p2_ciel": {
+      "decision": "REAL",
+      "query": "Villeneuve-d'Ascq immeubles ciel gris",
+      "fallbacks": [
+        "overcast sky apartment buildings",
+        "grey sky residential"
+      ],
+      "subject": [
+        "sky",
+        "ciel",
+        "building",
+        "immeuble",
+        "overcast",
+        "villeneuve"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    }
+  }
+}

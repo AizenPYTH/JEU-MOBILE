@@ -1,0 +1,824 @@
+{
+  "schemaVersion": 1,
+  "id": "alibi_003",
+  "number": 103,
+  "mode": "alibi",
+  "title": "LE RENDEZ-VOUS",
+  "tagline": "Un rendez-vous à la banque, noté dans l'agenda. A-t-il eu lieu ?",
+  "synopsis": [
+    "Jeudi 19 novembre, entre 14h et 15h, la voiture d'Aurélie Schmitt a été rayée sur toute la longueur et un pneu crevé, place du Marché, à Neudorf (Strasbourg), devant chez elle.",
+    "Élias Muller, 34 ans, a fermé leur agence d'aménagement intérieur avec elle en septembre, en mauvais termes. Il affirme qu'à cette heure-là, il était à un rendez-vous pour un prêt, à l'agence de la place Kléber, à l'autre bout de la ville.",
+    "Son agenda dit la même chose. Vérifiez le reste du téléphone."
+  ],
+  "objective": "Vérifiez l'alibi d'Élias : était-il à son rendez-vous, place Kléber, entre 14h et 15h ?",
+  "difficulty": 2,
+  "durationSeconds": 360,
+  "challengeDurations": {
+    "investigator": 648,
+    "detective": 360,
+    "expert": 252
+  },
+  "phoneStartTime": "2026-11-20 09:40",
+  "claim": {
+    "person": "me",
+    "statement": "« Entre 14h et 15h, j'avais rendez-vous à la banque, place Kléber, pour mon prêt. Je n'ai pas mis les pieds à Neudorf. »",
+    "place": "Agence Caisse Ill & Rhin, place Kléber (centre de Strasbourg)",
+    "from": "2026-11-19 14:00",
+    "to": "2026-11-19 15:00"
+  },
+  "minimalPath": [
+    "e_report",
+    "e_pluie"
+  ],
+  "dossier": {
+    "category": "VÉRIFICATION D'ALIBI",
+    "city": "Strasbourg",
+    "place": "Place du Marché — Neudorf",
+    "subject": "Élias Muller",
+    "subjectLabel": "DÉCLARANT",
+    "subjectAge": 34,
+    "subjectContact": "me",
+    "rating": 3
+  },
+  "devices": [
+    {
+      "id": "d_elias",
+      "label": "Téléphone d'Élias",
+      "model": "iPhone 15",
+      "wallpaper": "storm",
+      "batteryPercent": 67,
+      "lockedApps": [],
+      "contacts": [
+        {
+          "id": "me",
+          "name": "Élias Muller",
+          "phone": "+33 6 24 71 39 58",
+          "relation": "Moi",
+          "email": "elias.muller@mailo.fr",
+          "birthday": "27/01/1992",
+          "avatarHue": 0.05,
+          "isOwner": true
+        },
+        {
+          "id": "aurelie",
+          "name": "Aurélie Schmitt",
+          "phone": "+33 6 58 30 12 67",
+          "relation": "Ancienne associée",
+          "email": "aurelie.schmitt@atelier-ais.fr",
+          "avatarHue": 0.9
+        },
+        {
+          "id": "jonas",
+          "name": "Jonas Muller",
+          "phone": "+33 6 41 86 25 03",
+          "relation": "Frère",
+          "avatarHue": 0.36
+        },
+        {
+          "id": "maman",
+          "name": "Maman",
+          "phone": "+33 6 72 19 44 86",
+          "relation": "Mère",
+          "avatarHue": 0.97
+        },
+        {
+          "id": "weiss",
+          "name": "Frédéric Weiss",
+          "phone": "+33 3 88 52 60 14",
+          "relation": "Conseiller — Caisse Ill & Rhin",
+          "email": "f.weiss@caisse-illrhin.fr",
+          "avatarHue": 0.6
+        },
+        {
+          "id": "yasmine",
+          "name": "Yasmine Ould-Ali",
+          "phone": "+33 6 93 05 72 41",
+          "relation": "Associée (chantiers)",
+          "email": "yasmine.ouldali@mailo.fr",
+          "avatarHue": 0.22
+        },
+        {
+          "id": "baptiste",
+          "name": "Baptiste Kern",
+          "phone": "+33 6 35 48 90 16",
+          "relation": "Ami",
+          "avatarHue": 0.7
+        }
+      ],
+      "conversations": [
+        {
+          "id": "c3_aurelie",
+          "participants": [
+            "aurelie"
+          ],
+          "messages": [
+            {
+              "id": "m3_a01",
+              "from": "aurelie",
+              "at": "2026-09-28 10:15",
+              "text": "Le liquidateur a besoin de ta signature avant vendredi."
+            },
+            {
+              "id": "m3_a02",
+              "from": "me",
+              "at": "2026-09-28 11:02",
+              "text": "Je signe quand j'aurai vu les comptes. Pas avant."
+            },
+            {
+              "id": "m3_a03",
+              "from": "aurelie",
+              "at": "2026-10-14 20:40",
+              "text": "Tu as reçu ta part. On est quittes."
+            },
+            {
+              "id": "m3_a04",
+              "from": "me",
+              "at": "2026-10-14 22:05",
+              "text": "Quittes ? Tu gardes le fichier et tous les contrats. On n'est pas quittes."
+            },
+            {
+              "id": "m3_a_1112",
+              "from": "aurelie",
+              "at": "2026-11-12 21:30",
+              "text": "Je t'ai vu tourner place du Marché hier soir. Ne reviens pas devant chez moi."
+            },
+            {
+              "id": "m3_a_1112b",
+              "from": "me",
+              "at": "2026-11-12 21:48",
+              "text": "J'ai le droit de me garer où je veux."
+            }
+          ]
+        },
+        {
+          "id": "c3_jonas",
+          "participants": [
+            "jonas"
+          ],
+          "messages": [
+            {
+              "id": "m3_j01",
+              "from": "jonas",
+              "at": "2026-11-16 19:00",
+              "text": "Dimanche chez les parents, tu viens ?"
+            },
+            {
+              "id": "m3_j02",
+              "from": "me",
+              "at": "2026-11-16 19:04",
+              "text": "Oui, j'apporte le vin"
+            },
+            {
+              "id": "m3_j03",
+              "from": "me",
+              "at": "2026-11-19 14:33",
+              "text": "Il pleut des cordes 🌧",
+              "photo": "p3_pluie"
+            },
+            {
+              "id": "m3_j04",
+              "from": "jonas",
+              "at": "2026-11-19 14:35",
+              "text": "Ici aussi, le bureau prend l'eau par la fenêtre 🙃"
+            },
+            {
+              "id": "m3_j05",
+              "from": "jonas",
+              "at": "2026-11-19 18:20",
+              "text": "Au fait, t'as eu ton prêt ?"
+            },
+            {
+              "id": "m3_j06",
+              "from": "me",
+              "at": "2026-11-19 18:32",
+              "text": "On verra la semaine prochaine"
+            }
+          ]
+        },
+        {
+          "id": "c3_maman",
+          "participants": [
+            "maman"
+          ],
+          "messages": [
+            {
+              "id": "m3_m01",
+              "from": "maman",
+              "at": "2026-11-17 12:00",
+              "text": "N'oublie pas ton rendez-vous jeudi, mets une chemise 😄"
+            },
+            {
+              "id": "m3_m02",
+              "from": "me",
+              "at": "2026-11-17 12:14",
+              "text": "Oui maman"
+            },
+            {
+              "id": "m3_m03",
+              "from": "maman",
+              "at": "2026-11-19 16:10",
+              "text": "Alors, la banque ?"
+            },
+            {
+              "id": "m3_m_1625",
+              "from": "me",
+              "at": "2026-11-19 16:25",
+              "text": "Ça s'est bien passé, je te raconte dimanche"
+            },
+            {
+              "id": "m3_m04",
+              "from": "maman",
+              "at": "2026-11-19 16:26",
+              "text": "👏👏"
+            }
+          ]
+        },
+        {
+          "id": "c3_yasmine",
+          "participants": [
+            "yasmine"
+          ],
+          "messages": [
+            {
+              "id": "m3_y01",
+              "from": "yasmine",
+              "at": "2026-11-18 09:30",
+              "text": "Tu peux passer au chantier de la rue de Zurich demain matin ?"
+            },
+            {
+              "id": "m3_y02",
+              "from": "me",
+              "at": "2026-11-18 09:45",
+              "text": "Oui vers 9h, l'après-midi je suis pris"
+            },
+            {
+              "id": "m3_y03",
+              "from": "yasmine",
+              "at": "2026-11-19 09:10",
+              "text": "Le carreleur est là, t'arrives ?"
+            },
+            {
+              "id": "m3_y04",
+              "from": "me",
+              "at": "2026-11-19 09:12",
+              "text": "5 min"
+            },
+            {
+              "id": "m3_y05",
+              "from": "yasmine",
+              "at": "2026-11-19 12:30",
+              "text": "Merci pour ce matin. Bon courage pour ta banque cet aprèm"
+            },
+            {
+              "id": "m3_y06",
+              "from": "me",
+              "at": "2026-11-19 12:41",
+              "text": "Merci 🙏"
+            }
+          ]
+        },
+        {
+          "id": "c3_baptiste",
+          "participants": [
+            "baptiste"
+          ],
+          "messages": [
+            {
+              "id": "m3_b01",
+              "from": "baptiste",
+              "at": "2026-11-15 23:10",
+              "text": "Match samedi prochain à la Meinau ?"
+            },
+            {
+              "id": "m3_b02",
+              "from": "me",
+              "at": "2026-11-16 10:02",
+              "text": "Grave"
+            },
+            {
+              "id": "m3_b03",
+              "from": "baptiste",
+              "at": "2026-11-19 20:15",
+              "text": "Ça va toi ? Tu réponds plus"
+            },
+            {
+              "id": "m3_b04",
+              "from": "me",
+              "at": "2026-11-19 22:40",
+              "text": "Grosse journée, je t'appelle demain"
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "id": "k3_yasmine_1117",
+          "contact": "yasmine",
+          "direction": "incoming",
+          "at": "2026-11-17 10:20",
+          "durationSeconds": 140
+        },
+        {
+          "id": "k3_maman_1118",
+          "contact": "maman",
+          "direction": "outgoing",
+          "at": "2026-11-18 18:00",
+          "durationSeconds": 540
+        },
+        {
+          "id": "k3_weiss_1114",
+          "contact": "weiss",
+          "direction": "missed",
+          "at": "2026-11-19 11:14",
+          "durationSeconds": 0
+        },
+        {
+          "id": "k3_jonas_1352",
+          "contact": "jonas",
+          "direction": "outgoing",
+          "at": "2026-11-19 13:52",
+          "durationSeconds": 65
+        },
+        {
+          "id": "k3_baptiste_1702",
+          "contact": "baptiste",
+          "direction": "missed",
+          "at": "2026-11-19 17:02",
+          "durationSeconds": 0
+        },
+        {
+          "id": "k3_maman_1930",
+          "contact": "maman",
+          "direction": "incoming",
+          "at": "2026-11-19 19:30",
+          "durationSeconds": 210
+        }
+      ],
+      "places": [
+        {
+          "id": "pl3_home",
+          "name": "Domicile — Krutenau",
+          "kind": "home",
+          "x": 0.42,
+          "y": 0.506,
+          "latitude": 48.5797,
+          "longitude": 7.7581
+        },
+        {
+          "id": "pl3_chantier",
+          "name": "Chantier — rue de Zurich",
+          "kind": "work",
+          "x": 0.382,
+          "y": 0.488,
+          "latitude": 48.5806,
+          "longitude": 7.756
+        },
+        {
+          "id": "pl3_kleber",
+          "name": "Place Kléber — Caisse Ill & Rhin",
+          "kind": "district",
+          "x": 0.196,
+          "y": 0.432,
+          "latitude": 48.5834,
+          "longitude": 7.7458
+        },
+        {
+          "id": "pl3_marche",
+          "name": "Place du Marché — Neudorf",
+          "kind": "parking",
+          "x": 0.513,
+          "y": 0.704,
+          "latitude": 48.5698,
+          "longitude": 7.7632
+        },
+        {
+          "id": "pl3_parents",
+          "name": "Chez les parents — Robertsau",
+          "kind": "home",
+          "x": 0.773,
+          "y": 0.13,
+          "latitude": 48.5985,
+          "longitude": 7.7775
+        },
+        {
+          "id": "pl3_meinau",
+          "name": "Stade de la Meinau",
+          "kind": "park",
+          "x": 0.362,
+          "y": 0.898,
+          "latitude": 48.5601,
+          "longitude": 7.7549,
+          "revealedBy": [
+            "photo:p3_meinau"
+          ]
+        }
+      ],
+      "tracks": [],
+      "photos": [
+        {
+          "id": "p3_petitefrance",
+          "takenAt": "2026-10-25 11:30",
+          "source": "camera",
+          "place": "Strasbourg — Petite France",
+          "device": "iPhone 15",
+          "scene": "street_day",
+          "caption": "Les maisons à colombages de la Petite France, au bord de l'Ill.",
+          "details": "Un dimanche matin d'automne, lumière douce."
+        },
+        {
+          "id": "p3_meinau",
+          "takenAt": "2026-10-31 20:45",
+          "source": "camera",
+          "place": "Strasbourg — stade de la Meinau",
+          "device": "iPhone 15",
+          "scene": "view",
+          "style": "night",
+          "caption": "Les tribunes éclairées du stade, vues d'en haut.",
+          "details": "Un soir de match, avec Baptiste."
+        },
+        {
+          "id": "p3_tram",
+          "takenAt": "2026-11-05 08:15",
+          "source": "camera",
+          "place": "Strasbourg — Homme de Fer",
+          "device": "iPhone 15",
+          "scene": "street_day",
+          "caption": "Un tram arrêté à la station Homme de Fer.",
+          "details": "Le matin, sous un ciel blanc."
+        },
+        {
+          "id": "p3_cathedrale",
+          "takenAt": "2026-11-08 16:50",
+          "source": "camera",
+          "place": "Strasbourg — place de la Cathédrale",
+          "device": "iPhone 15",
+          "scene": "sunset",
+          "caption": "La cathédrale au crépuscule, la flèche dans un ciel rose.",
+          "details": "Prise un dimanche en fin d'après-midi."
+        },
+        {
+          "id": "p3_simulation",
+          "takenAt": "2026-11-10 21:05",
+          "source": "screenshot",
+          "scene": "screenshot",
+          "style": "screenshot",
+          "caption": "Capture : une simulation de prêt.",
+          "details": "Capture d'écran d'un simulateur en ligne.",
+          "lines": [
+            "Simulation de prêt",
+            "Montant : 38 000 €",
+            "Durée : 84 mois"
+          ]
+        },
+        {
+          "id": "p3_echantillons",
+          "takenAt": "2026-11-13 15:00",
+          "source": "camera",
+          "place": "Strasbourg — Krutenau",
+          "device": "iPhone 15",
+          "scene": "office",
+          "caption": "Des échantillons de carrelage alignés sur une table.",
+          "details": "Six carreaux, du gris clair au vert d'eau."
+        },
+        {
+          "id": "p3_chantier",
+          "takenAt": "2026-11-19 09:40",
+          "source": "camera",
+          "place": "Strasbourg — Krutenau, rue de Zurich",
+          "device": "iPhone 15",
+          "scene": "interior_warm",
+          "caption": "Une salle de bains en chantier, carrelage à moitié posé.",
+          "details": "Métadonnées : 19/11/2026, 09:40, rue de Zurich. Des seaux de colle, des croisillons."
+        },
+        {
+          "id": "p3_pluie",
+          "takenAt": "2026-11-19 14:31",
+          "source": "camera",
+          "place": "Strasbourg — Neudorf, place du Marché",
+          "device": "iPhone 15",
+          "scene": "rain",
+          "caption": "La pluie sur un pare-brise, des voitures garées floues derrière.",
+          "details": "Métadonnées : 19/11/2026, 14:31, Strasbourg — Neudorf, place du Marché. Prise avec cet iPhone, depuis l'intérieur d'une voiture."
+        },
+        {
+          "id": "p3_kleber",
+          "takenAt": "2026-11-19 15:24",
+          "source": "camera",
+          "place": "Strasbourg — place Kléber",
+          "device": "iPhone 15",
+          "scene": "street_day",
+          "caption": "La place Kléber sous la pluie, pavés luisants.",
+          "details": "Métadonnées : 19/11/2026, 15:24, Strasbourg — place Kléber. Prise avec cet iPhone."
+        }
+      ],
+      "calendar": [
+        {
+          "id": "cal3_chantier",
+          "start": "2026-11-19 09:00",
+          "end": "2026-11-19 11:30",
+          "title": "Chantier rue de Zurich (salle de bains)",
+          "location": "Rue de Zurich, Strasbourg"
+        },
+        {
+          "id": "cal3_banque",
+          "start": "2026-11-19 14:00",
+          "end": "2026-11-19 15:00",
+          "title": "RDV prêt — F. Weiss",
+          "location": "Caisse Ill & Rhin, place Kléber",
+          "notes": "Apporter : 3 derniers relevés, avis d'impôt, devis camion"
+        },
+        {
+          "id": "cal3_parents",
+          "start": "2026-11-22 12:00",
+          "end": "2026-11-22 16:00",
+          "title": "Déjeuner chez les parents",
+          "location": "Robertsau"
+        },
+        {
+          "id": "cal3_report",
+          "start": "2026-11-26 10:00",
+          "end": "2026-11-26 11:00",
+          "title": "RDV prêt — F. Weiss (reporté)",
+          "location": "Caisse Ill & Rhin, place Kléber"
+        }
+      ],
+      "notes": [
+        {
+          "id": "n3_pret",
+          "title": "Prêt — à préparer",
+          "createdAt": "2026-11-10 21:10",
+          "modifiedAt": "2026-11-18 22:30",
+          "body": "38 000 € sur 7 ans (camion + outillage)\n- relevés sept/oct/nov\n- avis d'impôt 2026\n- devis camion\n- bilan de l'ancienne boîte ??"
+        },
+        {
+          "id": "n3_liquidation",
+          "title": "Liquidation",
+          "createdAt": "2026-09-20 18:00",
+          "modifiedAt": "2026-10-14 22:20",
+          "body": "Demander le grand livre au liquidateur.\nQui garde le fichier des contacts ?\nLes contrats en cours → A. les garde tous.\nNe plus rien signer sans lire."
+        }
+      ],
+      "mails": [
+        {
+          "id": "ml3_devis",
+          "folder": "sent",
+          "fromName": "Élias Muller",
+          "fromAddress": "elias.muller@mailo.fr",
+          "to": "yasmine.ouldali@mailo.fr",
+          "at": "2026-11-16 18:40",
+          "subject": "Devis carrelage — rue de Zurich",
+          "body": "Voilà le devis révisé, avec le carrelage vert d'eau.",
+          "attachments": [
+            "devis_zurich_v2.pdf"
+          ]
+        },
+        {
+          "id": "ml3_salon",
+          "folder": "inbox",
+          "fromName": "Salon Habitat Strasbourg",
+          "fromAddress": "invitations@salon-habitat-strasbourg.fr",
+          "to": "elias.muller@mailo.fr",
+          "at": "2026-11-18 08:00",
+          "subject": "Votre invitation professionnelle",
+          "body": "Le salon ouvre ses portes du 4 au 6 décembre au Parc des expositions. Présentez ce mail à l'accueil.",
+          "unread": true
+        },
+        {
+          "id": "ml3_report",
+          "folder": "inbox",
+          "fromName": "Frédéric Weiss",
+          "fromAddress": "f.weiss@caisse-illrhin.fr",
+          "to": "elias.muller@mailo.fr",
+          "at": "2026-11-19 11:20",
+          "subject": "Votre rendez-vous de ce jeudi 14h",
+          "body": "Bonjour Monsieur Muller,\n\nJe suis absent cet après-midi pour raison de santé et j'ai essayé de vous joindre. Je me permets de reporter notre rendez-vous de 14h au jeudi 26 novembre à 10h, même agence, place Kléber.\n\nToutes mes excuses.\nFrédéric Weiss\nConseiller professionnels — Caisse Ill & Rhin"
+        },
+        {
+          "id": "ml3_reply",
+          "folder": "sent",
+          "fromName": "Élias Muller",
+          "fromAddress": "elias.muller@mailo.fr",
+          "to": "f.weiss@caisse-illrhin.fr",
+          "at": "2026-11-19 11:31",
+          "subject": "Re: Votre rendez-vous de ce jeudi 14h",
+          "body": "Bonjour,\n\nBien reçu, le 26 à 10h me convient. Bon rétablissement.\n\nÉlias Muller"
+        },
+        {
+          "id": "ml3_parking",
+          "folder": "inbox",
+          "fromName": "PayStat",
+          "fromAddress": "recus@paystat.fr",
+          "to": "elias.muller@mailo.fr",
+          "at": "2026-11-19 14:06",
+          "subject": "Votre reçu de stationnement",
+          "body": "Merci d'avoir utilisé PayStat.\n\nZone : Strasbourg — Neudorf, place du Marché\nDébut : 19/11/2026 14:06\nFin prévue : 19/11/2026 15:06\nMontant : 2,40 €\nVéhicule : FX-318-KL"
+        }
+      ],
+      "browser": [
+        {
+          "id": "b3_simulateur",
+          "at": "2026-11-10 21:00",
+          "kind": "visit",
+          "text": "Simulateur de prêt professionnel",
+          "url": "https://www.simulateur-pret-pro.fr",
+          "summary": "Mensualités estimées pour 38 000 € sur 84 mois."
+        },
+        {
+          "id": "b3_meteo",
+          "at": "2026-11-19 08:05",
+          "kind": "search",
+          "text": "météo Strasbourg jeudi pluie"
+        },
+        {
+          "id": "b3_parking",
+          "at": "2026-11-19 13:41",
+          "kind": "search",
+          "text": "stationnement place du Marché Neudorf tarif"
+        }
+      ],
+      "liveEvents": [
+        {
+          "id": "lv3_maman",
+          "afterSeconds": 50,
+          "kind": "message",
+          "app": "messages",
+          "level": "important",
+          "title": "Maman",
+          "body": "La police m'a demandé si tu étais bien à la banque jeudi. Pourquoi ? Rappelle-moi",
+          "conversation": "c3_maman",
+          "message": {
+            "id": "m3_live_maman",
+            "from": "maman",
+            "at": "2026-11-20 09:41",
+            "text": "La police m'a demandé si tu étais bien à la banque jeudi. Pourquoi ? Rappelle-moi"
+          },
+          "opens": "message:m3_live_maman"
+        },
+        {
+          "id": "lv3_rappel",
+          "afterSeconds": 170,
+          "kind": "reminder",
+          "app": "calendar",
+          "level": "normal",
+          "title": "Rappel",
+          "body": "RDV prêt — F. Weiss (reporté) · jeudi 26 novembre, 10:00",
+          "opens": "calendar:cal3_report"
+        }
+      ]
+    }
+  ],
+  "suspects": [
+    {
+      "id": "s_elias",
+      "contact": "me",
+      "role": "Déclarant — ancien associé d'Aurélie Schmitt",
+      "age": 34,
+      "address": "Krutenau, Strasbourg",
+      "statement": "« Entre 14h et 15h, j'avais rendez-vous à la banque, place Kléber, pour mon prêt. Je n'ai pas mis les pieds à Neudorf. »",
+      "verdict": "Le rendez-vous n'a jamais eu lieu : le conseiller l'a reporté par mail à 11:20, et Élias a répondu à 11:31. À 14:06, il paie un stationnement place du Marché, à Neudorf, jusqu'à 15:06 ; à 14:31, son téléphone y photographie la pluie depuis sa voiture. Il n'arrive place Kléber qu'à 15:24, après les faits.",
+      "trap": "L'agenda affiche toujours « RDV prêt — 14:00, place Kléber », une photo de la place Kléber est datée du même après-midi, et il écrit à sa mère que « ça s'est bien passé ». Tout est vrai en apparence — mais le rendez-vous avait été déplacé au 26, et la photo est prise à 15:24."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e_report",
+      "title": "Le rendez-vous reporté",
+      "importance": "key",
+      "suspects": [
+        "s_elias"
+      ],
+      "refs": [
+        "mail:ml3_report",
+        "mail:ml3_reply",
+        "calendar:cal3_report"
+      ],
+      "anyOf": true,
+      "meaning": "À 11:20, le conseiller reporte le rendez-vous au 26 novembre ; Élias répond « bien reçu » à 11:31 et le nouveau rendez-vous est dans son agenda. Il savait qu'il n'avait rien à faire place Kléber à 14h."
+    },
+    {
+      "id": "e_pluie",
+      "title": "La pluie sur le pare-brise, 14:31",
+      "importance": "key",
+      "suspects": [
+        "s_elias"
+      ],
+      "refs": [
+        "photoInfo:p3_pluie"
+      ],
+      "meaning": "Prise avec son téléphone à 14:31, place du Marché à Neudorf — là où était garée la voiture d'Aurélie — depuis l'intérieur d'une voiture."
+    },
+    {
+      "id": "e_parking",
+      "title": "Le reçu de stationnement",
+      "importance": "key",
+      "suspects": [
+        "s_elias"
+      ],
+      "refs": [
+        "mail:ml3_parking"
+      ],
+      "meaning": "Stationnement payé place du Marché, à Neudorf, de 14:06 à 15:06 : exactement le créneau de son « rendez-vous »."
+    },
+    {
+      "id": "e_aurelie",
+      "title": "« Ne reviens pas devant chez moi »",
+      "importance": "supporting",
+      "suspects": [
+        "s_elias"
+      ],
+      "refs": [
+        "message:m3_a_1112",
+        "message:m3_a_1112b"
+      ],
+      "meaning": "Une semaine plus tôt, Aurélie l'avait déjà vu tourner place du Marché, devant chez elle. Il connaissait l'endroit."
+    },
+    {
+      "id": "f_agenda",
+      "title": "L'agenda : RDV prêt à 14:00",
+      "importance": "falseLead",
+      "suspects": [
+        "s_elias"
+      ],
+      "refs": [
+        "calendar:cal3_banque"
+      ],
+      "meaning": "L'évènement n'a jamais été supprimé. Un agenda dit ce qui était prévu, pas ce qui a eu lieu."
+    },
+    {
+      "id": "f_kleber",
+      "title": "La place Kléber, le même après-midi",
+      "importance": "falseLead",
+      "suspects": [
+        "s_elias"
+      ],
+      "refs": [
+        "photoInfo:p3_kleber"
+      ],
+      "meaning": "Élias est bien allé place Kléber ce jeudi — à 15:24, après les faits. Le lieu est juste, l'heure ne l'est pas."
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "text": "Commencez par vérifier les horaires.",
+      "scoreCost": 0
+    },
+    {
+      "id": "h2",
+      "text": "Comparez les traces du téléphone avec ce qu'il affirme.",
+      "scoreCost": 5
+    },
+    {
+      "id": "h3",
+      "text": "Un agenda dit ce qui était prévu. Croisez-le avec les mails du jour et les métadonnées des photos de l'après-midi.",
+      "scoreCost": 10
+    }
+  ],
+  "solution": {
+    "culprit": "s_elias",
+    "alibiHolds": false,
+    "headline": "Le rendez-vous d'Élias n'a jamais eu lieu.",
+    "summary": "Reporté le matin même. À 14h, Élias était garé place du Marché, à Neudorf.",
+    "reveal": [
+      {
+        "at": "2026-11-12 21:30",
+        "text": "Aurélie : « Je t'ai vu tourner place du Marché hier soir »",
+        "evidence": "e_aurelie"
+      },
+      {
+        "at": "2026-11-19 11:20",
+        "text": "Le conseiller reporte le rendez-vous au 26 ; Élias répond « bien reçu » à 11:31",
+        "evidence": "e_report"
+      },
+      {
+        "at": "2026-11-19 14:00",
+        "text": "L'agenda affiche toujours « RDV prêt — place Kléber »",
+        "evidence": "f_agenda"
+      },
+      {
+        "at": "2026-11-19 14:06",
+        "text": "Stationnement payé place du Marché, Neudorf, jusqu'à 15:06",
+        "evidence": "e_parking"
+      },
+      {
+        "at": "2026-11-19 14:31",
+        "text": "Son téléphone photographie la pluie sur le pare-brise, place du Marché",
+        "evidence": "e_pluie"
+      },
+      {
+        "at": "2026-11-19 15:24",
+        "text": "Il arrive place Kléber et prend une photo de la place",
+        "evidence": "f_kleber"
+      },
+      {
+        "at": "2026-11-19 16:25",
+        "text": "À sa mère : « Ça s'est bien passé »"
+      }
+    ],
+    "story": [
+      "Le rendez-vous de 14h existait bien, et il est toujours dans l'agenda. Mais à 11:20, le conseiller l'a reporté au 26 novembre, et Élias a répondu dans la foulée.",
+      "À 14:06, il a payé un stationnement place du Marché, à Neudorf, devant chez Aurélie. À 14:31, il a photographié la pluie sur son pare-brise et l'a envoyée à son frère, sans dire où il était.",
+      "À 15:24, il était place Kléber, assez tôt pour une photo, trop tard pour un alibi. Le soir, il a dit à sa mère que « ça s'était bien passé »."
+    ]
+  }
+}

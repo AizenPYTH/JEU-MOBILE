@@ -18,15 +18,16 @@ Toutes passent par **`GeneratedPhoto(photo:)`**. Depuis le pipeline :
 1. `GeneratedPhoto` cherche **`ArtLibrary.photo(case:id:)`**, c'est-à-dire l'image `caseNNN_photo_<id>` dans
    `ScreenshotUI/Resources/Art.xcassets/Photos` (le numéro d'affaire vient de l'environnement `\.caseNumber`,
    déjà posé par chaque écran d'affaire).
-2. Si elle existe (photo d'ambiance préparée par le pipeline), elle est affichée **à la place du dessin**, en
-   remplissant le cadre sans le déborder.
-3. Sinon (preuve, personne, texte, capture, ou source introuvable), le **rendu procédural** habituel est peint.
+2. Si elle existe (vraie photographie préparée par le pipeline, preuve comprise quand sa fiche le permet), elle est
+   affichée **à la place du dessin**, en remplissant le cadre sans le déborder.
+3. Sinon (capture d'écran, document, ticket, ou vraie photo pas encore trouvée), le **rendu procédural** habituel est
+   peint — stylisé, jamais une image IA.
 4. Dans les deux cas, les effets de style du jeu s'appliquent par-dessus : nuit (grain, désaturation), flou, bougé
    (inclinaison), vieille photo (tons sépia, bord blanc), flash de selfie, vignettage.
 
 Rien d'autre ne change : le moteur, les affaires, les preuves, l'analyse des métadonnées (« Analyser ») et le texte des
-légendes restent ceux de l'affaire. Une preuve reste toujours dessinée par le jeu tant qu'aucune image sur mesure n'est
-fournie.
+légendes restent ceux de l'affaire. Une preuve ne reçoit une photo de bibliothèque que si la fiche
+`config/photo_queries/case_NNN.json` le prévoit (ce qu'elle prouve tient à son heure, son lieu ou son sujet).
 
 ## Nom des fichiers
 

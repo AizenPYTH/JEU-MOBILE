@@ -1,0 +1,921 @@
+{
+  "schemaVersion": 1,
+  "id": "alibi_002",
+  "number": 102,
+  "mode": "alibi",
+  "title": "LE DERNIER MÉTRO",
+  "tagline": "Une bagarre à 01h10. Lui dit qu'il dormait presque.",
+  "synopsis": [
+    "Nuit du vendredi 23 au samedi 24 octobre, 01h10, rue Masséna, à Lille : Dylan Maes reçoit un coup de poing à la sortie d'un bar. Un témoin décrit un homme grand, en veste kaki.",
+    "Léo Vandamme, 28 ans, développeur, était au bar plus tôt dans la soirée et s'y est disputé avec Dylan pour une histoire d'argent. Il affirme avoir pris le dernier métro et être rentré chez lui avant 1h.",
+    "Son téléphone est sur votre bureau. Est-ce qu'il dit vrai ?"
+  ],
+  "objective": "Vérifiez l'alibi de Léo : était-il chez lui, à Villeneuve-d'Ascq, entre 00h30 et 01h30 ?",
+  "difficulty": 1,
+  "durationSeconds": 300,
+  "challengeDurations": {
+    "investigator": 540,
+    "detective": 300,
+    "expert": 210
+  },
+  "phoneStartTime": "2026-10-24 11:30",
+  "claim": {
+    "person": "me",
+    "statement": "« J'ai quitté la rue Masséna vers minuit et quart. J'ai pris le dernier métro à République–Beaux-Arts. À 1h, j'étais chez moi, à Villeneuve-d'Ascq. »",
+    "place": "Dernier métro (ligne 1), puis chez lui, quartier du Triolo à Villeneuve-d'Ascq",
+    "from": "2026-10-24 00:30",
+    "to": "2026-10-24 01:30"
+  },
+  "minimalPath": [
+    "e_rame",
+    "e_trajet"
+  ],
+  "dossier": {
+    "category": "VÉRIFICATION D'ALIBI",
+    "city": "Lille",
+    "place": "Rue Masséna — sortie de bar",
+    "subject": "Léo Vandamme",
+    "subjectLabel": "DÉCLARANT",
+    "subjectAge": 28,
+    "subjectContact": "me",
+    "rating": 2
+  },
+  "devices": [
+    {
+      "id": "d_leo",
+      "label": "Téléphone de Léo",
+      "model": "iPhone 13",
+      "wallpaper": "ice",
+      "batteryPercent": 14,
+      "lockedApps": [],
+      "contacts": [
+        {
+          "id": "me",
+          "name": "Léo Vandamme",
+          "phone": "+33 6 51 27 84 30",
+          "relation": "Moi",
+          "email": "leo.vandamme@mailo.fr",
+          "birthday": "09/05/1998",
+          "avatarHue": 0.62,
+          "isOwner": true
+        },
+        {
+          "id": "robin",
+          "name": "Robin Delcourt",
+          "phone": "+33 6 88 14 52 07",
+          "relation": "Coloc",
+          "avatarHue": 0.12
+        },
+        {
+          "id": "warren",
+          "name": "Warren Lefebvre",
+          "phone": "+33 6 37 60 91 25",
+          "relation": "Pote",
+          "avatarHue": 0.27
+        },
+        {
+          "id": "kenza",
+          "name": "Kenza Amrani",
+          "phone": "+33 7 45 03 68 19",
+          "relation": "Pote",
+          "avatarHue": 0.88
+        },
+        {
+          "id": "dylan",
+          "name": "Dylan Maes",
+          "phone": "+33 6 70 22 49 81",
+          "relation": "Ancien coloc",
+          "avatarHue": 0.41
+        },
+        {
+          "id": "lucie",
+          "name": "Lucie Vandamme",
+          "phone": "+33 6 13 97 26 44",
+          "relation": "Sœur",
+          "avatarHue": 0.75
+        },
+        {
+          "id": "papa",
+          "name": "Papa",
+          "phone": "+33 6 09 58 31 72",
+          "relation": "Père",
+          "avatarHue": 0.52
+        },
+        {
+          "id": "anouk",
+          "name": "Anouk Deschamps",
+          "phone": "+33 6 62 40 17 93",
+          "relation": "Collègue",
+          "email": "anouk.deschamps@studio-numa.fr",
+          "avatarHue": 0.19
+        }
+      ],
+      "conversations": [
+        {
+          "id": "c2_massena",
+          "title": "Masséna vendredi 🍻",
+          "participants": [
+            "warren",
+            "kenza",
+            "dylan"
+          ],
+          "messages": [
+            {
+              "id": "m2_g01",
+              "from": "warren",
+              "at": "2026-10-22 18:30",
+              "text": "Vendredi Masséna ?"
+            },
+            {
+              "id": "m2_g02",
+              "from": "kenza",
+              "at": "2026-10-22 18:41",
+              "text": "Chaud"
+            },
+            {
+              "id": "m2_g03",
+              "from": "me",
+              "at": "2026-10-22 18:44",
+              "text": "Go, mais je bosse samedi matin donc pas tard"
+            },
+            {
+              "id": "m2_g04",
+              "from": "dylan",
+              "at": "2026-10-22 18:50",
+              "text": "Je passerai peut-être"
+            },
+            {
+              "id": "m2_g05",
+              "from": "warren",
+              "at": "2026-10-23 21:05",
+              "text": "On est au fond, à gauche du comptoir"
+            },
+            {
+              "id": "m2_g06",
+              "from": "me",
+              "at": "2026-10-23 21:20",
+              "text": "J'arrive dans 5"
+            },
+            {
+              "id": "m2_g07",
+              "from": "me",
+              "at": "2026-10-24 00:14",
+              "text": "Je rentre les gars, dernier métro. Bonne fin de soirée"
+            },
+            {
+              "id": "m2_g08",
+              "from": "kenza",
+              "at": "2026-10-24 00:15",
+              "text": "Bisous 🫶"
+            },
+            {
+              "id": "m2_g_0115",
+              "from": "warren",
+              "at": "2026-10-24 01:15",
+              "text": "Ça part en vrille devant le bar 😳",
+              "photo": "p2_rue"
+            },
+            {
+              "id": "m2_g09",
+              "from": "kenza",
+              "at": "2026-10-24 01:18",
+              "text": "Dylan s'est pris un coup, les videurs ont appelé les pompiers"
+            },
+            {
+              "id": "m2_g10",
+              "from": "warren",
+              "at": "2026-10-24 01:24",
+              "text": "Léo t'étais encore là toi ?"
+            },
+            {
+              "id": "m2_g11",
+              "from": "me",
+              "at": "2026-10-24 01:31",
+              "text": "Non je suis chez moi depuis 1h. Il va bien ??"
+            },
+            {
+              "id": "m2_g12",
+              "from": "kenza",
+              "at": "2026-10-24 01:33",
+              "text": "Il saigne du nez mais ça va, il rentre avec sa sœur"
+            },
+            {
+              "id": "m2_g13",
+              "from": "warren",
+              "at": "2026-10-24 09:50",
+              "text": "La police m'a appelé ce matin. Ils demandaient qui s'était embrouillé avec Dylan… j'ai dû donner ton nom, désolé"
+            }
+          ]
+        },
+        {
+          "id": "c2_dylan",
+          "participants": [
+            "dylan"
+          ],
+          "messages": [
+            {
+              "id": "m2_d01",
+              "from": "me",
+              "at": "2026-10-12 14:03",
+              "text": "Tu me rends les 200 € quand ? Ça fait deux mois"
+            },
+            {
+              "id": "m2_d02",
+              "from": "dylan",
+              "at": "2026-10-12 19:40",
+              "text": "fin du mois promis"
+            },
+            {
+              "id": "m2_d_2352",
+              "from": "dylan",
+              "at": "2026-10-23 23:52",
+              "text": "Arrête de me parler de ça devant tout le monde"
+            },
+            {
+              "id": "m2_d_2355",
+              "from": "me",
+              "at": "2026-10-23 23:55",
+              "text": "Alors rends-les. C'est simple."
+            }
+          ]
+        },
+        {
+          "id": "c2_robin",
+          "participants": [
+            "robin"
+          ],
+          "messages": [
+            {
+              "id": "m2_r01",
+              "from": "robin",
+              "at": "2026-10-21 19:02",
+              "text": "Y a plus de lessive"
+            },
+            {
+              "id": "m2_r02",
+              "from": "me",
+              "at": "2026-10-21 19:10",
+              "text": "J'en prends demain"
+            },
+            {
+              "id": "m2_r03",
+              "from": "robin",
+              "at": "2026-10-23 20:30",
+              "text": "Je dors tôt ce soir, fais pas trop de bruit en rentrant stp 🙏"
+            },
+            {
+              "id": "m2_r04",
+              "from": "me",
+              "at": "2026-10-23 20:31",
+              "text": "Promis"
+            },
+            {
+              "id": "m2_r_0102",
+              "from": "robin",
+              "at": "2026-10-24 01:02",
+              "text": "C'est toi qui viens de faire tomber le vélo dans l'entrée ? 😑"
+            },
+            {
+              "id": "m2_r_0103",
+              "from": "me",
+              "at": "2026-10-24 01:03",
+              "text": "Oui dsl… rendors-toi"
+            },
+            {
+              "id": "m2_r05",
+              "from": "robin",
+              "at": "2026-10-24 08:20",
+              "text": "T'as laissé la lumière du salon allumée"
+            }
+          ]
+        },
+        {
+          "id": "c2_lucie",
+          "participants": [
+            "lucie"
+          ],
+          "messages": [
+            {
+              "id": "m2_l01",
+              "from": "lucie",
+              "at": "2026-10-20 12:00",
+              "text": "Tu viens à l'anniv de papa le 31 ?"
+            },
+            {
+              "id": "m2_l02",
+              "from": "me",
+              "at": "2026-10-20 12:30",
+              "text": "Oui bien sûr"
+            },
+            {
+              "id": "m2_l03",
+              "from": "lucie",
+              "at": "2026-10-23 17:40",
+              "text": "Tu peux passer prendre le gâteau samedi ? Je t'envoie l'adresse"
+            },
+            {
+              "id": "m2_l04",
+              "from": "me",
+              "at": "2026-10-23 17:52",
+              "text": "Oui après le boulot"
+            }
+          ]
+        },
+        {
+          "id": "c2_papa",
+          "participants": [
+            "papa"
+          ],
+          "messages": [
+            {
+              "id": "m2_p01",
+              "from": "papa",
+              "at": "2026-10-19 09:00",
+              "text": "Tu as regardé pour le contrôle technique ?"
+            },
+            {
+              "id": "m2_p02",
+              "from": "me",
+              "at": "2026-10-19 12:15",
+              "text": "Pas encore, je m'en occupe cette semaine"
+            },
+            {
+              "id": "m2_p03",
+              "from": "papa",
+              "at": "2026-10-22 20:40",
+              "text": "Le garage de Ronchin a de la place mardi"
+            },
+            {
+              "id": "m2_p04",
+              "from": "me",
+              "at": "2026-10-22 21:02",
+              "text": "Merci p'pa 👍"
+            }
+          ]
+        },
+        {
+          "id": "c2_anouk",
+          "participants": [
+            "anouk"
+          ],
+          "messages": [
+            {
+              "id": "m2_a01",
+              "from": "anouk",
+              "at": "2026-10-23 16:30",
+              "text": "Tu déploies la mise à jour demain matin ou lundi ?"
+            },
+            {
+              "id": "m2_a02",
+              "from": "me",
+              "at": "2026-10-23 16:34",
+              "text": "Demain 9h. Je serai au bureau"
+            },
+            {
+              "id": "m2_a03",
+              "from": "anouk",
+              "at": "2026-10-24 09:40",
+              "text": "Ça a marché ?"
+            },
+            {
+              "id": "m2_a04",
+              "from": "me",
+              "at": "2026-10-24 10:05",
+              "text": "Oui tout est en ligne. Je dois filer, la police veut me voir"
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "id": "k2_papa_1022",
+          "contact": "papa",
+          "direction": "outgoing",
+          "at": "2026-10-22 19:00",
+          "durationSeconds": 420
+        },
+        {
+          "id": "k2_anouk_1023",
+          "contact": "anouk",
+          "direction": "incoming",
+          "at": "2026-10-23 11:15",
+          "durationSeconds": 185
+        },
+        {
+          "id": "k2_warren_2118",
+          "contact": "warren",
+          "direction": "incoming",
+          "at": "2026-10-23 21:18",
+          "durationSeconds": 25
+        },
+        {
+          "id": "k2_warren_0120",
+          "contact": "warren",
+          "direction": "missed",
+          "at": "2026-10-24 01:20",
+          "durationSeconds": 0
+        },
+        {
+          "id": "k2_warren_0122",
+          "contact": "warren",
+          "direction": "missed",
+          "at": "2026-10-24 01:22",
+          "durationSeconds": 0
+        },
+        {
+          "id": "k2_kenza_0136",
+          "contact": "kenza",
+          "direction": "outgoing",
+          "at": "2026-10-24 01:36",
+          "durationSeconds": 180
+        },
+        {
+          "id": "k2_lucie_1015",
+          "contact": "lucie",
+          "direction": "incoming",
+          "at": "2026-10-24 10:15",
+          "durationSeconds": 96
+        }
+      ],
+      "places": [
+        {
+          "id": "pl2_home",
+          "name": "Domicile — Triolo, Villeneuve-d'Ascq",
+          "kind": "home",
+          "x": 0.922,
+          "y": 0.813,
+          "latitude": 50.6171,
+          "longitude": 3.1437
+        },
+        {
+          "id": "pl2_triolo",
+          "name": "Station Triolo",
+          "kind": "station",
+          "x": 0.903,
+          "y": 0.771,
+          "latitude": 50.6187,
+          "longitude": 3.1409
+        },
+        {
+          "id": "pl2_massena",
+          "name": "Rue Masséna",
+          "kind": "bar",
+          "x": 0.312,
+          "y": 0.426,
+          "latitude": 50.6318,
+          "longitude": 3.0553
+        },
+        {
+          "id": "pl2_republique",
+          "name": "Station République–Beaux-Arts",
+          "kind": "station",
+          "x": 0.363,
+          "y": 0.445,
+          "latitude": 50.6311,
+          "longitude": 3.0627
+        },
+        {
+          "id": "pl2_flandres",
+          "name": "Station Gare Lille-Flandres",
+          "kind": "station",
+          "x": 0.418,
+          "y": 0.3,
+          "latitude": 50.6366,
+          "longitude": 3.0706
+        },
+        {
+          "id": "pl2_work",
+          "name": "Bureau — EuraTechnologies",
+          "kind": "work",
+          "x": 0.073,
+          "y": 0.403,
+          "latitude": 50.6327,
+          "longitude": 3.0206
+        },
+        {
+          "id": "pl2_citadelle",
+          "name": "Parc de la Citadelle",
+          "kind": "park",
+          "x": 0.237,
+          "y": 0.176,
+          "latitude": 50.6413,
+          "longitude": 3.0443,
+          "revealedBy": [
+            "photo:p2_citadelle"
+          ]
+        }
+      ],
+      "tracks": [
+        {
+          "id": "t2_me",
+          "contact": "me",
+          "points": [
+            {
+              "id": "tp2_01",
+              "at": "2026-10-11 10:50",
+              "place": "pl2_citadelle"
+            },
+            {
+              "id": "tp2_02",
+              "at": "2026-10-23 09:05",
+              "place": "pl2_work"
+            },
+            {
+              "id": "tp2_03",
+              "at": "2026-10-23 21:24",
+              "place": "pl2_massena"
+            },
+            {
+              "id": "tp2_04",
+              "at": "2026-10-24 00:21",
+              "place": "pl2_massena",
+              "note": "Départ"
+            },
+            {
+              "id": "tp2_05",
+              "at": "2026-10-24 00:29",
+              "place": "pl2_republique"
+            },
+            {
+              "id": "tp2_06",
+              "at": "2026-10-24 00:36",
+              "place": "pl2_flandres"
+            },
+            {
+              "id": "tp2_07",
+              "at": "2026-10-24 00:52",
+              "place": "pl2_triolo"
+            },
+            {
+              "id": "tp2_08",
+              "at": "2026-10-24 00:58",
+              "place": "pl2_home"
+            },
+            {
+              "id": "tp2_09",
+              "at": "2026-10-24 08:48",
+              "place": "pl2_work"
+            }
+          ]
+        }
+      ],
+      "photos": [
+        {
+          "id": "p2_citadelle",
+          "takenAt": "2026-10-11 11:00",
+          "source": "camera",
+          "place": "Lille — parc de la Citadelle",
+          "device": "iPhone 13",
+          "scene": "park",
+          "caption": "Une allée du parc de la Citadelle couverte de feuilles mortes.",
+          "details": "Un dimanche matin. Des feuilles jaunes, un banc vide."
+        },
+        {
+          "id": "p2_grandplace",
+          "takenAt": "2026-10-18 15:30",
+          "source": "camera",
+          "place": "Lille — Grand-Place",
+          "device": "iPhone 13",
+          "scene": "street_day",
+          "caption": "La Vieille Bourse et la Grand-Place, un après-midi gris.",
+          "details": "Des pavés mouillés, des parapluies au loin."
+        },
+        {
+          "id": "p2_velo",
+          "takenAt": "2026-10-19 18:10",
+          "source": "camera",
+          "place": "Villeneuve-d'Ascq — Triolo",
+          "device": "iPhone 13",
+          "scene": "interior_warm",
+          "caption": "Un vélo appuyé contre le mur d'une entrée d'appartement.",
+          "details": "Le vélo de Léo, dans l'entrée étroite de la coloc. Le phare avant pend."
+        },
+        {
+          "id": "p2_code",
+          "takenAt": "2026-10-20 16:45",
+          "source": "camera",
+          "place": "Lille — EuraTechnologies",
+          "device": "iPhone 13",
+          "scene": "laptop",
+          "caption": "Un écran d'ordinateur couvert de code, une tasse à côté.",
+          "details": "Photo de bureau, rien de particulier."
+        },
+        {
+          "id": "p2_virement",
+          "takenAt": "2026-10-22 12:05",
+          "source": "screenshot",
+          "scene": "screenshot",
+          "style": "screenshot",
+          "caption": "Capture : un virement de 200 €.",
+          "details": "Capture d'écran de l'application bancaire.",
+          "lines": [
+            "Virement émis",
+            "200,00 € — Dylan Maes",
+            "14/08/2026 — « dépannage »"
+          ]
+        },
+        {
+          "id": "p2_pintes",
+          "takenAt": "2026-10-23 22:10",
+          "source": "camera",
+          "place": "Lille — rue Masséna",
+          "device": "iPhone 13",
+          "scene": "bar",
+          "style": "night",
+          "caption": "Deux pintes posées sur un comptoir en bois.",
+          "details": "Métadonnées : 23/10/2026, 22:10, rue Masséna. Lumière orangée du bar."
+        },
+        {
+          "id": "p2_rame",
+          "takenAt": "2026-10-24 00:39",
+          "source": "camera",
+          "place": "Lille — métro ligne 1, Gare Lille-Flandres",
+          "device": "iPhone 13",
+          "scene": "metro",
+          "caption": "L'intérieur d'une rame de métro presque vide.",
+          "details": "Métadonnées : 24/10/2026, 00:39, métro ligne 1 — Gare Lille-Flandres. Prise avec cet iPhone. Sièges vides, les portes viennent de se fermer."
+        },
+        {
+          "id": "p2_rue",
+          "takenAt": "2026-10-24 01:14",
+          "source": "received",
+          "from": "warren",
+          "receivedAt": "2026-10-24 01:15",
+          "place": "Lille — rue Masséna",
+          "device": "Galaxy S23",
+          "scene": "street_night",
+          "style": "night",
+          "caption": "La rue Masséna de nuit, un attroupement devant un bar, des gyrophares au loin.",
+          "details": "Reçue de Warren à 01:15. Prise à 01:14 avec un Galaxy S23 — pas avec ce téléphone."
+        },
+        {
+          "id": "p2_ciel",
+          "takenAt": "2026-10-24 08:22",
+          "source": "camera",
+          "place": "Villeneuve-d'Ascq — Triolo",
+          "device": "iPhone 13",
+          "scene": "sky",
+          "caption": "Un ciel bas et gris au-dessus des immeubles.",
+          "details": "Métadonnées : 24/10/2026, 08:22, Triolo. Le matin, en partant au bureau."
+        }
+      ],
+      "calendar": [
+        {
+          "id": "cal2_foot",
+          "start": "2026-10-21 20:00",
+          "end": "2026-10-21 21:00",
+          "title": "Foot en salle",
+          "location": "Halle de Villeneuve-d'Ascq"
+        },
+        {
+          "id": "cal2_deploy",
+          "start": "2026-10-24 09:00",
+          "end": "2026-10-24 10:00",
+          "title": "Mise en ligne v2.4",
+          "location": "EuraTechnologies"
+        },
+        {
+          "id": "cal2_anniv",
+          "start": "2026-10-31 12:00",
+          "title": "Anniversaire de Papa",
+          "allDay": true
+        }
+      ],
+      "notes": [
+        {
+          "id": "n2_samedi",
+          "title": "Samedi",
+          "createdAt": "2026-10-22 22:00",
+          "modifiedAt": "2026-10-23 18:05",
+          "body": "- mise en ligne 9h\n- passer prendre le gâteau (Lucie)\n- réparer le phare du vélo\n- lessive !!"
+        },
+        {
+          "id": "n2_dylan",
+          "title": "Prêt Dylan",
+          "createdAt": "2026-08-14 20:12",
+          "modifiedAt": "2026-10-12 14:05",
+          "body": "200 € le 14/08.\nIl devait rendre fin septembre.\n12/10 : relancé."
+        }
+      ],
+      "mails": [
+        {
+          "id": "ml2_foot",
+          "folder": "inbox",
+          "fromName": "Halle de Villeneuve-d'Ascq",
+          "fromAddress": "reservations@halle-va.fr",
+          "to": "leo.vandamme@mailo.fr",
+          "at": "2026-10-19 10:12",
+          "subject": "Réservation confirmée — mercredi 21/10, 20h",
+          "body": "Votre créneau de foot en salle est confirmé : terrain 2, mercredi 21 octobre, 20h–21h."
+        },
+        {
+          "id": "ml2_deploy",
+          "folder": "inbox",
+          "fromName": "Anouk Deschamps",
+          "fromAddress": "anouk.deschamps@studio-numa.fr",
+          "to": "leo.vandamme@mailo.fr",
+          "at": "2026-10-23 16:20",
+          "subject": "v2.4 — liste de contrôle",
+          "body": "Ci-joint la liste de contrôle pour la mise en ligne. Rien de bloquant.",
+          "attachments": [
+            "checklist_v2-4.pdf"
+          ]
+        }
+      ],
+      "browser": [
+        {
+          "id": "b2_velo",
+          "at": "2026-10-20 21:40",
+          "kind": "search",
+          "text": "réparer phare vélo qui pend"
+        },
+        {
+          "id": "b2_metro",
+          "at": "2026-10-24 00:12",
+          "kind": "search",
+          "text": "dernier métro ligne 1 Lille vendredi"
+        },
+        {
+          "id": "b2_horaires",
+          "at": "2026-10-24 00:13",
+          "kind": "visit",
+          "text": "Métro ligne 1 — horaires de nuit",
+          "url": "https://www.horaires-metro-lille.fr/ligne-1",
+          "summary": "Ligne 1, direction 4 Cantons : derniers départs de République–Beaux-Arts vers 00:30 le vendredi."
+        }
+      ],
+      "liveEvents": [
+        {
+          "id": "lv2_warren",
+          "afterSeconds": 35,
+          "kind": "message",
+          "app": "messages",
+          "level": "important",
+          "title": "Masséna vendredi 🍻",
+          "body": "Warren : Les flics vont regarder la vidéo du bar. Si t'étais pas là, t'as rien à craindre",
+          "conversation": "c2_massena",
+          "message": {
+            "id": "m2_live_warren",
+            "from": "warren",
+            "at": "2026-10-24 11:31",
+            "text": "Les flics vont regarder la vidéo du bar. Si t'étais pas là, t'as rien à craindre"
+          },
+          "opens": "message:m2_live_warren"
+        },
+        {
+          "id": "lv2_lucie",
+          "afterSeconds": 110,
+          "kind": "call",
+          "app": "phone",
+          "level": "normal",
+          "title": "Appel manqué",
+          "body": "Lucie Vandamme",
+          "call": {
+            "id": "k2_live_lucie",
+            "contact": "lucie",
+            "direction": "missed",
+            "at": "2026-10-24 11:33",
+            "durationSeconds": 0
+          },
+          "opens": "call:k2_live_lucie"
+        }
+      ]
+    }
+  ],
+  "suspects": [
+    {
+      "id": "s_leo",
+      "contact": "me",
+      "role": "Déclarant — développeur, ancien colocataire de Dylan",
+      "age": 28,
+      "address": "Quartier du Triolo, Villeneuve-d'Ascq",
+      "statement": "« J'ai quitté la rue Masséna vers minuit et quart. J'ai pris le dernier métro à République–Beaux-Arts. À 1h, j'étais chez moi, à Villeneuve-d'Ascq. »",
+      "verdict": "Léo dit vrai. Il quitte la rue Masséna à 00:21, photographie une rame presque vide à 00:39 à Gare Lille-Flandres, et son téléphone est au Triolo à 00:52, chez lui à 00:58. À 01:02, son colocataire l'entend faire tomber le vélo dans l'entrée. À 01:10, il n'était pas rue Masséna : la vidéo du bar a montré un autre homme.",
+      "trap": "Une photo de la rue Masséna prise à 01:14 est dans sa galerie, et il s'était disputé avec Dylan pour 200 € une heure plus tôt. Mais cette photo a été prise par le téléphone de Warren et simplement reçue à 01:15."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e_rame",
+      "title": "La rame de 00:39",
+      "importance": "key",
+      "suspects": [
+        "s_leo"
+      ],
+      "refs": [
+        "photoInfo:p2_rame"
+      ],
+      "meaning": "Prise avec son propre téléphone à 00:39, dans le métro ligne 1 à Gare Lille-Flandres, direction Villeneuve-d'Ascq. Il est bien dans le dernier métro."
+    },
+    {
+      "id": "e_trajet",
+      "title": "L'historique de position",
+      "importance": "key",
+      "suspects": [
+        "s_leo"
+      ],
+      "refs": [
+        "track:t2_me"
+      ],
+      "meaning": "Départ de la rue Masséna à 00:21, République–Beaux-Arts à 00:29, Gare Lille-Flandres à 00:36, Triolo à 00:52, domicile à 00:58. Le téléphone ne revient pas à Lille avant le matin."
+    },
+    {
+      "id": "e_coloc",
+      "title": "« Le vélo dans l'entrée »",
+      "importance": "key",
+      "suspects": [
+        "s_leo"
+      ],
+      "refs": [
+        "message:m2_r_0102",
+        "message:m2_r_0103"
+      ],
+      "meaning": "À 01:02, Robin entend quelqu'un rentrer et faire tomber le vélo : Léo répond aussitôt. Ce n'est pas seulement son téléphone qui est rentré — c'est lui."
+    },
+    {
+      "id": "f_photo_rue",
+      "title": "La rue Masséna à 01:14",
+      "importance": "falseLead",
+      "suspects": [
+        "s_leo"
+      ],
+      "refs": [
+        "photoInfo:p2_rue"
+      ],
+      "meaning": "Dans sa galerie, mais pas de lui : reçue de Warren à 01:15, prise avec un Galaxy S23. Elle montre où était Warren, pas où était Léo."
+    },
+    {
+      "id": "f_dette",
+      "title": "Les 200 € de Dylan",
+      "importance": "falseLead",
+      "suspects": [
+        "s_leo"
+      ],
+      "refs": [
+        "message:m2_d_2352",
+        "message:m2_d_2355"
+      ],
+      "meaning": "Un vrai différend, et une vraie raison d'être en colère. Mais un mobile ne place personne rue Masséna à 01:10."
+    }
+  ],
+  "hints": [
+    {
+      "id": "h1",
+      "text": "Commencez par vérifier les horaires.",
+      "scoreCost": 0
+    },
+    {
+      "id": "h2",
+      "text": "Comparez les traces du téléphone avec ce qu'il affirme.",
+      "scoreCost": 5
+    },
+    {
+      "id": "h3",
+      "text": "Toutes les photos de la galerie n'ont pas été prises par ce téléphone. Analysez celles de la nuit, puis ouvrez l'historique de position.",
+      "scoreCost": 10
+    }
+  ],
+  "solution": {
+    "culprit": "s_leo",
+    "alibiHolds": true,
+    "headline": "Léo était dans le dernier métro.",
+    "summary": "Tout l'accusait en apparence. Son téléphone, lui, rentrait au Triolo avec lui.",
+    "reveal": [
+      {
+        "at": "2026-10-23 23:52",
+        "text": "Dispute avec Dylan pour 200 € : « Alors rends-les. C'est simple. »",
+        "evidence": "f_dette"
+      },
+      {
+        "at": "2026-10-24 00:21",
+        "text": "Le téléphone quitte la rue Masséna",
+        "evidence": "e_trajet"
+      },
+      {
+        "at": "2026-10-24 00:39",
+        "text": "Photo d'une rame presque vide, ligne 1, Gare Lille-Flandres",
+        "evidence": "e_rame"
+      },
+      {
+        "at": "2026-10-24 00:58",
+        "text": "Le téléphone arrive au domicile, au Triolo",
+        "evidence": "e_trajet"
+      },
+      {
+        "at": "2026-10-24 01:02",
+        "text": "Robin : « C'est toi qui viens de faire tomber le vélo ? » — Léo répond",
+        "evidence": "e_coloc"
+      },
+      {
+        "at": "2026-10-24 01:14",
+        "text": "Rue Masséna, Warren photographie l'attroupement et l'envoie au groupe",
+        "evidence": "f_photo_rue"
+      }
+    ],
+    "story": [
+      "Léo s'est bien disputé avec Dylan vers minuit, pour 200 € jamais rendus. Tout le groupe l'a vu, et c'est son nom que Warren a donné à la police.",
+      "Mais à 00:21, il a quitté la rue Masséna. À 00:39, il a photographié la rame presque vide du dernier métro ; à 00:58, son téléphone était chez lui, et à 01:02 son colocataire l'entendait rentrer.",
+      "La photo de la rue Masséna à 01:14 n'était pas la sienne : Warren l'avait prise et envoyée au groupe. L'alibi tient."
+    ]
+  }
+}

@@ -1,0 +1,935 @@
+{
+  "case": "001",
+  "about": "Affaire #001 « LE DERNIER MESSAGE » (Marseille, 12–13 septembre 2026) : une requête par photo du téléphone d'Alex, sans aucun personnage de l'affaire à l'image.",
+  "photos": {
+    "p_b01": {
+      "decision": "REAL",
+      "query": "Port de Marseille coucher de soleil",
+      "fallbacks": [
+        "Marseille port ferry sunset",
+        "harbour cranes sunset"
+      ],
+      "subject": [
+        "port",
+        "harbour",
+        "harbor",
+        "sunset",
+        "coucher",
+        "ferry"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b02": {
+      "decision": "REAL",
+      "query": "mur d'escalade bloc prises jaunes",
+      "fallbacks": [
+        "bouldering gym yellow holds",
+        "climbing wall indoor"
+      ],
+      "subject": [
+        "climbing",
+        "escalade",
+        "bouldering",
+        "bloc",
+        "wall",
+        "mur"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b03": {
+      "decision": "REAL",
+      "query": "gouttes de pluie vitre",
+      "fallbacks": [
+        "raindrops window street blurred",
+        "rain on window"
+      ],
+      "subject": [
+        "rain",
+        "pluie",
+        "raindrops",
+        "gouttes",
+        "window",
+        "vitre"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b04": {
+      "decision": "REAL",
+      "query": "Cours Julien Marseille",
+      "fallbacks": [
+        "Marseille street art street",
+        "rue Marseille graffiti"
+      ],
+      "subject": [
+        "cours julien",
+        "street",
+        "rue",
+        "graffiti",
+        "marseille"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b05": {
+      "decision": "REAL",
+      "query": "concert scène lumières violettes nuit",
+      "fallbacks": [
+        "outdoor concert stage purple lights",
+        "festival stage night"
+      ],
+      "subject": [
+        "concert",
+        "stage",
+        "scène",
+        "festival",
+        "lights"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b06": {
+      "decision": "REAL",
+      "query": "terrasse bar guirlandes nuit",
+      "fallbacks": [
+        "bar terrace string lights night",
+        "café terrasse nuit Marseille"
+      ],
+      "subject": [
+        "terrace",
+        "terrasse",
+        "bar",
+        "café",
+        "lights",
+        "guirlandes"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b07": {
+      "decision": "REAL",
+      "query": "chat roux endormi paillasson",
+      "fallbacks": [
+        "ginger cat sleeping doormat",
+        "orange cat sleeping"
+      ],
+      "subject": [
+        "cat",
+        "chat",
+        "ginger",
+        "roux"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b08": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone (texte exact)"
+    },
+    "p_b09": {
+      "decision": "REAL",
+      "query": "étagère livres de photographie",
+      "fallbacks": [
+        "photography books shelf camera",
+        "bookshelf photo books"
+      ],
+      "subject": [
+        "books",
+        "livres",
+        "bookshelf",
+        "étagère",
+        "shelf"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b10": {
+      "decision": "REAL",
+      "query": "ciel bleu traînée d'avion",
+      "fallbacks": [
+        "contrail blue sky",
+        "airplane contrail"
+      ],
+      "subject": [
+        "contrail",
+        "sky",
+        "ciel",
+        "traînée",
+        "avion"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b12": {
+      "decision": "REAL",
+      "query": "canapé neuf cartons déménagement",
+      "fallbacks": [
+        "new sofa moving boxes living room",
+        "sofa cardboard boxes"
+      ],
+      "subject": [
+        "sofa",
+        "canapé",
+        "couch",
+        "boxes",
+        "cartons",
+        "living room"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b13": {
+      "decision": "REAL",
+      "query": "Gare Saint-Charles hall",
+      "fallbacks": [
+        "Gare de Marseille-Saint-Charles",
+        "railway station hall departures board"
+      ],
+      "subject": [
+        "saint-charles",
+        "gare",
+        "station",
+        "railway",
+        "hall"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b14": {
+      "decision": "REAL",
+      "query": "ordinateur portable bureau écran design",
+      "fallbacks": [
+        "laptop desk graphic design",
+        "laptop screen office"
+      ],
+      "subject": [
+        "laptop",
+        "ordinateur",
+        "computer",
+        "screen",
+        "écran"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b15": {
+      "decision": "REAL",
+      "query": "rue Vauban Marseille nuit",
+      "fallbacks": [
+        "Marseille street night lamps",
+        "street lamps night parked car"
+      ],
+      "subject": [
+        "street",
+        "rue",
+        "night",
+        "nuit",
+        "lamp",
+        "réverbère"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b16": {
+      "decision": "REAL",
+      "query": "objectif appareil photo 35mm bureau",
+      "fallbacks": [
+        "camera lens on desk",
+        "vintage camera lens box"
+      ],
+      "subject": [
+        "lens",
+        "objectif",
+        "camera",
+        "appareil"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b17": {
+      "decision": "REAL",
+      "query": "cadres bois contre mur galerie",
+      "fallbacks": [
+        "picture frames leaning wall",
+        "gallery installation frames"
+      ],
+      "subject": [
+        "frames",
+        "cadres",
+        "gallery",
+        "galerie",
+        "exhibition",
+        "exposition"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b19": {
+      "decision": "REAL",
+      "query": "verres vides table nappe blanche",
+      "fallbacks": [
+        "empty glasses table after party",
+        "buffet table glasses bottles"
+      ],
+      "subject": [
+        "glasses",
+        "verres",
+        "table",
+        "bottles",
+        "bouteilles"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b20": {
+      "decision": "REAL",
+      "query": "Parc Borély Marseille",
+      "fallbacks": [
+        "Parc Borély",
+        "park path trees late summer"
+      ],
+      "subject": [
+        "borély",
+        "borely",
+        "park",
+        "parc",
+        "trees",
+        "arbres"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b21": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone (texte exact)"
+    },
+    "p_b22": {
+      "decision": "REAL",
+      "query": "mur de bloc prises bleues magnésie",
+      "fallbacks": [
+        "bouldering wall chalk holds",
+        "climbing holds chalk"
+      ],
+      "subject": [
+        "climbing",
+        "escalade",
+        "bouldering",
+        "bloc",
+        "holds",
+        "prises"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b23": {
+      "decision": "REAL",
+      "query": "toits de Marseille lever de soleil",
+      "fallbacks": [
+        "Marseille rooftops sunrise",
+        "rooftops sunrise pink sky"
+      ],
+      "subject": [
+        "rooftops",
+        "toits",
+        "sunrise",
+        "lever",
+        "aube",
+        "roofs"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b24": {
+      "decision": "REAL",
+      "query": "pelleteuse chantier trottoir",
+      "fallbacks": [
+        "excavator roadworks sidewalk",
+        "travaux rue pelleteuse"
+      ],
+      "subject": [
+        "excavator",
+        "pelleteuse",
+        "roadworks",
+        "travaux",
+        "chantier",
+        "construction"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b25": {
+      "decision": "REAL",
+      "query": "pothos plante verte fenêtre",
+      "fallbacks": [
+        "pothos plant window",
+        "houseplant pothos"
+      ],
+      "subject": [
+        "pothos",
+        "plant",
+        "plante",
+        "houseplant"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b26": {
+      "decision": "REAL",
+      "query": "mur d'escalade vu d'en bas contre-jour",
+      "fallbacks": [
+        "climbing wall from below",
+        "indoor climbing wall ceiling"
+      ],
+      "subject": [
+        "climbing",
+        "escalade",
+        "bouldering",
+        "wall",
+        "mur"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b27": {
+      "decision": "REAL",
+      "query": "cartons d'archives empilés",
+      "fallbacks": [
+        "archive boxes stacked",
+        "stacked cardboard boxes room"
+      ],
+      "subject": [
+        "boxes",
+        "cartons",
+        "archive",
+        "archives",
+        "stacked"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b28": {
+      "decision": "REAL",
+      "query": "table de bar verres soirée terrasse",
+      "fallbacks": [
+        "bar table drinks evening",
+        "terrace drinks string lights"
+      ],
+      "subject": [
+        "bar",
+        "table",
+        "drinks",
+        "verres",
+        "terrace",
+        "terrasse"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b29": {
+      "decision": "REAL",
+      "query": "smartphone écran table bar nuit",
+      "fallbacks": [
+        "phone screen bar table night",
+        "smartphone glowing drinks"
+      ],
+      "subject": [
+        "smartphone",
+        "phone",
+        "téléphone",
+        "screen",
+        "bar"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_b30": {
+      "decision": "REAL",
+      "query": "abribus nuit Marseille",
+      "fallbacks": [
+        "bus stop night",
+        "bus shelter night empty"
+      ],
+      "subject": [
+        "bus stop",
+        "abribus",
+        "bus",
+        "shelter",
+        "arrêt"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old01": {
+      "decision": "REAL",
+      "query": "feu d'artifice Vieux-Port Marseille",
+      "fallbacks": [
+        "Marseille fireworks 14 juillet",
+        "fireworks harbour night"
+      ],
+      "subject": [
+        "fireworks",
+        "feu d'artifice",
+        "feux",
+        "vieux-port",
+        "port"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old02": {
+      "decision": "REAL",
+      "query": "salon cartons guitare contre le mur",
+      "fallbacks": [
+        "living room boxes guitar",
+        "apartment living room guitar"
+      ],
+      "subject": [
+        "living room",
+        "salon",
+        "guitar",
+        "guitare",
+        "boxes"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old03": {
+      "decision": "REAL",
+      "query": "Plage des Catalans Marseille",
+      "fallbacks": [
+        "Marseille beach parasol",
+        "plage parasol rayé serviettes"
+      ],
+      "subject": [
+        "catalans",
+        "plage",
+        "beach",
+        "parasol",
+        "marseille"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old04": {
+      "decision": "REAL",
+      "query": "table de réveillon bougies",
+      "fallbacks": [
+        "christmas dinner table candles",
+        "festive table candles"
+      ],
+      "subject": [
+        "table",
+        "candles",
+        "bougies",
+        "christmas",
+        "noël",
+        "réveillon"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old05": {
+      "decision": "REAL",
+      "query": "télésiège sapins enneigés Alpes",
+      "fallbacks": [
+        "ski lift snowy fir trees",
+        "snow mountain chairlift"
+      ],
+      "subject": [
+        "snow",
+        "neige",
+        "chairlift",
+        "télésiège",
+        "ski",
+        "sapins"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old06": {
+      "decision": "REAL",
+      "query": "fête de la musique foule nuit",
+      "fallbacks": [
+        "concert crowd red lights",
+        "street concert crowd night"
+      ],
+      "subject": [
+        "crowd",
+        "foule",
+        "concert",
+        "fête de la musique",
+        "music"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old07": {
+      "decision": "REAL",
+      "query": "photographies encadrées mur blanc escabeau",
+      "fallbacks": [
+        "framed photographs white wall",
+        "exhibition hanging frames ladder"
+      ],
+      "subject": [
+        "frames",
+        "cadres",
+        "photographs",
+        "exhibition",
+        "exposition",
+        "wall"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_self01": {
+      "decision": "REAL",
+      "query": "gobelet café rebord fenêtre bureau",
+      "fallbacks": [
+        "coffee cup office window",
+        "takeaway coffee window morning"
+      ],
+      "subject": [
+        "coffee",
+        "café",
+        "cup",
+        "gobelet",
+        "window",
+        "fenêtre"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_self02": {
+      "decision": "REAL",
+      "query": "Plage des Catalans coucher de soleil",
+      "fallbacks": [
+        "beach towels flip-flops sunset",
+        "serviettes tongs plage"
+      ],
+      "subject": [
+        "beach",
+        "plage",
+        "towels",
+        "serviettes",
+        "catalans",
+        "sunset"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_self03": {
+      "decision": "REAL",
+      "query": "tasse café table salon rideaux",
+      "fallbacks": [
+        "coffee mug living room table",
+        "morning coffee curtains"
+      ],
+      "subject": [
+        "coffee",
+        "café",
+        "mug",
+        "tasse",
+        "table"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_blur01": {
+      "decision": "PROCEDURAL",
+      "reason": "photo ratée prise dans une poche : rendu flou du jeu"
+    },
+    "p_blur02": {
+      "decision": "PROCEDURAL",
+      "reason": "photo ratée du plafond : rendu flou du jeu"
+    },
+    "p_blur03": {
+      "decision": "REAL",
+      "query": "bar lumières floues nuit",
+      "fallbacks": [
+        "blurry bar lights",
+        "bokeh bar lamp glasses"
+      ],
+      "subject": [
+        "bar",
+        "blur",
+        "flou",
+        "bokeh",
+        "lights",
+        "lamp"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_quick01": {
+      "decision": "REAL",
+      "query": "colonne affiches concerts Marseille",
+      "fallbacks": [
+        "advertising column posters",
+        "poster wall street torn posters"
+      ],
+      "subject": [
+        "posters",
+        "affiches",
+        "column",
+        "colonne",
+        "poster"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_quick02": {
+      "decision": "REAL",
+      "query": "voiture garée sur le trottoir",
+      "fallbacks": [
+        "car parked on sidewalk",
+        "badly parked car pavement"
+      ],
+      "subject": [
+        "car",
+        "voiture",
+        "parked",
+        "sidewalk",
+        "trottoir"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_night01": {
+      "decision": "REAL",
+      "query": "rue de nuit vue d'une fenêtre scooter",
+      "fallbacks": [
+        "street from window night",
+        "night street lamps scooter"
+      ],
+      "subject": [
+        "street",
+        "rue",
+        "night",
+        "nuit",
+        "window",
+        "scooter"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_night02": {
+      "decision": "REAL",
+      "query": "Marseille de nuit Notre-Dame de la Garde",
+      "fallbacks": [
+        "Marseille by night skyline",
+        "city lights night sea"
+      ],
+      "subject": [
+        "marseille",
+        "night",
+        "nuit",
+        "notre-dame de la garde",
+        "city",
+        "ville"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_doc01": {
+      "decision": "PROCEDURAL",
+      "reason": "ticket de caisse : texte exact rendu par le jeu"
+    },
+    "p_doc02": {
+      "decision": "PROCEDURAL",
+      "reason": "document (attestation) : texte exact rendu par le jeu"
+    },
+    "p_scr01": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone (texte exact)"
+    },
+    "p_scr02": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone (texte exact)"
+    },
+    "p_scr03": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone (texte exact)"
+    },
+    "p_lucas_car": {
+      "decision": "REAL",
+      "query": "petite voiture grise garage",
+      "fallbacks": [
+        "small grey hatchback",
+        "grey city car garage"
+      ],
+      "subject": [
+        "car",
+        "voiture",
+        "hatchback",
+        "citadine",
+        "grey",
+        "gris"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_vernissage": {
+      "decision": "REAL",
+      "query": "vernissage exposition photographie visiteurs de dos",
+      "fallbacks": [
+        "photography exhibition opening visitors",
+        "gallery opening framed prints"
+      ],
+      "subject": [
+        "exhibition",
+        "exposition",
+        "vernissage",
+        "gallery",
+        "galerie",
+        "visitors"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_invoice": {
+      "decision": "PROCEDURAL",
+      "reason": "document (facture Studio Nova) : texte exact rendu par le jeu ; preuve portée par ses lignes et ses métadonnées"
+    },
+    "p_bar_selfie": {
+      "decision": "REAL",
+      "query": "table de bar verres chaises soirée",
+      "fallbacks": [
+        "bar table glasses empty chair",
+        "pub table drinks evening"
+      ],
+      "subject": [
+        "bar",
+        "table",
+        "glasses",
+        "verres",
+        "chair",
+        "chaise"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_emma_couch": {
+      "decision": "REAL",
+      "query": "lit couette tasse fenêtre jour",
+      "fallbacks": [
+        "bed duvet mug window daylight",
+        "bedroom tv duvet tea"
+      ],
+      "subject": [
+        "bed",
+        "lit",
+        "bedroom",
+        "chambre",
+        "duvet",
+        "couette"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_parking": {
+      "decision": "REAL",
+      "query": "parking de nuit voiture feux arrière",
+      "fallbacks": [
+        "empty car park night",
+        "parking lot night tail lights"
+      ],
+      "subject": [
+        "parking",
+        "car park",
+        "parking lot",
+        "voiture",
+        "car",
+        "night"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_sarah_jade": {
+      "decision": "REAL",
+      "query": "jardin guirlandes lumineuses ballons fête nuit",
+      "fallbacks": [
+        "garden party string lights balloons",
+        "birthday party garden night"
+      ],
+      "subject": [
+        "party",
+        "fête",
+        "balloons",
+        "ballons",
+        "string lights",
+        "guirlandes",
+        "garden"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_karim_desk": {
+      "decision": "REAL",
+      "query": "réception hôtel nuit comptoir",
+      "fallbacks": [
+        "hotel reception desk night",
+        "hotel lobby front desk"
+      ],
+      "subject": [
+        "hotel",
+        "hôtel",
+        "reception",
+        "réception",
+        "lobby",
+        "desk"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    }
+  }
+}

@@ -17,6 +17,13 @@ struct DeskOverline: View {
 
 // MARK: - 13 · Bureau
 
+/// What the Bureau shows of the ALIBI mode.
+struct AlibiSummary {
+    let total: Int
+    let done: Int
+    let inProgress: Bool
+}
+
 /// The hub (final handoff §F-13): one big kraft folder with the investigation in progress or the
 /// next one, one main button, the other files as 48 pt rows. No logo here. Before the assignment
 /// (screen 12) the header shows the investigator's name only: no rank, no service number.
@@ -28,8 +35,11 @@ struct BureauView: View {
     let identity: PlayerIdentity
     let rank: Rank
     let assigned: Bool
+    /// The ALIBI mode's card (nil when no ALIBI check is shipped).
+    var alibi: AlibiSummary? = nil
     let onOpen: (CaseFile) -> Void
     let onResume: () -> Void
+    var onAlibi: () -> Void = {}
     let onProfile: () -> Void
     let onTab: (DeskTab) -> Void
 
@@ -77,6 +87,12 @@ struct BureauView: View {
                             .offset(y: appeared || still ? 0 : 24)
                     }
                     otherFiles(excluding: main)
+                    if let alibi {
+                        // The second mode: visible, never above the investigation.
+                        DeskOverline(text: L10n.t("desk.otherMode"))
+                            .padding(.top, 14)
+                        AlibiDeskCard(total: alibi.total, done: alibi.done, inProgress: alibi.inProgress, onOpen: onAlibi)
+                    }
                 }
                 .padding(.horizontal, 16)
                 .padding(.bottom, 24)
@@ -231,7 +247,7 @@ private struct FeaturedFolder: View {
     }
 
     private var folderTab: some View {
-        Text(file.map { L10n.f("dossier.tabNumber", dossierNumber($0.number)) } ?? " ")
+        Text(file.map { L10n.f("dossier.tabNumber", shownNumber($0.number)) } ?? " ")
             .font(Trace.Fonts.pieceNumber)
             .tracking(1.4)
             .foregroundStyle(Trace.Colors.kraftInk)
@@ -255,7 +271,7 @@ private struct FeaturedFolder: View {
                     .font(Trace.Fonts.serifTitle(26))
                     .foregroundStyle(Trace.Colors.kraftInk)
                     .fixedSize(horizontal: false, vertical: true)
-                    .accessibilityLabel(Text(verbatim: "\(L10n.f("dossier.number", dossierNumber(file.number))), \(file.title.capitalizedFirst)"))
+                    .accessibilityLabel(Text(verbatim: "\(fileLabel(file.number)), \(file.title.capitalizedFirst)"))
                     .accessibilityAddTraits(.isHeader)
                 Text(file.tagline)
                     .font(Trace.Fonts.prose)
@@ -368,7 +384,7 @@ private struct CaseRow: View {
     var body: some View {
         Button(action: action) {
             HStack(alignment: .center, spacing: 14) {
-                Text(dossierNumber(file.number))
+                Text(shownNumber(file.number))
                     .font(Trace.Fonts.monoStrong)
                     .foregroundStyle(Trace.Colors.bone2)
                 Text(file.title.capitalizedFirst)
@@ -390,7 +406,7 @@ private struct CaseRow: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(PressableStyle())
-        .accessibilityLabel(Text(verbatim: "\(L10n.f("dossier.number", dossierNumber(file.number))), \(file.title.capitalizedFirst), \(status.title)"))
+        .accessibilityLabel(Text(verbatim: "\(fileLabel(file.number)), \(file.title.capitalizedFirst), \(status.title)"))
         .accessibilityIdentifier("case.\(file.id)")
     }
 
@@ -513,7 +529,7 @@ struct ArchiveCard: View {
         let facts = DossierFacts(file: file)
         Button(action: onOpen) {
             HStack(alignment: .top, spacing: 0) {
-                Text(dossierNumber(file.number)).font(.custom(Trace.FontName.monoBold, size: 20)).foregroundStyle(Trace.Colors.ink)
+                Text(shownNumber(file.number)).font(.custom(Trace.FontName.monoBold, size: 20)).foregroundStyle(Trace.Colors.ink)
                     .frame(width: 58, alignment: .leading)
                 VStack(alignment: .leading, spacing: 5) {
                     Text(file.title.capitalizedFirst).font(Trace.Fonts.name).foregroundStyle(Trace.Colors.ink)
@@ -780,7 +796,7 @@ struct InvestigatorView: View {
     private func caseLine(_ file: CaseFile, progress: CaseProgress?) -> some View {
         let status = DossierStatus.of(file, progress: progress, savedCaseID: nil)
         return HStack(alignment: .firstTextBaseline, spacing: 10) {
-            Text(dossierNumber(file.number))
+            Text(shownNumber(file.number))
                 .font(Trace.Fonts.fieldValue)
                 .foregroundStyle(Trace.Colors.inkSoft)
             Text(file.title.capitalizedFirst)
@@ -876,7 +892,7 @@ struct InvestigatorView: View {
                 .font(Trace.Fonts.fieldValue)
                 .foregroundStyle(Trace.Colors.inkSoft)
             VStack(alignment: .leading, spacing: 2) {
-                Text(verbatim: "\(dossierNumber(file?.number ?? 0)) · \(file?.title.capitalizedFirst ?? "")")
+                Text(verbatim: "\(shownNumber(file?.number ?? 0)) · \(file?.title.capitalizedFirst ?? "")")
                     .font(Trace.Fonts.proseSmall)
                     .foregroundStyle(Trace.Colors.ink)
                     .fixedSize(horizontal: false, vertical: true)

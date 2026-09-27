@@ -11,6 +11,9 @@ public enum CaseAnalysis {
         public var photoCount: Int
         /// Share of messages that are referenced by no evidence at all (the "noise" to dig through).
         public var noiseRatio: Double
+        /// Same estimate as `estimatedSolveSeconds`, for the case's `minimalPath` only (nil without one):
+        /// what a player who goes straight to the essentials needs.
+        public var minimalPathSeconds: Int? = nil
 
         public var isComfortablySolvable: Bool { estimatedSolveSeconds <= duration * 3 / 4 }
     }
@@ -18,10 +21,6 @@ public enum CaseAnalysis {
     public static func analyze(_ file: CaseFile, rules: GameRules, readingSecondsPerItem: Int = 15) -> Report {
         let costs = rules.timeCosts
         let investigation = Investigation(caseFile: file, rules: rules, clock: ManualClock())
-        var appsNeeded = Set<AppID>()
-        var total = 0
-        var items = 0
-
         func cost(of ref: ItemRef) -> (Int, AppID?) {
             switch ref.kind {
             case .message:
@@ -46,22 +45,31 @@ public enum CaseAnalysis {
             }
         }
 
-        let key = file.evidence.filter { $0.importance == .key }
-        for evidence in key {
-            let options = evidence.refs.map(cost(of:))
-            if evidence.anyOf == true {
-                if let best = options.min(by: { $0.0 < $1.0 }) {
-                    total += best.0; items += 1
-                    if let app = best.1 { appsNeeded.insert(app) }
-                }
-            } else {
-                for option in options {
-                    total += option.0; items += 1
-                    if let app = option.1 { appsNeeded.insert(app) }
+        /// Action cost and number of items to read to see all of `evidences`.
+        func estimate(_ evidences: [Evidence]) -> (cost: Int, items: Int) {
+            var appsNeeded = Set<AppID>()
+            var total = 0
+            var items = 0
+            for evidence in evidences {
+                let options = evidence.refs.map(cost(of:))
+                if evidence.anyOf == true {
+                    if let best = options.min(by: { $0.0 < $1.0 }) {
+                        total += best.0; items += 1
+                        if let app = best.1 { appsNeeded.insert(app) }
+                    }
+                } else {
+                    for option in options {
+                        total += option.0; items += 1
+                        if let app = option.1 { appsNeeded.insert(app) }
+                    }
                 }
             }
+            return (total + appsNeeded.count * costs.openApp, items)
         }
-        total += appsNeeded.count * costs.openApp
+
+        let key = file.evidence.filter { $0.importance == .key }
+        let (total, items) = estimate(key)
+        let minimal = file.minimalPath.map { ids in estimate(file.evidence.filter { ids.contains($0.id) }) }
 
         let allMessages = file.devices.flatMap(\.conversations).flatMap(\.messages)
         let referenced = Set(file.evidence.flatMap(\.refs).filter { $0.kind == .message }.map(\.id))
@@ -73,6 +81,7 @@ public enum CaseAnalysis {
                       keyEvidenceCount: key.count,
                       messageCount: allMessages.count,
                       photoCount: file.devices.flatMap(\.photos).count,
-                      noiseRatio: noise)
+                      noiseRatio: noise,
+                      minimalPathSeconds: minimal.map { $0.cost + $0.items * readingSecondsPerItem })
     }
 }

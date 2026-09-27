@@ -1,6 +1,6 @@
 {
  "dossier": {
-  "rating": 2,
+  "rating": 1,
   "category": "DISPARITION",
   "city": "Marseille",
   "place": "Zone portuaire",
@@ -18,9 +18,9 @@
  "synopsis": [
   "Samedi 12 septembre, Alex Moreau, 26 ans, quitte ses amis au bar Le Levant vers 21h30. Il n'est jamais rentré chez lui.",
   "Son téléphone a été retrouvé ce matin, au sol, dans un parking de la zone portuaire. Vous avez accès à son contenu pendant quelques minutes.",
-  "Quatre personnes gravitaient autour de lui ce soir-là. Toutes n'ont pas dit la vérité."
+  "Quatre personnes gravitaient autour de lui ce soir-là : Sarah, son ex ; Karim, à qui il devait de l'argent ; Lucas, son meilleur ami ; Emma, avec qui il dirige le collectif photo Lumen. Toutes n'ont pas dit la vérité."
  ],
- "objective": "Identifier la personne qui a vu Alex en dernier.",
+ "objective": "Alex a quitté le Levant à 21:36 pour un rendez-vous. Trouvez qui il a rejoint, et qui ment sur sa soirée.",
  "difficulty": 1,
  "durationSeconds": 480,
  "phoneStartTime": "2026-09-13 10:00",
@@ -1625,7 +1625,7 @@
     },
     {
      "id": "pl_gare",
-     "name": "Gare centrale",
+     "name": "Gare Saint-Charles",
      "kind": "station",
      "x": 0.58,
      "y": 0.52,
@@ -1837,9 +1837,9 @@
      "takenAt": "2026-08-17 19:58",
      "source": "camera",
      "scene": "sunset",
-     "caption": "Coucher de soleil sur le port.",
+     "caption": "Coucher de soleil sur le port, depuis le J4.",
      "details": "Des grues au loin, un ferry à quai. Rien de particulier.",
-     "place": "Quai des Arts",
+     "place": "Esplanade du J4",
      "device": "iPhone 13"
     },
     {
@@ -1847,8 +1847,8 @@
      "takenAt": "2026-08-18 20:31",
      "source": "camera",
      "scene": "climbing",
-     "caption": "Tom dans une voie jaune.",
-     "details": "La salle est presque vide. Tom porte un t-shirt rouge.",
+     "caption": "La voie jaune que Tom a enchaînée.",
+     "details": "Des prises jaunes jusqu'au plafond, la salle presque vide.",
      "place": "Salle d'escalade Bloc Out",
      "device": "iPhone 13"
     },
@@ -1867,18 +1867,19 @@
      "takenAt": "2026-08-20 13:02",
      "source": "camera",
      "scene": "street_day",
-     "caption": "Une rue du centre, en plein soleil.",
-     "details": "Des passants, une vitrine de disquaire.",
-     "device": "iPhone 13"
+     "caption": "Le cours Julien, en plein soleil.",
+     "details": "Des façades couvertes de graffitis, une vitrine de disquaire.",
+     "device": "iPhone 13",
+     "place": "Cours Julien"
     },
     {
      "id": "p_b05",
      "takenAt": "2026-08-21 22:10",
      "source": "camera",
      "scene": "concert",
-     "caption": "Concert au parc — lumières violettes.",
+     "caption": "Concert au parc Borély — lumières violettes.",
      "details": "La scène est loin, la photo est floue.",
-     "place": "Parc des Tilleuls",
+     "place": "Parc Borély",
      "device": "iPhone 13"
     },
     {
@@ -1887,7 +1888,7 @@
      "source": "camera",
      "scene": "bar",
      "caption": "Le Levant, terrasse du fond.",
-     "details": "Des verres sur la table, Inès rit.",
+     "details": "Des verres sur la table, des guirlandes au-dessus de la terrasse.",
      "place": "Le Levant",
      "device": "iPhone 13"
     },
@@ -1923,7 +1924,7 @@
      "source": "camera",
      "scene": "books",
      "caption": "Étagère de livres photo.",
-     "details": "Vivian Maier, Saul Leiter, Martin Parr…",
+     "details": "Une rangée de beaux livres de photographie, un appareil argentique posé devant.",
      "place": "Domicile",
      "device": "iPhone 13"
     },
@@ -1942,7 +1943,7 @@
      "source": "camera",
      "scene": "interior_warm",
      "caption": "Le canapé de Lucas, enfin monté.",
-     "details": "Lucas fait un pouce levé au fond. Des cartons partout.",
+     "details": "Un canapé gris tout neuf, des cartons partout autour.",
      "place": "Avenue des Chênes",
      "device": "iPhone 13"
     },
@@ -1951,9 +1952,9 @@
      "takenAt": "2026-09-01 08:47",
      "source": "camera",
      "scene": "station",
-     "caption": "Gare centrale, le matin.",
-     "details": "Le panneau affiche un retard de 10 minutes.",
-     "place": "Gare centrale",
+     "caption": "Gare Saint-Charles, le matin.",
+     "details": "Le grand hall, des voyageurs qui attendent sous le tableau des départs.",
+     "place": "Gare Saint-Charles",
      "device": "iPhone 13"
     },
     {
@@ -1962,7 +1963,7 @@
      "source": "camera",
      "scene": "laptop",
      "caption": "Maquette Varenne à l'écran.",
-     "details": "Une affiche bleue et orange sur l'écran.",
+     "details": "Un ordinateur portable ouvert sur le bureau, une maquette d'affiche à l'écran.",
      "place": "Agence Varenne",
      "device": "iPhone 13"
     },
@@ -1980,9 +1981,9 @@
      "id": "p_b16",
      "takenAt": "2026-09-04 13:25",
      "source": "camera",
-     "scene": "document",
+     "scene": "interior_warm",
      "caption": "Colis reçu : une nouvelle optique 35 mm.",
-     "details": "La boîte est ouverte sur le bureau.",
+     "details": "L'objectif posé sur le bureau, à côté de la boîte ouverte.",
      "place": "Domicile",
      "device": "iPhone 13"
     },
@@ -2001,8 +2002,8 @@
      "takenAt": "2026-09-05 22:15",
      "source": "camera",
      "scene": "gallery",
-     "caption": "Des visiteurs devant les tirages.",
-     "details": "Une dizaine de personnes, lumière chaude.",
+     "caption": "Fin du vernissage : la table de la buvette.",
+     "details": "Des verres vides, des bouteilles, une nappe blanche.",
      "place": "Local du collectif Lumen",
      "device": "iPhone 13"
     },
@@ -2011,9 +2012,10 @@
      "takenAt": "2026-09-06 12:30",
      "source": "camera",
      "scene": "park",
-     "caption": "Balade au parc le lendemain.",
+     "caption": "Balade au parc Borély le lendemain.",
      "details": "Des feuilles qui commencent à jaunir.",
-     "device": "iPhone 13"
+     "device": "iPhone 13",
+     "place": "Parc Borély"
     },
     {
      "id": "p_b21",
@@ -2077,8 +2079,8 @@
      "takenAt": "2026-09-11 18:55",
      "source": "camera",
      "scene": "climbing",
-     "caption": "Tom en haut du mur.",
-     "details": "Photo prise d'en bas, contre-jour.",
+     "caption": "Le haut du mur, vu d'en bas.",
+     "details": "Contre-jour, des prises de toutes les couleurs jusqu'au plafond. Tom vient de sortir la voie.",
      "place": "Salle d'escalade Bloc Out",
      "device": "iPhone 13"
     },
@@ -2097,8 +2099,8 @@
      "takenAt": "2026-09-12 20:02",
      "source": "camera",
      "scene": "bar",
-     "caption": "Le Levant, verres sur la table.",
-     "details": "Lucas, en sweat noir, regarde son téléphone. Sarah parle avec Inès.",
+     "caption": "Le Levant, la terrasse du fond.",
+     "details": "Des verres, des téléphones posés sur la table, les guirlandes qui s'allument.",
      "place": "Le Levant",
      "device": "iPhone 13"
     },
@@ -2107,8 +2109,8 @@
      "takenAt": "2026-09-12 21:05",
      "source": "camera",
      "scene": "bar",
-     "caption": "Tom montre une vidéo à Lucas.",
-     "details": "Photo floue, prise de travers.",
+     "caption": "La vidéo que Tom fait tourner à table.",
+     "details": "Un écran de téléphone lumineux au-dessus des verres. Photo floue, prise de travers.",
      "place": "Le Levant",
      "device": "iPhone 13"
     },
@@ -2117,9 +2119,9 @@
      "takenAt": "2026-09-12 21:52",
      "source": "camera",
      "scene": "street_night",
-     "caption": "Arrêt de bus, ligne 12.",
-     "details": "L'écran annonce le prochain bus dans 4 minutes, direction « Port ».",
-     "place": "Gare centrale",
+     "caption": "Arrêt de bus, ligne 12, direction Port.",
+     "details": "Un abribus éclairé, personne sur le trottoir.",
+     "place": "Gare Saint-Charles",
      "device": "iPhone 13"
     },
     {
@@ -2188,9 +2190,9 @@
      "id": "p_old07",
      "takenAt": "2024-10-03 18:30",
      "source": "camera",
-     "scene": "group",
-     "caption": "Premier accrochage du collectif Lumen.",
-     "details": "Quatre silhouettes devant un mur blanc.",
+     "scene": "gallery",
+     "caption": "Premier accrochage du collectif Lumen, 2024.",
+     "details": "Quatre tirages encadrés sur un mur blanc, un escabeau au pied.",
      "style": "old",
      "place": "Local du collectif Lumen",
      "device": "iPhone 13"
@@ -2199,10 +2201,9 @@
      "id": "p_self01",
      "takenAt": "2026-08-19 08:02",
      "source": "camera",
-     "scene": "mirror",
-     "caption": "Selfie dans le miroir de l'ascenseur.",
-     "details": "Alex, un café à la main, l'air pas réveillé.",
-     "style": "selfie",
+     "scene": "office",
+     "caption": "Le café du matin, à l'agence.",
+     "details": "Un gobelet fumant sur le rebord de la fenêtre, la rue encore grise en bas.",
      "place": "Agence Varenne",
      "device": "iPhone 13"
     },
@@ -2211,9 +2212,8 @@
      "takenAt": "2026-08-29 17:48",
      "source": "camera",
      "scene": "beach",
-     "caption": "Selfie à la plage avec Lucas.",
-     "details": "Deux silhouettes à contre-jour, cheveux mouillés.",
-     "style": "selfie",
+     "caption": "Plage des Catalans, fin d'après-midi avec Lucas.",
+     "details": "Deux serviettes, deux paires de tongs, le soleil bas sur l'eau.",
      "place": "Plage des Catalans",
      "device": "iPhone 13"
     },
@@ -2221,10 +2221,9 @@
      "id": "p_self03",
      "takenAt": "2026-09-06 13:15",
      "source": "camera",
-     "scene": "selfie",
-     "caption": "Selfie après le vernissage, cernes comprises.",
-     "details": "Le visage est flou, l'arrière-plan net.",
-     "style": "selfie",
+     "scene": "interior_warm",
+     "caption": "Le lendemain du vernissage : café et fatigue.",
+     "details": "Une tasse sur la table du salon, les rideaux encore tirés.",
      "place": "Domicile",
      "device": "iPhone 13"
     },
@@ -2255,7 +2254,7 @@
      "source": "camera",
      "scene": "bar",
      "caption": "Le Levant, photo ratée.",
-     "details": "Un bras, une lampe, des reflets. Rien d'utile.",
+     "details": "Une lampe, des reflets, des verres. Rien d'utile.",
      "style": "blurry",
      "place": "Le Levant",
      "device": "iPhone 13"
@@ -2265,8 +2264,8 @@
      "takenAt": "2026-08-27 12:05",
      "source": "camera",
      "scene": "street_day",
-     "caption": "Une affiche de concert, prise en passant.",
-     "details": "« Nuits du Port — 18 septembre ».",
+     "caption": "Des affiches de concerts, prises en passant.",
+     "details": "Une colonne couverte d'affiches déchirées, au coin de la rue.",
      "style": "quick",
      "device": "iPhone 13"
     },
@@ -2298,7 +2297,7 @@
      "source": "camera",
      "scene": "view",
      "caption": "La ville depuis le toit de l'immeuble.",
-     "details": "Des lumières jusqu'à la mer.",
+     "details": "Des lumières jusqu'à la mer, Notre-Dame de la Garde éclairée au loin.",
      "style": "night",
      "place": "Domicile",
      "device": "iPhone 13"
@@ -2394,8 +2393,8 @@
      "takenAt": "2026-08-23 11:43",
      "source": "received",
      "scene": "car",
-     "caption": "La Clio grise de Lucas, sortie du garage.",
-     "details": "Une petite citadine grise, carrosserie propre. La plaque est à moitié cachée par un vélo.",
+     "caption": "La citadine grise de Lucas, sortie du garage.",
+     "details": "Une petite citadine grise, carrosserie propre, devant l'atelier du garage.",
      "place": "Garage Martin",
      "from": "lucas",
      "receivedAt": "2026-08-23 11:45",
@@ -2405,9 +2404,9 @@
      "id": "p_vernissage",
      "takenAt": "2026-09-05 20:12",
      "source": "received",
-     "scene": "group",
-     "caption": "Vernissage Lumen : Emma, Inès et Alex devant les tirages.",
-     "details": "Emma porte une veste en jean clair, délavée. Alex tient une coupe. Au fond, les 14 tirages encadrés.",
+     "scene": "gallery",
+     "caption": "Vernissage Lumen, vu du fond de la salle.",
+     "details": "Des visiteurs de dos devant les 14 tirages encadrés en bois clair, des coupes sur une table.",
      "place": "Local du collectif Lumen",
      "from": "ines",
      "receivedAt": "2026-09-06 11:05",
@@ -2423,9 +2422,11 @@
      "style": "document",
      "lines": [
       "STUDIO NOVA",
+      "Rue Paradis, Marseille",
       "FACTURE N° 114",
       "Prestations de tirage",
-      "Total TTC  1 650,00 €"
+      "Total TTC  1 650,00 €",
+      "Validé : E.R. — trésorière"
      ],
      "place": "Domicile",
      "device": "iPhone 13"
@@ -2434,10 +2435,9 @@
      "id": "p_bar_selfie",
      "takenAt": "2026-09-12 20:12",
      "source": "camera",
-     "scene": "group",
-     "caption": "Selfie au Levant : Alex, Lucas, Sarah, Karim, Inès, Tom.",
-     "details": "Tout le monde sourit. Karim a déjà sa veste de travail sur le bras. Emma n'est pas là.",
-     "style": "selfie",
+     "scene": "bar",
+     "caption": "Le Levant : la table du fond, avant le départ de Karim.",
+     "details": "Six verres sur la table, la veste de travail de Karim sur le dossier d'une chaise. Une chaise reste vide : Emma n'est pas venue.",
      "place": "Le Levant",
      "device": "iPhone 13"
     },
@@ -2446,8 +2446,8 @@
      "takenAt": "2026-09-12 19:42",
      "source": "received",
      "scene": "bed",
-     "caption": "Emma sous la couette, une tasse fumante, la télé allumée.",
-     "details": "Par la fenêtre derrière le lit, le ciel est encore clair : il fait jour dehors. L'horloge du décodeur, en bas de la télé, est illisible.",
+     "caption": "« Chez moi » : la couette, une tasse fumante, la télé allumée.",
+     "details": "Par la fenêtre, derrière le lit, le ciel est encore clair : il fait jour dehors.",
      "place": "Rue Paradis",
      "from": "emma",
      "receivedAt": "2026-09-12 22:30",
@@ -2459,7 +2459,7 @@
      "source": "camera",
      "scene": "parking_night",
      "caption": "Le parking du Quai 9, de nuit.",
-     "details": "Au fond, les feux arrière d'une petite citadine grise qui repart. Près de la barrière, une silhouette dans une veste claire.",
+     "details": "Le parking est presque vide sous les lampadaires orange. Au fond, les feux arrière d'une petite citadine grise qui repart vers la sortie.",
      "style": "night",
      "place": "Parking du Quai 9",
      "device": "iPhone 13"
@@ -2470,7 +2470,7 @@
      "source": "received",
      "scene": "party",
      "caption": "L'anniversaire de Jade : ballons et guirlandes.",
-     "details": "Sarah est au premier plan avec sa sœur Jade. Guirlandes lumineuses, une vingtaine d'invités.",
+     "details": "Un jardin rue des Lilas, des guirlandes lumineuses, des ballons accrochés à la table, une vingtaine d'invités.",
      "place": "Rue des Lilas",
      "from": "sarah",
      "receivedAt": "2026-09-12 22:21",
@@ -2482,7 +2482,7 @@
      "source": "received",
      "scene": "desk_night",
      "caption": "Le comptoir d'accueil de l'hôtel, de nuit.",
-     "details": "Un écran de réservation, une sonnette, le logo « Le Cygne » sur le mur. L'horloge murale indique 22:47.",
+     "details": "Un écran de réservation, une sonnette, les clés alignées derrière le comptoir. Le hall est vide.",
      "place": "Hôtel Le Cygne",
      "from": "karim",
      "receivedAt": "2026-09-12 22:48",
@@ -2890,6 +2890,23 @@
      "level": "normal"
     },
     {
+     "id": "lv10",
+     "afterSeconds": 150,
+     "kind": "message",
+     "app": "messages",
+     "title": "Inès Carpentier",
+     "body": "Si la police lit ça : samedi, Alex m'a dit qu'il avait un rendez-vous après le Levant. Une histoire avec l'asso.",
+     "conversation": "c_ines",
+     "message": {
+      "id": "m_live_ines_rdv",
+      "from": "ines",
+      "at": "2026-09-13 10:00",
+      "text": "Si la police lit ça : samedi, Alex m'a dit qu'il avait un rendez-vous après le Levant. Une histoire avec l'asso."
+     },
+     "opens": "message:m_live_ines_rdv",
+     "level": "important"
+    },
+    {
      "id": "lv04",
      "afterSeconds": 175,
      "kind": "message",
@@ -2918,7 +2935,7 @@
     },
     {
      "id": "lv06",
-     "afterSeconds": 285,
+     "afterSeconds": 270,
      "kind": "deletion",
      "app": "messages",
      "title": "Les Levantins",
@@ -2930,7 +2947,7 @@
     },
     {
      "id": "lv07",
-     "afterSeconds": 340,
+     "afterSeconds": 300,
      "kind": "message",
      "app": "messages",
      "title": "Emma Roussel",
@@ -2947,7 +2964,7 @@
     },
     {
      "id": "lv08",
-     "afterSeconds": 400,
+     "afterSeconds": 350,
      "kind": "message",
      "app": "messages",
      "title": "Lucas Ferrand",
@@ -2964,7 +2981,7 @@
     },
     {
      "id": "lv09",
-     "afterSeconds": 450,
+     "afterSeconds": 400,
      "kind": "message",
      "app": "messages",
      "title": "Sarah Vasseur",
@@ -3022,7 +3039,7 @@
   {
    "id": "s_emma",
    "contact": "emma",
-   "role": "Co-fondatrice du collectif Lumen",
+   "role": "Co-fondatrice et trésorière du collectif Lumen",
    "age": 28,
    "address": "Rue Paradis",
    "statement": "« J'avais la migraine. Je suis restée chez moi toute la soirée. »",
@@ -3072,7 +3089,7 @@
   {
    "id": "e_sharing",
    "title": "Le partage de position coupé",
-   "importance": "key",
+   "importance": "supporting",
    "suspects": [
     "s_emma"
    ],
@@ -3099,7 +3116,7 @@
   {
    "id": "e_lucas_route",
    "title": "Le détour de Lucas",
-   "importance": "key",
+   "importance": "supporting",
    "suspects": [
     "s_lucas",
     "s_emma"
@@ -3135,7 +3152,7 @@
   },
   {
    "id": "e_parking",
-   "title": "La silhouette du parking",
+   "title": "Le parking à 22:18",
    "importance": "supporting",
    "suspects": [
     "s_emma"
@@ -3143,7 +3160,7 @@
    "refs": [
     "photoInfo:p_parking"
    ],
-   "meaning": "Une silhouette en veste claire près de la barrière, et la Clio grise de Lucas qui repart : Emma portait sa veste en jean clair au vernissage."
+   "meaning": "À 22:18, Alex photographie le parking : une petite citadine grise repart, celle de Lucas, qui vient de déposer quelqu'un (22:17). La personne déposée, elle, est restée avec Alex."
   },
   {
    "id": "e_sarah_alibi",
@@ -3240,20 +3257,24 @@
  "hints": [
   {
    "id": "h1",
-   "text": "Comparez ce que chacun affirme avec les positions partagées entre 21h et 23h. Et regardez qui n'apparaît plus sur la carte.",
+   "text": "Tout se joue samedi soir, juste après le départ d'Alex du Levant (21:36). Regardez Messages — Corbeille comprise —, le Calendrier et les photos reçues ce soir-là.",
    "scoreCost": 0
   },
   {
    "id": "h2",
-   "text": "Une photo n'est pas toujours prise au moment où elle est envoyée.",
-   "scoreCost": 8
+   "text": "Comparez ce que chacun affirme sur sa soirée avec l'heure à laquelle ses photos ont vraiment été prises, et avec les positions de la Carte.",
+   "scoreCost": 5
   },
   {
    "id": "h3",
-   "text": "Ce qui a été effacé n'a pas forcément disparu : la corbeille garde les messages de 21:40.",
-   "scoreCost": 15,
-   "unlockAtRemainingSeconds": 120
+   "text": "Un élément du téléphone contredit l'alibi de l'un d'eux : une photo « preuve » n'a pas été prise à l'heure où elle a été envoyée. Et le rendez-vous de 22h a laissé des traces, même effacées.",
+   "scoreCost": 10
   }
+ ],
+ "minimalPath": [
+  "e_rdv",
+  "e_photo_meta",
+  "e_motive"
  ],
  "solution": {
   "culprit": "s_emma",

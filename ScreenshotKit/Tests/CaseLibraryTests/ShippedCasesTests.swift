@@ -33,7 +33,8 @@ struct ShippedCasesTests {
                 #expect(report.estimatedSolveSeconds <= seconds * 3 / 4, "\(file.id) at \(level): \(report.estimatedSolveSeconds) s for \(seconds) s")
             }
             // The phone must be a real haystack: most messages are not evidence.
-            #expect(report.noiseRatio > 0.7, "\(file.id): only \(Int(report.noiseRatio * 100)) % noise")
+            // A real phone is full of banalities (the short ALIBI phones a little less).
+            #expect(report.noiseRatio > (file.isAlibi ? 0.5 : 0.7), "\(file.id): only \(Int(report.noiseRatio * 100)) % noise")
         }
     }
 

@@ -1,0 +1,635 @@
+{
+  "case": "003",
+  "about": "Après la fête — villa au Cap Ferret (Bassin d'Arcachon), Bordeaux, Biarritz ; fin août 2026, nuits claires",
+  "photos": {
+    "p_group_2340": {
+      "decision": "REAL",
+      "query": "yellow hoodie on chair",
+      "fallbacks": [
+        "mustard sweatshirt",
+        "yellow sweatshirt",
+        "yellow hoodie"
+      ],
+      "subject": [
+        "hoodie",
+        "sweatshirt",
+        "sweat",
+        "jumper",
+        "pull",
+        "capuche"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_louise_0206": {
+      "decision": "REAL",
+      "query": "maison nuit étoiles pose longue",
+      "fallbacks": [
+        "house under milky way",
+        "villa night stars",
+        "milky way over house"
+      ],
+      "subject": [
+        "milky way",
+        "voie lactée",
+        "stars",
+        "étoiles",
+        "night sky",
+        "nuit"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_louise_0214": {
+      "decision": "REAL",
+      "query": "escalier jardin lampadaire nuit",
+      "fallbacks": [
+        "garden stairs lamp night",
+        "stone steps street lamp night",
+        "outdoor staircase night light"
+      ],
+      "subject": [
+        "stairs",
+        "steps",
+        "escalier",
+        "staircase",
+        "marches",
+        "lamp"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_louise_0227": {
+      "decision": "REAL",
+      "query": "maison nuit étoiles pose longue",
+      "fallbacks": [
+        "house under milky way",
+        "villa night stars"
+      ],
+      "subject": [
+        "milky way",
+        "voie lactée",
+        "stars",
+        "étoiles",
+        "night"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": "p_louise_0206"
+    },
+    "p_diane_biarritz": {
+      "decision": "REAL",
+      "query": "Côte des Basques Biarritz café",
+      "fallbacks": [
+        "sunglasses cafe table sea",
+        "coffee cups terrace ocean",
+        "Biarritz Côte des Basques"
+      ],
+      "subject": [
+        "sunglasses",
+        "lunettes",
+        "café",
+        "coffee",
+        "cup",
+        "tasse",
+        "terrace"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_max_sunglasses": {
+      "decision": "REAL",
+      "query": "Côte des Basques Biarritz café",
+      "fallbacks": [
+        "tortoiseshell sunglasses table",
+        "sunglasses on table"
+      ],
+      "subject": [
+        "sunglasses",
+        "lunettes",
+        "table",
+        "cup",
+        "tasse"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": "p_diane_biarritz"
+    },
+    "p_paul_surf": {
+      "decision": "REAL",
+      "query": "Lacanau plage surf",
+      "fallbacks": [
+        "Lacanau Océan plage",
+        "surfer small wave beach"
+      ],
+      "subject": [
+        "lacanau",
+        "surf",
+        "beach",
+        "plage",
+        "wave",
+        "vague"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old_2003": {
+      "decision": "REAL",
+      "query": "Dune du Pilat",
+      "fallbacks": [
+        "Dune du Pyla sable",
+        "sand dune beach bucket"
+      ],
+      "subject": [
+        "dune",
+        "pilat",
+        "pyla",
+        "sable",
+        "sand"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old_2005": {
+      "decision": "REAL",
+      "query": "bûche de Noël table",
+      "fallbacks": [
+        "christmas log cake table",
+        "christmas table candles red tablecloth"
+      ],
+      "subject": [
+        "bûche",
+        "christmas",
+        "noël",
+        "yule",
+        "table",
+        "candle"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_porto": {
+      "decision": "REAL",
+      "query": "Porto azulejos rue",
+      "fallbacks": [
+        "Porto street azulejo facade",
+        "Porto Ribeira street"
+      ],
+      "subject": [
+        "porto",
+        "azulejo",
+        "azulejos",
+        "street",
+        "rua",
+        "rue"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_zellige": {
+      "decision": "REAL",
+      "query": "zellige carreaux vert",
+      "fallbacks": [
+        "green zellige tiles",
+        "green ceramic tiles samples"
+      ],
+      "subject": [
+        "zellige",
+        "tile",
+        "tiles",
+        "carreaux",
+        "carrelage",
+        "ceramic"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old_2022": {
+      "decision": "REAL",
+      "query": "cartons déménagement appartement",
+      "fallbacks": [
+        "moving boxes apartment",
+        "cardboard boxes empty room"
+      ],
+      "subject": [
+        "boxes",
+        "cartons",
+        "moving",
+        "déménagement",
+        "carton",
+        "room"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old_2019": {
+      "decision": "REAL",
+      "query": "Dune du Pilat coucher de soleil",
+      "fallbacks": [
+        "Banc d'Arguin sunset",
+        "Pyla sunset paragliding"
+      ],
+      "subject": [
+        "pilat",
+        "pyla",
+        "sunset",
+        "coucher",
+        "dune",
+        "arguin"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_resa": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    },
+    "p_selfie_mirror": {
+      "decision": "REAL",
+      "query": "bureau tasse café échantillons",
+      "fallbacks": [
+        "coffee cup desk morning",
+        "design studio desk samples"
+      ],
+      "subject": [
+        "desk",
+        "bureau",
+        "coffee",
+        "café",
+        "cup",
+        "tasse",
+        "office"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_sky_july": {
+      "decision": "REAL",
+      "query": "Chartrons Bordeaux toits",
+      "fallbacks": [
+        "Bordeaux rooftops sunrise",
+        "pink sky rooftops"
+      ],
+      "subject": [
+        "bordeaux",
+        "chartrons",
+        "roof",
+        "toits",
+        "rooftops",
+        "sky",
+        "ciel"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_cat": {
+      "decision": "REAL",
+      "query": "tabby cat balcony",
+      "fallbacks": [
+        "chat tigré balcon",
+        "tabby cat flower box"
+      ],
+      "subject": [
+        "cat",
+        "chat",
+        "tabby",
+        "tigré"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_rain": {
+      "decision": "REAL",
+      "query": "Bordeaux tram pluie",
+      "fallbacks": [
+        "rain drops tram window",
+        "raindrops window"
+      ],
+      "subject": [
+        "rain",
+        "pluie",
+        "raindrops",
+        "gouttes",
+        "window",
+        "vitre"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_night_chartrons": {
+      "decision": "REAL",
+      "query": "rue Notre-Dame Bordeaux",
+      "fallbacks": [
+        "Chartrons Bordeaux nuit",
+        "Bordeaux street night bicycle"
+      ],
+      "subject": [
+        "bordeaux",
+        "chartrons",
+        "notre-dame",
+        "street",
+        "rue",
+        "night"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_laptop": {
+      "decision": "REAL",
+      "query": "laptop bathroom design",
+      "fallbacks": [
+        "ordinateur portable bureau",
+        "laptop desk"
+      ],
+      "subject": [
+        "laptop",
+        "ordinateur",
+        "computer",
+        "notebook",
+        "desk"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_ceiling": {
+      "decision": "PROCEDURAL",
+      "reason": "photo prise par erreur (plafond flou)"
+    },
+    "p_plant": {
+      "decision": "REAL",
+      "query": "monstera new leaf",
+      "fallbacks": [
+        "monstera deliciosa leaf",
+        "monstera plant"
+      ],
+      "subject": [
+        "monstera",
+        "leaf",
+        "feuille",
+        "plant",
+        "plante"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_chantier": {
+      "decision": "REAL",
+      "query": "salle de bain zellige vert",
+      "fallbacks": [
+        "green tiled bathroom",
+        "bathroom green tiles"
+      ],
+      "subject": [
+        "bathroom",
+        "salle de bain",
+        "tile",
+        "tiles",
+        "zellige",
+        "carrelage"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_meteo": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    },
+    "p_quick_car": {
+      "decision": "REAL",
+      "query": "Rocade de Bordeaux bouchons",
+      "fallbacks": [
+        "traffic jam brake lights",
+        "Bordeaux ring road traffic"
+      ],
+      "subject": [
+        "rocade",
+        "traffic",
+        "bouchon",
+        "embouteillage",
+        "highway",
+        "autoroute"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_marees": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran rendue par le téléphone"
+    },
+    "p_sunset_bassin": {
+      "decision": "REAL",
+      "query": "Bassin d'Arcachon coucher de soleil",
+      "fallbacks": [
+        "Cap Ferret sunset pinasses",
+        "Arcachon bay sunset boats"
+      ],
+      "subject": [
+        "arcachon",
+        "bassin",
+        "sunset",
+        "coucher",
+        "pinasse",
+        "bay"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_ticket": {
+      "decision": "PROCEDURAL",
+      "reason": "ticket de caisse rendu par le téléphone"
+    },
+    "p_phare": {
+      "decision": "REAL",
+      "query": "Phare du Cap Ferret",
+      "fallbacks": [
+        "Cap Ferret lighthouse",
+        "lighthouse red top pines"
+      ],
+      "subject": [
+        "phare",
+        "lighthouse",
+        "cap ferret",
+        "ferret"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_huitres": {
+      "decision": "REAL",
+      "query": "huîtres Cap Ferret port",
+      "fallbacks": [
+        "oysters platter Arcachon",
+        "oysters wooden tray white wine"
+      ],
+      "subject": [
+        "huîtres",
+        "huitres",
+        "oysters",
+        "oyster",
+        "plateau"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_stairs_day": {
+      "decision": "REAL",
+      "query": "escalier pierre jardin plage",
+      "fallbacks": [
+        "stone stairs to beach",
+        "garden stone steps handrail",
+        "Cap Ferret escalier plage"
+      ],
+      "subject": [
+        "stairs",
+        "steps",
+        "escalier",
+        "staircase",
+        "marches"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_dune": {
+      "decision": "REAL",
+      "query": "Dune du Pilat depuis Cap Ferret",
+      "fallbacks": [
+        "Pointe du Cap Ferret plage",
+        "Arcachon bay dune boats"
+      ],
+      "subject": [
+        "dune",
+        "pilat",
+        "pyla",
+        "cap ferret",
+        "plage",
+        "beach"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_selfie_louise": {
+      "decision": "REAL",
+      "query": "coupes champagne terrasse",
+      "fallbacks": [
+        "champagne glasses table terrace",
+        "glitter party table"
+      ],
+      "subject": [
+        "champagne",
+        "glasses",
+        "coupes",
+        "flutes",
+        "verres",
+        "terrace"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_pocket": {
+      "decision": "PROCEDURAL",
+      "reason": "photo prise dans une poche (noir, lueur)"
+    },
+    "p_cake": {
+      "decision": "REAL",
+      "query": "gâteau bougies 30",
+      "fallbacks": [
+        "birthday cake number candles",
+        "birthday cake candles dark"
+      ],
+      "subject": [
+        "cake",
+        "gâteau",
+        "candles",
+        "bougies",
+        "birthday",
+        "anniversaire"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_gift": {
+      "decision": "REAL",
+      "query": "photo encadrée cadre bois",
+      "fallbacks": [
+        "framed photograph oak frame",
+        "picture frame wood"
+      ],
+      "subject": [
+        "frame",
+        "cadre",
+        "framed",
+        "photograph",
+        "picture"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_blur_party": {
+      "decision": "REAL",
+      "query": "blurry party dancing lights",
+      "fallbacks": [
+        "fête floue guirlande",
+        "party crowd blurred lights"
+      ],
+      "subject": [
+        "party",
+        "fête",
+        "dance",
+        "dancing",
+        "danse",
+        "crowd",
+        "lights"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_night_garden": {
+      "decision": "REAL",
+      "query": "jardin nuit terrasse lampadaire",
+      "fallbacks": [
+        "garden at night lamp post",
+        "dark garden night lamp"
+      ],
+      "subject": [
+        "garden",
+        "jardin",
+        "night",
+        "nuit",
+        "lamp",
+        "lampadaire"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    }
+  }
+}

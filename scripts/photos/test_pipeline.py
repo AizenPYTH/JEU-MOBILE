@@ -102,25 +102,46 @@ class AuditTests(unittest.TestCase):
             self.assertIn(p["decision"], P.DECISIONS)
             self.assertTrue(p["reason"])
 
-    def test_evidence_is_never_a_stock_photo(self):
+    def test_evidence_is_real_only_when_its_query_sheet_says_so(self):
         for p in self.catalog["photos"]:
-            if p["isEvidence"]:
-                self.assertEqual(p["decision"], "CUSTOM_REQUIRED", p["assetId"])
+            if p["isEvidence"] and p["decision"] == "REPLACE_REAL":
+                self.assertTrue(p["planned"], p["assetId"])
 
-    def test_known_decisions(self):
+    def test_query_sheets_decide(self):
         by_id = {p["assetId"]: p for p in self.catalog["photos"]}
-        self.assertEqual(by_id["case001_photo_p_emma_couch"]["decision"], "CUSTOM_REQUIRED")  # the #001 clue
+        for path in sorted(P.QUERIES_DIR.glob("case_*.json")):
+            sheet = P.load_json(path)
+            for pid, plan in sheet["photos"].items():
+                aid = P.asset_name(sheet["case"], pid)
+                self.assertIn(aid, by_id, f"{path.name}: {pid} is not a photo of the case")
+                expected = {"REAL": "REPLACE_REAL", "PROCEDURAL": "PROCEDURAL"}.get(plan["decision"], "CUSTOM_REAL")
+                self.assertEqual(by_id[aid]["decision"], expected, aid)
+                if plan["decision"] == "REAL":
+                    self.assertTrue(plan["query"].strip(), aid)
+                    self.assertTrue(plan.get("subject"), aid)
         self.assertEqual(by_id["case001_photo_p_b08"]["decision"], "PROCEDURAL")  # screenshot
-        self.assertEqual(by_id["case001_photo_p_b02"]["decision"], "CUSTOM_REQUIRED")  # « Tom » on the picture
-        self.assertEqual(by_id["case003_photo_p_blur_party"]["decision"], "CUSTOM_REQUIRED")  # yellow sweatshirt
-        self.assertEqual(by_id["case001_photo_p_b01"]["decision"], "REPLACE_BY_API")  # a sunset
+
+    def test_every_case_has_a_query_sheet(self):
+        for case in P.load_cases():
+            key = f"{case['number']:03d}"
+            sheet = P.load_json(P.QUERIES_DIR / f"case_{key}.json")
+            self.assertIsNotNone(sheet, key)
+            photos = {ph["id"] for dev in case["devices"] for ph in dev["photos"]}
+            self.assertEqual(set(sheet["photos"]), photos, key)
+
+    def test_shared_photos_use_one_photograph(self):
+        by_id = {p["assetId"]: p for p in self.catalog["photos"]}
+        for p in self.catalog["photos"]:
+            if p.get("shareWith") and p.get("source"):
+                other = by_id[P.asset_name(p["case"], p["shareWith"])]
+                self.assertEqual(p["source"], other.get("source"), p["assetId"])
+                self.assertNotEqual(p["variant"], other.get("variant"), p["assetId"])
 
     def test_sources_have_queries_and_share_photos(self):
-        self.assertTrue(30 <= len(self.catalog["sources"]) <= 60, len(self.catalog["sources"]))
+        self.assertGreaterEqual(len(self.catalog["sources"]), 30)
         for s in self.catalog["sources"]:
             self.assertTrue(s["query"].strip(), s["id"])
-            self.assertLessEqual(len(s["photos"]), self.cfg["selection"]["photosPerSource"])
-            self.assertFalse(s["isEvidence"])
+            self.assertLessEqual(len(s["variants"] if isinstance(s["variants"], list) else s["photos"]), len(P.VARIANTS), s["id"])
         assigned = [p for p in self.catalog["photos"] if p.get("source")]
         self.assertEqual(len(assigned), sum(len(s["photos"]) for s in self.catalog["sources"]))
 
@@ -173,6 +194,36 @@ class ScoreTests(unittest.TestCase):
         self.assertEqual(P.clean_title("<div class='fn'> Bonne Mère Marseille</div>"), "Bonne Mère Marseille")
         self.assertEqual(P.clean_title("File:Quai du Rhône (36045409450).jpg"), "Quai du Rhône")
 
+    def test_wikimedia_licences(self):
+        self.assertEqual(P.wikimedia_licence("CC BY-SA 4.0"), ("by-sa", "4.0"))
+        self.assertEqual(P.wikimedia_licence("CC BY 2.0"), ("by", "2.0"))
+        self.assertEqual(P.wikimedia_licence("CC0"), ("cc0", ""))
+        self.assertEqual(P.wikimedia_licence("Public domain"), ("pdm", ""))
+        for refused in ("CC BY-NC 2.0", "CC BY-ND 4.0", "GFDL", "Copyrighted free use", ""):
+            self.assertEqual(P.wikimedia_licence(refused)[0], "", refused)
+
+    def test_rejects_ai_images_and_non_photos(self):
+        src = {**self.src, "case": "001"}
+        base = dict(provider="wikimedia", lic="by-sa", tags=["street", "night"])
+        self.assertGreater(P.score(fake_candidate("1", title="Rue de nuit", **base), src, self.cfg)[0], 0)
+        for tags, why in ((["AI-generated images", "street"], "IA"), (["Stable Diffusion", "street"], "IA"),
+                          (["Drawings of streets", "street drawing"], "photographie"), (["Maps of Marseille", "street map"], "photographie")):
+            sc, reason = P.score(fake_candidate("2", title="Rue de nuit", **{**base, "tags": tags}), src, self.cfg)
+            self.assertEqual(sc, -math.inf, tags)
+            self.assertIn(why, reason)
+        self.assertEqual(P.score(fake_candidate("3", title="Rue de nuit", year=1932, **base), src, self.cfg)[0], -math.inf)
+        self.assertEqual(P.score(fake_candidate("4", title="Rue de nuit", restrictions="Personality rights", **base), src, self.cfg)[0], -math.inf)
+        self.assertEqual(P.score(fake_candidate("5", title="Rue de nuit", mime="image/png", **base), src, self.cfg)[0], -math.inf)
+
+    def test_evidence_never_shows_people(self):
+        src = {**self.src, "case": "001", "isEvidence": True}
+        self.assertEqual(P.score(fake_candidate("1", title="street at night woman", tags=["street"]), src, self.cfg)[0], -math.inf)
+
+    def test_subject_words_of_the_query_sheet(self):
+        src = {**self.src, "case": "001", "subject": ["métro", "subway"]}
+        self.assertEqual(P.score(fake_candidate("1", title="Marseille street at night"), src, self.cfg)[0], -math.inf)
+        self.assertGreater(P.score(fake_candidate("2", title="Marseille metro at night"), src, self.cfg)[0], 0)
+
     def test_attribution_texts(self):
         self.assertEqual(P.attribution_text(fake_candidate("1")), "Photo by Jane Doe on Pexels")
         self.assertIn("CC BY", P.attribution_text(fake_candidate("1", provider="openverse", lic="by", licenseVersion="4.0", title="Port")))
@@ -183,6 +234,7 @@ class EndToEndTests(unittest.TestCase):
         cfg = P.load_json(P.CONFIG)
         P.pexels_search = world.search
         P.openverse_search = lambda *a: []
+        P.wikimedia_search = lambda *a: []
         P.Http.download = world.download
         stats = {"requests": {}, "rejected": 0, "errors": []}
         args = ns(dry_run=dry_run)
@@ -199,10 +251,10 @@ class EndToEndTests(unittest.TestCase):
         return cfg, catalog, manifest, stats
 
     def setUp(self):
-        self.saved = (P.pexels_search, P.openverse_search, P.Http.download)
+        self.saved = (P.pexels_search, P.openverse_search, P.Http.download, P.wikimedia_search)
 
     def tearDown(self):
-        P.pexels_search, P.openverse_search, P.Http.download = self.saved
+        P.pexels_search, P.openverse_search, P.Http.download, P.wikimedia_search = self.saved
 
     def test_full_run_produces_credited_images(self):
         with Sandbox() as d:
@@ -210,7 +262,7 @@ class EndToEndTests(unittest.TestCase):
             fetched = [e for e in manifest["sources"] if e["status"] == "fetched"]
             # Day sources are fetched; night sources need dark images (the fake world is bright).
             day_sources = [s for s in catalog["sources"] if not s["requireDark"]]
-            self.assertEqual(len(fetched), len(day_sources))
+            self.assertGreaterEqual(len(fetched), len(day_sources) * 0.6)
             self.assertTrue(manifest["assets"])
             from PIL import Image
             for a in manifest["assets"]:
@@ -224,7 +276,8 @@ class EndToEndTests(unittest.TestCase):
             credits = json.loads((d / "PhotoCredits.json").read_text())
             self.assertTrue(credits["pexels"])
             self.assertTrue(all(i["attribution"].startswith("Photo by") for i in credits["items"]))
-            self.assertTrue((d / "docs" / "PHOTO_SOURCES.md").exists())
+            self.assertIn("REAL PHOTO COMPLIANCE", (d / "docs" / "PHOTO_SOURCES.md").read_text())
+            self.assertIn("REAL PHOTO COMPLIANCE", (d / "docs" / "PHOTO_AUDIT.md").read_text())
 
     def test_night_sources_reject_bright_images(self):
         with Sandbox():

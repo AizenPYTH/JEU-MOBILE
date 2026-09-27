@@ -37,6 +37,36 @@ public struct CaseFile: Codable, Sendable, Identifiable {
     public var introScene: IntroScene? = nil
     /// The cover of the case file (type, place, victim…), shown on the folder. Presentation only.
     public var dossier: DossierInfo? = nil
+    /// Main investigation (nil) or a short ALIBI check (`claim` + `solution.alibiHolds`).
+    public var mode: CaseMode? = nil
+    /// ALIBI mode: what the person claims, to be confirmed or contradicted by the phone.
+    public var claim: AlibiClaim? = nil
+    /// The smallest set of evidence a player must reasonably find to understand the solution
+    /// (design data: checked by the validator and the resolvability analysis, never shown).
+    public var minimalPath: [String]? = nil
+
+    public var isAlibi: Bool { mode == .alibi }
+}
+
+/// The two ways to play a case.
+public enum CaseMode: String, Codable, Sendable {
+    /// Who is responsible? Several suspects, one conclusion.
+    case investigation
+    /// Does the statement hold? One person, one claim: « alibi confirmé » or « alibi contredit ».
+    case alibi
+}
+
+/// ALIBI mode: « Julien affirme être resté chez lui entre 22:00 et 23:00. »
+public struct AlibiClaim: Codable, Sendable, Hashable {
+    /// Who claims it (a contact of the phone, usually its owner `me`).
+    public var person: ContactID
+    /// The statement, as told (quoted).
+    public var statement: String
+    /// Where they say they were.
+    public var place: String
+    /// The time window of the claim.
+    public var from: Moment
+    public var to: Moment
 }
 
 /// What is typed on the cover of a case file. Facts known before the investigation, never a clue.
@@ -423,6 +453,8 @@ public struct Solution: Codable, Sendable, Hashable {
     public var reveal: [RevealStep]
     /// The full story, revealed paragraph by paragraph.
     public var story: [String]
+    /// ALIBI mode: true when the phone confirms the claim, false when it contradicts it.
+    public var alibiHolds: Bool? = nil
 }
 
 public struct RevealStep: Codable, Sendable, Hashable {

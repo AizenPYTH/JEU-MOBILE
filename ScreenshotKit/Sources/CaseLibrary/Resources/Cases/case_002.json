@@ -17,10 +17,10 @@
  "tagline": "Son téléphone a pris le premier métro. Pas elle.",
  "synopsis": [
   "Vendredi 16 octobre, Clémence Aubry, 29 ans, régisseuse son au Silo, un club de la Confluence, termine son service vers 2h du matin. Elle n'est jamais rentrée chez elle.",
-  "À 5h12, un agent trouve son téléphone sur un banc de la station Terreaux-Sud, quai 2, huit minutes après le passage du premier métro. Dans la nuit, sa sœur a pourtant reçu un message rassurant.",
-  "Vous avez quelques minutes pour comprendre qui avait ce téléphone entre les mains."
+  "À 5h12, un agent trouve son téléphone sur un banc de la station Terreaux-Sud, quai 2, huit minutes après le passage du premier métro. Dans la nuit, à 3h07, sa sœur a pourtant reçu un message rassurant.",
+  "Vous avez quelques minutes pour retracer la nuit du téléphone et comprendre qui l'avait entre les mains."
  ],
- "objective": "Découvrir qui avait le téléphone de Clémence après 2h30.",
+ "objective": "Découvrir qui avait le téléphone de Clémence entre 2h30 et 5h du matin.",
  "difficulty": 1,
  "durationSeconds": 480,
  "phoneStartTime": "2026-10-17 07:40",
@@ -1278,7 +1278,7 @@
        "id": "m_staff_012",
        "from": "mathilde",
        "at": "2026-09-27 13:10",
-       "text": "Apéro ce soir chez moi à partir de 18h30 pour fêter la rentrée. L'adresse est dans l'invitation. Venez comme vous êtes."
+       "text": "Apéro ce soir chez moi à partir de 18h30 pour fêter la rentrée : 14 quai Arloing, 3e étage (Vaise), code 4127B. Venez comme vous êtes."
       },
       {
        "id": "m_staff_013",
@@ -1296,7 +1296,7 @@
        "id": "m_staff_015",
        "from": "kader",
        "at": "2026-09-27 19:44",
-       "text": "la patronne a sorti le grand jeu",
+       "text": "la patronne a sorti le grand jeu 🍷",
        "photo": "p_apero_keys"
       },
       {
@@ -2029,7 +2029,9 @@
      "longitude": 4.8105,
      "revealedBy": [
       "calendar:c_apero_mathilde",
-      "photoInfo:p_pocket_0309"
+      "photoInfo:p_pocket_0309",
+      "message:m_staff_012",
+      "photoInfo:p_apero_keys"
      ]
     },
     {
@@ -2259,7 +2261,7 @@
      "source": "camera",
      "scene": "street_night",
      "caption": "Fête de la musique 2021, rue de la République.",
-     "details": "Un sound system sur un trottoir, des gens qui dansent.",
+     "details": "Un sound system sur un trottoir, la foule vue de loin sous les guirlandes.",
      "style": "old",
      "place": "Lyon 2e",
      "device": "iPhone 8"
@@ -2300,8 +2302,8 @@
      "takenAt": "2025-05-10 01:20",
      "source": "camera",
      "scene": "club",
-     "caption": "Selfie en cabine avec Yanis, mai 2025.",
-     "details": "Deux silhouettes sous une lumière rouge, un casque partagé.",
+     "caption": "La cabine du Silo, mai 2025. Première saison avec Yanis.",
+     "details": "Lumière rouge, deux casques posés sur les platines, personne derrière.",
      "style": "old",
      "place": "Le Silo",
      "device": "iPhone 14"
@@ -2342,7 +2344,7 @@
      "source": "camera",
      "scene": "books",
      "caption": "Trois vinyles achetés chez le disquaire.",
-     "details": "Des pochettes sans titre, une étiquette « 12€ ».",
+     "details": "Trois pochettes sans titre posées sur le parquet, un autocollant de prix.",
      "place": "Domicile",
      "device": "iPhone 14"
     },
@@ -2351,9 +2353,8 @@
      "takenAt": "2026-09-19 21:10",
      "source": "camera",
      "scene": "mirror",
-     "caption": "Selfie dans le miroir de la loge, casque autour du cou.",
-     "details": "Des stickers sur le miroir, un gobelet de thé.",
-     "style": "selfie",
+     "caption": "Le miroir de la loge, avant le service.",
+     "details": "Des ampoules autour du miroir, un casque posé sur la tablette, un gobelet de thé.",
      "place": "Le Silo",
      "device": "iPhone 14"
     },
@@ -2402,8 +2403,8 @@
      "takenAt": "2026-10-02 14:12",
      "source": "camera",
      "scene": "street_day",
-     "caption": "Une affiche collée sur un poteau.",
-     "details": "« Basses Fréquences — vendredi 16 octobre — Le Silo ».",
+     "caption": "Des affiches collées sur un poteau, pentes de la Croix-Rousse.",
+     "details": "Des affiches de concerts superposées, à moitié arrachées.",
      "style": "quick",
      "device": "iPhone 14"
     },
@@ -2443,9 +2444,8 @@
      "takenAt": "2026-10-11 10:02",
      "source": "camera",
      "scene": "park",
-     "caption": "Selfie avec Lou après le run.",
-     "details": "Deux silhouettes essoufflées, le Rhône derrière.",
-     "style": "selfie",
+     "caption": "Les berges du Rhône après le run avec Lou.",
+     "details": "Le Rhône gris, les platanes, le pont de la Guillotière au loin.",
      "place": "Berges du Rhône",
      "device": "iPhone 14"
     },
@@ -2492,10 +2492,10 @@
      "id": "p_selfie01",
      "takenAt": "2026-10-16 23:40",
      "source": "camera",
-     "scene": "selfie",
-     "caption": "Selfie en régie, soirée Basses Fréquences.",
-     "details": "Le visage éclairé en bleu, la foule floue derrière.",
-     "style": "selfie",
+     "scene": "club",
+     "caption": "La salle vue depuis la régie, soirée Basses Fréquences.",
+     "details": "La foule de dos, éclairée en bleu, des bras levés vers la scène.",
+     "style": "night",
      "place": "Le Silo",
      "device": "iPhone 14"
     },
@@ -2595,7 +2595,7 @@
      "source": "camera",
      "scene": "parking_night",
      "caption": "La cour du Silo, de nuit : des fûts empilés.",
-     "details": "Six fûts métalliques contre une porte verte marquée « Sortie de secours ». La barre anti-panique est bloquée.",
+     "details": "Six fûts métalliques empilés contre une porte verte, l'issue de secours de la cour. La barre anti-panique est bloquée.",
      "style": "night",
      "place": "Le Silo",
      "device": "iPhone 14"
@@ -2628,8 +2628,8 @@
      "takenAt": "2026-10-10 12:33",
      "source": "camera",
      "scene": "cat",
-     "caption": "Pistache assis sur le rack de modules.",
-     "details": "Le chat a une patte sur un câble jaune. Des voyants rouges allumés.",
+     "caption": "Pistache couché à côté du rack de modules.",
+     "details": "Le chat allongé sur le bureau, une patte sur un câble. Des voyants rouges allumés.",
      "place": "Domicile",
      "device": "iPhone 14"
     },
@@ -2638,9 +2638,9 @@
      "takenAt": "2026-09-27 19:41",
      "source": "received",
      "scene": "interior_warm",
-     "caption": "Apéro chez Mathilde : des verres sur une table basse.",
-     "details": "Mathilde pose ses clés sur la table basse : un porte-clés en cuir rouge avec un grand M doré. Parquet clair.",
-     "place": "Vaise, Lyon",
+     "caption": "Apéro chez Mathilde : des verres sur la table basse.",
+     "details": "Une table basse en bois clair sur un parquet clair, des verres de vin rouge, deux bougies allumées. La lumière du soir par la fenêtre.",
+     "place": "Quai Arloing — Vaise",
      "from": "kader",
      "receivedAt": "2026-09-27 19:44",
      "device": "Galaxy A54"
@@ -2651,7 +2651,7 @@
      "source": "received",
      "scene": "club",
      "caption": "La cabine DJ, lumières rouges.",
-     "details": "Yanis aux platines, casque sur une oreille. L'horloge de la régie indique 02:48.",
+     "details": "La cabine vue depuis la piste, à contre-jour sous les lasers rouges : une silhouette aux platines, casque sur une oreille, des bras levés au premier plan.",
      "place": "Le Silo",
      "from": "kader",
      "receivedAt": "2026-10-17 02:49",
@@ -2663,7 +2663,7 @@
      "source": "received",
      "scene": "street_night",
      "caption": "La file d'attente devant l'entrée du Silo.",
-     "details": "Une trentaine de personnes derrière les barrières. Dans la vitre de la porte, le reflet d'une doudoune orange : celle de Raphaël. L'enseigne lumineuse au-dessus de l'entrée affiche 03:04.",
+     "details": "Photo prise depuis la porte, derrière les barrières : une trentaine de personnes de dos, sous les lampadaires du quai. Prise et envoyée par le téléphone de Raphaël.",
      "place": "Le Silo",
      "from": "raphael",
      "receivedAt": "2026-10-17 03:05",
@@ -2675,7 +2675,7 @@
      "source": "camera",
      "scene": "pocket",
      "caption": "Photo floue, sombre.",
-     "details": "Photo floue, prise par erreur. Un parquet clair, le pied d'une table basse, et un porte-clés en cuir rouge avec un grand M doré.",
+     "details": "Photo floue, prise par erreur. Un parquet clair, le pied d'une table basse en bois clair, la flamme d'une bougie.",
      "style": "blurry",
      "place": "Quai Arloing — Vaise",
      "device": "iPhone 14"
@@ -3172,9 +3172,9 @@
    "role": "DJ résident du Silo, ex de Clémence",
    "age": 32,
    "address": "Villeurbanne — Gratte-Ciel",
-   "alibi": "À 02:48, Yanis était aux platines du Silo (photo de Kader, horloge de la régie), et le planning le fait jouer jusqu'à 03:30. Le téléphone, lui, était déjà à Vaise.",
+   "alibi": "À 02:48, Yanis était aux platines du Silo (photo de Kader prise à 02:48, au Silo), et le planning le fait jouer jusqu'à 03:30. Le téléphone, lui, était déjà en route vers Vaise.",
    "alibiEvidence": "e_yanis_alibi",
-   "trap": "« Tu vas le regretter » et un message qui dit « je dors chez Yanis » : tout semblait l'accuser. Il parlait de son départ à La Friche Nord, et le message qui le nomme n'a pas été écrit par Clémence.",
+   "trap": "« Tu vas le regretter » et un message qui dit « je dors chez Yanis » : tout semblait le désigner. Il parlait de son départ à La Friche Nord, et le message qui le nomme n'a pas été écrit par Clémence.",
    "statement": "« J'ai joué jusqu'à la fermeture, 3h30, puis je suis rentré à Villeurbanne en taxi. Elle n'est jamais venue chez moi. »",
    "verdict": "Yanis n'y est pour rien. Son « tu vas le regretter » parlait de La Friche Nord. À 02:48, il était aux platines, et le message « je dors chez Yanis » part de Vaise, pas de Villeurbanne : quelqu'un a voulu le désigner."
   },
@@ -3196,7 +3196,7 @@
    "role": "Responsable sécurité du Silo",
    "age": 35,
    "address": "Oullins",
-   "alibi": "À 03:04, il photographiait la file d'attente devant l'entrée du Silo — son reflet dans la vitre, l'heure sur l'enseigne. Le téléphone était alors à Vaise, à quatre kilomètres.",
+   "alibi": "À 03:04, il photographiait la file d'attente depuis la porte du Silo, avec son propre téléphone : la photo est datée et localisée au Silo. Le téléphone de Clémence était alors à Vaise, à quatre kilomètres.",
    "alibiEvidence": "e_raphael_alibi",
    "trap": "Le dernier à l'avoir vue, et des semaines de messages insistants pour la raccompagner. Mais il n'a pas quitté la porte.",
    "statement": "« Je l'ai laissée devant le club à 2h12. Je suis resté à la porte jusqu'à la fermeture. »",
@@ -3215,7 +3215,7 @@
     "message:m_anais_0307",
     "track:t_me"
    ],
-   "meaning": "À 03:07, le message « je dors chez Yanis » part du quai Arloing, à Vaise. Le téléphone n'a jamais été à Villeurbanne. Et ce n'est pas la façon d'écrire de Clémence : majuscules, accents, points."
+   "meaning": "À 03:07, le message « je dors chez Yanis » part du quai Arloing, à Vaise. Le téléphone n'a jamais été à Villeurbanne. Et ce n'est pas la façon d'écrire de Clémence : partout ailleurs, pas de majuscules, pas d'accents ; ici, majuscules, accents et points."
   },
   {
    "id": "e_address",
@@ -3225,9 +3225,12 @@
     "s_mathilde"
    ],
    "refs": [
-    "calendar:c_apero_mathilde"
+    "calendar:c_apero_mathilde",
+    "message:m_staff_012",
+    "photoInfo:p_apero_keys"
    ],
-   "meaning": "Mathilde habite 14 quai Arloing : le téléphone y a passé 1 h 38, de 02:58 à 04:36."
+   "meaning": "Mathilde habite 14 quai Arloing, à Vaise (invitation à l'apéro du staff) : le téléphone y a passé 1 h 38, de 02:58 à 04:36.",
+   "anyOf": true
   },
   {
    "id": "e_call",
@@ -3257,7 +3260,7 @@
   },
   {
    "id": "e_keyring",
-   "title": "Le porte-clés rouge",
+   "title": "La photo de 03:09",
    "importance": "supporting",
    "suspects": [
     "s_mathilde"
@@ -3266,7 +3269,7 @@
     "photoInfo:p_pocket_0309",
     "photoInfo:p_apero_keys"
    ],
-   "meaning": "La photo prise par erreur à 03:09 montre le porte-clés en cuir rouge « M » de Mathilde, sur le même parquet clair que le soir de l'apéro."
+   "meaning": "La photo prise par erreur à 03:09, quai Arloing, montre un parquet clair et une table basse en bois clair : le salon de la photo de l'apéro chez Mathilde."
   },
   {
    "id": "e_cut_call",
@@ -3292,7 +3295,7 @@
     "photoInfo:p_booth_0248",
     "mail:mail_running_order"
    ],
-   "meaning": "À 02:48, Yanis est aux platines du Silo ; il joue jusqu'à 03:30."
+   "meaning": "À 02:48, Yanis est aux platines du Silo (photo de Kader prise à 02:48 au Silo) ; le planning le fait jouer jusqu'à 03:30."
   },
   {
    "id": "e_bastien_alibi",
@@ -3316,7 +3319,7 @@
    "refs": [
     "photoInfo:p_door_0304"
    ],
-   "meaning": "À 03:04, Raphaël photographie la file devant le Silo : sa doudoune orange dans la vitre, l'heure sur l'enseigne."
+   "meaning": "À 03:04, Raphaël photographie la file depuis la porte du Silo : la photo, prise par son propre téléphone, est datée et localisée au Silo."
   },
   {
    "id": "f_yanis_threat",
@@ -3370,20 +3373,26 @@
  "hints": [
   {
    "id": "h1",
-   "text": "Un téléphone se souvient d'où il était. Comparez chaque message de la nuit avec l'endroit où il se trouvait.",
+   "text": "Tout se joue dans la nuit du 16 au 17, entre 2h et 5h. Commencez par Messages (la conversation avec Anaïs), le journal d'appels et Localisation.",
    "scoreCost": 0
   },
   {
    "id": "h2",
-   "text": "Regardez l'historique de position « Moi » entre 2h et 5h, puis cherchez qui habite là.",
-   "scoreCost": 8
+   "text": "Comparez chaque message de la nuit avec l'endroit où se trouvait le téléphone à la même heure, et avec la façon dont Clémence écrit d'habitude.",
+   "scoreCost": 5
   },
   {
    "id": "h3",
-   "text": "Le message de 03:07 n'est pas écrit comme les autres, et il part de Vaise. Qui a appelé Clémence à 02:19 ?",
-   "scoreCost": 15,
-   "unlockAtRemainingSeconds": 120
+   "text": "Le message de 03:07 part de Vaise, pas de Villeurbanne, et il n'est pas écrit comme les autres. Qui, parmi les suspects, habite à cet endroit précis, et qui a appelé Clémence juste après sa sortie du Silo ?",
+   "scoreCost": 10,
+   "unlockAtRemainingSeconds": 240
   }
+ ],
+ "minimalPath": [
+  "e_fake_message",
+  "e_call",
+  "e_address",
+  "e_motive"
  ],
  "solution": {
   "culprit": "s_mathilde",
@@ -3427,7 +3436,7 @@
    },
    {
     "at": "2026-10-17 03:09",
-    "text": "Une photo prise par erreur : le porte-clés rouge au grand M",
+    "text": "Une photo prise par erreur quai Arloing : le parquet clair et la table basse de l'apéro chez Mathilde",
     "evidence": "e_keyring"
    },
    {
@@ -3440,7 +3449,7 @@
    "Mardi 13 octobre, Clémence signale le Silo à l'inspection du travail : l'issue de secours de la cour est bloquée par des fûts, et la jauge de 800 personnes est dépassée presque chaque week-end. Jeudi, l'inspection annonce une visite pour lundi 10h et prévient l'exploitante. Mathilde n'a pas besoin de nom : une seule personne avait photographié ces fûts dans le groupe du staff.",
    "Vendredi à 22:40, Mathilde écrit : « Il faut qu'on parle ce soir, après ton service. Pas au club. » À 01:31, elle annonce à tout le monde qu'elle rentre. En réalité, elle attend dans sa voiture, au parking des Docks, à deux cents mètres de la sortie.",
    "À 02:12, Clémence quitte le Silo. Il fait 4 degrés. Bastien, qui a bu, refuse de venir la chercher. À 02:19, Mathilde appelle et propose de la ramener. Dans la voiture, elle prend la direction de Vaise « pour parler cinq minutes » et exige que Clémence retire son signalement. À 02:46, Clémence essaie d'appeler sa sœur ; Mathilde lui ordonne de raccrocher.",
-   "À 02:52, quai Arloing, Clémence claque la portière et part à pied le long de la Saône. Son téléphone est resté sur le socle de charge du tableau de bord, déverrouillé. Mathilde le monte chez elle. À 03:07, elle répond à Anaïs à la place de sa sœur — avec des majuscules, des accents, des points — et nomme Yanis. À 03:09, en le reposant, elle déclenche l'appareil photo : son propre porte-clés apparaît sur l'image.",
+   "À 02:52, quai Arloing, Clémence claque la portière et part à pied le long de la Saône. Son téléphone est resté sur le socle de charge du tableau de bord, déverrouillé. Mathilde le monte chez elle. À 03:07, elle répond à Anaïs à la place de sa sœur — avec des majuscules, des accents, des points — et nomme Yanis. À 03:09, en le reposant, elle déclenche l'appareil photo : son propre salon apparaît sur l'image, le parquet clair et la table basse de l'apéro.",
    "À 04:36, elle ressort, vérifie l'horaire du premier métro sur le téléphone de Clémence et le dépose à 04:52 sur un banc de la station Terreaux-Sud, pour faire croire que Clémence est partie seule. Un agent le trouve à 05:12, huit minutes après le passage du premier métro.",
    "Grâce à votre enquête, les recherches se concentrent sur les berges de Vaise. Clémence est retrouvée à 9h sous un pont, la cheville tordue, en hypothermie, mais vivante. Mathilde reconnaît avoir gardé le téléphone et envoyé le message."
   ]

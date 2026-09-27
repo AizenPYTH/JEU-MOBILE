@@ -1,0 +1,604 @@
+{
+  "case": "005",
+  "about": "ROUTE DE NUIT — Vercors (Villard-de-Lans, Autrans, col de la Croix-Perrin), novembre, brouillard et nuit ; le 4×4 de la mairie et du col est une seule photo réelle (deux recadrages).",
+  "photos": {
+    "p_old01": {
+      "decision": "REAL",
+      "query": "Villard-de-Lans neige",
+      "fallbacks": [
+        "Vercors village snow roofs",
+        "skis planted in snow"
+      ],
+      "subject": [
+        "neige",
+        "snow",
+        "villard",
+        "vercors",
+        "ski",
+        "winter",
+        "hiver"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old02": {
+      "decision": "REAL",
+      "query": "garden stone steps",
+      "fallbacks": [
+        "escalier jardin pierre",
+        "stone stairs garden summer"
+      ],
+      "subject": [
+        "stairs",
+        "steps",
+        "escalier",
+        "marches",
+        "garden",
+        "jardin"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old03": {
+      "decision": "REAL",
+      "query": "birthday cake candles 30",
+      "fallbacks": [
+        "gâteau anniversaire bougies",
+        "chocolate birthday cake candles"
+      ],
+      "subject": [
+        "cake",
+        "gâteau",
+        "birthday",
+        "anniversaire",
+        "candles",
+        "bougies"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old04": {
+      "decision": "REAL",
+      "query": "Parc Paul Mistral Grenoble",
+      "fallbacks": [
+        "Grenoble park spring path",
+        "park alley spring stroller"
+      ],
+      "subject": [
+        "parc",
+        "park",
+        "mistral",
+        "allée",
+        "path",
+        "garden"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old05": {
+      "decision": "REAL",
+      "query": "Christmas dinner table tree",
+      "fallbacks": [
+        "table de Noël sapin",
+        "festive table christmas tree lights"
+      ],
+      "subject": [
+        "christmas",
+        "noël",
+        "table",
+        "dinner",
+        "sapin",
+        "tree"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_old06": {
+      "decision": "REAL",
+      "query": "office party table drinks",
+      "fallbacks": [
+        "pot de départ bureau",
+        "meeting room snacks drinks"
+      ],
+      "subject": [
+        "party",
+        "table",
+        "drinks",
+        "office",
+        "buffet",
+        "pot"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n01": {
+      "decision": "REAL",
+      "query": "Moucherotte Vercors",
+      "fallbacks": [
+        "Vercors crête nuages",
+        "mountain ridge clouds light"
+      ],
+      "subject": [
+        "moucherotte",
+        "vercors",
+        "mountain",
+        "montagne",
+        "ridge",
+        "clouds",
+        "nuages"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n02": {
+      "decision": "REAL",
+      "query": "Vercors forêt automne",
+      "fallbacks": [
+        "forest path autumn leaves",
+        "sentier feuilles mortes"
+      ],
+      "subject": [
+        "forest",
+        "forêt",
+        "autumn",
+        "automne",
+        "leaves",
+        "path",
+        "sentier"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n03": {
+      "decision": "REAL",
+      "query": "salle du conseil municipal",
+      "fallbacks": [
+        "mairie salle conseil",
+        "council chamber chairs tables"
+      ],
+      "subject": [
+        "conseil",
+        "council",
+        "mairie",
+        "salle",
+        "chamber",
+        "chairs"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n04": {
+      "decision": "REAL",
+      "query": "carrière calcaire Isère",
+      "fallbacks": [
+        "limestone quarry trucks",
+        "quarry forest France"
+      ],
+      "subject": [
+        "quarry",
+        "carrière",
+        "limestone",
+        "calcaire",
+        "mine",
+        "trucks"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n05": {
+      "decision": "REAL",
+      "query": "jack-o'-lantern doorstep night",
+      "fallbacks": [
+        "citrouille Halloween bougie",
+        "carved pumpkin candle porch"
+      ],
+      "subject": [
+        "pumpkin",
+        "citrouille",
+        "halloween",
+        "lantern",
+        "jack"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n06": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran météo rendue par le téléphone"
+    },
+    "p_n07": {
+      "decision": "REAL",
+      "query": "newsroom whiteboard meeting",
+      "fallbacks": [
+        "salle de rédaction réunion",
+        "office whiteboard coffee cups"
+      ],
+      "subject": [
+        "newsroom",
+        "whiteboard",
+        "meeting",
+        "rédaction",
+        "office",
+        "réunion"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n08": {
+      "decision": "REAL",
+      "query": "children drawings fridge magnets",
+      "fallbacks": [
+        "dessins d'enfant frigo",
+        "kids drawings refrigerator"
+      ],
+      "subject": [
+        "drawings",
+        "dessins",
+        "fridge",
+        "frigo",
+        "refrigerator",
+        "children"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n09": {
+      "decision": "PROCEDURAL",
+      "reason": "facture (papier) rendue par le téléphone"
+    },
+    "p_n10": {
+      "decision": "REAL",
+      "query": "snow balcony railing",
+      "fallbacks": [
+        "neige balcon rambarde",
+        "first snow balcony"
+      ],
+      "subject": [
+        "snow",
+        "neige",
+        "balcony",
+        "balcon",
+        "railing",
+        "rambarde"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n11": {
+      "decision": "REAL",
+      "query": "birthday cake office party",
+      "fallbacks": [
+        "gâteau anniversaire bureau",
+        "cake paper cups table"
+      ],
+      "subject": [
+        "cake",
+        "gâteau",
+        "birthday",
+        "anniversaire",
+        "party",
+        "office"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n12": {
+      "decision": "PROCEDURAL",
+      "reason": "photo accidentelle prise dans une poche"
+    },
+    "p_n13": {
+      "decision": "PROCEDURAL",
+      "reason": "document manuscrit rendu par le téléphone (texte à lire)"
+    },
+    "p_n14": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran d'article rendue par le téléphone"
+    },
+    "p_n15": {
+      "decision": "PROCEDURAL",
+      "reason": "photo accidentelle du plafond"
+    },
+    "p_n16": {
+      "decision": "REAL",
+      "query": "Autrans ski de fond",
+      "fallbacks": [
+        "Autrans neige piste",
+        "cross-country ski tracks bench snow"
+      ],
+      "subject": [
+        "autrans",
+        "ski",
+        "nordic",
+        "fond",
+        "snow",
+        "neige",
+        "tracks"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n17": {
+      "decision": "REAL",
+      "query": "quarry excavator rock face",
+      "fallbacks": [
+        "carrière pelleteuse front de taille",
+        "open pit quarry yellow excavator"
+      ],
+      "subject": [
+        "quarry",
+        "carrière",
+        "excavator",
+        "pelleteuse",
+        "rock",
+        "mine"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n18": {
+      "decision": "REAL",
+      "query": "Villard-de-Lans rue nuit",
+      "fallbacks": [
+        "Villard-de-Lans centre",
+        "mountain village street night rain"
+      ],
+      "subject": [
+        "villard",
+        "street",
+        "rue",
+        "night",
+        "nuit",
+        "village"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n19": {
+      "decision": "REAL",
+      "query": "Bois Barbu Villard-de-Lans",
+      "fallbacks": [
+        "Vercors ski de fond piste",
+        "cross-country skiing trail snow forest"
+      ],
+      "subject": [
+        "bois barbu",
+        "ski",
+        "nordic",
+        "fond",
+        "snow",
+        "neige",
+        "trail",
+        "piste"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n20": {
+      "decision": "PROCEDURAL",
+      "reason": "capture d'écran Inforoute rendue par le téléphone"
+    },
+    "p_n21": {
+      "decision": "REAL",
+      "query": "newsroom desk newspapers coffee",
+      "fallbacks": [
+        "bureau journaux café",
+        "newspaper office desk"
+      ],
+      "subject": [
+        "newsroom",
+        "newspaper",
+        "journaux",
+        "desk",
+        "office",
+        "coffee",
+        "café"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n22": {
+      "decision": "REAL",
+      "query": "courtyard rain night lamp",
+      "fallbacks": [
+        "cour pluie nuit lampe",
+        "rainy night courtyard"
+      ],
+      "subject": [
+        "rain",
+        "pluie",
+        "courtyard",
+        "cour",
+        "night",
+        "nuit",
+        "lamp"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n23": {
+      "decision": "REAL",
+      "query": "car dashboard night",
+      "fallbacks": [
+        "tableau de bord voiture nuit",
+        "car interior night passenger seat"
+      ],
+      "subject": [
+        "dashboard",
+        "car",
+        "voiture",
+        "tableau de bord",
+        "interior",
+        "night"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_n24": {
+      "decision": "REAL",
+      "query": "Col de la Croix-Perrin",
+      "fallbacks": [
+        "foggy parking lot night",
+        "fog mountain road night"
+      ],
+      "subject": [
+        "croix-perrin",
+        "col",
+        "fog",
+        "brouillard",
+        "parking",
+        "night",
+        "road"
+      ],
+      "night": true,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_mairie_4x4": {
+      "decision": "REAL",
+      "query": "dark grey SUV parked night",
+      "fallbacks": [
+        "4x4 gris garé nuit",
+        "SUV parking lot night streetlight"
+      ],
+      "subject": [
+        "suv",
+        "4x4",
+        "4×4",
+        "car",
+        "voiture",
+        "vehicle",
+        "véhicule"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_doc_virements": {
+      "decision": "PROCEDURAL",
+      "reason": "relevé bancaire (document) : les lignes du 12/09 doivent se lire, rendu par le téléphone"
+    },
+    "p_platre": {
+      "decision": "REAL",
+      "query": "hôpital couloir urgences",
+      "fallbacks": [
+        "hospital corridor emergency",
+        "hospital corridor stretcher"
+      ],
+      "subject": [
+        "hospital",
+        "hôpital",
+        "corridor",
+        "couloir",
+        "urgences",
+        "emergency",
+        "stretcher"
+      ],
+      "night": false,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_kids_2305": {
+      "decision": "REAL",
+      "query": "bunk beds night light",
+      "fallbacks": [
+        "lits superposés veilleuse",
+        "children bedroom night lamp"
+      ],
+      "subject": [
+        "bunk",
+        "lits",
+        "bed",
+        "bedroom",
+        "chambre",
+        "night light",
+        "veilleuse"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": null
+    },
+    "p_bat_2301": {
+      "decision": "PROCEDURAL",
+      "reason": "BAT de la une (épreuve imprimée à lire) rendu par le téléphone"
+    },
+    "p_col_2314": {
+      "decision": "REAL",
+      "query": "dark grey SUV parked night",
+      "fallbacks": [
+        "4x4 gris garé nuit",
+        "SUV parking lot night streetlight"
+      ],
+      "subject": [
+        "suv",
+        "4x4",
+        "4×4",
+        "car",
+        "voiture",
+        "vehicle",
+        "véhicule"
+      ],
+      "night": true,
+      "evidence": true,
+      "shareWith": "p_mairie_4x4"
+    },
+    "p_r_chat": {
+      "decision": "REAL",
+      "query": "cat laundry basket",
+      "fallbacks": [
+        "chat panier à linge",
+        "tabby cat sleeping basket"
+      ],
+      "subject": [
+        "cat",
+        "chat",
+        "basket",
+        "panier",
+        "laundry",
+        "linge"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    },
+    "p_r_dent": {
+      "decision": "REAL",
+      "query": "baby tooth matchbox",
+      "fallbacks": [
+        "dent de lait",
+        "milk tooth"
+      ],
+      "subject": [
+        "tooth",
+        "dent",
+        "baby tooth",
+        "milk tooth",
+        "lait"
+      ],
+      "night": false,
+      "evidence": false,
+      "shareWith": null
+    }
+  }
+}

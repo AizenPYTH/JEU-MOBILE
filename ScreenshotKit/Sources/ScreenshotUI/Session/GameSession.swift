@@ -502,6 +502,16 @@ final class GameSession {
 
     func accuse(_ suspect: SuspectID) {
         guard let verdict = investigation.accuse(suspect) else { return }
+        finish(verdict)
+    }
+
+    /// ALIBI: « alibi confirmé » (true) or « alibi contredit » (false).
+    func concludeAlibi(holds: Bool) {
+        guard let verdict = investigation.concludeAlibi(holds: holds) else { return }
+        finish(verdict)
+    }
+
+    private func finish(_ verdict: Verdict) {
         loop?.cancel(); loop = nil
         refresh() // the case is over: this also clears the saved investigation
         onFinish(verdict)

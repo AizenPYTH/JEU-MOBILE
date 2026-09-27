@@ -5,6 +5,8 @@
 /// things were missed *per app* — without saying which, so replaying stays interesting.
 public struct Verdict: Sendable {
     public var accused: SuspectID
+    /// ALIBI mode: the player's answer (true = « alibi confirmé »); nil in the main mode.
+    public var alibiAnswer: Bool? = nil
     public var isCorrect: Bool
     public var culprit: SuspectID
     /// Narrative about the accused suspect.
@@ -43,10 +45,11 @@ public struct Verdict: Sendable {
         public var hintCost: Int
     }
 
-    static func make(for investigation: Investigation, accused: SuspectID) -> Verdict {
+    static func make(for investigation: Investigation, accused: SuspectID, alibiAnswer: Bool? = nil) -> Verdict {
         let file = investigation.caseFile
         let scoring = investigation.rules.scoring
-        let isCorrect = accused == file.solution.culprit
+        // ALIBI: the right answer is whether the claim holds; the main mode: the right person.
+        let isCorrect = alibiAnswer.map { $0 == file.solution.alibiHolds } ?? (accused == file.solution.culprit)
         let foundIDs = Set(investigation.foundEvidence.map(\.id))
 
         let counted = file.evidence.filter { $0.importance != .falseLead }
@@ -82,6 +85,7 @@ public struct Verdict: Sendable {
         let suspect = investigation.index.suspect(accused)
         return Verdict(
             accused: accused,
+            alibiAnswer: alibiAnswer,
             isCorrect: isCorrect,
             culprit: file.solution.culprit,
             accusedText: suspect?.verdict ?? "",

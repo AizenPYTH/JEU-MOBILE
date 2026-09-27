@@ -25,6 +25,7 @@ struct CallsView: View {
                             CallRow(call: call, game: game)
                         }
                         .buttonStyle(.plain)
+                        .accessibilityIdentifier("call.\(call.id)")
                         .onAppear { session.markSeen(ItemRef(.call, call.id)) }
                         .pinnable(ItemRef(.call, call.id), session: session, radius: Theme.Radius.sm)
                         if offset < calls.count - 1 { RowDivider(leading: 64) }

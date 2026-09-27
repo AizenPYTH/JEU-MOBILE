@@ -17,10 +17,10 @@
  "synopsis": [
   "Jeudi 12 novembre, gala d'ouverture de l'exposition « Éclats — joaillerie du XXᵉ siècle » au Pavillon Mercure, à Paris. Pièce maîtresse : le collier Aurore, 1928, prêté par le collectionneur Adrien Sterne.",
   "À 22h14, la salle plonge dans le noir pendant 90 secondes. Quand la lumière revient, la vitrine 4 est vide. Aucune effraction.",
-  "La commissaire de l'exposition, Salomé Tessier, vous confie son téléphone. Tout le monde a une théorie."
+  "La commissaire de l'exposition, Salomé Tessier, vous confie son téléphone. Tout le monde a une théorie : l'extra qui s'est enfui, le régisseur qui a lancé le noir, l'animatrice qui l'a annoncé en ligne. Le prêteur, lui, se dit anéanti."
  ],
- "objective": "Découvrir qui a fait disparaître le collier Aurore.",
- "difficulty": 1,
+ "objective": "Découvrir qui a fait disparaître le collier Aurore, et comment.",
+ "difficulty": 2,
  "durationSeconds": 480,
  "phoneStartTime": "2026-11-12 23:25",
  "challengeDurations": {
@@ -345,7 +345,7 @@
        "id": "m_sterne_007",
        "from": "me",
        "at": "2026-10-28 16:02",
-       "text": "Oui, il m'a appelée, tout est conforme. Vous aurez son rapport ce soir."
+       "text": "Oui, il m'a appelée, tout est conforme. Son constat arrive ce soir par mail, avec la photo de face."
       },
       {
        "id": "m_sterne_key",
@@ -627,7 +627,7 @@
        "id": "m_victor_2216",
        "from": "victor",
        "at": "2026-11-12 22:16",
-       "text": "je suis en régie !! c'était le noir du conducteur, personne t'a prévenue ??",
+       "text": "je suis en régie !! c'était le noir du conducteur, top Q47, 90 s. personne t'a prévenue ??",
        "photo": "p_regie_2215"
       },
       {
@@ -1097,7 +1097,7 @@
        "id": "m_noemie_012",
        "from": "noemie",
        "at": "2026-11-12 22:13",
-       "text": "la salle est magnifique 😍",
+       "text": "la salle est magnifique 😍 (M. Sterne est scotché à sa vitrine, il ne bouge plus 😅)",
        "photo": "p_room_2213"
       },
       {
@@ -1806,7 +1806,7 @@
      "source": "camera",
      "scene": "gallery",
      "caption": "Accrochage « Verre & lumière », Lyon, 2019.",
-     "details": "Des vases sur des socles blancs. Salomé, de dos, un mètre ruban à la main.",
+     "details": "Des vases de verre sur des socles blancs, un mètre ruban déroulé au pied d'un socle.",
      "style": "old",
      "place": "Lyon",
      "device": "iPhone 11"
@@ -1817,7 +1817,7 @@
      "source": "camera",
      "scene": "party",
      "caption": "Vernissage à Nantes, juin 2021.",
-     "details": "Des guirlandes, du monde dans une cour pavée.",
+     "details": "Des guirlandes lumineuses au-dessus d'une cour pavée, du monde au loin, de dos.",
      "style": "old",
      "place": "Nantes",
      "device": "iPhone 11"
@@ -1827,8 +1827,8 @@
      "takenAt": "2023-08-12 17:15",
      "source": "camera",
      "scene": "beach",
-     "caption": "Plage avec Camille et Jules, été 2023.",
-     "details": "Un seau rouge, un château de sable effondré.",
+     "caption": "Le château de sable de Jules, été 2023.",
+     "details": "Un seau rouge, un château de sable effondré, la mer au fond.",
      "style": "old",
      "device": "iPhone 14"
     },
@@ -1838,7 +1838,7 @@
      "source": "camera",
      "scene": "snow",
      "caption": "Neige au chalet, décembre 2024.",
-     "details": "Des sapins, une luge contre un mur en bois.",
+     "details": "Des sapins sous la neige, une luge contre un mur en bois.",
      "style": "old",
      "device": "iPhone 14"
     },
@@ -1859,7 +1859,7 @@
      "source": "camera",
      "scene": "gallery",
      "caption": "Salle 2 du Pavillon, encore vide.",
-     "details": "Parquet nu, murs blancs, des rails lumière au plafond.",
+     "details": "Parquet nu, murs blancs, des rails lumière au plafond. Personne.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -1868,8 +1868,8 @@
      "takenAt": "2026-10-08 10:20",
      "source": "camera",
      "scene": "laptop",
-     "caption": "Plan v1 à l'écran.",
-     "details": "Six rectangles numérotés et une scène à gauche.",
+     "caption": "Le plan v1 à l'écran, en réunion.",
+     "details": "Un ordinateur ouvert sur une table, un plan de salle à l'écran, des gobelets de café autour.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -1879,7 +1879,7 @@
      "source": "camera",
      "scene": "cat",
      "caption": "Pistache sur la pile de catalogues.",
-     "details": "Un chat tigré couché sur des épreuves imprimées.",
+     "details": "Un chat tigré endormi sur une pile d'épreuves imprimées.",
      "place": "Domicile",
      "device": "iPhone 16 Pro"
     },
@@ -1908,7 +1908,7 @@
      "source": "camera",
      "scene": "office",
      "caption": "L'atelier de PY à Bagnolet.",
-     "details": "Des maquettes de vitrines en carton plume, des pots de peinture noire.",
+     "details": "Des maquettes en carton plume sur un établi, des pots de peinture noire, des outils au mur.",
      "place": "Bagnolet",
      "device": "iPhone 16 Pro"
     },
@@ -1918,7 +1918,7 @@
      "source": "camera",
      "scene": "street_night",
      "caption": "Belleville, la nuit, en rentrant.",
-     "details": "Une rue en pente, des réverbères, un scooter garé.",
+     "details": "Une rue en pente, des réverbères, un scooter garé. Personne.",
      "style": "night",
      "place": "Domicile",
      "device": "iPhone 16 Pro"
@@ -1939,7 +1939,7 @@
      "source": "camera",
      "scene": "vitrine",
      "caption": "Livraison des vitrines.",
-     "details": "Six vitrines encore sous bâche, des sangles au sol. Une rayure sur la 6.",
+     "details": "Des vitrines encore emballées sous bâche, des sangles au sol, le quai de livraison ouvert.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -1968,7 +1968,7 @@
      "source": "camera",
      "scene": "park",
      "caption": "Footing aux Buttes-Chaumont.",
-     "details": "Les arbres roux, le temple au loin, Samir essoufflé.",
+     "details": "Les arbres roux au bord du lac, le temple de la Sibylle au loin, sur son rocher.",
      "place": "Parc des Buttes-Chaumont",
      "device": "iPhone 16 Pro"
     },
@@ -2033,7 +2033,7 @@
      "source": "camera",
      "scene": "gallery",
      "caption": "Essais lumière en salle 2.",
-     "details": "Un rond de lumière blanche sur une vitrine vide, le reste dans le noir.",
+     "details": "Un rond de lumière blanche sur une vitrine vide, le reste de la salle dans le noir.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -2043,7 +2043,7 @@
      "source": "camera",
      "scene": "station",
      "caption": "Gare de Lyon, en attendant Camille.",
-     "details": "Le panneau affiche « Lyon Part-Dieu — arrivée 10h02 — à l'heure ».",
+     "details": "Le grand hall de la gare de Lyon, la foule sur les quais, l'horloge du beffroi au-dessus.",
      "style": "quick",
      "place": "Gare de Lyon",
      "device": "iPhone 16 Pro"
@@ -2052,10 +2052,9 @@
      "id": "p_b17",
      "takenAt": "2026-11-07 20:45",
      "source": "camera",
-     "scene": "selfie",
-     "caption": "Selfie avec Camille.",
-     "details": "Deux sœurs, même nez, même rire. Une bougie derrière.",
-     "style": "selfie",
+     "scene": "interior_warm",
+     "caption": "Dîner avec Camille, à la maison.",
+     "details": "Deux verres de vin, une bougie allumée, deux assiettes vides.",
      "place": "Domicile",
      "device": "iPhone 16 Pro"
     },
@@ -2065,7 +2064,7 @@
      "source": "camera",
      "scene": "gallery",
      "caption": "Montage du 11 novembre.",
-     "details": "Les vitrines numérotées sont en place, encore vides. Des escabeaux partout.",
+     "details": "Les vitrines en place, encore vides. Des escabeaux et des caisses partout.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -2075,7 +2074,7 @@
      "source": "camera",
      "scene": "view",
      "caption": "Le matin, depuis le perron du Pavillon.",
-     "details": "La Seine en contrebas, la tour dans la brume.",
+     "details": "La Seine en contrebas, la tour Eiffel dans la brume.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -2085,7 +2084,7 @@
      "source": "camera",
      "scene": "vitrine",
      "caption": "Pose de l'Aurore dans la vitrine 4.",
-     "details": "Le collier est posé sur le buste de velours noir, le fermoir bien visible au centre, face à la salle. Photo prise de trop loin pour compter les perles. Hélène tient la porte de la vitrine.",
+     "details": "Le collier est posé sur le buste de velours noir, le fermoir bien visible au centre, face à la salle. Photo prise de trop loin pour compter les perles. La porte de la vitrine est encore ouverte.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -2095,7 +2094,7 @@
      "source": "camera",
      "scene": "gala",
      "caption": "La salle prête, avant l'ouverture.",
-     "details": "Tables hautes, nappes noires, les six vitrines allumées.",
+     "details": "Tables hautes, nappes noires, les vitrines allumées dans une salle encore vide.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -2104,9 +2103,8 @@
      "takenAt": "2026-11-12 19:58",
      "source": "camera",
      "scene": "mirror",
-     "caption": "Selfie avec Noémie, en noir.",
-     "details": "Deux robes noires, des badges « ORGANISATION ».",
-     "style": "selfie",
+     "caption": "La loge, juste avant l'ouverture.",
+     "details": "Le miroir à ampoules de la loge 2, deux badges et un rouge à lèvres posés devant.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -2116,7 +2114,7 @@
      "source": "camera",
      "scene": "gala",
      "caption": "Les premiers invités.",
-     "details": "Une foule en tenue de soirée, des coupes, la vitrine 4 au fond.",
+     "details": "Une foule en tenue de soirée, vue de dos, des coupes à la main, des vitrines allumées au fond.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -2125,8 +2123,8 @@
      "takenAt": "2026-11-12 21:52",
      "source": "camera",
      "scene": "gala",
-     "caption": "Discours d'Hélène.",
-     "details": "Photo floue : Hélène au pupitre, un bras levé devant l'objectif.",
+     "caption": "Discours d'Hélène, pris de loin.",
+     "details": "Photo floue : un pupitre dans une découpe de lumière, par-dessus les têtes des invités.",
      "style": "blurry",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
@@ -2193,8 +2191,8 @@
      "takenAt": "2026-11-12 17:52",
      "source": "camera",
      "scene": "vitrine",
-     "caption": "La vitrine 4 sous les projecteurs, pour les réseaux.",
-     "details": "En zoomant : on compte 41 perles. Le fermoir est tourné vers le fond de la vitrine, invisible.",
+     "caption": "La vitrine 4 sous les projecteurs, pour les réseaux (juste après le « nettoyage »).",
+     "details": "Un collier de perles sur un buste de velours noir. En zoomant : on compte 41 perles. Le fermoir est tourné vers le fond de la vitrine, invisible.",
      "place": "Pavillon Mercure",
      "device": "iPhone 16 Pro"
     },
@@ -2214,7 +2212,7 @@
      "source": "received",
      "scene": "gala",
      "caption": "La salle 2 pendant la présentation d'Iris.",
-     "details": "La scène à gauche, Iris au micro dans la poursuite. À droite, près de la vitrine 4, Adrien Sterne, seul, une main dans la poche de sa veste.",
+     "details": "Prise du fond de la salle, par-dessus les têtes. À gauche, la scène dans la poursuite. À droite, la vitrine 4 : devant elle, une seule silhouette, de dos, en veste sombre, une main dans la poche.",
      "place": "Pavillon Mercure",
      "from": "noemie",
      "receivedAt": "2026-11-12 22:13",
@@ -2226,7 +2224,7 @@
      "source": "received",
      "scene": "gala",
      "caption": "La scène au moment où tout s'éteint.",
-     "details": "Prise à 22:14 pile. Iris Nakamura, au micro sur pied, est le dernier point éclairé de la salle. La vitrine 4, à l'autre bout, est déjà dans le noir, à une vingtaine de mètres.",
+     "details": "Prise à 22:14 pile, du premier rang. Le micro sur pied d'Iris est le dernier point éclairé de la salle. La vitrine 4, à l'autre bout, est déjà dans le noir, à une vingtaine de mètres.",
      "style": "night",
      "place": "Pavillon Mercure",
      "from": "samir",
@@ -2239,7 +2237,7 @@
      "source": "received",
      "scene": "desk_night",
      "caption": "La console de la régie, dans le noir.",
-     "details": "L'écran affiche « Q47 — NOIR 90 s — GO 22:14:00 » et un compte à rebours. La régie est sur la mezzanine au fond de la salle, à une trentaine de mètres de la vitrine 4. Le reflet de Victor, casque sur les oreilles, dans l'écran.",
+     "details": "La console lumière, ses curseurs éclairés dans le noir. La régie est sur la mezzanine au fond de la salle, à une trentaine de mètres de la vitrine 4.",
      "style": "night",
      "place": "Pavillon Mercure",
      "from": "victor",
@@ -2251,9 +2249,8 @@
      "takenAt": "2026-11-10 21:10",
      "source": "received",
      "scene": "mirror",
-     "caption": "Iris dans une robe noire à sequins.",
-     "details": "Selfie dans un miroir de cabine d'essayage. Rien de plus.",
-     "style": "selfie",
+     "caption": "La robe noire à sequins pour jeudi.",
+     "details": "Une robe à sequins sur un cintre, dans une cabine d'essayage. Rien de plus.",
      "from": "iris",
      "receivedAt": "2026-11-10 21:14",
      "device": "iPhone 16"
@@ -2263,8 +2260,8 @@
      "takenAt": "2026-10-11 16:38",
      "source": "received",
      "scene": "interior_warm",
-     "caption": "Jules montre le trou de sa dent.",
-     "details": "Un petit garçon hilare, une dent dans la main.",
+     "caption": "La première dent de Jules.",
+     "details": "Une minuscule dent de lait posée sur un mouchoir, à côté d'une pièce.",
      "place": "Lyon",
      "from": "camille",
      "receivedAt": "2026-10-11 16:40",
@@ -2784,7 +2781,7 @@
    "age": 34,
    "address": "Paris 11e",
    "statement": "« J'étais sur scène, au micro, pendant tout le noir. »",
-   "alibi": "Iris n'a pas quitté son micro sur pied pendant le noir : un invité du premier rang, à deux mètres, l'a photographiée à 22:14 et l'a entendue parler jusqu'au retour de la lumière.",
+   "alibi": "Iris n'a pas quitté son micro sur pied pendant le noir : un invité du premier rang, à deux mètres, a photographié la scène à 22:14 et l'a entendue parler jusqu'au retour de la lumière.",
    "alibiEvidence": "e_iris_alibi",
    "trap": "Elle avait demandé qu'on lui ouvre la vitrine 4, et elle a annoncé la disparition en ligne trois minutes après. Une journaliste qui a flairé le scoop, pas une voleuse.",
    "verdict": "Iris Nakamura voulait un gros plan, puis un scoop. Rien de plus. Pendant les 90 secondes, elle parlait au micro, sur scène, à une vingtaine de mètres de la vitrine 4."
@@ -2821,9 +2818,11 @@
     "s_sterne"
    ],
    "refs": [
-    "calendar:c_sterne_1730"
+    "calendar:c_sterne_1730",
+    "message:m_sterne_1712"
    ],
-   "meaning": "La seule ouverture de la vitrine 4 entre la pose (16:05) et la photo de 17:52 : M. Sterne et « son joaillier », seuls, de 17:30 à 17:50. C'est là que la copie a remplacé le vrai collier."
+   "meaning": "La seule ouverture de la vitrine 4 entre la pose (16:05) et la photo de 17:52 : M. Sterne et « son joaillier », seuls, de 17:30 à 17:50, à sa demande. C'est là que la copie a remplacé le vrai collier.",
+   "anyOf": true
   },
   {
    "id": "e_cue",
@@ -2846,9 +2845,11 @@
     "s_sterne"
    ],
    "refs": [
-    "message:m_sterne_key"
+    "message:m_sterne_key",
+    "message:m_helene_008"
    ],
-   "meaning": "Seuls Salomé et Adrien Sterne avaient une clé de la vitrine 4. Elle n'a pas été forcée."
+   "meaning": "Seuls Salomé et Adrien Sterne avaient une clé de la vitrine 4, et celle de Salomé dormait au coffre. La vitrine n'a pas été forcée.",
+   "anyOf": true
   },
   {
    "id": "e_insurance",
@@ -2871,9 +2872,11 @@
     "s_iris"
    ],
    "refs": [
-    "photoInfo:p_room_2213"
+    "photoInfo:p_room_2213",
+    "message:m_noemie_012"
    ],
-   "meaning": "Une minute avant le noir, Adrien Sterne se tient seul contre la vitrine 4, la main dans la poche — là où il garde sa clé. Iris, elle, est sur scène."
+   "meaning": "Une minute avant le noir, Adrien Sterne se tient seul devant la vitrine 4, la main dans la poche — là où il garde sa clé. Iris, elle, est sur scène.",
+   "anyOf": true
   },
   {
    "id": "e_debts",
@@ -2909,7 +2912,7 @@
    "refs": [
     "message:m_live_josiane_coat"
    ],
-   "meaning": "À 22:35, Adrien Sterne récupère son manteau en hâte. C'est dans sa doublure que la copie sera retrouvée."
+   "meaning": "À 22:35, pendant que la police rassemble tout le monde, Adrien Sterne récupère son manteau en hâte et s'en va. C'est dans sa doublure que la copie sera retrouvée."
   },
   {
    "id": "e_enzo_alibi",
@@ -2935,7 +2938,7 @@
     "photoInfo:p_regie_2215",
     "message:m_victor_2216"
    ],
-   "meaning": "À 22:15, Victor est en régie, sur la mezzanine, devant sa console : « Q47 — NOIR 90 s ». Il exécutait le conducteur."
+   "meaning": "À 22:15, Victor est en régie, sur la mezzanine, devant sa console, à trente mètres de la vitrine : « top Q47, 90 s ». Il exécutait le conducteur."
   },
   {
    "id": "e_iris_alibi",
@@ -3015,20 +3018,26 @@
  "hints": [
   {
    "id": "h1",
-   "text": "Et si le collier avait disparu avant le noir ?",
+   "text": "Tout ne s'est peut-être pas joué pendant les 90 secondes. Remontez l'après-midi du 12 novembre : le Calendrier et les Photos de Salomé.",
    "scoreCost": 0
   },
   {
    "id": "h2",
-   "text": "Comparez la photo de la vitrine prise à 17:52 avec le constat de l'expert, dans vos mails.",
-   "scoreCost": 8
+   "text": "Comparez le collier tel que l'expert l'a décrit (Mails) avec celui que montre la photo de la vitrine 4 prise à 17:52 (analysez-la). Puis cherchez qui a eu la vitrine ouverte entre la pose et cette photo.",
+   "scoreCost": 5
   },
   {
    "id": "h3",
-   "text": "Qui a eu la vitrine ouverte pour lui seul, et qui a demandé le noir ? Le conducteur de Victor le dit.",
-   "scoreCost": 15,
-   "unlockAtRemainingSeconds": 120
+   "text": "Trois questions : qui a eu la vitrine 4 ouverte pour lui seul l'après-midi, qui détient l'autre clé, et à la demande de qui le noir figure dans le conducteur de Victor ? Une seule personne répond aux trois. Le mobile est dans un mail de l'assureur.",
+   "scoreCost": 10,
+   "unlockAtRemainingSeconds": 180
   }
+ ],
+ "minimalPath": [
+  "e_cue",
+  "e_key",
+  "e_swap_slot",
+  "e_insurance"
  ],
  "solution": {
   "culprit": "s_sterne",
@@ -3082,7 +3091,7 @@
    "Le 12 novembre, à 17:30, il obtient vingt minutes « seul » avec son joaillier, vitrine ouverte, pour un « dernier nettoyage ». Le vrai collier repart dans une mallette ; une copie prend sa place. Le copiste a oublié deux perles, et Kessler a tourné le fermoir vers le fond pour cacher l'imitation. À 17:52, Salomé la photographie sans rien remarquer.",
    "Quelques jours plus tôt, il a obtenu de Victor un « effet de révélation » : 90 secondes de noir total à 22:14, sans prévenir la salle. Salomé n'a jamais ouvert le conducteur.",
    "À 22:14, dans le noir, il ouvre la vitrine avec son double, empoche la copie et referme mal. À 22:15:30, la poursuite éclaire une vitrine vide. L'extra s'enfuit, le régisseur est montré du doigt, l'animatrice poste la nouvelle : tout le monde regarde ailleurs. Sterne appelle Salomé à 22:31, anéanti.",
-   "À 22:35, il récupère son manteau au vestiaire, pressé de partir. La police l'arrête à la porte. La copie de 41 perles est dans la doublure. L'assurance aurait payé 4,2 millions pour un collier déjà vendu."
+   "À 22:35, pendant que la police rassemble tout le monde en salle 1, il récupère son manteau au vestiaire et s'éclipse. Il est interpellé chez lui dans la nuit : la copie de 41 perles est dans la doublure. L'assurance aurait payé 4,2 millions pour un collier déjà vendu."
   ]
  }
 }

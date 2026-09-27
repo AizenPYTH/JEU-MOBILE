@@ -117,7 +117,7 @@ struct CaseOpeningView: View {
     /// The paper tag tied to the bag: « SCELLÉ N° 00N-01 » and the phone's label (case data).
     private var sealTag: some View {
         VStack(alignment: .leading, spacing: 3) {
-            Text(L10n.f("opening.seal", dossierNumber(session.caseFile.number) + "-01"))
+            Text(L10n.f("opening.seal", shownNumber(session.caseFile.number) + "-01"))
                 .font(Trace.Fonts.kicker)
                 .tracking(1.4)
                 .foregroundStyle(Trace.Colors.stamp)

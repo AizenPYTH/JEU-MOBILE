@@ -7,7 +7,8 @@ import CaseLibrary
 /// several apps, each innocent cleared by their alibi, and each case its own story.
 @Suite("All cases")
 struct AllCasesTests {
-    private static func cases() throws -> [CaseFile] { try CaseLibrary.loadCases() }
+    /// The main-mode cases (ALIBI cases have their own suite).
+    private static func cases() throws -> [CaseFile] { try CaseLibrary.loadCases().filter { !$0.isAlibi } }
 
     /// The app an item is found in.
     private static func app(of ref: ItemRef, in file: CaseFile) -> AppID? {
@@ -158,15 +159,40 @@ struct AllCasesTests {
         }
     }
 
-    /// Same levels everywhere, three hints in tiers (free clue, place, evidence).
+    /// Same levels everywhere, three hints in tiers: where to look (free), what to compare, a strong
+    /// orientation — never the answer (the culprit's name is in none of them).
     @Test func levelsAndHintsFollowTheRules() throws {
         let rules = try CaseLibrary.loadRules()
         for file in try Self.cases() {
             #expect(file.duration(for: .investigator, rules: rules) == 900, "\(file.id)")
             #expect(file.duration(for: .detective, rules: rules) == 480, "\(file.id)")
             #expect(file.duration(for: .expert, rules: rules) == 300, "\(file.id)")
-            #expect(file.hints.map(\.scoreCost) == [0, 8, 15], "\(file.id): hints \(file.hints.map(\.scoreCost))")
-            #expect(file.hints.last?.unlockAtRemainingSeconds != nil, "\(file.id): the last hint unlocks late")
+            #expect(file.hints.map(\.scoreCost) == [0, 5, 10], "\(file.id): hints \(file.hints.map(\.scoreCost))")
+            let culprit = try #require(file.suspects.first { $0.id == file.solution.culprit })
+            let name = try #require(file.devices.flatMap(\.contacts).first { $0.id == culprit.contact }).name
+            let first = String(name.split(separator: " ").first ?? "")
+            for hint in file.hints {
+                #expect(!hint.text.contains(name) && !hint.text.contains(first), "\(file.id): hint \(hint.id) names the culprit")
+            }
+        }
+    }
+
+    /// Every case knows its minimum solvable path, and it is reachable well within the time: the
+    /// difficulty comes from reasoning, not from digging.
+    @Test func minimalPathIsShortAndReachable() throws {
+        let rules = try CaseLibrary.loadRules()
+        for file in try Self.cases() {
+            let path = try #require(file.minimalPath, "\(file.id) has no minimalPath")
+            #expect((2...5).contains(path.count), "\(file.id): \(path.count) essential pieces")
+            let report = CaseAnalysis.analyze(file, rules: rules)
+            let seconds = try #require(report.minimalPathSeconds)
+            #expect(seconds <= file.duration(for: .detective, rules: rules) / 2, "\(file.id): \(seconds) s to see the essentials")
+        }
+        // #001 is the tutorial: no case asks for fewer essential pieces.
+        let all = try Self.cases().sorted { $0.number < $1.number }
+        let first = all[0].minimalPath?.count ?? 0
+        for other in all.dropFirst() {
+            #expect(first <= (other.minimalPath?.count ?? .max), "#001 is not the simplest (\(other.id))")
         }
     }
 

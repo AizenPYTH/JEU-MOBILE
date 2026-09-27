@@ -32,10 +32,17 @@ do {
         let issues = CaseValidator.validate(file)
         let report = CaseAnalysis.analyze(file, rules: rules)
         let minutes = file.durationSeconds / 60, seconds = file.durationSeconds % 60
-        print("#\(String(format: "%03d", file.number)) \(file.title)  (\(minutes):\(String(format: "%02d", seconds)), difficulty \(file.difficulty))")
+        let label = file.isAlibi ? "ALIBI #\(String(format: "%03d", file.number - 100))" : "#\(String(format: "%03d", file.number))"
+        print("\(label) \(file.title)  (\(minutes):\(String(format: "%02d", seconds)), difficulty \(file.difficulty))")
+        if let claim = file.claim, let holds = file.solution.alibiHolds {
+            print("  claim: \(claim.statement) → \(holds ? "CONFIRMÉ" : "CONTREDIT")")
+        }
         print("  suspects: \(file.suspects.count) · evidence: \(file.evidence.count) (key \(report.keyEvidenceCount)) · hints: \(file.hints.count)")
         print("  messages: \(report.messageCount) · photos: \(report.photoCount) · noise: \(Int(report.noiseRatio * 100)) % of messages are not evidence")
         print("  minimum action cost to see all key evidence: \(report.minimumKeyCost) s · estimated solve time: \(report.estimatedSolveSeconds) s")
+        if let path = file.minimalPath, let seconds = report.minimalPathSeconds {
+            print("  minimal path: \(path.joined(separator: ", ")) · \(seconds) s to see the essentials")
+        }
         if !report.isComfortablySolvable {
             print("  ⚠️  estimated solve time is above 75 % of the duration")
         }

@@ -522,7 +522,7 @@ struct DossierBar: View {
 
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: PhoneLayout.barRadius, style: .continuous)
-        let file = L10n.f("dossier.number", dossierNumber(caseNumber))
+        let file = fileLabel(caseNumber)
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 3) {
                 Text(file)
