@@ -975,10 +975,10 @@ final class MainFlowTests: XCTestCase {
         snap("S1-photos-defilent")
         openApp("messages")
         assertScrolls("conversation.", "une conversation")
-        // The group chat (39 messages): a swipe down that starts on the last visible message scrolls back.
+        // Emma's conversation (33 messages): a swipe down that starts on the last visible message scrolls back.
+        openApp("messages")
         app.swipeDown(); app.swipeDown()
-        scrollTo(element("conversation.c_group"))
-        tap(element("conversation.c_group"), "le groupe", expecting: first("message."))
+        tap(element("conversation.c_emma"), "conversation Emma", expecting: first("message."))
         let messages = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH %@", "message."))
         let last = messages.element(boundBy: max(0, messages.count - 1))
         let before = last.frame.minY
