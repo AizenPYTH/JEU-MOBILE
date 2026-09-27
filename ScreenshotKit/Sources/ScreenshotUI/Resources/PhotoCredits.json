@@ -108,19 +108,6 @@
     },
     {
       "provider": "openverse",
-      "photographer": "JIP",
-      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:JIP&action=edit&redlink=1",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=86396473",
-      "license": "BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "title": "Soviet-era Estonian room in a museum",
-      "attribution": "« Soviet-era Estonian room in a museum » by JIP, CC BY-SA 4.0",
-      "cases": [
-        "003"
-      ]
-    },
-    {
-      "provider": "openverse",
       "photographer": "John Goldsmith",
       "photographerUrl": "https://www.geograph.org.uk/profile/28123",
       "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=105185420",
@@ -232,19 +219,6 @@
       "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
       "title": "Sunset over city",
       "attribution": "« Sunset over city » by Nisnuwon, CC BY-SA 4.0",
-      "cases": [
-        "001"
-      ]
-    },
-    {
-      "provider": "openverse",
-      "photographer": "No Swan So Fine",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:No_Swan_So_Fine",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=147826384",
-      "license": "BY-SA 4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "title": "Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 01",
-      "attribution": "« Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 01 » by No Swan So Fine, CC BY-SA 4.0",
       "cases": [
         "001"
       ]

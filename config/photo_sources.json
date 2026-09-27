@@ -180,34 +180,6 @@
       "evidence": false
     },
     {
-      "sourceId": "case001_src_car_parked_on_street_01",
-      "status": "fetched",
-      "case": "001",
-      "provider": "openverse",
-      "providerPhotoId": "b5d5b199-0edf-434b-a532-c38f980b8df5",
-      "photographer": "No Swan So Fine",
-      "photographerUrl": "https://commons.wikimedia.org/wiki/User:No_Swan_So_Fine",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=147826384",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Entrance_to_The_Chilterns_underground_car_park%2C_Paddington_Street%2C_Marylebone%2C_October_2023_01.jpg",
-      "license": "by-sa",
-      "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "origin": "wikimedia",
-      "title": "Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 01",
-      "tags": [],
-      "queryUsed": "car parked on street",
-      "dateFetched": "2026-09-27T09:07:58+00:00",
-      "width": 4032,
-      "height": 3024,
-      "score": 4.5,
-      "luminance": 167.2,
-      "file": "openverse_b5d5b199-0edf-434b-a532-c38f980b8df5.jpg",
-      "sha256": "ac78cd52d55c443258f3902877f0cdb606acbfd3bfc263769e5e0a56102a2ae0",
-      "attributionRequired": true,
-      "attributionText": "« Entrance to The Chilterns underground car park, Paddington Street, Marylebone, October 2023 01 » by No Swan So Fine, CC BY-SA 4.0",
-      "evidence": false
-    },
-    {
       "sourceId": "case001_src_cat_sleeping_01",
       "status": "fetched",
       "case": "001",
@@ -637,34 +609,6 @@
       "sha256": "23710d176a96fb2f738f4ab3871c5ec00badd3e928df611301899407db493046",
       "attributionRequired": false,
       "attributionText": "« Cat Sleeping » — Erik-Jan Leusink (CC0)",
-      "evidence": false
-    },
-    {
-      "sourceId": "case003_src_green_zellige_tiles_bathroom_01",
-      "status": "fetched",
-      "case": "003",
-      "provider": "openverse",
-      "providerPhotoId": "7f6ecc3b-5f62-41c3-87fa-bdd51e8703e3",
-      "photographer": "JIP",
-      "photographerUrl": "https://commons.wikimedia.org/w/index.php?title=User:JIP&action=edit&redlink=1",
-      "sourceUrl": "https://commons.wikimedia.org/w/index.php?curid=86396473",
-      "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/Soviet-era_Estonian_room_in_a_museum.jpg",
-      "license": "by-sa",
-      "licenseVersion": "4.0",
-      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "origin": "wikimedia",
-      "title": "Soviet-era Estonian room in a museum",
-      "tags": [],
-      "queryUsed": "apartment living room interior",
-      "dateFetched": "2026-09-27T09:09:02+00:00",
-      "width": 4608,
-      "height": 3456,
-      "score": 2.5,
-      "luminance": 102.0,
-      "file": "openverse_7f6ecc3b-5f62-41c3-87fa-bdd51e8703e3.jpg",
-      "sha256": "473fd995ea948092209794591ab0107d8a49ac1bac395051e3647d120a3aeb85",
-      "attributionRequired": true,
-      "attributionText": "« Soviet-era Estonian room in a museum » by JIP, CC BY-SA 4.0",
       "evidence": false
     },
     {
@@ -1257,32 +1201,6 @@
       "bytes": 137367
     },
     {
-      "assetId": "case001_photo_p_quick02",
-      "sourceId": "case001_src_car_parked_on_street_01",
-      "caseId": "001",
-      "photoId": "p_quick02",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case001_photo_p_quick02.imageset/case001_photo_p_quick02.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_b5d5b199-0edf-434b-a532-c38f980b8df5.jpg",
-        "sourceSha256": "ac78cd52d55c443258f3902877f0cdb606acbfd3bfc263769e5e0a56102a2ae0",
-        "box": [
-          0,
-          0,
-          4032,
-          3024
-        ]
-      },
-      "sha256": "f6eebfe3d371d92caf74a87e2e6765d262aebf69dbcba5dfe1998a84c79432f7",
-      "bytes": 211906
-    },
-    {
       "assetId": "case002_photo_p_berges01",
       "sourceId": "case002_src_lyon_rhone_river_banks_plane_trees_01",
       "caseId": "002",
@@ -1385,32 +1303,6 @@
       },
       "sha256": "50f905967dc337c037f35ba1285a29a81495813953e56d6d949a58814e87c069",
       "bytes": 75847
-    },
-    {
-      "assetId": "case003_photo_p_chantier",
-      "sourceId": "case003_src_green_zellige_tiles_bathroom_01",
-      "caseId": "003",
-      "photoId": "p_chantier",
-      "evidence": false,
-      "finalAssetPath": "ScreenshotKit/Sources/ScreenshotUI/Resources/Art.xcassets/Photos/case003_photo_p_chantier.imageset/case003_photo_p_chantier.jpg",
-      "transformation": {
-        "profile": "phone-photo",
-        "width": 1024,
-        "height": 768,
-        "quality": 76,
-        "crop": "best",
-        "zoom": 1.0,
-        "source": "openverse_7f6ecc3b-5f62-41c3-87fa-bdd51e8703e3.jpg",
-        "sourceSha256": "473fd995ea948092209794591ab0107d8a49ac1bac395051e3647d120a3aeb85",
-        "box": [
-          0,
-          0,
-          4608,
-          3456
-        ]
-      },
-      "sha256": "69fcf436e506116999214c9f48543e4d041a8697fed843d7a22e41ed09d4c62d",
-      "bytes": 83448
     },
     {
       "assetId": "case003_photo_p_old_2019",
@@ -1545,10 +1437,10 @@
   ],
   "stats": {
     "requests": {
-      "openverse": 37
+      "openverse": 38
     },
-    "rejected": 434,
-    "lastRun": "2026-09-27T09:09:36+00:00"
+    "rejected": 509,
+    "lastRun": "2026-09-27T09:13:20+00:00"
   },
   "about": "Provenance of every external photo (generated by scripts/photos/pipeline.py). One `sources` entry per downloaded image, one `assets` entry per image shipped in the game."
 }
