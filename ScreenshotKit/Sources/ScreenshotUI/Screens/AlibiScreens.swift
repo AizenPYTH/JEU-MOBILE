@@ -232,7 +232,6 @@ struct AlibiBriefingView: View {
             .padding(.vertical, 10)
         }
         .background(DeskBackdrop())
-        .accessibilityIdentifier("alibi.briefing")
     }
 
     private var sheet: some View {
