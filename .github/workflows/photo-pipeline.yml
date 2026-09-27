@@ -40,7 +40,7 @@ jobs:
         run: python3 -m pip install --quiet "pillow>=10"
 
       - name: Restore the pipeline cache (search results, originals)
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: cache/photos
           key: photo-cache-${{ hashFiles('config/photo_catalog.json', 'config/photo_pipeline.json') }}-${{ github.run_id }}
@@ -61,6 +61,13 @@ jobs:
           grep -vE "rejeté|dry-run\]" "$RUNNER_TEMP/photos.log" | tail -40 >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           exit $status
+
+      - name: Save the pipeline cache (even after a partial run, so the next one resumes)
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: cache/photos
+          key: photo-cache-${{ hashFiles('config/photo_catalog.json', 'config/photo_pipeline.json') }}-${{ github.run_id }}
 
       - name: Commit the prepared photos
         if: ${{ !inputs.dry_run }}

@@ -205,6 +205,9 @@ def cmd_audit(args, cfg) -> dict:
                     continue
                 decision, reason = classify(photo, case, ev_index, names, cfg, seen)
                 night = is_night(photo, cfg["audit"])
+                if photo["id"] and decision in ("REPLACE_BY_API", "DUPLICATE"):
+                    q, _ = build_queries(case_key, photo, cfg)
+                    night = night or bool(re.search(r"\b(night|fireworks)\b", q))
                 entry = {
                     "assetId": aid, "case": case_key, "caseTitle": case["title"], "photoId": photo["id"],
                     "screens": ["Photos"] + usage.get(photo["id"], []), "scene": photo["scene"],
@@ -512,6 +515,7 @@ def cmd_download(args, cfg, catalog, manifest, stats) -> None:
     http = Http(cfg, stats)
     selection = load_json(CACHE / "selection.json", {}) or {}
     entries = {e["sourceId"]: e for e in manifest.get("sources", [])}
+    taken = {(e["provider"], e["providerPhotoId"]): e["sourceId"] for e in entries.values() if e.get("status") == "fetched"}
     for src in catalog["sources"]:
         current = entries.get(src["id"])
         if current and current.get("status") == "fetched" and (CACHE / "originals" / current["file"]).exists():
@@ -520,6 +524,8 @@ def cmd_download(args, cfg, catalog, manifest, stats) -> None:
             continue
         tried = 0
         for cand in selection.get(src["id"], []):
+            if taken.get((cand["provider"], cand["providerPhotoId"]), src["id"]) != src["id"]:
+                continue  # already the image of another source: two phones never share a photo
             fname = f"{cand['provider']}_{re.sub(r'[^A-Za-z0-9-]', '', cand['providerPhotoId'])}.jpg"
             dest = CACHE / "originals" / fname
             if args.dry_run:
@@ -553,6 +559,7 @@ def cmd_download(args, cfg, catalog, manifest, stats) -> None:
                 "attributionText": attribution_text(cand),
                 "evidence": False,
             }
+            taken[(cand["provider"], cand["providerPhotoId"])] = src["id"]
             break
         else:
             if not args.dry_run and (src["id"] not in entries or entries[src["id"]].get("status") != "fetched"):

@@ -422,8 +422,8 @@
       ],
       "sensitivity": "no-identifiable-people, no-brands",
       "isEvidence": false,
-      "night": false,
-      "requireDark": false,
+      "night": true,
+      "requireDark": true,
       "variants": 1,
       "photos": [
         "case001_photo_p_old01"
@@ -2802,7 +2802,7 @@
       "isEvidence": false,
       "decision": "REPLACE_BY_API",
       "reason": "Photo d'ambiance sans rôle dans le raisonnement : source externe recadrée.",
-      "night": false,
+      "night": true,
       "required": true,
       "currentSource": "procédural (GeneratedPhoto, scène « sky »)",
       "source": "case001_src_fireworks_over_harbor_night_01",
@@ -4952,7 +4952,7 @@
       "caption": "Le cadeau de Louise : un tirage encadré.",
       "isEvidence": false,
       "decision": "CUSTOM_REQUIRED",
-      "reason": "Personne nommée à l'image (Louise) : une photo générique montrerait un inconnu.",
+      "reason": "Personne nommée à l'image (Jeanne) : une photo générique montrerait un inconnu.",
       "night": false,
       "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « gallery »)",
