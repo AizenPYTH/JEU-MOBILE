@@ -936,50 +936,6 @@
       }
     },
     {
-      "id": "case001_src_mur_d_escalade_vu_d_en_bas_contre_jour_01",
-      "case": "001",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "climbing",
-      "query": "mur d'escalade vu d'en bas contre-jour",
-      "fallbackQueries": [
-        "climbing wall from below",
-        "indoor climbing wall ceiling"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": false,
-      "subject": [
-        "climbing",
-        "escalade",
-        "bouldering",
-        "wall",
-        "mur"
-      ],
-      "night": false,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case001_photo_p_b26"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
       "id": "case001_src_mur_de_bloc_prises_bleues_magnesie_01",
       "case": "001",
       "type": "ambient",
@@ -2506,52 +2462,6 @@
       }
     },
     {
-      "id": "case002_src_passerelle_saint_vincent_lyon_coucher_de_01",
-      "case": "002",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "sunset",
-      "query": "Passerelle Saint-Vincent Lyon coucher de soleil",
-      "fallbackQueries": [
-        "Saône Lyon coucher de soleil",
-        "Quai Saint-Vincent Lyon"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": false,
-      "subject": [
-        "saône",
-        "saone",
-        "passerelle",
-        "sunset",
-        "coucher",
-        "lyon",
-        "quai"
-      ],
-      "night": false,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case002_photo_p_old04"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
       "id": "case002_src_pont_de_la_guillotiere_rhone_01",
       "case": "002",
       "type": "ambient",
@@ -3590,52 +3500,6 @@
       }
     },
     {
-      "id": "case003_src_chartrons_bordeaux_toits_01",
-      "case": "003",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "sky",
-      "query": "Chartrons Bordeaux toits",
-      "fallbackQueries": [
-        "Bordeaux rooftops sunrise",
-        "pink sky rooftops"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": false,
-      "subject": [
-        "bordeaux",
-        "chartrons",
-        "roof",
-        "toits",
-        "rooftops",
-        "sky",
-        "ciel"
-      ],
-      "night": false,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case003_photo_p_sky_july"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
       "id": "case003_src_dune_du_pilat_01",
       "case": "003",
       "type": "ambient",
@@ -4220,51 +4084,6 @@
       }
     },
     {
-      "id": "case003_src_gateau_bougies_30_night_01",
-      "case": "003",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "party",
-      "query": "gâteau bougies 30",
-      "fallbackQueries": [
-        "birthday cake number candles",
-        "birthday cake candles dark"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": false,
-      "subject": [
-        "cake",
-        "gâteau",
-        "candles",
-        "bougies",
-        "birthday",
-        "anniversaire"
-      ],
-      "night": true,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case003_photo_p_cake"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
       "id": "case003_src_huitres_cap_ferret_port_01",
       "case": "003",
       "type": "ambient",
@@ -4487,52 +4306,6 @@
         "variantCrops": [
           "best",
           "left"
-        ]
-      }
-    },
-    {
-      "id": "case003_src_yellow_hoodie_on_chair_p_group_2340_01",
-      "case": "003",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "interior_warm",
-      "query": "yellow hoodie on chair",
-      "fallbackQueries": [
-        "mustard sweatshirt",
-        "yellow sweatshirt",
-        "yellow hoodie"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": true,
-      "subject": [
-        "hoodie",
-        "sweatshirt",
-        "sweat",
-        "jumper",
-        "pull",
-        "capuche"
-      ],
-      "night": false,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case003_photo_p_group_2340"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
         ]
       }
     },
@@ -5204,52 +4977,6 @@
       "variants": 1,
       "photos": [
         "case004_photo_p_old03"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
-      "id": "case004_src_cocktail_reception_crowd_from_behind_night_01",
-      "case": "004",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "gala",
-      "query": "cocktail reception crowd from behind",
-      "fallbackQueries": [
-        "soirée réception foule",
-        "gala evening guests"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": false,
-      "subject": [
-        "reception",
-        "réception",
-        "crowd",
-        "foule",
-        "gala",
-        "guests",
-        "cocktail"
-      ],
-      "night": true,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case004_photo_p_b23"
       ],
       "transform": {
         "profile": "phone-photo",
@@ -6211,52 +5938,6 @@
       }
     },
     {
-      "id": "case005_src_autrans_ski_de_fond_01",
-      "case": "005",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "snow",
-      "query": "Autrans ski de fond",
-      "fallbackQueries": [
-        "Autrans neige piste",
-        "cross-country ski tracks bench snow"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": false,
-      "subject": [
-        "autrans",
-        "ski",
-        "nordic",
-        "fond",
-        "snow",
-        "neige",
-        "tracks"
-      ],
-      "night": false,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case005_photo_p_n16"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
       "id": "case005_src_bois_barbu_villard_de_lans_01",
       "case": "005",
       "type": "ambient",
@@ -6613,50 +6294,6 @@
       "variants": 1,
       "photos": [
         "case005_photo_p_n18"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
-      "id": "case005_src_baby_tooth_matchbox_01",
-      "case": "005",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "interior_warm",
-      "query": "baby tooth matchbox",
-      "fallbackQueries": [
-        "dent de lait",
-        "milk tooth"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": false,
-      "subject": [
-        "tooth",
-        "dent",
-        "baby tooth",
-        "milk tooth",
-        "lait"
-      ],
-      "night": false,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case005_photo_p_r_dent"
       ],
       "transform": {
         "profile": "phone-photo",
@@ -8327,50 +7964,6 @@
       }
     },
     {
-      "id": "case103_src_stade_de_la_meinau_night_01",
-      "case": "103",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "view",
-      "query": "Stade de la Meinau",
-      "fallbackQueries": [
-        "Stade de la Meinau nuit",
-        "football stadium stands night"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": false,
-      "subject": [
-        "meinau",
-        "stade",
-        "stadium",
-        "tribune",
-        "stand"
-      ],
-      "night": true,
-      "requireDark": true,
-      "variants": 1,
-      "photos": [
-        "case103_photo_p3_meinau"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
       "id": "case103_src_tram_strasbourg_homme_de_fer_01",
       "case": "103",
       "type": "ambient",
@@ -8449,51 +8042,6 @@
       "variants": 1,
       "photos": [
         "case103_photo_p3_chantier"
-      ],
-      "transform": {
-        "profile": "phone-photo",
-        "crop": "smart",
-        "variantCrops": [
-          "best"
-        ]
-      }
-    },
-    {
-      "id": "case103_src_ceramic_tile_samples_01",
-      "case": "103",
-      "type": "ambient",
-      "usage": "phone-photo",
-      "scene": "office",
-      "query": "ceramic tile samples",
-      "fallbackQueries": [
-        "échantillons carrelage",
-        "floor tiles samples table"
-      ],
-      "orientation": "landscape",
-      "ratio": "4:3",
-      "minWidth": 1200,
-      "minHeight": 800,
-      "priority": 2,
-      "providers": [
-        "wikimedia",
-        "pexels",
-        "openverse"
-      ],
-      "sensitivity": "real photograph, no identifiable people, no brands, no AI image",
-      "isEvidence": false,
-      "subject": [
-        "tile",
-        "tiles",
-        "carrelage",
-        "carreau",
-        "ceramic",
-        "sample"
-      ],
-      "night": false,
-      "requireDark": false,
-      "variants": 1,
-      "photos": [
-        "case103_photo_p3_echantillons"
       ],
       "transform": {
         "profile": "phone-photo",
@@ -9084,16 +8632,13 @@
       "takenAt": "2026-10-31 20:45",
       "caption": "Les tribunes éclairées du stade, vues d'en haut.",
       "isEvidence": false,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
       "night": true,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « view »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case103_src_stade_de_la_meinau_night_01",
-      "variant": 0,
-      "replacement": "case103_src_stade_de_la_meinau_night_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case103_photo_p3_tram",
@@ -9177,16 +8722,13 @@
       "takenAt": "2026-11-13 15:00",
       "caption": "Des échantillons de carrelage alignés sur une table.",
       "isEvidence": false,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
       "night": false,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « office »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case103_src_ceramic_tile_samples_01",
-      "variant": 0,
-      "replacement": "case103_src_ceramic_tile_samples_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case103_photo_p3_chantier",
@@ -9820,16 +9362,13 @@
       "takenAt": "2026-09-11 18:55",
       "caption": "Le haut du mur, vu d'en bas.",
       "isEvidence": false,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
       "night": false,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « climbing »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case001_src_mur_d_escalade_vu_d_en_bas_contre_jour_01",
-      "variant": 0,
-      "replacement": "case001_src_mur_d_escalade_vu_d_en_bas_contre_jour_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case001_photo_p_b27",
@@ -10713,16 +10252,13 @@
       "takenAt": "2023-07-14 21:30",
       "caption": "Coucher de soleil sur la Saône, juillet 2023.",
       "isEvidence": false,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
       "night": false,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « sunset »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case002_src_passerelle_saint_vincent_lyon_coucher_de_01",
-      "variant": 0,
-      "replacement": "case002_src_passerelle_saint_vincent_lyon_coucher_de_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case002_photo_p_old05",
@@ -11540,16 +11076,13 @@
       "takenAt": "2026-08-22 23:40",
       "caption": "Le sweat moutarde que j'ai offert à Maxime à Noël. Il l'a enfin sorti 🙄",
       "isEvidence": true,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet).",
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
       "night": false,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « interior_warm »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case003_src_yellow_hoodie_on_chair_p_group_2340_01",
-      "variant": 0,
-      "replacement": "case003_src_yellow_hoodie_on_chair_p_group_2340_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case003_photo_p_louise_0206",
@@ -11906,16 +11439,13 @@
       "takenAt": "2026-07-17 07:45",
       "caption": "Ciel rose au-dessus des toits des Chartrons.",
       "isEvidence": false,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
       "night": false,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « sky »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case003_src_chartrons_bordeaux_toits_01",
-      "variant": 0,
-      "replacement": "case003_src_chartrons_bordeaux_toits_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case003_photo_p_cat",
@@ -12348,16 +11878,13 @@
       "takenAt": "2026-08-22 23:15",
       "caption": "Le gâteau et ses deux bougies « 3 » et « 0 ».",
       "isEvidence": false,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
       "night": true,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « party »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case003_src_gateau_bougies_30_night_01",
-      "variant": 0,
-      "replacement": "case003_src_gateau_bougies_30_night_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case003_photo_p_gift",
@@ -13080,16 +12607,13 @@
       "takenAt": "2026-11-12 20:35",
       "caption": "Les premiers invités.",
       "isEvidence": false,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
-      "night": true,
-      "required": true,
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "night": false,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « gala »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case004_src_cocktail_reception_crowd_from_behind_night_01",
-      "variant": 0,
-      "replacement": "case004_src_cocktail_reception_crowd_from_behind_night_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case004_photo_p_b24",
@@ -13871,16 +13395,13 @@
       "takenAt": "2026-11-22 14:30",
       "caption": "Autrans, première neige qui tient.",
       "isEvidence": false,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
       "night": false,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « snow »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case005_src_autrans_ski_de_fond_01",
-      "variant": 0,
-      "replacement": "case005_src_autrans_ski_de_fond_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     },
     {
       "assetId": "case005_photo_p_n17",
@@ -14252,16 +13773,13 @@
       "takenAt": "2026-11-21 19:38",
       "caption": "La dent de Léo dans une boîte d'allumettes.",
       "isEvidence": false,
-      "decision": "REPLACE_REAL",
-      "reason": "Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire.",
+      "decision": "CUSTOM_REAL",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
       "night": false,
-      "required": true,
+      "required": false,
       "currentSource": "procédural (GeneratedPhoto, scène « interior_warm »)",
       "planned": true,
-      "shareWith": null,
-      "source": "case005_src_baby_tooth_matchbox_01",
-      "variant": 0,
-      "replacement": "case005_src_baby_tooth_matchbox_01 (variante 1)"
+      "replacement": "vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant"
     }
   ],
   "removedImages": [

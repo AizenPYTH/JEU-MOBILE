@@ -461,24 +461,9 @@
       "shareWith": null
     },
     "p_b23": {
-      "decision": "REAL",
-      "query": "cocktail reception crowd from behind",
-      "fallbacks": [
-        "soirée réception foule",
-        "gala evening guests"
-      ],
-      "subject": [
-        "reception",
-        "réception",
-        "crowd",
-        "foule",
-        "gala",
-        "guests",
-        "cocktail"
-      ],
-      "night": true,
-      "evidence": false,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "cocktail reception crowd from behind"
     },
     "p_b24": {
       "decision": "REAL",

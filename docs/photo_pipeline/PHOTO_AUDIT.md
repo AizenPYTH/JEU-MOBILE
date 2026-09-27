@@ -7,15 +7,15 @@ Ne pas éditer à la main : modifier les fiches de requêtes ou `config/photo_pi
 
 | Affaire | Photos | KEEP_REAL | REPLACE_REAL | CUSTOM_REAL | PROCEDURAL | REMOVE | Sources |
 |---|---|---|---|---|---|---|---|
-| #001 LE DERNIER MESSAGE | 58 | 0 | 48 | 0 | 10 | 0 | 48 |
-| #002 PREMIER MÉTRO | 38 | 0 | 31 | 0 | 7 | 0 | 30 |
-| #003 APRÈS LA FÊTE | 38 | 0 | 32 | 0 | 6 | 0 | 30 |
-| #004 90 SECONDES | 40 | 0 | 32 | 0 | 8 | 0 | 30 |
-| #005 ROUTE DE NUIT | 38 | 0 | 29 | 0 | 9 | 0 | 28 |
+| #001 LE DERNIER MESSAGE | 58 | 0 | 47 | 1 | 10 | 0 | 47 |
+| #002 PREMIER MÉTRO | 38 | 0 | 30 | 1 | 7 | 0 | 29 |
+| #003 APRÈS LA FÊTE | 38 | 0 | 29 | 3 | 6 | 0 | 27 |
+| #004 90 SECONDES | 40 | 0 | 31 | 1 | 8 | 0 | 29 |
+| #005 ROUTE DE NUIT | 38 | 0 | 27 | 2 | 9 | 0 | 26 |
 | ALIBI #001 LE DÎNER | 10 | 0 | 9 | 0 | 1 | 0 | 9 |
 | ALIBI #002 LE DERNIER MÉTRO | 9 | 0 | 8 | 0 | 1 | 0 | 8 |
-| ALIBI #003 LE RENDEZ-VOUS | 9 | 0 | 8 | 0 | 1 | 0 | 8 |
-| **Total** | **240** | **0** | **197** | **0** | **43** | **0** | **191** |
+| ALIBI #003 LE RENDEZ-VOUS | 9 | 0 | 6 | 2 | 1 | 0 | 6 |
+| **Total** | **240** | **0** | **187** | **10** | **43** | **0** | **181** |
 
 Décisions :
 
@@ -32,11 +32,11 @@ Règle du studio : aucune image générée par IA dans les téléphones et les g
 | | |
 |---|---|
 | Photos des téléphones (toutes affaires) | 240 |
-| Vraies photos livrées (photographies réelles) | **144** |
-| — dont externes : openverse 22 · wikimedia 122 | 144 |
+| Vraies photos livrées (photographies réelles) | **138** |
+| — dont externes : openverse 19 · wikimedia 119 | 138 |
 | Vraies photos prises par le studio (CUSTOM_REAL livrées) | 0 |
-| Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | 53 |
-| Vraies photos à prendre nous-mêmes (CUSTOM_REAL) | 0 |
+| Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | 58 |
+| Vraies photos à prendre nous-mêmes (CUSTOM_REAL) | 10 |
 | Rendus du jeu voulus (captures d'écran, documents, tickets — pas des photographies) | 43 |
 | Images IA supprimées | 5 |
 | Images IA restantes dans les zones photo | 0 |
@@ -55,6 +55,16 @@ Exceptions (photo réelle pas encore livrée) :
 
 | Photo | Décision | Justification |
 |---|---|---|
+| `case103_photo_p3_meinau` — Les tribunes éclairées du stade, vues d'en haut. | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
+| `case103_photo_p3_echantillons` — Des échantillons de carrelage alignés sur une table. | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
+| `case001_photo_p_b26` — Le haut du mur, vu d'en bas. | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
+| `case002_photo_p_old04` — Coucher de soleil sur la Saône, juillet 2023. | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
+| `case003_photo_p_group_2340` — Le sweat moutarde que j'ai offert à Maxime à Noël. Il l'a enfin sorti 🙄 | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
+| `case003_photo_p_sky_july` — Ciel rose au-dessus des toits des Chartrons. | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
+| `case003_photo_p_cake` — Le gâteau et ses deux bougies « 3 » et « 0 ». | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
+| `case004_photo_p_b23` — Les premiers invités. | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
+| `case005_photo_p_n16` — Autrans, première neige qui tient. | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
+| `case005_photo_p_r_dent` — La dent de Léo dans une boîte d'allumettes. | CUSTOM_REAL | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. |
 | `case101_photo_p_affiche` — Des épreuves d'affiches étalées sur une grande table du studio. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case101_photo_p_grue` — La grue jaune éclairée, de nuit, au bord de la Loire. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case102_photo_p2_rame` — L'intérieur d'une rame de métro presque vide. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
@@ -63,9 +73,12 @@ Exceptions (photo réelle pas encore livrée) :
 | `case001_photo_p_b17` — Montage de l'expo Lumen au local. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_b19` — Fin du vernissage : la table de la buvette. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_b23` — Lever de soleil depuis la fenêtre. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case001_photo_p_b27` — Le local Lumen, rangé après l'expo. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_b29` — La vidéo que Tom fait tourner à table. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_self02` — Plage des Catalans, fin d'après-midi avec Lucas. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_blur03` — Le Levant, photo ratée. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case001_photo_p_lucas_car` — La citadine grise de Lucas, sortie du garage. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case001_photo_p_bar_selfie` — Le Levant : la table du fond, avant le départ de Karim. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case001_photo_p_emma_couch` — « Chez moi » : la couette, une tasse fumante, la télé allumée. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case001_photo_p_sarah_jade` — L'anniversaire de Jade : ballons et guirlandes. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case002_photo_p_loge01` — Le miroir de la loge, avant le service. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
@@ -87,6 +100,7 @@ Exceptions (photo réelle pas encore livrée) :
 | `case003_photo_p_selfie_louise` — L'apéro sur la terrasse : des paillettes partout. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case003_photo_p_blur_party` — Tout le monde danse dans le salon. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case004_photo_p_b02` — Le plan v1 à l'écran, en réunion. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case004_photo_p_b05` — L'atelier de PY à Bagnolet. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case004_photo_p_b08` — Livraison des vitrines. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case004_photo_p_b13` — Épreuves du catalogue. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case004_photo_p_b15` — Essais lumière en salle 2. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
@@ -103,6 +117,7 @@ Exceptions (photo réelle pas encore livrée) :
 | `case005_photo_p_n08` — Les dessins de Nina sur le frigo. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_n17` — La carrière depuis le chemin forestier. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_n18` — Villard, la grande rue sous la pluie. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
+| `case005_photo_p_n21` — La rédaction, avant la conf. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_n22` — La cour sous la pluie. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 | `case005_photo_p_mairie_4x4` — La cour de la mairie de Vallières, avant le conseil. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case005_photo_p_platre` — Le couloir des urgences, vu depuis un brancard. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
@@ -136,7 +151,7 @@ Exceptions (photo réelle pas encore livrée) :
 | `p_b23` | Photos | sky — Lever de soleil depuis la fenêtre. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case001_src_toits_de_marseille_lever_de_soleil_01 (variante 1) |
 | `p_b24` | Photos | street_day — Travaux devant l'agence. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case001_src_pelleteuse_chantier_trottoir_01 (variante 1) |
 | `p_b25` | Photos | plant — Le pothos du salon a doublé de taille. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case001_src_pothos_plante_verte_fenetre_01 (variante 1) |
-| `p_b26` | Photos | climbing — Le haut du mur, vu d'en bas. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case001_src_mur_d_escalade_vu_d_en_bas_contre_jour_01 (variante 1) |
+| `p_b26` | Photos | climbing — Le haut du mur, vu d'en bas. | non | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 | `p_b27` | Photos | gallery — Le local Lumen, rangé après l'expo. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case001_src_cartons_d_archives_empiles_01 (variante 1) |
 | `p_b28` | Photos | bar · nuit — Le Levant, la terrasse du fond. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case001_src_table_de_bar_verres_soiree_terrasse_night_01 (variante 1) |
 | `p_b29` | Photos | bar · nuit — La vidéo que Tom fait tourner à table. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case001_src_smartphone_ecran_table_bar_nuit_night_01 (variante 1) |
@@ -179,7 +194,7 @@ Exceptions (photo réelle pas encore livrée) :
 | `p_old01` | Photos | concert · nuit — Festival d'été, 2019. La scène au loin. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case002_src_festival_lasers_foule_nuit_night_01 (variante 1) |
 | `p_old02` | Photos | street_night · nuit — Fête de la musique 2021, rue de la République. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case002_src_fete_de_la_musique_lyon_night_01 (variante 1) |
 | `p_old03` | Photos | party · nuit — Anniversaire, 25 ans. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case002_src_gateau_d_anniversaire_bougies_night_01 (variante 1) |
-| `p_old04` | Photos | sunset — Coucher de soleil sur la Saône, juillet 2023. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case002_src_passerelle_saint_vincent_lyon_coucher_de_01 (variante 1) |
+| `p_old04` | Photos | sunset — Coucher de soleil sur la Saône, juillet 2023. | non | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 | `p_old05` | Photos | interior_warm — Réveillon chez Papa. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case002_src_table_de_reveillon_bougies_01 (variante 1) |
 | `p_old06` | Photos | club · nuit — La cabine du Silo, mai 2025. Première saison avec Yanis. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case002_src_dj_booth_turntables_red_light_night_01 (variante 1) |
 | `p_synth01` | Photos | desk_night · nuit — Le rack de modules, câbles partout. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case002_src_eurorack_modular_synthesizer_night_01 (variante 1) |
@@ -219,7 +234,7 @@ Exceptions (photo réelle pas encore livrée) :
 
 | ID | Écran | Fonction | Preuve | Décision | Raison | Remplacement |
 |---|---|---|---|---|---|---|
-| `p_group_2340` | Photos | interior_warm — Le sweat moutarde que j'ai offert à Maxime à Noël. Il l'a enfin sorti 🙄 | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case003_src_yellow_hoodie_on_chair_p_group_2340_01 (variante 1) |
+| `p_group_2340` | Photos | interior_warm — Le sweat moutarde que j'ai offert à Maxime à Noël. Il l'a enfin sorti 🙄 | oui | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 | `p_louise_0206` | Photos, Messages › c_louise | sky · nuit — La Voie lactée au-dessus du toit de la villa, pose longue. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case003_src_maison_nuit_etoiles_pose_longue_p_louise_0206_night_01 (variante 1) |
 | `p_louise_0214` | Photos, Messages › c_louise | garden_stairs · nuit — Le bas du jardin et l'escalier de la plage, pose longue : le lampadaire s'est allumé. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case003_src_escalier_jardin_lampadaire_nuit_p_louise_0214_night_01 (variante 1) |
 | `p_louise_0227` | Photos, Messages › c_louise | terrace · nuit — Le toit de la villa sous les étoiles, même cadrage qu'à 02:06. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case003_src_maison_nuit_etoiles_pose_longue_p_louise_0206_night_01 (variante 2) |
@@ -234,7 +249,7 @@ Exceptions (photo réelle pas encore livrée) :
 | `p_old_2019` | Photos | sunset — Coucher de soleil au Pyla, 2019. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_dune_du_pilat_coucher_de_soleil_01 (variante 1) |
 | `p_resa` | Photos | screenshot — Capture : réservation de la villa. | non | **PROCEDURAL** | capture d'écran rendue par le téléphone | aucun : rendu procédural conservé |
 | `p_selfie_mirror` | Photos | office — L'agence, 8h10 : premier café. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_bureau_tasse_cafe_echantillons_01 (variante 1) |
-| `p_sky_july` | Photos | sky — Ciel rose au-dessus des toits des Chartrons. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_chartrons_bordeaux_toits_01 (variante 1) |
+| `p_sky_july` | Photos | sky — Ciel rose au-dessus des toits des Chartrons. | non | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 | `p_cat` | Photos | cat — Le chat du voisin sur notre balcon. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_tabby_cat_balcony_01 (variante 1) |
 | `p_rain` | Photos | rain — Orage sur les quais. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_bordeaux_tram_pluie_01 (variante 1) |
 | `p_night_chartrons` | Photos | street_night · nuit — La rue Notre-Dame, la nuit. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_rue_notre_dame_bordeaux_night_01 (variante 1) |
@@ -253,7 +268,7 @@ Exceptions (photo réelle pas encore livrée) :
 | `p_dune` | Photos | beach — La dune du Pilat, en face, de l'autre côté du bassin. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_dune_du_pilat_depuis_cap_ferret_01 (variante 1) |
 | `p_selfie_louise` | Photos | terrace — L'apéro sur la terrasse : des paillettes partout. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_coupes_champagne_terrasse_01 (variante 1) |
 | `p_pocket` | Photos | pocket — Photo prise dans une poche. | non | **PROCEDURAL** | photo prise dans une poche (noir, lueur) | aucun : rendu procédural conservé |
-| `p_cake` | Photos, Messages › c_party | party · nuit — Le gâteau et ses deux bougies « 3 » et « 0 ». | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_gateau_bougies_30_night_01 (variante 1) |
+| `p_cake` | Photos, Messages › c_party | party · nuit — Le gâteau et ses deux bougies « 3 » et « 0 ». | non | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 | `p_gift` | Photos | gallery — Le cadeau de Louise : un tirage encadré. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_photo_encadree_cadre_bois_01 (variante 1) |
 | `p_blur_party` | Photos | party · nuit — Tout le monde danse dans le salon. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_blurry_party_dancing_lights_night_01 (variante 1) |
 | `p_night_garden` | Photos | garden_stairs · nuit — Le jardin la nuit, depuis la terrasse. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case003_src_jardin_nuit_terrasse_lampadaire_night_01 (variante 1) |
@@ -289,7 +304,7 @@ Exceptions (photo réelle pas encore livrée) :
 | `p_b20` | Photos | vitrine — Pose de l'Aurore dans la vitrine 4. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case004_src_pearl_necklace_display_case_velvet_p_vitrine_1752_01 (variante 2) |
 | `p_b21` | Photos | gala · nuit — La salle prête, avant l'ouverture. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case004_src_gala_hall_tables_black_tablecloths_night_01 (variante 1) |
 | `p_b22` | Photos | mirror — La loge, juste avant l'ouverture. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case004_src_dressing_room_mirror_lights_01 (variante 1) |
-| `p_b23` | Photos | gala · nuit — Les premiers invités. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case004_src_cocktail_reception_crowd_from_behind_night_01 (variante 1) |
+| `p_b23` | Photos | gala — Les premiers invités. | non | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 | `p_b24` | Photos | gala · nuit — Discours d'Hélène, pris de loin. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case004_src_lectern_spotlight_stage_night_01 (variante 1) |
 | `p_blur01` | Photos | ceiling — Le plafond de la chambre. | non | **PROCEDURAL** | photo accidentelle floue (plafond), rendue par le téléphone | aucun : rendu procédural conservé |
 | `p_blur02` | Photos | pocket — Photo déclenchée par erreur dans le noir. | non | **PROCEDURAL** | photo accidentelle dans le noir (poche), rendue par le téléphone | aucun : rendu procédural conservé |
@@ -328,7 +343,7 @@ Exceptions (photo réelle pas encore livrée) :
 | `p_n13` | Photos | document — Planning de garde de décembre, griffonné. | non | **PROCEDURAL** | document manuscrit rendu par le téléphone (texte à lire) | aucun : rendu procédural conservé |
 | `p_n14` | Photos | screenshot — Capture : mon article de ce matin. | non | **PROCEDURAL** | capture d'écran d'article rendue par le téléphone | aucun : rendu procédural conservé |
 | `p_n15` | Photos | ceiling — Le plafond de la chambre. | non | **PROCEDURAL** | photo accidentelle du plafond | aucun : rendu procédural conservé |
-| `p_n16` | Photos | snow — Autrans, première neige qui tient. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case005_src_autrans_ski_de_fond_01 (variante 1) |
+| `p_n16` | Photos | snow — Autrans, première neige qui tient. | non | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 | `p_n17` | Photos | mountain — La carrière depuis le chemin forestier. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case005_src_quarry_excavator_rock_face_01 (variante 1) |
 | `p_n18` | Photos | street_night · nuit — Villard, la grande rue sous la pluie. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case005_src_villard_de_lans_rue_nuit_night_01 (variante 1) |
 | `p_n19` | Photos | snow — Bois Barbu : première sortie en skating. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case005_src_bois_barbu_villard_de_lans_01 (variante 1) |
@@ -344,7 +359,7 @@ Exceptions (photo réelle pas encore livrée) :
 | `p_bat_2301` | Photos, Messages › c_agathe | document — Le BAT de la une de samedi. | oui | **PROCEDURAL** | BAT de la une (épreuve imprimée à lire) rendu par le téléphone | aucun : rendu procédural conservé |
 | `p_col_2314` | Photos | road_night · nuit — Un 4×4 se gare sur le parking du col. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case005_src_dark_grey_suv_parked_night_p_mairie_4x4_01 (variante 2) |
 | `p_r_chat` | Photos, Messages › c_maman | cat — Le chat de Maman dans le panier à linge. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case005_src_cat_laundry_basket_01 (variante 1) |
-| `p_r_dent` | Photos, Messages › c_romain | interior_warm — La dent de Léo dans une boîte d'allumettes. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case005_src_baby_tooth_matchbox_01 (variante 1) |
+| `p_r_dent` | Photos, Messages › c_romain | interior_warm — La dent de Léo dans une boîte d'allumettes. | non | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 
 ## ALIBI #001 LE DÎNER
 
@@ -380,11 +395,11 @@ Exceptions (photo réelle pas encore livrée) :
 | ID | Écran | Fonction | Preuve | Décision | Raison | Remplacement |
 |---|---|---|---|---|---|---|
 | `p3_petitefrance` | Photos | street_day — Les maisons à colombages de la Petite France, au bord de l'Ill. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case103_src_petite_france_strasbourg_colombages_01 (variante 1) |
-| `p3_meinau` | Photos | view · nuit — Les tribunes éclairées du stade, vues d'en haut. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case103_src_stade_de_la_meinau_night_01 (variante 1) |
+| `p3_meinau` | Photos | view · nuit — Les tribunes éclairées du stade, vues d'en haut. | non | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 | `p3_tram` | Photos | street_day — Un tram arrêté à la station Homme de Fer. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case103_src_tram_strasbourg_homme_de_fer_01 (variante 1) |
 | `p3_cathedrale` | Photos | sunset — La cathédrale au crépuscule, la flèche dans un ciel rose. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case103_src_cathedrale_de_strasbourg_crepuscule_01 (variante 1) |
 | `p3_simulation` | Photos | screenshot — Capture : une simulation de prêt. | non | **PROCEDURAL** | capture d'écran rendue par le téléphone | aucun : rendu procédural conservé |
-| `p3_echantillons` | Photos | office — Des échantillons de carrelage alignés sur une table. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case103_src_ceramic_tile_samples_01 (variante 1) |
+| `p3_echantillons` | Photos | office — Des échantillons de carrelage alignés sur une table. | non | **CUSTOM_REAL** | Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant. | vraie photo à prendre nous-mêmes ; le rendu procédural reste en attendant |
 | `p3_chantier` | Photos | interior_warm — Une salle de bains en chantier, carrelage à moitié posé. | non | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. | case103_src_bathroom_renovation_tiling_01 (variante 1) |
 | `p3_pluie` | Photos, Messages › c3_jonas | rain — La pluie sur un pare-brise, des voitures garées floues derrière. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case103_src_rain_on_windshield_p3_pluie_01 (variante 1) |
 | `p3_kleber` | Photos | street_day — La place Kléber sous la pluie, pavés luisants. | oui | **REPLACE_REAL** | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). | case103_src_place_kleber_strasbourg_pluie_p3_kleber_01 (variante 1) |

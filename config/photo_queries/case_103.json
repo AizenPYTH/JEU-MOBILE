@@ -21,22 +21,9 @@
       "shareWith": null
     },
     "p3_meinau": {
-      "decision": "REAL",
-      "query": "Stade de la Meinau",
-      "fallbacks": [
-        "Stade de la Meinau nuit",
-        "football stadium stands night"
-      ],
-      "subject": [
-        "meinau",
-        "stade",
-        "stadium",
-        "tribune",
-        "stand"
-      ],
-      "night": true,
-      "evidence": false,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "Stade de la Meinau"
     },
     "p3_tram": {
       "decision": "REAL",
@@ -78,23 +65,9 @@
       "reason": "capture d'écran rendue par le téléphone"
     },
     "p3_echantillons": {
-      "decision": "REAL",
-      "query": "ceramic tile samples",
-      "fallbacks": [
-        "échantillons carrelage",
-        "floor tiles samples table"
-      ],
-      "subject": [
-        "tile",
-        "tiles",
-        "carrelage",
-        "carreau",
-        "ceramic",
-        "sample"
-      ],
-      "night": false,
-      "evidence": false,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "ceramic tile samples"
     },
     "p3_chantier": {
       "decision": "REAL",

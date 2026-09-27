@@ -314,24 +314,9 @@
       "reason": "photo accidentelle du plafond"
     },
     "p_n16": {
-      "decision": "REAL",
-      "query": "Autrans ski de fond",
-      "fallbacks": [
-        "Autrans neige piste",
-        "cross-country ski tracks bench snow"
-      ],
-      "subject": [
-        "autrans",
-        "ski",
-        "nordic",
-        "fond",
-        "snow",
-        "neige",
-        "tracks"
-      ],
-      "night": false,
-      "evidence": false,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "Autrans ski de fond"
     },
     "p_n17": {
       "decision": "REAL",
@@ -583,22 +568,9 @@
       "shareWith": null
     },
     "p_r_dent": {
-      "decision": "REAL",
-      "query": "baby tooth matchbox",
-      "fallbacks": [
-        "dent de lait",
-        "milk tooth"
-      ],
-      "subject": [
-        "tooth",
-        "dent",
-        "baby tooth",
-        "milk tooth",
-        "lait"
-      ],
-      "night": false,
-      "evidence": false,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "baby tooth matchbox"
     }
   }
 }

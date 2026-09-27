@@ -397,22 +397,9 @@
       "shareWith": null
     },
     "p_b26": {
-      "decision": "REAL",
-      "query": "mur d'escalade vu d'en bas contre-jour",
-      "fallbacks": [
-        "climbing wall from below",
-        "indoor climbing wall ceiling"
-      ],
-      "subject": [
-        "climbing",
-        "escalade",
-        "bouldering",
-        "wall",
-        "mur"
-      ],
-      "night": false,
-      "evidence": false,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "mur d'escalade vu d'en bas contre-jour"
     },
     "p_b27": {
       "decision": "REAL",

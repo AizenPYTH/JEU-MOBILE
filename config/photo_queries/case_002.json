@@ -61,24 +61,9 @@
       "shareWith": null
     },
     "p_old04": {
-      "decision": "REAL",
-      "query": "Passerelle Saint-Vincent Lyon coucher de soleil",
-      "fallbacks": [
-        "Saône Lyon coucher de soleil",
-        "Quai Saint-Vincent Lyon"
-      ],
-      "subject": [
-        "saône",
-        "saone",
-        "passerelle",
-        "sunset",
-        "coucher",
-        "lyon",
-        "quai"
-      ],
-      "night": false,
-      "evidence": false,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "Passerelle Saint-Vincent Lyon coucher de soleil"
     },
     "p_old05": {
       "decision": "REAL",

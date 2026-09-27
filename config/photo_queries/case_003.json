@@ -3,24 +3,9 @@
   "about": "Après la fête — villa au Cap Ferret (Bassin d'Arcachon), Bordeaux, Biarritz ; fin août 2026, nuits claires",
   "photos": {
     "p_group_2340": {
-      "decision": "REAL",
-      "query": "yellow hoodie on chair",
-      "fallbacks": [
-        "mustard sweatshirt",
-        "yellow sweatshirt",
-        "yellow hoodie"
-      ],
-      "subject": [
-        "hoodie",
-        "sweatshirt",
-        "sweat",
-        "jumper",
-        "pull",
-        "capuche"
-      ],
-      "night": false,
-      "evidence": true,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "yellow hoodie on chair"
     },
     "p_louise_0206": {
       "decision": "REAL",
@@ -276,24 +261,9 @@
       "shareWith": null
     },
     "p_sky_july": {
-      "decision": "REAL",
-      "query": "Chartrons Bordeaux toits",
-      "fallbacks": [
-        "Bordeaux rooftops sunrise",
-        "pink sky rooftops"
-      ],
-      "subject": [
-        "bordeaux",
-        "chartrons",
-        "roof",
-        "toits",
-        "rooftops",
-        "sky",
-        "ciel"
-      ],
-      "night": false,
-      "evidence": false,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "Chartrons Bordeaux toits"
     },
     "p_cat": {
       "decision": "REAL",
@@ -556,23 +526,9 @@
       "reason": "photo prise dans une poche (noir, lueur)"
     },
     "p_cake": {
-      "decision": "REAL",
-      "query": "gâteau bougies 30",
-      "fallbacks": [
-        "birthday cake number candles",
-        "birthday cake candles dark"
-      ],
-      "subject": [
-        "cake",
-        "gâteau",
-        "candles",
-        "bougies",
-        "birthday",
-        "anniversaire"
-      ],
-      "night": false,
-      "evidence": false,
-      "shareWith": null
+      "decision": "CUSTOM",
+      "reason": "Aucune photo libre fidèle à la légende après trois relectures (sujet, saison, heure ou lieu faux) : vraie photo à prendre par le studio ; rendu dessiné du jeu en attendant.",
+      "previousQuery": "gâteau bougies 30"
     },
     "p_gift": {
       "decision": "REAL",
