@@ -140,7 +140,8 @@ struct ProgressBoxes: View {
     let done: Int
 
     var body: some View {
-        let columns = Array(repeating: GridItem(.fixed(26), spacing: 8), count: min(10, max(1, total)))
+        // As many 26 pt boxes per row as the sheet allows (at most 10).
+        let columns = [GridItem(.adaptive(minimum: 26, maximum: 26), spacing: 8)]
         LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
             ForEach(0..<total, id: \.self) { i in
                 ZStack {

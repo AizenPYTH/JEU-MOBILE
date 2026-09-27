@@ -488,10 +488,12 @@ struct CharacterPreview: UIViewRepresentable {
         }
         holder.pivot.eulerAngles.y = Float(yaw * .pi / 180)
         if holder.closeUp != closeUp {
+            // The first framing is set at once; later changes (face ⇄ full length) move in 0.45 s.
+            let first = holder.closeUp == nil
             holder.closeUp = closeUp
             let eye: Float = appearance.presentation == "presentation_f" ? 1.55 : 1.66
             SCNTransaction.begin()
-            SCNTransaction.animationDuration = holder.closeUp == nil ? 0 : 0.45
+            SCNTransaction.animationDuration = first ? 0 : 0.45
             if closeUp {
                 holder.camera.camera?.fieldOfView = CGFloat(2 * atan(18.0 / 85.0) * 180 / .pi)
                 holder.camera.position = SCNVector3(0, eye, 1.45)

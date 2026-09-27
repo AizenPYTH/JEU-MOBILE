@@ -65,6 +65,20 @@ final class MainFlowTests: XCTestCase {
         wait(result, timeout, "après « \(what) »")
     }
 
+    /// The Bureau (h01: ENQUÊTES · ALIBI · HISTOIRE) → the ENQUÊTES desk (h02). Also accepts
+    /// already being on h02.
+    @discardableResult
+    private func bureau(_ timeout: TimeInterval = 20, _ what: String = "Bureau") -> XCUIElement {
+        let title = element("home.title")
+        let either = app.descendants(matching: .any).matching(
+            NSPredicate(format: "identifier IN %@", ["mode.investigations", "home.title"])).firstMatch
+        wait(either, timeout, what)
+        if !title.exists {
+            tap(element("mode.investigations"), "Enquêtes", expecting: title)
+        }
+        return title
+    }
+
     /// An urgent notification covers the phone with a scrim until it is dismissed.
     private func dismissUrgentBanner() {
         if app.buttons["banner.open"].exists {
@@ -193,7 +207,7 @@ final class MainFlowTests: XCTestCase {
         let fileIt = element("result.file")
         scrollTo(fileIt)
         fileIt.tap()
-        wait(element("home.title"), 10, "retour au Bureau")
+        bureau(10, "retour au Bureau")
     }
 
     /// Reads the phone's clock and the timer: clock = 10:00 + time spent (±1 min at a minute boundary).
@@ -253,7 +267,7 @@ final class MainFlowTests: XCTestCase {
 
     private func startCase() {
         app.launch()
-        wait(element("home.title"), 20, "Bureau")
+        bureau(20, "Bureau")
         snap("01-bureau")
         openCaseFile()
         sleep(1)
@@ -370,9 +384,10 @@ final class MainFlowTests: XCTestCase {
         tap(fileIt, "Classer le dossier", expecting: element("assignment.desk"), timeout: 10)
         sleep(2)
         snap("F15-affectation")
-        tap(element("assignment.desk"), "Aller au Bureau", expecting: element("home.title"))
+        tap(element("assignment.desk"), "Aller au Bureau", expecting: element("mode.investigations"))
         sleep(1)
         snap("F16-bureau")
+        bureau()
 
         // The profile now shows the service number and the rank.
         tap(element("tab.investigator"), "Enquêteur", expecting: element("profile.view"))
@@ -396,7 +411,7 @@ final class MainFlowTests: XCTestCase {
         app.terminate()
         app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
         app.launch()
-        wait(element("home.title"), 20, "Bureau au lancement suivant")
+        bureau(20, "Bureau au lancement suivant")
         XCTAssertFalse(element("title.start").exists, "Pas d'écran titre après l'affectation")
     }
 
@@ -507,7 +522,7 @@ final class MainFlowTests: XCTestCase {
         fileIt.tap()
 
         // Back on the Bureau; the case is in the Archives.
-        wait(element("home.title"), 10, "Bureau")
+        bureau(10, "Bureau")
         snap("21-bureau-apres")
         tap(element("menu.cases"), "Archives", expecting: element("case.case_001"))
         sleep(1)
@@ -599,7 +614,7 @@ final class MainFlowTests: XCTestCase {
         // Finished: nothing left to resume.
         app.terminate()
         app.launch()
-        wait(element("home.title"), 20, "Bureau")
+        bureau(20, "Bureau")
         XCTAssertFalse(element("home.resume").exists, "Une affaire terminée ne se reprend pas")
         XCTAssertFalse(element("title.resume").exists)
     }
@@ -662,7 +677,7 @@ final class MainFlowTests: XCTestCase {
 
     func testChallengeLevelsAndReplay() {
         app.launch()
-        wait(element("home.title"), 20, "Bureau")
+        bureau(20, "Bureau")
         openCaseFile()
         let investigator = element("challenge.investigator")
         let detective = element("challenge.detective")
@@ -742,7 +757,7 @@ final class MainFlowTests: XCTestCase {
 
     func testEveryNewCaseOpensItsOwnPhone() {
         app.launch()
-        wait(element("home.title"), 20, "Bureau")
+        bureau(20, "Bureau")
         for (n, item) in newCases.enumerated() {
             openCaseFile(item.id)
             XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label ==[cd] %@", item.title)).firstMatch.exists, "Dossier de \(item.id)")
@@ -808,7 +823,7 @@ final class MainFlowTests: XCTestCase {
 
     func testSettingsRelaxedTime() {
         app.launch()
-        wait(element("home.title"), 20, "Bureau")
+        bureau(20, "Bureau")
         tap(element("tab.investigator"), "Enquêteur", expecting: element("profile.view"))
         let settings = element("menu.settings")
         scrollTo(settings)
@@ -828,7 +843,8 @@ final class MainFlowTests: XCTestCase {
         sleep(1)
         snap("S1-parametres-modifies")
         tap(element("settings.back"), "retour", expecting: element("tab.bureau"))
-        tap(element("tab.bureau"), "Bureau", expecting: element("home.title"))
+        tap(element("tab.bureau"), "Bureau", expecting: element("mode.investigations"))
+        bureau()
 
         // « Temps détendu »: 08:00 becomes 12:00.
         openCaseFile()
@@ -890,15 +906,148 @@ final class MainFlowTests: XCTestCase {
         snap("37-solution-revelee")
     }
 
+    // MARK: - HISTOIRE: create the investigator, chapter 1, back to the office; the other modes and back
+
+    /// Taps through a scene (lines, timed shots) until `target` appears. Pauses and cards end by
+    /// themselves; a tap only completes or moves on a line.
+    private func playScene(until target: XCUIElement, _ what: String, maxSteps: Int = 90) {
+        for step in 0..<maxSteps {
+            if target.waitForExistence(timeout: 0.6) { return }
+            let scene = element("story.scene")
+            if scene.exists {
+                scene.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45)).tap()
+            }
+            if step == 30 { snap("scene-\(what)") }
+        }
+        wait(target, 5, what)
+    }
+
+    /// First entry in HISTOIRE: the creator (4 steps, hold « Commencer ma carrière »), scene 01-01
+    /// with a choice, the app quit in the middle of the scene and resumed at the same line, the new
+    /// file, case #001 played on the phone, the report filed, back at the BEN (scene 01-02), the
+    /// chapter's result, career and reward, scene 01-03 and « Mon bureau », then ENQUÊTES and ALIBI
+    /// and back to HISTOIRE — the story is where it was.
+    func testStoryFirstChapter() {
+        app.launchArguments += ["-UITestDuration", "25"]
+        app.launch()
+        let storyCard = wait(element("mode.story"), 20, "Bureau (HISTOIRE)")
+        sleep(1)
+        snap("H01-bureau-trois-modes")
+        XCTAssertTrue(element("mode.investigations").exists && element("mode.alibi").exists, "Trois modes au Bureau")
+
+        // h05 · creation.
+        tap(storyCard, "HISTOIRE", expecting: element("creator.firstName"))
+        tapWhenReady(element("creator.template.vincent"), "modèle Vincent Delmas")
+        sleep(1)
+        snap("H02-creation-identite")
+        tap(element("creator.next"), "Suivant (identité)", expecting: element("creator.category.skinTone"))
+        sleep(1)
+        snap("H03-creation-apparence")
+        tap(element("creator.next"), "Suivant (apparence)", expecting: element("creator.outfit.next"))
+        tapWhenReady(element("creator.outfit.next"), "tenue suivante")
+        sleep(1)
+        snap("H04-creation-tenue")
+        tap(element("creator.next"), "Suivant (tenue)", expecting: element("creator.confirm"))
+        sleep(1)
+        snap("H05-dossier-enqueteur")
+        let confirm = element("creator.confirm")
+        confirm.press(forDuration: 1.8)
+        if !element("story.scene").waitForExistence(timeout: 6) {
+            snap("retry-commencer")
+            if confirm.exists { confirm.press(forDuration: 2.2) }
+        }
+        wait(element("story.scene"), 15, "scène 01-01")
+        sleep(2)
+        snap("H06-scene-couloir")
+
+        // S01-01 → office 312 → Lacaze's question.
+        let answer = element("story.choice.c01_dutiful")
+        playScene(until: answer, "question de Lacaze")
+        snap("H07-choix-lacaze")
+
+        // Quit in the middle of the scene: the same line, the same answers.
+        app.terminate()
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR", "-UITestDuration", "25"]
+        app.launch()
+        tap(wait(element("mode.story"), 20, "Bureau après relance"), "HISTOIRE", expecting: element("story.hub"))
+        sleep(1)
+        snap("H08-hub-reprise")
+        tap(element("story.continue"), "Continuer", expecting: answer, timeout: 12)
+        snap("H09-reprise-meme-replique")
+        tapWhenReady(answer, "Je ferai le travail.")
+
+        // The file on Lacaze's desk → the briefing → the phone.
+        let open = element("story.caseFolder.open")
+        playScene(until: open, "le dossier")
+        sleep(1)
+        snap("H10-nouveau-dossier")
+        tap(open, "Ouvrir le dossier", expecting: element("intro.start"))
+        sleep(1)
+        snap("H11-briefing")
+        openPhone()
+        dismissUrgentBanner()
+        snap("H12-telephone")
+
+        // Time runs out; Emma; the report; filed → back to the BEN.
+        wait(element("accuse.timeUp"), 40, "« TEMPS ÉCOULÉ »")
+        choose(wait(element("accuse.suspect.s_emma"), 10, "suspects"))
+        holdToConclude()
+        readReport("H13-verification")
+        let fileIt = element("result.file")
+        scrollTo(fileIt)
+        fileIt.tap()
+        wait(element("story.scene"), 15, "retour au BEN (S01-02)")
+        sleep(2)
+        snap("H14-retour-ben")
+
+        // S01-02: the card, one answer, the end of the chapter.
+        let thanks = element("story.choice.c01_thanks")
+        playScene(until: thanks, "la carte BEN")
+        snap("H15-carte-ben")
+        tapWhenReady(thanks, "Merci, commandant.")
+        let fileChapter = element("story.result.file")
+        playScene(until: fileChapter, "fin du chapitre")
+        sleep(1)
+        snap("H16-fin-du-chapitre")
+        tap(fileChapter, "Classer le chapitre", expecting: element("story.progress.continue"), timeout: 8)
+        sleep(1)
+        snap("H17-etat-de-service")
+        tap(element("story.progress.continue"), "Continuer", expecting: element("story.reward.later"), timeout: 10)
+        sleep(1)
+        snap("H18-recompense")
+        tapWhenReady(element("story.reward.later"), "Plus tard")
+
+        // S01-03 → « Mon bureau ».
+        playScene(until: element("story.office.view"), "mon bureau")
+        sleep(2)
+        snap("H19-mon-bureau")
+        tap(element("story.office.back"), "Retour", expecting: element("story.hub"), timeout: 10)
+        sleep(1)
+        snap("H20-hub-apres-chapitre")
+
+        // ENQUÊTES, ALIBI, then back to HISTOIRE: the story is where it was.
+        tap(element("story.back"), "‹ Bureau", expecting: element("mode.investigations"))
+        bureau(10, "ENQUÊTES")
+        snap("H21-enquetes")
+        tap(element("investigations.back"), "‹ Bureau", expecting: element("mode.alibi"))
+        tap(element("mode.alibi"), "ALIBI", expecting: element("alibi.title"))
+        tap(element("alibi.back"), "‹ Bureau", expecting: element("mode.story"))
+        tap(element("mode.story"), "HISTOIRE", expecting: element("story.hub"))
+        sleep(1)
+        snap("H22-retour-histoire")
+        tap(element("story.office"), "Mon bureau", expecting: element("story.office.back"), timeout: 8)
+        sleep(2)
+        snap("H23-bureau-depuis-hub")
+    }
+
     // MARK: - ALIBI mode
 
     /// Bureau → ALIBI → « Le dîner » → the phone → file a call → Carnet (« Contredit », no suspect
     /// to pick) → « Son alibi est-il fiable ? » → hold « Alibi contredit » → verification → report.
     func testAlibiModeFirstCheck() {
         app.launch()
-        wait(element("home.title"), 20, "Bureau")
-        let card = element("home.alibi")
-        scrollTo(card)
+        let card = wait(element("mode.alibi"), 20, "Bureau (ALIBI)")
+        sleep(1)
         snap("A0-bureau-carte-alibi")
         tap(card, "ALIBI", expecting: element("alibi.title"))
         sleep(1)

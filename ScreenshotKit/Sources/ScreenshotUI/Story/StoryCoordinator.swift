@@ -287,6 +287,7 @@ final class StoryCoordinator {
     func updateAgreement(_ agreement: Agreement) {
         director?.updateAgreement(agreement)
         persist()
+        bump()
     }
 
     /// « Réinitialiser l'histoire » (held 1.6 s): the story only.
@@ -389,6 +390,7 @@ final class StoryCoordinator {
         begin(fromBlack: 0.7)
         handle(director.caseFinished(caseID, solved: solved, score: score, found: found, total: total, seconds: seconds, alibi: alibi))
         if director.save.rank > before { recordPromotion(director.save.rank) }
+        persist()
     }
 
     /// The phone was left (paused): back to the hub; CONTINUER resumes the investigation.
@@ -402,7 +404,6 @@ final class StoryCoordinator {
     func finishResult(officeFocus: String? = nil) {
         guard let director else { return }
         pendingOfficeFocus = officeFocus
-        if let promotion = director.save.promotion { recordPromotion(promotion.to) }
         begin(fromBlack: 0.7)
         handle(director.advance())
     }
@@ -472,8 +473,10 @@ final class StoryCoordinator {
                 } else {
                     screen = .caseFolder(caseID)
                 }
-            case .result:
+            case .result(let result):
                 AudioDirector.shared.stopAmbience(fadeOut: 0.6)
+                // A rank reached at the chapter's end: in the history now (once), shown by h17.
+                if let promotion = result.promotion { recordPromotion(promotion.to) }
                 screen = .result
             case .office:
                 screen = .office(focus: pendingOfficeFocus)
@@ -566,8 +569,12 @@ final class StoryCoordinator {
         journal.append(JournalEntry(id: journalCounter, speaker: speaker, text: text, choice: choice, player: player))
     }
 
+    /// « Avancement : Inspectrice » in the history, once per rank.
     private func recordPromotion(_ rank: StoryRank) {
-        director?.addHistory(L10n.f("story.history.promotion", rankTitle(rank)), date: Self.day(.now))
+        guard let director else { return }
+        let text = L10n.f("story.history.promotion", rankTitle(rank))
+        guard !director.save.history.contains(where: { $0.text == text }) else { return }
+        director.addHistory(text, date: Self.day(.now))
         persist()
     }
 
