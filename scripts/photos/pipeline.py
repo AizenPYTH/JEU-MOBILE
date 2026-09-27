@@ -284,7 +284,9 @@ def cmd_audit(args, cfg) -> dict:
         for i in range(count):
             sid = f"case{case_key}_src_{slug}{'_night' if night and 'night' not in slug else ''}_{i + 1:02d}"
             members = g["photos"][i * size:(i + 1) * size]
-            outdoor_dark = night and g["scene"] in cfg["audit"]["outdoorScenes"] + ["club", "concert"]
+            # Night outdoors must look like night; indoors (a bar, a room) may be lit.
+            outdoor_dark = night and (g["scene"] in cfg["audit"]["outdoorScenes"] + ["club", "concert"]
+                                      or g["scene"] not in cfg["audit"].get("indoorScenes", []))
             sources.append({
                 "id": sid, "case": case_key, "type": "ambient", "usage": "phone-photo", "scene": g["scene"],
                 "query": query, "fallbackQueries": g["fallbacks"], "orientation": "landscape", "ratio": "4:3",
@@ -550,6 +552,8 @@ def hard_reject(c: dict, cfg: dict) -> str:
         return "mot exclu dans le titre ou les tags"
     if words & set(sel.get("placeRejectWords", [])):
         return "lieu étranger à l'affaire (placeRejectWords)"
+    if words & set(sel.get("strongPeopleWords", [])):
+        return "personne identifiable au centre de l'image (strongPeopleWords)"
     text = " " + fold(clean_title(c.get("title", "")) + " " + " ".join(c.get("tags", []))) + " "
     for phrase in sel.get("aiPhrases", []):
         if f" {fold(phrase)} " in re.sub(r"[^a-z0-9]+", " ", text) + " ":
