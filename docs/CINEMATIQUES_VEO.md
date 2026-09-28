@@ -1,32 +1,203 @@
-# Cinématiques des affaires #002 à #005 — prompts Veo 3.1
+# Cinématiques d'avant (retirées du jeu) — ouverture du jeu et ouvertures des affaires #001 à #005
 
-> **Archivé (septembre 2026, handoff final V3).** Les cinématiques ont été retirées du jeu à la demande du
-> porteur de projet : chaque affaire est désormais introduite par son dossier (briefing : résumé, mission,
-> suspects, temps) puis une courte ouverture (sachet de scellé → téléphone, écran verrouillé pour #002–#005).
-> `CinematicView` n'existe plus ; le champ `introScene` des affaires est conservé dans les données mais n'est
-> plus joué. Ce document reste comme référence si des vidéos sont un jour produites hors du jeu (bande-annonce).
+> **Archivé (septembre 2026, handoff final V3).** Ces cinématiques ont été retirées du jeu : chaque affaire est
+> introduite par son dossier (briefing) puis une courte ouverture (sachet de scellé → téléphone). Le champ
+> `introScene` des affaires reste dans les données. Ce document rassemble **tous** leurs prompts pour les refaire
+> hors du jeu (vidéo, bande-annonce). Les scènes 3D du mode HISTOIRE ont leurs propres prompts :
+> `docs/story/PROMPTS_CINEMATIQUES_HISTOIRE.md`.
 
-Chaque affaire a sa propre séquence d'ouverture. Elle est **déjà jouable dans le jeu** : elle est décrite dans le
-fichier de l'affaire (`introScene`) et rendue par `CinematicView` avec des images générées et des sons synthétisés.
-Ce document sert à produire la **version filmée** avec Veo 3.1, plan par plan, pour remplacer ou enrichir la version
-du jeu.
 
-## Règles communes
+Intro du jeu (recrutement) + ouverture de chaque affaire #001 → #005, plan par plan.
+Prompts en anglais (Veo / GPT Image les suivent mieux), explications en français.
 
-- **Format** : 9:16 vertical (comme le téléphone du jeu), 1080p, 8 s par plan, audio activé. Enchaîner les plans avec
-  « Extend » ou au montage.
-- **Toujours présenter la scène comme une scène de film de fiction** (« a scene from a fictional French thriller
-  film »). Ne jamais faire prononcer de nom de personne par un personnage dans un format « reportage » : Veo le bloque
-  (voir l'affaire #001). Les textes à l'écran (heures, noms d'affaire) s'ajoutent au montage, pas dans Veo.
-- **Aucun texte généré dans l'image** : terminer chaque prompt par « No subtitles, no on-screen text, no captions, no
-  logos. » Les écrans de téléphone sont flous ou vus de biais : l'interface réelle est celle du jeu.
-- **Personnages** : jamais de gros plan de visage identifiable ; silhouettes, mains, dos, reflets. C'est cohérent avec
-  la règle « aucune illustration de personnage » de TRACE et ça évite les refus.
-- **Transition vers le jeu** : chaque séquence se termine sur le téléphone (posé, qui vibre, qui s'allume). Le jeu
-  enchaîne ensuite : le téléphone est pris en main, déverrouillé, et devient le téléphone de TRACE (même cadrage).
-  Ne jamais générer l'interface TRACE dans Veo.
-- **Son** : Veo génère l'ambiance ; le jeu a ses propres sons (`metro`, `chime`, `train`, `room`, `sea`, `gulls`,
-  `hall`, `powerdown`, `rain`, `engine`, `ring`, `vibrate`, `notification`). Garder la même logique sonore au montage.
+## Règles communes (à respecter pour chaque plan)
+
+- **Format** : 9:16 vertical, 1080p, 4 à 8 s par plan, audio activé (ambiance seulement). Un plan = une génération ;
+  le montage enchaîne.
+- **Deux façons de produire un plan** :
+  - **T2V** (texte → vidéo, Veo 3.1) : on colle le prompt vidéo directement.
+  - **I2V** (image → vidéo) : on génère d'abord l'image avec le prompt IMAGE (GPT Image, 1080 × 1920), puis on
+    l'anime dans Veo / Kling / Runway avec le prompt MOUVEMENT. C'est la méthode à privilégier quand un personnage
+    récurrent apparaît (Lacaze) : on donne son portrait validé en image de référence.
+- **Toujours « a scene from a fictional French … film »** en tête de prompt : Veo refuse souvent les faux reportages
+  qui nomment des personnes réelles ou plausibles.
+- **Aucun nom prononcé dans la vidéo, aucun texte dans l'image** : finir chaque prompt par
+  `No subtitles, no on-screen text, no captions, no logos.` Les textes (dates, lieux, « Cdt. B. LACAZE » sur la porte)
+  sont ajoutés au montage ou par le jeu.
+- **Voix** : jamais générées par la vidéo. Toutes les répliques sont faites dans **ElevenLabs** (fiche de casting en
+  fin de document), puis posées au montage.
+- **Visages** : le joueur n'est **jamais** vu de face (dos, épaule, mains, POV) : un seul tournage vaut pour les 4
+  apparences (Élise A/B, Vincent A/B). Manteau sombre neutre (marine / anthracite) dans tous les plans.
+  Les suspects ne sont jamais montrés dans les ouvertures d'affaire (silhouettes, reflets, de dos).
+- **Téléphones** : écran flou ou vu de biais, jamais d'interface lisible : la vraie interface est celle du jeu, qui
+  reprend la main sur le dernier plan (téléphone posé → déverrouillage).
+
+**Bloc commun IMAGE** (à coller avant chaque prompt image de l'intro) :
+```
+Cinematic still from a French crime drama, realistic, 9:16 vertical, shot on ARRI Alexa, 35mm lens, natural film grain, muted colours, overcast November light through rain-streaked windows, renovated 1970s administrative building, no text, no logos, no readable signs.
+```
+
+---
+
+# PARTIE 1 — Cinématique du début du jeu (≈ 1:35)
+
+| Temps | Séquence | Qui la fait |
+|---|---|---|
+| 0:00–0:04 | Logo NOREL GAMES, puis « CONCLUDE » tapé à la machine + « ENQUÊTES » | Jeu (pas de prompt) |
+| 0:04–0:12 | Chargement « Accès aux archives » | Jeu (écran de chargement) |
+| 0:12–0:40 | **Recrutement : 10 plans** (ci-dessous) | I2V + jeu |
+| 0:40–0:50 | Choix du personnage (Élise / Vincent, A / B) | Jeu (interactif) |
+| 0:50–1:05 | Fiche d'agent remplie, tampons, affectation | Jeu |
+| 1:05–1:20 | Remise du dossier #001 (plan 11 ci-dessous = seul plan vidéo) | Jeu + I2V |
+| 1:20–1:35 | Ouverture de l'affaire #001 (Partie 2) | Vidéo |
+
+Décor commun du recrutement : bâtiment administratif des années 70 rénové, couloirs à néons, bureaux vitrés, piles de
+dossiers, pluie derrière les fenêtres, fin d'après-midi de novembre. Néons froids (4 000 K) dans les couloirs, lampe de
+bureau chaude (2 700 K) chez Lacaze.
+
+### PLAN 1 — Le couloir (4 s · I2V)
+Derrière le joueur, épaule droite en amorce, il avance ; bureaux vitrés, agents flous au loin, chariot de dossiers.
+Sons : pas sur le lino, néon qui grésille, téléphone qui sonne au loin.
+```
+IMAGE: Long institutional corridor with glass-walled offices, flickering fluorescent tubes, a trolley loaded with cardboard files, blurred officers far away, a man in a dark navy coat seen from behind on the right edge of the frame walking away from camera. [+ bloc commun]
+```
+```
+MOTION: A scene from a fictional French crime drama. Slow steadicam follow behind the man in the dark coat as he walks down the corridor; the fluorescent tube above flickers once; far-away officers cross the corridor out of focus. Keep his face hidden, only his back and right shoulder visible. Audio: footsteps on linoleum, buzzing neon, a phone ringing in a distant office, ventilation hum. No subtitles, no on-screen text, no captions, no logos.
+```
+
+### PLAN 2 — La porte (2,5 s · I2V)
+Face à une porte en verre dépoli ; la main du joueur entre dans le champ et frappe deux coups. « Cdt. B. LACAZE » est
+ajouté au montage.
+```
+IMAGE: Close shot of a frosted-glass office door with a brass handle in the fluorescent corridor, a blank rectangle where a name plate would be, a man's hand in a dark coat sleeve raised near the glass, about to knock. [+ bloc commun]
+```
+```
+MOTION: A scene from a fictional French crime drama. The hand knocks twice on the frosted glass, then lowers; behind the glass, a warm lamp glow and a vague silhouette at a desk. Static camera. Audio: two knocks on glass, a muffled male voice from inside (no clear words), corridor hum. No subtitles, no on-screen text, no captions, no logos.
+```
+Voix (ElevenLabs, étouffée) : LACAZE « Entrez. »
+
+### PLAN 3 — Le bureau (3 s · I2V, référence portrait `npc_lacaze`)
+Plan large depuis la porte, légère poussée : Lacaze derrière un bureau encombré, lampe verte, stores, pluie ; il lit un
+dossier sans lever les yeux.
+```
+IMAGE: Cluttered office seen from the doorway, green banker's lamp, venetian blinds, rain streaming on the window, piles of files, a lean man in his late fifties with short grey hair, a grey moustache and half-moon reading glasses, white shirt with rolled-up sleeves and a loosened tie, reading a grey file behind a wooden desk. [+ bloc commun]
+```
+```
+MOTION: A scene from a fictional French crime drama. Slow push-in from the doorway towards the desk; the officer keeps reading and turns one page without looking up; rain runs down the window behind him. Audio: rain on glass, a chair being pulled out, a clock ticking. No subtitles, no on-screen text, no captions, no logos.
+```
+Voix : LACAZE « Asseyez-vous. »
+
+### PLAN 4 — Le dossier du joueur (3 s · I2V)
+Gros plan en plongée : les mains de Lacaze tournent une chemise grise « DOSSIER D'AGENT » ; la photo agrafée est floue
+(neutre pour les 4 apparences).
+```
+IMAGE: Top-down close-up of a wooden desk: an older man's hands with rolled-up shirt sleeves holding a grey personnel file, a small ID photo clipped on it completely out of focus, typed pages, a fountain pen, warm lamp light. [+ bloc commun]
+```
+```
+MOTION: A scene from a fictional French crime drama. The hands slowly turn the pages of the grey file and set the fountain pen down. Static top-down camera, shallow depth of field. Audio: paper pages, the pen placed on wood, rain. No subtitles, no on-screen text, no captions, no logos.
+```
+Voix : LACAZE « Douze ans de terrain. Brigade financière, puis la PJ. »
+
+### PLAN 5 — La conversation (4 s · I2V, référence `npc_lacaze`)
+Contrechamp : épaule du joueur en amorce (floue, sans visage), Lacaze en plan poitrine enlève ses lunettes et le
+regarde.
+```
+IMAGE: Over-the-shoulder shot from behind a man in a dark coat (out of focus, face never visible) facing an older police commander with a grey moustache sitting behind a desk under a green lamp, venetian blinds and rain behind him. [+ bloc commun]
+```
+```
+MOTION: A scene from a fictional French crime drama. The older officer slowly takes off his reading glasses, folds them and looks straight at the man in the foreground; the foreground shoulder stays out of focus. Audio: clock ticking, rain, a low music drone rising. No subtitles, no on-screen text, no captions, no logos.
+```
+Voix : LACAZE « Ici, on ne court pas après les gens. On lit ce qu'ils laissent derrière eux. »
+
+### PLAN 6 — Les pages (2,5 s · I2V)
+Insert sur les mains : il tourne 2 ou 3 pages (rapports, tampons).
+```
+IMAGE: Close-up of hands flipping through typed police reports with faded ink stamps and paper clips on a wooden desk, warm lamp light, shallow depth of field. [+ bloc commun]
+```
+```
+MOTION: A scene from a fictional French crime drama. The hands flip three pages one after the other, stamps and paragraphs blur past. Static close-up. Audio: three page turns, rain. No subtitles, no on-screen text, no captions, no logos.
+```
+Voix : LACAZE « Messages, photos, appels. Un téléphone ment moins que son propriétaire. »
+
+### PLAN 7 — La chemise (3 s · I2V)
+Plan moyen de côté : il sort une chemise kraft d'un tiroir et la pose sur le bureau.
+```
+IMAGE: Side view of an older officer at a wooden desk pulling a worn brown kraft folder out of a desk drawer, green lamp, venetian blinds, rain. [+ bloc commun]
+```
+```
+MOTION: A scene from a fictional French crime drama. The officer pulls the kraft folder out of the drawer, closes the drawer and lays the folder flat on the desk with a soft thud. Static medium side shot. Audio: drawer sliding, the folder landing on wood, a light low impact in the music. No subtitles, no on-screen text, no captions, no logos.
+```
+Voix : LACAZE « Votre première affectation. »
+
+### PLAN 8 — Gros plan sur le dossier (2 s · JEU, pas de prompt)
+Chemise kraft « N° 001 », tampon CONFIDENTIEL, élastique : rendu par le jeu pour raccorder exactement avec l'app.
+
+### PLAN 9 — Il fait glisser la chemise (2,5 s · I2V)
+POV du joueur assis, en légère plongée : la main de Lacaze pousse la chemise vers la caméra.
+```
+IMAGE: Point of view of a seated person looking down at a wooden desk; an older man's hand rests on a brown kraft folder with a red rubber stamp, green lamp light, rain-streaked window in the background. [+ bloc commun]
+```
+```
+MOTION: A scene from a fictional French crime drama. The older man's hand slides the kraft folder across the desk towards the camera until it fills the lower frame. First-person camera, very slight handheld breathing. Audio: cardboard sliding on wood, rain, the music drone returns. No subtitles, no on-screen text, no captions, no logos.
+```
+Voix : LACAZE « Marseille. Un homme de vingt-six ans. Son téléphone a été retrouvé ce matin. »
+
+### PLAN 10 — Vers la fiche (1,5 s · JEU)
+La chemise remplit l'écran, fondu vers la fiche d'agent vierge (choix du personnage). Voix off : LACAZE « Complétez votre fiche. »
+
+### PLAN 11 — Le téléphone sort du scellé (3 s · I2V) — remise du dossier #001
+Après l'ouverture de l'affaire #001 : mains gantées qui ouvrent le sachet scellé et posent le téléphone sur le bois
+(même cadrage que le plan « téléphone posé » du jeu, qui prend le relais).
+```
+IMAGE: Top-down close-up on a dark wooden desk: hands in thin blue nitrile gloves opening a transparent sealed evidence bag with a red tamper-evident strip, a black smartphone inside, warm desk lamp light, no readable text on the bag. [+ bloc commun]
+```
+```
+MOTION: A scene from a fictional French crime drama. The gloved hands tear open the evidence bag, slide the smartphone out and lay it face up in the centre of the frame, then withdraw. Static top-down camera. Audio: plastic tearing, the phone set down on wood, silence. No readable text on the phone or bag, no subtitles, no on-screen text, no captions, no logos.
+```
+Voix : LACAZE (off) « Il a laissé son téléphone. À vous de le faire parler. »
+
+---
+
+# PARTIE 2 — Ouvertures des affaires
+
+## AFFAIRE #001 — « LE DERNIER MESSAGE »
+
+**Identité** : portuaire, humide, bleu nuit et orange sodium. Marseille, dimanche 13 septembre, 09 h 52, après une
+nuit de pluie. **Idée** : un reportage télé devant le parking du Quai 9, où le téléphone d'Alex a été retrouvé ; puis le
+téléphone, mis sous scellé, se met à vibrer : « Maman — Je suis très inquiète ».
+Dans le jeu : titre (date, lieu) → reportage → noir + vibration → téléphone posé « SCELLÉ N°3 » → déverrouillage.
+
+⚠ Le plan d'origine était « de nuit » : le jeu affiche 09 h 52. Les prompts ci-dessous sont donc un **matin gris
+après la pluie** (flaques, lumières de police encore allumées), ce qui raccorde avec le texte à l'écran.
+
+### PLAN 1 — Le Quai 9 (8 s · T2V ou I2V)
+Parking portuaire ouvert, rubalise, gyrophares bleus dans les flaques, grues et conteneurs ; une journaliste de dos
+avec un micro, un caméraman flou. Aucun visage, aucun nom prononcé : la voix du reportage vient d'ElevenLabs.
+```
+A scene from a fictional French crime drama. Grey Sunday morning after a night of rain at an open-air car park on the Marseille docks: police tape across the entrance, blue flashing lights of two police cars reflected in wide puddles, cranes and stacked shipping containers behind, seagulls. A TV reporter is seen from behind, holding a microphone, facing a camera operator who is out of focus; a few onlookers behind the tape, blurred. Camera: handheld TV news camera look, slow drift to the right, 9:16 vertical, photorealistic. Audio: city ambience, distant sirens, seagulls, crowd murmur, wind on the microphone (no speech). No subtitles, no on-screen text, no captions, no logos.
+```
+
+### PLAN 2 — Le lieu de la découverte (6 s · I2V)
+Gros plan au ras du sol : l'emplacement où le téléphone a été retrouvé, marqueur jaune de police numéroté, flaque.
+```
+IMAGE: Low close-up of wet asphalt in a port car park after rain, a yellow evidence marker tent (number not readable) next to a puddle reflecting blue police lights, a painted parking line, containers blurred in the background, 9:16, photorealistic.
+```
+```
+MOTION: A scene from a fictional French crime drama. Very slow push-in towards the evidence marker; raindrops still fall into the puddle, the blue light pulses on the water. Audio: dripping water, distant sirens, seagulls. No subtitles, no on-screen text, no captions, no logos.
+```
+
+### PLAN 3 — Le téléphone sous scellé (6 s · I2V)
+Le téléphone d'Alex dans son sachet transparent sur un bureau, il vibre, l'écran s'allume (notification floue). Le jeu
+enchaîne ensuite sur son propre plan « téléphone posé » et le déverrouillage.
+```
+IMAGE: Top-down close-up of a black smartphone inside a transparent sealed evidence bag with a red seal strip on a dark wooden desk, dim office light, a few raindrops still on the plastic, no readable text, 9:16, photorealistic.
+```
+```
+MOTION: A scene from a fictional French crime drama. The phone inside the evidence bag vibrates against the desk and its screen lights up with a blurred notification, then goes dark again. Static top-down camera. Audio: phone buzzing on wood through plastic, office silence, rain outside. No readable text on the screen, no subtitles, no on-screen text, no captions, no logos.
+```
+Voix du reportage (ElevenLabs, journaliste, ~8 s) :
+« Nous sommes devant le parking du Quai 9, où le téléphone d'Alex Moreau a été retrouvé ce matin. Le jeune homme n'a
+plus donné signe de vie depuis samedi soir. Les enquêteurs espèrent que son téléphone parlera. »
 
 ---
 
@@ -233,3 +404,17 @@ Same fictional film. Close shot of the dark fabric passenger seat of the car: a 
 ```
 Same fictional film. Wide shot: the lone car with blinking hazard lights on the foggy mountain road, dark forest all around. Far behind it, the rotating orange beacon of a snowplough slowly approaches through the fog and rain. Camera: static, low, photorealistic. Audio: rain, the heavy diesel of the approaching snowplough, wind. Hard cut to black. No subtitles, no on-screen text, no captions, no logos.
 ```
+
+---
+
+# Fiche de casting ElevenLabs
+
+| Rôle | Voix | Ton | Répliques |
+|---|---|---|---|
+| Cdt. Bernard Lacaze | masculine, grave, légère raucité, 55–60 ans, accent neutre du sud-ouest | sobre, lent, phrases courtes, fatigué mais exigeant, jamais théâtral | intro plans 2, 3, 4, 5, 6, 7, 9, 10, 11 (~22 s) |
+| Journaliste #001 | féminine, claire, articulée, ~35 ans | rythme télé, neutre, légère tension | reportage #001 (~8 s) |
+| Annonce métro #002 | féminine, neutre, sonorisée | plate, officielle | « Le premier métro en direction de Gare de Vaise entre en station. » |
+| Animatrice #004 | féminine, chaleureuse, amplifiée, ~34 ans | enjouée | « Mesdames et messieurs… dans quelques instants, le collier Aurore. » |
+
+Réglages : stabilité 55–65, similarité 75, style 10–20. Export WAV 48 kHz mono, 300 ms de silence avant et après,
+normalisé à −16 LUFS.
