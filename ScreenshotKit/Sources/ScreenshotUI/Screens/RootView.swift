@@ -13,9 +13,9 @@ public struct RootView: View {
 
     public var body: some View {
         ZStack {
-            Trace.Colors.launch.ignoresSafeArea()
+            Trace.Colors.bg.ignoresSafeArea()
             if let boot {
-                GameRoot(boot: boot)
+                GameRoot(boot: boot, onRetry: retryLoading)
                     .transition(.opacity)
             } else {
                 LoadingScreen(loader: loader) { data in
@@ -26,26 +26,28 @@ public struct RootView: View {
         }
         .preferredColorScheme(.dark)
     }
+
+    /// « Réessayer » on the loading error card: the launch work runs again (saves are untouched).
+    private func retryLoading() {
+        loader = LaunchLoader()
+        withAnimation(.easeInOut(duration: 0.2)) { boot = nil }
+    }
 }
 
-/// The game's flow (final handoff §C, §E).
+/// The game's flow (UX V3 §4, §7).
 ///
-/// First launch: Titre (02) → Qui enquête ? (03) → Dossier #001 (04) → Téléphone. After #001:
-/// Affectation (12) → Bureau (13). Later launches: Titre-reprise (02b) if an investigation is in
-/// progress, the Bureau otherwise. In a case: Dossier → ouverture → Téléphone ⇄ Carnet → Conclusion
-/// (09) → Vérification + Rapport (10–11) → Bureau.
+/// First launch: 00 Première impression → Qui enquête ? → Dossier #001 → Téléphone. After the
+/// first report of #001: Affectation (12) → Bureau. Later launches: the Bureau directly (its
+/// CaseCard offers « Reprendre » when an investigation is in progress). In a case: Dossier →
+/// ouverture → Téléphone ⇄ Carnet → Conclusion → Vérification + Rapport → Bureau.
 struct GameRoot: View {
     enum Stage {
-        /// 02 · first launch.
-        case title
-        /// 02b · an investigation is in progress.
-        case titleResume
-        /// 03 · who investigates (first launch).
+        /// 00 · first launch only.
+        case firstImpression
+        /// Who investigates (first launch).
         case whoInvestigates
-        /// h01 · the Bureau: ENQUÊTES, ALIBI, HISTOIRE.
+        /// 01 · the Bureau: the modes' segmented control (Enquêtes · Alibi · Histoire).
         case home
-        /// h02 · the ENQUÊTES desk (the big folder and the other files).
-        case investigations
         /// HISTOIRE (hub, creator, scenes, chapter results, office…).
         case story
         /// A story case's briefing (its own save slot; back to the story).
@@ -54,18 +56,18 @@ struct GameRoot: View {
         case archive
         case profile
         case settings
-        /// 04 · the case file, briefing first.
+        /// 02 · the case file.
         case intro(CaseFile)
-        /// ALIBI: the list of checks, then one check's mini-file.
-        case alibi
+        /// ALIBI: one check's mini-file (the list is the Bureau's Alibi segment).
         case alibiIntro(CaseFile)
         /// From the case file to the phone: the sealed bag, the zoom, the lock screen.
         case opening(GameSession)
         case playing(GameSession)
-        /// 10–11 · verification, then the closing report.
+        /// Verification, then the closing report.
         case result(Play)
         /// 12 · official assignment to the BEN (once, after #001).
         case assignment(solved: Bool)
+        /// « Voir le rapport » of a played case.
         case archived(CaseFile, Attempt)
     }
 
@@ -92,6 +94,8 @@ struct GameRoot: View {
     @State private var stage: Stage = .home
     /// Where the settings return to.
     @State private var settingsReturn: Stage = .profile
+    /// Where « Voir le rapport » returns to.
+    @State private var archivedReturn: DeskTab = .bureau
     @State private var attempts: [Attempt] = []
     /// The investigation the player left, if any ("Reprendre l'enquête").
     @State private var savedGame: SavedInvestigation?
@@ -103,6 +107,11 @@ struct GameRoot: View {
     @State private var replaceAsk: PendingStart?
     /// « Commencer quand même »: the case starts once the sheet has gone.
     @State private var replaceConfirmed: PendingStart?
+    /// The case just classified as solved: its CaseCard shows on the Bureau and the RÉSOLU stamp
+    /// falls on it (§6-12). Cleared once the player leaves the Bureau.
+    @State private var justFiled: String?
+    /// The Bureau's mode segment, remembered (§6-01).
+    @AppStorage(Preferences.deskModeKey) private var deskMode: DeskMode = .investigations
     /// The story mode (its own save).
     @State private var story = StoryCoordinator()
     @AppStorage(Preferences.reduceMotionKey) private var reduceMotion = false
@@ -110,25 +119,29 @@ struct GameRoot: View {
     private let cases: [CaseFile]
     private let rules: GameRules?
     private let loadError: String?
+    private let onRetry: () -> Void
 
     /// Everything was loaded by the launch screen (`LaunchLoader`): fonts, saves, rules, cases.
-    init(boot: BootData) {
+    init(boot: BootData, onRetry: @escaping () -> Void = {}) {
         _attempts = State(initialValue: boot.attempts)
         _savedGame = State(initialValue: boot.savedGame)
         cases = boot.cases
         rules = boot.rules
         loadError = boot.loadError
+        self.onRetry = onRetry
         let inProgress = boot.savedGame.map { saved in boot.cases.contains { $0.id == saved.snapshot.caseID } } ?? false
         let firstID = (boot.cases.first { $0.number == 1 } ?? boot.cases.first)?.id
         let first: Stage
         if inProgress {
-            first = .titleResume
+            // The Bureau's CaseCard offers « Reprendre ».
+            first = .home
         } else if !PlayerStore.isAssigned, let firstID,
                   PlayerStore.assignmentDue(attempts: boot.attempts, firstCaseID: firstID, filedAnyway: false) {
             // #001 was concluded but the game was left before its report was filed: screen 12 is owed.
             first = .assignment(solved: boot.attempts.contains { $0.caseID == firstID && $0.solved })
-        } else if !PlayerStore.isAssigned {
-            first = .title
+        } else if !PlayerStore.isAssigned && !PlayerStore.hasChosen {
+            // A brand-new player: 00 · Première impression.
+            first = .firstImpression
         } else {
             first = .home
         }
@@ -139,11 +152,15 @@ struct GameRoot: View {
 
     var body: some View {
         ZStack {
-            Trace.Colors.desk.ignoresSafeArea()
+            Trace.Colors.bg.ignoresSafeArea()
             content
         }
         .preferredColorScheme(.dark)
         .animation(noMotion ? .easeInOut(duration: 0.2) : Trace.Motion.paper, value: stageKey)
+        .onChange(of: stageKey) { _, key in
+            // The stamp belongs to the return to the Bureau (through the assignment, once).
+            if key != "home" && key != "assignment" { justFiled = nil }
+        }
         .sheet(item: $replaceAsk, onDismiss: {
             guard let pending = replaceConfirmed else { return }
             replaceConfirmed = nil
@@ -162,12 +179,12 @@ struct GameRoot: View {
                               },
                               onCancel: { replaceAsk = nil })
                 .presentationDetents([.medium, .large])
-                .presentationCornerRadius(16)
-                .presentationBackground(Trace.Colors.paper)
+                .presentationCornerRadius(Trace.Radius.sheet)
+                .presentationBackground(Trace.Colors.surface)
         }
     }
 
-    /// Screens of the desk slide in (fade + 24 pt); with reduced motion, they only fade.
+    /// Screens slide in (fade + 24 pt); with reduced motion, they only fade.
     private var push: AnyTransition {
         noMotion ? .opacity : .opacity.combined(with: .offset(x: 24))
     }
@@ -175,25 +192,12 @@ struct GameRoot: View {
     @ViewBuilder
     private var content: some View {
         if let loadError {
-            DamagedFileView(detail: loadError)
+            DamagedFileView(detail: loadError, onRetry: onRetry)
         } else {
             switch stage {
-            case .title:
-                TitleScreen(onStart: beginFirstCase, onSettings: { openSettings(from: .title) })
+            case .firstImpression:
+                FirstImpressionView(onStart: beginFirstCase)
                     .transition(.opacity)
-            case .titleResume:
-                if let resumable {
-                    TitleResumeScreen(caseFile: resumable.file,
-                                      remainingSeconds: resumable.saved.remainingSeconds,
-                                      pieces: resumable.saved.snapshot.notebook.count,
-                                      onResume: resumeSaved,
-                                      onDesk: goHome,
-                                      onSettings: { openSettings(from: .titleResume) })
-                        .environment(\.caseNumber, resumable.file.number)
-                        .transition(.opacity)
-                } else {
-                    TitleScreen(onStart: beginFirstCase, onSettings: { openSettings(from: .title) })
-                }
             case .whoInvestigates:
                 WhoInvestigatesScreen(initial: identity, allowsAppearance: false,
                                       onContinue: { chosen in
@@ -201,17 +205,40 @@ struct GameRoot: View {
                                           identity = chosen
                                           openFirstCase()
                                       },
-                                      onBack: { stage = .title })
+                                      onBack: { stage = .firstImpression })
                     .transition(push)
             case .home:
-                ModeDeskView(data: modeDeskData,
-                             onMode: openMode,
-                             onProfile: { selectTab(.investigator) },
-                             onTab: selectTab)
+                BureauView(identity: identity,
+                           mode: $deskMode,
+                           modesUnlocked: assigned,
+                           firstNumber: firstCase?.number ?? 1,
+                           cases: mainCases,
+                           progress: progress,
+                           attempts: attempts,
+                           resumable: mainResumable,
+                           durations: mainDurations,
+                           justFiled: justFiled,
+                           alibiCases: alibiCases,
+                           alibiInProgressID: resumable?.file.isAlibi == true ? resumable?.file.id : nil,
+                           story: storySummary,
+                           onOpen: { stage = .intro($0) },
+                           onResume: resumeSaved,
+                           onReport: openReport,
+                           onAlibi: { stage = .alibiIntro($0) },
+                           onStory: openStory,
+                           onStoryVisible: {
+                               story.load()
+                               refreshStory()
+                           },
+                           onProfile: { selectTab(.investigator) },
+                           onTab: selectTab)
                     .transition(.opacity)
             case .story:
-                StoryRootView(story: story, caseInfo: storyCaseInfo, onExit: goHome)
-                    .transition(.opacity)
+                StoryRootView(story: story, caseInfo: storyCaseInfo, onExit: {
+                    deskMode = .story
+                    goHome()
+                })
+                .transition(.opacity)
             case .storyIntro(let file):
                 DossierView(caseFile: file,
                             rules: rules,
@@ -223,28 +250,9 @@ struct GameRoot: View {
                             archiveOpen: false,
                             onStart: { _ in beginStory(file) },
                             onResume: {},
-                            onClose: { stage = .story })
+                            onClose: { stage = .story },
+                            backTitle: L10n.t("desk.mode.story"))
                     .environment(\.caseNumber, file.number)
-                    .transition(push)
-            case .investigations:
-                BureauView(cases: mainCases, progress: progress, resumable: mainResumable, featured: mainResumable?.file ?? nextCase,
-                           identity: identity, rank: rank, assigned: assigned,
-                           alibi: alibiCases.isEmpty ? nil : AlibiSummary(total: alibiCases.count,
-                                                                         done: alibiCases.filter { progress[$0.id]?.solved == true }.count,
-                                                                         inProgress: resumable?.file.isAlibi == true),
-                           onOpen: { stage = .intro($0) },
-                           onResume: resumeSaved,
-                           onAlibi: { stage = .alibi },
-                           onProfile: { selectTab(.investigator) },
-                           onTab: selectTab,
-                           onBack: goHome)
-                    .transition(push)
-            case .alibi:
-                AlibiDeskView(cases: alibiCases, progress: progress,
-                              inProgressID: resumable?.file.isAlibi == true ? resumable?.file.id : nil,
-                              onOpen: { stage = .alibiIntro($0) },
-                              onResume: resumeSaved,
-                              onBack: goHome)
                     .transition(push)
             case .alibiIntro(let file):
                 AlibiBriefingView(caseFile: file,
@@ -252,7 +260,10 @@ struct GameRoot: View {
                                   inProgress: resumable?.file.id == file.id,
                                   onStart: { start(file, challenge: .detective) },
                                   onResume: resumeSaved,
-                                  onClose: { stage = .alibi })
+                                  onClose: {
+                                      deskMode = .alibi
+                                      goHome()
+                                  })
                     .environment(\.caseNumber, file.number)
                     .transition(push)
             case .cases, .archive:
@@ -312,7 +323,8 @@ struct GameRoot: View {
                            onFile: { fileAway(play, anyway: false) },
                            onRetry: { retry(play) },
                            onFileAnyway: { fileAway(play, anyway: true) },
-                           onRevealRequested: { reveal(play) })
+                           onRevealRequested: { reveal(play) },
+                           connections: play.session.game.connections.count)
                     .id(play.revealed)
                     .environment(\.caseNumber, play.session.caseFile.number)
                     .transition(.opacity)
@@ -326,7 +338,8 @@ struct GameRoot: View {
                                })
                     .transition(.opacity)
             case .archived(let file, let attempt):
-                ArchivedCaseView(caseFile: file, attempt: attempt, onClose: { stage = .archive })
+                ArchivedCaseView(caseFile: file, attempt: attempt, onClose: { selectTab(archivedReturn) },
+                                 backTitle: L10n.t(archivedReturn == .bureau ? "tab.bureau" : "tab.archives"))
                     .environment(\.caseNumber, file.number)
                     .transition(push)
             }
@@ -338,6 +351,11 @@ struct GameRoot: View {
     /// The investigations (main mode) and the ALIBI checks.
     private var mainCases: [CaseFile] { cases.filter(\.isMainInvestigation) }
     private var alibiCases: [CaseFile] { cases.filter(\.isAlibi) }
+
+    /// Seconds of each main case at its intended level (« Temps détendu » included).
+    private var mainDurations: [String: Int] {
+        Dictionary(uniqueKeysWithValues: mainCases.map { ($0.id, durations(of: $0)[.detective] ?? $0.durationSeconds) })
+    }
 
     /// Rank from the number of investigations solved (ENQUÊTEUR → INSPECTEUR → SENIOR → EXPÉRIMENTÉ).
     private var rank: Rank {
@@ -361,20 +379,13 @@ struct GameRoot: View {
         stage = .settings
     }
 
-    /// The first case not solved yet (or the last one).
-    private var nextCase: CaseFile? {
-        mainCases.first { progress[$0.id]?.solved != true } ?? mainCases.last
-    }
-
     private var firstCase: CaseFile? { mainCases.first { $0.number == 1 } ?? mainCases.first }
 
     private var stageKey: String {
         switch stage {
-        case .title: "title"
-        case .titleResume: "titleResume"
+        case .firstImpression: "firstImpression"
         case .whoInvestigates: "who"
         case .home: "home"
-        case .investigations: "investigations"
         case .story: "story"
         case .storyIntro(let f): "storyIntro-\(f.id)"
         case .cases: "cases"
@@ -382,7 +393,6 @@ struct GameRoot: View {
         case .profile: "profile"
         case .settings: "settings"
         case .intro(let f): "intro-\(f.id)"
-        case .alibi: "alibi"
         case .alibiIntro(let f): "alibiIntro-\(f.id)"
         case .opening: "opening"
         case .playing: "playing"
@@ -392,34 +402,22 @@ struct GameRoot: View {
         }
     }
 
-    /// 02 → 03 (if nobody chose yet) → 04 Dossier #001.
+    /// 00 [Commencer] → Qui enquête ? (if nobody chose yet) → Dossier #001.
     private func beginFirstCase() {
         if PlayerStore.hasChosen { openFirstCase() } else { stage = .whoInvestigates }
     }
 
     private func openFirstCase() {
-        if let firstCase { stage = .intro(firstCase) } else { stage = .home }
+        if let firstCase { stage = .intro(firstCase) } else { goHome() }
     }
 
-    /// Back from a case file that was not started: the title screen before the assignment, the
-    /// Bureau after.
+    /// « ‹ Bureau » from a case file that was not started.
     private func leaveBriefing() {
-        if assigned { goInvestigations() } else { goToStart() }
+        deskMode = .investigations
+        goHome()
     }
 
-    /// h02 · the ENQUÊTES desk.
-    private func goInvestigations() {
-        attempts = ProgressStore.attempts()
-        savedGame = SavedInvestigationStore.load()
-        stage = .investigations
-    }
-
-    private func goToStart() {
-        attempts = ProgressStore.attempts()
-        savedGame = SavedInvestigationStore.load()
-        stage = resumable != nil ? .titleResume : (assigned ? .home : .title)
-    }
-
+    /// 01 · the Bureau, with fresh progress.
     private func goHome() {
         attempts = ProgressStore.attempts()
         savedGame = SavedInvestigationStore.load()
@@ -427,7 +425,17 @@ struct GameRoot: View {
         stage = .home
     }
 
-    /// The saved investigation when it is a main-mode case (the Bureau's big folder).
+    /// « Voir le rapport » on a solved CaseCard: the report of its last solved attempt.
+    private func openReport(_ file: CaseFile) {
+        guard let attempt = ProgressStore.reportAttempt(of: file.id, in: attempts) else {
+            stage = .intro(file)
+            return
+        }
+        archivedReturn = .bureau
+        stage = .archived(file, attempt)
+    }
+
+    /// The saved investigation when it is a main-mode case (the Bureau's CaseCard).
     private var mainResumable: (saved: SavedInvestigation, file: CaseFile)? {
         resumable.flatMap { $0.file.isMainInvestigation ? $0 : nil }
     }
@@ -446,7 +454,7 @@ struct GameRoot: View {
             // A save that cannot be read again: never a dead end.
             SavedInvestigationStore.clear()
             savedGame = nil
-            goToStart()
+            goHome()
             return
         }
         session.begin()
@@ -509,18 +517,13 @@ struct GameRoot: View {
 
     // MARK: Story
 
-    /// The Bureau's HISTOIRE folder: the creator the first time, the hub after.
-    private func openMode(_ mode: ModeDeskData.Mode) {
-        switch mode {
-        case .investigations: goInvestigations()
-        case .alibi: stage = .alibi
-        case .story:
-            story.load()
-            refreshStory()
-            story.onStartCase = { startStoryCase($0) }
-            if isPhoneScreen(story.screen) { story.screen = .hub }
-            stage = .story
-        }
+    /// The Histoire card's button: the creator the first time, the hub after.
+    private func openStory() {
+        story.load()
+        refreshStory()
+        story.onStartCase = { startStoryCase($0) }
+        if isPhoneScreen(story.screen) { story.screen = .hub }
+        stage = .story
     }
 
     private func isPhoneScreen(_ screen: StoryScreen) -> Bool {
@@ -573,60 +576,13 @@ struct GameRoot: View {
         return lower.prefix(1).uppercased() + lower.dropFirst()
     }
 
-    /// h01's three folders.
-    private var modeDeskData: ModeDeskData {
-        let solvedMain = mainCases.filter { progress[$0.id]?.solved == true }.count
-        let fresh = mainCases.filter { progress[$0.id] == nil }.count
-        let current = mainResumable?.file ?? nextCase
-        var investigationsMeta: String
-        if let resume = mainResumable {
-            investigationsMeta = L10n.f("mode.investigations.inProgress", shownNumber(resume.file.number), fresh)
-        } else {
-            investigationsMeta = L10n.f("mode.investigations.meta", solvedMain, mainCases.count)
-        }
-        if mainCases.isEmpty { investigationsMeta = "" }
-        let nextAlibi = alibiCases.first { progress[$0.id]?.solved != true } ?? alibiCases.first
-        let claim = nextAlibi?.claim
-        let alibiPerson = claim.flatMap { c in nextAlibi?.devices.first?.contacts.first { $0.id == c.person }?.name }
-        let window = claim.map { "\($0.from.clockText)–\($0.to.clockText)" }
-        let hasStory = story.hasInvestigator
+    /// The Bureau's Histoire card: the chapter in progress and its progress.
+    private var storySummary: StoryDeskSummary {
         let chapter = story.currentChapter
-        let progressScenes = story.sceneProgress
-        let line: String
-        let initials: String
-        if let player = story.player {
-            let rank = story.rankTitle().uppercased()
-            line = "\(player.firstName.prefix(1)). \(player.lastName.uppercased()) · \(rank) · BEN"
-            initials = IDPhoto.initials(of: "\(player.firstName) \(player.lastName)")
-        } else {
-            let name = identity.id.fullName
-            let parts = name.split(separator: " ")
-            let last = parts.dropFirst().joined(separator: " ").uppercased()
-            line = "\(parts.first?.prefix(1) ?? ""). \(last) · \(rank.title.uppercased()) · BEN"
-            initials = identity.id.initials
-        }
-        let first: ModeDeskData.Mode
-        if mainResumable != nil { first = .investigations }
-        else if resumable?.file.isAlibi == true { first = .alibi }
-        else if hasStory, story.save?.position.stepIndex ?? 0 > 0, !(story.save.map { $0.completedChapters.contains($0.position.chapterID) } ?? true) { first = .story }
-        else { first = .investigations }
-        return ModeDeskData(investigatorLine: line,
-                            portrait: story.portrait ?? ArtLibrary.image(identity.portraitName),
-                            initials: initials,
-                            investigationsMeta: investigationsMeta,
-                            currentCaseTitle: current?.title,
-                            currentCaseNumber: current.map { shownNumber($0.number) },
-                            alibiMeta: alibiCases.isEmpty ? nil : L10n.f("mode.alibi.meta", alibiCases.count),
-                            alibiPerson: alibiPerson,
-                            alibiStatement: claim?.statement,
-                            alibiWindow: window,
-                            alibiLocked: false,
-                            storyHasInvestigator: hasStory,
-                            storyChapterLine: chapter.map { L10n.f("mode.story.chapter", $0.number, Self.sentenceCase($0.title)) },
-                            storyProgress: progressScenes.total > 0 ? Double(max(0, progressScenes.index - 1)) / Double(progressScenes.total) : 0,
-                            storyPortrait: story.portrait,
-                            storyLocked: false,
-                            first: first)
+        let scenes = story.sceneProgress
+        return StoryDeskSummary(hasInvestigator: story.hasInvestigator,
+                                chapterLine: chapter.map { L10n.f("mode.story.chapter", $0.number, Self.sentenceCase($0.title)) },
+                                progress: scenes.total > 0 ? Double(max(0, scenes.index - 1)) / Double(scenes.total) : 0)
     }
 
     /// End of the opening: the phone just unlocked is the one the player now holds.
@@ -635,8 +591,8 @@ struct GameRoot: View {
         stage = .playing(session)
     }
 
-    /// Leaving the phone (« Mettre en pause »): the investigation is saved. Back to the Bureau (which
-    /// offers to resume it); before the assignment, to the title screen's resume card.
+    /// Leaving the phone (« Mettre en pause »): the investigation is saved. Back to the Bureau, on
+    /// the mode it belongs to (its card offers to resume it).
     private func quit(_ session: GameSession) {
         session.pause()
         if session.slot == .story {
@@ -644,7 +600,8 @@ struct GameRoot: View {
             stage = .story
             return
         }
-        if assigned { goInvestigations() } else { goToStart() }
+        deskMode = session.caseFile.isAlibi ? .alibi : .investigations
+        goHome()
     }
 
     private func finished(_ verdict: Verdict) {
@@ -671,7 +628,8 @@ struct GameRoot: View {
         stage = .result(Play(session: session, verdict: verdict, attemptID: attempt.id, relaxed: relaxed))
     }
 
-    /// [CLASSER LE DOSSIER] / « Classer quand même »: the assignment (once, after #001), then the Bureau.
+    /// [Classer le dossier] / « Classer quand même »: the assignment (once, after #001), then the
+    /// Bureau — where a solved case's card receives the RÉSOLU stamp.
     private func fileAway(_ play: Play, anyway: Bool) {
         if play.session.slot == .story {
             // T-SIG-2: back to the BEN.
@@ -686,18 +644,19 @@ struct GameRoot: View {
             return
         }
         if play.session.caseFile.isAlibi {
-            attempts = ProgressStore.attempts()
-            savedGame = SavedInvestigationStore.load()
-            stage = .alibi
+            deskMode = .alibi
+            goHome()
             return
         }
         if anyway { filedAnyway = true }
         attempts = ProgressStore.attempts()
+        deskMode = .investigations
+        justFiled = play.verdict.isCorrect ? play.session.caseFile.id : nil
         if let firstCase, play.session.caseFile.id == firstCase.id,
            PlayerStore.assignmentDue(attempts: attempts, firstCaseID: firstCase.id, filedAnyway: filedAnyway) {
             stage = .assignment(solved: play.verdict.isCorrect)
         } else {
-            goInvestigations()
+            goHome()
         }
     }
 
@@ -722,25 +681,33 @@ struct GameRoot: View {
     }
 }
 
-/// The case files could not be read (never a blank screen): a post-it on the desk.
+/// The case files could not be read (§6-13 « Erreur de chargement »): never a blank screen — an
+/// error card with [Réessayer].
 struct DamagedFileView: View {
     let detail: String
+    var onRetry: () -> Void = {}
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(L10n.t("error.damaged")).fieldLabel(Trace.Colors.stamp)
-            Text(L10n.t("error.damagedBody")).font(Trace.Fonts.prose).foregroundStyle(Trace.Colors.ink)
-                .fixedSize(horizontal: false, vertical: true)
+            PostItNote(title: L10n.t("error.damaged"),
+                       message: L10n.t("error.damagedBody"),
+                       action: L10n.t("error.retry"),
+                       actionID: "error.retry",
+                       onAction: onRetry)
+                .overlay(RoundedRectangle(cornerRadius: Trace.Radius.card, style: .continuous)
+                    .strokeBorder(Trace.Colors.critical, lineWidth: 1))
             #if DEBUG
-            Text(detail).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft)
+            Text(detail)
+                .font(Trace.Fonts.monoSmall)
+                .foregroundStyle(Trace.Colors.text3)
+                .frame(maxWidth: 340, alignment: .leading)
             #endif
         }
-        .padding(20)
-        .frame(maxWidth: 320, alignment: .leading)
-        .paper(Trace.Colors.noteYellow, lifted: true)
-        .rotationEffect(.degrees(-1.5))
+        .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(TraceDesk())
+        .background(DeskBackdrop())
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("error.damaged")
     }
 }
 
@@ -748,8 +715,9 @@ struct DamagedFileView: View {
 /// `-UITestReset YES` clears the saved attempts and the investigation in progress,
 /// `-UITestDuration <seconds>` shortens every case,
 /// `-UITestFirstLaunch skip|show`: `skip` = a returning, assigned player (Élise A, tutorial seen);
-/// `show` = a brand-new player (title, who investigates, tutorial bubbles). The reset also clears
-/// the story's save and makes its lines appear at once.
+/// `show` = a brand-new player (00 Première impression, who investigates, tutorial bubbles). The
+/// reset also clears the story's save and the Bureau's remembered mode, and makes the story's lines
+/// appear at once.
 @MainActor
 enum UITestHooks {
     static func applyAtLaunch() {
@@ -764,6 +732,7 @@ enum UITestHooks {
             StoryPreferences.textSpeed = .instant
             defaults.removeObject(forKey: Preferences.relaxedTimeKey)
             defaults.removeObject(forKey: Preferences.reduceMotionKey)
+            defaults.removeObject(forKey: Preferences.deskModeKey)
         }
         switch defaults.string(forKey: "UITestFirstLaunch") {
         case "skip":

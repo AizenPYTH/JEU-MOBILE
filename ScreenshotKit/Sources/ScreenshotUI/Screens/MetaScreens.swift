@@ -3,17 +3,17 @@ import SwiftUI
 import UIKit
 import CaseEngine
 
-// Desk screens that are not the Bureau, the Archives, the profile or the case folder (see
-// DeskScreens.swift and DossierView.swift): the level boxes of the case form, the archived
-// reconstruction, the settings and « À propos ».
+// BEN screens that are not the Bureau, the Archives, the profile or the case file (see
+// DeskScreens.swift and DossierView.swift): the level rows of the case file, the archived
+// reconstruction, the settings and « À propos ». UX V3: flat surfaces, V3 components.
 
 /// "001" style case number.
 func caseNumber(_ n: Int) -> String { shownNumber(n) }
 
-// MARK: - Level box (on the case form)
+// MARK: - Level row (in the case file)
 
-/// One challenge level as a line of the case form: a box to tick, the level, what it is for, its
-/// duration, and the player's best result there (or « non tentée », or locked).
+/// One challenge level: a radio, the level, what it is for, its duration, and the player's best
+/// result there (or « non tentée », or locked). Selected: ben rule and tint.
 struct ChallengeCard: View {
     let level: Challenge
     let seconds: Int
@@ -23,34 +23,42 @@ struct ChallengeCard: View {
     let action: () -> Void
 
     var body: some View {
+        let shape = RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous)
         Button(action: action) {
             HStack(alignment: .top, spacing: 12) {
                 ZStack {
-                    Rectangle().strokeBorder(Trace.Colors.ink, lineWidth: 1.4).frame(width: 18, height: 18)
+                    Circle().strokeBorder(selected ? Trace.Colors.ben : Trace.Colors.text3, lineWidth: 2)
                     if selected {
-                        Image(systemName: "xmark").font(.system(size: 12, weight: .heavy)).foregroundStyle(Trace.Colors.pen)
+                        Circle().fill(Trace.Colors.ben).frame(width: 10, height: 10)
                     } else if locked {
-                        Image(systemName: "lock.fill").font(.system(size: 9)).foregroundStyle(Trace.Colors.inkFaint)
+                        Image(systemName: "lock.fill").font(.system(size: 9)).foregroundStyle(Trace.Colors.text3)
                     }
                 }
-                .padding(.top, 2)
+                .frame(width: 20, height: 20)
+                .padding(.top, 1)
+                .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 3) {
                     HStack(alignment: .firstTextBaseline) {
-                        Text(L10n.t("challenge.\(level.rawValue)").uppercased())
-                            .font(Trace.Fonts.fieldValueLarge).tracking(1.2).foregroundStyle(Trace.Colors.ink)
+                        Text(L10n.t("challenge.\(level.rawValue)"))
+                            .font(Trace.Fonts.monoStrong)
+                            .foregroundStyle(Trace.Colors.text)
                         Spacer()
-                        Text(PhoneFormat.countdown(Double(seconds))).font(Trace.Fonts.fieldValueLarge).foregroundStyle(Trace.Colors.ink)
+                        Text(PhoneFormat.countdown(Double(seconds)))
+                            .font(Trace.Fonts.data)
+                            .foregroundStyle(Trace.Colors.text)
                     }
-                    Text(L10n.t("challenge.\(level.rawValue)Pitch")).font(Trace.Fonts.proseSmall).foregroundStyle(Trace.Colors.inkSoft)
+                    Text(L10n.t("challenge.\(level.rawValue)Pitch"))
+                        .font(Trace.Fonts.caption)
+                        .foregroundStyle(Trace.Colors.text2)
+                        .fixedSize(horizontal: false, vertical: true)
                     status
                 }
             }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 10)
-            .background(selected ? Trace.Colors.highlight : .clear)
-            .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
-            .opacity(locked ? 0.5 : 1)
-            .contentShape(Rectangle())
+            .padding(12)
+            .background(shape.fill(selected ? Trace.Colors.tint(Trace.Colors.ben) : Trace.Colors.surface))
+            .overlay(shape.strokeBorder(selected ? Trace.Colors.ben : Trace.Colors.line, lineWidth: selected ? 2 : 1))
+            .opacity(locked ? 0.6 : 1)
+            .contentShape(shape)
         }
         .buttonStyle(PressableStyle())
         .disabled(locked)
@@ -62,102 +70,154 @@ struct ChallengeCard: View {
     @ViewBuilder
     private var status: some View {
         if locked {
-            Text(L10n.t("challenge.locked")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkFaint)
+            Text(L10n.t("challenge.locked"))
+                .font(Trace.Fonts.caption)
+                .foregroundStyle(Trace.Colors.text2)
+                .fixedSize(horizontal: false, vertical: true)
         } else if let progress, progress.solved {
             HStack(spacing: 8) {
-                StampMark(text: L10n.t("challenge.solved"), size: 8, angle: -3)
-                if let time = progress.bestTime { Text(PhoneFormat.countdown(Double(time))).foregroundStyle(Trace.Colors.ink) }
-                if let score = progress.bestScore { Text("\(score) / 100").foregroundStyle(Trace.Colors.ink) }
+                StatusBadge(text: L10n.t("challenge.solved"), color: Trace.Colors.successText, symbol: "✓")
+                if let time = progress.bestTime { Text(PhoneFormat.countdown(Double(time))) }
+                if let score = progress.bestScore { Text(verbatim: "\(score)/100") }
             }
-            .font(Trace.Fonts.monoSmall.weight(.semibold))
+            .font(Trace.Fonts.data)
+            .foregroundStyle(Trace.Colors.text)
             .padding(.top, 2)
         } else if let progress, progress.plays > 0 {
-            Text(L10n.f("challenge.tried", progress.plays)).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft)
+            Text(L10n.f("challenge.tried", progress.plays))
+                .font(Trace.Fonts.caption)
+                .foregroundStyle(Trace.Colors.text2)
         } else {
-            Text(L10n.t("challenge.untried")).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkFaint)
+            Text(L10n.t("challenge.untried"))
+                .font(Trace.Fonts.caption)
+                .foregroundStyle(Trace.Colors.text2)
         }
     }
 }
 
-// MARK: - Archived reconstruction
+// MARK: - Archived reconstruction (« Voir le rapport »)
 
-/// The reconstruction of a closed (or revealed) case, read-only, as a typed report.
+/// The report of a closed (or revealed) case, read-only: the result, the data of the attempt, then
+/// the reconstruction.
 struct ArchivedCaseView: View {
     let caseFile: CaseFile
     let attempt: Attempt
     let onClose: () -> Void
+    /// « ‹ Archives » by default.
+    var backTitle: String? = nil
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
+        let columns = typeSize.isAccessibilitySize
+            ? [GridItem(.flexible())]
+            : [GridItem(.flexible(), spacing: 12), GridItem(.flexible())]
         VStack(alignment: .leading, spacing: 0) {
-            Button(action: onClose) {
-                HStack(spacing: 4) {
-                    Image(systemName: "chevron.backward").font(.system(size: 15, weight: .semibold))
-                    Text(L10n.t("tab.archives")).font(.custom(Trace.FontName.sans, size: 17, relativeTo: .body))
-                }
-                .foregroundStyle(Trace.Colors.bone).frame(minHeight: 44)
-            }
-            .buttonStyle(.plain)
-            .padding(.horizontal, 16)
+            BackLink(title: backTitle ?? L10n.t("tab.archives"), identifier: "archived.back", action: onClose)
+                .padding(.horizontal, 16)
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text(L10n.f("dossier.numberLong", shownNumber(caseFile.number))).fieldLabel(Trace.Colors.stamp)
-                    Text(caseFile.solution.headline).font(Trace.Fonts.nameLarge).foregroundStyle(Trace.Colors.ink)
-                    Text(caseFile.solution.summary).font(Trace.Fonts.quote).foregroundStyle(Trace.Colors.inkSoft)
-                    RevealTimeline(steps: caseFile.solution.reveal, found: Set(caseFile.solution.reveal.compactMap(\.evidence)), shown: caseFile.solution.reveal.count)
-                    ForEach(Array(caseFile.solution.story.enumerated()), id: \.offset) { _, paragraph in
-                        Text(paragraph).font(Trace.Fonts.prose).foregroundStyle(Trace.Colors.ink)
+                VStack(alignment: .leading, spacing: 20) {
+                    StatusBadge(text: L10n.t(attempt.solved ? "case.state.solved" : "case.state.unsolved"),
+                                color: attempt.solved ? Trace.Colors.successText : Trace.Colors.criticalOnDark,
+                                symbol: attempt.solved ? "✓" : "✕")
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(fileLabel(caseFile.number))
+                            .font(Trace.Fonts.data)
+                            .foregroundStyle(Trace.Colors.benText)
+                        Text(caseFile.title.capitalizedFirst)
+                            .font(Trace.Fonts.title)
+                            .foregroundStyle(Trace.Colors.text)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityAddTraits(.isHeader)
+                            .accessibilityIdentifier("archived.title")
                     }
+                    LazyVGrid(columns: columns, alignment: .leading, spacing: 12) {
+                        ReportCard(label: L10n.t("report.date"), value: attempt.date.formatted(date: .abbreviated, time: .omitted))
+                        ReportCard(label: L10n.t("report.keyFound"), value: "\(attempt.found)/\(attempt.total)")
+                        ReportCard(label: L10n.t("report.hints"), value: "\(attempt.hintsUsed)")
+                        ReportCard(label: L10n.t("result.colMark"), value: attempt.ranked ? "\(attempt.score)/100" : L10n.t("archive.unranked"))
+                    }
+                    VStack(alignment: .leading, spacing: 12) {
+                        SectionHeader(title: L10n.t("report.reconstruction"))
+                        Text(caseFile.solution.headline)
+                            .font(Trace.Fonts.headline)
+                            .foregroundStyle(Trace.Colors.text)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Text(caseFile.solution.summary)
+                            .font(Trace.Fonts.quote)
+                            .foregroundStyle(Trace.Colors.text2)
+                            .fixedSize(horizontal: false, vertical: true)
+                        RevealTimeline(steps: caseFile.solution.reveal,
+                                       found: Set(caseFile.solution.reveal.compactMap(\.evidence)),
+                                       shown: caseFile.solution.reveal.count)
+                        ForEach(Array(caseFile.solution.story.enumerated()), id: \.offset) { _, paragraph in
+                            Text(paragraph)
+                                .font(Trace.Fonts.body)
+                                .foregroundStyle(Trace.Colors.text)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .benCard()
                 }
-                .padding(20)
-                .paper(Trace.Colors.paper)
-                .padding(.horizontal, 10)
+                .padding(.horizontal, 16)
+                .padding(.top, 8)
                 .padding(.bottom, 24)
             }
         }
-        .background(TraceDesk())
+        .background(DeskBackdrop())
     }
 }
 
 // MARK: - Settings
 
-/// Paramètres: one paper form on the desk, one column, rows of at least 44 pt. Sound, vibrations,
-/// accessibility (« Réduire les animations », legible handwriting, « Temps détendu »), « Revoir le
-/// tutoriel », and « À propos » — the only place with the logo tile outside the title screens.
+/// Paramètres: « ‹ Enquêteur », the Newsreader title, then grouped cards with rows of 50 pt —
+/// sound and vibrations, accessibility (« Réduire les animations », « Temps détendu »), help
+/// (« Réinitialiser les conseils ») and « À propos » (the only place with the logo tile outside the
+/// launch).
 struct GameSettingsView: View {
     let onBack: () -> Void
+    /// « ‹ Enquêteur » by default.
+    var backTitle: String? = nil
     @AppStorage(Preferences.soundsKey) private var sounds = true
     @AppStorage(Preferences.vibrationsKey) private var vibrations = true
     @AppStorage(Preferences.reduceMotionKey) private var reduceMotion = false
-    @AppStorage(Preferences.legibleHandwritingKey) private var legible = false
     @AppStorage(Preferences.relaxedTimeKey) private var relaxedTime = false
-    @State private var tutorialReplayed = false
+    @State private var tipsReset = false
     @State private var showingAbout = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Button(action: onBack) {
-                HStack(spacing: 4) {
-                    Image(systemName: "chevron.backward").font(.system(size: 15, weight: .semibold))
-                    Text(L10n.t("common.back")).font(Trace.Fonts.uiBody)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                BenScreenHeader(back: backTitle ?? L10n.t("tab.investigator"), backID: "settings.back", onBack: onBack,
+                                title: L10n.t("menu.settings"), titleID: "settings.title")
+                group(L10n.t("settings.soundGroup")) {
+                    toggle(L10n.t("settings.soundEffects"), $sounds, id: "settings.sounds")
+                    toggle(L10n.t("settings.vibrations"), $vibrations, id: "settings.vibrations", divider: false)
                 }
-                .foregroundStyle(Trace.Colors.bone)
-                .frame(minHeight: 44)
-                .contentShape(Rectangle())
+                group(L10n.t("settings.accessibilityGroup")) {
+                    toggle(L10n.t("settings.reduceMotion"), $reduceMotion, id: "settings.reduceMotion")
+                    toggle(L10n.t("settings.relaxedTime"), $relaxedTime, detail: L10n.t("settings.relaxedTimeDetail"),
+                           id: "settings.relaxedTime", divider: false)
+                }
+                group(L10n.t("settings.helpGroup")) {
+                    row(L10n.t("settings.replayTutorial"), id: "settings.replayTutorial") { resetTips() }
+                    if tipsReset {
+                        Text(L10n.t("settings.replayTutorialDone"))
+                            .font(Trace.Fonts.caption)
+                            .foregroundStyle(Trace.Colors.successText)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .transition(.opacity)
+                    }
+                    row(L10n.t("settings.about"), id: "settings.about", divider: false) { showingAbout = true }
+                }
             }
-            .buttonStyle(.plain)
             .padding(.horizontal, 16)
-            .accessibilityIdentifier("settings.back")
-            ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
-                    Text(L10n.t("menu.settings"))
-                        .font(Trace.Fonts.serifTitle(28))
-                        .foregroundStyle(Trace.Colors.bone)
-                        .accessibilityAddTraits(.isHeader)
-                    form
-                }
-                .padding(.horizontal, 16)
-                .padding(.bottom, 24)
-            }
+            .padding(.top, 8)
+            .padding(.bottom, 24)
         }
         .background(DeskBackdrop())
         .sheet(isPresented: $showingAbout) {
@@ -165,91 +225,74 @@ struct GameSettingsView: View {
         }
     }
 
-    private var form: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            section(L10n.t("settings.soundGroup"))
-            toggle(L10n.t("settings.soundEffects"), $sounds, id: "settings.sounds")
-            toggle(L10n.t("settings.vibrations"), $vibrations, id: "settings.vibrations")
-            section(L10n.t("settings.accessibilityGroup"))
-            toggle(L10n.t("settings.reduceMotion"), $reduceMotion, id: "settings.reduceMotion")
-            toggle(L10n.t("settings.legibleHandwriting"), $legible, id: "settings.legibleHandwriting")
-            toggle(L10n.t("settings.relaxedTime"), $relaxedTime, detail: L10n.t("settings.relaxedTimeDetail"),
-                   id: "settings.relaxedTime")
-            section(L10n.t("settings.helpGroup"))
-            row(L10n.t("settings.replayTutorial"), id: "settings.replayTutorial") { replayTutorial() }
-            if tutorialReplayed {
-                Text(L10n.t("settings.replayTutorialDone"))
-                    .font(Trace.Fonts.proseSmall)
-                    .foregroundStyle(Trace.Colors.inkMid)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.vertical, 8)
-                    .transition(.opacity)
-            }
-            row(L10n.t("settings.about"), id: "settings.about") { showingAbout = true }
-        }
-        .padding(18)
-        .paper(Trace.Colors.paper)
-    }
-
-    /// The three help bubbles come back on the next play of case #001.
-    private func replayTutorial() {
+    /// « Réinitialiser les conseils »: every help bubble (tip) shows again, once.
+    private func resetTips() {
         TutorialCoach.replay()
-        withAnimation(.easeOut(duration: 0.2)) { tutorialReplayed = true }
+        withAnimation(.easeOut(duration: 0.2)) { tipsReset = true }
         UIAccessibility.post(notification: .announcement, argument: L10n.t("settings.replayTutorialDone"))
     }
 
-    private func section(_ title: String) -> some View {
-        Text(title)
-            .fieldLabel()
-            .padding(.top, 14)
-            .padding(.bottom, 4)
-            .accessibilityAddTraits(.isHeader)
+    private func group<Content: View>(_ title: String, @ViewBuilder _ content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            SectionHeader(title: title)
+            VStack(spacing: 0) {
+                content()
+            }
+            .benCard()
+        }
     }
 
-    private func toggle(_ title: String, _ value: Binding<Bool>, detail: String? = nil, id: String) -> some View {
+    private func toggle(_ title: String, _ value: Binding<Bool>, detail: String? = nil, id: String, divider: Bool = true) -> some View {
         Toggle(isOn: value) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(Trace.Fonts.prose)
-                    .foregroundStyle(Trace.Colors.ink)
+                    .font(Trace.Fonts.body)
+                    .foregroundStyle(Trace.Colors.text)
                     .fixedSize(horizontal: false, vertical: true)
                 if let detail {
                     Text(detail)
-                        .font(Trace.Fonts.proseSmall)
-                        .foregroundStyle(Trace.Colors.inkSoft)
+                        .font(Trace.Fonts.caption)
+                        .foregroundStyle(Trace.Colors.text2)
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
         }
-        .tint(Trace.Colors.stamp)
+        .tint(Trace.Colors.ben)
+        .padding(.horizontal, 16)
         .padding(.vertical, 6)
-        .frame(minHeight: 48)
-        .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
+        .frame(minHeight: Trace.Height.row)
+        .overlay(alignment: .bottom) {
+            if divider { Rectangle().fill(Trace.Colors.line).frame(height: 1).padding(.leading, 16) }
+        }
         .accessibilityIdentifier(id)
     }
 
-    private func row(_ title: String, id: String, action: @escaping @MainActor () -> Void) -> some View {
+    private func row(_ title: String, id: String, divider: Bool = true, action: @escaping @MainActor () -> Void) -> some View {
         Button(action: action) {
             HStack {
                 Text(title)
-                    .font(Trace.Fonts.prose)
-                    .foregroundStyle(Trace.Colors.ink)
+                    .font(Trace.Fonts.body)
+                    .foregroundStyle(Trace.Colors.text)
                     .fixedSize(horizontal: false, vertical: true)
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .foregroundStyle(Trace.Colors.inkSoft)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(Trace.Colors.text3)
                     .accessibilityHidden(true)
             }
-            .frame(minHeight: 48)
-            .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
+            .padding(.horizontal, 16)
+            .frame(minHeight: Trace.Height.row)
+            .overlay(alignment: .bottom) {
+                if divider { Rectangle().fill(Trace.Colors.line).frame(height: 1).padding(.leading, 16) }
+            }
             .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PressableStyle())
         .accessibilityIdentifier(id)
     }
 }
 
-/// Paramètres › À propos: the logo tile (96 pt) on the dark desk, the studio, the version.
+/// Paramètres › À propos: the logo tile (96 pt), the studio, the version, the photo credits.
 private struct AboutSheet: View {
     let onClose: () -> Void
     @State private var showingCredits = false
@@ -257,17 +300,17 @@ private struct AboutSheet: View {
     private static let studio = "NOREL GAMES"
 
     var body: some View {
-        VStack(spacing: 14) {
+        VStack(spacing: 12) {
             Spacer(minLength: 24)
             LogoTile(size: 96)
-                .padding(.bottom, 10)
+                .padding(.bottom, 12)
             Text(verbatim: Self.studio)
-                .font(Trace.Fonts.kicker)
-                .tracking(3)
-                .foregroundStyle(Trace.Colors.bone)
+                .font(Trace.Fonts.data)
+                .tracking(2)
+                .foregroundStyle(Trace.Colors.text)
             Text(Self.version)
-                .font(Trace.Fonts.mono)
-                .foregroundStyle(Trace.Colors.bone2)
+                .font(Trace.Fonts.data)
+                .foregroundStyle(Trace.Colors.text2)
                 .accessibilityIdentifier("about.version")
             if PhotoCredits.bundled != nil {
                 Button(L10n.t("credits.button")) { showingCredits = true }
@@ -276,20 +319,22 @@ private struct AboutSheet: View {
             }
             Spacer(minLength: 24)
             Button(L10n.t("a11y.close"), action: onClose)
-                .buttonStyle(TextLinkStyle())
+                .buttonStyle(CTAButtonStyle(kind: .outline))
                 .accessibilityIdentifier("about.close")
         }
-        .padding(.horizontal, 24)
-        .padding(.bottom, 10)
+        .padding(.horizontal, 20)
+        .padding(.bottom, 12)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(DeskBackdrop())
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
-        .presentationBackground(Trace.Colors.launch)
+        .presentationCornerRadius(Trace.Radius.sheet)
+        .presentationBackground(Trace.Colors.bg)
         .sheet(isPresented: $showingCredits) {
             if let credits = PhotoCredits.bundled {
                 PhotoCreditsView(credits: credits, onClose: { showingCredits = false })
-                    .presentationBackground(Trace.Colors.launch)
+                    .presentationCornerRadius(Trace.Radius.sheet)
+                    .presentationBackground(Trace.Colors.bg)
             }
         }
     }

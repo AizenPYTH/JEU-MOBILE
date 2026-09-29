@@ -6,8 +6,8 @@ enum Preferences {
     static let vibrationsKey = "screenshot.vibrations"
     static let reduceMotionKey = "screenshot.reduceMotion"
     static let soundsKey = "screenshot.sounds"
-    /// Accessibility: handwritten annotations in a legible serif instead of Caveat.
-    static let legibleHandwritingKey = "trace.legibleHandwriting"
+    /// The Bureau's selected mode segment (Enquêtes · Alibi · Histoire), remembered (UX V3 §6-01).
+    static let deskModeKey = "conclude.desk.mode"
     /// « Temps détendu » (final handoff §M): the timer is 1.5 × longer, without penalty.
     static let relaxedTimeKey = "conclude.relaxedTime"
 

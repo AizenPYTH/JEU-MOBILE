@@ -83,6 +83,17 @@ enum ProgressStore {
         return result
     }
 
+    /// A case was concluded at least once (whatever the verdict): the Bureau's other modes and
+    /// cases open after #001 (UX V3 §6-01, §6-13).
+    static func hasConcluded(_ caseID: String, in attempts: [Attempt]) -> Bool {
+        attempts.contains { $0.caseID == caseID }
+    }
+
+    /// The last solved attempt of a case (its report on the Bureau), else its last attempt.
+    static func reportAttempt(of caseID: String, in attempts: [Attempt]) -> Attempt? {
+        attempts.last { $0.caseID == caseID && $0.solved } ?? attempts.last { $0.caseID == caseID }
+    }
+
     static func record(_ attempt: Attempt) {
         save(attempts() + [attempt])
     }

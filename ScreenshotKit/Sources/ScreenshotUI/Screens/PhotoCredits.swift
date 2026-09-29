@@ -40,50 +40,60 @@ struct PhotoCreditsView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 14) {
-                Text(L10n.t("credits.title"))
-                    .font(Trace.Fonts.monoTitle)
-                    .foregroundStyle(Trace.Colors.bone)
+            VStack(alignment: .leading, spacing: 16) {
+                BackLink(title: L10n.t("settings.about"), identifier: "credits.back", action: onClose)
+                Text(L10n.t("credits.button"))
+                    .font(Trace.Fonts.title)
+                    .foregroundStyle(Trace.Colors.text)
+                    .fixedSize(horizontal: false, vertical: true)
                     .accessibilityAddTraits(.isHeader)
                 Text(L10n.t("credits.intro"))
-                    .font(Trace.Fonts.uiBody)
-                    .foregroundStyle(Trace.Colors.boneMid)
+                    .font(Trace.Fonts.body)
+                    .foregroundStyle(Trace.Colors.text2)
                     .fixedSize(horizontal: false, vertical: true)
                 if credits.pexels, let home = Self.pexelsHome {
                     Link(L10n.t("credits.pexels"), destination: home)
                         .font(Trace.Fonts.link)
-                        .foregroundStyle(Trace.Colors.bone)
+                        .foregroundStyle(Trace.Colors.benText)
+                        .frame(minHeight: Trace.Height.hit)
                         .accessibilityIdentifier("credits.pexels")
                 }
-                ForEach(credits.items) { item in
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(item.attribution)
-                            .font(Trace.Fonts.uiBody)
-                            .foregroundStyle(Trace.Colors.bone)
-                            .fixedSize(horizontal: false, vertical: true)
-                        HStack(spacing: 14) {
-                            if let url = URL(string: item.sourceUrl), !item.sourceUrl.isEmpty {
-                                Link(L10n.t("credits.source"), destination: url)
+                VStack(spacing: 0) {
+                    ForEach(Array(credits.items.enumerated()), id: \.element.id) { index, item in
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text(item.attribution)
+                                .font(Trace.Fonts.callout)
+                                .foregroundStyle(Trace.Colors.text)
+                                .fixedSize(horizontal: false, vertical: true)
+                            HStack(spacing: 16) {
+                                if let url = URL(string: item.sourceUrl), !item.sourceUrl.isEmpty {
+                                    Link(L10n.t("credits.source"), destination: url)
+                                }
+                                if let url = URL(string: item.licenseUrl), !item.licenseUrl.isEmpty {
+                                    Link(item.license, destination: url)
+                                }
                             }
-                            if let url = URL(string: item.licenseUrl), !item.licenseUrl.isEmpty {
-                                Link(item.license, destination: url)
+                            .font(Trace.Fonts.caption)
+                            .foregroundStyle(Trace.Colors.benText)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .overlay(alignment: .bottom) {
+                            if index < credits.items.count - 1 {
+                                Rectangle().fill(Trace.Colors.line).frame(height: 1).padding(.leading, 16)
                             }
                         }
-                        .font(Trace.Fonts.monoSmall)
-                        .foregroundStyle(Trace.Colors.boneMid)
+                        .accessibilityElement(children: .combine)
                     }
-                    .padding(.vertical, 8)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.graphite).frame(height: 1) }
-                    .accessibilityElement(children: .combine)
                 }
+                .benCard()
                 Button(L10n.t("a11y.close"), action: onClose)
-                    .buttonStyle(TextLinkStyle())
-                    .frame(maxWidth: .infinity)
+                    .buttonStyle(CTAButtonStyle(kind: .outline))
                     .accessibilityIdentifier("credits.close")
             }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 24)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 20)
         }
         .background(DeskBackdrop())
         .accessibilityIdentifier("credits.view")
