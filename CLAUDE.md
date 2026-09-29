@@ -43,7 +43,8 @@ Configs/Screenshot.xcconfig  Bundle ID, version, signature (source unique) ; Con
                           ios-testflight.yml (manuel + PR vers main). Contenu de référence : docs/CI_WORKFLOWS.md
 docs/TESTFLIGHT_SETUP.md  Signature et TestFlight sans Mac
 docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
-docs/CINEMATIQUES_VEO.md  ARCHIVÉ — prompts Veo des anciennes cinématiques (retirées du jeu en V3)
+docs/archive/             ARCHIVÉ / LEGACY — anciens prompts de cinématiques, ancien audit (hors production)
+docs/CASE_PRESENTATION.md Présentation d'une affaire par son dossier (aucune cinématique)
 docs/design_final/        Handoff FINAL V3.0 (NE PAS MODIFIER) — parcours, écrans 01–15, tutoriel, états, critères
 docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — tokens du téléphone
 docs/brand/               Logo CONCLUDE : ENQUÊTES (source de l'icône)
@@ -131,9 +132,10 @@ scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d
   téléphone, avec 3 bulles (EXPLORER · VERSER AU DOSSIER · RELIER) au #001 seulement. La couche carrière
   (matricule, rang ENQUÊTEUR → INSPECTEUR → SENIOR → EXPÉRIMENTÉ, profil) n'apparaît qu'après l'écran 12
   « Affectation » (après #001). Lancements suivants : Bureau, ou Titre-reprise si une enquête est en cours.
-- **Aucune cinématique** (décision du porteur de projet) : l'affaire est introduite par le briefing du
-  dossier et une courte ouverture (sachet de scellé → téléphone ; écran verrouillé pour #002–#005).
-  Le champ `introScene` des affaires reste dans les données mais n'est plus joué.
+- **Aucune cinématique, aucune vidéo, jamais** (décision définitive du porteur de projet) : l'affaire est
+  présentée par son dossier (docs/CASE_PRESENTATION.md : contexte, mission, personnes, `firstLead`) et une
+  courte ouverture (< 2 s, passable). `introScene` et le champ `video` des scènes n'existent plus ;
+  `NoCinematicTests` refuse tout fichier vidéo, lecteur vidéo ou clé de données qui en demanderait.
 - Trois verbes partout : EXPLORER · VERSER AU DOSSIER · CONCLURE (jamais « Épingler », « Accuser »,
   « Recrue », « Stagiaire » : `LocalizationTests.bannedWordsAreGone`). Un seul bouton plein par écran.
   Le logo n'apparaît que sur 01, 02, 02b et À propos.

@@ -1,10 +1,10 @@
 # Mode HISTOIRE — prompts des cinématiques (scènes des chapitres)
 
-> Généré par `scripts/story/export_cinematic_prompts.py` à partir des données du jeu (`ScreenshotKit/Sources/StoryLibrary/Resources/Story`) : chaque scène, chaque plan, chaque réplique, chaque réponse. Relancer le script après toute modification d'une scène.
+> **ARCHIVÉ / LEGACY.** Le jeu ne lit **aucune** vidéo et n'en attendra aucune : les scènes sont jouées en 3D temps réel. Ce document ne sert qu'à un travail hors du jeu (bande-annonce, réseaux).
+
+> Généré par `docs/archive/tools/export_cinematic_prompts.py` à partir des données du jeu (`ScreenshotKit/Sources/StoryLibrary/Resources/Story`) : chaque scène, chaque plan, chaque réplique, chaque réponse. Relancer le script après toute modification d'une scène.
 
 Chaque scène est jouée en 3D temps réel par le jeu (SceneKit). Pour la refaire en vidéo : un prompt par **plan** (une coupe caméra = un plan), à monter ensuite dans l'ordre. Les répliques du joueur n'ont pas de voix (sous-titres seulement). Les répliques des PNJ peuvent être dites dans la vidéo ou doublées (ElevenLabs, fiches voix ci-dessous) ; les sous-titres sont toujours affichés par le jeu. Les choix du joueur créent des **branches** : il faut une vidéo par branche pour les plans concernés (repérés « Réponse A / B / — »).
-
-Intégration : chaque scène a un champ `video` prévu dans les données (non lu par le jeu pour l'instant). Livrer les vidéos par plan et par branche, nommées `<scène>_plan<N>[_<réponse>].mp4` (ex. `S01-01B_plan7_c01_defiant.mp4`).
 
 **Le nom du joueur** : certaines répliques le disent (« {player.lastName}. Fermez la porte. »). Les prompts l'écrivent avec le modèle Vincent Delmas ; pour un doublage, enregistrer une version par nom ou couper le nom au montage (le jeu affiche toujours la réplique exacte en sous-titre).
 

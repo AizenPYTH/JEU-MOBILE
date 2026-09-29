@@ -11,6 +11,7 @@
     "Vous avez quelques minutes pour retrouver qui est entré dans l'atelier jeudi soir."
   ],
   "objective": "Découvrir qui a ouvert l'Atelier Varin avec le code de Maëlle, jeudi à 22:31, et fait sortir les plans du concours.",
+  "firstLead": "L'alarme a été désarmée jeudi à 22:31 avec le code de Maëlle. Où était son téléphone à ce moment-là ?",
   "difficulty": 1,
   "durationSeconds": 420,
   "challengeDurations": {

@@ -218,16 +218,6 @@ struct AllCasesTests {
                 places[place.name] = file.id
             }
         }
-        // Different openings: no two cases start on the same picture, and each ends on the phone.
-        var firstScenes: [String] = []
-        for file in cases {
-            let intro = try #require(file.introScene, "\(file.id) has no opening")
-            #expect(intro.shots.last?.kind == .unlock, "\(file.id): the opening ends on the phone")
-            #expect(intro.shots.contains { $0.kind == .phoneOnTable }, "\(file.id): the phone is shown where it lies")
-            let first = intro.shots.first { $0.scene != nil }?.scene ?? intro.shots.first?.kind.rawValue ?? ""
-            #expect(!firstScenes.contains(first), "\(file.id): same first picture as another case (\(first))")
-            firstScenes.append(first)
-        }
         // Different phones: owner, wallpaper, model or battery.
         let looks = cases.map { file -> String in
             let d = file.devices[0]

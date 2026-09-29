@@ -21,6 +21,7 @@
   "Cinq personnes avaient une raison de la croiser cette nuit. Le brouillard est tombé sur le plateau. Le temps presse."
  ],
  "objective": "Identifier la personne qui a donné rendez-vous à Solène au col.",
+ "firstLead": "Solène avait rendez-vous au col. Avec qui a-t-elle échangé ce vendredi soir ?",
  "difficulty": 3,
  "durationSeconds": 480,
  "phoneStartTime": "2026-11-28 00:50",
@@ -28,112 +29,6 @@
   "investigator": 900,
   "detective": 480,
   "expert": 300
- },
- "introScene": {
-  "shots": [
-   {
-    "kind": "scene",
-    "seconds": 7,
-    "scene": "road_night",
-    "camera": "push",
-    "effect": "hazard",
-    "ambience": [
-     "rain",
-     "engine"
-    ],
-    "lines": [
-     {
-      "text": "COL DE LA CROIX-PERRIN · VENDREDI 27 NOVEMBRE · 23:48",
-      "at": 0.3
-     },
-     {
-      "text": "Moteur allumé. Portière ouverte.",
-      "at": 2.6
-     }
-    ]
-   },
-   {
-    "kind": "scene",
-    "seconds": 5,
-    "scene": "road_night",
-    "camera": "drift",
-    "effect": "rain",
-    "ambience": [
-     "rain",
-     "engine"
-    ]
-   },
-   {
-    "kind": "phoneOnTable",
-    "seconds": 7,
-    "time": "2026-11-27 23:48",
-    "surface": "carSeat",
-    "label": "Siège passager — 23:48",
-    "ambience": [
-     "rain",
-     "engine"
-    ],
-    "cues": [
-     {
-      "sound": "vibrate",
-      "at": 0.8
-     },
-     {
-      "sound": "notification",
-      "at": 0.85
-     },
-     {
-      "sound": "notification",
-      "at": 2.6
-     },
-     {
-      "sound": "ring",
-      "at": 4.2
-     }
-    ],
-    "notifications": [
-     {
-      "app": "messages",
-      "title": "Julien (nouveau n°)",
-      "body": "Je suis au parking du col, t'es où ?",
-      "at": 0.8
-     },
-     {
-      "app": "messages",
-      "title": "Romain Vidal",
-      "body": "Tu rentres quand ? Léo a de la fièvre",
-      "at": 2.6
-     },
-     {
-      "app": "phone",
-      "title": "Agathe Lemoine",
-      "body": "Appel entrant",
-      "at": 4.2,
-      "call": true
-     }
-    ],
-    "lines": [
-     {
-      "text": "Personne ne répond.",
-      "at": 5.6
-     }
-    ]
-   },
-   {
-    "kind": "title",
-    "seconds": 1.2,
-    "cues": [
-     {
-      "sound": "vibrate",
-      "at": 0.4
-     }
-    ]
-   },
-   {
-    "kind": "unlock",
-    "seconds": 2.4
-   }
-  ]
  },
  "devices": [
   {

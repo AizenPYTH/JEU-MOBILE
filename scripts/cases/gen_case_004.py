@@ -1,5 +1,7 @@
 # Generates ScreenshotKit/Sources/CaseLibrary/Resources/Cases/case_004.json
 # Case #004 — 90 SECONDES. Thursday 12 Nov 2026, opening gala of the « Éclats » exhibition at the
+# First draft of the case: the JSON has since been tuned by hand and is the source of truth
+# (do not regenerate over it). The former opening sequence (introScene) was removed with the cinematics.
 # Pavillon Mercure (Paris). The phone is Salomé Tessier's (the curator), handed over at 23:25.
 # Truth: the necklace on display was already a copy since the 17:30 slot the lender (Sterne) asked
 # for; the 22:14 "power cut" was a 90 s blackout cue he requested; he opened the case with his own
@@ -736,24 +738,6 @@ solution = dict(
 )
 
 # ---------------------------------------------------------------- opening sequence
-intro = dict(shots=[
-    dict(kind="scene", seconds=7, scene="gala", camera="push", ambience=["hall"],
-         lines=[dict(text="PAVILLON MERCURE · JEUDI 12 NOVEMBRE · 22:13", at=0.3),
-                dict(text="Mesdames et messieurs… dans quelques instants, le collier Aurore.", at=2.4, speaker="Iris Nakamura", voiced=True)]),
-    dict(kind="scene", seconds=4, scene="vitrine", camera="push", ambience=["hall"]),
-    dict(kind="scene", seconds=5, scene="gala", camera="still", effect="blackout", ambience=["hall"],
-         cues=[dict(sound="powerdown", at=0.3), dict(sound="sting", at=1.2)],
-         lines=[dict(text="22:14", at=0.5)]),
-    dict(kind="scene", seconds=4.5, scene="vitrine_empty", camera="push", ambience=["crowd"],
-         lines=[dict(text="La vitrine 4 est vide.", at=1.2)]),
-    dict(kind="phoneOnTable", seconds=6.5, time="2026-11-12 22:31", surface="marble", label="Salon d'honneur — 22:31", ambience=["crowd"],
-         cues=[dict(sound="vibrate", at=0.6), dict(sound="notification", at=0.65), dict(sound="notification", at=1.9), dict(sound="ring", at=3.2)],
-         notifications=[dict(app="messages", title="Victor Almeida", body="C'était pas une panne. Personne t'a prévenue ??", at=0.6),
-                        dict(app="messages", title="Éclats — équipe gala", body="Hélène : la police est là", at=1.9),
-                        dict(app="phone", title="Adrien Sterne", body="Appel entrant", at=3.2, call=True)]),
-    dict(kind="unlock", seconds=2.4),
-])
-
 case = dict(
     dossier=dict(rating=3, category="VOL", city="Paris", place="Pavillon Mercure — gala", subject="Collier Aurore, 1928", subjectLabel="OBJET DISPARU", lastContact="2026-11-12 22:13", lastContactLabel="DERNIÈRE OBSERVATION"),
     schemaVersion=1, id="case_004", number=4, title="90 SECONDES",
@@ -766,7 +750,6 @@ case = dict(
     objective="Découvrir qui a fait disparaître le collier Aurore.",
     difficulty=1, durationSeconds=480, phoneStartTime=LIVE_AT,
     challengeDurations={"investigator": 900, "detective": 480, "expert": 300},
-    introScene=intro,
     devices=[device], suspects=suspects, evidence=evidence, hints=hints, solution=solution,
 )
 with open(OUT, "w", encoding="utf-8") as f:

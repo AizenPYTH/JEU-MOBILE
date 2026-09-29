@@ -82,33 +82,23 @@ scénario, mêmes preuves, seul le temps change. Sans `challengeDurations`, les 
 `durationSeconds` × les facteurs de `rules.json` (`challenges`). Expert se débloque après une réussite
 en Détective. CaseLint vérifie que l'affaire reste résoluble au niveau le plus court.
 
-## Séquence d'ouverture (`introScene`) — plus jouée
+## Présentation de l'affaire (dossier) — aucune cinématique
 
-> Depuis le handoff final V3, le jeu n'a plus de cinématique : l'affaire est présentée par son dossier
-> (briefing : `dossier`, premier paragraphe de `synopsis`, `objective`, suspects, durée), puis une courte
-> ouverture commune (sachet de scellé → téléphone ; déverrouillage automatique au #001, écran verrouillé
-> — fond `wallpaper`, heure `phoneStartTime` — pour les autres). Le champ `introScene` reste accepté et
-> validé pour ne pas casser les fichiers existants, mais il n'est plus lu par l'interface : inutile d'en
-> écrire pour une nouvelle affaire. Description conservée pour mémoire :
+Le jeu ne contient **aucune cinématique ni vidéo** (décision définitive du porteur de projet). L'affaire est
+présentée par son dossier (voir `docs/CASE_PRESENTATION.md`), écrit avec des champs déjà présents :
 
-Une suite de plans joués avant de rendre le téléphone au joueur (le chrono ne tourne pas pendant ;
-« Passer » est toujours possible). Chaque plan : `kind`, `seconds`, `ambience` (sons en boucle :
-`street`, `sirens`, `crowd`, `metro`, `room`, `sea`, `hall`, `rain`, `engine`), `cues` (sons ponctuels
-`{sound, at}` : `vibrate`, `notification`, `unlock`, `key`, `sting`, `chime`, `train`, `powerdown`, `ring`, `gulls`),
-`lines` (`{text, at, speaker?, voiced?}` — `voiced` = lu par la voix du
-système).
+| Section du dossier | Champ |
+|---|---|
+| DOSSIER #00N · catégorie, ville, titre | `number`, `dossier.category`, `dossier.city`, `title` |
+| STATUT · DIFFICULTÉ | l'état de la partie ; `dossier.rating` (1–5, sinon `difficulty` + 1) |
+| LE CONTEXTE | `synopsis` (1ᵉʳ paragraphe visible, les autres dépliables) — 2 à 4 phrases courtes |
+| VOTRE MISSION | `objective` |
+| PERSONNES CONCERNÉES | `dossier.subjectContact` + `suspects` (nom du contact, `role`) |
+| PREMIÈRE PISTE | `firstLead` : **une** phrase qui dit où commencer, jamais qui (le validateur refuse le nom du responsable) |
 
-| `kind` | Plan | Champs propres |
-|---|---|---|
-| `title` | Écran noir, sons, une ou deux lignes | — |
-| `broadcast` | Reportage en direct devant le lieu (caméra à l'épaule, gyrophares, sous-titres) | `channel`, `label` (heure), `location`, `headline`, `ticker`, `scene` (image de fond) |
-| `scene` | Un lieu filmé : l'image `scene`, un mouvement de caméra et un effet. 1ʳᵉ ligne = titre de lieu/heure ; lignes avec `speaker` = annonces sous-titrées ; autres = voix narrative | `scene`, `camera` (`still`, `push`, `pull`, `panLeft`, `panRight`, `drift`), `effect` (`trainArrival`, `blackout`, `rain`, `hazard`, `sunlight`) |
-| `phoneOnTable` | Le téléphone là où il a été trouvé, l'écran verrouillé s'allume | `surface` (`wood`, `bench`, `glass`, `carSeat`, `sofa`, `marble`), `label` (étiquette), `notification` ou `notifications` `[{app, title, body, at, call?}]` (`call: true` = appel entrant qui sonne), `time` (heure affichée sur l'écran verrouillé, par défaut `phoneStartTime`) |
-| `unlock` | Le téléphone est pris en main et déverrouillé : l'écran d'accueil devient celui du jeu | — |
-
-Tous les décalages (`at`) sont relatifs au début du plan et doivent tenir dans sa durée (validé).
-La notification de l'écran verrouillé devrait exister dans le téléphone (même personne, même texte).
-Les anciennes versions filmées (Veo 3.1) sont archivées dans `docs/CINEMATIQUES_VEO.md`.
+Puis une ouverture commune de moins de 2 s (sachet de scellé → téléphone ; déverrouillage automatique au #001,
+écran verrouillé — fond `wallpaper`, heure `phoneStartTime` — pour les autres), qu'un toucher passe.
+L'ancien champ `introScene` n'existe plus : les tests refusent une affaire qui le contient encore.
 
 ## Suspects, preuves, indices, solution
 

@@ -1,12 +1,13 @@
+# ARCHIVED / LEGACY — the game plays no video: this only documents the story scenes for work outside the game.
 # Exports every story scene as a shooting script with ready-to-paste video prompts:
-#   python3 scripts/story/export_cinematic_prompts.py docs/story/PROMPTS_CINEMATIQUES_HISTOIRE.md
+#   python3 docs/archive/tools/export_cinematic_prompts.py
 # Read from the game's data (Resources/Story): nothing is written by hand scene by scene, so the document always
 # matches what the game plays. Character, set and style descriptions are the handoff's (docs/design_story).
 import glob, json, math, os, sys
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")
 R = os.path.join(ROOT, "ScreenshotKit", "Sources", "StoryLibrary", "Resources", "Story")
-OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "docs", "story", "PROMPTS_CINEMATIQUES_HISTOIRE.md")
+OUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "docs", "archive", "PROMPTS_CINEMATIQUES_HISTOIRE.md")
 
 locations = {l["id"]: l for l in json.load(open(os.path.join(R, "locations.json")))["locations"]}
 npcs = {n["id"]: n for n in json.load(open(os.path.join(R, "npcs.json")))["npcs"]}
@@ -326,7 +327,9 @@ def branch_shots(scene, start):
 
 # ------------------------------------------------------------------------------------------------------------------
 w("# Mode HISTOIRE — prompts des cinématiques (scènes des chapitres)\n")
-w("> Généré par `scripts/story/export_cinematic_prompts.py` à partir des données du jeu "
+w("> **ARCHIVÉ / LEGACY.** Le jeu ne lit **aucune** vidéo et n'en attendra aucune : les scènes sont jouées en 3D temps "
+  "réel. Ce document ne sert qu'à un travail hors du jeu (bande-annonce, réseaux).\n")
+w("> Généré par `docs/archive/tools/export_cinematic_prompts.py` à partir des données du jeu "
   "(`ScreenshotKit/Sources/StoryLibrary/Resources/Story`) : chaque scène, chaque plan, chaque réplique, chaque réponse. "
   "Relancer le script après toute modification d'une scène.\n")
 w("Chaque scène est jouée en 3D temps réel par le jeu (SceneKit). Pour la refaire en vidéo : un prompt par **plan** "
@@ -334,8 +337,6 @@ w("Chaque scène est jouée en 3D temps réel par le jeu (SceneKit). Pour la ref
   "seulement). Les répliques des PNJ peuvent être dites dans la vidéo ou doublées (ElevenLabs, fiches voix ci-dessous) ; "
   "les sous-titres sont toujours affichés par le jeu. Les choix du joueur créent des **branches** : il faut une vidéo "
   "par branche pour les plans concernés (repérés « Réponse A / B / — »).\n")
-w("Intégration : chaque scène a un champ `video` prévu dans les données (non lu par le jeu pour l'instant). Livrer les "
-  "vidéos par plan et par branche, nommées `<scène>_plan<N>[_<réponse>].mp4` (ex. `S01-01B_plan7_c01_defiant.mp4`).\n")
 w("**Le nom du joueur** : certaines répliques le disent (« {player.lastName}. Fermez la porte. »). Les prompts l'écrivent "
   "avec le modèle Vincent Delmas ; pour un doublage, enregistrer une version par nom ou couper le nom au montage (le jeu "
   "affiche toujours la réplique exacte en sous-titre).\n")

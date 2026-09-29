@@ -20,6 +20,7 @@
   "La commissaire de l'exposition, Salomé Tessier, vous confie son téléphone. Tout le monde a une théorie : l'extra qui s'est enfui, le régisseur qui a lancé le noir, l'animatrice qui l'a annoncé en ligne. Le prêteur, lui, se dit anéanti."
  ],
  "objective": "Découvrir qui a fait disparaître le collier Aurore, et comment.",
+ "firstLead": "La vitrine 4 était vide quand la lumière est revenue. Reconstituez la journée du 12 novembre, pas seulement les 90 secondes.",
  "difficulty": 2,
  "durationSeconds": 480,
  "phoneStartTime": "2026-11-12 23:25",
@@ -27,134 +28,6 @@
   "investigator": 900,
   "detective": 480,
   "expert": 300
- },
- "introScene": {
-  "shots": [
-   {
-    "kind": "scene",
-    "seconds": 7,
-    "scene": "gala",
-    "camera": "push",
-    "ambience": [
-     "hall"
-    ],
-    "lines": [
-     {
-      "text": "PAVILLON MERCURE · JEUDI 12 NOVEMBRE · 22:13",
-      "at": 0.3
-     },
-     {
-      "text": "Mesdames et messieurs… dans quelques instants, le collier Aurore.",
-      "at": 2.4,
-      "speaker": "Iris Nakamura",
-      "voiced": true
-     }
-    ]
-   },
-   {
-    "kind": "scene",
-    "seconds": 4,
-    "scene": "vitrine",
-    "camera": "push",
-    "ambience": [
-     "hall"
-    ]
-   },
-   {
-    "kind": "scene",
-    "seconds": 5,
-    "scene": "gala",
-    "camera": "still",
-    "effect": "blackout",
-    "ambience": [
-     "hall"
-    ],
-    "cues": [
-     {
-      "sound": "powerdown",
-      "at": 0.3
-     },
-     {
-      "sound": "sting",
-      "at": 1.2
-     }
-    ],
-    "lines": [
-     {
-      "text": "22:14",
-      "at": 0.5
-     }
-    ]
-   },
-   {
-    "kind": "scene",
-    "seconds": 4.5,
-    "scene": "vitrine_empty",
-    "camera": "push",
-    "ambience": [
-     "crowd"
-    ],
-    "lines": [
-     {
-      "text": "La vitrine 4 est vide.",
-      "at": 1.2
-     }
-    ]
-   },
-   {
-    "kind": "phoneOnTable",
-    "seconds": 6.5,
-    "time": "2026-11-12 22:31",
-    "surface": "marble",
-    "label": "Salon d'honneur — 22:31",
-    "ambience": [
-     "crowd"
-    ],
-    "cues": [
-     {
-      "sound": "vibrate",
-      "at": 0.6
-     },
-     {
-      "sound": "notification",
-      "at": 0.65
-     },
-     {
-      "sound": "notification",
-      "at": 1.9
-     },
-     {
-      "sound": "ring",
-      "at": 3.2
-     }
-    ],
-    "notifications": [
-     {
-      "app": "messages",
-      "title": "Victor Almeida",
-      "body": "C'était pas une panne. Personne t'a prévenue ??",
-      "at": 0.6
-     },
-     {
-      "app": "messages",
-      "title": "Éclats — équipe gala",
-      "body": "Hélène : la police est là",
-      "at": 1.9
-     },
-     {
-      "app": "phone",
-      "title": "Adrien Sterne",
-      "body": "Appel entrant",
-      "at": 3.2,
-      "call": true
-     }
-    ]
-   },
-   {
-    "kind": "unlock",
-    "seconds": 2.4
-   }
-  ]
  },
  "devices": [
   {

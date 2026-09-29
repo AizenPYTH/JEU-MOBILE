@@ -25,7 +25,6 @@ struct AlibiCasesTests {
         for file in try Self.alibis() {
             #expect((240...360).contains(file.durationSeconds), "\(file.id): \(file.durationSeconds) s")
             #expect(file.suspects.count == 1 && file.devices.count == 1, "\(file.id)")
-            #expect(file.introScene == nil, "\(file.id): no opening scene")
             #expect(file.hints.map(\.scoreCost) == [0, 5, 10], "\(file.id)")
             let key = file.evidence.filter { $0.importance == .key }
             #expect((2...5).contains(key.count), "\(file.id): \(key.count) key pieces")

@@ -40,8 +40,8 @@ emplacement de sauvegarde à part (`SaveSlot.story`), puis rend la main au coord
 - **Tout est donnée** : ajouter un chapitre, une scène, un PNJ, une tenue, un décor ne touche pas au moteur.
 - **Jamais d'impasse** : une sauvegarde qui pointe vers un contenu disparu ramène au hub ; un décor ou une caméra
   manquant retombe sur la première caméra du décor ; un son manquant est ignoré.
-- **Pas de vidéo IA** : les scènes sont jouées en 3D temps réel. Le champ `video` d'une scène est prévu pour un
-  rendu précalculé éventuel, jamais requis.
+- **Aucune vidéo** : les scènes sont jouées en 3D temps réel (SceneKit). Aucune scène n'attend ni ne lit de fichier
+  vidéo ; le modèle n'a pas de champ pour en désigner un (les tests refusent une scène qui en déclarerait).
 
 ## Ajouter…
 

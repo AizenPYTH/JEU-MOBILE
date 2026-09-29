@@ -1,5 +1,7 @@
 # Generates ScreenshotKit/Sources/CaseLibrary/Resources/Cases/case_005.json
 # Case #005 — ROUTE DE NUIT. Friday 27 Nov 2026 night, Vercors; investigation Saturday 28 Nov 00:50.
+# First draft of the case: the JSON has since been tuned by hand and is the source of truth
+# (do not regenerate over it). The former opening sequence (introScene) was removed with the cinematics.
 # Core mechanic: a spoofed "new number" of the source. The player compares phone numbers across
 # Contacts, Messages and an old mail signature, checks where the real source was (Messages, Photos,
 # Phone) and identifies the car photographed at the pass (Photos, cross-checked with an older photo).
@@ -793,22 +795,6 @@ solution = dict(
 )
 
 # ---------------------------------------------------------------- opening sequence
-intro = dict(shots=[
-    dict(kind="scene", seconds=7, scene="road_night", camera="push", effect="hazard", ambience=["rain", "engine"],
-         lines=[dict(text="COL DE LA CROIX-PERRIN · VENDREDI 27 NOVEMBRE · 23:48", at=0.3),
-                dict(text="Moteur allumé. Portière ouverte.", at=2.6)]),
-    dict(kind="scene", seconds=5, scene="road_night", camera="drift", effect="rain", ambience=["rain", "engine"]),
-    dict(kind="phoneOnTable", seconds=7, time="2026-11-27 23:48", surface="carSeat", label="Siège passager — 23:48", ambience=["rain", "engine"],
-         cues=[dict(sound="vibrate", at=0.8), dict(sound="notification", at=0.85), dict(sound="notification", at=2.6),
-               dict(sound="ring", at=4.2)],
-         notifications=[dict(app="messages", title="Julien (nouveau n°)", body="Je suis au parking du col, t'es où ?", at=0.8),
-                        dict(app="messages", title="Romain Vidal", body="Tu rentres quand ? Léo a de la fièvre", at=2.6),
-                        dict(app="phone", title="Agathe Lemoine", body="Appel entrant", at=4.2, call=True)],
-         lines=[dict(text="Personne ne répond.", at=5.6)]),
-    dict(kind="title", seconds=1.2, cues=[dict(sound="vibrate", at=0.4)]),
-    dict(kind="unlock", seconds=2.4),
-])
-
 case = dict(
     dossier=dict(rating=4, category="DISPARITION", city="Vercors", place="Col de la Croix-Perrin", subject="Solène Marchetti", subjectLabel="PERSONNE DISPARUE", subjectAge=34, subjectContact="me", lastContact="2026-11-27 23:10"),
     schemaVersion=1, id="case_005", number=5, title="ROUTE DE NUIT",
@@ -823,7 +809,6 @@ case = dict(
     objective="Identifier la personne qui a donné rendez-vous à Solène au col.",
     difficulty=1, durationSeconds=480, phoneStartTime=PHONE_START,
     challengeDurations={"investigator": 900, "detective": 480, "expert": 300},
-    introScene=intro,
     devices=[device], suspects=suspects, evidence=evidence, hints=hints, solution=solution,
 )
 with open(OUT, "w", encoding="utf-8") as f:

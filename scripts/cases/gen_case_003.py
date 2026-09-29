@@ -1,5 +1,7 @@
 # Generates ScreenshotKit/Sources/CaseLibrary/Resources/Cases/case_003.json
 # Case #003 — APRÈS LA FÊTE. Night of Saturday 22 to Sunday 23 August 2026, a rented villa at Cap Ferret.
+# First draft of the case: the JSON has since been tuned by hand and is the source of truth
+# (do not regenerate over it). The former opening sequence (introScene) was removed with the cinematics.
 # Investigation starts Sunday 23 August, 11:40 (Jeanne hands her phone to the gendarmes).
 #
 # Truth: Maxime (Jeanne's partner) has a secret affair with Diane (Paul's wife). At 01:49 Diane posts
@@ -788,22 +790,6 @@ solution = dict(
 )
 
 # ---------------------------------------------------------------- opening sequence
-intro = dict(shots=[
-    dict(kind="scene", seconds=7, scene="villa_morning", camera="drift", effect="sunlight", ambience=["room", "sea"],
-         cues=[dict(sound="gulls", at=1.4)],
-         lines=[dict(text="CAP FERRET · DIMANCHE 23 AOÛT · 07:10", at=0.3),
-                dict(text="Le lendemain de ses trente ans.", at=2.4)]),
-    dict(kind="scene", seconds=5, scene="terrace", camera="panRight", ambience=["sea"],
-         cues=[dict(sound="gulls", at=2.0)]),
-    dict(kind="phoneOnTable", seconds=6.5, time="2026-08-23 07:11", surface="wood", label="Table de chevet — chambre du haut — 07:11",
-         ambience=["room"],
-         cues=[dict(sound="ring", at=0.8), dict(sound="vibrate", at=0.8), dict(sound="notification", at=3.4)],
-         notifications=[dict(app="phone", title="Grégoire", body="Appel entrant", at=0.8, call=True),
-                        dict(app="messages", title="Grégoire", body="JEANNE DESCENDS VITE. C'EST PAUL", at=3.4)],
-         lines=[dict(text="Personne ne répond.", at=4.8)]),
-    dict(kind="unlock", seconds=2.4),
-])
-
 case = dict(
     dossier=dict(rating=3, category="CHUTE SUSPECTE", city="Cap Ferret", place="Villa Les Oyats", subject="Paul Castaing", subjectLabel="VICTIME", subjectAge=33, subjectContact="paul", lastContact="2026-08-23 02:09"),
     schemaVersion=1, id="case_003", number=3, title="APRÈS LA FÊTE",
@@ -817,7 +803,6 @@ case = dict(
     objective="Établir qui était avec Paul sur l'escalier de la plage vers 2h10.",
     difficulty=1, durationSeconds=480, phoneStartTime=t(23, "11:40"),
     challengeDurations={"investigator": 900, "detective": 480, "expert": 300},
-    introScene=intro,
     devices=[device], suspects=suspects, evidence=evidence, hints=hints, solution=solution,
 )
 with open(OUT, "w", encoding="utf-8") as f:

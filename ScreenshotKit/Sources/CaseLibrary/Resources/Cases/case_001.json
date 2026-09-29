@@ -21,6 +21,7 @@
   "Quatre personnes gravitaient autour de lui ce soir-là : Sarah, son ex ; Karim, à qui il devait de l'argent ; Lucas, son meilleur ami ; Emma, avec qui il dirige le collectif photo Lumen. Toutes n'ont pas dit la vérité."
  ],
  "objective": "Alex a quitté le Levant à 21:36 pour un rendez-vous. Trouvez qui il a rejoint, et qui ment sur sa soirée.",
+ "firstLead": "Samedi, 21:36 : Alex quitte le Levant pour un rendez-vous. Que dit son téléphone juste après ?",
  "difficulty": 1,
  "durationSeconds": 480,
  "phoneStartTime": "2026-09-13 10:00",
@@ -28,104 +29,6 @@
   "investigator": 900,
   "detective": 480,
   "expert": 300
- },
- "introScene": {
-  "shots": [
-   {
-    "kind": "title",
-    "seconds": 4.5,
-    "ambience": [
-     "street",
-     "sirens"
-    ],
-    "lines": [
-     {
-      "text": "DIMANCHE 13 SEPTEMBRE · 09:52",
-      "at": 0.4
-     },
-     {
-      "text": "Zone portuaire, Marseille.",
-      "at": 1.6
-     }
-    ]
-   },
-   {
-    "kind": "broadcast",
-    "seconds": 11,
-    "ambience": [
-     "street",
-     "crowd",
-     "sirens"
-    ],
-    "scene": "parking_night",
-    "channel": "INFO 24",
-    "label": "09:54",
-    "location": "Zone portuaire — Parking du Quai 9",
-    "headline": "Un homme de 26 ans porté disparu",
-    "ticker": "Disparition à Marseille : la police lance un appel à témoins",
-    "lines": [
-     {
-      "text": "Nous sommes devant le parking du Quai 9, où le téléphone d'Alex Moreau a été retrouvé ce matin.",
-      "at": 0.6,
-      "speaker": "Reporter",
-      "voiced": true
-     },
-     {
-      "text": "Le jeune homme n'a plus donné signe de vie depuis samedi soir.",
-      "at": 5.2,
-      "speaker": "Reporter",
-      "voiced": true
-     },
-     {
-      "text": "Les enquêteurs espèrent que son téléphone parlera.",
-      "at": 8.4,
-      "speaker": "Reporter",
-      "voiced": true
-     }
-    ]
-   },
-   {
-    "kind": "title",
-    "seconds": 1.6,
-    "cues": [
-     {
-      "sound": "vibrate",
-      "at": 0.9
-     }
-    ]
-   },
-   {
-    "kind": "phoneOnTable",
-    "seconds": 6,
-    "label": "SCELLÉ N°3\nTéléphone de A. Moreau",
-    "cues": [
-     {
-      "sound": "vibrate",
-      "at": 2.0
-     },
-     {
-      "sound": "notification",
-      "at": 2.1
-     }
-    ],
-    "notification": {
-     "app": "messages",
-     "title": "Maman",
-     "body": "Je suis très inquiète",
-     "at": 2.0
-    },
-    "lines": [
-     {
-      "text": "Vous avez quelques minutes.",
-      "at": 3.6
-     }
-    ]
-   },
-   {
-    "kind": "unlock",
-    "seconds": 2.4
-   }
-  ]
  },
  "devices": [
   {

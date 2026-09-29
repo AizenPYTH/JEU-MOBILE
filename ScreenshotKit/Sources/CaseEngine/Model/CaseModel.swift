@@ -33,8 +33,6 @@ public struct CaseFile: Codable, Sendable, Identifiable {
     /// Duration per challenge level ("investigator", "detective", "expert"), in seconds. Missing
     /// levels use the factors of `rules.json` (see `duration(for:rules:)`).
     public var challengeDurations: [String: Int]? = nil
-    /// The opening sequence played before the phone (see `IntroScene`); nil = straight to the phone.
-    public var introScene: IntroScene? = nil
     /// The cover of the case file (type, place, victim…), shown on the folder. Presentation only.
     public var dossier: DossierInfo? = nil
     /// Main investigation (nil) or a short ALIBI check (`claim` + `solution.alibiHolds`).
@@ -44,6 +42,9 @@ public struct CaseFile: Codable, Sendable, Identifiable {
     /// The smallest set of evidence a player must reasonably find to understand the solution
     /// (design data: checked by the validator and the resolvability analysis, never shown).
     public var minimalPath: [String]? = nil
+    /// « PREMIÈRE PISTE » on the case file: one sentence saying where to start, never who
+    /// (the validator refuses the culprit's name). Presentation only.
+    public var firstLead: String? = nil
 
     public var isAlibi: Bool { mode == .alibi }
     /// An investigation written for the Story mode (played from a chapter, never listed in ENQUÊTES).

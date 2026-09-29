@@ -1,10 +1,9 @@
 # Cinématiques d'avant (retirées du jeu) — ouverture du jeu et ouvertures des affaires #001 à #005
 
-> **Archivé (septembre 2026, handoff final V3).** Ces cinématiques ont été retirées du jeu : chaque affaire est
-> introduite par son dossier (briefing) puis une courte ouverture (sachet de scellé → téléphone). Le champ
-> `introScene` des affaires reste dans les données. Ce document rassemble **tous** leurs prompts pour les refaire
-> hors du jeu (vidéo, bande-annonce). Les scènes 3D du mode HISTOIRE ont leurs propres prompts :
-> `docs/story/PROMPTS_CINEMATIQUES_HISTOIRE.md`.
+> **ARCHIVÉ / LEGACY.** Toutes les cinématiques vidéo sont **définitivement supprimées** du jeu : aucun écran ne
+> lit ni n'attend de vidéo. Chaque affaire est présentée par son dossier (`docs/CASE_PRESENTATION.md`) puis une
+> courte ouverture (sachet de scellé → téléphone). Le champ `introScene` n'existe plus. Ce document ne sert qu'à un
+> travail hors du jeu (bande-annonce, réseaux). Prompts des scènes HISTOIRE : `docs/archive/PROMPTS_CINEMATIQUES_HISTOIRE.md`.
 
 
 Intro du jeu (recrutement) + ouverture de chaque affaire #001 → #005, plan par plan.

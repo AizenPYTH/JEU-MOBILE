@@ -21,6 +21,7 @@
   "Vous avez quelques minutes pour retracer la nuit du téléphone et comprendre qui l'avait entre les mains."
  ],
  "objective": "Découvrir qui avait le téléphone de Clémence entre 2h30 et 5h du matin.",
+ "firstLead": "À 3h07, Anaïs, la sœur de Clémence, reçoit un message rassurant. Commencez par là.",
  "difficulty": 1,
  "durationSeconds": 480,
  "phoneStartTime": "2026-10-17 07:40",
@@ -28,112 +29,6 @@
   "investigator": 900,
   "detective": 480,
   "expert": 300
- },
- "introScene": {
-  "shots": [
-   {
-    "kind": "scene",
-    "seconds": 7,
-    "scene": "metro",
-    "camera": "push",
-    "ambience": [
-     "metro"
-    ],
-    "cues": [
-     {
-      "sound": "chime",
-      "at": 1.6
-     }
-    ],
-    "lines": [
-     {
-      "text": "STATION TERREAUX-SUD · SAMEDI 17 OCTOBRE · 05:03",
-      "at": 0.3
-     },
-     {
-      "text": "Le premier métro en direction de Gare de Vaise entre en station.",
-      "at": 2.2,
-      "speaker": "Annonce",
-      "voiced": true
-     }
-    ]
-   },
-   {
-    "kind": "scene",
-    "seconds": 5,
-    "scene": "metro",
-    "camera": "still",
-    "effect": "trainArrival",
-    "ambience": [
-     "metro"
-    ],
-    "cues": [
-     {
-      "sound": "train",
-      "at": 0.2
-     }
-    ]
-   },
-   {
-    "kind": "phoneOnTable",
-    "seconds": 6.5,
-    "time": "2026-10-17 05:12",
-    "surface": "bench",
-    "label": "OBJET TROUVÉ — quai 2 — 05:12",
-    "ambience": [
-     "metro"
-    ],
-    "cues": [
-     {
-      "sound": "vibrate",
-      "at": 1.2
-     },
-     {
-      "sound": "notification",
-      "at": 1.25
-     },
-     {
-      "sound": "ring",
-      "at": 3.4
-     }
-    ],
-    "notifications": [
-     {
-      "app": "messages",
-      "title": "Anaïs",
-      "body": "clem ?? réponds stp",
-      "at": 1.2
-     },
-     {
-      "app": "phone",
-      "title": "Anaïs",
-      "body": "Appel entrant",
-      "at": 3.4,
-      "call": true
-     }
-    ],
-    "lines": [
-     {
-      "text": "Personne ne le réclame.",
-      "at": 5.0
-     }
-    ]
-   },
-   {
-    "kind": "title",
-    "seconds": 1.4,
-    "cues": [
-     {
-      "sound": "vibrate",
-      "at": 0.5
-     }
-    ]
-   },
-   {
-    "kind": "unlock",
-    "seconds": 2.4
-   }
-  ]
  },
  "devices": [
   {

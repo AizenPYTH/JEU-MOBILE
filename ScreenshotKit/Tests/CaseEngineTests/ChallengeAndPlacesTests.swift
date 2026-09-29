@@ -92,22 +92,15 @@ struct PlacesTests {
     }
 }
 
-@Suite("Intro scene")
-struct IntroSceneTests {
-    @Test func shotsAreValidatedAndDecoded() throws {
-        let json = #"""
-        {"shots":[{"kind":"title","seconds":3,"ambience":["sirens"],"lines":[{"text":"Dimanche","at":0.5}]},
-                  {"kind":"broadcast","seconds":10,"channel":"INFO 24","lines":[{"text":"Nous sommes…","at":1,"voiced":true}]},
-                  {"kind":"phoneOnTable","seconds":4,"notification":{"app":"messages","title":"Maman","body":"Rappelle-moi","at":1.5},
-                   "cues":[{"sound":"vibrate","at":1.5}]},
-                  {"kind":"unlock","seconds":2}]}
-        """#
-        let scene = try JSONDecoder().decode(IntroScene.self, from: Data(json.utf8))
-        #expect(scene.shots.count == 4 && scene.totalSeconds == 19)
+@Suite("First lead")
+struct FirstLeadTests {
+    @Test func theFirstLeadNeverNamesTheCulprit() {
         var file = Fixtures.caseFile
-        file.introScene = scene
+        file.firstLead = "Ses derniers messages de samedi soir."
         #expect(CaseValidator.validate(file).isEmpty)
-        file.introScene?.shots[2].notification?.at = 9
-        #expect(CaseValidator.validate(file).contains { $0.message.contains("is outside the shot") && $0.message.contains("notification") })
+        file.firstLead = "Demandez-vous où était Emma à 22:00."
+        #expect(CaseValidator.validate(file).contains { $0.message.contains("names the culprit") })
+        file.firstLead = "  "
+        #expect(CaseValidator.validate(file).contains { $0.message.contains("first lead is empty") })
     }
 }

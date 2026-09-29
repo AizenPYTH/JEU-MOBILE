@@ -78,7 +78,9 @@ Source : `docs/design_final/FINAL_DESIGN_HANDOFF_CONCLUDE.md` (lecture seule) et
 
 - **Aucune cinématique** (demande du porteur de projet) : ni la cinématique #001, ni « Voir / Revoir la
   séquence », ni la cinématique de recrutement de l'écran 12. L'affaire est présentée par le briefing et
-  l'ouverture courte. `introScene` reste dans les JSON (non joué). `docs/CINEMATIQUES_VEO.md` est archivé.
+  l'ouverture courte. Septembre 2026 : suppression définitive — `introScene` retiré du modèle, des JSON et des
+  générateurs, champ `video` des scènes HISTOIRE retiré ; anciens prompts dans `docs/archive/` (voir
+  `docs/CASE_PRESENTATION.md`).
 - **Pas de tickets** (l'économie n'existe pas) : l'écran 14 affiche le coût de chaque indice en points de
   note et la note maximale restante. Le bouton « PLUS DE TICKETS » n'existe donc pas.
 - **Une pièce = un suspect** : le moteur relie une pièce à un seul suspect (`NotebookEntry.linkedTo`) ; le

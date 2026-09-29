@@ -1,5 +1,7 @@
 # Generates ScreenshotKit/Sources/CaseLibrary/Resources/Cases/case_001.json
 # Case #001 — LE DERNIER MESSAGE. Saturday 12 Sept 2026 night; investigation Sunday 13 Sept 10:00.
+# First draft of the case: the JSON has since been tuned by hand and is the source of truth
+# (do not regenerate over it). The former opening sequence (introScene) was removed with the cinematics.
 import json, sys
 
 OUT = sys.argv[1]
@@ -704,24 +706,6 @@ solution = dict(
 )
 
 # ---------------------------------------------------------------- opening sequence
-intro = dict(shots=[
-    dict(kind="title", seconds=4.5, ambience=["street", "sirens"],
-         lines=[dict(text="DIMANCHE 13 SEPTEMBRE · 09:52", at=0.4),
-                dict(text="Zone portuaire, Marseille.", at=1.6)]),
-    dict(kind="broadcast", seconds=11, ambience=["street", "crowd", "sirens"], scene="parking_night",
-         channel="INFO 24", label="09:54", location="Zone portuaire — Parking du Quai 9",
-         headline="Un homme de 26 ans porté disparu", ticker="Disparition à Marseille : la police lance un appel à témoins",
-         lines=[dict(text="Nous sommes devant le parking du Quai 9, où le téléphone d'Alex Moreau a été retrouvé ce matin.", at=0.6, speaker="Reporter", voiced=True),
-                dict(text="Le jeune homme n'a plus donné signe de vie depuis samedi soir.", at=5.2, speaker="Reporter", voiced=True),
-                dict(text="Les enquêteurs espèrent que son téléphone parlera.", at=8.4, speaker="Reporter", voiced=True)]),
-    dict(kind="title", seconds=1.6, cues=[dict(sound="vibrate", at=0.9)]),
-    dict(kind="phoneOnTable", seconds=6, label="SCELLÉ N°3\nTéléphone de A. Moreau",
-         cues=[dict(sound="vibrate", at=2.0), dict(sound="notification", at=2.1)],
-         notification=dict(app="messages", title="Maman", body="Je suis très inquiète", at=2.0),
-         lines=[dict(text="Vous avez quelques minutes.", at=3.6)]),
-    dict(kind="unlock", seconds=2.4),
-])
-
 case = dict(
     dossier=dict(rating=2, category="DISPARITION", city="Marseille", place="Zone portuaire", subject="Alex Moreau", subjectLabel="PERSONNE DISPARUE", subjectAge=26, subjectContact="me", lastContact=t(12, "22:08")),
     schemaVersion=1, id="case_001", number=1, title="LE DERNIER MESSAGE",
@@ -734,7 +718,6 @@ case = dict(
     objective="Identifier la personne qui a vu Alex en dernier.",
     difficulty=1, durationSeconds=480, phoneStartTime=t(13, "10:00"),
     challengeDurations={"investigator": 900, "detective": 480, "expert": 300},
-    introScene=intro,
     devices=[device], suspects=suspects, evidence=evidence, hints=hints, solution=solution,
 )
 with open(OUT, "w", encoding="utf-8") as f:

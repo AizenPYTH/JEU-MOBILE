@@ -21,6 +21,7 @@
   "Jeanne vous confie son téléphone : sa soirée y est entière, heure par heure."
  ],
  "objective": "Paul n'est pas tombé seul. Établir qui l'a rejoint sur l'escalier de la plage, entre 2h10 et 2h20.",
+ "firstLead": "Tous disent avoir dormi. Qui écrivait encore, vers 2h du matin ?",
  "difficulty": 2,
  "durationSeconds": 480,
  "phoneStartTime": "2026-08-23 11:40",
@@ -28,101 +29,6 @@
   "investigator": 900,
   "detective": 480,
   "expert": 300
- },
- "introScene": {
-  "shots": [
-   {
-    "kind": "scene",
-    "seconds": 7,
-    "scene": "villa_morning",
-    "camera": "drift",
-    "effect": "sunlight",
-    "ambience": [
-     "room",
-     "sea"
-    ],
-    "cues": [
-     {
-      "sound": "gulls",
-      "at": 1.4
-     }
-    ],
-    "lines": [
-     {
-      "text": "CAP FERRET · DIMANCHE 23 AOÛT · 07:10",
-      "at": 0.3
-     },
-     {
-      "text": "Le lendemain de ses trente ans.",
-      "at": 2.4
-     }
-    ]
-   },
-   {
-    "kind": "scene",
-    "seconds": 5,
-    "scene": "terrace",
-    "camera": "panRight",
-    "ambience": [
-     "sea"
-    ],
-    "cues": [
-     {
-      "sound": "gulls",
-      "at": 2.0
-     }
-    ]
-   },
-   {
-    "kind": "phoneOnTable",
-    "seconds": 6.5,
-    "time": "2026-08-23 07:11",
-    "surface": "wood",
-    "label": "Table de chevet — chambre du haut — 07:11",
-    "ambience": [
-     "room"
-    ],
-    "cues": [
-     {
-      "sound": "ring",
-      "at": 0.8
-     },
-     {
-      "sound": "vibrate",
-      "at": 0.8
-     },
-     {
-      "sound": "notification",
-      "at": 3.4
-     }
-    ],
-    "notifications": [
-     {
-      "app": "phone",
-      "title": "Grégoire",
-      "body": "Appel entrant",
-      "at": 0.8,
-      "call": true
-     },
-     {
-      "app": "messages",
-      "title": "Grégoire",
-      "body": "JEANNE DESCENDS VITE. C'EST PAUL",
-      "at": 3.4
-     }
-    ],
-    "lines": [
-     {
-      "text": "Personne ne répond.",
-      "at": 4.8
-     }
-    ]
-   },
-   {
-    "kind": "unlock",
-    "seconds": 2.4
-   }
-  ]
  },
  "devices": [
   {

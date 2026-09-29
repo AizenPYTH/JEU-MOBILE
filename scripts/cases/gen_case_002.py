@@ -1,5 +1,7 @@
 # Generates ScreenshotKit/Sources/CaseLibrary/Resources/Cases/case_002.json
 # Case #002 — PREMIER MÉTRO. Night of Friday 16 to Saturday 17 October 2026, Lyon.
+# First draft of the case: the JSON has since been tuned by hand and is the source of truth
+# (do not regenerate over it). The former opening sequence (introScene) was removed with the cinematics.
 # The phone is handed over on Saturday 17 October at 07:40.
 #
 # Core mechanic: the reassuring 03:07 message was sent from the phone while it sat at quai Arloing
@@ -811,22 +813,6 @@ solution = dict(
 )
 
 # ---------------------------------------------------------------- opening sequence
-intro = {"shots": [
-    {"kind": "scene", "seconds": 7, "scene": "metro", "camera": "push", "ambience": ["metro"],
-     "cues": [{"sound": "chime", "at": 1.6}],
-     "lines": [{"text": "STATION TERREAUX-SUD · SAMEDI 17 OCTOBRE · 05:03", "at": 0.3},
-               {"text": "Le premier métro en direction de Gare de Vaise entre en station.", "at": 2.2, "speaker": "Annonce", "voiced": True}]},
-    {"kind": "scene", "seconds": 5, "scene": "metro", "camera": "still", "effect": "trainArrival", "ambience": ["metro"],
-     "cues": [{"sound": "train", "at": 0.2}]},
-    {"kind": "phoneOnTable", "seconds": 6.5, "time": "2026-10-17 05:12", "surface": "bench", "label": "OBJET TROUVÉ — quai 2 — 05:12", "ambience": ["metro"],
-     "cues": [{"sound": "vibrate", "at": 1.2}, {"sound": "notification", "at": 1.25}, {"sound": "ring", "at": 3.4}],
-     "notifications": [{"app": "messages", "title": "Anaïs", "body": "clem ?? réponds stp", "at": 1.2},
-                       {"app": "phone", "title": "Anaïs", "body": "Appel entrant", "at": 3.4, "call": True}],
-     "lines": [{"text": "Personne ne le réclame.", "at": 5.0}]},
-    {"kind": "title", "seconds": 1.4, "cues": [{"sound": "vibrate", "at": 0.5}]},
-    {"kind": "unlock", "seconds": 2.4},
-]}
-
 case = dict(
     dossier=dict(rating=2, category="DISPARITION INQUIÉTANTE", city="Lyon", place="Confluence — Le Silo", subject="Clémence Aubry", subjectLabel="PERSONNE DISPARUE", subjectAge=29, subjectContact="me", lastContact="2026-10-17 02:17"),
     schemaVersion=1, id="case_002", number=2, title="PREMIER MÉTRO",
@@ -841,7 +827,6 @@ case = dict(
     objective="Découvrir qui avait le téléphone de Clémence après 2h30.",
     difficulty=1, durationSeconds=480, phoneStartTime=t(17, "07:40"),
     challengeDurations={"investigator": 900, "detective": 480, "expert": 300},
-    introScene=intro,
     devices=[device], suspects=suspects, evidence=evidence, hints=hints, solution=solution,
 )
 with open(OUT, "w", encoding="utf-8") as f:

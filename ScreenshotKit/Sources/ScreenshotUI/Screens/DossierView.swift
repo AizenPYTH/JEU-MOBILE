@@ -4,9 +4,11 @@ import CaseEngine
 
 // MARK: - 04 · Dossier, briefing
 
-/// The case file on the desk (final handoff §F-04): a kraft folder « N° 00N » holding one typed
-/// sheet — the case, the person concerned, the mission and, for #001, the three steps — then one
-/// full button, [OUVRIR LE TÉLÉPHONE]. Everything else stays secondary: an investigation in
+/// The case file on the desk (final handoff §F-04, docs/CASE_PRESENTATION.md): a kraft folder
+/// « N° 00N » holding one typed sheet, read top to bottom in a few seconds — DOSSIER #00N, STATUT and
+/// DIFFICULTÉ, LE CONTEXTE, VOTRE MISSION (and, for #001, the three steps), PERSONNES CONCERNÉES,
+/// PREMIÈRE PISTE — then one full button, [OUVRIR LE TÉLÉPHONE]. No cinematic, no video: the case
+/// is presented by its paper. Everything else stays secondary: an investigation in
 /// progress ([REPRENDRE L'ENQUÊTE] + « Recommencer »), the challenge level (hidden on the very
 /// first case), the closing report of a case already played ([REJOUER] once it is archived).
 struct DossierView: View {
@@ -154,6 +156,7 @@ struct DossierView: View {
     private var sheetContent: some View {
         VStack(alignment: .leading, spacing: 18) {
             header
+            statusRow
             summary
             mission
             if caseFile.number == 1 {
@@ -163,6 +166,8 @@ struct DossierView: View {
                     .buttonStyle(TextLinkStyle(onPaper: true))
                     .accessibilityIdentifier("briefing.rules")
             }
+            people
+            firstLead
             footer
             if showsLevels {
                 levelPicker
@@ -176,6 +181,13 @@ struct DossierView: View {
         .padding(.bottom, 16)
         .frame(maxWidth: .infinity, alignment: .leading)
         .paper()
+        .overlay(alignment: .topTrailing) {
+            StampMark(text: L10n.t("stamp.confidential"), size: 9, angle: 4)
+                .padding(.top, 8)
+                .padding(.trailing, 12)
+                .opacity(0.8)
+                .accessibilityHidden(true)
+        }
     }
 
     // MARK: Header
@@ -244,12 +256,54 @@ struct DossierView: View {
         }
     }
 
+    // MARK: Status
+
+    /// `STATUT : OUVERT` and the difficulty meter (the folder's rating).
+    private var statusRow: some View {
+        HStack(alignment: .center, spacing: 10) {
+            Text(L10n.f("briefing.status", statusText).uppercased())
+                .font(Trace.Fonts.fieldValue)
+                .tracking(1.2)
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("briefing.status")
+            Spacer(minLength: 8)
+            Text(L10n.t("dossier.difficulty").uppercased())
+                .font(Trace.Fonts.fieldLabel)
+                .tracking(1.2)
+                .foregroundStyle(Trace.Colors.inkSoft)
+                .accessibilityHidden(true)
+            DifficultyMeter(level: facts.rating)
+        }
+        .padding(.vertical, 8)
+        .overlay(alignment: .top) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
+        .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.ruled.opacity(2)).frame(height: 1) }
+        .accessibilityElement(children: .combine)
+    }
+
+    /// OUVERT, EN COURS (an investigation is saved) or CLASSÉ (the case has been concluded).
+    private var statusText: String {
+        if saved != nil { return L10n.t("status.open") }
+        if attempts.contains(where: \.solved) { return L10n.t("briefing.status.closed") }
+        return L10n.t("briefing.status.opened")
+    }
+
+    /// A section kicker on the sheet: LE CONTEXTE, PERSONNES CONCERNÉES, PREMIÈRE PISTE.
+    private func kicker(_ key: String, color: Color = Trace.Colors.inkSoft) -> some View {
+        Text(L10n.t(key))
+            .font(Trace.Fonts.kicker)
+            .tracking(1.6)
+            .foregroundStyle(color)
+            .accessibilityAddTraits(.isHeader)
+    }
+
     // MARK: Summary
 
-    /// The first paragraph of the synopsis; the others behind « Contexte ».
+    /// LE CONTEXTE: the first paragraph of the synopsis; the others behind « Lire la suite ».
     private var summary: some View {
         let more = Array(caseFile.synopsis.dropFirst())
         return VStack(alignment: .leading, spacing: 6) {
+            kicker("briefing.context")
             if let first = caseFile.synopsis.first {
                 paragraph(first)
             }
@@ -259,7 +313,7 @@ struct DossierView: View {
                     Haptics.selection()
                 } label: {
                     HStack(spacing: 6) {
-                        Text(L10n.t("dossier.tab.context"))
+                        Text(L10n.t(contextOpen ? "briefing.contextLess" : "briefing.contextMore"))
                         Image(systemName: contextOpen ? "chevron.up" : "chevron.down").font(Trace.Fonts.kicker)
                     }
                 }
@@ -302,6 +356,68 @@ struct DossierView: View {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityElement(children: .combine)
+    }
+
+    // MARK: People, first lead
+
+    /// PERSONNES CONCERNÉES: the person the case is about (when not a suspect), then each suspect —
+    /// initials, name, role. Nothing more: the sheet never says who lies.
+    private var people: some View {
+        let subject = facts.subjectContact()
+        let suspectContacts = Set(caseFile.suspects.map(\.contact))
+        return VStack(alignment: .leading, spacing: 8) {
+            kicker("briefing.people")
+            if let subject, !suspectContacts.contains(subject.id) {
+                personRow(initials: subject.initials, name: subject.name, role: Self.sentenceCase(facts.subjectLabel))
+            }
+            ForEach(caseFile.suspects) { suspect in
+                if let contact = contact(suspect.contact) {
+                    personRow(initials: contact.initials, name: contact.name, role: suspect.role)
+                }
+            }
+        }
+        .accessibilityIdentifier("briefing.people")
+    }
+
+    private func personRow(initials: String, name: String, role: String) -> some View {
+        HStack(alignment: .center, spacing: 10) {
+            PortraitOrInitials(image: nil, initials: initials, width: Metrics.personSize, height: Metrics.personSize)
+                .clipShape(RoundedRectangle(cornerRadius: 2))
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(name)
+                    .font(Trace.Fonts.monoStrong)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(role)
+                    .font(Trace.Fonts.proseSmall)
+                    .foregroundStyle(Trace.Colors.inkMid)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    private func contact(_ id: String) -> Contact? {
+        caseFile.devices.lazy.compactMap { $0.contacts.first { $0.id == id } }.first
+    }
+
+    /// PREMIÈRE PISTE: one typed line on a slip, where to start (case data, never who).
+    @ViewBuilder
+    private var firstLead: some View {
+        if let lead = caseFile.firstLead {
+            VStack(alignment: .leading, spacing: 6) {
+                kicker("briefing.firstLead", color: Trace.Colors.stamp)
+                Text(lead)
+                    .font(Trace.Fonts.prose)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.leading, 10)
+                    .overlay(alignment: .leading) { Rectangle().fill(Trace.Colors.stamp).frame(width: 2) }
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("briefing.firstLead")
+        }
     }
 
     /// #001 only: EXPLORER · VERSER AU DOSSIER · CONCLURE, numbered.
@@ -617,6 +733,7 @@ struct DossierView: View {
         static let sheetRadius: CGFloat = 16
         static let printSize = CGSize(width: 84, height: 104)
         static let printBorder: CGFloat = 4
+        static let personSize: CGFloat = 30
         static let chevron = Font.system(size: 15, weight: .semibold)
         /// Summary: Newsreader 14.5.
         static let summaryFont = Font.custom(Trace.FontName.serif, size: 14.5, relativeTo: .callout)

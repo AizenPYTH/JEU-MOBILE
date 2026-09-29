@@ -202,26 +202,20 @@ public enum CaseValidator {
             }
         }
 
-        // Challenge levels and the opening sequence.
+        // Challenge levels.
         for (level, seconds) in file.challengeDurations ?? [:] {
             if Challenge(rawValue: level) == nil { fail("unknown challenge level '\(level)'") }
             if seconds <= 0 { fail("challenge '\(level)' needs a positive duration") }
         }
-        if let intro = file.introScene {
-            if intro.shots.isEmpty { fail("the intro scene has no shot") }
-            for (n, shot) in intro.shots.enumerated() {
-                if shot.seconds <= 0 { fail("intro shot \(n + 1) needs a positive duration") }
-                for line in shot.lines ?? [] where line.at < 0 || line.at >= shot.seconds {
-                    fail("intro shot \(n + 1): line « \(line.text.prefix(20)) » is outside the shot")
-                }
-                for cue in shot.cues ?? [] where cue.at < 0 || cue.at >= shot.seconds {
-                    fail("intro shot \(n + 1): cue '\(cue.sound)' is outside the shot")
-                }
-                for n2 in shot.allNotifications where n2.at < 0 || n2.at >= shot.seconds {
-                    fail("intro shot \(n + 1): the notification « \(n2.title) » is outside the shot")
-                }
-                if shot.kind == .scene && shot.scene == nil { fail("intro shot \(n + 1): a scene shot needs a 'scene'") }
-                if let scene = shot.scene, !Photo.scenes.contains(scene) { fail("intro shot \(n + 1): unknown scene '\(scene)'") }
+
+        // The first lead says where to start, never who.
+        if let lead = file.firstLead {
+            if lead.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { fail("the first lead is empty") }
+            let culprit = file.suspects.first { $0.id == file.solution.culprit }
+            let name = culprit.flatMap { s in file.devices.lazy.compactMap { $0.contacts.first { $0.id == s.contact } }.first }?.name
+            let words = Set(lead.lowercased().split { !$0.isLetter }.map(String.init))
+            for part in (name ?? "").lowercased().split(separator: " ") where part.count > 2 && words.contains(String(part)) {
+                fail("the first lead names the culprit (« \(part) »)")
             }
         }
 

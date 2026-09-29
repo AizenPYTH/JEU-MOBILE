@@ -58,9 +58,6 @@ do {
             print("  ✗ not solvable at the hardest level (\(report.estimatedSolveSeconds) s for \(shortest) s)")
             failed = true
         }
-        if let intro = file.introScene {
-            print("  intro: \(intro.shots.count) shots · \(Int(intro.totalSeconds)) s")
-        }
         if issues.isEmpty {
             print("  ✓ valid\n")
         } else {

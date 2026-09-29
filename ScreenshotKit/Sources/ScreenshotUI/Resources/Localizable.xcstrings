@@ -2032,6 +2032,74 @@
         }
       }
     },
+    "briefing.context": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BACKGROUND"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LE CONTEXTE"
+          }
+        }
+      }
+    },
+    "briefing.contextLess": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show less"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réduire"
+          }
+        }
+      }
+    },
+    "briefing.contextMore": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read more"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lire la suite"
+          }
+        }
+      }
+    },
+    "briefing.firstLead": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "FIRST LEAD"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PREMIÈRE PISTE"
+          }
+        }
+      }
+    },
     "briefing.level": {
       "extractionState": "manual",
       "localizations": {
@@ -2079,6 +2147,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "VOTRE MISSION"
+          }
+        }
+      }
+    },
+    "briefing.people": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PEOPLE INVOLVED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PERSONNES CONCERNÉES"
           }
         }
       }
@@ -2215,6 +2300,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "OUVRIR LE TÉLÉPHONE"
+          }
+        }
+      }
+    },
+    "briefing.status": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "STATUS: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "STATUT : %@"
+          }
+        }
+      }
+    },
+    "briefing.status.closed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Closed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classé"
+          }
+        }
+      }
+    },
+    "briefing.status.opened": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvert"
           }
         }
       }

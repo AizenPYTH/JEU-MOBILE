@@ -252,9 +252,6 @@ public struct StoryScene: Codable, Sendable, Hashable, Identifiable {
     public var participants: [String]
     public var beats: [SceneBeat]
     public var dialogue: [DialogueNode]
-    /// Optional pre-rendered video that may replace the real-time scene one day. Never required:
-    /// the scene is always playable without it.
-    public var video: String?
 
     public func node(_ id: String) -> DialogueNode? { dialogue.first { $0.id == id } }
 }
