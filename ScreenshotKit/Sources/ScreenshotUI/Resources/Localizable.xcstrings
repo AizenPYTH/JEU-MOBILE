@@ -2998,6 +2998,23 @@
         }
       }
     },
+    "carnet.a11y.marks": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your notes: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos notes : %@"
+          }
+        }
+      }
+    },
     "carnet.a11y.piece": {
       "extractionState": "manual",
       "localizations": {
@@ -3406,6 +3423,23 @@
         }
       }
     },
+    "carnet.keyElement": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key element"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Élément clé"
+          }
+        }
+      }
+    },
     "carnet.link": {
       "extractionState": "manual",
       "localizations": {
@@ -3678,6 +3712,57 @@
         }
       }
     },
+    "carnet.screenTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case notebook"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Carnet d'enquête"
+          }
+        }
+      }
+    },
+    "carnet.sheet.against": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↑ %ld against"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↑ %ld contre"
+          }
+        }
+      }
+    },
+    "carnet.sheet.favour": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↓ %ld for"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "↓ %ld pour"
+          }
+        }
+      }
+    },
     "carnet.status.accusedMany": {
       "extractionState": "manual",
       "localizations": {
@@ -3780,6 +3865,23 @@
         }
       }
     },
+    "carnet.tab.chrono": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Timeline"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chrono"
+          }
+        }
+      }
+    },
     "carnet.tab.pieces": {
       "extractionState": "manual",
       "localizations": {
@@ -3793,6 +3895,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pièces · %ld"
+          }
+        }
+      }
+    },
+    "carnet.tab.threads": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Threads"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fils"
           }
         }
       }
@@ -4627,6 +4746,23 @@
         }
       }
     },
+    "connection.deleteThread": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove the thread"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer le fil"
+          }
+        }
+      }
+    },
     "connection.emptyBody": {
       "extractionState": "manual",
       "localizations": {
@@ -4814,6 +4950,23 @@
         }
       }
     },
+    "connection.pull": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pull a new thread"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tirer un nouveau fil"
+          }
+        }
+      }
+    },
     "connection.short": {
       "extractionState": "manual",
       "localizations": {
@@ -4827,6 +4980,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "Connexion %ld"
+          }
+        }
+      }
+    },
+    "connection.threadOptions": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thread options"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Options du fil"
+          }
+        }
+      }
+    },
+    "connection.threadShort": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thread %ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fil %ld"
+          }
+        }
+      }
+    },
+    "connection.threadTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thread %1$ld · %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fil %1$ld · %2$@"
           }
         }
       }
@@ -16157,6 +16361,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "%ld ANS"
+          }
+        }
+      }
+    },
+    "suspect.alibiLabel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alibi"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alibi"
           }
         }
       }

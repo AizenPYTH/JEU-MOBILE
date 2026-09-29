@@ -2,9 +2,10 @@
 import SwiftUI
 import CaseEngine
 
-// The pieces of the case file as the Carnet shows them (UX V3 §5): EvidenceCard, SuspectCard,
-// ConnectionChain, the chronology. Flat surfaces, no paper. They only show what the player put in
-// the file and decided — never a reading of it, never whether a link is right.
+// The pieces of the case file as the Carnet shows them (V4 « Dossier lisible » §3 on the UX of V3
+// §5): NotebookDividers, SuspectSheet, EvidencePrint (+ the ÉLÉMENT CLÉ stamp), RedThread, the ruled
+// chronology, EvidenceCard. Paper, prints and red thread, ink on paper. They only show what the
+// player put in the file and decided — never a reading of it, never whether a link is right.
 
 // MARK: - Piece numbers
 
@@ -139,10 +140,65 @@ enum PieceFamily: String, CaseIterable, Hashable {
     var title: String { L10n.t("carnet.filter.\(rawValue)") }
 }
 
+// MARK: - Notebook tokens (V4 §2 « Typographie », §3)
+
+extension Trace.Fonts {
+    /// A Carnet divider's label: Plex Sans 13/600.
+    static let notebookDivider = Font.custom(Trace.FontName.sansSemibold, size: 13, relativeTo: .footnote)
+    /// A divider's counter: Plex Mono 10.
+    static let notebookCount = Font.custom(Trace.FontName.monoSemibold, size: 10, relativeTo: .caption2)
+    /// A suspect's name on a SuspectSheet: Newsreader 19/600.
+    static let notebookName = Font.custom(Trace.FontName.serifSemibold, size: 19, relativeTo: .title3)
+    /// Reading text on a notebook page (the chronology): Plex Sans 15.
+    static let notebookText = Font.custom(Trace.FontName.sans, size: 15, relativeTo: .subheadline)
+    /// A time in the chronology's margin: Plex Mono 14.
+    static let notebookTime = Font.custom(Trace.FontName.monoMedium, size: 14, relativeTo: .subheadline)
+    /// The words written along the red thread: Caveat 20.
+    static let threadNote = Font.custom(Trace.FontName.hand, size: 20, relativeTo: .title3)
+}
+
+extension Trace.Colors {
+    /// The V3 « warning » (timer under 01:00, a hint's cost) on paper: a dark ochre, 5.2:1 on paperCard.
+    static let notebookWarning = Color(hex: 0x8A5A12)
+    /// The hairline round a capture, a card or a field on paper.
+    static let notebookHairline = Color(hex: 0x1C1A17, opacity: 0.16)
+}
+
+/// A board of the Carnet (§3): `kraftBoard` under the pieces, `kraftDark` under the red thread;
+/// kraft fibres in multiply between the cards (none with « Augmenter le contraste »), a dark edge.
+struct BoardSurface: View {
+    var color: Color = Trace.Colors.kraftBoard
+    @Environment(\.colorSchemeContrast) private var contrast
+
+    var body: some View {
+        Rectangle()
+            .fill(color)
+            .overlay { if contrast != .increased { PaperGrain(intensity: 0.04, texture: "tex_kraft_fibers") } }
+            .overlay(Rectangle().strokeBorder(Color.black.opacity(0.28), lineWidth: 1))
+            .clipped()
+            .allowsHitTesting(false)
+            .accessibilityHidden(true)
+    }
+}
+
+/// A card laid on a board or a page: `paperCard`, square corners, the slip shadow. No texture (it
+/// holds text and buttons).
+struct PaperCardBackground: View {
+    var color: Color = Trace.Colors.paperCard
+    var shadow = Trace.Shadow.slip
+
+    var body: some View {
+        Rectangle()
+            .fill(color)
+            .shadow(color: shadow.color, radius: shadow.radius, y: shadow.y)
+            .accessibilityHidden(true)
+    }
+}
+
 // MARK: - Exhibit (a piece of the file)
 
-/// One exhibit, flat: what the piece shows (`ExhibitSupport`) on `surface2`, then
-/// « PIÈCE nn · Type · HH:MM ». No paper, no rotation (V3).
+/// One exhibit on paper: what the piece shows (`ExhibitSupport`) on a `paperCard` slip, then
+/// « PIÈCE nn · Type · HH:MM ».
 struct ExhibitView: View {
     let ref: ItemRef
     let game: Investigation
@@ -155,23 +211,23 @@ struct ExhibitView: View {
             ExhibitSupport(ref: ref, game: game, compact: compact)
             HStack(alignment: .firstTextBaseline) {
                 if let number {
-                    Text(PieceFormat.title(number)).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.benText)
+                    Text(PieceFormat.title(number)).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.ink)
                 }
                 Spacer(minLength: 4)
                 Text(PieceFormat.type(ref, in: game) + (item.at.map { " · " + PhoneFormat.time($0) } ?? ""))
-                    .font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.text2).lineLimit(1)
+                    .font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.ink2).lineLimit(1)
             }
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous).fill(Trace.Colors.surface2))
+        .background(PaperCardBackground())
         .accessibilityElement(children: .combine)
     }
 }
 
-/// What an exhibit shows: the photo, the message capture (a light strip, like the screen it came
-/// from — content keeps its look), the call record, the map extract, the diary entry, the note…
-/// Shared by the exhibits, the Carnet's piece detail and the filing sheet.
+/// What an exhibit shows, on paper (ink): the photo as a print, the message capture (the phone's
+/// light screen, like the screen it came from), the call record, the map extract, the diary entry,
+/// the note… Shared by the exhibits, the Carnet's piece detail and the filing slip.
 struct ExhibitSupport: View {
     let ref: ItemRef
     let game: Investigation
@@ -186,11 +242,13 @@ struct ExhibitSupport: View {
                     PhotoPrint(border: 4) {
                         GeneratedPhoto(photo: photo).frame(height: compact ? 96 : 200)
                     }
+                    .accessibilityHidden(true)
                     if ref.kind == .photoInfo || !compact {
-                        Text(photo.caption).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.text).lineLimit(compact ? 2 : nil)
+                        Text(photo.caption).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.ink).lineLimit(compact ? 2 : nil)
+                            .fixedSize(horizontal: false, vertical: !compact)
                     }
                     if ref.kind == .photoInfo, let place = photo.place {
-                        Text(place).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.text2).lineLimit(compact ? 1 : nil)
+                        Text(place).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.ink2).lineLimit(compact ? 1 : nil)
                     }
                 }
             }
@@ -210,38 +268,41 @@ struct ExhibitSupport: View {
             if let event = index.calendarEvent(ref.id) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(PhoneFormat.longDayCapitalized(event.start)).font(Trace.Fonts.caption)
-                        .foregroundStyle(Trace.Colors.text2)
+                        .foregroundStyle(Trace.Colors.ink2)
                     Text(PhoneFormat.time(event.start) + (event.end.map { "–" + PhoneFormat.time($0) } ?? ""))
-                        .font(Trace.Fonts.data).foregroundStyle(Trace.Colors.benText)
-                    Text(event.title).font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.text).lineLimit(compact ? 2 : nil)
+                        .font(Trace.Fonts.data).foregroundStyle(Trace.Colors.ink)
+                    Text(event.title).font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.ink).lineLimit(compact ? 2 : nil)
                     if let location = event.location {
-                        Text(location).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.text2).lineLimit(compact ? 1 : nil)
+                        Text(location).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.ink2).lineLimit(compact ? 1 : nil)
                     }
                 }
             }
         case .note:
             if let note = index.note(ref.id) {
-                Text("« \(note.body) »").font(Trace.Fonts.quote).foregroundStyle(Trace.Colors.text).lineLimit(compact ? 4 : nil)
+                Text("« \(note.body) »").font(Trace.Fonts.quote).foregroundStyle(Trace.Colors.ink).lineLimit(compact ? 4 : nil)
+                    .fixedSize(horizontal: false, vertical: !compact)
             }
         case .mail:
             if let mail = index.mail(ref.id) {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(mail.fromName).font(Trace.Fonts.caption.weight(.semibold)).foregroundStyle(Trace.Colors.text).lineLimit(1)
-                    Text(mail.subject).font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.text).lineLimit(compact ? 2 : nil)
-                    Text(mail.body).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.text2).lineLimit(compact ? 3 : nil)
+                    Text(mail.fromName).font(Trace.Fonts.caption.weight(.semibold)).foregroundStyle(Trace.Colors.ink).lineLimit(1)
+                    Text(mail.subject).font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.ink).lineLimit(compact ? 2 : nil)
+                    Text(mail.body).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.ink2).lineLimit(compact ? 3 : nil)
+                        .fixedSize(horizontal: false, vertical: !compact)
                     if let files = mail.attachments, !files.isEmpty {
-                        Text("⎘ " + files.joined(separator: " · ")).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.text2).lineLimit(1)
+                        Text("⎘ " + files.joined(separator: " · ")).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.ink2).lineLimit(1)
                     }
                 }
             }
         case .browser:
             if let entry = index.browserEntry(ref.id) {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text(entry.url ?? L10n.t("piece.search")).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.text2).lineLimit(1)
+                    Text(entry.url ?? L10n.t("piece.search")).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.ink2).lineLimit(1)
                     Text(entry.kind == .search ? "« \(entry.text) »" : entry.text)
-                        .font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.text).lineLimit(compact ? 3 : nil)
+                        .font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.ink).lineLimit(compact ? 3 : nil)
                     if let summary = entry.summary, !compact {
-                        Text(summary).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.text2)
+                        Text(summary).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.ink2)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
             }
@@ -250,90 +311,330 @@ struct ExhibitSupport: View {
                 HStack(spacing: 8) {
                     Avatar(contact: contact, size: 30)
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(contact.name).font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.text)
-                        Text(contact.phone).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.text2)
+                        Text(contact.name).font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.ink)
+                        Text(contact.phone).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.ink2)
                     }
                 }
             }
         case .app:
-            Text(PieceFormat.preview(ref, in: game)).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.text)
+            Text(PieceFormat.preview(ref, in: game)).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.ink)
         }
     }
 
-    /// A message capture: the bubble on the phone's light background, like the screen it came from.
+    /// A message capture: the bubble on the phone's white screen, like the screen it came from.
     private func capture(from: String, text: String, mine: Bool) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(from).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.text2).lineLimit(1)
+            Text(from).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.ink2).lineLimit(1)
             Text(text)
                 .font(Theme.Fonts.callout)
                 .foregroundStyle(mine ? Theme.Colors.bubbleOutText : Theme.Colors.textPrimary)
                 .lineLimit(compact ? 4 : nil)
+                .fixedSize(horizontal: false, vertical: !compact)
                 .padding(.horizontal, 10).padding(.vertical, 7)
                 .background(RoundedRectangle(cornerRadius: 16, style: .continuous).fill(mine ? Theme.Colors.bubbleOut : Theme.Colors.bgBubbleIn))
                 .frame(maxWidth: .infinity, alignment: mine ? .trailing : .leading)
                 .padding(8)
-                .background(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous).fill(Theme.Colors.bgBase))
+                .background(Rectangle().fill(Theme.Colors.bgBase))
+                .overlay(Rectangle().strokeBorder(Trace.Colors.notebookHairline, lineWidth: 1))
         }
     }
 
-    /// A call record: the call among its neighbours, highlighted.
+    /// A call record: the call among its neighbours, the call itself underlined in ink.
     private func callRecord(_ call: Call) -> some View {
         let calls = game.calls.sorted { $0.at < $1.at }
         let i = calls.firstIndex { $0.id == call.id } ?? 0
         let rows = calls.isEmpty ? [call] : Array(calls[max(0, i - 1)...min(calls.count - 1, i + 1)])
         return VStack(alignment: .leading, spacing: 3) {
-            Text(L10n.t("piece.callRecord")).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.text2)
+            Text(L10n.t("piece.callRecord")).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.ink2)
             ForEach(rows) { row in
+                let this = row.id == call.id
                 HStack {
                     Text(PhoneFormat.time(row.at)).font(Trace.Fonts.data)
                     Text(game.name(of: row.contact).split(separator: " ").first.map(String.init) ?? "")
-                        .font(Trace.Fonts.callout).lineLimit(1)
+                        .font(this ? Trace.Fonts.callout.weight(.semibold) : Trace.Fonts.callout).lineLimit(1)
                     Text(CallsFormat.arrow(row)).font(Trace.Fonts.caption)
                     Spacer(minLength: 2)
                     Text(row.durationSeconds > 0 ? PhoneFormat.duration(row.durationSeconds) : "—").font(Trace.Fonts.data)
                 }
-                .foregroundStyle(row.id == call.id ? Trace.Colors.text : Trace.Colors.text2)
+                .foregroundStyle(this ? Trace.Colors.ink : Trace.Colors.ink2)
                 .padding(.horizontal, 6)
-                .padding(.vertical, 2)
-                .background(RoundedRectangle(cornerRadius: 6).fill(row.id == call.id ? Trace.Colors.tint(Trace.Colors.ben) : .clear))
+                .padding(.vertical, 3)
+                .background(Rectangle().fill(this ? Trace.Colors.tint(Trace.Colors.red) : .clear))
             }
         }
     }
 
-    /// A map extract: streets, the last position circled.
+    /// A map extract: streets, the last position circled in red.
     private func mapExtract(_ track: LocationTrack) -> some View {
         let last = track.points.max { $0.at < $1.at }
         return VStack(alignment: .leading, spacing: 4) {
-            ZStack {
-                Rectangle().fill(Trace.Colors.surface3)
-                Canvas { context, size in
-                    var rng = SeededRandom(seed: track.id)
-                    for _ in 0..<6 {
-                        var road = Path()
-                        road.move(to: CGPoint(x: rng.next() * size.width, y: 0))
-                        road.addLine(to: CGPoint(x: rng.next() * size.width, y: size.height))
-                        context.stroke(road, with: .color(Trace.Colors.text2.opacity(0.35)), lineWidth: 2 + rng.next() * 3)
-                    }
-                    let c = CGPoint(x: size.width * 0.62, y: size.height * 0.4)
-                    context.stroke(Path(ellipseIn: CGRect(x: c.x - 8, y: c.y - 8, width: 16, height: 16)), with: .color(Trace.Colors.benText), lineWidth: 2)
-                }
-            }
-            .frame(height: compact ? 64 : 120)
-            .clipShape(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous))
-            .accessibilityHidden(true)
-            Text(L10n.f("item.track", game.name(of: track.contact))).font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.text).lineLimit(1)
+            MapGlyph(seed: track.id)
+                .frame(height: compact ? 64 : 120)
+            Text(L10n.f("item.track", game.name(of: track.contact))).font(Trace.Fonts.callout.weight(.semibold)).foregroundStyle(Trace.Colors.ink).lineLimit(1)
             if let last, let place = game.index.place(last.place) {
-                Text(place.name).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.text2).lineLimit(1)
+                Text(place.name).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.ink2).lineLimit(1)
             }
         }
     }
 }
 
-// MARK: - EvidenceCard (§5)
+/// A printed map extract: a few streets on white, the last position circled in red. Decorative
+/// (the place is always written next to it).
+struct MapGlyph: View {
+    let seed: String
 
-/// EvidenceCard (§5): « PIÈCE nn » (data, benText), « type · source » (caption), the content in
-/// three lines then « Lire plus », then the card's own footer (links line, readings).
-/// States: plain · selected (2 pt ben rule) · contradiction (warning rule + « ≠ contredit PIÈCE nn »).
+    var body: some View {
+        Canvas { context, size in
+            var rng = SeededRandom(seed: seed)
+            for _ in 0..<6 {
+                var road = Path()
+                road.move(to: CGPoint(x: rng.next() * size.width, y: 0))
+                road.addLine(to: CGPoint(x: rng.next() * size.width, y: size.height))
+                context.stroke(road, with: .color(Trace.Colors.ink2.opacity(0.28)), lineWidth: 2 + rng.next() * 3)
+            }
+            let c = CGPoint(x: size.width * 0.62, y: size.height * 0.42)
+            context.fill(Path(ellipseIn: CGRect(x: c.x - 3, y: c.y - 3, width: 6, height: 6)), with: .color(Trace.Colors.red))
+            context.stroke(Path(ellipseIn: CGRect(x: c.x - 10, y: c.y - 10, width: 20, height: 20)), with: .color(Trace.Colors.red), lineWidth: 2)
+        }
+        .background(Trace.Colors.paperCardLight)
+        .overlay(Rectangle().strokeBorder(Trace.Colors.notebookHairline, lineWidth: 1))
+        .accessibilityHidden(true)
+    }
+}
+
+// MARK: - EvidencePrint (§3, screen 07)
+
+/// The 86 pt vignette of a piece on the board: the photo as a print; a message's words on white;
+/// a map glyph; otherwise the piece in a few words on white, with its kind's symbol.
+struct EvidenceVignette: View {
+    let ref: ItemRef
+    let game: Investigation
+    var height: CGFloat = 86
+
+    var body: some View {
+        Group {
+            switch ref.kind {
+            case .photo, .photoInfo:
+                if let photo = game.index.photo(ref.id) {
+                    PhotoPrint(border: 4) {
+                        GeneratedPhoto(photo: photo)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: height)
+                    }
+                } else {
+                    slip(text: PieceFormat.preview(ref, in: game), from: nil)
+                }
+            case .message:
+                if let message = game.index.message(ref.id) {
+                    slip(text: message.text ?? L10n.t("item.photo"), from: game.name(of: message.from))
+                } else {
+                    slip(text: PieceFormat.preview(ref, in: game), from: nil)
+                }
+            case .draft:
+                slip(text: PieceFormat.preview(ref, in: game), from: L10n.t("messages.draft"))
+            case .track:
+                MapGlyph(seed: ref.id)
+                    .frame(height: height)
+                    .padding(4)
+                    .background(Trace.Colors.photoBorder)
+                    .shadow(color: Trace.Shadow.print.color, radius: Trace.Shadow.print.radius, y: Trace.Shadow.print.y)
+            default:
+                slip(text: PieceFormat.preview(ref, in: game), from: nil)
+            }
+        }
+        .accessibilityHidden(true)
+    }
+
+    /// A white strip with the piece's words (the phone's type for a message: it keeps its look).
+    private func slip(text: String, from: String?) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 5) {
+                Image(systemName: Self.symbol(ref.kind))
+                if let from { Text(from).lineLimit(1) }
+            }
+            .font(Theme.Fonts.caption)
+            .foregroundStyle(Theme.Colors.textSecondary)
+            Text(text)
+                .font(Theme.Fonts.callout)
+                .foregroundStyle(Theme.Colors.textPrimary)
+                .lineLimit(3)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(8)
+        .frame(maxWidth: .infinity, minHeight: height, maxHeight: height, alignment: .topLeading)
+        .background(Theme.Colors.bgBase)
+        .clipped()
+        .overlay(Rectangle().strokeBorder(Trace.Colors.notebookHairline, lineWidth: 1))
+        .shadow(color: Trace.Shadow.print.color, radius: Trace.Shadow.print.radius, y: Trace.Shadow.print.y)
+    }
+
+    static func symbol(_ kind: ItemRef.Kind) -> String {
+        switch kind {
+        case .message: "message"
+        case .draft: "square.and.pencil"
+        case .photo: "photo"
+        case .photoInfo: "info.circle"
+        case .call: "phone"
+        case .track: "map"
+        case .calendar: "calendar"
+        case .note: "note.text"
+        case .mail: "envelope"
+        case .browser: "magnifyingglass"
+        case .contact: "person.crop.rectangle"
+        case .app: "app"
+        }
+    }
+}
+
+/// The ÉLÉMENT CLÉ stamp (PNG, multiply) on a piece the PLAYER put in a « contredit » thread —
+/// never from the case's own data. `falling`: it falls now (180 ms, rigid haptic; appears with
+/// reduced motion).
+struct KeyElementStamp: View {
+    static let asset = "stamp_element_cle_rouge_marque"
+    var falling = false
+    var width: CGFloat = 96
+    var onLanded: () -> Void = {}
+
+    var body: some View {
+        Group {
+            if falling {
+                FallingStampImage(asset: Self.asset, label: L10n.t("carnet.keyElement"), width: width, onPaper: true,
+                                  angle: -8, delay: 0.35, onLanded: onLanded)
+            } else {
+                StampImage(asset: Self.asset, label: L10n.t("carnet.keyElement"), width: width, onPaper: true, angle: -8)
+            }
+        }
+        .allowsHitTesting(false)
+    }
+}
+
+/// Whether a print carries the ÉLÉMENT CLÉ stamp, and whether it falls now.
+enum KeyStampState: Equatable { case none, still, falling }
+
+/// EvidencePrint (§3): a piece on the evidence board, a `paperCard` slip holding the 86 pt vignette
+/// (the print is tilted by the piece's id, ≤ 1.5°), « PIÈCE nn », its type, and the links line
+/// (« ↑ Emma », « ≠ contredit 05 » in red). Tap: the piece's detail. The slip itself, its text and
+/// its buttons (`footer`) stay straight.
+struct EvidencePrint<Footer: View>: View {
+    let ref: ItemRef
+    let game: Investigation
+    let number: Int
+    var stamp: KeyStampState = .none
+    let onOpen: () -> Void
+    var onStampLanded: () -> Void = {}
+    @ViewBuilder var footer: () -> Footer
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Button(action: onOpen) {
+                VStack(alignment: .leading, spacing: 6) {
+                    EvidenceVignette(ref: ref, game: game)
+                        .tilt("\(ref)")
+                        .overlay(alignment: .topTrailing) {
+                            if stamp != .none {
+                                KeyElementStamp(falling: stamp == .falling, width: 92, onLanded: onStampLanded)
+                                    .offset(x: 8, y: -10)
+                            }
+                        }
+                        .padding(.top, 2)
+                        .padding(.bottom, 6)
+                    Text(PieceFormat.title(number))
+                        .font(Trace.Fonts.data)
+                        .tracking(1)
+                        .foregroundStyle(Trace.Colors.ink)
+                    Text(PieceFormat.caption(ref, in: game))
+                        .font(Trace.Fonts.caption)
+                        .foregroundStyle(Trace.Colors.ink2)
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                    PrintLinks(ref: ref, game: game)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(PressableStyle())
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(spoken))
+            .accessibilityAddTraits(.isButton)
+            .accessibilityIdentifier("notebook.row")
+            footer()
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(PaperCardBackground())
+    }
+
+    private var spoken: String {
+        [PieceFormat.spoken(ref, in: game, number: number), PrintLinks.spoken(ref: ref, game: game),
+         stamp == .none ? nil : L10n.t("carnet.keyElement")]
+            .compactMap { $0 }
+            .joined(separator: ". ")
+    }
+}
+
+/// The links line of a print: « ↑ Emma » / « ↓ Emma » (the player's reading, arrow + colour) and
+/// « ≠ contredit 05 » in red for each element the player said it contradicts.
+struct PrintLinks: View {
+    let ref: ItemRef
+    let game: Investigation
+
+    var body: some View {
+        let entry = game.notebook.first { $0.ref == ref }
+        let suspect = entry?.linkedTo.flatMap { game.index.suspect($0) }
+        let against = game.contradicted(by: ref)
+        if suspect != nil || !against.isEmpty {
+            FlowLayout(spacing: 8) {
+                if let suspect {
+                    Text(verbatim: LinkTally.glyph(entry?.stance) + " " + Self.firstName(game.name(of: suspect.contact)))
+                        .foregroundStyle(LinkTally.color(entry?.stance))
+                }
+                ForEach(Array(against.enumerated()), id: \.offset) { _, node in
+                    Text(L10n.f("chrono.contradicts", Self.shortTag(node, in: game)))
+                        .foregroundStyle(Trace.Colors.red)
+                }
+            }
+            .font(Trace.Fonts.caption.weight(.semibold))
+            .lineLimit(1)
+        }
+    }
+
+    /// « 05 » for a piece, the first name for a person.
+    static func shortTag(_ node: Connection.Node, in game: Investigation) -> String {
+        switch node {
+        case .piece(let ref): game.pieceNumber(of: ref).map { PieceFormat.number($0) } ?? PieceFormat.kind(ref, in: game)
+        case .person(let id): firstName(game.index.suspect(id).map { game.name(of: $0.contact) } ?? id)
+        }
+    }
+
+    static func firstName(_ name: String) -> String {
+        name.split(separator: " ").first.map(String.init) ?? name
+    }
+
+    /// VoiceOver: « L'accuse : Emma. ≠ contredit PIÈCE 05 ».
+    static func spoken(ref: ItemRef, game: Investigation) -> String? {
+        let entry = game.notebook.first { $0.ref == ref }
+        var parts: [String] = []
+        if let suspect = entry?.linkedTo.flatMap({ game.index.suspect($0) }) {
+            let name = firstName(game.name(of: suspect.contact))
+            switch entry?.stance {
+            case .incriminates:
+                parts.append(game.caseFile.isAlibi ? L10n.t("alibi.linkContradicts") : L10n.f("carnet.linkAccuses", name))
+            case .clears:
+                parts.append(game.caseFile.isAlibi ? L10n.t("alibi.linkConfirms") : L10n.f("carnet.linkClears", name))
+            case nil:
+                parts.append(L10n.f("toast.linked", name))
+            }
+        }
+        parts += game.contradicted(by: ref).map { L10n.f("chrono.contradicts", ConnectionFormat.tag($0, in: game)) }
+        return parts.isEmpty ? nil : parts.joined(separator: ". ")
+    }
+}
+
+// MARK: - EvidenceCard (a piece on a paper sheet)
+
+/// EvidenceCard (V3 §5, on paper): a `paperCard` card — « PIÈCE nn » (data, ink), « type · source »
+/// (caption, ink2), the content in three lines then « Lire plus », then the card's own footer.
+/// States: plain · selected (2 pt ink rule) · contradiction (red rule + « ≠ contredit PIÈCE nn »).
 struct EvidenceCard<Footer: View>: View {
     enum Mark: Equatable { case plain, selected, contradiction }
 
@@ -349,7 +650,6 @@ struct EvidenceCard<Footer: View>: View {
 
     var body: some View {
         let number = game.pieceNumber(of: ref) ?? 0
-        let shape = RoundedRectangle(cornerRadius: Trace.Radius.card, style: .continuous)
         VStack(alignment: .leading, spacing: 12) {
             if let onOpen {
                 Button(action: onOpen) { summary(number, readMore: true) }
@@ -365,37 +665,43 @@ struct EvidenceCard<Footer: View>: View {
             }
             footer()
         }
-        .padding(16)
+        .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(shape.fill(Trace.Colors.surface))
-        .overlay(shape.strokeBorder(borderColor, lineWidth: mark == .selected ? 2 : 1))
+        .background(PaperCardBackground(shadow: Trace.Shadow.print))
+        .overlay(Rectangle().strokeBorder(borderColor, lineWidth: mark == .plain ? 1 : 2))
         .accessibilityElement(children: .contain)
     }
 
     private var borderColor: Color {
         switch mark {
-        case .plain: Trace.Colors.line
-        case .selected: Trace.Colors.ben
-        case .contradiction: Trace.Colors.warning
+        case .plain: Trace.Colors.notebookHairline
+        case .selected: Trace.Colors.ink
+        case .contradiction: Trace.Colors.red
         }
     }
 
     private func summary(_ number: Int, readMore: Bool) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .center, spacing: 8) {
-                Text(PieceFormat.title(number)).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.benText)
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(PieceFormat.title(number)).font(Trace.Fonts.data).tracking(1).foregroundStyle(Trace.Colors.ink)
                 Spacer(minLength: 4)
                 if let badge {
-                    StatusBadge(text: badge, color: Trace.Colors.warning)
+                    Text(badge)
+                        .font(Trace.Fonts.caption.weight(.semibold))
+                        .foregroundStyle(Trace.Colors.red)
+                        .multilineTextAlignment(.trailing)
                 }
             }
             Text(PieceFormat.caption(ref, in: game))
                 .font(Trace.Fonts.caption)
-                .foregroundStyle(Trace.Colors.text2)
+                .foregroundStyle(Trace.Colors.ink2)
                 .fixedSize(horizontal: false, vertical: true)
             EvidencePreview(ref: ref, game: game)
             if readMore {
-                Text(L10n.t("carnet.readMore")).font(Trace.Fonts.caption.weight(.semibold)).foregroundStyle(Trace.Colors.benText)
+                Text(L10n.t("carnet.readMore"))
+                    .font(Trace.Fonts.caption.weight(.semibold))
+                    .foregroundStyle(Trace.Colors.ink)
+                    .underline()
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -410,7 +716,7 @@ extension EvidenceCard where Footer == EmptyView {
     }
 }
 
-/// The content of a piece in a card: a photo thumbnail, or its words in three lines.
+/// The content of a piece in a card: a photo thumbnail (a small print), or its words in three lines.
 struct EvidencePreview: View {
     let ref: ItemRef
     let game: Investigation
@@ -420,13 +726,13 @@ struct EvidencePreview: View {
         case .photo, .photoInfo:
             if let photo = game.index.photo(ref.id) {
                 HStack(alignment: .top, spacing: 12) {
-                    GeneratedPhoto(photo: photo)
-                        .frame(width: 88, height: 66)
-                        .clipShape(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous))
-                        .accessibilityHidden(true)
+                    PhotoPrint(border: 3) {
+                        GeneratedPhoto(photo: photo).frame(width: 84, height: 63)
+                    }
+                    .accessibilityHidden(true)
                     Text(PieceFormat.preview(ref, in: game))
                         .font(Trace.Fonts.callout)
-                        .foregroundStyle(Trace.Colors.text)
+                        .foregroundStyle(Trace.Colors.ink)
                         .lineLimit(3)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -434,18 +740,17 @@ struct EvidencePreview: View {
         default:
             Text(PieceFormat.preview(ref, in: game))
                 .font(Trace.Fonts.callout)
-                .foregroundStyle(Trace.Colors.text)
+                .foregroundStyle(Trace.Colors.ink)
                 .lineLimit(3)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
 
-// MARK: - SuspectCard (§5)
+// MARK: - SuspectSheet (§3, screen 06)
 
-/// What the player's readings say about a suspect (§5 SuspectCard): accused (↑ n l'accusent),
-/// cleared (↓ n le disculpent) or neutral (« Rien de relevé »). Counts only what the player
-/// decided, never a verdict.
+/// What the player's readings say about a suspect: accused (↑ n l'accusent), cleared (↓ n le
+/// disculpent) or neutral (« Rien de relevé »). Counts only what the player decided, never a verdict.
 enum SuspectStanding: Equatable {
     case neutral
     case accused(Int)
@@ -476,75 +781,112 @@ enum SuspectStanding: Equatable {
         }
     }
 
+    /// On paper.
     var color: Color {
         switch self {
-        case .neutral, .split: Trace.Colors.text2
-        case .accused: Trace.Colors.criticalOnDark
-        case .cleared: Trace.Colors.successText
+        case .neutral, .split: Trace.Colors.ink2
+        case .accused: Trace.Colors.red
+        case .cleared: Trace.Colors.green
         }
     }
 }
 
-/// SuspectCard (§5): photo 56 × 70 (initials when missing), name + age, relation, « Alibi · … »
-/// (what they declared), StatusBadge + « n pièces ».
-struct SuspectCard: View {
+/// « ↑ 2 contre   ↓ 1 pour » (Plex Mono 13/700): red and green on paper, ink2 at zero — always
+/// with the arrow and the word, never the colour alone.
+struct StanceTally: View {
+    let against: Int
+    let favour: Int
+    /// ALIBI: « contredisent » / « confirment ».
+    var alibi = false
+
+    var body: some View {
+        FlowLayout(spacing: 14) {
+            Text(alibi ? "↑ \(against) " + L10n.t("alibi.tallyContradicts") : L10n.f("carnet.sheet.against", against))
+                .foregroundStyle(against > 0 ? Trace.Colors.red : Trace.Colors.ink2)
+            Text(alibi ? "↓ \(favour) " + L10n.t("alibi.tallyConfirms") : L10n.f("carnet.sheet.favour", favour))
+                .foregroundStyle(favour > 0 ? Trace.Colors.green : Trace.Colors.ink2)
+        }
+        .font(Trace.Fonts.data)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(LinkTally.spoken(against: against, favour: favour)))
+    }
+}
+
+/// SuspectSheet (§3): a `paperCard` sheet on the ruled page — the identity photo 78 × 98 (initials
+/// when missing), the name in Newsreader 19/600, the age in Mono, the relation, « ALIBI » and what
+/// they declared (their statement — never the case's hidden alibi), « ↑ n contre » / « ↓ n pour »
+/// from the player's own readings, and the player's ticked notes in Caveat (also spoken).
+struct SuspectSheet: View {
     let suspect: Suspect
     let contact: Contact?
     var against = 0
     var favour = 0
-    /// Pieces linked to this suspect (whatever the reading).
-    var pieces = 0
+    /// The player's own ticks (never checked by the game).
+    var marks: [SuspectMark] = []
 
     var body: some View {
-        let standing = SuspectStanding(against: against, favour: favour)
         HStack(alignment: .top, spacing: 14) {
-            IDPhoto(contact: contact, width: 56, height: 70)
+            IDPhoto(contact: contact, width: 78, height: 98, stapled: true)
+                .padding(.top, 4)
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 4) {
-                HStack(alignment: .firstTextBaseline, spacing: 6) {
-                    Text(contact?.name ?? suspect.contact)
-                        .font(Trace.Fonts.headline)
-                        .foregroundStyle(Trace.Colors.text)
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(name)
+                        .font(Trace.Fonts.notebookName)
+                        .foregroundStyle(Trace.Colors.ink)
                         .fixedSize(horizontal: false, vertical: true)
                     if let age = suspect.age {
-                        Text(L10n.f("suspect.age", age)).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.text2)
+                        Text(L10n.f("suspect.ageShort", age))
+                            .font(Trace.Fonts.fieldValue)
+                            .foregroundStyle(Trace.Colors.ink2)
+                            .lineLimit(1)
                     }
                 }
                 Text(suspect.role)
                     .font(Trace.Fonts.callout)
-                    .foregroundStyle(Trace.Colors.text2)
+                    .foregroundStyle(Trace.Colors.ink2)
                     .fixedSize(horizontal: false, vertical: true)
-                Text(L10n.f("suspect.alibiLine", suspect.statement))
-                    .font(Trace.Fonts.caption)
-                    .foregroundStyle(Trace.Colors.text2)
-                    .lineLimit(2)
-                FlowLayout(spacing: 8) {
-                    StatusBadge(text: standing.text, color: standing.color, symbol: standing.symbol)
-                    Text(L10n.f(pieces == 1 ? "carnet.pieceCountOne" : "carnet.pieceCountMany", pieces))
-                        .font(Trace.Fonts.caption)
-                        .foregroundStyle(Trace.Colors.text2)
-                        .frame(minHeight: Trace.Height.badge)
+                Text(L10n.t("suspect.alibiLabel"))
+                    .fieldLabel(Trace.Colors.ink2)
+                    .padding(.top, 8)
+                Text(suspect.statement)
+                    .font(Trace.Fonts.callout)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .lineLimit(3)
+                    .fixedSize(horizontal: false, vertical: true)
+                StanceTally(against: against, favour: favour)
+                    .padding(.top, 8)
+                if !marks.isEmpty {
+                    Handwritten(text: marksText, size: 19)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 2)
                 }
-                .padding(.top, 4)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             Image(systemName: "chevron.right")
                 .font(Trace.Fonts.caption.weight(.semibold))
-                .foregroundStyle(Trace.Colors.text3)
-                .padding(.top, 4)
+                .foregroundStyle(Trace.Colors.ink2)
+                .padding(.top, 6)
                 .accessibilityHidden(true)
         }
-        .padding(16)
+        .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .benCard()
+        .background(PaperCardBackground())
         .contentShape(Rectangle())
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(spoken(standing)))
+        .accessibilityLabel(Text(spoken))
     }
 
-    private func spoken(_ standing: SuspectStanding) -> String {
-        [contact?.name ?? suspect.contact, suspect.age.map { L10n.f("suspect.age", $0) }, suspect.role,
-         L10n.f("suspect.alibiLine", suspect.statement), LinkTally.spoken(against: against, favour: favour)]
+    private var name: String { contact?.name ?? suspect.contact }
+
+    private var marksText: String {
+        marks.map { L10n.t("mark.\($0.rawValue)") }.joined(separator: " · ")
+    }
+
+    private var spoken: String {
+        [name, suspect.age.map { L10n.f("suspect.age", $0) }, suspect.role,
+         L10n.f("suspect.alibiLine", suspect.statement), LinkTally.spoken(against: against, favour: favour),
+         marks.isEmpty ? nil : L10n.f("carnet.a11y.marks", marksText)]
             .compactMap { $0 }
             .joined(separator: ", ")
     }
@@ -558,11 +900,11 @@ struct LinkTally: View {
     var body: some View {
         Group {
             if against + favour == 0 {
-                Text(L10n.t("suspect.noPiece")).foregroundStyle(Trace.Colors.text2)
+                Text(L10n.t("suspect.noPiece")).foregroundStyle(Trace.Colors.ink2)
             } else {
                 HStack(spacing: 10) {
-                    Text(verbatim: "↑ \(against)").foregroundStyle(against > 0 ? Trace.Colors.criticalOnDark : Trace.Colors.text3)
-                    Text(verbatim: "↓ \(favour)").foregroundStyle(favour > 0 ? Trace.Colors.successText : Trace.Colors.text3)
+                    Text(verbatim: "↑ \(against)").foregroundStyle(against > 0 ? Trace.Colors.red : Trace.Colors.ink2)
+                    Text(verbatim: "↓ \(favour)").foregroundStyle(favour > 0 ? Trace.Colors.green : Trace.Colors.ink2)
                 }
             }
         }
@@ -586,12 +928,12 @@ struct LinkTally: View {
         }
     }
 
-    /// The colour of a reading (with its glyph and word, never alone).
+    /// The colour of a reading on paper (with its glyph and word, never alone).
     static func color(_ stance: NotebookEntry.Stance?) -> Color {
         switch stance {
-        case .incriminates: Trace.Colors.criticalOnDark
-        case .clears: Trace.Colors.successText
-        case nil: Trace.Colors.text2
+        case .incriminates: Trace.Colors.red
+        case .clears: Trace.Colors.green
+        case nil: Trace.Colors.ink2
         }
     }
 
@@ -610,10 +952,10 @@ extension Suspect {
     static func letter(_ index: Int) -> String { String(UnicodeScalar(65 + min(index, 25)).map(Character.init) ?? "?") }
 }
 
-// MARK: - Connections (§5 ConnectionChain)
+// MARK: - Connections: the red thread (§3 RedThread, screen 08)
 
 /// Words, symbols and colours of the links between two elements. Always the word; the colour only
-/// repeats it (contredit = warning, confirme = success, the others = benText).
+/// repeats it (on paper: contredit = red, confirme = green, the others = ink2).
 enum ConnectionFormat {
     static func verb(_ verb: Connection.Verb) -> String { L10n.t("connection.verb.\(verb.rawValue)") }
 
@@ -629,9 +971,9 @@ enum ConnectionFormat {
 
     static func color(_ verb: Connection.Verb) -> Color {
         switch verb {
-        case .contradicts: Trace.Colors.warning
-        case .confirms: Trace.Colors.successText
-        case .samePlace, .sameTime, .implicates: Trace.Colors.benText
+        case .contradicts: Trace.Colors.red
+        case .confirms: Trace.Colors.green
+        case .samePlace, .sameTime, .implicates: Trace.Colors.ink2
         }
     }
 
@@ -659,14 +1001,14 @@ enum ConnectionFormat {
         }
     }
 
-    /// VoiceOver: « Connexion 1 : Pièce 03, contredit, Pièce 02 ».
+    /// VoiceOver: « Fil 1 : Pièce 03, contredit, Pièce 02 ».
     static func spoken(_ connection: Connection, number: Int, in game: Investigation) -> String {
         var parts: [String] = []
         for (i, node) in connection.nodes.enumerated() {
             if i > 0, i - 1 < connection.verbs.count { parts.append(verb(connection.verbs[i - 1]).lowercased()) }
             parts.append(tag(node, in: game) + (node.isPerson ? "" : " " + text(node, in: game)))
         }
-        return L10n.f("connection.short", number) + " : " + parts.joined(separator: ", ")
+        return L10n.f("connection.threadShort", number) + " : " + parts.joined(separator: ", ")
     }
 }
 
@@ -686,67 +1028,42 @@ extension Connection.Node {
     }
 }
 
-/// ConnectionChain (§5): a `surface` card, « CONNEXION n · verbe », the elements on `surface2`
-/// (data label + text), and between two of them a 2 × 28 pt connector with its verb. It never
-/// says whether a link is right.
-struct ConnectionChain: View {
+/// RedThread (§3): one chain of the player's connections on the `kraftDark` board. A paper label
+/// « FIL n · verbe »; the elements are `paperCard` nodes with a red pin on top, offset sideways
+/// 0 / 40 pt in turn; between two of them a red 2 × 44 pt thread with its verb written in Caveat 20
+/// ivory (and spoken). It never says whether a link is right.
+struct RedThread: View {
     let connection: Connection
     let number: Int
     let game: Investigation
-    /// The link (index in `verbs`) to draw now, top → bottom (a new connection or element).
+    /// The link (index in `verbs`) to draw now: pin set, thread unrolled, verb written.
     var drawLink: Int? = nil
     var onOpenPiece: ((ItemRef) -> Void)? = nil
     var onAdd: (() -> Void)? = nil
     var onDelete: (() -> Void)? = nil
 
+    /// Where the thread runs, from the chain's leading edge.
+    static let threadX: CGFloat = 64
+    /// The sideways offset of every other node.
+    static let stagger: CGFloat = 40
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .center) {
-                Text(L10n.f("connection.title", number, connection.verbs.first.map { ConnectionFormat.verb($0) } ?? ""))
-                    .fieldLabel()
-                    .accessibilityAddTraits(.isHeader)
-                Spacer(minLength: 8)
-                if let onDelete {
-                    Menu {
-                        Button(role: .destructive, action: onDelete) {
-                            Label(L10n.t("connection.delete"), systemImage: "trash")
-                        }
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .font(Trace.Fonts.headline)
-                            .foregroundStyle(Trace.Colors.text2)
-                            .frame(width: Trace.Height.hit, height: Trace.Height.hit)
-                            .contentShape(Rectangle())
-                    }
-                    .accessibilityLabel(Text(L10n.t("connection.options")))
-                    .accessibilityIdentifier("notebook.connection.menu.\(connection.id)")
-                }
-            }
-            .padding(.bottom, 6)
+            header
+                .padding(.bottom, 16)
             ForEach(Array(connection.nodes.enumerated()), id: \.offset) { i, node in
                 if i > 0, i - 1 < connection.verbs.count {
-                    ConnectorView(verb: connection.verbs[i - 1], animated: drawLink == i - 1)
+                    ThreadSegment(verb: connection.verbs[i - 1], x: Self.threadX, animated: drawLink == i - 1)
                 }
-                nodeView(node)
+                nodeView(node, index: i, animatedPin: drawLink.map { $0 + 1 == i } ?? false)
             }
-            if let onAdd {
-                Button(action: onAdd) {
-                    Label(L10n.t("connection.addElement"), systemImage: "plus")
-                }
-                .buttonStyle(TextLinkStyle())
-                .padding(.top, 6)
-                .accessibilityIdentifier("notebook.connection.add.\(connection.id)")
-            }
+            if let onAdd { addButton(onAdd) }
         }
-        .padding(.horizontal, 16)
-        .padding(.top, 10)
-        .padding(.bottom, onAdd == nil ? 16 : 6)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .benCard()
         .contextMenu {
             if let onDelete {
                 Button(role: .destructive, action: onDelete) {
-                    Label(L10n.t("connection.delete"), systemImage: "trash")
+                    Label(L10n.t("connection.deleteThread"), systemImage: "trash")
                 }
             }
         }
@@ -754,88 +1071,205 @@ struct ConnectionChain: View {
         .accessibilityLabel(Text(ConnectionFormat.spoken(connection, number: number, in: game)))
     }
 
+    /// « FIL 1 · CONTREDIT » on a paper label; the options (delete) on the right.
+    private var header: some View {
+        HStack(alignment: .center, spacing: 8) {
+            Text(L10n.f("connection.threadTitle", number, connection.verbs.first.map { ConnectionFormat.verb($0) } ?? ""))
+                .fieldLabel(Trace.Colors.ink)
+                .lineLimit(2)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 5)
+                .background(PaperCardBackground(color: Trace.Colors.label, shadow: Trace.Shadow.print))
+                .accessibilityAddTraits(.isHeader)
+            Spacer(minLength: 8)
+            if let onDelete {
+                Menu {
+                    Button(role: .destructive, action: onDelete) {
+                        Label(L10n.t("connection.deleteThread"), systemImage: "trash")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .font(Trace.Fonts.headline)
+                        .foregroundStyle(Trace.Colors.ink)
+                        .frame(width: 34, height: 34)
+                        .background(Circle().fill(Trace.Colors.paperCard))
+                        .frame(width: Trace.Height.hit, height: Trace.Height.hit)
+                        .contentShape(Rectangle())
+                }
+                .accessibilityLabel(Text(L10n.t("connection.threadOptions")))
+                .accessibilityIdentifier("notebook.connection.menu.\(connection.id)")
+            }
+        }
+    }
+
     @ViewBuilder
-    private func nodeView(_ node: Connection.Node) -> some View {
-        let content = HStack(alignment: .center, spacing: 12) {
+    private func nodeView(_ node: Connection.Node, index: Int, animatedPin: Bool) -> some View {
+        let lead: CGFloat = index.isMultiple(of: 2) ? 0 : Self.stagger
+        let card = HStack(alignment: .center, spacing: 12) {
             if case .person(let id) = node, let suspect = game.index.suspect(id) {
                 IDPhoto(contact: game.contact(suspect.contact), width: 32, height: 40)
                     .accessibilityHidden(true)
             }
-            VStack(alignment: .leading, spacing: 4) {
-                Text(ConnectionFormat.label(node, in: game)).font(Trace.Fonts.data).foregroundStyle(Trace.Colors.benText)
+            VStack(alignment: .leading, spacing: 3) {
+                Text(ConnectionFormat.label(node, in: game))
+                    .font(Trace.Fonts.data)
+                    .foregroundStyle(Trace.Colors.ink2)
                 Text(ConnectionFormat.text(node, in: game))
                     .font(Trace.Fonts.callout)
-                    .foregroundStyle(Trace.Colors.text)
+                    .foregroundStyle(Trace.Colors.ink)
                     .lineLimit(2)
+                    .multilineTextAlignment(.leading)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             if node.pieceRef != nil, onOpenPiece != nil {
-                Image(systemName: "chevron.right").font(Trace.Fonts.caption.weight(.semibold)).foregroundStyle(Trace.Colors.text3)
+                Image(systemName: "chevron.right")
+                    .font(Trace.Fonts.caption.weight(.semibold))
+                    .foregroundStyle(Trace.Colors.ink2)
                     .accessibilityHidden(true)
             }
         }
-        .padding(12)
+        .padding(.horizontal, 12)
+        .padding(.top, 14)
+        .padding(.bottom, 12)
         .frame(maxWidth: .infinity, minHeight: Trace.Height.hit, alignment: .leading)
-        .background(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous).fill(Trace.Colors.surface2))
-        if let ref = node.pieceRef, let onOpenPiece {
-            Button { onOpenPiece(ref) } label: { content.contentShape(Rectangle()) }
-                .buttonStyle(PressableStyle())
-                .accessibilityElement(children: .combine)
-        } else {
-            content.accessibilityElement(children: .combine)
+        .background(PaperCardBackground())
+        .overlay(alignment: .topLeading) {
+            ThreadPin(animated: animatedPin)
+                .offset(x: Self.threadX - lead - 7, y: -7)
+        }
+        .contentShape(Rectangle())
+        Group {
+            if let ref = node.pieceRef, let onOpenPiece {
+                Button { onOpenPiece(ref) } label: { card }
+                    .buttonStyle(PressableStyle())
+                    .accessibilityElement(children: .combine)
+            } else {
+                card.accessibilityElement(children: .combine)
+            }
+        }
+        .padding(.leading, lead)
+        .padding(.trailing, Self.stagger - lead)
+    }
+
+    /// « + Ajouter un élément »: a loose end of thread, then a paper tag.
+    private func addButton(_ action: @escaping () -> Void) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Line()
+                .stroke(Trace.Colors.red, style: StrokeStyle(lineWidth: 2, dash: [4, 4]))
+                .frame(width: 2, height: 20)
+                .padding(.leading, Self.threadX - 1)
+                .accessibilityHidden(true)
+            Button(action: action) {
+                Label(L10n.t("connection.addElement"), systemImage: "plus")
+                    .font(Trace.Fonts.callout.weight(.semibold))
+                    .foregroundStyle(Trace.Colors.ink)
+                    .padding(.horizontal, 14)
+                    .frame(minHeight: 40)
+                    .background(PaperCardBackground(shadow: Trace.Shadow.print))
+                    .frame(minHeight: Trace.Height.hit)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(PressableStyle())
+            .padding(.leading, Self.threadX - 28)
+            .accessibilityIdentifier("notebook.connection.add.\(connection.id)")
         }
     }
 }
 
-/// The vertical 2 × 28 pt connector and its verb. A new one draws itself top → bottom (300 ms,
-/// easeInOut) and its verb fades in; with reduced motion, a 200 ms fade only (§8).
-struct ConnectorView: View {
-    let verb: Connection.Verb
-    /// False until a new connector has drawn itself.
-    @State private var drawn: Bool
+/// A red pin on a node (14 pt). A new one is set: scale 1.2 → 1 in 120 ms (a fade with reduced
+/// motion), once the builder sheet has gone down.
+struct ThreadPin: View {
+    @State private var set: Bool
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
     @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
 
-    init(verb: Connection.Verb, animated: Bool = false) {
-        self.verb = verb
-        _drawn = State(initialValue: !animated)
+    init(animated: Bool = false) {
+        _set = State(initialValue: !animated)
     }
 
     var body: some View {
-        let color = ConnectionFormat.color(verb)
         let reduced = systemReduceMotion || appReduceMotion
+        Pin(color: Trace.Colors.red, size: 14)
+            .scaleEffect(set || reduced ? 1 : 1.2)
+            .opacity(set ? 1 : 0)
+            .task {
+                guard !set else { return }
+                try? await Task.sleep(for: .milliseconds(300))
+                withAnimation(reduced ? .easeInOut(duration: 0.2) : .easeOut(duration: 0.12)) { set = true }
+            }
+    }
+}
+
+/// The red thread between two nodes (2 × 44 pt) and its verb in Caveat 20 ivory. A new one unrolls
+/// top → bottom (300 ms) after its pin, then its word is written left → right (400 ms); with
+/// reduced motion both fade in (200 ms), no unrolling.
+struct ThreadSegment: View {
+    let verb: Connection.Verb
+    var x: CGFloat = RedThread.threadX
+    @State private var unrolled: CGFloat
+    @State private var written: CGFloat
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
+
+    init(verb: Connection.Verb, x: CGFloat = RedThread.threadX, animated: Bool = false) {
+        self.verb = verb
+        self.x = x
+        _unrolled = State(initialValue: animated ? 0 : 1)
+        _written = State(initialValue: animated ? 0 : 1)
+    }
+
+    private var reduced: Bool { systemReduceMotion || appReduceMotion }
+
+    var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            ZStack(alignment: .top) {
-                Color.clear.frame(width: 2, height: 28)
-                Rectangle().fill(color).frame(width: 2, height: drawn || reduced ? 28 : 0)
-                    .opacity(reduced && !drawn ? 0 : 1)
-            }
-            .frame(width: 2, height: 28)
-            HStack(spacing: 5) {
-                Image(systemName: ConnectionFormat.symbol(verb))
-                Text(ConnectionFormat.verb(verb))
-            }
-            .font(Trace.Fonts.caption.weight(.semibold))
-            .foregroundStyle(color)
-            .opacity(drawn ? 1 : 0)
+            Rectangle()
+                .fill(Trace.Colors.red)
+                .frame(width: 2)
+                .frame(minHeight: 44, maxHeight: .infinity)
+                .scaleEffect(x: 1, y: reduced ? 1 : unrolled, anchor: .top)
+                .opacity(reduced ? unrolled : 1)
+                .accessibilityHidden(true)
+            Text(ConnectionFormat.verb(verb).lowercased())
+                .font(Trace.Fonts.threadNote)
+                .foregroundStyle(Trace.Colors.ivory)
+                .shadow(color: .black.opacity(0.35), radius: 1, y: 1)
+                .fixedSize(horizontal: false, vertical: true)
+                .mask(alignment: .leading) {
+                    Rectangle().scaleEffect(x: reduced ? 1 : written, y: 1, anchor: .leading)
+                }
+                .opacity(reduced ? written : 1)
+                .padding(.vertical, 4)
         }
-        .padding(.leading, 22)
+        .padding(.leading, x - 1)
+        .fixedSize(horizontal: false, vertical: true)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(ConnectionFormat.verb(verb)))
-        .onAppear {
-            guard !drawn else { return }
-            // After the sheet that created it has gone down.
-            withAnimation((reduced ? Animation.easeInOut(duration: 0.2) : .easeInOut(duration: 0.3)).delay(0.3)) { drawn = true }
+        .task {
+            guard unrolled < 1 || written < 1 else { return }
+            // After the builder sheet (300 ms) and the pin (120 ms).
+            try? await Task.sleep(for: .milliseconds(420))
+            if reduced {
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    unrolled = 1
+                    written = 1
+                }
+                return
+            }
+            withAnimation(.easeInOut(duration: 0.3)) { unrolled = 1 }
+            try? await Task.sleep(for: .milliseconds(300))
+            withAnimation(.easeOut(duration: 0.4)) { written = 1 }
         }
     }
 }
 
-// MARK: - Chronology (§6-08)
+// MARK: - Chronology (the ruled page)
 
-/// Carnet › Chronologie: the dated pieces of the file in time order, under a day header. Time in
-/// Plex Mono 14 (52 pt column), a 10 pt dot and a 2 pt line, the text, « PIÈCE nn · source ».
-/// A piece the player put in a « contredit » link: warning dot with a halo, « ≠ contredit PIÈCE nn ».
-/// Declarations (alibis) are events too: « Déclaration »; without a time, they come first.
+/// Carnet › Chrono: the dated pieces of the file in time order, written on a ruled page — the time
+/// in Plex Mono 14 in the left margin (the page's red rule at `margin`), the text in Plex Sans 15
+/// ink, « PIÈCE nn · source » in ink2. A piece the PLAYER put in a « contredit » thread: a red dot on
+/// the margin and « ≠ contredit PIÈCE nn » in red. Declarations are events too (« Déclaration »);
+/// without a time, they come first. At accessibility sizes the time sits above the text (no margin).
 struct ChronologySheet: View {
     struct Declaration: Identifiable {
         let id: String
@@ -847,6 +1281,8 @@ struct ChronologySheet: View {
     let game: Investigation
     var declarations: [Declaration] = []
     var onOpen: ((ItemRef) -> Void)? = nil
+    /// The page's red margin rule, from its leading edge; nil: no margin (accessibility sizes).
+    var margin: CGFloat? = 56
 
     private enum Event {
         case piece(NotebookEntry, ItemDescriber.Item, Moment)
@@ -859,6 +1295,9 @@ struct ChronologySheet: View {
         }
     }
 
+    /// Where the text column starts.
+    private var textX: CGFloat { (margin ?? 4) + 12 }
+
     var body: some View {
         let pieces: [Event] = game.notebook.compactMap { entry in
             let item = ItemDescriber.describe(entry.ref, in: game)
@@ -869,40 +1308,41 @@ struct ChronologySheet: View {
         let untimed = declarations.filter { $0.at == nil }
         VStack(alignment: .leading, spacing: 0) {
             if pieces.isEmpty {
-                EmptyPage(title: L10n.t("chrono.emptyTitle"), tip: L10n.t("chrono.emptyBody"))
+                EmptyPage(title: L10n.t("chrono.emptyTitle"), tip: L10n.t("chrono.emptyBody"), onPaper: true)
+                    .padding(.leading, textX)
+                    .padding(.trailing, 16)
                     .accessibilityIdentifier("notebook.chrono.empty")
             }
             if !untimed.isEmpty {
-                SectionHeader(title: L10n.t("chrono.statements"))
-                    .padding(.top, pieces.isEmpty ? 0 : 4)
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(untimed) { declaration in
-                        row(time: nil, text: declaration.who + " · " + declaration.text, meta: L10n.t("chrono.statement"),
-                            dot: .declaration, last: false)
-                    }
+                SectionHeader(title: L10n.t("chrono.statements"), color: Trace.Colors.ink2)
+                    .padding(.leading, textX)
+                    .padding(.top, 8)
+                    .padding(.bottom, -4)
+                ForEach(untimed) { declaration in
+                    row(time: nil, text: declaration.who + " · " + declaration.text, meta: L10n.t("chrono.statement"), contradiction: false)
                 }
-                .padding(.bottom, 12)
+                Color.clear.frame(height: 8).accessibilityHidden(true)
             }
             ForEach(Array(events.enumerated()), id: \.offset) { offset, event in
                 let previous = offset > 0 ? events[offset - 1].at : nil
                 if previous.map({ !$0.isSameDay(as: event.at) }) ?? true {
                     Text(PhoneFormat.longDayCapitalized(event.at))
-                        .font(Trace.Fonts.caption)
-                        .foregroundStyle(Trace.Colors.text2)
-                        .padding(.leading, 64)
-                        .padding(.top, offset == 0 ? 0 : 12)
-                        .padding(.bottom, 8)
+                        .font(Trace.Fonts.caption.weight(.semibold))
+                        .foregroundStyle(Trace.Colors.ink2)
+                        .padding(.leading, textX)
+                        .padding(.trailing, 16)
+                        .padding(.top, offset == 0 && untimed.isEmpty ? 8 : 16)
+                        .padding(.bottom, 2)
                         .accessibilityAddTraits(.isHeader)
                 }
-                eventRow(event, last: offset == events.count - 1)
+                eventRow(event)
             }
         }
+        .padding(.bottom, 16)
     }
 
-    private enum Dot { case plain, contradiction, declaration }
-
     @ViewBuilder
-    private func eventRow(_ event: Event, last: Bool) -> some View {
+    private func eventRow(_ event: Event) -> some View {
         switch event {
         case .piece(let entry, let item, let at):
             let number = game.pieceNumber(of: entry.ref) ?? 0
@@ -910,7 +1350,7 @@ struct ChronologySheet: View {
             let meta = against.isEmpty
                 ? PieceFormat.title(number) + " · " + PieceFormat.origin(entry.ref, in: game)
                 : against.map { L10n.f("chrono.contradicts", ConnectionFormat.tag($0, in: game)) }.joined(separator: " · ")
-            let line = row(time: at, text: item.label, meta: meta, dot: against.isEmpty ? .plain : .contradiction, last: last)
+            let line = row(time: at, text: item.label, meta: meta, contradiction: !against.isEmpty)
             if let onOpen {
                 Button { onOpen(entry.ref) } label: { line }
                     .buttonStyle(PressableStyle())
@@ -919,52 +1359,147 @@ struct ChronologySheet: View {
                 line.accessibilityIdentifier("notebook.row")
             }
         case .declaration(let declaration, let at):
-            row(time: at, text: declaration.who + " · " + declaration.text, meta: L10n.t("chrono.statement"), dot: .declaration, last: last)
+            row(time: at, text: declaration.who + " · " + declaration.text, meta: L10n.t("chrono.statement"), contradiction: false)
         }
     }
 
-    private func row(time: Moment?, text: String, meta: String, dot: Dot, last: Bool) -> some View {
-        HStack(alignment: .top, spacing: 12) {
-            Text(time.map { PhoneFormat.time($0) } ?? "")
-                .font(.custom(Trace.FontName.monoMedium, size: 14, relativeTo: .subheadline))
-                .foregroundStyle(Trace.Colors.text)
-                .frame(width: 52, alignment: .leading)
-            VStack(spacing: 0) {
-                dotView(dot).padding(.top, 5)
-                Rectangle().fill(last ? Color.clear : Trace.Colors.surface3).frame(width: 2).frame(maxHeight: .infinity)
+    private func row(time: Moment?, text: String, meta: String, contradiction: Bool) -> some View {
+        let clock = time.map { PhoneFormat.time($0) } ?? ""
+        return HStack(alignment: .firstTextBaseline, spacing: 0) {
+            if let margin {
+                Text(clock)
+                    .font(Trace.Fonts.notebookTime)
+                    .monospacedDigit()
+                    .foregroundStyle(Trace.Colors.ink)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .frame(width: max(0, margin - 8), alignment: .trailing)
+                    .padding(.trailing, 8)
             }
-            .frame(width: 14)
-            .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 3) {
+                if margin == nil, !clock.isEmpty {
+                    Text(clock)
+                        .font(Trace.Fonts.notebookTime)
+                        .monospacedDigit()
+                        .foregroundStyle(Trace.Colors.ink)
+                }
                 Text(text)
-                    .font(Trace.Fonts.callout)
-                    .foregroundStyle(Trace.Colors.text)
+                    .font(Trace.Fonts.notebookText)
+                    .foregroundStyle(Trace.Colors.ink)
                     .lineLimit(3)
                     .fixedSize(horizontal: false, vertical: true)
-                Text(meta)
-                    .font(dot == .contradiction ? Trace.Fonts.caption.weight(.semibold) : Trace.Fonts.caption)
-                    .foregroundStyle(dot == .contradiction ? Trace.Colors.warning : Trace.Colors.text2)
-                    .fixedSize(horizontal: false, vertical: true)
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    if contradiction && margin == nil {
+                        Circle().fill(Trace.Colors.red).frame(width: 8, height: 8).accessibilityHidden(true)
+                    }
+                    Text(meta)
+                        .font(contradiction ? Trace.Fonts.caption.weight(.semibold) : Trace.Fonts.caption)
+                        .foregroundStyle(contradiction ? Trace.Colors.red : Trace.Colors.ink2)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
+            .padding(.leading, margin == nil ? 16 : 12)
+            .padding(.trailing, 16)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.bottom, 16)
         }
-        // The line runs the full height of the row.
-        .fixedSize(horizontal: false, vertical: true)
+        .padding(.vertical, 8)
+        .overlay(alignment: .topLeading) {
+            if contradiction, let margin {
+                // On the margin rule, level with the first line.
+                Circle()
+                    .fill(Trace.Colors.red)
+                    .frame(width: 9, height: 9)
+                    .offset(x: margin - 4, y: 13)
+                    .accessibilityHidden(true)
+            }
+        }
         .contentShape(Rectangle())
         .accessibilityElement(children: .combine)
     }
+}
 
-    @ViewBuilder
-    private func dotView(_ dot: Dot) -> some View {
-        switch dot {
-        case .plain:
-            Circle().fill(Trace.Colors.benText).frame(width: 10, height: 10)
-        case .contradiction:
-            Circle().fill(Trace.Colors.warning).frame(width: 10, height: 10)
-                .background(Circle().fill(Trace.Colors.tint(Trace.Colors.warning)).frame(width: 18, height: 18))
-        case .declaration:
-            Circle().strokeBorder(Trace.Colors.text2, lineWidth: 2).frame(width: 10, height: 10)
+// MARK: - NotebookDividers (§3)
+
+/// NotebookDividers (§3): the Carnet's four dividers, in the `tabs` colours; the active one is
+/// paper, 44 pt tall and continuous with the page below it; the others 38 pt, 6 pt lower, shaded
+/// at the foot (behind the page). Label Plex Sans 13/600 ink + counter Plex Mono 10. Changing: the
+/// new one rises (250 ms spring; a fade with reduced motion). Each divider is a 44 pt target.
+struct NotebookDividers<Value: Hashable>: View {
+    struct Item {
+        let value: Value
+        let label: String
+        var count: Int? = nil
+        let identifier: String
+    }
+
+    let items: [Item]
+    @Binding var selection: Value
+    @Environment(\.dynamicTypeSize) private var typeSize
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
+
+    var body: some View {
+        HStack(alignment: .bottom, spacing: 4) {
+            ForEach(Array(items.enumerated()), id: \.offset) { index, item in
+                divider(item, index: index)
+            }
+        }
+    }
+
+    private func divider(_ item: Item, index: Int) -> some View {
+        let active = item.value == selection
+        let shape = UnevenRoundedRectangle(topLeadingRadius: Trace.Radius.folderTab, bottomLeadingRadius: 0,
+                                           bottomTrailingRadius: 0, topTrailingRadius: Trace.Radius.folderTab)
+        let colors = Trace.Colors.tabs
+        return Button {
+            guard !active else { return }
+            withAnimation(systemReduceMotion || appReduceMotion ? .easeInOut(duration: 0.2) : Trace.Motion.tab) {
+                selection = item.value
+            }
+            Haptics.selection()
+        } label: {
+            label(item, active: active)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 6)
+                .frame(maxWidth: .infinity, minHeight: active ? 44 : 38)
+                .background {
+                    shape
+                        .fill(active ? Trace.Colors.paper : colors[index % colors.count])
+                        .overlay(alignment: .bottom) {
+                            if !active {
+                                LinearGradient(colors: [.clear, .black.opacity(0.16)], startPoint: .top, endPoint: .bottom)
+                                    .frame(height: 8)
+                            }
+                        }
+                }
+                .frame(minHeight: Trace.Height.hit, alignment: .bottom)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(item.label))
+        .accessibilityValue(Text(item.count.map { "\($0)" } ?? ""))
+        .accessibilityAddTraits(active ? [.isButton, .isSelected] : .isButton)
+        .accessibilityIdentifier(item.identifier)
+    }
+
+    private func label(_ item: Item, active: Bool) -> some View {
+        let layout = typeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(spacing: 2))
+            : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 4))
+        return layout {
+            Text(item.label)
+                .font(Trace.Fonts.notebookDivider)
+                .foregroundStyle(Trace.Colors.ink)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+            if let count = item.count {
+                Text(verbatim: "\(count)")
+                    .font(Trace.Fonts.notebookCount)
+                    .monospacedDigit()
+                    .foregroundStyle(active ? Trace.Colors.ink2 : Trace.Colors.ink)
+                    .lineLimit(1)
+            }
         }
     }
 }
