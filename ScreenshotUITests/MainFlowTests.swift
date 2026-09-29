@@ -3,8 +3,8 @@ import XCTest
 /// Plays CONCLUDE : ENQUÊTES on a simulator, like a player would, and keeps a screenshot of every
 /// step (published by CI on the `ci/ui-screenshots` branch).
 ///
-/// First launch (final handoff §C): Lancement → Titre → Qui enquête ? → Dossier #001 → ouverture →
-/// téléphone with the three tutorial bubbles → verser au dossier → Carnet → conclure → vérification →
+/// First launch (UX V3 handoff §7): Lancement → Première impression → Qui enquête ? → Dossier #001 →
+/// ouverture → téléphone with its tips → « + Verser au dossier » → Carnet → conclure → vérification →
 /// rapport → affectation → Bureau. Then, as a returning player: the apps, the search, pause and
 /// resume, the challenge levels, the map, the opening of cases #002–#005, time up and a wrong
 /// conclusion with « Reprendre l'enquête ».
@@ -115,7 +115,8 @@ final class MainFlowTests: XCTestCase {
         XCTAssertTrue(element.exists && element.isHittable, "Could not scroll to \(element.debugDescription)")
     }
 
-    /// Long press (0.4 s in the game) → the « VERSER AU DOSSIER » sheet → confirm.
+    /// Long press (0.5 s in the game, the shortcut) files at once → the « PIÈCE nn · Versée au
+    /// dossier » sheet → [Continuer] (it also closes by itself after 2.5 s outside UI-test resets).
     private func file(_ target: XCUIElement, _ name: String) {
         dismissUrgentBanner()
         let confirm = element("filing.confirm")
@@ -125,9 +126,27 @@ final class MainFlowTests: XCTestCase {
             dismissUrgentBanner()
             target.press(forDuration: 1.2)
         }
-        wait(confirm, 5, "feuille « Verser au dossier »")
+        wait(confirm, 5, "feuille « Pièce versée au dossier »")
         snap(name)
-        confirm.tap()
+        if confirm.exists { confirm.tap() }
+        XCTAssertTrue(confirm.waitForNonExistence(timeout: 5), "La feuille de versement ne se ferme pas")
+    }
+
+    /// The main way (§6-04): a tap selects the element, « + Verser au dossier » appears under it.
+    private func fileWithBadge(_ target: XCUIElement, _ name: String) {
+        dismissUrgentBanner()
+        let badge = element("evidence.file")
+        tapWhenReady(target, "élément à verser")
+        if !badge.waitForExistence(timeout: 3) {
+            snap("retry-selection-\(name)")
+            target.tap()
+        }
+        wait(badge, 5, "« + Verser au dossier »")
+        snap(name + "-badge")
+        let confirm = element("filing.confirm")
+        tap(badge, "Verser au dossier", expecting: confirm)
+        snap(name)
+        if confirm.exists { confirm.tap() }
         XCTAssertTrue(confirm.waitForNonExistence(timeout: 5), "La feuille de versement ne se ferme pas")
     }
 
@@ -179,12 +198,12 @@ final class MainFlowTests: XCTestCase {
         wait(verification, 8, "vérification du dossier")
     }
 
-    /// Vérification (typed, stamp) → [LIRE LE RAPPORT] → the report.
+    /// Vérification (1.8 s, three lines) → the report, by itself (its verdict badge is "result.read").
     private func readReport(_ shot: String) {
-        let read = wait(element("result.read"), 15, "« Lire le rapport »")
+        wait(element("result.read"), 15, "le rapport après la vérification")
+        wait(element("result.report"), 5, "le rapport")
         sleep(1)
         snap(shot)
-        tap(read, "Lire le rapport", expecting: element("result.report"))
     }
 
     /// Carnet → CONCLURE → the conclusion screen.
@@ -296,18 +315,18 @@ final class MainFlowTests: XCTestCase {
         app.launchArguments = baseArguments + ["-UITestFirstLaunch", "show"]
         app.launch()
 
-        // 01 · Launch, then 02 · Title: the banner, the promise, the three verbs, one button.
-        let start = wait(element("title.start"), 20, "écran titre")
+        // 01 · Launch, then 00 · Première impression: five steps light up, the line, [Commencer] at 4.5 s.
+        wait(element("first.impression"), 20, "première impression")
         sleep(1)
-        snap("F01-titre")
-        XCTAssertTrue(element("title.settings").exists, "⚙ sur l'écran titre")
-        XCTAssertTrue(app.staticTexts["Un téléphone. Une disparition. Quelqu'un ment."].exists, "L'accroche")
-        for verb in ["EXPLORER", "VERSER AU DOSSIER", "CONCLURE"] {
-            XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", verb)).firstMatch.exists, "Verbe \(verb)")
-        }
+        snap("F01a-premiere-impression-debut")
+        let start = wait(element("first.start"), 8, "[Commencer]")
+        sleep(1)
+        snap("F01b-premiere-impression")
+        XCTAssertTrue(app.staticTexts["Un téléphone. Une disparition. À vous de conclure."].exists, "La phrase")
+        XCTAssertFalse(element("title.start").exists, "Plus d'écran titre")
 
         // 03 · Who investigates: Élise preselected, no service number, no rank.
-        tap(start, "Commencer l'enquête", expecting: element("who.continue"))
+        tap(start, "Commencer", expecting: element("who.continue"))
         let elise = element("who.elise")
         XCTAssertTrue(elise.isSelected, "Élise est présélectionnée")
         XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'BEN-0'")).firstMatch.exists, "Aucun matricule avant l'affectation")
@@ -341,7 +360,7 @@ final class MainFlowTests: XCTestCase {
             snap("F06-bulle-2")
         }
         scrollTo(alibi, maxSwipes: 4)
-        file(alibi, "F07-feuille-verser")
+        fileWithBadge(alibi, "F07-feuille-verser")
         XCTAssertFalse(element("coach.bubble.2").exists, "Verser la pièce ferme la bulle 2")
         wait(element("piece.badge"), 5, "étiquette « PIÈCE 01 » sur le message")
         assertPieces(1)
@@ -587,11 +606,11 @@ final class MainFlowTests: XCTestCase {
         app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR"]
         app.launch()
 
-        // 02b · Titre, reprise: the investigation in progress, one button.
-        let resume = wait(element("title.resume"), 20, "« Reprendre l'enquête » (écran titre)")
-        XCTAssertTrue(element("title.desk").exists, "Lien « Aller au Bureau »")
+        // The Bureau: the case card of the investigation in progress, « Reprendre ».
+        let resume = wait(element("home.resume"), 20, "« Reprendre » (carte de l'affaire en cours)")
+        XCTAssertFalse(element("title.resume").exists, "Plus d'écran titre")
         sleep(1)
-        snap("52-titre-reprise")
+        snap("52-bureau-reprise")
         tap(resume, "Reprendre l'enquête", expecting: element("phone.timer"))
 
         // Same screen, same pieces; the timer goes on from where it was (time away does not count).
@@ -930,13 +949,16 @@ final class MainFlowTests: XCTestCase {
     func testStoryFirstChapter() {
         app.launchArguments += ["-UITestDuration", "25"]
         app.launch()
-        let storyCard = wait(element("mode.story"), 20, "Bureau (HISTOIRE)")
+        let storySegment = wait(element("mode.story"), 20, "Bureau (segment Histoire)")
         sleep(1)
         snap("H01-bureau-trois-modes")
         XCTAssertTrue(element("mode.investigations").exists && element("mode.alibi").exists, "Trois modes au Bureau")
+        tap(storySegment, "Histoire", expecting: element("story.open"))
+        sleep(1)
+        snap("H01b-bureau-histoire")
 
         // h05 · creation.
-        tap(storyCard, "HISTOIRE", expecting: element("creator.firstName"))
+        tap(element("story.open"), "Ouvrir l'histoire", expecting: element("creator.firstName"))
         tapWhenReady(element("creator.template.vincent"), "modèle Vincent Delmas")
         sleep(1)
         snap("H02-creation-identite")
@@ -969,7 +991,8 @@ final class MainFlowTests: XCTestCase {
         app.terminate()
         app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_FR", "-UITestDuration", "25"]
         app.launch()
-        tap(wait(element("mode.story"), 20, "Bureau après relance"), "HISTOIRE", expecting: element("story.hub"))
+        tap(wait(element("mode.story"), 20, "Bureau après relance"), "Histoire", expecting: element("story.open"))
+        tap(element("story.open"), "Ouvrir l'histoire", expecting: element("story.hub"))
         sleep(1)
         snap("H08-hub-reprise")
         tap(element("story.continue"), "Continuer", expecting: answer, timeout: 12)
@@ -1029,10 +1052,9 @@ final class MainFlowTests: XCTestCase {
         tap(element("story.back"), "‹ Bureau", expecting: element("mode.investigations"))
         bureau(10, "ENQUÊTES")
         snap("H21-enquetes")
-        tap(element("investigations.back"), "‹ Bureau", expecting: element("mode.alibi"))
-        tap(element("mode.alibi"), "ALIBI", expecting: element("alibi.title"))
-        tap(element("alibi.back"), "‹ Bureau", expecting: element("mode.story"))
-        tap(element("mode.story"), "HISTOIRE", expecting: element("story.hub"))
+        tap(element("mode.alibi"), "Alibi", expecting: element("alibi.title"))
+        tap(element("mode.story"), "Histoire", expecting: element("story.open"))
+        tap(element("story.open"), "Ouvrir l'histoire", expecting: element("story.hub"))
         sleep(1)
         snap("H22-retour-histoire")
         tap(element("story.office"), "Mon bureau", expecting: element("story.office.back"), timeout: 8)
@@ -1049,7 +1071,7 @@ final class MainFlowTests: XCTestCase {
         let card = wait(element("mode.alibi"), 20, "Bureau (ALIBI)")
         sleep(1)
         snap("A0-bureau-carte-alibi")
-        tap(card, "ALIBI", expecting: element("alibi.title"))
+        tap(card, "Alibi", expecting: element("alibi.title"))
         sleep(1)
         snap("A1-alibi-liste")
         tap(element("alibi.start"), "Commencer", expecting: element("alibi.claim"))
