@@ -167,7 +167,7 @@ final class MainFlowTests: XCTestCase {
 
     /// Carnet › PIÈCES: piece `n` accuses (or clears) a suspect.
     private func link(piece n: Int, to suspect: String, accuses: Bool = true) {
-        element("notebook.tab.0").tap()
+        element("notebook.tab.pieces").tap()
         let stance = element(accuses ? "notebook.accuses.\(n)" : "notebook.clears.\(n)")
         let chip = element("notebook.suspectChip.\(suspect)")
         scrollTo(stance, maxSwipes: 6)
@@ -527,11 +527,11 @@ final class MainFlowTests: XCTestCase {
         snap("14-carnet-pieces")
         link(piece: 1, to: "s_emma")
         snap("15-carnet-liee")
-        element("notebook.tab.1").tap()
+        element("notebook.tab.suspects").tap()
         wait(element("notebook.suspect.s_emma"), 5, "fiche d'Emma")
         sleep(1)
         snap("15a-carnet-suspects")
-        element("notebook.tab.2").tap()
+        element("notebook.tab.chrono").tap()
         sleep(1)
         snap("15b-carnet-chronologie")
 
@@ -1119,12 +1119,12 @@ final class MainFlowTests: XCTestCase {
         wait(element("notebook.goal"), 5, "rappel de la déclaration")
         snap("A5-alibi-carnet")
         tapWhenReady(element("notebook.accuses.1"), "Contredit")
-        element("notebook.tab.1").tap()
+        element("notebook.tab.suspects").tap()
         wait(element("notebook.claim"), 5, "onglet Déclaration")
         snap("A6-alibi-declaration")
 
         // Verdict.
-        element("notebook.tab.0").tap()
+        element("notebook.tab.pieces").tap()
         tapWhenReady(element("notebook.accuse"), "Conclure")
         wait(element("alibi.question"), 8, "« Son alibi est-il fiable ? »")
         snap("A7-alibi-verdict")
