@@ -180,7 +180,7 @@ struct GameRoot: View {
                               onCancel: { replaceAsk = nil })
                 .presentationDetents([.medium, .large])
                 .presentationCornerRadius(Trace.Radius.sheet)
-                .presentationBackground(Trace.Colors.surface)
+                .presentationBackground(Trace.Colors.paper)
         }
     }
 
@@ -737,6 +737,8 @@ enum UITestHooks {
             defaults.removeObject(forKey: Preferences.relaxedTimeKey)
             defaults.removeObject(forKey: Preferences.reduceMotionKey)
             defaults.removeObject(forKey: Preferences.deskModeKey)
+            // The seal (screen 03) is shown once per case: shown again after a reset.
+            defaults.removeObject(forKey: "conclude.sealOpened.v1")
         }
         switch defaults.string(forKey: "UITestFirstLaunch") {
         case "skip":

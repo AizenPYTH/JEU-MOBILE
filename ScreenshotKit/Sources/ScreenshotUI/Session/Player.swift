@@ -55,6 +55,9 @@ enum Rank: Int, CaseIterable, Comparable {
     }
 
     var title: String { L10n.t("rank.\(key)") }
+    /// The rank as it applies to the investigator: « INSPECTRICE » for Élise, « INSPECTEUR » for
+    /// Vincent (the Bureau's greeting, the BEN card).
+    func title(feminine: Bool) -> String { L10n.t(feminine ? "rank.\(key)F" : "rank.\(key)") }
     /// Inked rank stamp (Art.xcassets/Stamps).
     var stampAsset: String { "stamp_\(key)_rouge" }
     /// Cases to solve to reach the next rank (nil at the top).

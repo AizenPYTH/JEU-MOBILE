@@ -5171,6 +5171,23 @@
         }
       }
     },
+    "desk.backToInvestigations": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to investigations"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revenir aux enquêtes"
+          }
+        }
+      }
+    },
     "desk.duration": {
       "extractionState": "manual",
       "localizations": {
@@ -5201,6 +5218,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bonjour, %@"
+          }
+        }
+      }
+    },
+    "desk.helloRank": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hello, %1$@ %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonjour, %1$@ %2$@"
           }
         }
       }
@@ -5426,6 +5460,23 @@
         }
       }
     },
+    "desk.resumeTime": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resume · %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reprendre · %@"
+          }
+        }
+      }
+    },
     "desk.story.continue": {
       "extractionState": "manual",
       "localizations": {
@@ -5460,6 +5511,23 @@
         }
       }
     },
+    "desk.waiting": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A case file is waiting on your desk."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un dossier vous attend sur le bureau."
+          }
+        }
+      }
+    },
     "dossier.defaultCategory": {
       "extractionState": "manual",
       "localizations": {
@@ -5490,6 +5558,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Difficulté"
+          }
+        }
+      }
+    },
+    "dossier.examine": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Examine the phone · Piece 01"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Examiner le téléphone · Pièce 01"
           }
         }
       }
@@ -5732,6 +5817,23 @@
         }
       }
     },
+    "dossier.method": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Method"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Méthode"
+          }
+        }
+      }
+    },
     "dossier.number": {
       "extractionState": "manual",
       "localizations": {
@@ -5779,6 +5881,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Personnes"
+          }
+        }
+      }
+    },
+    "dossier.peopleHeard": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "People interviewed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personnes entendues"
           }
         }
       }
@@ -10383,6 +10502,23 @@
         }
       }
     },
+    "rank.enqueteurF": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "INVESTIGATOR"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ENQUÊTRICE"
+          }
+        }
+      }
+    },
     "rank.experimente": {
       "extractionState": "manual",
       "localizations": {
@@ -10396,6 +10532,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "EXPÉRIMENTÉ"
+          }
+        }
+      }
+    },
+    "rank.experimenteF": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EXPERIENCED"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "EXPÉRIMENTÉE"
           }
         }
       }
@@ -10417,7 +10570,41 @@
         }
       }
     },
+    "rank.inspecteurF": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "INSPECTOR"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "INSPECTRICE"
+          }
+        }
+      }
+    },
     "rank.senior": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SENIOR"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SENIOR"
+          }
+        }
+      }
+    },
+    "rank.seniorF": {
       "extractionState": "manual",
       "localizations": {
         "en": {
