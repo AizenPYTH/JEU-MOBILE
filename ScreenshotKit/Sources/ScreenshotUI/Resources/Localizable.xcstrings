@@ -8914,6 +8914,23 @@
         }
       }
     },
+    "opening.openSeal": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the evidence bag"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le scellé"
+          }
+        }
+      }
+    },
     "opening.seal": {
       "extractionState": "manual",
       "localizations": {
@@ -9063,6 +9080,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "PAUSE"
+          }
+        }
+      }
+    },
+    "pause.stopped": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The timer is stopped."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le chrono est arrêté."
           }
         }
       }
@@ -11444,6 +11478,74 @@
         }
       }
     },
+    "rim.alibi": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alibi #%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alibi #%@"
+          }
+        }
+      }
+    },
+    "rim.dossier": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File #%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dossier #%@"
+          }
+        }
+      }
+    },
+    "rim.noPieces": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0 pieces"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "0 pièce"
+          }
+        }
+      }
+    },
+    "seal.lastOn": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last switched on: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dernier allumage : %@"
+          }
+        }
+      }
+    },
     "search.all": {
       "extractionState": "manual",
       "localizations": {
@@ -11950,6 +12052,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vibrations"
+          }
+        }
+      }
+    },
+    "slip.stamp": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versée"
           }
         }
       }

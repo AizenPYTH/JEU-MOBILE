@@ -2,10 +2,10 @@
 import SwiftUI
 import UIKit
 
-/// A BEN tip bubble (handoff UX V3 §7): flat `surface`, light text, radius 16, a small arrow
-/// towards what it talks about, one sentence and a close button. Never modal: only its × takes
-/// touches (taps go through the rest of it). It lives on the light phone: the dark bubble is the
-/// BEN speaking, not the phone.
+/// A tip (handoff UX V3 §7, drawn as V4 paper): a small paperCard note pinned with a red pin, a
+/// small paper arrow towards what it talks about, one sentence in Plex Sans ink (a necessary
+/// instruction: never Caveat) and a close button. Never modal: only its × takes touches (taps go
+/// through the rest of it). It lies on the light phone like a note left by the BEN.
 struct CoachBubble: View {
     let bubble: TutorialCoach.Bubble
     /// Where the arrow points.
@@ -13,7 +13,7 @@ struct CoachBubble: View {
     /// Horizontal shift of the arrow from the bubble's centre, to point at an element that is not
     /// under the middle of the bubble (the Messages icon, a received message…).
     var arrowOffset: CGFloat = 0
-    /// Kept for callers (the bubble is always the BEN's dark surface now).
+    /// Kept for callers (the note is always paper now).
     var dark = false
     let onClose: () -> Void
     @State private var shown = false
@@ -31,19 +31,20 @@ struct CoachBubble: View {
     }
 
     var body: some View {
-        let shape = RoundedRectangle(cornerRadius: Trace.Radius.card, style: .continuous)
+        let shape = Rectangle()
         HStack(alignment: .top, spacing: 8) {
             Text(text)
                 .font(Trace.Fonts.callout)
-                .foregroundStyle(Trace.Colors.text)
+                .foregroundStyle(Trace.Colors.ink)
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 12)
+                .padding(.top, 16)
+                .padding(.bottom, 12)
                 .allowsHitTesting(false)
             Button(action: onClose) {
                 Image(systemName: "xmark")
                     .font(.system(size: 11, weight: .bold))
-                    .foregroundStyle(Trace.Colors.text2)
+                    .foregroundStyle(Trace.Colors.ink2)
                     .frame(width: Trace.Height.hit, height: Trace.Height.hit)
                     .contentShape(Rectangle())
             }
@@ -57,16 +58,23 @@ struct CoachBubble: View {
         .frame(maxWidth: 280, alignment: .leading)
         .background(
             shape
-                .fill(Trace.Colors.surface)
-                .overlay(shape.strokeBorder(Trace.Colors.line, lineWidth: 1))
+                .fill(Trace.Colors.paperCard)
                 .overlay(alignment: arrow == .top ? .top : .bottom) {
                     BubbleArrow(up: arrow == .top)
-                        .fill(Trace.Colors.surface)
+                        .fill(Trace.Colors.paperCard)
                         .frame(width: 16, height: 8)
                         .offset(x: arrowOffset, y: arrow == .top ? -7.5 : 7.5)
                 }
+                .compositingGroup()
+                .shadow(color: Trace.Shadow.slip.color, radius: Trace.Shadow.slip.radius, y: Trace.Shadow.slip.y)
                 .allowsHitTesting(false)
         )
+        .overlay(alignment: .topLeading) {
+            // The pin that holds the note (decorative).
+            Pin(color: Trace.Colors.red, size: coachPinSize)
+                .offset(x: coachPinInset, y: -coachPinSize / 2 + 2)
+                .allowsHitTesting(false)
+        }
         .offset(y: shown || reduceMotion ? 0 : (arrow == .top ? -4 : 4))
         .opacity(shown ? 1 : 0)
         .onAppear { withAnimation(.easeOut(duration: reduceMotion ? 0.2 : 0.22)) { shown = true } }
@@ -79,7 +87,11 @@ struct CoachBubble: View {
     }
 }
 
-/// The bubble's small triangle.
+/// The pin's head, and how far it sits from the note's leading edge.
+private let coachPinSize: CGFloat = 13
+private let coachPinInset: CGFloat = 14
+
+/// The note's small paper triangle.
 private struct BubbleArrow: Shape {
     let up: Bool
 
@@ -99,7 +111,7 @@ private struct BubbleArrow: Shape {
     }
 }
 
-/// The element a tip points at (§7): a 2 pt ben ring that pulses once (scale 1 → 1.04 → 1), then
+/// The element a tip points at (§7): a 2 pt red ring (the pin's red) that pulses once (scale 1 → 1.04 → 1), then
 /// stays until the tip is answered. Reduced motion: the ring only.
 struct CoachRing: View {
     let radius: CGFloat
@@ -109,7 +121,7 @@ struct CoachRing: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: radius + 3, style: .continuous)
-            .strokeBorder(Trace.Colors.ben, lineWidth: 2)
+            .strokeBorder(Trace.Colors.red, lineWidth: 2)
             .padding(-3)
             .scaleEffect(pulse ? 1.04 : 1)
             .allowsHitTesting(false)

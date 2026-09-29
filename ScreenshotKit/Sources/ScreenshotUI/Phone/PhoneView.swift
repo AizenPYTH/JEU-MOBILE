@@ -2,16 +2,16 @@
 import SwiftUI
 import CaseEngine
 
-/// The seized phone (handoff UX V3 §2, §6-03): a real, light phone that fills the screen above the
-/// BEN's investigation bar — no device mock around it. Its fictional status bar (the phone's own
-/// time and battery), its apps, its notifications and the home indicator; the EvidenceBadge of the
-/// element the player touched is drawn here, above every app screen. The investigation bar, the
-/// EvidenceSheet and the Carnet belong to the shell (`InvestigationView`).
+/// The seized phone (handoff V4 screen 04, UX V3 §2, §6-03): a real, light phone that fills the
+/// screen above the kraft InvestigationRim — no device mock around it. Its fictional status bar
+/// (the phone's own time and battery), its apps, its notifications and the home indicator; the
+/// EvidenceTag of the element the player touched is drawn here, above every app screen. The rim,
+/// the EvidenceSlip and its veil, and the Carnet belong to the shell (`InvestigationView`).
 struct PhoneView: View {
     let session: GameSession
     /// Apps open from (and close back into) their icon, like on iOS.
     @Namespace private var appZoom
-    /// Where the selected element is (its badge is drawn by `EvidenceBadgeLayer`).
+    /// Where the selected element is (its EvidenceTag is drawn by `EvidenceBadgeLayer`).
     @State private var badgeAnchor = EvidenceBadgeAnchor()
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
     @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
@@ -56,7 +56,7 @@ struct PhoneView: View {
                 .background(session.path.isEmpty ? Color.clear : Theme.Colors.bgBase.opacity(0.94))
                 .zIndex(1)
 
-            // The selected element's « + Verser au dossier ».
+            // The selected element's EvidenceTag « Verser au dossier ».
             EvidenceBadgeLayer(session: session, anchor: badgeAnchor, topInset: statusBar,
                                bottomInset: PhoneLayout.barClearance)
                 .zIndex(2)
@@ -81,7 +81,8 @@ struct PhoneView: View {
                     .zIndex(4)
             }
 
-            // Short confirmations (« Retirée du dossier »…): at the top, under the status bar.
+            // Short confirmations (« Retirée du dossier »…): a taped paper label at the top, under
+            // the status bar.
             if let toast = session.toast {
                 ToastView(toast: toast)
                     .padding(.top, statusBar + Theme.Spacing.s3)
@@ -163,7 +164,7 @@ struct AppContainer: View {
 }
 
 /// Common look of every phone screen: light base, no list chrome, room for the home indicator.
-/// A tap anywhere on the screen hides the EvidenceBadge of the selected element (§6-04).
+/// A tap anywhere on the screen hides the EvidenceTag of the selected element (§6-04).
 struct PhoneAppStyle: ViewModifier {
     var session: GameSession? = nil
 
