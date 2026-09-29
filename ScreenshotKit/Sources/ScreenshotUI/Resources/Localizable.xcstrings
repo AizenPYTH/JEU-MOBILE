@@ -464,6 +464,23 @@
         }
       }
     },
+    "accuse.confirmFor": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is responsible?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ est responsable ?"
+          }
+        }
+      }
+    },
     "accuse.confirmMessage": {
       "extractionState": "manual",
       "localizations": {
@@ -555,13 +572,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "TIME'S UP"
+            "value": "Time's up"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "TEMPS ÉCOULÉ"
+            "value": "Temps écoulé"
           }
         }
       }
@@ -8394,6 +8411,40 @@
         }
       }
     },
+    "result.cluesFound": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clues found"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indices trouvés"
+          }
+        }
+      }
+    },
+    "result.cluesMissed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clues missed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indices manqués"
+          }
+        }
+      }
+    },
     "result.colHints": {
       "extractionState": "manual",
       "localizations": {
@@ -8424,6 +8475,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Note"
+          }
+        }
+      }
+    },
+    "result.connections": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connections"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connexions"
           }
         }
       }
@@ -8479,6 +8547,40 @@
         }
       }
     },
+    "result.fileShort": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classer"
+          }
+        }
+      }
+    },
+    "result.finalMark": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Final mark"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note finale"
+          }
+        }
+      }
+    },
     "result.header": {
       "extractionState": "manual",
       "localizations": {
@@ -8492,6 +8594,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "RAPPORT · #%@"
+          }
+        }
+      }
+    },
+    "result.hideMissed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide the missed clues"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masquer les indices manqués"
+          }
+        }
+      }
+    },
+    "result.hideTimeline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide the reconstruction"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masquer la reconstitution"
           }
         }
       }
@@ -8622,6 +8758,23 @@
         }
       }
     },
+    "result.missedIn": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the %@ app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans l'app %@"
+          }
+        }
+      }
+    },
     "result.notFound": {
       "extractionState": "manual",
       "localizations": {
@@ -8656,6 +8809,23 @@
         }
       }
     },
+    "result.piecesUsed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pieces used"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièces utilisées"
+          }
+        }
+      }
+    },
     "result.read": {
       "extractionState": "manual",
       "localizations": {
@@ -8686,6 +8856,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "temps détendu"
+          }
+        }
+      }
+    },
+    "result.replayHint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The timer starts full again, your pieces are kept."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le chrono repart plein, vos pièces sont gardées."
+          }
+        }
+      }
+    },
+    "result.responsible": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responsible"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responsable"
+          }
+        }
+      }
+    },
+    "result.responsibleHidden": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not revealed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non révélé"
+          }
+        }
+      }
+    },
+    "result.responsibleHiddenTip": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The solution is available on request."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La solution reste disponible sur demande."
           }
         }
       }
@@ -8792,6 +9030,23 @@
         }
       }
     },
+    "result.revealedBadge": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solution viewed"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solution consultée"
+          }
+        }
+      }
+    },
     "result.rightFinds": {
       "extractionState": "manual",
       "localizations": {
@@ -8805,6 +9060,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ce que vous aviez vu juste"
+          }
+        }
+      }
+    },
+    "result.showMissed": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See the missed clues (%ld)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir les indices manqués (%ld)"
+          }
+        }
+      }
+    },
+    "result.showTimeline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See the reconstruction"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir la reconstitution"
+          }
+        }
+      }
+    },
+    "result.solvedBadge": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case solved"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affaire résolue"
           }
         }
       }
@@ -8860,6 +9166,23 @@
         }
       }
     },
+    "result.unsolvedBadge": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case not solved"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affaire non résolue"
+          }
+        }
+      }
+    },
     "result.whatHappened": {
       "extractionState": "manual",
       "localizations": {
@@ -8890,6 +9213,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ce n'était pas %@."
+          }
+        }
+      }
+    },
+    "result.youAccused": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You accused: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous avez accusé : %@"
           }
         }
       }
@@ -14094,19 +14434,53 @@
         }
       }
     },
+    "verify.connections": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connections · %ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connexions · %ld"
+          }
+        }
+      }
+    },
+    "verify.decisive": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Decisive pieces · %1$ld/%2$ld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièces décisives · %1$ld/%2$ld"
+          }
+        }
+      }
+    },
     "verify.designated": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "NAMED AS RESPONSIBLE: %@"
+            "value": "Named suspect · %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "RESPONSABLE DÉSIGNÉ : %@"
+            "value": "Suspect désigné · %@"
           }
         }
       }
