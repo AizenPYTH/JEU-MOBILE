@@ -37,7 +37,7 @@ sur #001). Un build TestFlight est la prochaine étape pour ce test.
 |---|---|
 | `swift test` (CaseEngine, CaseLibrary, StoryEngine) | **133 tests OK** — dont NoCinematic, Connections, FirstLead, localisation fr/en, mots bannis, vocabulaire de l'ancien prototype, assets, pipeline photo (données) |
 | `swift run CaseLint` | **9 affaires valides + histoire valide** (résolvables dans le temps, > 70 % de bruit) |
-| `scripts/photos/test_pipeline.py` | voir « Pipeline photo » ci-dessous |
+| `scripts/photos/test_pipeline.py` (pipeline photo : licences, rejet IA, catalogue) | **26 tests OK** |
 | iOS – compilation simulateur (Xcode 26.3) | **OK** |
 | Tests d'interface (XCUITest, 14 parcours) | **14 / 14 OK** (commit `e3b06cd`) : premier lancement (première impression → qui enquête → #001 → versement au badge → Carnet → conclusion → rapport → affectation → Bureau), parcours complet, recherche, quitter/reprendre (app tuée), pause/reprise depuis le dossier, niveaux, carte, #002–#005, code verrouillé, réglages (temps détendu, conseils), temps écoulé + mauvaise conclusion + reprise + solution, HISTOIRE (création, chapitre 1, reprise en pleine scène, bureau), ALIBI, défilement |
 
