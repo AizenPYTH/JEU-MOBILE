@@ -29,7 +29,7 @@ struct BrowserHistoryView: View {
                             }
                             .buttonStyle(.plain)
                             .onAppear { session.markSeen(ItemRef(.browser, entry.id)) }
-                            .pinnable(ItemRef(.browser, entry.id), session: session, radius: Theme.Radius.sm)
+                            .pinnable(ItemRef(.browser, entry.id), session: session, radius: Theme.Radius.sm, selectOnTap: false)
                             if offset < items.count - 1 { RowDivider(leading: 60) }
                         }
                     }
@@ -154,6 +154,8 @@ struct BrowserPageView: View {
                 .padding(.bottom, Theme.Spacing.bottomInset)
             }
             .navigationBarTitleDisplayMode(.inline)
+            // The page is the history entry: versable from here too (its badge in the corner).
+            .pinnable(ItemRef(.browser, entry.id), session: session, selectOnTap: false)
         }
     }
 }
@@ -287,7 +289,7 @@ struct MailView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .navigationBarTitleDisplayMode(.inline)
-            .pinnable(ItemRef(.mail, mail.id), session: session)
+            .pinnable(ItemRef(.mail, mail.id), session: session, selectOnTap: false)
             .alert(L10n.t("mail.attachmentMissingTitle"), isPresented: Binding(get: { attachmentTapped != nil }, set: { if !$0 { attachmentTapped = nil } })) {
                 Button(L10n.t("common.ok"), role: .cancel) {}
             } message: {
@@ -483,7 +485,7 @@ struct ContactDetailView: View {
                 .padding(.bottom, Theme.Spacing.bottomInset)
             }
             .navigationBarTitleDisplayMode(.inline)
-            .pinnable(ItemRef(.contact, contact.id), session: session)
+            .pinnable(ItemRef(.contact, contact.id), session: session, selectOnTap: false)
         }
     }
 }

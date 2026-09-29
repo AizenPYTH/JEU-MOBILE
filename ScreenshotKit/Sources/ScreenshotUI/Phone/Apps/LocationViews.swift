@@ -172,7 +172,7 @@ struct TrackView: View {
             .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { available = $0 }
             .navigationTitle(track.contact == ownerContactID ? L10n.t("location.me") : game.name(of: track.contact))
             .navigationBarTitleDisplayMode(.inline)
-            .pinnable(ItemRef(.track, track.id), session: session)
+            .pinnable(ItemRef(.track, track.id), session: session, selectOnTap: false)
         }
     }
 
@@ -197,7 +197,7 @@ struct TrackStopRow: View {
             VStack(spacing: 0) {
                 Text("\(number)")
                     .font(Theme.Fonts.dataSmall.weight(.bold))
-                    .foregroundStyle(Theme.Colors.textPrimary)
+                    .foregroundStyle(Theme.Colors.textOnLight)
                     .frame(width: 22, height: 22)
                     .background(Circle().fill(Theme.Colors.info))
                 if !last {

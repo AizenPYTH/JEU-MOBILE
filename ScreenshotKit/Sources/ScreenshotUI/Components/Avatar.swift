@@ -33,7 +33,7 @@ struct Avatar: View {
             .overlay(
                 Text(contact?.initials ?? "?")
                     .font(Theme.font(Theme.FontName.semibold, size * 0.36))
-                    .foregroundStyle(Theme.Colors.textPrimary)
+                    .foregroundStyle(colors == nil ? Theme.Colors.textSecondary : Theme.Colors.textOnLight)
             )
             .frame(width: size, height: size)
             .accessibilityHidden(true)
@@ -86,7 +86,7 @@ struct Portrait: View {
             .overlay(
                 Text(contact?.initials ?? "?")
                     .font(Theme.font(Theme.FontName.semibold, min(width, height) * 0.3))
-                    .foregroundStyle(Theme.Colors.textPrimary)
+                    .foregroundStyle(Theme.Colors.textOnLight)
             )
             .elevation0(Theme.Radius.md)
             .frame(width: width, height: height)

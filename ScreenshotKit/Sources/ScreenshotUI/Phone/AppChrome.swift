@@ -137,7 +137,7 @@ struct RowDivider: View {
     }
 }
 
-/// Coloured square with a white symbol (settings-style row icon).
+/// Coloured square with a white symbol (settings-style row icon), like the app icons.
 struct SymbolTile: View {
     let symbol: String
     let color: Color
@@ -146,7 +146,7 @@ struct SymbolTile: View {
     var body: some View {
         Image(systemName: symbol)
             .font(.system(size: size * 0.5, weight: .semibold))
-            .foregroundStyle(Theme.Colors.textPrimary)
+            .foregroundStyle(Theme.Colors.textOnLight)
             .frame(width: size, height: size)
             .background(RoundedRectangle(cornerRadius: size * 0.26, style: .continuous).fill(color))
             .accessibilityHidden(true)

@@ -34,7 +34,7 @@ struct PhotosGridView: View {
                                 }
                                 .buttonStyle(.plain)
                                 .accessibilityIdentifier("photo.\(photo.id)")
-                                .pinnable(ItemRef(.photo, photo.id), session: session, radius: 0)
+                                .pinnable(ItemRef(.photo, photo.id), session: session, radius: 0, selectOnTap: false)
                             }
                         }
                     } header: {

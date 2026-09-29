@@ -2,71 +2,90 @@
 import Foundation
 import Observation
 
-/// The three contextual bubbles of the first case (final handoff §D). No rules page: the player
-/// learns by doing, in case #001, on the first play only.
+/// The onboarding tips (handoff UX V3 §7). No rules page, no other help text: the player learns by
+/// doing, and each tip shows once per install (`tip_*` flags in UserDefaults).
 ///
-/// 1 EXPLORER on the phone's home screen · 2 VERSER AU DOSSIER in a conversation that holds a
-/// piece · 3 RELIER in the Carnet. One bubble at a time, never modal, each shown once, only while
-/// more than 06:30 is left. Filing a piece skips bubble 2, linking one skips bubble 3.
-/// Plus one soft nudge after 90 s in the phone without any piece filed.
+/// - `tip_messages` (#001 only): on the phone's home screen, the Messages icon pulses and a BEN
+///   bubble says « Commencez par les messages. », until the first tap on an app.
+/// - `tip_touch_to_file` (#001 only): in the first conversation, the first versable bubble pulses
+///   once and a BEN bubble says « Touchez un message pour le verser au dossier. », until the
+///   player touches an element (or files one).
+/// - `tip_first_piece` (any case): the EvidenceSheet of the very first piece adds « Retrouvez-la
+///   dans le Carnet. ».
+///
+/// `Bubble` keeps its former cases (`.link` is never shown any more) so that older callers compile.
 @MainActor
 @Observable
 final class TutorialCoach {
     enum Bubble: Int, CaseIterable {
-        case explore = 1, file, link
+        /// « Commencez par les messages. » (home screen).
+        case explore = 1
+        /// « Touchez un message pour le verser au dossier. » (first conversation).
+        case file
+        /// Former Carnet bubble: never shown in V3.
+        case link
     }
 
+    /// The per-install flags (§7). `replay()` clears them (Paramètres › « Réinitialiser les conseils »).
+    enum Tip: String, CaseIterable {
+        case messages = "tip_messages"
+        case touchToFile = "tip_touch_to_file"
+        case firstPiece = "tip_first_piece"
+    }
+
+    /// Former flag of the three-bubble tutorial (cleared by `replay()` too).
     static let seenKey = "conclude.tutorialSeen"
-    private static let nudgeKey = "conclude.tutorial.nudge"
-    private static func doneKey(_ bubble: Bubble) -> String { "conclude.tutorial.done\(bubble.rawValue)" }
+    private static let legacyKeys = ["conclude.tutorialSeen", "conclude.tutorial.nudge",
+                                     "conclude.tutorial.done1", "conclude.tutorial.done2", "conclude.tutorial.done3"]
 
-    /// Bubbles appear only while more than this is left on the timer (06:30).
-    static let minimumRemaining: Double = 390
-    /// The soft nudge comes after this many seconds without a piece.
-    static let nudgeAfter: Double = 90
+    /// Kept for callers; tips no longer depend on the time left.
+    static let minimumRemaining: Double = 0
 
-    /// The tutorial runs in this session (case #001, first play).
+    /// The #001 bubbles run in this session (case #001, tips not seen yet).
     let enabled: Bool
     /// The bubble on screen, if any.
     private(set) var active: Bubble?
     /// Bubble 2 points at this message.
     private(set) var fileTarget: String?
 
-    /// Seconds left on the timer (set by the session).
+    /// Seconds left on the timer (set by the session; kept for callers).
     @ObservationIgnored var remaining: () -> Double = { .infinity }
     @ObservationIgnored private var pending: Task<Void, Never>?
 
     init(caseNumber: Int) {
-        enabled = caseNumber == 1 && !UserDefaults.standard.bool(forKey: Self.seenKey)
+        enabled = caseNumber == 1 && !(Self.isSeen(.messages) && Self.isSeen(.touchToFile))
     }
 
-    /// Paramètres › « Revoir le tutoriel »: the bubbles come back on the next play of #001.
+    /// Paramètres › « Réinitialiser les conseils »: every tip shows again.
     static func replay() {
         let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: seenKey)
-        defaults.removeObject(forKey: nudgeKey)
-        for bubble in Bubble.allCases { defaults.removeObject(forKey: doneKey(bubble)) }
+        for tip in Tip.allCases { defaults.removeObject(forKey: tip.rawValue) }
+        for key in legacyKeys { defaults.removeObject(forKey: key) }
     }
 
-    /// UI tests and returning players: no bubbles.
+    /// UI tests and returning players: no tips.
     static func markSeen() {
-        UserDefaults.standard.set(true, forKey: seenKey)
+        for tip in Tip.allCases { UserDefaults.standard.set(true, forKey: tip.rawValue) }
     }
+
+    static func isSeen(_ tip: Tip) -> Bool { UserDefaults.standard.bool(forKey: tip.rawValue) }
+
+    private static func setSeen(_ tip: Tip) { UserDefaults.standard.set(true, forKey: tip.rawValue) }
 
     // MARK: Events from the screens
 
     /// The phone's home screen is on screen.
     func homeAppeared() { show(.explore) }
 
-    /// An app was opened (bubble 1 is answered by any tap on an app).
+    /// An app was opened: the Messages tip is answered.
     func appOpened() { if active == .explore { done(.explore) } }
 
-    /// A conversation is open; `evidenceMessage` is the first message in it that is a piece.
+    /// A conversation is open; `evidenceMessage` is the message the bubble points at.
     func conversationOpened(evidenceMessage: String?) {
         pending?.cancel()
         guard enabled, let evidenceMessage, !isDone(.file) else { return }
         pending = Task { [weak self] in
-            try? await Task.sleep(for: .seconds(2))
+            try? await Task.sleep(for: .seconds(1.2))
             guard !Task.isCancelled, let self else { return }
             self.fileTarget = evidenceMessage
             self.show(.file)
@@ -75,48 +94,68 @@ final class TutorialCoach {
 
     func conversationClosed() {
         pending?.cancel()
-        if active == .file { done(.file) }
+        // Not answered yet: it comes back in the next conversation.
+        if active == .file { active = nil; fileTarget = nil }
     }
 
-    func carnetOpened() { show(.link) }
+    /// Former Carnet bubble: nothing in V3.
+    func carnetOpened() {}
 
-    func carnetClosed() { if active == .link { done(.link) } }
+    func carnetClosed() {}
 
-    /// The close button of a bubble, or a tap outside it.
+    /// The close button of a bubble.
     func dismiss() { if let active { done(active) } }
 
-    /// A piece was filed: bubble 2 is no longer needed (and bubble 1 is answered).
+    /// An element of the phone was touched (selected): the « Touchez un message » tip is answered.
+    func elementSelected() {
+        if active == .explore { done(.explore) }
+        if enabled, active == .file || fileTarget != nil { done(.file) }
+    }
+
+    /// A piece was filed: both #001 bubbles are answered.
     func pieceFiled() {
         if active == .explore { done(.explore) }
-        done(.file)
+        if enabled { done(.file) }
     }
 
-    /// A piece was linked to a suspect: bubble 3 is no longer needed.
-    func linkMade() { done(.link) }
+    /// Kept for callers (the former bubble 3).
+    func linkMade() {}
 
-    /// Once, after 90 s in the phone with no piece filed.
-    func shouldNudge(elapsed: Double, pieces: Int) -> Bool {
-        guard enabled, pieces == 0, elapsed >= Self.nudgeAfter, !UserDefaults.standard.bool(forKey: Self.nudgeKey) else { return false }
-        UserDefaults.standard.set(true, forKey: Self.nudgeKey)
-        return true
+    /// The help lines of the EvidenceSheet for a piece just filed (§7-6), each shown once per install.
+    func filingTips() -> [String] {
+        guard !Self.isSeen(.firstPiece) else { return [] }
+        Self.setSeen(.firstPiece)
+        return [L10n.t("tip.firstPiece")]
     }
+
+    /// The former 90 s nudge: gone (V3 §7, « aucun autre texte d'aide »).
+    func shouldNudge(elapsed: Double, pieces: Int) -> Bool { false }
 
     // MARK: State
 
     private func show(_ bubble: Bubble) {
-        guard enabled, active == nil, !isDone(bubble), remaining() > Self.minimumRemaining else { return }
+        guard enabled, bubble != .link, active == nil, !isDone(bubble) else { return }
         active = bubble
     }
 
     private func done(_ bubble: Bubble) {
-        UserDefaults.standard.set(true, forKey: Self.doneKey(bubble))
+        switch bubble {
+        case .explore: Self.setSeen(.messages)
+        case .file:
+            Self.setSeen(.touchToFile)
+            fileTarget = nil
+            pending?.cancel()
+        case .link: break
+        }
         if active == bubble { active = nil }
-        if bubble == .file { fileTarget = nil; pending?.cancel() }
-        if Bubble.allCases.allSatisfy({ isDone($0) }) { UserDefaults.standard.set(true, forKey: Self.seenKey) }
     }
 
     private func isDone(_ bubble: Bubble) -> Bool {
-        UserDefaults.standard.bool(forKey: Self.doneKey(bubble))
+        switch bubble {
+        case .explore: Self.isSeen(.messages)
+        case .file: Self.isSeen(.touchToFile)
+        case .link: true
+        }
     }
 }
 #endif

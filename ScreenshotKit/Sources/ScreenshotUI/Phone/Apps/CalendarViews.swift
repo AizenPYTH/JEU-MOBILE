@@ -195,7 +195,7 @@ struct CalendarEventView: View {
                 .padding(.bottom, Theme.Spacing.bottomInset)
             }
             .navigationBarTitleDisplayMode(.inline)
-            .pinnable(ItemRef(.calendar, event.id), session: session)
+            .pinnable(ItemRef(.calendar, event.id), session: session, selectOnTap: false)
         }
     }
 }

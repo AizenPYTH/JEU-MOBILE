@@ -2,63 +2,62 @@
 import SwiftUI
 import CaseEngine
 
-/// Screen 08 — the phone's home screen: date + story time, "periodic table" app tiles, dock.
-/// In case #001, bubble 1 « EXPLORER » points at Messages (the other icons at 45 %); any tap closes
-/// it, nothing is blocked (final handoff §D).
+/// Screen 03 (handoff UX V3 §6-03) — the phone's home screen: light, the owner's wallpaper,
+/// « Téléphone d'Alex Moreau » for 3 s, then a 4-column grid of every app (fixed order) and the
+/// search pill. The fictional time and battery are in the status bar above it. In case #001, the
+/// first time, the Messages icon pulses twice and a BEN bubble says « Commencez par les
+/// messages. » until the first tap on an app (§7).
 struct HomeScreen: View {
     let session: GameSession
     let zoom: Namespace.ID
 
-    private var gridApps: [AppID] { AppID.allCases.filter { !AppID.dock.contains($0) } }
-
-    /// Widgets only where the screen is tall enough (not on the smallest iPhones).
-    @State private var roomForWidgets = true
-    /// The Messages icon of the dock, in the home screen's space (bubble 1 points at it).
+    /// The Messages icon, in the home screen's space (the tip points at it).
     @State private var messagesIcon: CGRect = .zero
+    /// « Téléphone de … » is shown for 3 s when the phone is first put in hand.
+    @State private var ownerShown = true
+    @State private var messagesPulse = false
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
+
+    /// The apps of the grid, in the handoff's order (§5 PhoneAppIcon), then the extra ones.
+    static let gridApps: [AppID] = [.messages, .phone, .photos, .location, .calendar, .notes,
+                                    .mail, .contacts, .browser, .notifications, .settings, .trash]
 
     var body: some View {
         let game = session.game
-        let now = session.phoneTime
         let exploring = session.coach.active == .explore
-        let dimmed = exploring ? homeDimmedOpacity : 1
+        let columns = dynamicTypeSize.isAccessibilitySize ? 3 : 4
         VStack(spacing: 0) {
-            VStack(spacing: Theme.Spacing.s1) {
-                Text(PhoneFormat.longDayCapitalized(now))
-                    .font(Theme.font(Theme.FontName.medium, 15))
-                    .foregroundStyle(Theme.Colors.textSecondary)
-                Text(PhoneFormat.time(now))
-                    .accessibilityIdentifier("phone.clock")
-                    .font(Theme.Fonts.homeClock)
-                    .monospacedDigit()
-                    .foregroundStyle(Theme.Colors.textPrimary)
-            }
-            .padding(.top, Theme.Spacing.s7)
-            .padding(.bottom, Theme.Spacing.s8)
-            .opacity(dimmed)
+            Text(ownerLine(game))
+                .font(Theme.font(Theme.FontName.medium, 13))
+                .foregroundStyle(Theme.Colors.textSecondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+                .opacity(ownerShown ? 1 : 0)
+                .padding(.top, Theme.Spacing.s4)
+                .padding(.bottom, Theme.Spacing.s6)
+                .accessibilityHidden(!ownerShown)
 
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Theme.Spacing.s5), count: 4),
-                      spacing: 22) {
-                ForEach(gridApps, id: \.self) { app in
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: Theme.Spacing.s4), count: columns),
+                      spacing: Theme.Spacing.s6) {
+                ForEach(Self.gridApps, id: \.self) { app in
                     AppTile(app: app, badge: badge(for: app, in: game), locked: game.access(to: app) == .locked,
-                            calendarDay: app == .calendar ? now : nil) {
+                            spotlight: exploring && app == .messages,
+                            pulse: app == .messages && messagesPulse) {
                         launch(app)
+                    }
+                    .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(homeSpace)) } action: { frame in
+                        if app == .messages { messagesIcon = frame }
                     }
                     .appZoomSource(app, in: zoom)
                 }
             }
-            .padding(.horizontal, 22)
-            .opacity(dimmed)
+            .padding(.horizontal, Theme.Spacing.s6)
 
-            if roomForWidgets {
-                HomeWidgets(session: session)
-                    .padding(.horizontal, 22)
-                    .padding(.top, 20)
-                    .opacity(dimmed)
-            }
+            Spacer(minLength: Theme.Spacing.s5)
 
-            Spacer(minLength: 0)
-
-            // Search the whole phone (screen 11), like the system search pill.
+            // Search the whole phone, like the system search pill.
             Button { session.open(.search) } label: {
                 HStack(spacing: Theme.Spacing.s2) {
                     Image(systemName: "magnifyingglass")
@@ -67,36 +66,14 @@ struct HomeScreen: View {
                 .font(Theme.Fonts.calloutStrong)
                 .foregroundStyle(Theme.Colors.textPrimary)
                 .padding(.horizontal, Theme.Spacing.s5)
-                .frame(height: 36)
-                .background(Capsule().fill(Theme.Colors.bgRaised.opacity(0.7)))
+                .frame(minHeight: Theme.Size.hit)
+                .background(Capsule().fill(Theme.Colors.bgRaised.opacity(0.85)))
                 .background(.ultraThinMaterial, in: Capsule())
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("phone.search")
-            .padding(.bottom, Theme.Spacing.s4)
-            .opacity(dimmed)
-
-            HStack {
-                ForEach(AppID.dock, id: \.self) { app in
-                    AppTile(app: app, badge: badge(for: app, in: game), locked: false, showsLabel: false,
-                            spotlight: exploring && app == .messages) {
-                        launch(app)
-                    }
-                    .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(homeSpace)) } action: { frame in
-                        if app == .messages { messagesIcon = frame }
-                    }
-                    .appZoomSource(app, in: zoom)
-                    .frame(maxWidth: .infinity)
-                    .opacity(exploring && app != .messages ? homeDimmedOpacity : 1)
-                }
-            }
-            .padding(.vertical, Theme.Spacing.s4)
-            .padding(.horizontal, Theme.Spacing.s3)
-            .background(RoundedRectangle(cornerRadius: Theme.Radius.dock, style: .continuous).fill(Theme.Colors.bgRaised.opacity(0.6)))
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.dock, style: .continuous))
-            .padding(.horizontal, 14)
-            // Above the dossier bar.
-            .padding(.bottom, Theme.Spacing.bottomInset)
+            // Above the home indicator.
+            .padding(.bottom, PhoneLayout.barClearance)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .coordinateSpace(.named(homeSpace))
@@ -105,18 +82,37 @@ struct HomeScreen: View {
                 exploreBubble
             }
         }
-        // Any tap on the home screen answers bubble 1; the tap itself goes on to what is under it.
-        .contentShape(Rectangle())
-        .simultaneousGesture(TapGesture().onEnded {
-            if session.coach.active == .explore { session.coach.dismiss() }
-        })
         .animation(.easeOut(duration: 0.2), value: exploring)
         .background(Wallpaper(style: session.game.device.wallpaper ?? .night))
-        .onGeometryChange(for: Bool.self) { $0.size.height > 700 } action: { roomForWidgets = $0 }
         .toolbar(.hidden, for: .navigationBar)
         .onAppear { session.coach.homeAppeared() }
-        // Leaving the home screen (an app, the search, a notification) answers bubble 1 too.
+        // Leaving the home screen (an app, the search, a notification) answers the tip too.
         .onDisappear { session.coach.appOpened() }
+        .task {
+            // « Téléphone de … »: 3 s, then gone.
+            try? await Task.sleep(for: .seconds(3))
+            withAnimation(.easeOut(duration: 0.3)) { ownerShown = false }
+        }
+        .task(id: exploring) {
+            // The Messages icon pulses twice (scale 1 → 1.04) while the tip is up.
+            guard exploring, !(systemReduceMotion || appReduceMotion) else { return }
+            try? await Task.sleep(for: .milliseconds(400))
+            for _ in 0..<2 {
+                guard !Task.isCancelled else { return }
+                withAnimation(.easeInOut(duration: 0.35)) { messagesPulse = true }
+                try? await Task.sleep(for: .milliseconds(350))
+                withAnimation(.easeInOut(duration: 0.35)) { messagesPulse = false }
+                try? await Task.sleep(for: .milliseconds(400))
+            }
+        }
+    }
+
+    /// « Téléphone d'Alex Moreau »: the owner's full name, or the phone's label.
+    private func ownerLine(_ game: Investigation) -> String {
+        let owner = game.device.contacts.first { $0.isOwner == true } ?? game.device.contacts.first { $0.id == ownerContactID }
+        guard let name = owner?.name, !name.isEmpty else { return game.device.label }
+        let elided = name.first.map { "AEIOUYHÂÉÈÊÎÔÛaeiouyh".contains($0) } ?? false
+        return L10n.f(elided ? "home.ownerElided" : "home.owner", name)
     }
 
     private func launch(_ app: AppID) {
@@ -124,18 +120,19 @@ struct HomeScreen: View {
         session.launch(app)
     }
 
-    /// Bubble 1, just above the Messages icon of the dock, its arrow pointing down at it.
+    /// The tip, just under the Messages icon, its arrow pointing up at it. Taps go through it
+    /// (only its × takes them).
     private var exploreBubble: some View {
         GeometryReader { geo in
             let width = min(homeBubbleWidth, geo.size.width - 24)
             let x = min(max(messagesIcon.midX - width / 2, 12), max(12, geo.size.width - 12 - width))
-            CoachBubble(bubble: .explore, arrow: .bottom, arrowOffset: messagesIcon.midX - (x + width / 2)) {
+            CoachBubble(bubble: .explore, arrow: .top, arrowOffset: messagesIcon.midX - (x + width / 2)) {
                 session.coach.dismiss()
             }
             .frame(width: width)
             .padding(.leading, x)
-            .padding(.bottom, max(0, geo.size.height - messagesIcon.minY + 20))
-            .frame(width: geo.size.width, height: geo.size.height, alignment: .bottomLeading)
+            .padding(.top, messagesIcon.maxY + 14)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .topLeading)
         }
     }
 
@@ -150,88 +147,12 @@ struct HomeScreen: View {
     }
 }
 
-/// The home screen's coordinate space (bubble 1 finds the Messages icon in it).
+/// The home screen's coordinate space (the tip finds the Messages icon in it).
 private let homeSpace = "phone.home.space"
-/// Everything but the Messages icon while bubble 1 is up (§D).
-private let homeDimmedOpacity: Double = 0.45
-private let homeBubbleWidth: CGFloat = 280
+private let homeBubbleWidth: CGFloat = 260
 
-/// Two widgets, like a real home screen: the battery, and the next calendar event (tapping it
-/// opens the Calendar, at its usual cost).
-struct HomeWidgets: View {
-    let session: GameSession
-
-    var body: some View {
-        let now = session.phoneTime
-        let next = session.game.device.calendar.filter { $0.start > now }.min { $0.start < $1.start }
-        HStack(spacing: Theme.Spacing.s5) {
-            battery
-            Button { session.launch(.calendar) } label: { upNext(next, now: now) }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("widget.calendar")
-        }
-        .frame(height: 130)
-    }
-
-    private var battery: some View {
-        let level = session.batteryLevel
-        return VStack(alignment: .leading) {
-            ZStack {
-                Circle().stroke(Theme.Colors.line2, lineWidth: 6)
-                Circle()
-                    .trim(from: 0, to: CGFloat(level) / 100)
-                    .stroke(level <= 10 ? Theme.Colors.alert : Theme.Colors.clear, style: StrokeStyle(lineWidth: 6, lineCap: .round))
-                    .rotationEffect(.degrees(-90))
-                Image(systemName: "iphone").font(.system(size: 20, weight: .semibold)).foregroundStyle(Theme.Colors.textPrimary)
-            }
-            .frame(width: 58, height: 58)
-            Spacer(minLength: 0)
-            Text("\(level) %").font(Theme.font(Theme.FontName.semibold, 22)).foregroundStyle(Theme.Colors.textPrimary)
-            Text(L10n.t("widget.battery")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
-        }
-        .widgetCard()
-        .accessibilityElement(children: .combine)
-    }
-
-    private func upNext(_ event: CalendarEvent?, now: Moment) -> some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text(PhoneFormat.weekdayShort(now) + " \(now.day)")
-                .font(Theme.font(Theme.FontName.semibold, 12))
-                .foregroundStyle(Theme.appAccent(.calendar))
-            Spacer(minLength: 0)
-            if let event {
-                Text(L10n.t("widget.upNext")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
-                HStack(alignment: .top, spacing: Theme.Spacing.s2) {
-                    RoundedRectangle(cornerRadius: 1.5).fill(Theme.appAccent(.calendar)).frame(width: 3)
-                    VStack(alignment: .leading, spacing: 1) {
-                        Text(event.title).font(Theme.Fonts.calloutStrong).foregroundStyle(Theme.Colors.textPrimary).lineLimit(2)
-                        Text(PhoneFormat.dayLabel(event.start, now: now) + (event.allDay == true ? "" : " · " + PhoneFormat.time(event.start)))
-                            .font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary).lineLimit(1)
-                    }
-                }
-                .fixedSize(horizontal: false, vertical: true)
-            } else {
-                Text(L10n.t("widget.noEvent")).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
-            }
-        }
-        .widgetCard()
-        .accessibilityElement(children: .combine)
-    }
-}
-
-private extension View {
-    /// Frosted widget card.
-    func widgetCard() -> some View {
-        padding(Theme.Spacing.s4)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-            .background(RoundedRectangle(cornerRadius: Theme.Radius.banner, style: .continuous).fill(Theme.Colors.bgRaised.opacity(0.55)))
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: Theme.Radius.banner, style: .continuous))
-            .overlay(RoundedRectangle(cornerRadius: Theme.Radius.banner, style: .continuous).strokeBorder(Theme.Colors.line1))
-    }
-}
-
-/// Wallpaper: a deep gradient with two soft, blurred lights — dark, but clearly a phone's
-/// lock/home screen, not an empty black surface. Each case's phone has its own (`Device.wallpaper`).
+/// Wallpaper (§6-03): the phone is light — a pale base tinted by the owner's two soft lights, so
+/// each case's phone keeps its own look (`Device.wallpaper`) and dark text stays readable on it.
 struct Wallpaper: View {
     var style: Device.Wallpaper = .night
 
@@ -249,50 +170,59 @@ struct Wallpaper: View {
     var body: some View {
         let palette = Self.palette(style)
         ZStack {
-            LinearGradient(colors: [palette.top, palette.bottom], startPoint: .top, endPoint: .bottom)
+            Theme.Colors.bgSurface
             GeometryReader { geo in
                 Circle().fill(palette.lightA)
-                    .frame(width: geo.size.width * 0.9)
-                    .blur(radius: 70)
-                    .position(x: geo.size.width * 0.15, y: geo.size.height * 0.2)
+                    .frame(width: geo.size.width * 1.1)
+                    .blur(radius: 90)
+                    .opacity(wallpaperLightOpacity)
+                    .position(x: geo.size.width * 0.1, y: geo.size.height * 0.15)
                 Circle().fill(palette.lightB)
-                    .frame(width: geo.size.width * 0.8)
-                    .blur(radius: 80)
-                    .position(x: geo.size.width * 0.95, y: geo.size.height * 0.62)
+                    .frame(width: geo.size.width)
+                    .blur(radius: 100)
+                    .opacity(wallpaperLightOpacity)
+                    .position(x: geo.size.width * 0.95, y: geo.size.height * 0.7)
             }
-            LinearGradient(colors: [.clear, palette.bottom.opacity(0.7)], startPoint: .center, endPoint: .bottom)
         }
         .ignoresSafeArea()
         .allowsHitTesting(false)
+        .accessibilityHidden(true)
     }
 }
 
+/// How much of the owner's colours tints the light wallpaper.
+private let wallpaperLightOpacity: Double = 0.45
+
+/// An app on the home screen: PhoneAppIcon (62 pt), its name in 12 pt, the unread badge in
+/// `alert` (critical), a lock on a locked app.
 struct AppTile: View {
     let app: AppID
     let badge: Int
     let locked: Bool
     var showsLabel = true
     var calendarDay: Moment? = nil
-    /// The icon a tutorial bubble points at (3 pt ring + halo).
+    /// The icon a tip points at (ben ring).
     var spotlight = false
+    /// The tip's pulse (scale 1 → 1.04).
+    var pulse = false
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
             VStack(spacing: 6) {
-                AppTileGlyph(app: app, calendarDay: calendarDay)
+                PhoneAppIcon(app: app, calendarDay: calendarDay)
                     .overlay {
-                        if spotlight { CoachRing(radius: Theme.Radius.icon) }
+                        if spotlight { CoachRing(radius: phoneTileRingRadius) }
                     }
                     .overlay(alignment: .topTrailing) {
                         if badge > 0 {
-                            Text("\(badge)")
-                                .font(Theme.font(Theme.FontName.monoSemibold, 12))
-                                .foregroundStyle(Theme.Colors.textPrimary)
+                            Text(verbatim: "\(badge)")
+                                .font(Theme.font(Theme.FontName.semibold, 13))
+                                .monospacedDigit()
+                                .foregroundStyle(Theme.Colors.textOnLight)
                                 .padding(.horizontal, 5)
-                                .frame(minWidth: Theme.Size.badge, minHeight: Theme.Size.badge)
+                                .frame(minWidth: Theme.Size.badge + 2, minHeight: Theme.Size.badge + 2)
                                 .background(Capsule().fill(Theme.Colors.alert))
-                                .overlay(Capsule().strokeBorder(Theme.Colors.wallpaperBottom.opacity(0.6), lineWidth: 1))
                                 .offset(x: 6, y: -6)
                         }
                     }
@@ -306,21 +236,25 @@ struct AppTile: View {
                                 .offset(x: 4, y: 4)
                         }
                     }
-                    .saturation(locked ? 0.2 : 1)
                     .opacity(locked ? 0.6 : 1)
+                    .scaleEffect(pulse ? 1.04 : 1)
                 if showsLabel {
                     Text(app.title)
-                        .font(Theme.Fonts.tabLabel)
+                        .font(Theme.font(Theme.FontName.regular, 12))
                         .foregroundStyle(Theme.Colors.textPrimary.opacity(locked ? 0.6 : 1))
-                        .shadow(color: .black.opacity(0.6), radius: 2, y: 1)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                 }
             }
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
         .accessibilityLabel(Text(badge > 0 ? L10n.f("a11y.appBadge", app.title, badge) : app.title))
         .accessibilityIdentifier("app.\(app.rawValue)")
     }
 }
+
+/// The tip's ring around a 62 pt icon (its radius is 15).
+private let phoneTileRingRadius: CGFloat = 15
 #endif

@@ -219,7 +219,7 @@ struct NoteView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .navigationBarTitleDisplayMode(.inline)
-            .pinnable(ItemRef(.note, note.id), session: session)
+            .pinnable(ItemRef(.note, note.id), session: session, selectOnTap: false)
         }
     }
 }

@@ -19,15 +19,26 @@ struct CallsView: View {
                 AppSectionHeader(title: L10n.t("calls.title"), count: calls.count, color: Theme.appAccent(.phone))
                 CardGroup {
                     ForEach(Array(calls.enumerated()), id: \.element.id) { offset, call in
-                        Button {
-                            session.open(.contact(call.contact))
-                        } label: {
+                        // A tap on the call selects it (« + Verser au dossier »); its contact card
+                        // opens from the ⓘ button, like on a real phone.
+                        HStack(spacing: 0) {
                             CallRow(call: call, game: game)
+                                .accessibilityIdentifier("call.\(call.id)")
+                                .onAppear { session.markSeen(ItemRef(.call, call.id)) }
+                                .pinnable(ItemRef(.call, call.id), session: session, radius: Theme.Radius.sm)
+                            Button {
+                                session.open(.contact(call.contact))
+                            } label: {
+                                Image(systemName: "info.circle")
+                                    .font(Theme.Fonts.headline)
+                                    .foregroundStyle(Theme.appAccent(.phone))
+                                    .frame(width: Theme.Size.hit, height: Theme.Size.hit)
+                                    .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityLabel(Text(L10n.t("a11y.openContact")))
+                            .padding(.trailing, Theme.Spacing.s2)
                         }
-                        .buttonStyle(.plain)
-                        .accessibilityIdentifier("call.\(call.id)")
-                        .onAppear { session.markSeen(ItemRef(.call, call.id)) }
-                        .pinnable(ItemRef(.call, call.id), session: session, radius: Theme.Radius.sm)
                         if offset < calls.count - 1 { RowDivider(leading: 64) }
                     }
                 }
@@ -53,7 +64,7 @@ struct CallRow: View {
                 .overlay(alignment: .bottomTrailing) {
                     Image(systemName: CallsFormat.symbol(call))
                         .font(.system(size: 9, weight: .bold))
-                        .foregroundStyle(Theme.Colors.textPrimary)
+                        .foregroundStyle(missed ? Theme.Colors.textOnLight : Theme.Colors.textPrimary)
                         .frame(width: 18, height: 18)
                         .background(Circle().fill(missed ? Theme.Colors.alert : Theme.Colors.bgSelected))
                         .overlay(Circle().strokeBorder(Theme.Colors.bgSurface, lineWidth: 2))

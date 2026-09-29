@@ -31,14 +31,29 @@ final class GameSession {
     /// (case start + everything spent: the same elapsed time as the timer); it is published here so
     /// that screens showing the time redraw when the minute changes.
     private(set) var phoneTime: Moment
-    /// The element whose « VERSER AU DOSSIER » sheet is open (final handoff §F-06).
-    private(set) var filingCandidate: ItemRef?
-    /// The last piece filed: its paper copy flies to the dossier bar (§F-07).
+    /// The EvidenceSheet on screen (UX V3 §6-05): the element just filed (or already in the file),
+    /// its piece number and the help line. nil = no sheet.
+    private(set) var receipt: FilingReceipt?
+    /// The element whose EvidenceSheet is open (kept for callers: `receipt?.ref`).
+    var filingCandidate: ItemRef? { receipt?.ref }
+    /// The last piece filed: a copy of it flies to the Carnet button (§6-05).
     private(set) var lastFiled: FiledPiece?
-    /// The clock is stopped (app sent to the background, pause sheet): the timer tag reads
-    /// « EN PAUSE » until the player touches the phone again (§N).
+    /// The element of the phone the player touched (§6-04): it wears a ben ring and the
+    /// EvidenceBadge « + Verser au dossier » (or « ✓ Pièce 03 ») under it. Any element can be
+    /// selected: the game never tells which ones matter.
+    private(set) var selected: ItemRef?
+    /// When `selected` was set: the tap that selects an element also reaches the screen behind it,
+    /// which must not clear it at once (see `clearSelectionAfterTap`).
+    @ObservationIgnored private var selectedAt = Date.distantPast
+    /// When the phone last changed screen: a tap that opened a screen does not also select the
+    /// element it started on.
+    @ObservationIgnored private var navigatedAt = Date.distantPast
+    /// « Voir la pièce » / « Relier »: the Carnet is asked to open on a piece (the shell opens it).
+    private(set) var carnetRequest: CarnetRequest?
+    /// The clock is stopped (app sent to the background, pause sheet): the investigation bar reads
+    /// « En pause » until the player touches the phone again.
     private(set) var isPaused = false
-    /// The three bubbles of case #001 (§D).
+    /// The onboarding tips (UX V3 §7).
     let coach: TutorialCoach
 
     private let investigation: Investigation
@@ -50,6 +65,8 @@ final class GameSession {
     @ObservationIgnored private var toastTask: Task<Void, Never>?
     /// Last whole second announced by the critical-time tick.
     @ObservationIgnored private var lastTickSecond = -1
+    /// Last time left announced to VoiceOver (each minute, then 30 s and 10 s).
+    @ObservationIgnored private var lastSpokenMark = -1
     private let onFinish: (Verdict) -> Void
     /// The save file of this investigation (the story mode keeps its own).
     let slot: SaveSlot
@@ -59,6 +76,25 @@ final class GameSession {
         let id: Int
         let number: Int
         let ref: ItemRef
+    }
+
+    /// What the EvidenceSheet shows (§6-05).
+    struct FilingReceipt: Equatable, Identifiable {
+        let id: Int
+        let ref: ItemRef
+        /// Its piece number (« PIÈCE 03 »).
+        let number: Int?
+        /// true: filed by this gesture; false: it was already in the file.
+        let isNew: Bool
+        /// The one-time tips of §7 (« Retrouvez-la dans le Carnet. »…).
+        let help: [String]
+    }
+
+    /// The Carnet, opened on a piece (« Voir la pièce ») or to connect it (« Relier »).
+    struct CarnetRequest: Equatable, Identifiable {
+        let id: Int
+        let ref: ItemRef
+        let connect: Bool
     }
 
     struct TimeCostFlash: Equatable, Identifiable {
@@ -185,9 +221,7 @@ final class GameSession {
         refresh(contentChanged: false)
         warnLowBatteryIfNeeded()
         announceCriticalSecond()
-        if coach.shouldNudge(elapsed: investigation.elapsedSeconds, pieces: investigation.notebook.count) {
-            showToast(L10n.t("tutorial.nudge"), seconds: 4.5)
-        }
+        announceTimeForVoiceOver()
         ticksSinceSave += 1
         if ticksSinceSave >= 20 { save() } // every ~5 s, in case the app is killed without warning
     }
@@ -216,8 +250,9 @@ final class GameSession {
             changed = true
             if phase != .investigating {
                 loop?.cancel(); loop = nil
-                // Time up (or concluding): the filing sheet closes with everything else.
-                filingCandidate = nil
+                // Time up (or concluding): the EvidenceSheet closes with everything else.
+                receipt = nil
+                selected = nil
                 isPaused = false
             }
         }
@@ -252,6 +287,19 @@ final class GameSession {
         if remainingSeconds <= 10 { Haptics.light() }
     }
 
+    /// VoiceOver hears the time left each minute, then at 30 s and at 10 s (§9).
+    private func announceTimeForVoiceOver() {
+        #if canImport(UIKit)
+        guard UIAccessibility.isVoiceOverRunning, phase == .investigating, !isPaused else { return }
+        let second = Int(remainingSeconds.rounded(.up))
+        let mark: Int
+        if second > 30 && second % 60 == 0 { mark = second } else if second == 30 || second == 10 { mark = second } else { return }
+        guard mark != lastSpokenMark else { return }
+        lastSpokenMark = mark
+        UIAccessibility.post(notification: .announcement, argument: L10n.f("a11y.timer", SpokenDuration.text(Double(mark))))
+        #endif
+    }
+
     private static func minute(of moment: Moment) -> Moment {
         moment.adding(seconds: -Int64(moment.second))
     }
@@ -270,10 +318,14 @@ final class GameSession {
     // MARK: Phone navigation (each opened screen costs its time)
 
     func setPath(_ newPath: [PhoneRoute]) {
-        // The finger that opened the filing sheet is lifted on the element behind it: its own tap
+        // The finger that opened the EvidenceSheet is lifted on the element behind it: its own tap
         // (open a conversation, a photo…) must not fire too.
-        if filingCandidate != nil && newPath.count > path.count { return }
+        if receipt != nil && newPath.count > path.count { return }
         let old = path
+        if newPath != old {
+            selected = nil
+            navigatedAt = Date()
+        }
         path = newPath
         if newPath.count > old.count {
             for route in newPath[old.count...] { charge(for: route) }
@@ -287,12 +339,14 @@ final class GameSession {
 
     /// Opens an app from the home screen or a notification (replaces the current stack).
     func launch(_ app: AppID, then route: PhoneRoute? = nil) {
-        guard filingCandidate == nil else { return }
+        guard receipt == nil else { return }
         path = []
         setPath(route.map { [.app(app), $0] } ?? [.app(app)])
     }
 
     func goHome() {
+        selected = nil
+        navigatedAt = Date()
         path = []
         revision += 1
     }
@@ -317,6 +371,7 @@ final class GameSession {
     /// Opens what a notification points to.
     func open(_ notification: PhoneNotification) {
         dismissBanner()
+        selected = nil
         guard let ref = notification.opens else { launch(notification.app); return }
         switch ref.kind {
         case .message:
@@ -335,7 +390,7 @@ final class GameSession {
     // MARK: Actions
 
     func perform(_ action: (Investigation) -> Void) {
-        guard filingCandidate == nil else { return } // see `setPath`
+        guard receipt == nil else { return } // see `setPath`
         action(investigation)
         refresh()
     }
@@ -389,22 +444,70 @@ final class GameSession {
 
     func isPinned(_ ref: ItemRef) -> Bool { game.isPinned(ref) }
 
-    /// Long press recognised on an element of the phone: the filing sheet opens.
+    // MARK: Selection (§6-04)
+
+    /// A tap on a versable element: it is selected and shows its EvidenceBadge.
+    func select(_ ref: ItemRef) {
+        guard phase == .investigating, receipt == nil, Date().timeIntervalSince(navigatedAt) > 0.3 else { return }
+        selectedAt = Date()
+        if selected != ref {
+            selected = ref
+            Haptics.selection()
+        }
+        coach.elementSelected()
+    }
+
+    func clearSelection() {
+        if selected != nil { selected = nil }
+    }
+
+    /// A tap somewhere on the phone: it hides the badge, unless it is the very tap that just
+    /// selected an element (both gestures see it).
+    func clearSelectionAfterTap() {
+        guard selected != nil, Date().timeIntervalSince(selectedAt) > 0.35 else { return }
+        selected = nil
+    }
+
+    // MARK: Filing (§6-05)
+
+    /// « + Verser au dossier » (the EvidenceBadge), the long press shortcut or VoiceOver's action:
+    /// the element goes into the file at once and the EvidenceSheet confirms it. An element already
+    /// in the file opens the same sheet, which then leads to its piece.
     func requestFiling(_ ref: ItemRef) {
-        guard phase == .investigating, !isPaused, filingCandidate == nil else { return }
-        Haptics.pin()
-        filingCandidate = ref
+        guard phase == .investigating, !isPaused, receipt == nil else { return }
+        selected = nil
+        let wasFiled = investigation.isPinned(ref)
+        if wasFiled {
+            Haptics.selection()
+        } else {
+            file(ref)
+        }
+        let help = wasFiled ? [] : coach.filingTips()
+        lastReceiptID += 1
+        receipt = FilingReceipt(id: lastReceiptID, ref: ref, number: investigation.pieceNumber(of: ref),
+                                isNew: !wasFiled, help: help)
     }
 
+    @ObservationIgnored private var lastReceiptID = 0
+
+    /// Closes the EvidenceSheet (« Continuer », the veil, 2.5 s later).
     func cancelFiling() {
-        filingCandidate = nil
+        receipt = nil
     }
 
-    /// « VERSER AU DOSSIER » in the filing sheet.
+    /// « Continuer » in the EvidenceSheet. (An element not in the file yet is filed first: the
+    /// former confirmation path.)
     func fileCandidate() {
-        guard let ref = filingCandidate else { return }
-        filingCandidate = nil
-        file(ref)
+        guard let receipt else { return }
+        self.receipt = nil
+        if !investigation.isPinned(receipt.ref) { file(receipt.ref) }
+    }
+
+    /// Opens the Carnet on a piece (« Voir la pièce ») or to connect it (« Relier »).
+    func showInCarnet(_ ref: ItemRef, connect: Bool = false) {
+        receipt = nil
+        selected = nil
+        carnetRequest = CarnetRequest(id: (carnetRequest?.id ?? 0) + 1, ref: ref, connect: connect)
     }
 
     /// Puts an element in the file (it becomes « PIÈCE 0N »). Filing twice does nothing.
@@ -412,7 +515,7 @@ final class GameSession {
         guard !investigation.isPinned(ref) else { return }
         _ = investigation.togglePin(ref)
         AudioDirector.shared.play(.paper, volume: 0.6)
-        Haptics.light()
+        Haptics.success()
         lastFiled = FiledPiece(id: (lastFiled?.id ?? 0) + 1, number: investigation.notebook.count, ref: ref)
         coach.pieceFiled()
         refresh()

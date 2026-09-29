@@ -47,54 +47,7 @@ struct TertiaryButtonStyle: ButtonStyle {
     }
 }
 
-/// Hold to confirm (900 ms, fills left → right; releasing early rolls back in 200 ms).
-struct HoldToConfirmButton: View {
-    let title: String
-    let disabledTitle: String
-    let enabled: Bool
-    let action: () -> Void
-
-    @State private var progress: CGFloat = 0
-    @State private var holding = false
-
-    var body: some View {
-        ZStack(alignment: .leading) {
-            RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)
-                .fill(enabled ? Theme.Colors.bgSelected : Theme.Colors.line1)
-            GeometryReader { geo in
-                RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)
-                    .fill(Theme.Colors.textPrimary)
-                    .frame(width: geo.size.width * progress)
-            }
-            Text(enabled ? title : disabledTitle)
-                .font(Theme.Fonts.headline)
-                .foregroundStyle(enabled ? (progress > 0.5 ? Theme.Colors.textOnLight : Theme.Colors.textPrimary) : Theme.Colors.textTertiary)
-                .frame(maxWidth: .infinity)
-        }
-        .frame(height: Theme.Size.buttonL)
-        .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous))
-        .contentShape(Rectangle())
-        .onLongPressGesture(minimumDuration: Theme.Motion.holdToConfirm, maximumDistance: 40) {
-            guard enabled else { return }
-            Haptics.success()
-            action()
-        } onPressingChanged: { pressing in
-            guard enabled else { return }
-            holding = pressing
-            if pressing {
-                withAnimation(.linear(duration: Theme.Motion.holdToConfirm)) { progress = 1 }
-            } else {
-                withAnimation(.linear(duration: 0.2)) { progress = 0 }
-            }
-        }
-        .accessibilityElement()
-        .accessibilityLabel(Text(enabled ? title : disabledTitle))
-        .accessibilityAddTraits(.isButton)
-        .accessibilityAction { if enabled { action() } }
-    }
-}
-
-/// SegmentedControl: h 38, pad 3, active segment bg.selected r 9.
+/// SegmentedControl (the phone's, iOS style): h 38, pad 3, the active segment white on the grey track, r 9.
 struct Segmented<Value: Hashable>: View {
     let options: [(value: Value, label: String)]
     @Binding var selection: Value
@@ -118,7 +71,7 @@ struct Segmented<Value: Hashable>: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(
                             RoundedRectangle(cornerRadius: 9, style: .continuous)
-                                .fill(selection == option.value ? Theme.Colors.bgSelected : .clear)
+                                .fill(selection == option.value ? Theme.Colors.bgBase : .clear)
                         )
                 }
                 .buttonStyle(.plain)
@@ -132,21 +85,23 @@ struct Segmented<Value: Hashable>: View {
     }
 }
 
-/// Empty state: dashed 56 square + title + a useful sentence (never a dead end).
+/// Empty state of a phone app, rendered like the system's (« Aucune note »): a title and one
+/// sentence, centred, in the phone's own style (UX V3 §6-13) — never the BEN's tone.
 struct EmptyStateView: View {
     let title: String
     let message: String
 
     var body: some View {
-        VStack(spacing: Theme.Spacing.s4) {
-            RoundedRectangle(cornerRadius: Theme.Radius.sm)
-                .strokeBorder(Theme.Colors.line3, style: StrokeStyle(lineWidth: 1, dash: [4, 4]))
-                .frame(width: 56, height: 56)
+        VStack(spacing: Theme.Spacing.s3) {
             Text(title).font(Theme.Fonts.headline).foregroundStyle(Theme.Colors.textPrimary)
-            Text(message).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary).multilineTextAlignment(.center)
+                .multilineTextAlignment(.center)
+            Text(message).font(Theme.Fonts.callout).foregroundStyle(Theme.Colors.textSecondary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding(Theme.Spacing.s8)
         .frame(maxWidth: .infinity)
+        .accessibilityElement(children: .combine)
     }
 }
 #endif
