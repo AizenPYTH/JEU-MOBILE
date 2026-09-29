@@ -6,13 +6,15 @@ import StoryEngine
 // The paper screens of the story mode (docs/design_story/STORY_UX_FLOW.md §3): h07 the
 // investigator's profile, h08 the career, h10 a chapter's folder, h15 the new case file,
 // h16 → h17 → « Avancement de service » → h18 the end of a chapter, h19 the story's settings.
-// They read `StoryCoordinator` and call its actions: no story rule here. Paper outside, one full
-// button per screen at safeArea.bottom + 10, « ‹ » 44 × 44 at the top left, every sheet scrolls
-// at large text sizes, and « Réduire les animations » turns every move into a 200 ms fade.
+// They read `StoryCoordinator` and call its actions: no story rule here. Re-skinned with the UX V3
+// tokens (docs/design_ux_v3 §0): flat `surface` cards on `bg`, no paper, kraft, grain, rotation,
+// stamp PNG or shadow; StatusBadges for states; one full button per screen at safeArea.bottom + 10,
+// « ‹ Histoire » top left, every card scrolls at large text sizes, and « Réduire les animations »
+// turns every move into a 200 ms fade.
 
 extension Trace.StoryFonts {
-    /// The rank on the career timeline (h08): Plex Mono 12/700.
-    static let careerRank = Font.custom(Trace.FontName.monoBold, fixedSize: 12)
+    /// The rank on the career timeline (h08): Plex Sans 17/600 (headline).
+    static let careerRank = Font.custom(Trace.FontName.sansSemibold, size: 17, relativeTo: .headline)
 }
 
 // MARK: - Shared pieces
@@ -54,18 +56,15 @@ private enum StoryPaper {
         return player.firstName + " " + player.lastName
     }
 
-    /// « É. MOREL »
+    /// « É. Morel »
     static func shortName(_ player: StoryPlayer) -> String {
-        "\(player.firstName.prefix(1)). \(player.lastName.uppercased())"
+        "\(player.firstName.prefix(1)). \(player.lastName)"
     }
 
     static func initials(_ player: StoryPlayer?) -> String {
         guard let player else { return "" }
         return (String(player.firstName.prefix(1)) + String(player.lastName.prefix(1))).uppercased()
     }
-
-    /// The inked stamp of a rank (Art.xcassets/Stamps).
-    static func stampAsset(_ rank: StoryRank) -> String { "stamp_\(rank.rawValue)_rouge" }
 
     /// mm:ss (an hour counts as 60 minutes); « — » for nothing.
     static func duration(_ seconds: Int) -> String {
@@ -75,76 +74,57 @@ private enum StoryPaper {
 
     // MARK: Views
 
-    /// A thin rule on paper.
+    /// A 1 pt `line` rule.
     struct Rule: View {
-        var color: Color = Trace.Colors.ink.opacity(0.18)
+        var color: Color = Trace.Colors.line
 
         var body: some View {
             Rectangle().fill(color).frame(height: 1).accessibilityHidden(true)
         }
     }
 
-    /// The letterhead's double rule.
-    struct DoubleRule: View {
-        var body: some View {
-            VStack(spacing: 2) {
-                Rectangle().fill(Trace.Colors.ink).frame(height: 1.5)
-                Rectangle().fill(Trace.Colors.ink).frame(height: 0.75)
-            }
-            .accessibilityHidden(true)
-        }
-    }
-
-    /// BEN / BUREAU DES ENQUÊTES NUMÉRIQUES, the seal, the double rule.
+    /// The card's header: « BEN » (data) and the bureau's name, then a rule. No seal (V3).
     struct Letterhead: View {
         var body: some View {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .center, spacing: 12) {
-                    StampImage(asset: "seal_ben_bleu", label: L10n.t("assignment.bureau"), width: 40, onPaper: true,
-                               angle: 0, color: Trace.Colors.benBlue)
-                        .accessibilityHidden(true)
-                    VStack(alignment: .leading, spacing: 3) {
-                        StoryLabel(text: L10n.t("story.paper.ben"), color: Trace.Colors.ink)
-                        StoryLabel(text: L10n.t("assignment.bureau"), color: Trace.Colors.inkSoft)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    Spacer(minLength: 0)
+            VStack(alignment: .leading, spacing: 10) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(L10n.t("story.paper.ben"))
+                        .font(Trace.Fonts.data)
+                        .foregroundStyle(Trace.Colors.benText)
+                    Text(L10n.t("assignment.bureau"))
+                        .font(Trace.Fonts.caption)
+                        .foregroundStyle(Trace.Colors.text2)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                DoubleRule()
+                Rule()
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .accessibilityElement(children: .combine)
         }
     }
 
-    /// Lacaze's visa: his signature (blue ink PNG) and his name, printed.
+    /// Lacaze's visa: his name, printed (no handwritten signature on the interface, V3).
     struct Visa: View {
         var body: some View {
             VStack(alignment: .leading, spacing: 2) {
-                StoryLabel(text: L10n.t("story.profile.visa"), color: Trace.Colors.inkSoft)
-                if let image = ArtLibrary.image("signature_lacaze_bleu") {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 130)
-                        .blendMode(.multiply)
-                        .accessibilityHidden(true)
-                }
+                StoryLabel(text: L10n.t("story.profile.visa"), color: Trace.Colors.text2)
                 Text(L10n.t("assignment.signatory"))
-                    .font(Trace.Fonts.monoSmall)
-                    .foregroundStyle(Trace.Colors.inkSoft)
+                    .font(Trace.Fonts.caption)
+                    .foregroundStyle(Trace.Colors.text)
             }
             .accessibilityElement(children: .combine)
         }
     }
 
-    /// « ‹ » 44 × 44 at the leading edge.
+    /// « ‹ Histoire » (V3 §4 « où suis-je »): the previous screen's name, 44 pt, top left.
     struct TopBar: View {
         let backID: String
+        var backLabel: String? = nil
         let onBack: () -> Void
 
         var body: some View {
             HStack(spacing: 0) {
-                BackChevron(action: onBack)
+                BackChevron(label: backLabel ?? L10n.t("story.nav.hub"), action: onBack)
                     .accessibilityIdentifier(backID)
                 Spacer(minLength: 0)
             }
@@ -163,20 +143,22 @@ private enum StoryPaper {
                 .padding(.top, 12)
                 .padding(.bottom, 10)
                 .frame(maxWidth: .infinity)
-                .background(Trace.Story.sceneVoid.ignoresSafeArea(edges: .bottom))
+                .background(Trace.Colors.bg.ignoresSafeArea(edges: .bottom))
         }
     }
 
-    /// A screen of the story on the desk: the top bar, the scrolling content, the footer.
+    /// A screen of the story: the top bar, the scrolling content, the footer.
     struct Page<Content: View, Bottom: View>: View {
         let backID: String
         let onBack: () -> Void
+        /// « ‹ {previous screen} »; « Histoire » by default.
+        var backLabel: String? = nil
         @ViewBuilder let content: Content
         @ViewBuilder let bottom: Bottom
 
         var body: some View {
             VStack(spacing: 0) {
-                TopBar(backID: backID, onBack: onBack)
+                TopBar(backID: backID, backLabel: backLabel, onBack: onBack)
                 ScrollView {
                     content
                         .padding(.horizontal, 16)
@@ -190,32 +172,24 @@ private enum StoryPaper {
         }
     }
 
-    /// The stamp micro-interaction (TRANSITIONS §3): scale 1.35 → 1 and blur 2 → 0 in 180 ms, a
-    /// 60 ms settle, the dry sound and a rigid haptic. With reduced motion, a 200 ms fade.
+    /// A state badge appearing (V3: no stamp): a fade with a 6 pt rise in 200 ms and a light
+    /// haptic. With reduced motion, a 200 ms fade.
     struct StampDrop<Content: View>: View {
         var delay: Double = 0.3
         @ViewBuilder let content: Content
-        @State private var phase = 0
+        @State private var shown = false
         @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
         @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
 
         var body: some View {
             let still = systemReduceMotion || appReduceMotion
             content
-                .scaleEffect(still ? 1 : (phase == 0 ? 1.35 : phase == 1 ? 0.98 : 1))
-                .blur(radius: still || phase > 0 ? 0 : 2)
-                .opacity(phase > 0 ? 1 : 0)
+                .offset(y: shown || still ? 0 : 6)
+                .opacity(shown ? 1 : 0)
                 .task {
                     try? await Task.sleep(for: .seconds(delay))
-                    if still {
-                        withAnimation(.easeOut(duration: 0.2)) { phase = 2 }
-                    } else {
-                        withAnimation(.easeIn(duration: 0.18)) { phase = 1 }
-                        try? await Task.sleep(for: .milliseconds(180))
-                        withAnimation(.easeOut(duration: 0.06)) { phase = 2 }
-                    }
-                    AudioDirector.shared.play(.stamp, volume: 0.8)
-                    Haptics.rigid()
+                    withAnimation(.easeOut(duration: 0.2)) { shown = true }
+                    Haptics.light()
                 }
         }
     }
@@ -248,8 +222,8 @@ private enum StoryPaper {
         }
     }
 
-    /// The BEN card of the reward (h18), a flat stand-in for the 3D object: the story's card
-    /// material (the 160° gradient), the print, the name, the rank, the service number.
+    /// The BEN card of the reward (h18), a flat stand-in for the 3D object: a flat `surface2`
+    /// card, the photo, the name, the rank, the service number.
     struct BENCard: View {
         let name: String
         let rank: String
@@ -258,66 +232,63 @@ private enum StoryPaper {
         let initials: String
 
         var body: some View {
-            let shape = RoundedRectangle(cornerRadius: 12, style: .continuous)
+            let shape = RoundedRectangle(cornerRadius: Trace.Radius.card, style: .continuous)
             VStack(spacing: 10) {
                 Capsule()
-                    .strokeBorder(Trace.Story.inkSecondary.opacity(0.7), lineWidth: 1.5)
+                    .strokeBorder(Trace.Colors.text2.opacity(0.7), lineWidth: 1.5)
                     .frame(width: 34, height: 8)
                     .padding(.top, 12)
                 VStack(spacing: 3) {
                     Text(L10n.t("story.paper.ben"))
-                        .font(Trace.StoryFonts.label)
-                        .tracking(3)
-                        .foregroundStyle(Trace.Story.ink)
-                    Text(L10n.t("assignment.bureau").uppercased())
-                        .font(Trace.StoryFonts.label)
-                        .tracking(0.8)
-                        .foregroundStyle(Trace.Story.inkSecondary)
+                        .font(Trace.Fonts.data)
+                        .foregroundStyle(Trace.Colors.benText)
+                    Text(L10n.t("assignment.bureau"))
+                        .font(Trace.Fonts.caption)
+                        .foregroundStyle(Trace.Colors.text2)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .minimumScaleFactor(0.7)
                 }
                 PortraitOrInitials(image: portrait, initials: initials, width: 78, height: 98)
-                    .overlay(Rectangle().strokeBorder(Trace.Story.ink.opacity(0.25), lineWidth: 1))
+                    .clipShape(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous))
                 VStack(spacing: 3) {
                     Text(name)
                         .font(Trace.StoryFonts.h3)
-                        .foregroundStyle(Trace.Story.ink)
+                        .foregroundStyle(Trace.Colors.text)
                         .multilineTextAlignment(.center)
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
-                    Text(rank.uppercased())
-                        .font(Trace.StoryFonts.technical)
-                        .foregroundStyle(Trace.Story.inkSecondary)
+                    Text(rank)
+                        .font(Trace.Fonts.caption)
+                        .foregroundStyle(Trace.Colors.text2)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                     Text(serviceNumber)
                         .font(Trace.StoryFonts.technical)
-                        .foregroundStyle(Trace.Story.ink)
+                        .foregroundStyle(Trace.Colors.text)
                 }
                 Spacer(minLength: 0)
             }
             .padding(.horizontal, 12)
             .frame(width: 168, height: 262)
-            .background(shape.fill(LinearGradient(colors: [Trace.Story.folderLight, Trace.Story.folder],
-                                                  startPoint: UnitPoint(x: 0.36, y: 0), endPoint: UnitPoint(x: 0.64, y: 1))))
-            .overlay(shape.strokeBorder(Trace.Story.ink.opacity(0.12), lineWidth: 1))
+            .background(shape.fill(Trace.Colors.surface2))
+            .overlay(shape.strokeBorder(Trace.Colors.line, lineWidth: 1))
         }
     }
 
-    /// Any other object of the reward: a paper tag with its name.
+    /// Any other object of the reward: a flat tag with its name.
     struct ObjectTag: View {
         let name: String
 
         var body: some View {
             VStack(spacing: 14) {
                 Circle()
-                    .strokeBorder(Trace.Colors.inkSoft, lineWidth: 1.5)
+                    .strokeBorder(Trace.Colors.text2, lineWidth: 1.5)
                     .frame(width: 14, height: 14)
-                StoryLabel(text: L10n.t("story.paper.ben"), color: Trace.Colors.inkSoft)
+                StoryLabel(text: L10n.t("story.paper.ben"), color: Trace.Colors.text2)
                 Text(name)
                     .font(Trace.StoryFonts.h3)
-                    .foregroundStyle(Trace.Colors.ink)
+                    .foregroundStyle(Trace.Colors.text)
                     .multilineTextAlignment(.center)
                     .lineLimit(3)
                     .minimumScaleFactor(0.6)
@@ -326,11 +297,11 @@ private enum StoryPaper {
             }
             .padding(18)
             .frame(width: 180, height: 230)
-            .paper(Trace.Colors.label, radius: 4)
+            .benCard(Trace.Colors.surface2)
         }
     }
 
-    /// h18's object, entering like a card (+20 pt, 4° → 0°, 420 ms), with its shadow on the desk.
+    /// h18's object, entering with a fade and a 20 pt rise (420 ms). Flat: no tilt, no shadow.
     struct RewardObject: View {
         let item: RewardItem
         let name: String
@@ -349,16 +320,7 @@ private enum StoryPaper {
         var body: some View {
             let still = systemReduceMotion || appReduceMotion
             ZStack {
-                Ellipse()
-                    .fill(Trace.Story.sceneVoid.opacity(0.85))
-                    .frame(width: 150, height: 18)
-                    .blur(radius: 10)
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .opacity(shown ? 1 : 0)
                 object
-                    .rotation3DEffect(.degrees(-10), axis: (x: 0, y: 1, z: 0), perspective: 0.6)
-                    .shadow(color: .black.opacity(0.7), radius: 30, y: 30)
-                    .rotationEffect(.degrees(shown || still ? 0 : 4))
                     .offset(y: shown || still ? 0 : 20)
                     .opacity(shown ? 1 : 0)
             }
@@ -393,32 +355,32 @@ private enum StoryPaper {
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
                     Letterhead()
-                    StoryLabel(text: L10n.t("story.career.note.title"), color: Trace.Colors.inkSoft)
+                    StoryLabel(text: L10n.t("story.career.note.title"), color: Trace.Colors.text2)
                         .accessibilityAddTraits(.isHeader)
                     Text(title)
                         .font(Trace.StoryFonts.h2)
-                        .foregroundStyle(Trace.Colors.ink)
+                        .foregroundStyle(Trace.Colors.text)
                         .fixedSize(horizontal: false, vertical: true)
                     Text(first ? L10n.t("story.career.note.first") : L10n.t("story.career.note.body"))
                         .font(Trace.StoryFonts.body)
-                        .foregroundStyle(Trace.Colors.inkMid)
+                        .foregroundStyle(Trace.Colors.text2)
                         .lineSpacing(4)
                         .fixedSize(horizontal: false, vertical: true)
                     if let date {
                         Text(L10n.f("story.career.note.date", date))
                             .font(Trace.StoryFonts.technical)
-                            .foregroundStyle(Trace.Colors.inkSoft)
+                            .foregroundStyle(Trace.Colors.text2)
                     }
                     Visa()
                     Button(L10n.t("a11y.close"), action: onClose)
-                        .buttonStyle(TextLinkStyle(onPaper: true))
+                        .buttonStyle(TextLinkStyle())
                         .frame(maxWidth: .infinity)
                         .accessibilityIdentifier("story.career.note.close")
                 }
                 .padding(20)
             }
             .scrollBounceBehavior(.basedOnSize)
-            .background(Trace.Colors.paper.overlay(PaperGrain()).ignoresSafeArea())
+            .background(Trace.Colors.surface.ignoresSafeArea())
             .accessibilityIdentifier("story.career.note")
         }
     }
@@ -434,17 +396,17 @@ private enum StoryPaper {
                 VStack(alignment: .leading, spacing: 12) {
                     Text(L10n.t("story.settings.replay"))
                         .font(Trace.StoryFonts.h2)
-                        .foregroundStyle(Trace.Colors.ink)
+                        .foregroundStyle(Trace.Colors.text)
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityAddTraits(.isHeader)
                     Text(L10n.t("story.settings.replayNote"))
                         .font(Trace.StoryFonts.body)
-                        .foregroundStyle(Trace.Colors.inkMid)
+                        .foregroundStyle(Trace.Colors.text2)
                         .fixedSize(horizontal: false, vertical: true)
                     if chapters.isEmpty {
                         Text(L10n.t("story.settings.replayEmpty"))
                             .font(Trace.StoryFonts.body)
-                            .foregroundStyle(Trace.Colors.inkSoft)
+                            .foregroundStyle(Trace.Colors.text2)
                             .fixedSize(horizontal: false, vertical: true)
                             .padding(.vertical, 8)
                     } else {
@@ -454,21 +416,21 @@ private enum StoryPaper {
                                 Button { onChoose(chapter.id) } label: {
                                     HStack(alignment: .firstTextBaseline, spacing: 12) {
                                         StoryLabel(text: L10n.f("story.chapter.tab", StoryPaper.twoDigits(chapter.number)),
-                                                   color: Trace.Colors.inkSoft)
+                                                   color: Trace.Colors.text2)
                                         Text(StoryPaper.title(chapter.title))
                                             .font(Trace.StoryFonts.body)
-                                            .foregroundStyle(Trace.Colors.ink)
+                                            .foregroundStyle(Trace.Colors.text)
                                             .multilineTextAlignment(.leading)
                                             .fixedSize(horizontal: false, vertical: true)
                                         Spacer(minLength: 8)
                                         Image(systemName: "chevron.right")
                                             .font(Trace.StoryFonts.caption)
-                                            .foregroundStyle(Trace.Colors.inkSoft)
+                                            .foregroundStyle(Trace.Colors.text2)
                                             .accessibilityHidden(true)
                                     }
                                     .padding(.vertical, 8)
                                     .frame(minHeight: 48)
-                                    .overlay(alignment: .bottom) { Rule(color: Trace.Colors.ruled.opacity(2)) }
+                                    .overlay(alignment: .bottom) { Rule(color: Trace.Colors.line) }
                                     .contentShape(Rectangle())
                                 }
                                 .buttonStyle(PressableStyle())
@@ -477,14 +439,14 @@ private enum StoryPaper {
                         }
                     }
                     Button(L10n.t("a11y.close"), action: onClose)
-                        .buttonStyle(TextLinkStyle(onPaper: true))
+                        .buttonStyle(TextLinkStyle())
                         .frame(maxWidth: .infinity)
                         .accessibilityIdentifier("story.settings.replay.close")
                 }
                 .padding(20)
             }
             .scrollBounceBehavior(.basedOnSize)
-            .background(Trace.Colors.paper.overlay(PaperGrain()).ignoresSafeArea())
+            .background(Trace.Colors.surface.ignoresSafeArea())
         }
     }
 
@@ -498,12 +460,12 @@ private enum StoryPaper {
                 VStack(alignment: .leading, spacing: 14) {
                     Text(L10n.t("story.settings.resetTitle"))
                         .font(Trace.StoryFonts.h2)
-                        .foregroundStyle(Trace.Colors.ink)
+                        .foregroundStyle(Trace.Colors.text)
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityAddTraits(.isHeader)
                     Text(L10n.t("story.settings.resetMessage"))
                         .font(Trace.StoryFonts.body)
-                        .foregroundStyle(Trace.Colors.inkMid)
+                        .foregroundStyle(Trace.Colors.text2)
                         .lineSpacing(4)
                         .fixedSize(horizontal: false, vertical: true)
                     StoryHoldButton(title: L10n.t("story.settings.resetHold"), seconds: 1.6, destructive: true, onPaper: true) {
@@ -512,21 +474,21 @@ private enum StoryPaper {
                     .accessibilityIdentifier("story.settings.reset.hold")
                     .padding(.top, 8)
                     Button(L10n.t("story.settings.cancel"), action: onCancel)
-                        .buttonStyle(TextLinkStyle(onPaper: true))
+                        .buttonStyle(TextLinkStyle())
                         .frame(maxWidth: .infinity)
                         .accessibilityIdentifier("story.settings.reset.cancel")
                 }
                 .padding(20)
             }
             .scrollBounceBehavior(.basedOnSize)
-            .background(Trace.Colors.paper.overlay(PaperGrain()).ignoresSafeArea())
+            .background(Trace.Colors.surface.ignoresSafeArea())
         }
     }
 }
 
 // MARK: - h07 · Profil enquêteur
 
-/// The investigator's file: letterhead, print 112 × 142, name, rank and service number, the
+/// The investigator's file (a flat card): header, photo 112 × 142, name, rank and service number, the
 /// three numbers (cases handled · solved · seniority), the last three lines of the history,
 /// Lacaze's visa and « Voir en 3D ». Never a relationship score.
 struct StoryProfileView: View {
@@ -562,7 +524,7 @@ struct StoryProfileView: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .paper(Trace.Colors.paper, radius: 0, lifted: true)
+        .benCard()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("story.profile.sheet")
     }
@@ -572,40 +534,30 @@ struct StoryProfileView: View {
 
     private var identity: some View {
         let player = story.player
-        let rank = story.save?.rank ?? .enqueteur
         let name = StoryPaper.fullName(player)
-        let title = story.rankTitle().uppercased()
+        let title = story.rankTitle()
         let layout = stacked
             ? AnyLayout(VStackLayout(alignment: .leading, spacing: 14))
             : AnyLayout(HStackLayout(alignment: .top, spacing: 16))
         return layout {
             PortraitOrInitials(image: story.portrait, initials: StoryPaper.initials(player),
                                width: Self.printWidth, height: Self.printHeight)
-                .padding(5)
-                .background(Trace.Colors.printWhite)
-                .shadow(color: .black.opacity(0.25), radius: 5, y: 4)
+                .clipShape(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous))
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(Text(L10n.f("story.profile.a11y.print", name)))
                 .accessibilityAddTraits(.isImage)
             VStack(alignment: .leading, spacing: 6) {
                 Text(name)
                     .font(Trace.StoryFonts.h2)
-                    .foregroundStyle(Trace.Colors.ink)
+                    .foregroundStyle(Trace.Colors.text)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityAddTraits(.isHeader)
-                Text(title)
-                    .font(Trace.StoryFonts.technical)
-                    .tracking(0.3)
-                    .foregroundStyle(Trace.Colors.inkMid)
-                    .fixedSize(horizontal: false, vertical: true)
+                StatusBadge(text: title, color: Trace.Colors.benText, symbol: "#")
                 if let number = player?.serviceNumber {
                     Text(L10n.f("story.profile.serviceNumber", number))
-                        .font(Trace.StoryFonts.technical)
-                        .tracking(0.3)
-                        .foregroundStyle(Trace.Colors.inkSoft)
+                        .font(Trace.Fonts.data)
+                        .foregroundStyle(Trace.Colors.text2)
                 }
-                StampImage(asset: StoryPaper.stampAsset(rank), label: title, width: 104, onPaper: true, angle: -8)
-                    .padding(.top, 6)
             }
         }
     }
@@ -624,12 +576,12 @@ struct StoryProfileView: View {
 
     private func number(_ label: String, _ value: String) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            StoryLabel(text: label, color: Trace.Colors.inkSoft)
+            StoryLabel(text: label, color: Trace.Colors.text2)
                 .fixedSize(horizontal: false, vertical: true)
             Text(value)
                 .font(Trace.StoryFonts.number)
                 .monospacedDigit()
-                .foregroundStyle(Trace.Colors.ink)
+                .foregroundStyle(Trace.Colors.text)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .combine)
@@ -649,7 +601,7 @@ struct StoryProfileView: View {
         let created: String? = story.save?.createdAt
         let createdShown = created.map { StoryCoordinator.shownDay($0) }
         return VStack(alignment: .leading, spacing: 0) {
-            StoryLabel(text: L10n.t("story.profile.history"), color: Trace.Colors.inkSoft)
+            StoryLabel(text: L10n.t("story.profile.history"), color: Trace.Colors.text2)
                 .padding(.bottom, 4)
                 .accessibilityAddTraits(.isHeader)
             if entries.isEmpty {
@@ -665,17 +617,17 @@ struct StoryProfileView: View {
     private func historyLine(date: String?, text: String) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: 12) {
             Text(date ?? "—")
-                .font(Trace.StoryFonts.technical)
-                .foregroundStyle(Trace.Colors.inkSoft)
+                .font(Trace.Fonts.data)
+                .foregroundStyle(Trace.Colors.text2)
                 .frame(minWidth: 92, alignment: .leading)
             Text(text)
-                .font(Trace.StoryFonts.body)
-                .foregroundStyle(Trace.Colors.ink)
+                .font(Trace.Fonts.callout)
+                .foregroundStyle(Trace.Colors.text)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 0)
         }
         .padding(.vertical, 9)
-        .overlay(alignment: .bottom) { StoryPaper.Rule(color: Trace.Colors.ruled.opacity(2)) }
+        .overlay(alignment: .bottom) { StoryPaper.Rule(color: Trace.Colors.line) }
         .accessibilityElement(children: .combine)
     }
 
@@ -688,7 +640,7 @@ struct StoryProfileView: View {
             StoryPaper.Visa()
             if !stacked { Spacer(minLength: 8) }
             Button(L10n.t("story.profile.view3d"), action: onView3D)
-                .buttonStyle(TextLinkStyle(onPaper: true))
+                .buttonStyle(TextLinkStyle())
                 .accessibilityIdentifier("story.profile.view3d")
         }
         .padding(.top, 4)
@@ -697,8 +649,8 @@ struct StoryProfileView: View {
 
 // MARK: - h08 · Carrière
 
-/// The career as a vertical timeline on paper: one step per rank — passed (filled ink dot, solid
-/// line, the date), current (red ring and halo, dotted line on, « ACTUEL » and a counter), future
+/// The career as a vertical timeline on a flat card: one step per rank — passed (filled dot, solid
+/// line, the date), current (ben ring and halo, dotted line on, « Actuel » and a counter), future
 /// (empty ring, dotted, 45 %, its condition). No gauge, no percentage. A passed step opens its
 /// promotion note.
 struct StoryCareerView: View {
@@ -722,12 +674,12 @@ struct StoryCareerView: View {
         StoryPaper.Page(backID: "story.career.back", onBack: onBack) {
             VStack(alignment: .leading, spacing: 14) {
                 Text(L10n.t("story.career.title"))
-                    .font(Trace.StoryFonts.h1)
-                    .foregroundStyle(Trace.Colors.bone)
+                    .font(Trace.Fonts.title)
+                    .foregroundStyle(Trace.Colors.text)
                     .accessibilityAddTraits(.isHeader)
                 Text(L10n.t("story.career.intro"))
-                    .font(Trace.StoryFonts.caption)
-                    .foregroundStyle(Trace.Colors.bone2)
+                    .font(Trace.Fonts.callout)
+                    .foregroundStyle(Trace.Colors.text2)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.bottom, 6)
                 timeline
@@ -741,8 +693,8 @@ struct StoryCareerView: View {
                                      onClose: { note = nil })
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
-                .presentationCornerRadius(16)
-                .presentationBackground(Trace.Colors.paper)
+                .presentationCornerRadius(Trace.Radius.sheet)
+                .presentationBackground(Trace.Colors.surface)
         }
     }
 
@@ -760,7 +712,7 @@ struct StoryCareerView: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .paper(Trace.Colors.paper, radius: 0, lifted: true)
+        .benCard()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("story.career.sheet")
     }
@@ -792,21 +744,18 @@ struct StoryCareerView: View {
         let step = stepLine(tier.rank)
         let meta = self.meta(tier, state: state)
         return VStack(alignment: .leading, spacing: 4) {
-            Text(title.uppercased())
+            Text(title)
                 .font(Trace.StoryFonts.careerRank)
-                .tracking(1.9)
-                .foregroundStyle(Trace.Colors.ink)
+                .foregroundStyle(Trace.Colors.text)
                 .fixedSize(horizontal: false, vertical: true)
             Text(step)
-                .font(Trace.Fonts.prose)
-                .foregroundStyle(Trace.Colors.ink)
+                .font(Trace.Fonts.callout)
+                .foregroundStyle(Trace.Colors.text2)
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
             Text(meta)
-                .font(Trace.StoryFonts.technical)
-                .tracking(0.3)
-                .textCase(.uppercase)
-                .foregroundStyle(state == .current ? Trace.Colors.stamp : Trace.Colors.inkSoft)
+                .font(Trace.Fonts.caption)
+                .foregroundStyle(state == .current ? Trace.Colors.benText : Trace.Colors.text2)
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -826,19 +775,19 @@ struct StoryCareerView: View {
             ZStack {
                 switch state {
                 case .passed:
-                    Circle().fill(Trace.Colors.ink).frame(width: Self.dotSize, height: Self.dotSize)
+                    Circle().fill(Trace.Colors.text2).frame(width: Self.dotSize, height: Self.dotSize)
                 case .current:
-                    Circle().fill(Trace.Colors.stamp.opacity(0.18)).frame(width: Self.markerWidth, height: Self.markerWidth)
-                    Circle().strokeBorder(Trace.Colors.stamp, lineWidth: 2).frame(width: Self.dotSize, height: Self.dotSize)
+                    Circle().fill(Trace.Colors.tint(Trace.Colors.ben)).frame(width: Self.markerWidth, height: Self.markerWidth)
+                    Circle().strokeBorder(Trace.Colors.ben, lineWidth: 2).frame(width: Self.dotSize, height: Self.dotSize)
                 case .future:
-                    Circle().strokeBorder(Trace.Colors.ink, lineWidth: 1.5).frame(width: Self.dotSize, height: Self.dotSize)
+                    Circle().strokeBorder(Trace.Colors.text2, lineWidth: 1.5).frame(width: Self.dotSize, height: Self.dotSize)
                 }
             }
             .frame(width: Self.markerWidth, height: Self.markerWidth)
             if !last {
                 Line()
-                    .stroke(Trace.Colors.ink,
-                            style: StrokeStyle(lineWidth: 1.5, lineCap: .round, dash: state == .passed ? [] : [0.5, 4.5]))
+                    .stroke(Trace.Colors.surface3,
+                            style: StrokeStyle(lineWidth: 2, lineCap: .round, dash: state == .passed ? [] : [0.5, 4.5]))
                     .frame(width: 2)
                     .frame(maxHeight: .infinity)
             }
@@ -902,10 +851,10 @@ struct StoryCareerView: View {
 
 // MARK: - h10 · Chapitre
 
-/// A chapter's folder (story.folder, a sheet inside, margin 14): tab « CHAPITRE 0N », title, the
-/// synopsis, the steps (✓ done · ● current · ○ to come, 45 %, « ··· » for a surprise), and one
-/// button: « CONTINUER · SCÈNE n » (current), « CHAPITRE SUIVANT » (finished, RÉSOLU on the
-/// folder), none for a chapter not written yet (« Bientôt disponible »).
+/// A chapter (a flat large card): « CHAPITRE 0N » (data), title, the synopsis, the steps (✓ done ·
+/// ● current · ○ to come, 45 %, « ··· » for a surprise), and one button: « Continuer · Scène n »
+/// (current), « Chapitre suivant » (finished, a ✓ Résolu badge), none for a chapter not written
+/// yet (« Bientôt disponible »).
 struct StoryChapterView: View {
     let story: StoryCoordinator
     let chapterID: String
@@ -928,7 +877,7 @@ struct StoryChapterView: View {
             } else {
                 Text(L10n.t("story.chapter.soon"))
                     .font(Trace.StoryFonts.body)
-                    .foregroundStyle(Trace.Colors.bone2)
+                    .foregroundStyle(Trace.Colors.text2)
                     .padding(.top, 24)
             }
         } bottom: {
@@ -977,72 +926,56 @@ struct StoryChapterView: View {
     // MARK: Folder
 
     private func folder(_ chapter: StoryChapter, phase: Phase) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(L10n.f("story.chapter.tab", StoryPaper.twoDigits(chapter.number)))
-                .font(Trace.StoryFonts.label)
-                .tracking(1.6)
-                .textCase(.uppercase)
-                .foregroundStyle(Trace.Story.ink)
-                .padding(.horizontal, 14)
-                .frame(minHeight: 30)
-                .background(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8).fill(Trace.Story.folder))
-                .accessibilityAddTraits(.isHeader)
-            folderSheet(chapter, phase: phase)
-                .padding(14)
-                .frame(maxWidth: .infinity)
-                .background(
-                    UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 8, bottomTrailingRadius: 8, topTrailingRadius: 8)
-                        .fill(Trace.Story.folder)
-                )
-        }
-        .shadow(color: .black.opacity(0.6), radius: 24, y: 22)
-        .opacity(phase == .planned || phase == .locked ? 0.5 : 1)
+        folderSheet(chapter, phase: phase)
+            .opacity(phase == .planned || phase == .locked ? 0.6 : 1)
     }
 
     private func folderSheet(_ chapter: StoryChapter, phase: Phase) -> some View {
         VStack(alignment: .leading, spacing: 14) {
+            HStack(alignment: .center, spacing: 8) {
+                Text(L10n.f("story.chapter.tab", StoryPaper.twoDigits(chapter.number)).uppercased())
+                    .font(Trace.Fonts.data)
+                    .foregroundStyle(Trace.Colors.benText)
+                    .accessibilityAddTraits(.isHeader)
+                Spacer(minLength: 8)
+                if phase == .finished {
+                    stamp(chapter)
+                }
+            }
             Text(StoryPaper.title(chapter.title))
-                .font(Trace.StoryFonts.h2)
-                .foregroundStyle(Trace.Colors.ink)
+                .font(Trace.Fonts.title)
+                .foregroundStyle(Trace.Colors.text)
                 .fixedSize(horizontal: false, vertical: true)
-                .padding(.trailing, phase == .finished ? 88 : 0)
                 .accessibilityAddTraits(.isHeader)
             Text(story.resolve(chapter.synopsis))
-                .font(Trace.StoryFonts.body)
-                .foregroundStyle(Trace.Colors.inkMid)
+                .font(Trace.Fonts.body)
+                .foregroundStyle(Trace.Colors.text2)
                 .lineSpacing(4)
                 .fixedSize(horizontal: false, vertical: true)
             switch phase {
             case .planned:
-                StoryLabel(text: L10n.t("story.chapter.soon"), color: Trace.Colors.inkSoft)
+                StoryLabel(text: L10n.t("story.chapter.soon"), color: Trace.Colors.text2)
                     .padding(.top, 4)
             case .locked:
-                StoryLabel(text: lockedLine(chapter), color: Trace.Colors.inkSoft)
+                StoryLabel(text: lockedLine(chapter), color: Trace.Colors.text2)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 4)
             case .finished, .current, .available:
                 steps(chapter, phase: phase)
             }
         }
-        .padding(18)
+        .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .paper(Trace.Colors.paper, radius: 0)
-        .overlay(alignment: .topTrailing) {
-            if phase == .finished {
-                stamp(chapter)
-                    .padding(.top, 10)
-                    .padding(.trailing, 8)
-            }
-        }
+        .benCard(radius: Trace.Radius.largeCard)
     }
 
+    /// ✓ Résolu (success) or Classé (grey): a StatusBadge, never a stamp (V3).
     @ViewBuilder
     private func stamp(_ chapter: StoryChapter) -> some View {
         if solved(chapter) {
-            StampImage(asset: "stamp_resolu_rouge_marque", label: L10n.t("stamp.solved"), width: 92, onPaper: true, angle: -10)
+            StatusBadge(text: L10n.t("story.badge.solved"), color: Trace.Colors.successText, symbol: "✓")
         } else {
-            StateStamp(text: L10n.t("story.paper.stampFiled"), color: Trace.Story.greyStamp)
-                .padding(.top, 10)
+            StatusBadge(text: L10n.t("story.paper.stampFiled"), color: Trace.Colors.text2, symbol: "●")
         }
     }
 
@@ -1075,19 +1008,19 @@ struct StoryChapterView: View {
         return HStack(alignment: .center, spacing: 12) {
             Text(verbatim: glyph)
                 .font(Trace.Fonts.monoStrong)
-                .foregroundStyle(state == .current ? Trace.Colors.stamp : Trace.Colors.ink)
+                .foregroundStyle(state == .current ? Trace.Colors.benText : state == .done ? Trace.Colors.successText : Trace.Colors.text2)
                 .frame(width: 16)
             Text(title)
-                .font(Trace.StoryFonts.body)
-                .foregroundStyle(Trace.Colors.ink)
+                .font(Trace.Fonts.callout)
+                .foregroundStyle(Trace.Colors.text)
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 8)
-            StoryLabel(text: type, color: Trace.Colors.inkSoft)
+            StoryLabel(text: type, color: Trace.Colors.text2)
         }
         .padding(.vertical, 6)
         .frame(minHeight: 44)
-        .overlay(alignment: .bottom) { StoryPaper.Rule(color: Trace.Colors.ruled.opacity(2)) }
+        .overlay(alignment: .bottom) { StoryPaper.Rule(color: Trace.Colors.line) }
         .opacity(state == .future ? 0.45 : 1)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text([stepStateName(state), spoken, type].joined(separator: ", ")))
@@ -1139,7 +1072,7 @@ struct StoryChapterView: View {
                 StoryPaper.Footer {
                     Text(L10n.t("story.chapter.nextSoon"))
                         .font(Trace.StoryFonts.caption)
-                        .foregroundStyle(Trace.Colors.bone2)
+                        .foregroundStyle(Trace.Colors.text2)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .frame(minHeight: 44)
@@ -1184,9 +1117,9 @@ struct StoryChapterView: View {
 
 // MARK: - h15 · Nouveau dossier
 
-/// The last image of the scene in 2D: the kraft folder on Lacaze's desk. Tab « N° C02-A »,
-/// « CHAPITRE 0N · AFFAIRE A », the title, NOUVEAU, « AFFECTÉ À É. MOREL ». [OUVRIR LE DOSSIER]
-/// rises in with a 500 ms fade.
+/// The last image of the scene in 2D: the new case file, as a flat large card (V3: no kraft).
+/// « N° C02-A » (data), « CHAPITRE 0N · AFFAIRE A », the title, a « Nouveau » badge, « Affecté à
+/// É. Morel ». [Ouvrir le dossier] rises in with a 500 ms fade.
 struct StoryCaseFolderView: View {
     let story: StoryCoordinator
     let caseID: String
@@ -1223,47 +1156,36 @@ struct StoryCaseFolderView: View {
     }
 
     private var folder: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(label.isEmpty ? "—" : label)
-                .font(Trace.StoryFonts.label)
-                .tracking(1.6)
-                .textCase(.uppercase)
-                .foregroundStyle(Trace.Story.kraftInk)
-                .padding(.horizontal, 14)
-                .frame(minHeight: 30)
-                .background(UnevenRoundedRectangle(topLeadingRadius: 8, topTrailingRadius: 8).fill(Trace.Colors.kraft))
-            VStack(alignment: .leading, spacing: 16) {
-                HStack(alignment: .top, spacing: 12) {
-                    StoryLabel(text: L10n.f("story.caseFolder.kicker", StoryPaper.twoDigits(chapterNumber), letter),
-                               color: Trace.Colors.kraftLabel)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Spacer(minLength: 8)
-                    StoryPaper.StampDrop(delay: 0.35) {
-                        StateStamp(text: L10n.t("story.paper.stampNew"))
-                    }
-                }
-                Text(StoryPaper.title(caseTitle))
-                    .font(Trace.StoryFonts.h2)
-                    .foregroundStyle(Trace.Story.kraftInk)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .accessibilityAddTraits(.isHeader)
-                Spacer(minLength: 48)
-                if let assigned {
-                    Text(assigned)
-                        .font(Trace.StoryFonts.technical)
-                        .tracking(0.6)
-                        .foregroundStyle(Trace.Colors.ink)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(Trace.Colors.label)
-                        .shadow(color: .black.opacity(0.2), radius: 1.5, y: 1)
-                        .rotationEffect(.degrees(-1.5))
+        VStack(alignment: .leading, spacing: 16) {
+            HStack(alignment: .center, spacing: 12) {
+                Text(label.isEmpty ? "—" : label.uppercased())
+                    .font(Trace.Fonts.data)
+                    .foregroundStyle(Trace.Colors.benText)
+                Spacer(minLength: 8)
+                StoryPaper.StampDrop(delay: 0.35) {
+                    StatusBadge(text: L10n.t("story.paper.stampNew"), color: Trace.Colors.benText, symbol: "●")
                 }
             }
-            .padding(22)
-            .frame(maxWidth: .infinity, minHeight: 280, alignment: .topLeading)
-            .kraft(radius: 8)
+            StoryLabel(text: L10n.f("story.caseFolder.kicker", StoryPaper.twoDigits(chapterNumber), letter),
+                       color: Trace.Colors.text2)
+                .fixedSize(horizontal: false, vertical: true)
+            Text(StoryPaper.title(caseTitle))
+                .font(Trace.Fonts.title)
+                .foregroundStyle(Trace.Colors.text)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityAddTraits(.isHeader)
+            Spacer(minLength: 32)
+            if let assigned {
+                Rectangle().fill(Trace.Colors.line).frame(height: 1).accessibilityHidden(true)
+                Text(assigned)
+                    .font(Trace.Fonts.caption)
+                    .foregroundStyle(Trace.Colors.text2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
+        .padding(20)
+        .frame(maxWidth: .infinity, minHeight: 260, alignment: .topLeading)
+        .benCard(radius: Trace.Radius.largeCard)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("story.caseFolder")
     }
@@ -1324,9 +1246,9 @@ struct StoryResultFlow: View {
     private var chapter: StoryChapter? { story.content?.campaign.chapter(result.chapterID) }
     private var items: [RewardItem] { result.reward?.items ?? [] }
     private var chapterNumber: String { StoryPaper.twoDigits(chapter?.number ?? 0) }
-    /// Labels on the CLASSÉ sheet (paper at 60 %) are in full ink, for contrast.
-    private var labelInk: Color { result.solved ? Trace.Colors.inkSoft : Trace.Colors.ink }
-    private var bodyInk: Color { result.solved ? Trace.Colors.inkMid : Trace.Colors.ink }
+    /// Labels and body text of the result card.
+    private var labelInk: Color { Trace.Colors.text2 }
+    private var bodyInk: Color { Trace.Colors.text2 }
 
     private var pageTransition: AnyTransition {
         still ? .opacity : .asymmetric(insertion: .offset(x: 40).combined(with: .opacity),
@@ -1398,19 +1320,18 @@ struct StoryResultFlow: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 8)
                 Spacer(minLength: 8)
-                if result.solved {
-                    FallingStampImage(asset: "stamp_resolu_rouge_marque", label: L10n.t("stamp.solved"), width: 100,
-                                      onPaper: true, angle: -8, success: true, delay: 0.35)
-                } else {
-                    StoryPaper.StampDrop(delay: 0.35) {
-                        StateStamp(text: L10n.t("story.paper.stampFiled"), color: Trace.Story.greyStamp)
+                StoryPaper.StampDrop(delay: 0.35) {
+                    if result.solved {
+                        StatusBadge(text: L10n.t("story.badge.solved"), color: Trace.Colors.successText, symbol: "✓")
+                    } else {
+                        StatusBadge(text: L10n.t("story.paper.stampFiled"), color: Trace.Colors.text2, symbol: "●")
                     }
-                    .padding(.top, 6)
                 }
+                .padding(.top, 4)
             }
             Text(StoryPaper.title(chapter?.title ?? ""))
-                .font(Trace.StoryFonts.h2)
-                .foregroundStyle(Trace.Colors.ink)
+                .font(Trace.Fonts.title)
+                .foregroundStyle(Trace.Colors.text)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
             if !summary.isEmpty {
@@ -1425,7 +1346,7 @@ struct StoryResultFlow: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .paper(result.solved ? Trace.Colors.paper : Trace.Colors.paper.opacity(0.6), radius: 0, lifted: true)
+        .benCard()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("story.result.sheet")
     }
@@ -1454,7 +1375,7 @@ struct StoryResultFlow: View {
             Text(value)
                 .font(Trace.Fonts.fieldValueLarge)
                 .monospacedDigit()
-                .foregroundStyle(Trace.Colors.ink)
+                .foregroundStyle(Trace.Colors.text)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(children: .combine)
@@ -1475,7 +1396,7 @@ struct StoryResultFlow: View {
                 ForEach(Array(lines.enumerated()), id: \.offset) { _, line in
                     Text(line)
                         .font(Trace.StoryFonts.body)
-                        .foregroundStyle(Trace.Colors.ink)
+                        .foregroundStyle(Trace.Colors.text)
                         .lineSpacing(4)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -1486,7 +1407,7 @@ struct StoryResultFlow: View {
     // MARK: h17 · État de service
 
     private var progressPage: some View {
-        StoryPaper.Page(backID: "story.progress.back", onBack: { go(.summary) }) {
+        StoryPaper.Page(backID: "story.progress.back", onBack: { go(.summary) }, backLabel: L10n.t("common.back")) {
             progressSheet
         } bottom: {
             StoryPaper.Footer {
@@ -1501,7 +1422,7 @@ struct StoryResultFlow: View {
         let next = result.nextTier
         let note = chapter?.note.map { story.resolve($0) } ?? ""
         return VStack(alignment: .leading, spacing: 18) {
-            StoryLabel(text: L10n.t("story.progress.title"), color: Trace.Colors.inkSoft)
+            StoryLabel(text: L10n.t("story.progress.title"), color: Trace.Colors.text2)
                 .accessibilityAddTraits(.isHeader)
             if let promotion = result.promotion {
                 promotionBlock(promotion.to)
@@ -1513,12 +1434,12 @@ struct StoryResultFlow: View {
                 ProgressBoxes(total: total, done: min(result.solvedCount, total))
                 Text(progressLine(next))
                     .font(Trace.StoryFonts.body)
-                    .foregroundStyle(Trace.Colors.inkMid)
+                    .foregroundStyle(Trace.Colors.text2)
                     .fixedSize(horizontal: false, vertical: true)
             } else {
                 Text(L10n.t("story.progress.max"))
                     .font(Trace.StoryFonts.h3)
-                    .foregroundStyle(Trace.Colors.ink)
+                    .foregroundStyle(Trace.Colors.text)
                     .fixedSize(horizontal: false, vertical: true)
             }
             if !note.isEmpty {
@@ -1529,7 +1450,7 @@ struct StoryResultFlow: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .paper(Trace.Colors.paper, radius: 0, lifted: true)
+        .benCard()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("story.progress.sheet")
     }
@@ -1544,7 +1465,7 @@ struct StoryResultFlow: View {
             if let next {
                 Text(verbatim: "→")
                     .font(Trace.StoryFonts.h3)
-                    .foregroundStyle(Trace.Colors.inkSoft)
+                    .foregroundStyle(Trace.Colors.text2)
                     .padding(.top, 14)
                     .accessibilityHidden(true)
                 rankColumn(L10n.t("story.progress.nextRank"), story.rankTitle(next.rank))
@@ -1554,10 +1475,10 @@ struct StoryResultFlow: View {
 
     private func rankColumn(_ label: String, _ title: String) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            StoryLabel(text: label, color: Trace.Colors.inkSoft)
+            StoryLabel(text: label, color: Trace.Colors.text2)
             Text(title)
                 .font(Trace.StoryFonts.h3)
-                .foregroundStyle(Trace.Colors.ink)
+                .foregroundStyle(Trace.Colors.text)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1581,21 +1502,21 @@ struct StoryResultFlow: View {
     /// Lacaze's note, typed (the game never writes by hand for anyone but the player).
     private func noteBlock(_ text: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            StoryLabel(text: L10n.t("story.progress.note"), color: Trace.Colors.inkSoft)
+            StoryLabel(text: L10n.t("story.progress.note"), color: Trace.Colors.text2)
             Text(text)
                 .font(Trace.Fonts.quote)
-                .foregroundStyle(Trace.Colors.pen)
+                .foregroundStyle(Trace.Colors.text)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.leading, 12)
-        .overlay(alignment: .leading) { Rectangle().fill(Trace.Colors.stamp.opacity(0.6)).frame(width: 2) }
+        .overlay(alignment: .leading) { Rectangle().fill(Trace.Colors.ben).frame(width: 3) }
         .padding(.top, 4)
         .accessibilityElement(children: .combine)
     }
 
     // MARK: Avancement de service (on h17)
 
-    /// A rank reached: « AVANCEMENT DE SERVICE », the sentence, the new rank stamp falling.
+    /// A rank reached: « AVANCEMENT DE SERVICE », the sentence, the new rank's badge appearing.
     private func promotionBlock(_ rank: StoryRank) -> some View {
         let title = story.rankTitle(rank)
         let layout = typeSize.isAccessibilitySize
@@ -1603,17 +1524,18 @@ struct StoryResultFlow: View {
             : AnyLayout(HStackLayout(alignment: .top, spacing: 12))
         return layout {
             VStack(alignment: .leading, spacing: 8) {
-                StoryLabel(text: L10n.t("story.promotion.title"), color: Trace.Colors.stamp)
+                StoryLabel(text: L10n.t("story.promotion.title"), color: Trace.Colors.benText)
                     .accessibilityAddTraits(.isHeader)
                 Text(L10n.f("story.promotion.body", title))
                     .font(Trace.StoryFonts.body)
-                    .foregroundStyle(Trace.Colors.ink)
+                    .foregroundStyle(Trace.Colors.text)
                     .lineSpacing(4)
                     .fixedSize(horizontal: false, vertical: true)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            FallingStampImage(asset: StoryPaper.stampAsset(rank), label: title.uppercased(), width: 120,
-                              onPaper: true, angle: -8, success: true, delay: 0.5)
+            StoryPaper.StampDrop(delay: 0.5) {
+                StatusBadge(text: title, color: Trace.Colors.successText, symbol: "↑")
+            }
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("story.promotion")
@@ -1627,7 +1549,8 @@ struct StoryResultFlow: View {
             let item = items[index]
             let last = index == items.count - 1
             StoryPaper.Page(backID: "story.reward.back",
-                            onBack: { go(index == 0 ? .progress : .reward(index - 1)) }) {
+                            onBack: { go(index == 0 ? .progress : .reward(index - 1)) },
+                            backLabel: L10n.t("common.back")) {
                 VStack(spacing: 16) {
                     StoryPaper.RewardObject(item: item, name: story.resolve(item.name), player: story.player,
                                             rank: story.rankTitle(), portrait: story.portrait)
@@ -1636,14 +1559,14 @@ struct StoryResultFlow: View {
                     StoryLabel(text: L10n.t("story.reward.added"))
                     Text(story.resolve(item.name))
                         .font(Trace.StoryFonts.h2)
-                        .foregroundStyle(Trace.Colors.bone)
+                        .foregroundStyle(Trace.Colors.text)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                         .accessibilityAddTraits(.isHeader)
                     if let provenance = item.provenance, !provenance.isEmpty {
                         Text(story.resolve(provenance))
                             .font(Trace.StoryFonts.caption)
-                            .foregroundStyle(Trace.Colors.bone2)
+                            .foregroundStyle(Trace.Colors.text2)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -1707,8 +1630,8 @@ struct StorySettingsView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     StoryLabel(text: L10n.t("story.settings.kicker"))
                     Text(L10n.t("story.settings.title"))
-                        .font(Trace.StoryFonts.h1)
-                        .foregroundStyle(Trace.Colors.bone)
+                        .font(Trace.Fonts.title)
+                        .foregroundStyle(Trace.Colors.text)
                         .accessibilityAddTraits(.isHeader)
                 }
                 reading
@@ -1736,8 +1659,8 @@ struct StorySettingsView: View {
                                        onClose: { sheet = nil })
                     .presentationDetents([.medium, .large])
                     .presentationDragIndicator(.visible)
-                    .presentationCornerRadius(16)
-                    .presentationBackground(Trace.Colors.paper)
+                    .presentationCornerRadius(Trace.Radius.sheet)
+                    .presentationBackground(Trace.Colors.surface)
             case .reset:
                 StoryPaper.ResetSheet(onConfirm: {
                                           resetConfirmed = true
@@ -1746,8 +1669,8 @@ struct StorySettingsView: View {
                                       onCancel: { sheet = nil })
                     .presentationDetents([.medium, .large])
                     .presentationDragIndicator(.visible)
-                    .presentationCornerRadius(16)
-                    .presentationBackground(Trace.Colors.paper)
+                    .presentationCornerRadius(Trace.Radius.sheet)
+                    .presentationBackground(Trace.Colors.surface)
             }
         }
     }
@@ -1797,7 +1720,7 @@ struct StorySettingsView: View {
                 StoryPaper.Choice(value: Agreement.masculine, label: L10n.t("story.settings.agreement.m")),
                 StoryPaper.Choice(value: Agreement.neutral, label: L10n.t("story.settings.agreement.n")),
             ])
-            linkRow(L10n.t("story.settings.reset"), id: "story.settings.reset", color: Trace.Colors.stampOnDark,
+            linkRow(L10n.t("story.settings.reset"), id: "story.settings.reset", color: Trace.Colors.criticalOnDark,
                     divider: false) { sheet = .reset }
         }
     }
@@ -1831,7 +1754,7 @@ struct StorySettingsView: View {
 
     private var rowDivider: some View {
         Rectangle()
-            .fill(Trace.Colors.bone.opacity(0.08))
+            .fill(Trace.Colors.line)
             .frame(height: 1)
             .padding(.leading, 16)
             .accessibilityHidden(true)
@@ -1850,17 +1773,17 @@ struct StorySettingsView: View {
             HStack(spacing: 8) {
                 Text(title)
                     .font(Trace.StoryFonts.uiBody)
-                    .foregroundStyle(Trace.Colors.bone)
+                    .foregroundStyle(Trace.Colors.text)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 8)
                 Text(current)
                     .font(Trace.StoryFonts.uiBody)
-                    .foregroundStyle(Trace.Colors.bone2)
+                    .foregroundStyle(Trace.Colors.text2)
                     .multilineTextAlignment(.trailing)
                 Image(systemName: "chevron.up.chevron.down")
                     .font(Trace.StoryFonts.caption)
-                    .foregroundStyle(Trace.Colors.bone3)
+                    .foregroundStyle(Trace.Colors.text3)
                     .accessibilityHidden(true)
             }
             .padding(.horizontal, 16)
@@ -1868,7 +1791,7 @@ struct StorySettingsView: View {
             .frame(minHeight: 48)
             .contentShape(Rectangle())
         }
-        .tint(Trace.Colors.bone)
+        .tint(Trace.Colors.text)
         .overlay(alignment: .bottom) { if divider { rowDivider } }
         .accessibilityLabel(Text(title))
         .accessibilityValue(Text(current))
@@ -1879,10 +1802,10 @@ struct StorySettingsView: View {
         Toggle(isOn: isOn) {
             Text(title)
                 .font(Trace.StoryFonts.uiBody)
-                .foregroundStyle(Trace.Colors.bone)
+                .foregroundStyle(Trace.Colors.text)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .tint(Trace.Colors.stampOnDark)
+        .tint(Trace.Colors.ben)
         .padding(.horizontal, 16)
         .padding(.vertical, 6)
         .frame(minHeight: 48)
@@ -1890,7 +1813,7 @@ struct StorySettingsView: View {
         .accessibilityIdentifier(id)
     }
 
-    private func linkRow(_ title: String, id: String, color: Color = Trace.Colors.bone, divider: Bool = true,
+    private func linkRow(_ title: String, id: String, color: Color = Trace.Colors.text, divider: Bool = true,
                          action: @escaping @MainActor () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 8) {
@@ -1902,7 +1825,7 @@ struct StorySettingsView: View {
                 Spacer(minLength: 8)
                 Image(systemName: "chevron.right")
                     .font(Trace.StoryFonts.caption)
-                    .foregroundStyle(Trace.Colors.bone3)
+                    .foregroundStyle(Trace.Colors.text3)
                     .accessibilityHidden(true)
             }
             .padding(.horizontal, 16)

@@ -4,7 +4,8 @@ import StoryEngine
 
 /// h09 · « Mon bureau »: the player's office in 3D, a fixed WIDE 3/4 shot from above
 /// (cam_po_wide); 3 to 6 points by level. A point frames its object (450 ms), then its sheet.
-/// New objects wear a red ring until they are opened.
+/// New objects wear a ben ring until they are opened. Overlay controls in the UX V3 look (flat,
+/// legible on the scene); the 3D office itself is unchanged.
 struct StoryOfficeView: View {
     let story: StoryCoordinator
     /// A prop to frame at once (from h18 « Voir dans mon bureau »), by the unlock it needs.
@@ -66,18 +67,19 @@ struct StoryOfficeView: View {
             }
             VStack {
                 HStack {
-                    BackChevron(label: focused == nil ? nil : L10n.t("story.office.title")) {
+                    BackChevron(label: focused == nil ? L10n.t("story.nav.hub") : L10n.t("story.office.title")) {
                         if focused != nil { close() } else { onBack() }
                     }
+                    .padding(.horizontal, 10)
+                    .background(Capsule().fill(Trace.Story.hud))
                     .accessibilityIdentifier("story.office.back")
                     Spacer()
                     Text(L10n.f("story.office.levelTag", story.officeLevel))
-                        .font(Trace.StoryFonts.label)
-                        .tracking(1.6)
-                        .foregroundStyle(Trace.Colors.ink)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .paper(Trace.Colors.paper)
+                        .font(Trace.Fonts.data)
+                        .foregroundStyle(Trace.Colors.text2)
+                        .padding(.horizontal, 10)
+                        .frame(minHeight: Trace.Height.badge)
+                        .background(Capsule().fill(Trace.Story.hud))
                         .accessibilityLabel(Text(L10n.f("story.office.level", story.officeLevel)))
                 }
                 .padding(.horizontal, 12)
@@ -91,8 +93,8 @@ struct StoryOfficeView: View {
                 HotspotSheet(name: story.resolve(spot.name), provenance: spot.provenance.map { story.resolve($0) },
                              label: story.resolve(spot.label))
                     .presentationDetents([.height(230)])
-                    .presentationCornerRadius(16)
-                    .presentationBackground(Trace.Colors.paper)
+                    .presentationCornerRadius(Trace.Radius.sheet)
+                    .presentationBackground(Trace.Colors.surface)
                     .presentationDragIndicator(.visible)
             }
         }
@@ -112,16 +114,16 @@ struct StoryOfficeView: View {
         let rewards = (story.content?.campaign.chapters.flatMap(\.steps).compactMap(\.reward).flatMap { $0.items ?? [] } ?? [])
             .filter { unlocks.contains($0.id) }.count
         return VStack(alignment: .leading, spacing: 10) {
-            StoryLabel(text: L10n.f("story.office.sheet", level), color: Trace.Colors.inkSoft)
+            StoryLabel(text: L10n.f("story.office.sheet", level), color: Trace.Colors.text2)
             if let next = nextAddition {
                 Text(next)
                     .font(Trace.StoryFonts.body)
-                    .foregroundStyle(Trace.Colors.inkMid)
+                    .foregroundStyle(Trace.Colors.text2)
                     .fixedSize(horizontal: false, vertical: true)
             } else {
                 Text(L10n.t("story.office.complete"))
                     .font(Trace.StoryFonts.body)
-                    .foregroundStyle(Trace.Colors.inkMid)
+                    .foregroundStyle(Trace.Colors.text2)
             }
             HStack(spacing: 8) {
                 chip(L10n.f("story.office.objects", hotspots.count))
@@ -130,7 +132,7 @@ struct StoryOfficeView: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .paper(Trace.Colors.paper)
+        .benCard()
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
         .accessibilityElement(children: .combine)
@@ -147,13 +149,12 @@ struct StoryOfficeView: View {
     }
 
     private func chip(_ text: String) -> some View {
-        Text(text.uppercased())
-            .font(Trace.StoryFonts.label)
-            .tracking(1.2)
-            .foregroundStyle(Trace.Colors.ink)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 5)
-            .overlay(Capsule().strokeBorder(Trace.Colors.ink.opacity(0.4), lineWidth: 1))
+        Text(text)
+            .font(Trace.Fonts.caption)
+            .foregroundStyle(Trace.Colors.text2)
+            .padding(.horizontal, 10)
+            .frame(minHeight: Trace.Height.badge)
+            .background(Capsule().fill(Trace.Colors.surface2))
     }
 
     // MARK: Actions
@@ -189,8 +190,8 @@ struct StoryOfficeView: View {
     }
 }
 
-/// HotspotDot: 12 pt #EFEBE3 point, 5 pt halo at 18 %, Mono 10 label on a dark tag; 44 pt target;
-/// a 2 pt red ring until first opened.
+/// HotspotDot: 12 pt light point, 5 pt halo at 18 %, a Plex Sans 12/600 label on a dark tag;
+/// 44 pt target; a 2 pt ben ring until first opened.
 private struct HotspotDot: View {
     let label: String
     let isNew: Bool
@@ -203,16 +204,15 @@ private struct HotspotDot: View {
                     Circle().fill(Trace.Story.dialogue.opacity(0.18)).frame(width: 22, height: 22)
                     Circle().fill(Trace.Story.dialogue).frame(width: 12, height: 12)
                     if isNew {
-                        Circle().strokeBorder(Trace.Colors.stampOnDark, lineWidth: 2).frame(width: 22, height: 22)
+                        Circle().strokeBorder(Trace.Colors.ben, lineWidth: 2).frame(width: 22, height: 22)
                     }
                 }
-                Text(label.uppercased())
+                Text(label)
                     .font(Trace.StoryFonts.label)
-                    .tracking(1)
                     .foregroundStyle(Trace.Story.dialogue)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 3)
-                    .background(RoundedRectangle(cornerRadius: 3).fill(Trace.Story.hotspotLabel))
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(RoundedRectangle(cornerRadius: 6, style: .continuous).fill(Trace.Story.hotspotLabel))
             }
             .frame(minWidth: 44, minHeight: 44)
             .contentShape(Rectangle())
@@ -230,15 +230,15 @@ private struct HotspotSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            StoryLabel(text: label, color: Trace.Colors.inkSoft)
+            StoryLabel(text: label, color: Trace.Colors.text2)
             Text(name)
                 .font(Trace.StoryFonts.h2)
-                .foregroundStyle(Trace.Colors.ink)
+                .foregroundStyle(Trace.Colors.text)
                 .fixedSize(horizontal: false, vertical: true)
             if let provenance {
                 Text(provenance)
                     .font(Trace.StoryFonts.caption)
-                    .foregroundStyle(Trace.Colors.inkSoft)
+                    .foregroundStyle(Trace.Colors.text2)
             }
             Spacer(minLength: 0)
         }

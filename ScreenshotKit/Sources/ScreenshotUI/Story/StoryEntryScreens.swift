@@ -6,6 +6,9 @@ import StoryEngine
 // The entry screens of the three modes and of the story (docs/design_story/STORY_UX_FLOW.md):
 // h01 the three-mode Bureau, h04 the story's hub, h05/h05b/h06 the character creator, and the
 // read-only « Voir en 3D » studio. No story rule here: the coordinator and the engine decide.
+// Re-skinned with the UX V3 tokens (docs/design_ux_v3 §0): flat surfaces, Plex Sans, no paper,
+// grain, rotation or shadow. The 3D renders (StoryStageView, CharacterPreview) are unchanged.
+// ModeDeskView (h01) is no longer routed to (the Bureau has a segmented control): kept compiling.
 
 // MARK: - Shared metrics and helpers
 
@@ -28,8 +31,8 @@ private enum DeskMetrics {
 }
 
 private extension Trace.StoryFonts {
-    /// The creator's name fields: Newsreader 20.
-    static let input = Font.custom(Trace.FontName.serif, size: 20, relativeTo: .title3)
+    /// The creator's name fields: Plex Sans 17.
+    static let input = Font.custom(Trace.FontName.sans, size: 17, relativeTo: .body)
 }
 
 /// Variant names come from the data (French `label`, English `labelEn`).
@@ -175,7 +178,7 @@ struct ModeDeskView: View {
                     PortraitOrInitials(image: data.portrait, initials: data.initials,
                                        width: DeskMetrics.pill, height: DeskMetrics.pill)
                         .clipShape(Circle())
-                        .overlay(Circle().strokeBorder(Trace.Colors.bone.opacity(0.35), lineWidth: 1))
+                        .overlay(Circle().strokeBorder(Trace.Colors.text.opacity(0.35), lineWidth: 1))
                         .contentShape(Circle())
                 }
                 .buttonStyle(.plain)
@@ -191,7 +194,7 @@ struct ModeDeskView: View {
                 Text(data.investigatorLine)
                     .font(Trace.StoryFonts.technical)
                     .tracking(0.8)
-                    .foregroundStyle(Trace.Colors.bone2)
+                    .foregroundStyle(Trace.Colors.text2)
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
@@ -299,7 +302,7 @@ private struct ModeFolder<Accessory: View>: View {
 
     private var secondary: Color {
         switch material {
-        case .kraft: Trace.Colors.kraftLabel
+        case .kraft: Trace.Colors.text2
         case .alibi: Trace.Story.alibiInkSecondary
         case .story: Trace.Story.inkSecondary
         }
@@ -307,7 +310,7 @@ private struct ModeFolder<Accessory: View>: View {
 
     private var tabColor: Color {
         switch material {
-        case .kraft: Trace.Colors.kraft
+        case .kraft: Trace.Colors.surface
         case .alibi: Trace.Story.alibiPaper
         case .story: Trace.Story.folderLight
         }
@@ -376,24 +379,18 @@ private struct ModeFolder<Accessory: View>: View {
         .accessibilityIdentifier(identifier)
     }
 
-    /// Kraft with its fibres, grey paper with its grain, or the BEN card (the one 160° gradient).
+    /// A flat surface for every mode (V3: no kraft, grain, gradient or shadow).
     @ViewBuilder
     private var folderBody: some View {
         let shape = UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 10, bottomTrailingRadius: 10,
                                            topTrailingRadius: 10, style: .continuous)
         switch material {
         case .kraft:
-            shape.fill(Trace.Colors.kraft)
-                .overlay(PaperGrain(intensity: 0.05, texture: "tex_kraft_fibers").clipShape(shape))
-                .shadow(color: .black.opacity(0.6), radius: 22, y: 22)
+            shape.fill(Trace.Colors.surface)
         case .alibi:
             shape.fill(Trace.Story.alibiPaper)
-                .overlay(PaperGrain().clipShape(shape))
-                .shadow(color: .black.opacity(0.6), radius: 22, y: 22)
         case .story:
-            shape.fill(LinearGradient(colors: [Trace.Story.folderLight, Trace.Story.folder],
-                                      startPoint: UnitPoint(x: 0.33, y: 0), endPoint: UnitPoint(x: 0.67, y: 1)))
-                .shadow(color: .black.opacity(0.65), radius: 22, y: 22)
+            shape.fill(Trace.Story.folder)
         }
     }
 }
@@ -408,8 +405,6 @@ private struct StapledPrint: View {
             GeneratedPhoto(scene: "street_night", seed: seed.isEmpty ? "desk" : seed)
                 .frame(width: 62, height: 56)
         }
-        .overlay(alignment: .top) { Staple().offset(y: -1) }
-        .rotationEffect(.degrees(2.5))
         .allowsHitTesting(false)
         .accessibilityHidden(true)
     }
@@ -444,9 +439,9 @@ private struct AlibiColumns: View {
         HStack(spacing: 0) {
             Rectangle().fill(Trace.Story.alibiInk).frame(width: gap ? 44 : 112, height: 2)
             if gap {
-                Rectangle().fill(Trace.Colors.stamp).frame(width: 36, height: 2)
-                    .overlay(alignment: .leading) { Rectangle().fill(Trace.Colors.stamp).frame(width: 1.5, height: 8) }
-                    .overlay(alignment: .trailing) { Rectangle().fill(Trace.Colors.stamp).frame(width: 1.5, height: 8) }
+                Rectangle().fill(Trace.Colors.benText).frame(width: 36, height: 2)
+                    .overlay(alignment: .leading) { Rectangle().fill(Trace.Colors.benText).frame(width: 1.5, height: 8) }
+                    .overlay(alignment: .trailing) { Rectangle().fill(Trace.Colors.benText).frame(width: 1.5, height: 8) }
                 Rectangle().fill(Trace.Story.alibiInk).frame(width: 32, height: 2)
             }
         }
@@ -463,15 +458,13 @@ private struct StoryPortraitPrint: View {
     var body: some View {
         Group {
             if empty {
-                Rectangle().fill(Trace.Colors.benBlue.opacity(0.3)).frame(width: 52, height: 65)
+                Rectangle().fill(Trace.Colors.surface3.opacity(0.3)).frame(width: 52, height: 65)
             } else {
                 PortraitOrInitials(image: image, initials: initials, width: 52, height: 65)
             }
         }
         .padding(3)
-        .background(Trace.Colors.printWhite)
-        .shadow(color: .black.opacity(0.25), radius: 5, y: 4)
-        .rotationEffect(.degrees(-2))
+        .background(Trace.Colors.surface2)
         .allowsHitTesting(false)
         .accessibilityHidden(true)
     }
@@ -525,11 +518,11 @@ struct StoryHubView: View {
     private var topBar: some View {
         HStack {
             Button(action: onBack) {
-                HStack(spacing: 4) {
+                HStack(spacing: 3) {
                     Image(systemName: "chevron.left").font(.system(size: 15, weight: .semibold))
-                    Text(L10n.t("tab.bureau")).font(Trace.StoryFonts.uiBody)
+                    Text(L10n.t("tab.bureau")).font(Trace.Fonts.link)
                 }
-                .foregroundStyle(Trace.Colors.bone)
+                .foregroundStyle(Trace.Colors.benText)
                 .padding(.horizontal, 12)
                 .frame(height: 32)
                 .background(Capsule().fill(Trace.Story.hud))
@@ -543,7 +536,7 @@ struct StoryHubView: View {
             Button(action: onSettings) {
                 Image(systemName: "gearshape")
                     .font(.system(size: 16, weight: .regular))
-                    .foregroundStyle(Trace.Colors.bone)
+                    .foregroundStyle(Trace.Colors.text)
                     .frame(width: 32, height: 32)
                     .background(Circle().fill(Trace.Story.hud))
                     .frame(width: 44, height: 44)
@@ -568,18 +561,23 @@ struct StoryHubView: View {
             }
             if let player = story.player {
                 VStack(alignment: .leading, spacing: 6) {
-                    StoryLabel(text: L10n.t("story.hub.kicker"), color: Trace.Colors.bone2)
+                    StoryLabel(text: L10n.t("story.hub.kicker"), color: Trace.Colors.text2)
                     Text(verbatim: "\(player.firstName) \(player.lastName)")
                         .font(Trace.StoryFonts.h1Hero)
-                        .tracking(-0.34)
                         .foregroundStyle(Trace.Story.dialogue)
                         .lineLimit(2)
                         .minimumScaleFactor(0.7)
                         .accessibilityAddTraits(.isHeader)
-                    Text(verbatim: "\(story.rankTitle().uppercased()) · \(player.serviceNumber)")
-                        .font(Trace.StoryFonts.technical)
-                        .tracking(0.22)
-                        .foregroundStyle(Trace.Colors.bone2)
+                    HStack(alignment: .firstTextBaseline, spacing: 6) {
+                        Text(story.rankTitle())
+                            .font(Trace.Fonts.callout)
+                            .foregroundStyle(Trace.Colors.text2)
+                        Text(verbatim: "·").foregroundStyle(Trace.Colors.text3).accessibilityHidden(true)
+                        Text(verbatim: player.serviceNumber)
+                            .font(Trace.Fonts.data)
+                            .foregroundStyle(Trace.Colors.text2)
+                    }
+                    .accessibilityElement(children: .combine)
                 }
                 .padding(.horizontal, DeskMetrics.textOnRender)
             }
@@ -602,8 +600,8 @@ struct StoryHubView: View {
     private var chapterBlock: some View {
         if story.endOfContent {
             VStack(alignment: .leading, spacing: 8) {
-                Rectangle().fill(Trace.Colors.bone.opacity(0.22)).frame(height: 1)
-                StoryLabel(text: L10n.t("story.hub.endKicker"), color: Trace.Colors.bone2)
+                Rectangle().fill(Trace.Colors.text.opacity(0.22)).frame(height: 1)
+                StoryLabel(text: L10n.t("story.hub.endKicker"), color: Trace.Colors.text2)
                 Text(L10n.t("story.hub.endOfContent"))
                     .font(Trace.StoryFonts.h3)
                     .foregroundStyle(Trace.Story.dialogue)
@@ -615,12 +613,12 @@ struct StoryHubView: View {
             let progress = story.sceneProgress
             Button { onChapter(chapter.id) } label: {
                 VStack(alignment: .leading, spacing: 8) {
-                    Rectangle().fill(Trace.Colors.bone.opacity(0.22)).frame(height: 1)
+                    Rectangle().fill(Trace.Colors.text.opacity(0.22)).frame(height: 1)
                     HStack(alignment: .firstTextBaseline) {
-                        StoryLabel(text: L10n.f("story.hub.chapter", chapter.number), color: Trace.Colors.bone2)
+                        StoryLabel(text: L10n.f("story.hub.chapter", chapter.number), color: Trace.Colors.text2)
                         Spacer(minLength: 8)
                         if progress.total > 0 {
-                            StoryLabel(text: L10n.f("story.hub.scene", progress.index, progress.total), color: Trace.Colors.bone2)
+                            StoryLabel(text: L10n.f("story.hub.scene", progress.index, progress.total), color: Trace.Colors.text2)
                         }
                     }
                     HStack(alignment: .center, spacing: 8) {
@@ -632,10 +630,10 @@ struct StoryHubView: View {
                         Spacer(minLength: 4)
                         Image(systemName: "chevron.right")
                             .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(Trace.Colors.bone2)
+                            .foregroundStyle(Trace.Colors.text2)
                             .accessibilityHidden(true)
                     }
-                    ChapterBar(progress: chapterFraction(chapter), track: Trace.Colors.bone.opacity(0.18), fill: Trace.Story.dialogue)
+                    ChapterBar(progress: chapterFraction(chapter), track: Trace.Colors.text.opacity(0.18), fill: Trace.Story.dialogue)
                 }
                 .frame(minHeight: 44)
                 .contentShape(Rectangle())
@@ -689,7 +687,7 @@ struct StoryHubView: View {
             if !officeOpen {
                 Text(L10n.t("story.hub.officeLocked"))
                     .font(Trace.StoryFonts.caption)
-                    .foregroundStyle(Trace.Colors.bone2)
+                    .foregroundStyle(Trace.Colors.text2)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .accessibilityHidden(true)
             }
@@ -697,23 +695,22 @@ struct StoryHubView: View {
     }
 }
 
-/// A secondary button of the hub's grid: outlined, 48 pt, Plex Mono caps (two lines if needed).
+/// A secondary button of the hub's grid (V3 ActionButton « secondaire »): `surface2`, radius 14,
+/// 48 pt, Plex Sans 15/600 in sentence case (two lines if needed). Disabled: `text3`.
 private struct HubOutlineStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
 
     func makeBody(configuration: Configuration) -> some View {
-        let shape = RoundedRectangle(cornerRadius: 6, style: .continuous)
+        let shape = RoundedRectangle(cornerRadius: Trace.Radius.button, style: .continuous)
         return configuration.label
-            .font(Trace.StoryFonts.button)
-            .tracking(1.2)
-            .textCase(.uppercase)
+            .font(Trace.Fonts.monoStrong)
             .multilineTextAlignment(.center)
             .lineLimit(2)
             .minimumScaleFactor(0.8)
-            .foregroundStyle(Trace.Story.dialogue.opacity(isEnabled ? 1 : 0.42))
+            .foregroundStyle(isEnabled ? Trace.Colors.text : Trace.Colors.text3)
             .padding(.horizontal, 6)
             .frame(maxWidth: .infinity, minHeight: 48)
-            .overlay(shape.strokeBorder(Trace.Story.dialogue.opacity(isEnabled ? 0.85 : 0.2), lineWidth: 1.5))
+            .background(shape.fill(configuration.isPressed ? Trace.Colors.surface3 : Trace.Colors.surface2))
             .contentShape(shape)
             .scaleEffect(configuration.isPressed ? 0.98 : 1)
             .brightness(configuration.isPressed ? -0.04 : 0)
@@ -871,11 +868,11 @@ private struct OutfitAnnotations: View {
                         p.addLine(to: inner)
                     }
                 }
-                .stroke(Trace.Colors.bone.opacity(0.8), lineWidth: 1)
-                Circle().fill(Trace.Colors.bone).frame(width: 5, height: 5)
+                .stroke(Trace.Colors.text.opacity(0.8), lineWidth: 1)
+                Circle().fill(Trace.Colors.text).frame(width: 5, height: 5)
                     .offset(x: outer.x - 2.5, y: outer.y - 2.5)
                 if lines.count > 1 {
-                    Circle().fill(Trace.Colors.bone).frame(width: 5, height: 5)
+                    Circle().fill(Trace.Colors.text).frame(width: 5, height: 5)
                         .offset(x: inner.x - 2.5, y: inner.y - 2.5)
                 }
                 if let first = lines.first {
@@ -895,7 +892,7 @@ private struct OutfitAnnotations: View {
     }
 
     private func tag(_ text: String) -> some View {
-        StoryLabel(text: text, color: Trace.Colors.bone)
+        StoryLabel(text: text, color: Trace.Colors.text)
             .lineLimit(1)
             .minimumScaleFactor(0.7)
             .padding(.horizontal, 6)
@@ -904,7 +901,7 @@ private struct OutfitAnnotations: View {
     }
 }
 
-// MARK: - Paper controls of the creator
+// MARK: - Controls of the creator (V3)
 
 private struct SegmentOption<Value: Hashable> {
     let value: Value
@@ -912,40 +909,40 @@ private struct SegmentOption<Value: Hashable> {
     let id: String
 }
 
-/// A segmented control on paper: ink outline, the chosen segment underlined in ink (the only
-/// filled button of the sheet stays the main one).
+/// A V3 segmented control (the NotebookTab look, §5): 40 pt segments in a `surface2` track (radius
+/// 12), the chosen one on `surface3` (radius 9) in `text`/600, the others in `text2`; each segment
+/// has a 44 pt target. Sentence case, Plex Sans 14.
 private struct PaperSegmented<Value: Hashable>: View {
     let options: [SegmentOption<Value>]
     let selection: Value
-    var height: CGFloat = 44
+    var height: CGFloat = Trace.Height.segment
     let onSelect: (Value) -> Void
 
     var body: some View {
-        let shape = RoundedRectangle(cornerRadius: 6, style: .continuous)
         HStack(spacing: 0) {
             ForEach(options.indices, id: \.self) { i in
                 let option = options[i]
                 let on = option.value == selection
-                if i > 0 {
-                    Rectangle().fill(Trace.Colors.ink.opacity(0.3)).frame(width: 1, height: height * 0.5)
-                }
                 Button {
                     guard !on else { return }
                     Haptics.selection()
                     onSelect(option.value)
                 } label: {
-                    Text(option.label.uppercased())
-                        .font(Trace.StoryFonts.label)
-                        .tracking(1.4)
-                        .foregroundStyle(on ? Trace.Colors.ink : Trace.Colors.inkSoft)
+                    Text(option.label)
+                        .font(on ? .custom(Trace.FontName.sansSemibold, size: 14, relativeTo: .subheadline)
+                                 : .custom(Trace.FontName.sans, size: 14, relativeTo: .subheadline))
+                        .foregroundStyle(on ? Trace.Colors.text : Trace.Colors.text2)
                         .lineLimit(1)
-                        .minimumScaleFactor(0.75)
+                        .minimumScaleFactor(0.7)
                         .padding(.horizontal, 4)
                         .frame(maxWidth: .infinity, minHeight: height)
-                        .background(on ? Trace.Colors.ink.opacity(0.07) : Color.clear)
-                        .overlay(alignment: .bottom) {
-                            Rectangle().fill(Trace.Colors.ink).frame(height: 2).opacity(on ? 1 : 0)
+                        .background {
+                            if on {
+                                RoundedRectangle(cornerRadius: Trace.Radius.segment, style: .continuous)
+                                    .fill(Trace.Colors.surface3)
+                            }
                         }
+                        .frame(minHeight: Trace.Height.hit)
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
@@ -954,13 +951,25 @@ private struct PaperSegmented<Value: Hashable>: View {
                 .accessibilityIdentifier(option.id)
             }
         }
-        .clipShape(shape)
-        .overlay(shape.strokeBorder(Trace.Colors.ink, lineWidth: 1.5))
+        .padding(2)
+        .background(RoundedRectangle(cornerRadius: Trace.Radius.segmented, style: .continuous).fill(Trace.Colors.surface2))
+    }
+}
+
+/// A selectable chip (V3): `surface2`, a 2 pt `ben` border and `surface3` when chosen.
+private struct ChipBackground: ViewModifier {
+    let chosen: Bool
+
+    func body(content: Content) -> some View {
+        let shape = RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous)
+        content
+            .background(shape.fill(chosen ? Trace.Colors.surface3 : Trace.Colors.surface2))
+            .overlay(shape.strokeBorder(chosen ? Trace.Colors.ben : Trace.Colors.line, lineWidth: chosen ? 2 : 1))
     }
 }
 
 /// CharacterOptionSwatch: a 44 pt round swatch (a colour from the data), or a 44 pt chip with the
-/// option's name (shapes, haircuts). Selected: a #ECE5D3 ring of 2 pt, then an ink ring of 2 pt.
+/// option's name (shapes, haircuts). Selected: a `surface` gap of 2 pt, then a `ben` ring of 2 pt.
 private struct CharacterOptionSwatch: View {
     let variant: CharacterVariant
     let selected: Bool
@@ -974,26 +983,24 @@ private struct CharacterOptionSwatch: View {
                     Circle()
                         .fill(Color(uiColor: UIColor(storyHex: hex)))
                         .frame(width: 44, height: 44)
-                        .overlay(Circle().strokeBorder(Trace.Colors.ink.opacity(0.15), lineWidth: 1))
+                        .overlay(Circle().strokeBorder(Trace.Colors.line, lineWidth: 1))
                         .overlay {
                             if selected {
                                 ZStack {
-                                    Circle().strokeBorder(Trace.Story.selection, lineWidth: 2).padding(-2)
-                                    Circle().strokeBorder(Trace.Colors.ink, lineWidth: 2).padding(-4)
+                                    Circle().strokeBorder(Trace.Colors.surface, lineWidth: 2).padding(-2)
+                                    Circle().strokeBorder(Trace.Colors.ben, lineWidth: 2).padding(-4)
                                 }
                             }
                         }
                 } else {
                     Text(label)
-                        .font(Trace.StoryFonts.technical)
-                        .tracking(0.4)
-                        .foregroundStyle(Trace.Colors.ink)
+                        .font(Trace.Fonts.callout)
+                        .foregroundStyle(Trace.Colors.text)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
                         .padding(.horizontal, 12)
                         .frame(maxWidth: .infinity, minHeight: 44)
-                        .background(Capsule().fill(selected ? Trace.Colors.paperSelected : Color.clear))
-                        .overlay(Capsule().strokeBorder(Trace.Colors.ink.opacity(selected ? 1 : 0.28), lineWidth: selected ? 2 : 1))
+                        .modifier(ChipBackground(chosen: selected))
                 }
             }
             .contentShape(Rectangle())
@@ -1009,7 +1016,7 @@ private struct CharacterOptionSwatch: View {
 
 /// h05 (4 steps: IDENTITÉ → APPARENCE → TENUE (h06) → CONFIRMATION (h05b)), or, when `editing`
 /// (h19 « Modifier l'apparence »), only APPARENCE and TENUE, saved with [ENREGISTRER]. The 3D render
-/// on top (350 pt, turned with a finger), a paper sheet at the bottom (340 pt).
+/// on top (350 pt, turned with a finger), a flat `surface` sheet at the bottom (340 pt).
 struct CharacterCreatorView: View {
     let story: StoryCoordinator
     let editing: Bool
@@ -1083,12 +1090,11 @@ struct CharacterCreatorView: View {
     private var topBar: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 8) {
-                BackChevron(label: editing && stepIndex == 0 ? L10n.t("story.creator.close") : nil,
-                            color: Trace.Colors.bone) { back() }
+                BackChevron(label: editing && stepIndex == 0 ? L10n.t("story.creator.close") : nil) { back() }
                     .accessibilityIdentifier("creator.back")
                 Spacer(minLength: 8)
                 StoryLabel(text: L10n.f("story.creator.stepLine", stepIndex + 1, steps.count, title(of: step)),
-                           color: Trace.Colors.bone2)
+                           color: Trace.Colors.text2)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
             }
@@ -1110,7 +1116,8 @@ struct CharacterCreatorView: View {
     // MARK: Sheet
 
     private var sheet: some View {
-        let shape = UnevenRoundedRectangle(topLeadingRadius: 16, topTrailingRadius: 16, style: .continuous)
+        let shape = UnevenRoundedRectangle(topLeadingRadius: Trace.Radius.sheet, topTrailingRadius: Trace.Radius.sheet,
+                                           style: .continuous)
         return VStack(spacing: 0) {
             ScrollView {
                 stepContent
@@ -1129,9 +1136,7 @@ struct CharacterCreatorView: View {
                 .padding(.bottom, 10)
         }
         .background(
-            shape.fill(Trace.Colors.paper)
-                .overlay(PaperGrain().clipShape(shape))
-                .shadow(color: .black.opacity(0.55), radius: 20, y: -6)
+            shape.fill(Trace.Colors.surface)
                 .ignoresSafeArea(edges: .bottom)
         )
         .overlay(alignment: .top) {
@@ -1160,16 +1165,16 @@ struct CharacterCreatorView: View {
     private var footer: some View {
         switch step {
         case .confirmation:
-            StoryHoldButton(title: L10n.t("story.creator.confirm"), seconds: 1.2, onPaper: true) { confirm() }
-                .accessibilityIdentifier("creator.confirm")
+            // §8 « Maintien 1,2 s (identité) ».
+            BenHoldButton(title: L10n.t("story.creator.confirm"), seconds: 1.2, identifier: "creator.confirm") { confirm() }
         case .outfit where editing:
             Button(L10n.t("story.creator.save")) { save() }
-                .buttonStyle(CTAButtonStyle(onPaper: true))
+                .buttonStyle(CTAButtonStyle())
                 .disabled(draft == nil)
                 .accessibilityIdentifier("creator.close")
         default:
             Button(L10n.t("story.creator.next")) { next() }
-                .buttonStyle(CTAButtonStyle(onPaper: true))
+                .buttonStyle(CTAButtonStyle())
                 .disabled(draft == nil)
                 .accessibilityIdentifier("creator.next")
         }
@@ -1181,7 +1186,7 @@ struct CharacterCreatorView: View {
     private var identityStep: some View {
         VStack(alignment: .leading, spacing: 14) {
             if let templates = story.catalog?.templates, !templates.isEmpty {
-                StoryLabel(text: L10n.t("story.creator.template"), color: Trace.Colors.inkSoft)
+                StoryLabel(text: L10n.t("story.creator.template"), color: Trace.Colors.text2)
                 HStack(spacing: 10) {
                     ForEach(templates) { model in
                         templateChip(model)
@@ -1192,13 +1197,13 @@ struct CharacterCreatorView: View {
                       text: $firstName, field: .first, id: "creator.firstName")
             nameField(L10n.t("story.creator.lastName"), prompt: L10n.t("story.creator.lastNamePrompt"),
                       text: $lastName, field: .last, id: "creator.lastName")
-            StoryLabel(text: L10n.t("story.creator.base"), color: Trace.Colors.inkSoft)
+            StoryLabel(text: L10n.t("story.creator.base"), color: Trace.Colors.text2)
                 .padding(.top, 4)
             PaperSegmented(options: [
                 SegmentOption(value: "presentation_f", label: L10n.t("story.creator.baseFeminine"), id: "creator.base.f"),
                 SegmentOption(value: "presentation_m", label: L10n.t("story.creator.baseMasculine"), id: "creator.base.m"),
             ], selection: presentation) { setBase($0) }
-            StoryLabel(text: L10n.t("story.creator.agreement"), color: Trace.Colors.inkSoft)
+            StoryLabel(text: L10n.t("story.creator.agreement"), color: Trace.Colors.text2)
                 .padding(.top, 4)
             PaperSegmented(options: [
                 SegmentOption(value: Agreement.feminine, label: L10n.t("story.creator.agreementF"), id: "creator.agreement.f"),
@@ -1214,14 +1219,12 @@ struct CharacterCreatorView: View {
         return Button { apply(model) } label: {
             Text(verbatim: "\(model.firstName) \(model.lastName)")
                 .font(Trace.StoryFonts.uiBody)
-                .foregroundStyle(Trace.Colors.ink)
+                .foregroundStyle(Trace.Colors.text)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
                 .padding(.horizontal, 12)
                 .frame(maxWidth: .infinity, minHeight: 44)
-                .background(RoundedRectangle(cornerRadius: 6).fill(chosen ? Trace.Colors.paperSelected : Color.clear))
-                .overlay(RoundedRectangle(cornerRadius: 6).strokeBorder(Trace.Colors.ink.opacity(chosen ? 1 : 0.28),
-                                                                         lineWidth: chosen ? 2 : 1))
+                .modifier(ChipBackground(chosen: chosen))
                 .contentShape(Rectangle())
         }
         .buttonStyle(PressableStyle())
@@ -1229,18 +1232,17 @@ struct CharacterCreatorView: View {
         .accessibilityIdentifier("creator.template.\(model.id)")
     }
 
-    /// 56 pt paper field: Plex Mono 11 label, Newsreader 20 input.
+    /// A 56 pt V3 field (`surface2`, radius 12): caption label, Plex Sans 17 input.
     private func nameField(_ label: String, prompt: String, text: Binding<String>, field: NameField, id: String) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(label)
-                .font(Trace.StoryFonts.technical)
-                .tracking(1.1)
-                .foregroundStyle(Trace.Colors.inkSoft)
+                .font(Trace.Fonts.caption)
+                .foregroundStyle(Trace.Colors.text2)
                 .accessibilityHidden(true)
-            TextField("", text: text, prompt: Text(prompt).foregroundStyle(Trace.Colors.inkFaint))
+            TextField("", text: text, prompt: Text(prompt).foregroundStyle(Trace.Colors.text3))
                 .font(Trace.StoryFonts.input)
-                .foregroundStyle(Trace.Colors.ink)
-                .tint(Trace.Colors.ink)
+                .foregroundStyle(Trace.Colors.text)
+                .tint(Trace.Colors.ben)
                 .textInputAutocapitalization(.words)
                 .autocorrectionDisabled()
                 .textContentType(field == .first ? UITextContentType.givenName : UITextContentType.familyName)
@@ -1253,8 +1255,7 @@ struct CharacterCreatorView: View {
         .padding(.horizontal, 12)
         .padding(.vertical, 6)
         .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
-        .background(RoundedRectangle(cornerRadius: 2).fill(Trace.Colors.print))
-        .overlay(alignment: .bottom) { Rectangle().fill(Trace.Colors.ink.opacity(0.35)).frame(height: 1) }
+        .background(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous).fill(Trace.Colors.surface2))
         .onChange(of: text.wrappedValue) { _, _ in
             if nameError { withAnimation(motion) { nameError = false } }
         }
@@ -1297,7 +1298,7 @@ struct CharacterCreatorView: View {
         let selectedID = draft?[slot]
         VStack(alignment: .leading, spacing: 10) {
             if let title {
-                StoryLabel(text: title, color: Trace.Colors.inkSoft)
+                StoryLabel(text: title, color: Trace.Colors.text2)
             }
             if !options.isEmpty, options.allSatisfy({ $0.color != nil }) {
                 HStack(spacing: 10) {
@@ -1343,10 +1344,10 @@ struct CharacterCreatorView: View {
                         moveOutfit(-1)
                     }
                     VStack(spacing: 4) {
-                        StoryLabel(text: L10n.f("story.creator.outfitCount", current + 1, groups.count), color: Trace.Colors.inkSoft)
+                        StoryLabel(text: L10n.f("story.creator.outfitCount", current + 1, groups.count), color: Trace.Colors.text2)
                         Text(variants.first.map { CreatorText.outfitName($0) } ?? "")
                             .font(Trace.StoryFonts.h3)
-                            .foregroundStyle(Trace.Colors.ink)
+                            .foregroundStyle(Trace.Colors.text)
                             .multilineTextAlignment(.center)
                             .fixedSize(horizontal: false, vertical: true)
                     }
@@ -1363,7 +1364,7 @@ struct CharacterCreatorView: View {
                 }
                 Text(L10n.t("story.creator.outfitNote"))
                     .font(Trace.StoryFonts.caption)
-                    .foregroundStyle(Trace.Colors.inkSoft)
+                    .foregroundStyle(Trace.Colors.text2)
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
@@ -1373,9 +1374,9 @@ struct CharacterCreatorView: View {
         Button(action: action) {
             Image(systemName: symbol)
                 .font(.system(size: 17, weight: .semibold))
-                .foregroundStyle(Trace.Colors.ink)
+                .foregroundStyle(Trace.Colors.text)
                 .frame(width: 44, height: 44)
-                .overlay(Circle().strokeBorder(Trace.Colors.ink.opacity(0.28), lineWidth: 1))
+                .background(Circle().fill(Trace.Colors.surface2))
                 .contentShape(Rectangle())
         }
         .buttonStyle(PressableStyle())
@@ -1383,7 +1384,7 @@ struct CharacterCreatorView: View {
         .accessibilityIdentifier(id)
     }
 
-    /// A colour variant: its swatch and its name (« MARINE »); tap to wear it.
+    /// A colour variant: its swatch and its name (« Marine »); tap to wear it.
     private func variantChip(_ variant: CharacterVariant) -> some View {
         let chosen = draft?.outfit == variant.id
         return Button { select(variant) } label: {
@@ -1391,19 +1392,17 @@ struct CharacterCreatorView: View {
                 Circle()
                     .fill(Color(uiColor: UIColor(storyHex: variant.color)))
                     .frame(width: 18, height: 18)
-                    .overlay(Circle().strokeBorder(Trace.Colors.ink.opacity(0.2), lineWidth: 1))
-                Text(CreatorText.outfitColour(variant).uppercased())
-                    .font(Trace.StoryFonts.technical)
-                    .tracking(0.6)
-                    .foregroundStyle(Trace.Colors.ink)
+                    .overlay(Circle().strokeBorder(Trace.Colors.line, lineWidth: 1))
+                Text(CreatorText.outfitColour(variant))
+                    .font(Trace.Fonts.callout)
+                    .foregroundStyle(Trace.Colors.text)
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
             }
             .padding(.horizontal, 14)
             .frame(maxWidth: .infinity, minHeight: 44)
-            .background(Capsule().fill(chosen ? Trace.Colors.paperSelected : Color.clear))
-            .overlay(Capsule().strokeBorder(Trace.Colors.ink.opacity(chosen ? 1 : 0.28), lineWidth: chosen ? 2 : 1))
-            .contentShape(Capsule())
+            .modifier(ChipBackground(chosen: chosen))
+            .contentShape(Rectangle())
         }
         .buttonStyle(PressableStyle())
         .accessibilityLabel(Text(CreatorText.label(variant)))
@@ -1415,24 +1414,29 @@ struct CharacterCreatorView: View {
 
     private var confirmationStep: some View {
         VStack(alignment: .leading, spacing: 14) {
-            HStack(alignment: .center, spacing: 12) {
-                StampImage(asset: "seal_ben_bleu", label: L10n.t("assignment.bureau"), width: 52,
-                           onPaper: true, angle: 0, color: Trace.Colors.benBlue)
+            HStack(alignment: .top, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    StoryLabel(text: L10n.t("story.creator.file"), color: Trace.Colors.ink)
+                    StoryLabel(text: L10n.t("story.creator.file"), color: Trace.Colors.text2)
                         .accessibilityAddTraits(.isHeader)
-                    StoryLabel(text: "BEN · " + L10n.t("assignment.bureau"), color: Trace.Colors.inkSoft)
+                    Text(verbatim: "BEN · " + L10n.t("assignment.bureau"))
+                        .font(Trace.Fonts.caption)
+                        .foregroundStyle(Trace.Colors.text2)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                Spacer(minLength: 8)
+                if stamped {
+                    StatusBadge(text: L10n.t("story.creator.stamp"), color: Trace.Colors.successText, symbol: "✓")
+                        .transition(.opacity)
+                }
             }
-            Rectangle().fill(Trace.Colors.ink.opacity(0.2)).frame(height: 1)
+            Rectangle().fill(Trace.Colors.line).frame(height: 1)
             HStack(alignment: .top, spacing: 14) {
                 confirmationPrint
                 VStack(alignment: .leading, spacing: 0) {
                     FieldRow(label: L10n.t("story.creator.fileName"),
                              value: "\(StoryPlayer.normalized(firstName)) \(StoryPlayer.normalized(lastName))")
                     FieldRow(label: L10n.t("assignment.serviceNumber"), value: L10n.t("story.creator.numberPending"),
-                             valueColor: Trace.Colors.inkSoft)
+                             valueColor: Trace.Colors.text2)
                     FieldRow(label: L10n.t("story.creator.service"), value: "BEN", divider: false)
                 }
             }
@@ -1442,30 +1446,18 @@ struct CharacterCreatorView: View {
                 FieldRow(label: L10n.t("story.creator.assignment"), value: L10n.t("story.creator.unit"), divider: false)
             }
         }
-        .overlay {
-            if stamped {
-                FallingStampImage(asset: "stamp_identite_confirmee", label: L10n.t("story.creator.stamp"), width: 126,
-                                  onPaper: true, angle: -8, color: Trace.Colors.stamp, success: true, delay: 0.05,
-                                  onLanded: { stampLanded() })
-                    .allowsHitTesting(false)
-            }
-        }
     }
 
-    /// The print (4:5): the live bust (S4 framing) on BEN blue, white border.
+    /// The photo (4:5): the live bust (S4 framing) on `surface3`, rounded 12 pt.
     private var confirmationPrint: some View {
         ZStack {
-            Trace.Colors.benBlue
+            Trace.Colors.surface3
             if let catalog = story.catalog, let look = draft {
                 CharacterPreview(appearance: look, catalog: catalog, rank: .enqueteur, yaw: 0, closeUp: true)
             }
         }
         .frame(width: 96, height: 120)
-        .clipped()
-        .padding(5)
-        .background(Trace.Colors.printWhite)
-        .shadow(color: .black.opacity(0.25), radius: 5, y: 4)
-        .rotationEffect(.degrees(-1.5))
+        .clipShape(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous))
         .accessibilityHidden(true)
     }
 
@@ -1577,15 +1569,21 @@ struct CharacterCreatorView: View {
         onClose()
     }
 
-    /// « COMMENCER MA CARRIÈRE » held 1.2 s: the stamp falls (T-UI-3).
+    /// « Commencer ma carrière » held 1.2 s: the « ✓ Identité confirmée » badge appears (V3: no
+    /// stamp), then T-UI-3 goes on.
     private func confirm() {
         guard !creating, draft != nil else { return }
         focus = nil
         creating = true
-        stamped = true
+        withAnimation(.easeOut(duration: 0.2)) { stamped = true }
+        Haptics.success()
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(250))
+            stampLanded()
+        }
     }
 
-    /// Stamp down → 400 ms → fade to black (600 ms) → the investigator exists, chapter 1 starts.
+    /// Badge shown → 400 ms → fade to black (600 ms) → the investigator exists, chapter 1 starts.
     private func stampLanded() {
         guard !created, let look = draft else { return }
         created = true
@@ -1625,7 +1623,7 @@ struct StoryModelViewer: View {
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading, spacing: 4) {
-                StoryLabel(text: L10n.t("story.hub.profile"), color: Trace.Colors.bone2)
+                StoryLabel(text: L10n.t("story.hub.profile"), color: Trace.Colors.text2)
                 if let player = story.player {
                     Text(verbatim: "\(player.firstName) \(player.lastName)")
                         .font(Trace.StoryFonts.h3)
@@ -1647,20 +1645,19 @@ struct StoryModelViewer: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             VStack(alignment: .leading, spacing: 6) {
-                StoryLabel(text: L10n.t("story.creator.step.outfit"), color: Trace.Colors.bone2)
+                StoryLabel(text: L10n.t("story.creator.step.outfit"), color: Trace.Colors.text2)
                 if let outfit {
                     Text(CreatorText.outfitName(outfit))
                         .font(Trace.StoryFonts.h3)
                         .foregroundStyle(Trace.Story.dialogue)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text(CreatorText.outfitColour(outfit).uppercased())
-                        .font(Trace.StoryFonts.technical)
-                        .tracking(0.6)
-                        .foregroundStyle(Trace.Colors.bone2)
+                    Text(CreatorText.outfitColour(outfit))
+                        .font(Trace.Fonts.callout)
+                        .foregroundStyle(Trace.Colors.text2)
                 }
                 Text(L10n.t("story.studio.dragHint"))
                     .font(Trace.StoryFonts.caption)
-                    .foregroundStyle(Trace.Colors.bone2)
+                    .foregroundStyle(Trace.Colors.text2)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityHidden(true)
             }

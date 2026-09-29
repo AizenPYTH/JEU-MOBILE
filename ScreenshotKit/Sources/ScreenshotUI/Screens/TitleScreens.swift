@@ -3,8 +3,9 @@ import SwiftUI
 import CaseEngine
 
 // Screens 02, 02b and 03 of the final handoff (§C, §F-02, §F-02b, §F-03): the title of the first
-// launch, the title with an investigation in progress, and « Qui enquête ? ». Dark desk only: the
-// logo banner never sits on a light background.
+// launch, the title with an investigation in progress, and « Qui enquête ? ». With the UX V3 the
+// first launch opens on 00 · Première impression (FirstImpression.swift) and the title screens are
+// no longer routed to; they are kept compiling. « Qui enquête ? » is re-skinned (§7 step 2).
 
 /// Layout of the title screens (390 × 844 reference, handoff §F « Gabarit commun »).
 private enum TitleLayout {
@@ -245,18 +246,19 @@ private struct ResumeCard: View {
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .paper(Trace.Colors.paper, radius: 0, lifted: true)
-        .rotationEffect(.degrees(-0.6))
+        .benCard()
         .accessibilityElement(children: .combine)
     }
 }
 
-// MARK: - 03 · Qui enquête ?
 
-/// Screen 03 · Qui enquête ? The two investigators of the BEN, the current one preselected (Élise
-/// on a first launch). The chosen card lifts (−6 pt, red rule, « ✓ CHOISIE »), the other dims to
-/// 60 %. No service number, no rank here. Opened from the profile (`allowsAppearance`), it also
-/// offers the photo A / B of the chosen investigator, and saves instead of continuing.
+// MARK: - Qui enquête ? (UX V3 §7 step 2)
+
+/// « Qui enquête ? » (UX V3 §7 step 2, simplified): one choice screen and its confirmation. The two
+/// investigators of the BEN as flat cards, the current one preselected (Élise on a first launch);
+/// the chosen card has a 2 pt `ben` border and a check, the other is dimmed. No service number, no
+/// rank here. Opened from the profile (`allowsAppearance`), it also offers the photo A / B of the
+/// chosen investigator, and saves instead of continuing.
 struct WhoInvestigatesScreen: View {
     let initial: PlayerIdentity
     let allowsAppearance: Bool
@@ -281,115 +283,92 @@ struct WhoInvestigatesScreen: View {
 
     private var noMotion: Bool { systemReduceMotion || appReduceMotion }
     private var stacked: Bool { typeSize.isAccessibilitySize }
-    /// 260 ms `paper` spring; a 200 ms fade with reduced motion.
-    private var selectionAnimation: Animation { noMotion ? .easeInOut(duration: 0.2) : Trace.Motion.paper }
+    /// A short ease; a 200 ms fade with reduced motion.
+    private var selectionAnimation: Animation { noMotion ? .easeInOut(duration: 0.2) : .easeOut(duration: 0.2) }
 
     var body: some View {
-        GeometryReader { geo in
-            VStack(spacing: 0) {
-                topBar
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 0) {
-                        header
-                        cards(width: geo.size.width - 2 * TitleLayout.sheetMargin)
-                            .padding(.horizontal, TitleLayout.sheetMargin)
-                            .padding(.top, 24)
-                        if allowsAppearance {
-                            appearancePicker
-                                .padding(.horizontal, TitleLayout.textMargin)
-                                .padding(.top, 24)
-                        }
-                        Text(L10n.t("who.note"))
-                            .font(Trace.Fonts.uiBody)
-                            .foregroundStyle(Trace.Colors.bone2)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.horizontal, TitleLayout.textMargin)
-                            .padding(.top, 18)
+        VStack(spacing: 0) {
+            HStack {
+                BackLink(title: L10n.t("common.back"), identifier: "who.back", action: onBack)
+                Spacer()
+            }
+            .padding(.horizontal, Trace.Spacing.l)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    header
+                    cards
+                        .padding(.top, Trace.Spacing.xxl)
+                    if allowsAppearance {
+                        appearancePicker
+                            .padding(.top, Trace.Spacing.xxl)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 12)
+                    Text(L10n.t("who.note"))
+                        .font(Trace.Fonts.callout)
+                        .foregroundStyle(Trace.Colors.text2)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, Trace.Spacing.xl)
                 }
-                .scrollBounceBehavior(.basedOnSize)
-                Button(allowsAppearance ? L10n.t("who.save") : L10n.t("who.continue")) {
-                    onContinue(PlayerIdentity(id: selected, appearance: appearance))
-                }
-                .buttonStyle(CTAButtonStyle())
-                .accessibilityIdentifier("who.continue")
-                .padding(.horizontal, TitleLayout.buttonMargin)
-                .padding(.top, 10)
-                .padding(.bottom, TitleLayout.buttonBottom)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, Trace.Spacing.l)
+                .padding(.bottom, Trace.Spacing.m)
             }
-        }
-        .background(DeskBackdrop())
-    }
-
-    private var topBar: some View {
-        HStack {
-            Button(action: onBack) {
-                Image(systemName: "chevron.backward")
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(Trace.Colors.bone)
-                    .frame(width: TitleLayout.iconSize, height: TitleLayout.iconSize)
-                    .contentShape(Rectangle())
+            .scrollBounceBehavior(.basedOnSize)
+            Button(allowsAppearance ? L10n.t("who.save") : L10n.f("who.continueWith", selected.firstName)) {
+                onContinue(PlayerIdentity(id: selected, appearance: appearance))
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text(L10n.t("common.back")))
-            .accessibilityIdentifier("who.back")
-            Spacer()
+            .buttonStyle(CTAButtonStyle(kind: .primary))
+            .accessibilityIdentifier("who.continue")
+            .padding(.horizontal, Trace.Spacing.xl)
+            .padding(.top, Trace.Spacing.s)
+            .padding(.bottom, Trace.Spacing.s)
         }
-        .padding(.horizontal, 8)
+        .background(Trace.Colors.bg.ignoresSafeArea())
     }
 
     private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: Trace.Spacing.s) {
             Text(L10n.t("who.title"))
-                .font(Trace.Fonts.monoTitle)
-                .tracking(2.2)
-                .foregroundStyle(Trace.Colors.bone)
+                .font(Trace.Fonts.title)
+                .foregroundStyle(Trace.Colors.text)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
             Text(allowsAppearance ? L10n.t("who.subtitleEdit") : L10n.t("who.subtitle"))
-                .font(Trace.Fonts.uiBody)
-                .foregroundStyle(Trace.Colors.boneMid)
+                .font(Trace.Fonts.body)
+                .foregroundStyle(Trace.Colors.text2)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .padding(.horizontal, TitleLayout.textMargin)
-        .padding(.top, 4)
+        .padding(.top, Trace.Spacing.s)
     }
 
     /// Two columns; one column at accessibility text sizes. Both cards take the same height.
     @ViewBuilder
-    private func cards(width: CGFloat) -> some View {
+    private var cards: some View {
         if stacked {
-            VStack(spacing: TitleLayout.cardGap) {
-                card(.elise, printWidth: TitleLayout.stackedPrint)
-                card(.vincent, printWidth: TitleLayout.stackedPrint)
+            VStack(spacing: Trace.Spacing.m) {
+                card(.elise)
+                card(.vincent)
             }
         } else {
-            let cardWidth = max(0, (width - TitleLayout.cardGap) / 2)
-            let printWidth = max(40, cardWidth - 2 * TitleLayout.cardPadding - 2 * TitleLayout.printBorder)
-            HStack(alignment: .top, spacing: TitleLayout.cardGap) {
-                card(.elise, printWidth: printWidth)
-                card(.vincent, printWidth: printWidth)
+            HStack(alignment: .top, spacing: Trace.Spacing.m) {
+                card(.elise)
+                card(.vincent)
             }
             .fixedSize(horizontal: false, vertical: true)
         }
     }
 
-    private func card(_ id: PlayerID, printWidth: CGFloat) -> some View {
+    private func card(_ id: PlayerID) -> some View {
         let isChosen = id == selected
         // Appearance A on the cards; the chosen photo when it can be changed here.
         let shown = PlayerIdentity(id: id, appearance: allowsAppearance && isChosen ? appearance : .a)
         return Button {
             choose(id)
         } label: {
-            InvestigatorCard(identity: shown, chosen: isChosen, printWidth: printWidth, sideBySide: stacked)
+            InvestigatorCard(identity: shown, chosen: isChosen, sideBySide: stacked)
                 .frame(maxHeight: .infinity, alignment: .top)
         }
-        .buttonStyle(.plain)
-        .opacity(isChosen ? 1 : 0.6)
-        .offset(y: isChosen && !noMotion ? -TitleLayout.lift : 0)
-        .zIndex(isChosen ? 1 : 0)
+        .buttonStyle(PressableStyle())
+        .opacity(isChosen ? 1 : 0.55)
         .accessibilityLabel(Text(verbatim: "\(id.fullName), \(id.title.lowercased())"))
         .accessibilityAddTraits(isChosen ? .isSelected : [])
         .accessibilityIdentifier("who.\(id.rawValue)")
@@ -401,15 +380,11 @@ struct WhoInvestigatesScreen: View {
         withAnimation(selectionAnimation) { selected = id }
     }
 
-    /// « APPARENCE »: photo A or B of the chosen investigator (from the profile only).
+    /// « Apparence »: photo A or B of the chosen investigator (from the profile only).
     private var appearancePicker: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(L10n.t("who.appearance"))
-                .font(Trace.Fonts.kicker)
-                .tracking(1.6)
-                .foregroundStyle(Trace.Colors.bone2)
-                .accessibilityAddTraits(.isHeader)
-            HStack(alignment: .top, spacing: 18) {
+        VStack(alignment: .leading, spacing: 0) {
+            SectionHeader(title: L10n.t("who.appearance"))
+            HStack(alignment: .top, spacing: Trace.Spacing.l) {
                 appearanceOption(.a)
                 appearanceOption(.b)
             }
@@ -419,21 +394,21 @@ struct WhoInvestigatesScreen: View {
     private func appearanceOption(_ look: Appearance) -> some View {
         let isChosen = look == appearance
         let letter = look.rawValue.uppercased()
+        let shape = RoundedRectangle(cornerRadius: Trace.Radius.card, style: .continuous)
         return Button {
             guard look != appearance else { return }
             Haptics.selection()
             withAnimation(selectionAnimation) { appearance = look }
         } label: {
             VStack(spacing: 6) {
-                PlayerPrint(identity: PlayerIdentity(id: selected, appearance: look),
-                            width: TitleLayout.appearancePrint, border: TitleLayout.appearanceBorder)
-                    .overlay(Rectangle().strokeBorder(Trace.Colors.stamp, lineWidth: 2).opacity(isChosen ? 1 : 0))
+                PlayerPrint(identity: PlayerIdentity(id: selected, appearance: look), width: 72)
+                    .overlay(shape.strokeBorder(Trace.Colors.ben, lineWidth: 2).opacity(isChosen ? 1 : 0))
                 Text(verbatim: letter)
-                    .font(Trace.Fonts.kicker)
-                    .foregroundStyle(isChosen ? Trace.Colors.stampOnDark : Trace.Colors.bone2)
+                    .font(Trace.Fonts.data)
+                    .foregroundStyle(isChosen ? Trace.Colors.benText : Trace.Colors.text2)
             }
-            .opacity(isChosen ? 1 : 0.6)
-            .offset(y: isChosen && !noMotion ? -TitleLayout.lift : 0)
+            .opacity(isChosen ? 1 : 0.55)
+            .frame(minWidth: Trace.Height.hit, minHeight: Trace.Height.hit)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -443,44 +418,74 @@ struct WhoInvestigatesScreen: View {
     }
 }
 
-/// One investigator on screen 03: the 4:5 print, the name, the title; « ✓ CHOISIE » and a red
-/// rule when chosen. In two columns the print is on top; stacked (accessibility sizes), on the left.
+/// One investigator on « Qui enquête ? »: a flat card with the 4:5 photo, the name (headline) and
+/// the title (caption). Chosen: 2 pt `ben` border and a 26 pt check. In two columns the photo is
+/// on top; stacked (accessibility sizes), on the left.
 private struct InvestigatorCard: View {
     let identity: PlayerIdentity
     let chosen: Bool
-    let printWidth: CGFloat
     let sideBySide: Bool
 
+    /// « ENQUÊTRICE » → « Enquêtrice » (V3: capitals only for section headers).
+    private var titleText: String {
+        let raw = identity.id.title
+        return raw.prefix(1).uppercased() + raw.dropFirst().lowercased()
+    }
+
     var body: some View {
+        let shape = RoundedRectangle(cornerRadius: Trace.Radius.card, style: .continuous)
         let layout = sideBySide
-            ? AnyLayout(HStackLayout(alignment: .top, spacing: 14))
-            : AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
+            ? AnyLayout(HStackLayout(alignment: .top, spacing: Trace.Spacing.m))
+            : AnyLayout(VStackLayout(alignment: .leading, spacing: Trace.Spacing.m))
         layout {
-            PlayerPrint(identity: identity, width: printWidth, border: TitleLayout.printBorder)
-            VStack(alignment: .leading, spacing: 4) {
+            photo
+            VStack(alignment: .leading, spacing: 2) {
                 Text(verbatim: identity.id.fullName)
-                    .font(Trace.Fonts.serifTitle(21))
-                    .foregroundStyle(Trace.Colors.ink)
+                    .font(Trace.Fonts.headline)
+                    .foregroundStyle(Trace.Colors.text)
                     .fixedSize(horizontal: false, vertical: true)
-                Text(identity.id.title)
-                    .font(Trace.Fonts.monoSmall)
-                    .tracking(1.4)
-                    .foregroundStyle(Trace.Colors.inkSoft)
+                Text(titleText)
+                    .font(Trace.Fonts.caption)
+                    .foregroundStyle(Trace.Colors.text2)
                     .fixedSize(horizontal: false, vertical: true)
-                Text(identity.id.isFeminine ? L10n.t("who.chosenF") : L10n.t("who.chosenM"))
-                    .font(Trace.Fonts.kicker)
-                    .tracking(1.4)
-                    .foregroundStyle(Trace.Colors.stamp)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, 4)
-                    .opacity(chosen ? 1 : 0)
             }
         }
-        .padding(TitleLayout.cardPadding)
+        .padding(Trace.Spacing.m)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .paper(chosen ? Trace.Colors.paperSelected : Trace.Colors.paper, radius: 0, lifted: chosen)
-        .overlay(Rectangle().strokeBorder(Trace.Colors.stamp, lineWidth: 2).opacity(chosen ? 1 : 0))
-        .contentShape(Rectangle())
+        .background(shape.fill(Trace.Colors.surface))
+        .overlay(shape.strokeBorder(chosen ? Trace.Colors.ben : Trace.Colors.line, lineWidth: chosen ? 2 : 1))
+        .overlay(alignment: .topTrailing) {
+            if chosen {
+                ZStack {
+                    Circle().fill(Trace.Colors.ben)
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(Trace.Colors.onFill)
+                }
+                .frame(width: 26, height: 26)
+                .padding(Trace.Spacing.s)
+                .accessibilityHidden(true)
+            }
+        }
+        .contentShape(shape)
+    }
+
+    /// The 4:5 photo, full card width in two columns, 96 pt wide when stacked.
+    @ViewBuilder
+    private var photo: some View {
+        if sideBySide {
+            PlayerPrint(identity: identity, width: 96)
+        } else {
+            Color.clear
+                .aspectRatio(0.8, contentMode: .fit)
+                .frame(maxWidth: .infinity)
+                .overlay {
+                    GeometryReader { geo in
+                        PlayerPrint(identity: identity, width: geo.size.width)
+                    }
+                }
+                .clipShape(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous))
+        }
     }
 }
 #endif

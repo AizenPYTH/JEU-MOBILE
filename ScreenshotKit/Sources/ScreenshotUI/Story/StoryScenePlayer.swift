@@ -4,7 +4,8 @@ import StoryEngine
 
 /// h11 / h12 · a scene: the 3D stage, cinema subtitles (never bubbles), the answers, the silence,
 /// a scripted notification, the place and time on the opening shot, and the HUD (JOURNAL · AUTO ·
-/// PASSER). docs/design_story/DIALOGUE_UI.md.
+/// PASSER). docs/design_story/DIALOGUE_UI.md. Overlays in the UX V3 look: flat, legible on the
+/// scene, sentence case; the 3D stage itself is unchanged.
 struct StoryScenePlayer: View {
     let story: StoryCoordinator
     @State private var picked: String?
@@ -56,7 +57,7 @@ struct StoryScenePlayer: View {
         .sheet(isPresented: Binding(get: { story.journalOpen }, set: { story.journalOpen = $0 })) {
             SceneJournal(story: story)
                 .presentationDetents([.fraction(0.9)])
-                .presentationCornerRadius(16)
+                .presentationCornerRadius(Trace.Radius.sheet)
                 .presentationBackground(Trace.Story.journal)
                 .presentationDragIndicator(.visible)
         }
@@ -201,15 +202,13 @@ private struct DialogueLineView: View {
         VStack(alignment: .leading, spacing: 8) {
             if let name = line.speakerName {
                 HStack(spacing: 10) {
-                    Text(name.uppercased())
+                    Text(name)
                         .font(Trace.StoryFonts.dialogueName)
-                        .tracking(2)
-                        .foregroundStyle(Trace.Story.dialogue)
+                        .foregroundStyle(Trace.Colors.benText)
                     if showRole, let role = line.speakerRole {
-                        Text(role.uppercased())
+                        Text(role)
                             .font(Trace.StoryFonts.dialogueRole)
-                            .tracking(1)
-                            .foregroundStyle(Trace.Colors.bone2)
+                            .foregroundStyle(Trace.Colors.text2)
                     }
                 }
             }
@@ -230,7 +229,7 @@ private struct DialogueLineView: View {
                     Spacer()
                     Text("▸")
                         .font(Trace.StoryFonts.next)
-                        .foregroundStyle(Trace.Colors.bone2)
+                        .foregroundStyle(Trace.Colors.text2)
                         .opacity(reduceMotion ? 1 : (pulse ? 1 : 0.6))
                         .animation(reduceMotion ? nil : .easeInOut(duration: 0.6).repeatForever(autoreverses: true), value: pulse)
                         .onAppear { pulse = true }
@@ -269,7 +268,8 @@ private struct DialogueLineView: View {
 
 // MARK: - Answers
 
-/// A (main, 1.5 pt, 6 % fill), B/C (1 pt at 25 %), the silence (« — », 15 %, italic).
+/// An answer (V3): a flat `surface2` row (radius 12) legible on the scene; A has a brighter rule,
+/// the silence (« — », italic) is transparent; the one picked gets the 2 pt `ben` selection.
 private struct ChoiceRow: View {
     let choice: ResolvedChoice
     let index: Int
@@ -281,31 +281,31 @@ private struct ChoiceRow: View {
     var body: some View {
         let first = index == 0 && !choice.silent
         let chosen = picked == choice.id
-        let shape = RoundedRectangle(cornerRadius: 6, style: .continuous)
+        let shape = RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous)
         Button(action: action) {
             HStack(alignment: .firstTextBaseline, spacing: 12) {
                 Text(prefix)
                     .font(Trace.StoryFonts.choicePrefix)
-                    .foregroundStyle(choice.silent ? Trace.Colors.bone3 : (first ? Trace.Story.dialogue : Trace.Colors.bone2))
+                    .foregroundStyle(choice.silent ? Trace.Colors.text3 : (first ? Trace.Story.dialogue : Trace.Colors.text2))
                     .frame(width: 14, alignment: .leading)
                 Text(choice.text)
                     .font(choice.silent ? Trace.StoryFonts.choiceSilent : Trace.StoryFonts.choice)
-                    .foregroundStyle(choice.silent ? Trace.Colors.bone2 : Trace.Story.dialogue)
+                    .foregroundStyle(choice.silent ? Trace.Colors.text2 : Trace.Story.dialogue)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 0)
                 if choice.chosenBefore {
                     // A replayed chapter shows the answer given the first time.
-                    Text("✓").font(Trace.StoryFonts.choicePrefix).foregroundStyle(Trace.Colors.bone2)
+                    Text("✓").font(Trace.StoryFonts.choicePrefix).foregroundStyle(Trace.Colors.text2)
                         .accessibilityLabel(Text(L10n.t("story.a11y.chosenBefore")))
                 }
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 14)
             .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
-            .background(shape.fill(Trace.Story.dialogue.opacity(first || chosen ? 0.06 : 0)))
-            .overlay(shape.strokeBorder(Trace.Story.dialogue.opacity(chosen ? 1 : (first ? 1 : (choice.silent ? 0.15 : 0.25))),
-                                        lineWidth: chosen || first ? 1.5 : 1))
+            .background(shape.fill(choice.silent && !chosen ? Color.clear : Trace.Colors.surface2.opacity(0.92)))
+            .overlay(shape.strokeBorder(chosen ? Trace.Colors.ben : (first ? Trace.Colors.text.opacity(0.3) : Trace.Colors.line),
+                                        lineWidth: chosen ? 2 : 1))
             .contentShape(shape)
         }
         .buttonStyle(.plain)
@@ -325,13 +325,12 @@ private struct HUDPill: View {
 
     var body: some View {
         Button(action: action) {
-            Text(title.uppercased())
+            Text(title)
                 .font(Trace.StoryFonts.label)
-                .tracking(1)
-                .foregroundStyle(on ? Trace.Colors.ink : Trace.Story.dialogue)
+                .foregroundStyle(on ? Trace.Colors.onFill : Trace.Story.dialogue)
                 .padding(.horizontal, 12)
                 .frame(height: 32)
-                .background(Capsule().fill(on ? Trace.Story.dialogue : Trace.Story.hud))
+                .background(Capsule().fill(on ? Trace.Colors.ben : Trace.Story.hud))
                 .frame(minHeight: 44)
                 .contentShape(Rectangle())
         }
@@ -393,7 +392,7 @@ private struct SceneJournal: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            StoryLabel(text: L10n.t("story.hud.journal"), color: Trace.Colors.bone2)
+            StoryLabel(text: L10n.t("story.hud.journal"), color: Trace.Colors.text2)
                 .padding(.horizontal, 20)
                 .padding(.top, 22)
                 .padding(.bottom, 10)
@@ -402,12 +401,12 @@ private struct SceneJournal: View {
                     if story.journal.isEmpty {
                         Text(L10n.t("story.journal.empty"))
                             .font(Trace.StoryFonts.body)
-                            .foregroundStyle(Trace.Colors.bone2)
+                            .foregroundStyle(Trace.Colors.text2)
                     }
                     ForEach(story.journal) { entry in
                         VStack(alignment: .leading, spacing: 4) {
                             if let speaker = entry.speaker {
-                                StoryLabel(text: speaker, color: Trace.Colors.bone2)
+                                StoryLabel(text: speaker, color: Trace.Colors.text2)
                             }
                             Text(entry.choice ? "▸ " + entry.text : entry.text)
                                 .font(Trace.StoryFonts.choice)

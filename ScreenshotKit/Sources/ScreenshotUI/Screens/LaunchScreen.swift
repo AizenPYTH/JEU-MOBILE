@@ -91,8 +91,9 @@ final class LaunchLoader {
 
 // MARK: - 01 · Lancement
 
-/// Screen 01 (final handoff §F-01): the logo tile on #0A0908, exactly where the system launch
-/// screen drew it (188 pt, centred in the whole screen), and « NOREL GAMES » 58 pt from the bottom
+/// Screen 01 (final handoff §F-01, UX V3 colours): the logo tile on the flat BEN background #0B0E13
+/// (the system launch screen's « LaunchBackground »), exactly where the system launch screen drew it
+/// (188 pt, centred in the whole screen), no paper, and « NOREL GAMES » 58 pt from the bottom
 /// edge. No bar, no spinner. It stays at least 1.6 s; it leaves when the game can start and the
 /// first portraits are decoded, and never waits past 4 s for the portraits (they fall back to
 /// initials). Then the logo fades to black (250 ms) and RootView fades the next screen in (350 ms).
@@ -118,13 +119,13 @@ struct LoadingScreen: View {
 
     var body: some View {
         ZStack {
-            Trace.Colors.launch
+            Trace.Colors.bg
             LogoTile(size: Self.tileSize)
                 .opacity(leaving ? 0 : 1)
             Text(verbatim: Self.studio)
                 .font(Self.studioFont)
                 .tracking(Self.studioTracking)
-                .foregroundStyle(Trace.Colors.bone3)
+                .foregroundStyle(Trace.Colors.text3)
                 .opacity(leaving ? 0 : 1)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 .padding(.bottom, Self.studioBottom)

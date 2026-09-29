@@ -4736,6 +4736,210 @@
         }
       }
     },
+    "first.start": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer"
+          }
+        }
+      }
+    },
+    "first.step1.line": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You are handed a case."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On vous confie une affaire."
+          }
+        }
+      }
+    },
+    "first.step1.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A case file"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un dossier"
+          }
+        }
+      }
+    },
+    "first.step2.line": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The phone of the person involved."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Celui de la personne concernée."
+          }
+        }
+      }
+    },
+    "first.step2.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A phone"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un téléphone"
+          }
+        }
+      }
+    },
+    "first.step3.line": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep what matters."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gardez ce qui compte."
+          }
+        }
+      }
+    },
+    "first.step3.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add to the file"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verser au dossier"
+          }
+        }
+      }
+    },
+    "first.step4.line": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If it helps, link pieces and people to see clearly."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si besoin, reliez pièces et personnes pour y voir clair."
+          }
+        }
+      }
+    },
+    "first.step4.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relier"
+          }
+        }
+      }
+    },
+    "first.step5.line": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name the one responsible before time runs out."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désignez le responsable avant la fin du temps."
+          }
+        }
+      }
+    },
+    "first.step5.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conclude"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conclure"
+          }
+        }
+      }
+    },
+    "first.tagline": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One phone. One disappearance. Your call to conclude."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un téléphone. Une disparition. À vous de conclure."
+          }
+        }
+      }
+    },
     "hints.allRevealed": {
       "extractionState": "manual",
       "localizations": {
@@ -10125,6 +10329,23 @@
         }
       }
     },
+    "story.badge.solved": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solved"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Résolu"
+          }
+        }
+      }
+    },
     "story.career.a11y.current": {
       "extractionState": "manual",
       "localizations": {
@@ -10903,13 +11124,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "FEMININE"
+            "value": "Feminine"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "FÉMININ"
+            "value": "Féminin"
           }
         }
       }
@@ -10920,13 +11141,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "MASCULINE"
+            "value": "Masculine"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "MASCULIN"
+            "value": "Masculin"
           }
         }
       }
@@ -10937,13 +11158,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "NEUTRAL"
+            "value": "Neutral"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "NEUTRE"
+            "value": "Neutre"
           }
         }
       }
@@ -10988,13 +11209,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "FEMININE"
+            "value": "Feminine"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "FÉMININE"
+            "value": "Féminine"
           }
         }
       }
@@ -11005,13 +11226,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "MASCULINE"
+            "value": "Masculine"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "MASCULINE"
+            "value": "Masculine"
           }
         }
       }
@@ -11022,13 +11243,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "EYES"
+            "value": "Eyes"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "YEUX"
+            "value": "Yeux"
           }
         }
       }
@@ -11039,13 +11260,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "FACE"
+            "value": "Face"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "VISAGE"
+            "value": "Visage"
           }
         }
       }
@@ -11056,13 +11277,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "HAIR"
+            "value": "Hair"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "CHEVEUX"
+            "value": "Cheveux"
           }
         }
       }
@@ -11073,13 +11294,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "SKIN"
+            "value": "Skin"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "TEINT"
+            "value": "Teint"
           }
         }
       }
@@ -11481,13 +11702,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "IDENTITY CONFIRMED"
+            "value": "Identity confirmed"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "IDENTITÉ CONFIRMÉE"
+            "value": "Identité confirmée"
           }
         }
       }
@@ -12032,6 +12253,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quitter la scène"
+          }
+        }
+      }
+    },
+    "story.nav.hub": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Story"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Histoire"
           }
         }
       }
@@ -14491,13 +14729,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "APPEARANCE"
+            "value": "Appearance"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "APPARENCE"
+            "value": "Apparence"
           }
         }
       }
@@ -14566,6 +14804,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Continuer"
+          }
+        }
+      }
+    },
+    "who.continueWith": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue as %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer avec %@"
           }
         }
       }
@@ -14644,13 +14899,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "WHO IS INVESTIGATING?"
+            "value": "Who is investigating?"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "QUI ENQUÊTE ?"
+            "value": "Qui enquête ?"
           }
         }
       }
