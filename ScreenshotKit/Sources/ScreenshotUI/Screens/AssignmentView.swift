@@ -124,7 +124,7 @@ struct AssignmentView: View {
                 }
                 .accessibilityElement(children: .combine)
                 field(label: L10n.t("assignment.serviceNumber"), value: identity.id.serviceNumber)
-                field(label: L10n.t("profile.rank"), value: rank.title.uppercased())
+                field(label: L10n.t("profile.rank"), value: rank.title(feminine: identity.id.isFeminine).uppercased())
             }
             Spacer(minLength: 0)
         }
