@@ -294,7 +294,7 @@ final class MainFlowTests: XCTestCase {
         openPhone()
     }
 
-    /// « Pause » (the phone's ‹): confirm, back to the Bureau.
+    /// « ‹ Dossier » (the investigation bar): confirm, back to the case file, which offers to resume.
     private func pauseInvestigation() {
         dismissUrgentBanner()
         tapWhenReady(element("phone.quit"), "Mettre en pause")
@@ -319,10 +319,13 @@ final class MainFlowTests: XCTestCase {
         wait(element("first.impression"), 20, "première impression")
         sleep(1)
         snap("F01a-premiere-impression-debut")
+        // A tap anywhere shows the final state at once (§6-00).
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.9)).tap()
+        let line = app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "À vous de conclure")).firstMatch
+        wait(line, 6, "la phrase « Un téléphone. Une disparition. À vous de conclure. »")
         let start = wait(element("first.start"), 8, "[Commencer]")
         sleep(1)
         snap("F01b-premiere-impression")
-        XCTAssertTrue(app.staticTexts["Un téléphone. Une disparition. À vous de conclure."].exists, "La phrase")
         XCTAssertFalse(element("title.start").exists, "Plus d'écran titre")
 
         // 03 · Who investigates: Élise preselected, no service number, no rank.
@@ -467,8 +470,15 @@ final class MainFlowTests: XCTestCase {
         let viewIt = element("filing.viewInCarnet")
         if viewIt.waitForExistence(timeout: 4) {
             snap("09b-deja-au-dossier")
-            tap(viewIt, "Voir dans le carnet", expecting: element("notebook.title"))
-            element("notebook.close").tap()
+            tap(viewIt, "Voir la pièce", expecting: element("notebook.title"))
+            // « Voir la pièce » opens the Carnet on that piece's detail.
+            let detailClose = element("piece.detail.close")
+            if detailClose.waitForExistence(timeout: 4) {
+                snap("09c-voir-la-piece")
+                detailClose.tap()
+                _ = detailClose.waitForNonExistence(timeout: 4)
+            }
+            tapWhenReady(element("notebook.close"), "‹ Téléphone")
             XCTAssertTrue(element("notebook.title").waitForNonExistence(timeout: 5), "Le carnet ne se ferme pas")
         }
 
@@ -658,16 +668,10 @@ final class MainFlowTests: XCTestCase {
         wait(alibi, 5, "retour dans la conversation après « Continuer »")
         let before = secondsLeft()
 
-        // Pause for real: the Bureau offers to resume; time away does not count.
+        // Pause for real: back on the case file, which offers to resume; time away does not count.
         pauseInvestigation()
-        let resume = wait(element("home.resume"), 10, "« Reprendre l'enquête » au Bureau")
-        snap("72-bureau-reprendre")
+        let introResume = wait(element("intro.resume"), 10, "« Reprendre l'enquête » sur le dossier")
         sleep(5)
-
-        // The case file offers it too.
-        openCaseFile()
-        let introResume = wait(element("intro.resume"), 5, "« Reprendre l'enquête » sur le dossier")
-        sleep(1)
         snap("73-dossier-reprendre")
         tap(introResume, "Reprendre (dossier)", expecting: element("phone.timer"))
         // Read at once: the time away (5 s here, plus the navigation, 15 s or more) must not count;
@@ -678,9 +682,11 @@ final class MainFlowTests: XCTestCase {
         assertPieces(1)
         snap("74-repris")
 
-        // Pause again and resume from the Bureau.
+        // Pause again, back to the Bureau, and resume from its case card.
         pauseInvestigation()
-        tap(resume, "Reprendre l'enquête (Bureau)", expecting: element("phone.timer"))
+        tap(wait(element("intro.close"), 10, "« ‹ Bureau »"), "‹ Bureau", expecting: element("home.resume"))
+        snap("72-bureau-reprendre")
+        tap(element("home.resume"), "Reprendre l'enquête (Bureau)", expecting: element("phone.timer"))
         wait(element("message.m_emma_2230"), 5, "même écran après reprise depuis le Bureau")
     }
 
@@ -689,6 +695,8 @@ final class MainFlowTests: XCTestCase {
     /// The level choice may be folded behind a « NIVEAU » row on the case file.
     private func showLevels(_ level: XCUIElement) {
         if !level.waitForExistence(timeout: 3), element("briefing.level").exists {
+            // The case file is taller now: bring « Niveau » on screen first.
+            scrollTo(element("briefing.level"))
             tapWhenReady(element("briefing.level"), "Niveau")
         }
         scrollTo(level)
@@ -807,7 +815,8 @@ final class MainFlowTests: XCTestCase {
             sleep(2)
             snap("B\(n)4-\(item.id)-carte")
             pauseInvestigation()
-            wait(element("home.resume"), 10, "reprise proposée pour \(item.id)")
+            wait(element("intro.resume"), 10, "reprise proposée pour \(item.id)")
+            tap(element("intro.close"), "‹ Bureau", expecting: element("home.resume"))
         }
     }
 
@@ -880,7 +889,7 @@ final class MainFlowTests: XCTestCase {
     // MARK: - Time runs out, wrong conclusion, « Reprendre l'enquête », the solution
 
     func testTimeUpWrongConclusionThenRetry() {
-        app.launchArguments += ["-UITestDuration", "30"]
+        app.launchArguments += ["-UITestDuration", "40"]
         startCase()
         openApp("messages")
         let alibi = element("message.m_emma_2230")
@@ -888,7 +897,7 @@ final class MainFlowTests: XCTestCase {
         file(alibi, "30-piece-avant-la-fin")
 
         // 00:00: the conclusion is forced, « TEMPS ÉCOULÉ », no way back.
-        wait(element("accuse.timeUp"), 40, "« TEMPS ÉCOULÉ »")
+        wait(element("accuse.timeUp"), 55, "« TEMPS ÉCOULÉ »")
         XCTAssertFalse(element("accuse.back").exists, "Pas de retour possible après la fin du chrono")
         snap("31-temps-ecoule")
 
@@ -903,12 +912,12 @@ final class MainFlowTests: XCTestCase {
         let retry = element("result.retry")
         scrollTo(retry)
         tap(retry, "Reprendre l'enquête", expecting: element("phone.timer"))
-        XCTAssertTrue(secondsLeft() >= 20, "Chrono plein à la reprise (\(secondsLeft()) s)")
+        XCTAssertTrue(secondsLeft() >= 30, "Chrono plein à la reprise (\(secondsLeft()) s)")
         assertPieces(1)
         snap("34-reprise-apres-echec")
 
         // Second attempt, wrong again, then the solution on request.
-        wait(element("accuse.timeUp"), 45, "« TEMPS ÉCOULÉ » (2e fois)")
+        wait(element("accuse.timeUp"), 60, "« TEMPS ÉCOULÉ » (2e fois)")
         choose(wait(element("accuse.suspect.s_lucas"), 10, "suspects"))
         holdToConclude()
         readReport("35-verification-2")

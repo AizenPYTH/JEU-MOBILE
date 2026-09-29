@@ -182,21 +182,25 @@ struct BenHoldButton: View {
 
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: Trace.Radius.button, style: .continuous)
-        ZStack(alignment: .leading) {
-            shape.fill(Trace.Colors.surface2)
-            GeometryReader { geo in
-                shape.fill(Trace.Colors.ben).frame(width: geo.size.width * progress)
+        // The label gives the button its size (60 pt, taller with large text); the fill lies behind
+        // it — a GeometryReader in a ZStack would take the whole screen.
+        Text(title)
+            .font(Trace.Fonts.cta)
+            .foregroundStyle(enabled ? Trace.Colors.text : Trace.Colors.text3)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .minimumScaleFactor(0.8)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity, minHeight: Trace.Height.hold)
+            .background {
+                ZStack(alignment: .leading) {
+                    shape.fill(Trace.Colors.surface2)
+                    GeometryReader { geo in
+                        shape.fill(Trace.Colors.ben).frame(width: geo.size.width * progress)
+                    }
+                }
             }
-            Text(title)
-                .font(Trace.Fonts.cta)
-                .foregroundStyle(enabled ? Trace.Colors.text : Trace.Colors.text3)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .minimumScaleFactor(0.8)
-                .padding(.horizontal, 16)
-                .frame(maxWidth: .infinity)
-        }
-        .frame(minHeight: Trace.Height.hold)
         .clipShape(shape)
         .contentShape(shape)
         .onLongPressGesture(minimumDuration: seconds, maximumDistance: 40) {

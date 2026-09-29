@@ -591,8 +591,9 @@ struct GameRoot: View {
         stage = .playing(session)
     }
 
-    /// Leaving the phone (« Mettre en pause »): the investigation is saved. Back to the Bureau, on
-    /// the mode it belongs to (its card offers to resume it).
+    /// Leaving the phone (« ‹ Dossier » in the investigation bar, then « Mettre en pause »): the
+    /// investigation is saved and the player is back on its case file, which offers « Reprendre
+    /// l'enquête · mm:ss » (UX V3 §4); « ‹ Bureau » from there. A story case goes back to the story.
     private func quit(_ session: GameSession) {
         session.pause()
         if session.slot == .story {
@@ -601,7 +602,10 @@ struct GameRoot: View {
             return
         }
         deskMode = session.caseFile.isAlibi ? .alibi : .investigations
-        goHome()
+        attempts = ProgressStore.attempts()
+        savedGame = SavedInvestigationStore.load()
+        guard let file = cases.first(where: { $0.id == session.caseFile.id }) else { return goHome() }
+        stage = file.isAlibi ? .alibiIntro(file) : .intro(file)
     }
 
     private func finished(_ verdict: Verdict) {

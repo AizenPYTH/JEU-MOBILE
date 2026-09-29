@@ -39,10 +39,13 @@ Source : `docs/design_ux_v3/HANDOFF_UX_V3.md`. **Les maquettes HTML citées (« 
   « #001 résolu ». Aucune affaire n'est verrouillée (comme avant).
 - Carnet : ordre des onglets Pièces · Suspects · Chronologie · Connexions (identifiants des tests), le Carnet s'ouvre
   sur Pièces. L'alibi « innocent » d'un suspect n'est jamais affiché (il dévoilerait la réponse).
-- Tutoriel #001 : l'anneau de la bulle « Touchez un message… » vise la première vraie pièce de la conversation, comme
-  l'ancien tutoriel (à trancher si l'on préfère un message neutre).
-- **À trancher** : durées de présentation — maintien 1,6 s (handoff) au lieu de 1,2 s, vérification 1,8 s au lieu de
-  2,4 s. Appliquées pour l'instant (ce ne sont pas des règles de résolution).
+- Tutoriel #001 (**décision du porteur de projet**) : l'anneau de la bulle « Touchez un message… » vise la première
+  vraie pièce de la conversation, comme l'ancien tutoriel — le tutoriel apprend la vraie boucle d'enquête avec une
+  pièce utile.
+- Durées (**décision du porteur de projet**) : maintien 1,6 s et vérification 1,8 s (valeurs UX V3), à revoir
+  seulement si un vrai test d'utilisation montre un problème.
+- « ‹ Dossier » (barre d'enquête) : après confirmation de la pause, retour sur le dossier de l'affaire, qui propose
+  « Reprendre l'enquête · mm:ss » (§4) ; « ‹ Bureau » depuis le dossier.
 - Appui long : verse directement (§6-04) au lieu d'ouvrir une feuille de confirmation ; retirer une pièce se fait
   depuis le Carnet.
 
