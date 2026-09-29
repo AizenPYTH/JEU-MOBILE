@@ -33,10 +33,10 @@ Règle du studio : aucune image générée par IA dans les téléphones et les g
 | | |
 |---|---|
 | Photos des téléphones (toutes affaires) | 265 |
-| Vraies photos livrées (photographies réelles) | **129** |
-| — dont externes : openverse 15 · wikimedia 114 | 129 |
+| Vraies photos livrées (photographies réelles) | **150** |
+| — dont externes : openverse 21 · wikimedia 129 | 150 |
 | Vraies photos prises par le studio (CUSTOM_REAL livrées) | 0 |
-| Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | 79 |
+| Vraies photos encore à récupérer (REPLACE_REAL sans image acceptable pour l'instant) | 58 |
 | Vraies photos à prendre nous-mêmes (CUSTOM_REAL) | 10 |
 | Rendus du jeu voulus (captures d'écran, documents, tickets — pas des photographies) | 47 |
 | Images IA supprimées | 5 |
@@ -124,27 +124,6 @@ Exceptions (photo réelle pas encore livrée) :
 | `case005_photo_p_platre` — Le couloir des urgences, vu depuis un brancard. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case005_photo_p_kids_2305` — La chambre des enfants, veilleuse allumée. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
 | `case005_photo_p_col_2314` — Un 4×4 se gare sur le parking du col. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
-| `case201_photo_p_old_etretat` — Les falaises d'Étretat, août 2024. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_old_fete` — Fête de la musique, rue Oberkampf. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_old_sapin` — Le sapin chez les parents, Orléans. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_canal` — Canal Saint-Martin, dimanche matin. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_maquette` — La maquette de la médiathèque, avant la mise en couleur. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_coulee` — La Coulée verte, pause de midi. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_aligre` — Marché d'Aligre, samedi. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_dahlias` — Les dahlias du jardin de maman. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_lea_chat` — Pistou, le chat de Léa, sur le canapé. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_buttes` — Parc des Buttes-Chaumont, le temple de la Sibylle. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_tirages` — Les tirages A0 étalés sur la grande table. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_verriere` — Pluie sur la verrière de l'atelier. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_daumesnil` — Le lac Daumesnil, samedi matin. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_cirque` — Le Cirque d'Hiver, en rentrant. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_nas_orange` — Le serveur du local technique, voyant orange. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_plante` — Le pothos du bureau reprend. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_belleville` — Coucher de soleil depuis le parc de Belleville. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_republique` — Place de la République, pause de midi. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
-| `case201_photo_p_vincennes_2230` — Le gâteau de Juliette, 36 bougies. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
-| `case201_photo_p_adrien_cigale` — La scène de La Cigale, vue du balcon. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire (preuve : ce qu'elle prouve tient à son heure, son lieu ou son sujet). |
-| `case201_photo_p_chateau` — Le donjon du château de Vincennes, en allant au RER. | REPLACE_REAL | Vraie photo sous licence libre, choisie pour ce que la photo montre dans l'affaire. |
 
 ## #001 LE DERNIER MESSAGE
 
