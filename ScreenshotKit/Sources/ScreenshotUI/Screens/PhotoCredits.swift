@@ -32,6 +32,9 @@ struct PhotoCredits: Decodable {
     }()
 }
 
+/// Paramètres › À propos › Crédits photos (V4): a paper sheet — « ‹ À propos », the title over a
+/// 1.5 pt ink rule, the promise (real photographs only), then one row per photo separated by thin
+/// ink rules: the attribution, its source and licence as underlined links.
 struct PhotoCreditsView: View {
     let credits: PhotoCredits
     let onClose: () -> Void
@@ -40,62 +43,60 @@ struct PhotoCreditsView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                BackLink(title: L10n.t("settings.about"), identifier: "credits.back", action: onClose)
-                Text(L10n.t("credits.button"))
-                    .font(Trace.Fonts.title)
-                    .foregroundStyle(Trace.Colors.text)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .accessibilityAddTraits(.isHeader)
+            VStack(alignment: .leading, spacing: Trace.Spacing.l) {
+                BackLink(title: L10n.t("settings.about"), identifier: "credits.back", onPaper: true, action: onClose)
+                PaperworkHeader(title: L10n.t("credits.button"))
                 Text(L10n.t("credits.intro"))
                     .font(Trace.Fonts.body)
-                    .foregroundStyle(Trace.Colors.text2)
+                    .foregroundStyle(Trace.Colors.ink2)
                     .fixedSize(horizontal: false, vertical: true)
                 if credits.pexels, let home = Self.pexelsHome {
-                    Link(L10n.t("credits.pexels"), destination: home)
-                        .font(Trace.Fonts.link)
-                        .foregroundStyle(Trace.Colors.benText)
-                        .frame(minHeight: Trace.Height.hit)
-                        .accessibilityIdentifier("credits.pexels")
+                    Link(destination: home) {
+                        Text(L10n.t("credits.pexels")).underline()
+                    }
+                    .font(Trace.Fonts.link)
+                    .foregroundStyle(Trace.Colors.ink)
+                    .frame(minHeight: Trace.Height.hit)
+                    .accessibilityIdentifier("credits.pexels")
                 }
                 VStack(spacing: 0) {
-                    ForEach(Array(credits.items.enumerated()), id: \.element.id) { index, item in
-                        VStack(alignment: .leading, spacing: 6) {
+                    PaperworkRule()
+                    ForEach(credits.items) { item in
+                        VStack(alignment: .leading, spacing: 2) {
                             Text(item.attribution)
                                 .font(Trace.Fonts.callout)
-                                .foregroundStyle(Trace.Colors.text)
+                                .foregroundStyle(Trace.Colors.ink)
                                 .fixedSize(horizontal: false, vertical: true)
-                            HStack(spacing: 16) {
+                                .padding(.top, Trace.Spacing.m)
+                            HStack(spacing: Trace.Spacing.l) {
                                 if let url = URL(string: item.sourceUrl), !item.sourceUrl.isEmpty {
-                                    Link(L10n.t("credits.source"), destination: url)
+                                    Link(destination: url) { Text(L10n.t("credits.source")).underline() }
+                                        .frame(minHeight: Trace.Height.hit)
                                 }
                                 if let url = URL(string: item.licenseUrl), !item.licenseUrl.isEmpty {
-                                    Link(item.license, destination: url)
+                                    Link(destination: url) { Text(item.license).underline() }
+                                        .frame(minHeight: Trace.Height.hit)
                                 }
                             }
                             .font(Trace.Fonts.caption)
-                            .foregroundStyle(Trace.Colors.benText)
+                            .foregroundStyle(Trace.Colors.ink2)
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .overlay(alignment: .bottom) {
-                            if index < credits.items.count - 1 {
-                                Rectangle().fill(Trace.Colors.line).frame(height: 1).padding(.leading, 16)
-                            }
-                        }
-                        .accessibilityElement(children: .combine)
+                        .overlay(alignment: .bottom) { PaperworkRule() }
+                        .accessibilityElement(children: .contain)
                     }
                 }
-                .benCard()
+                .tint(Trace.Colors.ink)
                 Button(L10n.t("a11y.close"), action: onClose)
-                    .buttonStyle(CTAButtonStyle(kind: .outline))
+                    .buttonStyle(CTAButtonStyle(kind: .outline, onPaper: true))
                     .accessibilityIdentifier("credits.close")
+                    .padding(.top, Trace.Spacing.s)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 20)
+            .padding(.horizontal, Paperwork.sheetPadding)
+            .padding(.vertical, Paperwork.sheetPadding)
         }
-        .background(DeskBackdrop())
+        .scrollBounceBehavior(.basedOnSize)
+        .background(Trace.Colors.paper.overlay(PaperGrain()).ignoresSafeArea())
         .accessibilityIdentifier("credits.view")
     }
 }

@@ -573,7 +573,9 @@ struct FallingStamp: View {
     var delay: Double = 0.2
     var sound = true
     @State private var phase = 0
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
+    @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
+    private var reduceMotion: Bool { systemReduceMotion || appReduceMotion }
 
     var body: some View {
         StampMark(text: text, color: color, size: size, dashed: dashed)

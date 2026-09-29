@@ -91,17 +91,21 @@ final class LaunchLoader {
 
 // MARK: - 01 · Lancement
 
-/// Screen 01 (final handoff §F-01, UX V3 colours): the logo tile on the flat BEN background #0B0E13
-/// (the system launch screen's « LaunchBackground »), exactly where the system launch screen drew it
-/// (188 pt, centred in the whole screen), no paper, and « NOREL GAMES » 58 pt from the bottom
-/// edge. No bar, no spinner. It stays at least 1.6 s; it leaves when the game can start and the
-/// first portraits are decoded, and never waits past 4 s for the portraits (they fall back to
-/// initials). Then the logo fades to black (250 ms) and RootView fades the next screen in (350 ms).
+/// Screen 01 · Lancement (V4 « Dossier lisible »): the logo tile laid on the dark wooden desk,
+/// exactly where the system launch screen drew it (188 pt, centred in the whole screen), and
+/// « NOREL GAMES » in Plex Mono ivory2, 58 pt from the bottom edge. No bar, no spinner. The system
+/// launch screen is the flat desk (#1A140F); the lamp's pool (`deskLamp`) comes up over 600 ms, so the
+/// hand-over is seamless. It stays at least 1.6 s; it leaves when the game can start and the first
+/// portraits are decoded, and never waits past 4 s for the portraits (they fall back to initials).
+/// Then the logo fades out (250 ms) and RootView fades the next screen in (350 ms).
 struct LoadingScreen: View {
     let loader: LaunchLoader
     let onFinished: (BootData) -> Void
 
     @State private var leaving = false
+    /// The lamp comes up over the flat desk of the system launch screen.
+    @State private var lampOn = false
+    @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
 
     /// Shortest time on screen, so the brand is seen even on a fast iPhone.
     private static let minimumDuration: Duration = .milliseconds(1600)
@@ -113,19 +117,22 @@ struct LoadingScreen: View {
     private static let studioBottom: CGFloat = 58
     /// The studio's name: not translated.
     private static let studio = "NOREL GAMES"
-    /// Plex Mono 10, tracking +32 %.
-    private static let studioFont = Font.custom(Trace.FontName.mono, fixedSize: 10)
+    /// Plex Mono 10/500, tracking +32 %.
+    private static let studioFont = Font.custom(Trace.FontName.monoMedium, fixedSize: 10)
     private static let studioTracking: CGFloat = 3.2
 
     var body: some View {
         ZStack {
-            Trace.Colors.bg
+            Trace.Colors.desk
+            TraceDesk()
+                .opacity(lampOn ? 1 : 0)
             LogoTile(size: Self.tileSize)
+                .shadow(color: lampOn ? Trace.Shadow.print.color : .clear, radius: Trace.Shadow.print.radius, y: Trace.Shadow.print.y)
                 .opacity(leaving ? 0 : 1)
             Text(verbatim: Self.studio)
                 .font(Self.studioFont)
                 .tracking(Self.studioTracking)
-                .foregroundStyle(Trace.Colors.text3)
+                .foregroundStyle(Trace.Colors.ivory2)
                 .opacity(leaving ? 0 : 1)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 .padding(.bottom, Self.studioBottom)
@@ -137,6 +144,9 @@ struct LoadingScreen: View {
         .accessibilityIdentifier("launch.loading")
         .task { await loader.run() }
         .task { await drive() }
+        .onAppear {
+            withAnimation(.easeOut(duration: systemReduceMotion ? 0.2 : 0.6)) { lampOn = true }
+        }
     }
 
     /// Waits for the case files (however long), the minimum time, and the first portraits (at most

@@ -1,11 +1,44 @@
 #if os(iOS)
 import SwiftUI
 
-// Screen 00 · Première impression (handoff UX V3 §6-00, §7 step 1): shown on the very first launch
-// only. Test: « C'est un jeu d'enquête sur téléphone. » The logo mention, the concept in five steps
-// that light up one after the other, one line in Newsreader, then [Commencer]. No video, no music.
+// Screen 00 · Première impression (handoff UX V3 §6-00, §7 step 1; V4 « Dossier lisible » look):
+// shown on the very first launch only. Test: « C'est un jeu d'enquête sur téléphone. » On the dark
+// wooden desk, the concept as five objects laid one under the other — a kraft folder, the light
+// phone, the kraft « Verser au dossier » tag, a red thread between two pins, a stamp — each with its
+// one line in Plex Sans; they light up one after the other. Then one line in Newsreader and
+// [Commencer]. No video, no music.
 
-/// The first impression: five steps lit every 0.9 s (opacity 0.3 → 1, 8 pt rise), the second one
+/// Sizes of the first impression (V4 §2–§3).
+private enum ImpressionLayout {
+    static let margin: CGFloat = 24
+    /// The step number's column (Plex Mono 13/700).
+    static let numberColumn: CGFloat = 28
+    /// Space between two steps, and between an object and its line.
+    static let stepGap: CGFloat = 18
+    static let lineGap: CGFloat = 8
+    /// Titles written on the objects: Plex Sans 15/600; the tag's own label 13/600 (§3 EvidenceTag).
+    static let objectTitle = Trace.Fonts.monoStrong
+    static let tagTitle = Font.custom(Trace.FontName.sansSemibold, size: 13, relativeTo: .footnote)
+    /// Folder: tab 40 × 8 (radius 5 5 0 0), body radius 0 0 8 8.
+    static let folderTab = CGSize(width: 40, height: 8)
+    static let folderRadius: CGFloat = 8
+    static let folderMinWidth: CGFloat = 132
+    /// Phone card: radius 14, bubbles radius 16.
+    static let phoneRadius: CGFloat = 14
+    static let bubbleRadius: CGFloat = 16
+    /// Evidence tag: 32 pt, corners 4 16 16 4, white eyelet 8 pt.
+    static let tagHeight: CGFloat = 32
+    static let eyelet: CGFloat = 8
+    /// Thread: two paper nodes 28 × 24 with a 12 pt pin, a 2 pt red thread from pin to pin.
+    static let node = CGSize(width: 28, height: 24)
+    static let pin: CGFloat = 12
+    static let thread: CGFloat = 2
+    /// Stamp: Plex Mono 14/700, −6° (stays inside its slip).
+    static let stampSize: CGFloat = 14
+    static let stampAngle: Double = -6
+}
+
+/// The first impression: five steps lit every 0.9 s (opacity 0.3 → 1, 8 pt rise), the phone step
 /// light like the phone; the line « Un téléphone. Une disparition. À vous de conclure. » and
 /// [Commencer] at 4.5 s. A tap anywhere before the end shows the final state at once. Reduced
 /// motion: the final state, faded in over 200 ms.
@@ -34,21 +67,21 @@ struct FirstImpressionView: View {
         static let light = Animation.easeOut(duration: 0.35)
     }
 
+    fileprivate enum Object { case folder, phone, tag, thread, stamp }
+
     private struct Step: Identifiable {
         let id: Int
-        let symbol: String
+        let object: Object
         let title: String
         let line: String
-        /// The phone step is light, like the phone itself.
-        var light = false
     }
 
     private var steps: [Step] {
-        [Step(id: 1, symbol: "folder", title: L10n.t("first.step1.title"), line: L10n.t("first.step1.line")),
-         Step(id: 2, symbol: "iphone", title: L10n.t("first.step2.title"), line: L10n.t("first.step2.line"), light: true),
-         Step(id: 3, symbol: "plus", title: L10n.t("first.step3.title"), line: L10n.t("first.step3.line")),
-         Step(id: 4, symbol: "link", title: L10n.t("first.step4.title"), line: L10n.t("first.step4.line")),
-         Step(id: 5, symbol: "checkmark", title: L10n.t("first.step5.title"), line: L10n.t("first.step5.line"))]
+        [Step(id: 1, object: .folder, title: L10n.t("first.step1.title"), line: L10n.t("first.step1.line")),
+         Step(id: 2, object: .phone, title: L10n.t("first.step2.title"), line: L10n.t("first.step2.line")),
+         Step(id: 3, object: .tag, title: L10n.t("first.step3.title"), line: L10n.t("first.step3.line")),
+         Step(id: 4, object: .thread, title: L10n.t("first.step4.title"), line: L10n.t("first.step4.line")),
+         Step(id: 5, object: .stamp, title: L10n.t("first.step5.title"), line: L10n.t("first.step5.line"))]
     }
 
     var body: some View {
@@ -57,25 +90,24 @@ struct FirstImpressionView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     LogoText()
                         .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.top, 24)
+                        .padding(.top, Trace.Spacing.xxl)
                         .accessibilityAddTraits(.isHeader)
-                    VStack(spacing: Trace.Spacing.s) {
+                    VStack(alignment: .leading, spacing: ImpressionLayout.stepGap) {
                         ForEach(Array(steps.enumerated()), id: \.element.id) { index, step in
-                            tile(step, on: index < lit)
+                            stepView(step, on: index < lit)
                         }
                     }
-                    .padding(.top, 32)
+                    .padding(.top, Trace.Spacing.xxl + Trace.Spacing.s)
                     Text(L10n.t("first.tagline"))
                         .font(Trace.Fonts.tagline)
-                        .foregroundStyle(Trace.Colors.text)
+                        .foregroundStyle(Trace.Colors.ivory)
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(.top, 32)
-                        .padding(.horizontal, 4)
+                        .padding(.top, Trace.Spacing.xxl + Trace.Spacing.s)
                         .opacity(lineShown ? 1 : 0)
                         .offset(y: lineShown || noMotion ? 0 : 8)
                         .accessibilityHidden(!lineShown)
                 }
-                .padding(.horizontal, Trace.Spacing.l)
+                .padding(.horizontal, ImpressionLayout.margin)
                 .padding(.bottom, Trace.Spacing.l)
             }
             .scrollBounceBehavior(.basedOnSize)
@@ -95,7 +127,7 @@ struct FirstImpressionView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .opacity(noMotion && !faded ? 0 : 1)
-        .background(Trace.Colors.bg.ignoresSafeArea())
+        .background(DeskBackdrop())
         // A tap anywhere before the end shows the final state (the button keeps its own tap).
         .contentShape(Rectangle())
         .onTapGesture { showFinalState(animated: true) }
@@ -106,45 +138,29 @@ struct FirstImpressionView: View {
 
     // MARK: - A step
 
-    private func tile(_ step: Step, on: Bool) -> some View {
-        let text = step.light ? Theme.Colors.textPrimary : Trace.Colors.text
-        let secondary = step.light ? Theme.Colors.textSecondary : Trace.Colors.text2
-        let fill = step.light ? Theme.Colors.bgBase : Trace.Colors.surface
-        let iconFill = step.light ? Theme.Colors.bgRaised : Trace.Colors.surface2
-        let iconColor = step.light ? Theme.Colors.trace : Trace.Colors.benText
-        return HStack(alignment: .center, spacing: Trace.Spacing.l) {
-            RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous)
-                .fill(iconFill)
-                .frame(width: 52, height: 52)
-                .overlay(
-                    Image(systemName: step.symbol)
-                        .font(.system(size: 22, weight: .regular))
-                        .foregroundStyle(iconColor)
-                )
-                .accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(step.title)
-                    .font(Trace.Fonts.headline)
-                    .foregroundStyle(text)
-                    .fixedSize(horizontal: false, vertical: true)
+    /// « 01 » in the margin (level with the object's middle), the object (which carries the
+    /// step's name), its line below.
+    private func stepView(_ step: Step, on: Bool) -> some View {
+        HStack(alignment: .objectMiddle, spacing: 0) {
+            Text(verbatim: String(format: "%02d", step.id))
+                .font(Trace.Fonts.data)
+                .foregroundStyle(Trace.Colors.ivory2)
+                .frame(width: ImpressionLayout.numberColumn, alignment: .leading)
+                .alignmentGuide(.objectMiddle) { $0[VerticalAlignment.center] }
+            VStack(alignment: .leading, spacing: ImpressionLayout.lineGap) {
+                ImpressionObject(kind: step.object, title: step.title)
+                    .alignmentGuide(.objectMiddle) { $0[VerticalAlignment.center] }
                 Text(step.line)
                     .font(Trace.Fonts.callout)
-                    .foregroundStyle(secondary)
+                    .foregroundStyle(Trace.Colors.ivoryMid)
                     .fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: 0)
         }
-        .padding(Trace.Spacing.m)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: Trace.Radius.card, style: .continuous)
-                .fill(fill)
-                .overlay(RoundedRectangle(cornerRadius: Trace.Radius.card, style: .continuous)
-                    .strokeBorder(step.light ? Theme.Colors.line1 : Trace.Colors.line, lineWidth: 1))
-        )
         .opacity(on ? 1 : 0.3)
         .offset(y: on || noMotion ? 0 : 8)
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(verbatim: "\(step.title). \(step.line)"))
     }
 
     // MARK: - Timeline
@@ -185,6 +201,161 @@ struct FirstImpressionView: View {
         } else {
             update()
         }
+    }
+}
+
+// MARK: - The five objects
+
+/// The step number sits level with the middle of its object.
+private struct ObjectMiddle: AlignmentID {
+    static func defaultValue(in context: ViewDimensions) -> CGFloat { context[VerticalAlignment.center] }
+}
+
+extension VerticalAlignment {
+    fileprivate static var objectMiddle: VerticalAlignment { VerticalAlignment(ObjectMiddle.self) }
+}
+
+/// One object laid on the desk, carrying the step's name. Decorative for VoiceOver (the step reads
+/// its name and line). None is tilted (V4 §2: only prints and piece slips are); the stamp keeps its
+/// own stamp angle.
+private struct ImpressionObject: View {
+    let kind: FirstImpressionView.Object
+    let title: String
+
+    var body: some View {
+        switch kind {
+        case .folder: folder
+        case .phone: phone
+        case .tag: tag
+        case .thread: thread
+        case .stamp: stamp
+        }
+    }
+
+    /// 1 · A kraft folder: its tab, a sheet showing over the top edge, the name on the cover.
+    private var folder: some View {
+        let cover = UnevenRoundedRectangle(bottomLeadingRadius: ImpressionLayout.folderRadius,
+                                          bottomTrailingRadius: ImpressionLayout.folderRadius,
+                                          style: .continuous)
+        return VStack(alignment: .leading, spacing: 0) {
+            UnevenRoundedRectangle(topLeadingRadius: 5, topTrailingRadius: 5, style: .continuous)
+                .fill(Trace.Colors.kraft)
+                .frame(width: ImpressionLayout.folderTab.width, height: ImpressionLayout.folderTab.height)
+            Text(title)
+                .font(ImpressionLayout.objectTitle)
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, Trace.Spacing.l)
+                .padding(.vertical, Trace.Spacing.m)
+                .frame(minWidth: ImpressionLayout.folderMinWidth, alignment: .leading)
+                .background(cover.fill(Trace.Colors.kraft))
+                // The sheet inside, showing above the cover on the right.
+                .background(alignment: .topTrailing) {
+                    Rectangle()
+                        .fill(Trace.Colors.paper)
+                        .frame(width: 64, height: 12)
+                        .offset(x: -Trace.Spacing.s, y: -5)
+                }
+        }
+        .compositingGroup()
+        .shadow(color: Trace.Shadow.slip.color, radius: Trace.Shadow.slip.radius, y: Trace.Shadow.slip.y)
+    }
+
+    /// 2 · The seized phone, light (the phone's own colours): a message received, and the name as
+    /// the message sent.
+    private var phone: some View {
+        let card = RoundedRectangle(cornerRadius: ImpressionLayout.phoneRadius, style: .continuous)
+        return VStack(alignment: .leading, spacing: 6) {
+            RoundedRectangle(cornerRadius: ImpressionLayout.bubbleRadius, style: .continuous)
+                .fill(Theme.Colors.bgBubbleIn)
+                .frame(width: 64, height: 16)
+            Text(title)
+                .font(ImpressionLayout.objectTitle)
+                .foregroundStyle(Theme.Colors.bubbleOutText)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, Trace.Spacing.m)
+                .padding(.vertical, 7)
+                .background(RoundedRectangle(cornerRadius: ImpressionLayout.bubbleRadius, style: .continuous)
+                    .fill(Theme.Colors.bubbleOut))
+                .padding(.leading, Trace.Spacing.xxl)
+        }
+        .padding(Trace.Spacing.s + 2)
+        .padding(.top, Trace.Spacing.s)
+        .background(card.fill(Theme.Colors.bgBase))
+        // The earpiece, centred on the card without widening it.
+        .overlay(alignment: .top) {
+            Capsule()
+                .fill(Theme.Colors.bgElevated)
+                .frame(width: 28, height: 4)
+                .padding(.top, 7)
+        }
+        .overlay(card.strokeBorder(Theme.Colors.line2, lineWidth: 1))
+        .shadow(color: Trace.Shadow.print.color, radius: Trace.Shadow.print.radius, y: Trace.Shadow.print.y)
+    }
+
+    /// 3 · The kraft « Verser au dossier » tag (§3 EvidenceTag): 32 pt, a white eyelet.
+    private var tag: some View {
+        let shape = UnevenRoundedRectangle(topLeadingRadius: 4, bottomLeadingRadius: 4,
+                                           bottomTrailingRadius: 16, topTrailingRadius: 16, style: .continuous)
+        return HStack(spacing: Trace.Spacing.s) {
+            Circle()
+                .fill(Trace.Colors.photoBorder)
+                .overlay(Circle().strokeBorder(Trace.Colors.kraftDark, lineWidth: 1))
+                .frame(width: ImpressionLayout.eyelet, height: ImpressionLayout.eyelet)
+            Text(title)
+                .font(ImpressionLayout.tagTitle)
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .padding(.leading, Trace.Spacing.m - 2)
+        .padding(.trailing, Trace.Spacing.l)
+        .padding(.vertical, 6)
+        .frame(minHeight: ImpressionLayout.tagHeight)
+        .background(shape.fill(Trace.Colors.kraft))
+        .shadow(color: Trace.Shadow.slip.color, radius: Trace.Shadow.slip.radius, y: Trace.Shadow.slip.y)
+    }
+
+    /// 4 · Two paper notes pinned in red, a red thread from pin to pin, the name under the thread.
+    private var thread: some View {
+        HStack(alignment: .top, spacing: Trace.Spacing.m) {
+            node
+            Text(title)
+                .font(ImpressionLayout.objectTitle)
+                .foregroundStyle(Trace.Colors.ivory)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.top, ImpressionLayout.pin + Trace.Spacing.xs)
+            node
+        }
+        .background(alignment: .top) {
+            Rectangle()
+                .fill(Trace.Colors.redOnDesk)
+                .frame(height: ImpressionLayout.thread)
+                .padding(.horizontal, ImpressionLayout.node.width / 2)
+                .padding(.top, (ImpressionLayout.pin - ImpressionLayout.thread) / 2)
+        }
+    }
+
+    private var node: some View {
+        ZStack(alignment: .top) {
+            Rectangle()
+                .fill(Trace.Colors.paperCard)
+                .frame(width: ImpressionLayout.node.width, height: ImpressionLayout.node.height)
+                .shadow(color: Trace.Shadow.slip.color, radius: 3, y: 2)
+                .padding(.top, ImpressionLayout.pin / 2)
+            Pin(color: Trace.Colors.red, size: ImpressionLayout.pin)
+        }
+    }
+
+    /// 5 · The stamp « CONCLURE », inked on a paper slip.
+    private var stamp: some View {
+        StampMark(text: title, color: Trace.Colors.red, size: ImpressionLayout.stampSize, angle: ImpressionLayout.stampAngle)
+            .padding(.horizontal, Trace.Spacing.l)
+            .padding(.vertical, Trace.Spacing.m + 2)
+            .background(
+                Rectangle()
+                    .fill(Trace.Colors.paper)
+                    .shadow(color: Trace.Shadow.slip.color, radius: Trace.Shadow.slip.radius, y: Trace.Shadow.slip.y)
+            )
     }
 }
 #endif
