@@ -514,7 +514,7 @@ struct ResultView: View {
                 Text(verbatim: "#" + shownNumber(caseFile.number))
                     .font(Trace.Fonts.data)
                     .foregroundStyle(Trace.Colors.benText)
-                Text(caseFile.title)
+                Text(caseFile.title.capitalizedFirst)
                     .font(Trace.Fonts.title)
                     .foregroundStyle(Trace.Colors.text)
                     .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
