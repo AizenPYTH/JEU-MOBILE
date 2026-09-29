@@ -13,9 +13,6 @@ public struct GameRules: Codable, Sendable, Equatable {
     public var scoring: Scoring
     /// Challenge levels (same case, less time). Optional: defaults in `challengeRules`.
     public var challenges: [ChallengeRule]? = nil
-    /// Pieces the file must hold before « Conclure l'enquête » is offered (the time running out
-    /// always leads to the conclusion). Absent: no minimum.
-    public var minPiecesToConclude: Int? = nil
 
     /// Seconds removed from the timer by each action — reading, searching and analysing cost time.
     public struct TimeCosts: Codable, Sendable, Equatable {

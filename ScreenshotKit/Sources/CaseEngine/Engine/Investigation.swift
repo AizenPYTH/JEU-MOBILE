@@ -589,17 +589,6 @@ public final class Investigation {
         connections.removeAll { $0.id == connectionID }
     }
 
-    // MARK: - Concluding
-
-    /// Pieces the file needs before the conclusion is offered (`rules.json`, UX V3 §4: 3).
-    public var piecesNeededToConclude: Int { rules.minPiecesToConclude ?? 0 }
-
-    /// The conclusion is offered once the file holds enough pieces — or when the time is up,
-    /// whatever the file holds.
-    public var canConclude: Bool {
-        phase == .accusing || (phase == .investigating && notebook.count >= piecesNeededToConclude)
-    }
-
     public func linkedEntries(for suspect: SuspectID) -> [NotebookEntry] {
         notebook.filter { $0.linkedTo == suspect }
     }

@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import CaseEngine
 
-@Suite("Connections and the conclusion threshold")
+@Suite("Connections")
 struct ConnectionTests {
     private let e1 = ItemRef(.message, "e1")
     private let p1 = ItemRef(.photoInfo, "p1")
@@ -57,27 +57,13 @@ struct ConnectionTests {
         #expect(Investigation(restoring: old, caseFile: Fixtures.caseFile, rules: Fixtures.rules, clock: clock)?.connections == [])
     }
 
-    @Test func theConclusionWaitsForThreePiecesUnlessTimeIsUp() {
-        var rules = Fixtures.rules
-        rules.minPiecesToConclude = 3
-        let clock = ManualClock(start: Date(timeIntervalSince1970: 1_000_000))
-        let game = Investigation(caseFile: Fixtures.caseFile, rules: rules, clock: clock)
+    /// The redesign changes the presentation only: connections are never a condition of the
+    /// conclusion and never change the verdict.
+    @Test func connectionsNeverGateTheConclusion() {
+        let (game, _) = Fixtures.investigation()
         game.start()
-        #expect(game.piecesNeededToConclude == 3)
-        game.togglePin(e1)
-        game.togglePin(p1)
-        #expect(!game.canConclude)
-        game.togglePin(l3)
-        #expect(game.canConclude)
-        game.togglePin(l3)
-        for _ in 0..<(400 * 2) { clock.advance(by: 0.5); game.tick() }
-        #expect(game.phase == .accusing && game.canConclude, "time is up: the conclusion is always offered")
-    }
-
-    @Test func theShippedRulesAskForThreePieces() throws {
-        let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-            .appendingPathComponent("Sources/CaseLibrary/Resources/Rules/rules.json")
-        let rules = try JSONDecoder().decode(GameRules.self, from: Data(contentsOf: url))
-        #expect(rules.minPiecesToConclude == 3)
+        game.requestAccusation()
+        #expect(game.phase == .accusing, "an empty file can still be concluded, as before")
+        #expect(game.accuse("s_emma") != nil)
     }
 }
