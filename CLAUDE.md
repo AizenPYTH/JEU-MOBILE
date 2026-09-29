@@ -46,12 +46,13 @@ docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
 docs/archive/             ARCHIVÉ / LEGACY — anciens prompts de cinématiques, ancien audit (hors production)
 docs/CASE_PRESENTATION.md Présentation d'une affaire par son dossier (aucune cinématique)
 docs/appstore/            Fiche App Store (brouillon) et politique de confidentialité (à publier)
-docs/design_ux_v3/        Handoff UX V3 « Digital Investigation Interface » (NE PAS MODIFIER) — design en vigueur
+docs/design_v4/           Handoff V4 « Dossier lisible » (NE PAS MODIFIER) — couche visuelle en vigueur
+docs/design_ux_v3/        Handoff UX V3 « Digital Investigation Interface » (NE PAS MODIFIER) — flux, états, règles UX
 docs/design_final/        Handoff FINAL V3.0 (NE PAS MODIFIER) — parcours, écrans 01–15 (visuel remplacé par UX V3)
 docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — tokens du téléphone
 docs/brand/               Logo CONCLUDE : ENQUÊTES (source de l'icône)
 docs/design_trace/        Handoff TRACE v2 « dossier d'enquête » (NE PAS MODIFIER) — tout ce qui est hors du téléphone
-docs/design_story/        Handoff « Mode Histoire » (NE PAS MODIFIER) — Bureau à 3 modes, écrans h01–h19, 3D, décors, PNJ
+docs/design_story/        Handoff « Mode Histoire » (NE PAS MODIFIER) — Bureau à 3 modes, écrans h01–h19, décors, PNJ (3D abandonnée)
 docs/game_modes/          ALIBI.md, STORY.md (mode Histoire) ; docs/story/ : architecture, personnages, scènes,
                           progression, sauvegarde du mode Histoire (comment ajouter chapitre, scène, PNJ, décor…)
 DESIGN_INTEGRATION.md     État de l'intégration du handoff + conflits à trancher
@@ -78,15 +79,17 @@ ScreenshotKit/            Package Swift contenant tout le jeu
                           pause, versement), InvestigationView (Carnet + Indice), EndScreens (09 conclusion, 10
                           vérification, 11 rapport, 12 affectation), DeskScreens (Bureau, Archives, Enquêteur),
                           MetaScreens (niveaux, archive, Paramètres)
-    Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (toucher → « + Verser au dossier », appui long =
-                          raccourci), FilingSheet (pièce versée), CoachBubble (conseils),
-                          Dossier (cartes pièce / suspect, connexions, chronologie), Controls (contrôles du téléphone)
-    Story/                Mode Histoire (SceneKit) : StoryCoordinator, StageKit (décors, personnages, caméras),
-                          StoryStageView, scène (sous-titres, choix), écrans h01–h19, StoryRootView
-    Theme/, Support/      Tokens du téléphone (Theme.swift), du BEN (TraceDesign.swift + ConcludeKit.swift : couleurs,
-                          polices, boutons, badges, segments ; StoryDesign.swift), L10n, dates, ArtLibrary (images livrées)
+    Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (toucher → étiquette « Verser au dossier », appui
+                          long = raccourci), FilingSheet (fiche « pièce versée »), CoachBubble (conseils),
+                          Dossier (intercalaires, fiches suspect, tirages, fil rouge, chronologie lignée), Controls
+    Story/                Mode Histoire en 2D (aucune 3D) : StoryCoordinator, scène en compte rendu d'entretien
+                          (StoryScenePlayer), écrans h01–h19 sur papier, StoryRootView
+    Theme/, Support/      Tokens du téléphone (Theme.swift), du dossier V4 (TraceDesign.swift + ConcludeKit.swift :
+                          bureau, kraft, papier, encre, tampons, tirages, boutons ; StoryDesign.swift), L10n, dates,
+                          ArtLibrary (images livrées)
     Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py, sons du mode
-                          Histoire : gen_story_sounds.py), Fonts/ (Newsreader, IBM Plex Sans, IBM Plex Mono — OFL)
+                          Histoire : gen_story_sounds.py), Fonts/ (Newsreader, IBM Plex Sans, IBM Plex Mono,
+                          Caveat — OFL)
   Sources/StoryEngine/    Mode Histoire, moteur en Swift pur (Foundation) : personnage, décors, scènes, campagne,
                           StoryDirector (déterministe), validateur, sauvegarde versionnée + migrations
   Sources/StoryLibrary/   Données de l'histoire : Resources/Story/{characters,npcs,locations,campaign}.json + scenes/
@@ -124,39 +127,45 @@ scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d
    affaire est écrit dans la langue du téléphone saisi.
 9. Pas de dépendance tierce sans accord du porteur de projet.
 
-## Design — « Digital Investigation Interface » (handoff UX V3)
+## Design — « Dossier lisible » (handoff V4, sur les flux de l'UX V3)
 
-- Source de vérité : `docs/design_ux_v3/HANDOFF_UX_V3.md` (lecture seule ; les maquettes HTML citées n'ont pas été
-  livrées). Elle remplace les règles VISUELLES de `docs/design_final` §G, `docs/design_story` DESIGN_SYSTEM §2–4 et de
-  `docs/design_trace` / `docs/design` (papier, kraft, rotations, textures, Caveat, Geist). Flux, données, vocabulaire et
-  contenu du téléphone sont conservés. État et écarts : `DESIGN_INTEGRATION.md`.
+- Sources de vérité : `docs/design_v4/HANDOFF_V4_DOSSIER.md` pour le **visuel** (tokens, composants, rendu des écrans)
+  et `docs/design_ux_v3/HANDOFF_UX_V3.md` pour la **navigation, les flux, les états, l'onboarding et les règles UX**
+  (lecture seule ; les maquettes HTML citées n'ont pas été livrées). État et écarts : `DESIGN_INTEGRATION.md`.
 - **Le redesign ne change aucune règle de jeu** (décision du porteur de projet) : présentation et compréhension
   seulement. Conclure reste possible à tout moment (aucun minimum de pièces ; dossier vide → confirmation) ; les
-  Connexions sont une aide (jamais requises, jamais notées ni jugées). Toute règle demandée par une maquette est
+  Connexions (fils) sont une aide (jamais requises, jamais notées ni jugées). Toute règle demandée par une maquette est
   vérifiée contre `rules.json`, le moteur, les affaires, CaseLint et les tests, puis signalée, jamais imposée.
-- Le BEN (hors téléphone) : `Trace.*` (TraceDesign.swift, ConcludeKit.swift) — fond bleu-graphite plat (`bg`,
-  `surface…`, `line`, `text/text2/text3`, `ben`, `benText`, `critical`, `success`, `warning`), aucune texture, rotation
-  ni ombre. Trois familles : Newsreader (titres), IBM Plex Sans (interface), IBM Plex Mono (données : heures, numéros,
-  chrono). Capitales seulement pour les en-têtes de section. Un seul bouton principal (ben) par écran.
-- Le téléphone : `Theme.*` (Theme.swift) — clair, police système, couleurs d'app standard. La barre d'enquête sombre
-  (« ‹ Dossier » · chrono · Carnet) reste visible en bas pendant toute l'enquête.
+- Le dossier (hors téléphone) : `Trace.*` (TraceDesign.swift, ConcludeKit.swift) — bureau en bois sombre (`desk`, halo
+  de lampe, `deskDeep` pour l'accusation, `bar`), chemises `kraft`, feuilles `paper` / `paperCard`, encre `ink` /
+  `ink2`, `ivory` sur le bureau, `red` (fil, punaises, tampons, mission), `green`, `pen`. Rotations ≤ 1,5°, jamais sur
+  un texte long ; « Contraste augmenté » retire rotations et textures. Polices : Newsreader (titres, noms), IBM Plex
+  Sans (interface, lecture), IBM Plex Mono (numéros, heures, chrono, libellés en capitales), Caveat (notes du joueur,
+  de Lacaze, verbes des fils, états vides — jamais une information indispensable, toujours doublée pour VoiceOver).
+  Un seul bouton principal par écran (ivoire sur le bureau, encre sur papier).
+- Le téléphone : `Theme.*` (Theme.swift) — clair, police système, couleurs d'app standard, rebord kraft autour. On y
+  entre par le **scellé** (une fois par affaire, puis directement). La barre d'enquête (« ‹ Dossier » · chrono ·
+  Carnet) reste visible en bas pendant toute l'enquête.
 - Premier lancement : Lancement → Première impression → Qui enquête ? (Élise Morel / Vincent Delmas) → Dossier #001 →
-  téléphone, avec 2 conseils (« Commencez par les messages. », « Touchez un message pour le verser au dossier. ») et
-  « Retrouvez-la dans le Carnet. » à la 1ʳᵉ pièce, une fois chacun (réinitialisables dans Paramètres). La couche
-  carrière (matricule, rang) n'apparaît qu'après l'écran « Affectation » (après #001). Lancements suivants : Bureau
-  ([Enquêtes | Alibi | Histoire], carte de l'affaire en cours ou suivante ; Alibi/Histoire après l'affectation).
+  scellé → téléphone, avec 2 conseils (« Commencez par les messages. », « Touchez un message pour le verser au
+  dossier. ») et « Retrouvez-la dans le Carnet. » à la 1ʳᵉ pièce, une fois chacun (réinitialisables dans Paramètres).
+  La couche carrière (matricule, rang) n'apparaît qu'après la lettre d'affectation (après #001). Lancements suivants :
+  Bureau (chemises à onglets Enquêtes | Alibi | Histoire ; Alibi/Histoire après l'affectation).
 - **Aucune cinématique, aucune vidéo, jamais** (décision définitive du porteur de projet) : l'affaire est
-  présentée par son dossier (docs/CASE_PRESENTATION.md : contexte, mission, personnes, `firstLead`) et une
-  courte ouverture (< 1 s, passable). `introScene` et le champ `video` des scènes n'existent plus ;
-  `NoCinematicTests` refuse tout fichier vidéo, lecteur vidéo ou clé de données qui en demanderait.
-- Verser au dossier : un toucher sur n'importe quel élément du téléphone propose « + Verser au dossier » (proposé
-  partout, jamais un indice) ; l'appui long verse directement. Carnet en 4 onglets : Pièces · Suspects · Chronologie ·
-  Connexions. Jamais « Épingler », « Accuser », « Recrue », « Stagiaire » (`LocalizationTests.bannedWordsAreGone`).
+  présentée par son dossier (docs/CASE_PRESENTATION.md : contexte, mission, personnes, `firstLead`) et le scellé.
+  `introScene` et le champ `video` des scènes n'existent plus ; `NoCinematicTests` refuse tout fichier vidéo, lecteur
+  vidéo ou clé de données qui en demanderait.
+- **Aucune 3D** (décision du porteur de projet, 29 septembre 2026) : le mode Histoire n'utilise plus SceneKit ; ses
+  scènes sont des comptes rendus d'entretien sur papier (tirages à initiales, réplique tapée, choix sur fiches).
+- Verser au dossier : un toucher sur n'importe quel élément du téléphone propose l'étiquette « Verser au dossier »
+  (proposée partout, jamais un indice) ; l'appui long verse directement. Carnet à 4 intercalaires : Suspects · Pièces ·
+  Chronologie · Fils. Le tampon ÉLÉMENT CLÉ ne vient que des fils « contredit » du joueur, jamais des données de
+  l'affaire. Jamais « Épingler », « Accuser », « Recrue », « Stagiaire » (`LocalizationTests.bannedWordsAreGone`).
 - Vocabulaire : Verser au dossier, L'accuse / Le disculpe, Relier, Conclure l'enquête, « Qui est responsable ? »,
   Rapport, Classer le dossier, Bureau, Archives, Enquêteur. Pièce n° = ordre de versement.
 - Conclure = maintenir 1,6 s « Maintenir : {Prénom} est responsable » (VoiceOver : confirmation) ; vérification
-  1,8 s ; rapport. Non résolu : « Reprendre l'enquête » (chrono plein, pièces gardées) ; la solution n'est montrée que
-  sur demande. Le seul tampon de l'interface : RÉSOLU sur la carte de l'affaire au Bureau.
+  1,8 s tapée à la machine puis tampon ; rapport sur papier. Non résolu : « Reprendre l'enquête » (chrono plein,
+  pièces gardées) ; la solution n'est montrée que sur demande.
   Note finale = 60 · bon suspect + 25 · trouvées/total + 10 · temps restant/durée + 5 · pièces
   pertinentes/pièces − coût des indices (valeurs dans `rules.json` et l'affaire).
 
@@ -233,7 +242,9 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
 - [x] Handoff UX V3 (docs/design_ux_v3) : BEN plat sombre, téléphone clair, barre d'enquête, « + Verser au dossier »,
       Carnet 4 onglets + Connexions, Bureau à segments, dossier, conclusion / vérification / rapport, première
       impression ; cinématiques supprimées définitivement ; aucune règle de jeu modifiée
-- [ ] Mode HISTOIRE : modèles 3D / animations / voix (docs/story/SCENE_SYSTEM.md), chapitres 03–05
+- [x] Handoff V4 « Dossier lisible » (docs/design_v4) : bureau en bois, chemises kraft, feuilles, tirages, scellé,
+      Carnet à intercalaires, fil rouge, tampons ; mode Histoire sans 3D (SceneKit retiré, scènes sur papier)
+- [ ] Mode HISTOIRE : voix, musiques (docs/story/SCENE_SYSTEM.md), chapitres 03–05
 - [ ] Affaires #006–#015 (6 suspects, 8–10 min), vérifications ALIBI #004+
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)
 - [ ] Monnaie / tickets d'indices, iCloud

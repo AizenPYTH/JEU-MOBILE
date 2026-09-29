@@ -7,11 +7,16 @@
 
 **Pas encore prêt pour publication sur l'App Store.** Le jeu est complet, compile, et passe tous ses tests
 automatiques (Linux + parcours complets sur simulateur). Il reste des **blocages externes** (URL de politique de
-confidentialité et d'assistance, captures d'écran, nom définitif) et un **blocage qualité** : le redesign UX V3,
-intégré aujourd'hui, n'a encore été testé ni sur un iPhone réel ni par de vrais joueurs (§8 du handoff : 5 joueurs
+confidentialité et d'assistance, captures d'écran, nom définitif) et un **blocage qualité** : le design V4
+« Dossier lisible » (sur les flux UX V3), intégré aujourd'hui, n'a encore été testé ni sur un iPhone réel ni par de vrais joueurs (§8 du handoff : 5 joueurs
 sur #001). Un build TestFlight est la prochaine étape pour ce test.
 
 ## Ce qui a changé dans cette passe
+
+0. **Design V4 « Dossier lisible »** (`docs/design_v4`, détail : `DESIGN_INTEGRATION.md`) : bureau en bois sombre,
+   chemises kraft, feuilles, tirages agrafés, scellé, Carnet à intercalaires, fil rouge, tampons ; téléphone clair
+   inchangé. Visuel seulement, aucune règle de jeu modifiée. **Mode Histoire sans 3D** : SceneKit retiré (décision du
+   porteur de projet), scènes présentées en compte rendu d'entretien sur papier.
 
 1. **Cinématiques supprimées définitivement.** Aucune vidéo, aucun lecteur vidéo, aucune séquence d'ouverture :
    `introScene` (modèle, validateur, CaseLint, JSON, générateurs) et le champ `video` des scènes HISTOIRE retirés.
@@ -53,7 +58,7 @@ du rapport en capitales.
 | Nom sous l'icône « Conclude » | ✓ |
 | Version `0.2.0` / build CI | ✓ — ☐ passer à 1.0.0 pour la sortie |
 | iOS 17, iPhone seul, portrait, plein écran | ✓ |
-| Icône 1024, écran de lancement (#0B0E13 + logo) | ✓ |
+| Icône 1024, écran de lancement (#1A140F + logo) | ✓ |
 | Chiffrement non exempté : NON | ✓ |
 | Manifeste de confidentialité (aucun suivi, aucune donnée collectée, UserDefaults CA92.1) | ✓ |
 | Autorisations (`NS…UsageDescription`) | ✓ aucune — et aucune n'est utilisée |
@@ -66,7 +71,7 @@ du rapport en capitales.
 
 1. **URL de politique de confidentialité** : publier `docs/appstore/PRIVACY_POLICY.md` (e-mail de contact à renseigner). *(externe)*
 2. **URL d'assistance** : une page de contact. *(externe)*
-3. **Captures d'écran iPhone 6,9"** (3 à 10) du design UX V3. *(à produire — les captures CI servent de base)*
+3. **Captures d'écran iPhone 6,9"** (3 à 10) du design V4. *(à produire — les captures CI servent de base)*
 4. **Nom App Store** : « CONCLUDE : ENQUÊTES » (logo) ou « CONCLUE : ENQUÊTES » (brief) — **à trancher**, puis
    vérifier la disponibilité. *(décision)*
 5. **Test sur iPhone réel + test joueurs du redesign** (handoff §8 : premier versement < 90 s, personne ne demande

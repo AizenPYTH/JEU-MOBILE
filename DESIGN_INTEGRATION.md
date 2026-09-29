@@ -1,9 +1,60 @@
-# Intégration des handoffs design (v1.0 → TRACE v2 → final V3 → UX V3)
+# Intégration des handoffs design (v1.0 → TRACE v2 → final V3 → UX V3 → V4 « Dossier lisible »)
 
 Sources : `docs/design_final/` (V3, parcours), `docs/design_trace/`, `docs/design/` (non modifiés). Ce document dit ce qui est intégré, ce qui reste à faire, et
 les points où le handoff contredit le brief ou le moteur — **à trancher par le porteur de projet**.
 
-## Handoff UX V3 « Digital Investigation Interface » (29 septembre 2026) — design en vigueur
+## Handoff V4 « Dossier lisible » (29 septembre 2026) — design en vigueur
+
+Source : `docs/design_v4/HANDOFF_V4_DOSSIER.md` (+ `05_PERSONNAGES_phase2.md`). **La maquette citée
+(« CONCLUDE - Refonte V4 Dossier.dc.html », écrans 01–10) n'était pas dans l'archive** (2 fichiers .md seulement) :
+l'intégration suit le texte. La V4 remplace **uniquement la couche visuelle** de l'UX V3 : navigation, flux, états,
+premier lancement, conseils, données et règles de l'UX V3 restent en vigueur (section suivante).
+
+### Intégré
+- Tokens §2 dans `TraceDesign.swift` / `ConcludeKit.swift` : bureau en bois sombre (desk, halo de lampe, deskDeep),
+  kraft, papier, encre, rouge (papier / bureau), vert, stylo, agrafes, intercalaires ; Newsreader (titres, noms),
+  IBM Plex Sans (interface), IBM Plex Mono (numéros, heures, chrono), **Caveat revient** pour les notes du joueur, de
+  Lacaze, le texte des fils et les états vides (§139), jamais pour une information indispensable (équivalent VoiceOver).
+  Rotations plafonnées à ±1,5° ; aucune rotation ni texture avec « Contraste augmenté ».
+- Composants §3 : chemises kraft à onglets (FolderTabs, CaseFolder, pastilles des autres affaires), feuille de dossier,
+  tirages agrafés (PhotoPrint, IDPhoto), étiquette « Verser au dossier » (EvidenceTag), fiche « pièce versée »
+  (EvidenceSlip, tampon VERSÉE), scellé (EvidenceSeal), intercalaires du Carnet, SuspectSheet, EvidencePrint sur la
+  planche kraft, fil rouge (RedThread), chronologie lignée, tampons PNG (CONFIDENTIEL, ÉLÉMENT CLÉ, RÉSOLU…).
+- Écrans §4 : 01 Bureau (chemises Enquêtes | Alibi | Histoire), 02 Dossier (chemise plein écran, feuille, « Examiner
+  le téléphone · Pièce 01 »), 03 Scellé (une fois par affaire, puis directement le téléphone), 04 téléphone avec
+  rebord kraft et barre d'enquête, 05 pièce versée, 06–09 Carnet, 10 conclusion sur le bureau profond (tirages
+  punaisés), vérification tapée + tampon, rapport sur papier avec visa, lettre d'affectation. Re-skin §6 : première
+  impression, Qui enquête ?, Alibi (chemise, verdict, rapport), Histoire, Profil, Archives, Paramètres, crédits.
+- Écran de lancement système : fond #1A140F (LaunchBackground), sans saut vers l'écran 01.
+
+### Écarts assumés (décisions)
+- **Aucune règle de jeu modifiée** : comme pour l'UX V3 (conclure toujours possible, aucun minimum de pièces, solution
+  sur demande, « Maintenir : {Prénom} est responsable » 1,6 s, vérification 1,8 s, conditions d'ouverture d'Alibi et
+  d'Histoire inchangées). Le bouton « Conclure » garde seulement son aspect contour / plein.
+- **Tampon ÉLÉMENT CLÉ** : posé uniquement sur les pièces que **le joueur** a reliées par un fil « contredit »
+  (jamais d'après les données de l'affaire, qui diraient au joueur ce qui compte).
+- « L'accuse / Le disculpe » et les pastilles de suspect restent sur chaque tirage (V3, tests d'interface) ; ils sont
+  sur la fiche, jamais inclinés.
+- Pas de grain sur les pages lignées et les fiches à texte long (lisibilité) ; fibres kraft sur les planches seulement.
+- Onglet « Fils » au Carnet (texte des états vides V3 conservé, « Aucune connexion »).
+- Première impression : la ligne du logo en Mono (UX V3 §6-00) est gardée.
+- Couleur d'avertissement lisible sur papier (#8A5A00 / #8A5A12) ajoutée pour le chrono sur étiquette papier (la
+  couleur V3 est illisible sur papier).
+
+### Mode Histoire sans 3D (décision du porteur de projet, 29 septembre 2026)
+« Enlève les personnages en 3D, c'est très moche, on laisse tomber » : **SceneKit est retiré du jeu** (StageKit,
+StoryStageView, rendus de portrait, studio « Voir en 3D », réglages qualité / profondeur / caméra supprimés). Les
+données (scènes, caméras, `keyframe`, animations) sont conservées dans StoryLibrary sans être jouées.
+- Scène (h11/h12) = **compte rendu d'entretien** sur le bureau : lieu sur une bande agrafée, personnes présentes en
+  tirages d'identité à initiales (celui qui parle en pleine opacité, punaise rouge), réplique tapée sur une feuille,
+  choix sur fiches papier. Toucher = compléter / avancer ; appui long = journal. Auto, journal, passer, reprise à la
+  réplique exacte : inchangés.
+- Création de l'enquêteur en **2 étapes** (identité, puis fiche du BEN à signer, maintien 1,2 s) ; l'apparence du
+  modèle choisi (Élise / Vincent) est enregistrée telle quelle.
+- Hub, chapitre, dossier, rapport, état de service, récompense, profil, carrière, mon bureau (vue de dessus, objets
+  en fiches punaisées), réglages : papier V4. Note de Lacaze en Caveat (V4 §2 l'autorise explicitement).
+
+## Handoff UX V3 « Digital Investigation Interface » (29 septembre 2026) — flux et règles en vigueur (visuel remplacé par la V4)
 
 Source : `docs/design_ux_v3/HANDOFF_UX_V3.md`. **Les maquettes HTML citées (« CONCLUDE - Refonte UX V3.dc.html »,
 écrans 00–13) n'étaient pas dans l'archive** : l'intégration suit le texte. Elle remplace le visuel papier (V3 final
@@ -69,8 +120,8 @@ technique : `docs/story/`.
   le téléphone, CUT / DISSOLVE / FADE, caméras du décor uniquement).
 
 ### Écarts assumés (décisions)
-- **3D** : SceneKit (natif, aucune dépendance), personnages et décors construits en formes simples (réalisme
-  stylisé, matériaux mats) en attendant les modèles du manifeste d'assets. Aucune vidéo, aucune IA générative.
+- **3D** : ~~SceneKit~~ **retiré le 29 septembre 2026** (décision du porteur de projet, voir « Mode Histoire sans
+  3D » plus haut) : scènes présentées en compte rendu papier. Aucune vidéo, aucune IA générative.
 - **Note de Lacaze (h17)** : le handoff la met en Caveat ; la règle du projet réserve l'écriture manuscrite au
   joueur. Elle est en Newsreader italique. À trancher si besoin.
 - **Seuils de rang 1 / 20 / 30 + chapitre** : appliqués au joueur qui a créé son enquêteur (carrière commune,
@@ -85,13 +136,10 @@ technique : `docs/story/`.
   #001) ; l'état verrouillé existe dans la chemise mais ne se voit pas en pratique.
 - **Colonne ALIBI « DÉCLARÉ / TRACÉ »** : « RELEVÉ » à la place de « TRACÉ » (mot interdit par les tests de
   vocabulaire hérités de TRACE).
-- **Qualité 3D** : Auto / Économie / Haute règlent l'anticrénelage, les ombres et la profondeur de champ ; pas de
-  détection automatique de la mémoire de l'appareil ni du passage en mode texte sous 24 fps.
 
 ### Reste à faire (Histoire)
-- Modèles 3D, animations faciales, voix, musiques, tampons NOUVEAU / CLASSÉ en PNG (voir
-  docs/story/SCENE_SYSTEM.md › Assets encore nécessaires).
-- « Montrer une pièce » (EvidenceChip) pendant un dialogue ; mode « Lire en texte » en cas d'échec 3D.
+- Voix, musiques, tampons NOUVEAU / CLASSÉ en PNG (voir docs/story/SCENE_SYSTEM.md). Plus de modèles 3D.
+- « Montrer une pièce » (EvidenceChip) pendant un dialogue.
 - Chapitres 03 à 05, PNJ d'affaire en salle d'audition.
 
 ## V3 — Handoff final « CONCLUDE » (26 septembre 2026)
