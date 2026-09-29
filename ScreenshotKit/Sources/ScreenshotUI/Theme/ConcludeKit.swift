@@ -169,7 +169,7 @@ struct SectionHeader: View {
 /// Hold to confirm (§5 ActionButton « maintien »): `surface2`, filled in `ben` from left to right
 /// while held (linear); let go early and it empties in 250 ms. Light haptic at the start, rigid at
 /// the end. VoiceOver: a double tap asks for confirmation instead (`accessibilityConfirm`).
-struct HoldToConfirmButton: View {
+struct BenHoldButton: View {
     let title: String
     var seconds: Double = Trace.Motion.holdToClose
     var enabled = true
