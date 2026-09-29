@@ -1,6 +1,28 @@
 # Mode Histoire — scènes, décors, caméras
 
-Référence : `docs/design_story/STORY_SCENES.md`, `ENVIRONMENTS.md`, `3D_DIRECTION.md`, `TRANSITIONS.md`, `DIALOGUE_UI.md`.
+Référence : `docs/design_story/STORY_SCENES.md`, `ENVIRONMENTS.md`, `TRANSITIONS.md`, `DIALOGUE_UI.md` (textes,
+rythme) ; `docs/design_v4/` (rendu).
+
+## Présentation à l'écran : un compte rendu d'entretien (pas de 3D)
+
+Décision du porteur de projet : les personnages et les décors 3D sont retirés. `StoryScenePlayer` présente la scène
+en 2D sur le bureau (fond `deskLamp`) :
+
+| Élément | Rendu |
+|---|---|
+| Lieu | bande de papier agrafée : « COMPTE RENDU D'ENTRETIEN » + `place` (Plex Mono, capitales) |
+| Présents | `participants` en photos d'identité à initiales (fond `photoBg`) ; un PNJ apparaît quand il est placé / entre en scène (ou dès qu'il parle). Celui qui parle : pleine opacité + punaise rouge ; les autres à 55 % |
+| Réplique | feuille de papier : nom en Plex Mono capitales (+ rôle à sa première réplique), texte en Newsreader 19–22 (taille des sous-titres), tapé à la vitesse choisie (instantané dans les tests) ; joueur en italique `ink2`, narrateur sans nom |
+| Réponses | fiches de papier (inclinaison ≤ 1°), A / B / C en Plex Mono, silence en italique ; la réponse choisie reçoit un filet rouge |
+| `wait` (silence, plan tenu) | la feuille affiche « … » ; la durée est celle des données, un toucher ne l'écourte pas |
+| `title` | carton de papier sur le bureau assombri |
+| `notification` | fiche de papier scotchée en haut (3 s) |
+| `camera`, `place`, `enter`, `move`, `face`, `animate`, `show` / `hide` | rien à l'écran (le directeur les joue toujours ; ils ne bloquent pas) |
+| `transition` fade | fondu vers le bois sombre |
+
+Un toucher n'importe où complète la réplique puis passe à la suite ; appui long : JOURNAL. AUTO, PASSER et le
+journal suivent les mêmes règles qu'avant (coordinateur). Identifiants de test : `story.scene`, `story.dialogue`,
+`story.choice.<id>`, `story.hud.{journal,auto,skip}`, `story.journal`, `story.notification`.
 
 ## Une scène (scenes/chapter_NN.json)
 
@@ -51,17 +73,15 @@ conséquence.
 Cadrages vérifiés par le test `shotsFrameTheirSubject` : sujet dans le cadre, personne contre l'objectif, CLOSE
 « épaules → tête » (85 mm à ~1,9 m), épaule du joueur au bord du cadre en plan par-dessus l'épaule.
 
-Une caméra : position, point visé, focale (28, 35, 50, 85 ou 100 mm ; le côté 36 mm du capteur est vertical, cadre
-portrait). Mouvements : `pushIn` (≤ 12 cm) et `track` (travelling lent) ; avec « Réduire les animations » ou
-« Réduire les mouvements de caméra », tout devient des coupes. Profondeur de champ sur les yeux de la personne du
-plan ou sur l'objet (réglable).
+Une caméra (donnée seulement) : position, point visé, focale (28, 35, 50, 85 ou 100 mm), mouvements `pushIn` et
+`track`. Les réglages « Qualité », « Profondeur de champ » et « Réduire les mouvements de caméra » ont été retirés
+avec la 3D.
 
-Rendu (StageKit.swift) : quatre murs, faux plafond, plinthes, accessoires du kit BEN (bureaux bois/métal, chaises,
-armoires, étagères, stores, radiateurs, cloisons vitrées, néons, fontaine, chariot, téléphone fixe, chemises, sachet
-de scellé, carte BEN, boîtes d'archives, micro, voyant d'enregistrement, écran mural, tableau en liège, coffre…),
-éclairage par préréglage (néon 4 000 K, lampe 2 700 K, sodium 2 100 K, salle d'audition 5 000 K), ombres douces
-selon la qualité, étalonnage (saturation −15 %, vignettage). Le rouge n'est jamais une lumière, sauf le voyant.
-Une seule pièce en mémoire : changer de décor décharge le précédent.
+Ces décors, caméras et cadrages restent dans les données et sont vérifiés par le validateur et les tests du moteur
+(les scènes gardent leur grammaire), mais **aucun n'est plus rendu** : le rendu SceneKit (StageKit, StoryStageView)
+a été supprimé avec la 3D. Seul le bureau du joueur (`ENV_BEN_OFFICE_PLAYER`) sert encore à l'écran : ses
+accessoires visibles au niveau courant (`level`, `maxLevel`, `requires`) avec `hotspot` — et les objets de
+récompense — deviennent les fiches de « Mon bureau ».
 
 ## Sons
 
@@ -70,21 +90,12 @@ ben_openspace, ben_archives, ben_interrogation ; steps_lino, door_glass, door_cl
 paper_slide, plastic_bag, neon_buzz, phone_distant, desk_phone_ring, keyboard, printer, coffee_machine. Un son absent
 est ignoré (la scène se joue quand même). Voix : champ `voice` prêt, aucune voix enregistrée livrée.
 
-## Assets encore nécessaires (à produire, voir docs/design_story/ASSET_MANIFEST.md)
+## Assets encore utiles
 
-Rien n'est inventé : tant qu'un asset manque, le rendu en formes simples le remplace.
+Aucun modèle 3D n'est plus attendu. Restent utiles :
 
-- **P0** — modèles 3D : bases joueur F/M (USDZ riggé, 45 k tris, blendshapes ARKit), tenues OUTFIT_01–04 A/B,
-  cheveux (12 coupes en cartes de cheveux), PNJ Lacaze + figurant ; décors ENV_BEN_CORRIDOR,
-  ENV_BEN_OFFICE_LACAZE, ENV_BEN_OFFICE_PLAYER_L01 (lightmaps) ; kit BEN (~40 pièces) ; props carte BEN, sachet
-  de scellé + téléphone (écran en texture de rendu), chemise kraft, chemise d'agent ; bibliothèque de 20 animations
-  corporelles, 12 expressions, 6 poses de mains ; couloir flou précalculé du studio (STUDIO_PLAYER_BG).
-- **P0** — 2D : tampons PNG `stamp_nouveau_*` et `stamp_classe_*` (même générateur que les tampons existants ;
-  en attendant, `StateStamp` les dessine).
-- **P0** — audio : voix de Lacaze pour le chapitre 01 (VO_LACAZE_C01, ~20 répliques), thème MUS_THEME_BEN.
-- **P1** — bureaux du joueur L02–L04, open space, archives, salle d'audition, salle de réunion en modèles ; Inès,
-  Aubrac, Colette ; objets de récompense ; thèmes tension / résolution ; voix des chapitres suivants.
-- **P2** — décors extérieurs (rue, appartement, café, parking, métro, entrepôt), PNJ d'affaires pour l'audition.
-
-Remplacer un rendu : charger le modèle dans `StageBuilder.prop` (par `kind`) ou `CharacterRig.make` (par variante)
-au lieu des formes simples ; les données (ancres, caméras, identifiants) ne changent pas.
+- **2D** : tampons PNG « NOUVEAU » et « CLASSÉ » (même générateur que les tampons existants ; en attendant, ils
+  sont dessinés en code) ; tampons de rang au féminin (« ENQUÊTRICE », « INSPECTRICE ») — sans eux, le rang accordé
+  est dessiné en code.
+- **Audio** : voix de Lacaze pour le chapitre 01 (VO_LACAZE_C01, ~20 répliques), thème MUS_THEME_BEN ; voix des
+  chapitres suivants.

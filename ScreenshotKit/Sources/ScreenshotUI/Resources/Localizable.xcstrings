@@ -6555,23 +6555,6 @@
         }
       }
     },
-    "evidence.filed": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Added to the file"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Versée au dossier"
-          }
-        }
-      }
-    },
     "evidence.viewPiece": {
       "extractionState": "manual",
       "localizations": {
@@ -8548,57 +8531,6 @@
         }
       }
     },
-    "modecard.investigations.line": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search a phone and name who is responsible before time runs out."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fouillez un téléphone et désignez le responsable avant la fin du temps."
-          }
-        }
-      }
-    },
-    "modecard.investigations.meta": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Solved: %1$ld of %2$ld"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Résolues : %1$ld sur %2$ld"
-          }
-        }
-      }
-    },
-    "modecard.investigations.subtitle": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Who is responsible?"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qui est responsable ?"
-          }
-        }
-      }
-    },
     "modecard.story.subtitle": {
       "extractionState": "manual",
       "localizations": {
@@ -9271,23 +9203,6 @@
         }
       }
     },
-    "opening.swipe": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Swipe up to open"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Glissez vers le haut"
-          }
-        }
-      }
-    },
     "opening.unlock": {
       "extractionState": "manual",
       "localizations": {
@@ -9390,23 +9305,6 @@
         }
       }
     },
-    "pause.overline": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PAUSED"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PAUSE"
-          }
-        }
-      }
-    },
     "pause.stopped": {
       "extractionState": "manual",
       "localizations": {
@@ -9420,23 +9318,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Le chrono est arrêté."
-          }
-        }
-      }
-    },
-    "pause.title": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Investigation paused"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enquête en pause"
           }
         }
       }
@@ -12794,6 +12675,23 @@
         }
       }
     },
+    "story.a11y.next": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Double-tap to continue."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touchez deux fois pour continuer."
+          }
+        }
+      }
+    },
     "story.a11y.off": {
       "extractionState": "manual",
       "localizations": {
@@ -13685,6 +13583,23 @@
         }
       }
     },
+    "story.creator.agreementNote": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your rank will read: %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre grade s'écrira : %@."
+          }
+        }
+      }
+    },
     "story.creator.assignment": {
       "extractionState": "manual",
       "localizations": {
@@ -13698,142 +13613,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Affectation"
-          }
-        }
-      }
-    },
-    "story.creator.base": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "BASE"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "BASE"
-          }
-        }
-      }
-    },
-    "story.creator.baseFeminine": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feminine"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Féminine"
-          }
-        }
-      }
-    },
-    "story.creator.baseMasculine": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Masculine"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Masculine"
-          }
-        }
-      }
-    },
-    "story.creator.categoryEyes": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eyes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yeux"
-          }
-        }
-      }
-    },
-    "story.creator.categoryFace": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Face"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Visage"
-          }
-        }
-      }
-    },
-    "story.creator.categoryHair": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hair"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cheveux"
-          }
-        }
-      }
-    },
-    "story.creator.categorySkin": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skin"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Teint"
-          }
-        }
-      }
-    },
-    "story.creator.close": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Close"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fermer"
           }
         }
       }
@@ -13855,40 +13634,6 @@
         }
       }
     },
-    "story.creator.faceShape": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SHAPE"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "FORME"
-          }
-        }
-      }
-    },
-    "story.creator.facialHair": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "FACIAL HAIR"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PILOSITÉ"
-          }
-        }
-      }
-    },
     "story.creator.file": {
       "extractionState": "manual",
       "localizations": {
@@ -13902,23 +13647,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "VOTRE DOSSIER D'ENQUÊTEUR"
-          }
-        }
-      }
-    },
-    "story.creator.fileName": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Name"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nom"
           }
         }
       }
@@ -13953,40 +13681,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prénom"
-          }
-        }
-      }
-    },
-    "story.creator.hairColor": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "COLOUR"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "COULEUR"
-          }
-        }
-      }
-    },
-    "story.creator.haircut": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "HAIRCUT"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "COUPE"
           }
         }
       }
@@ -14110,91 +13804,6 @@
         }
       }
     },
-    "story.creator.outfitCount": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OUTFIT %1$ld / %2$ld"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "TENUE %1$ld / %2$ld"
-          }
-        }
-      }
-    },
-    "story.creator.outfitNext": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Next outfit"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tenue suivante"
-          }
-        }
-      }
-    },
-    "story.creator.outfitNote": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One outfit, worn in every scene."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une seule tenue, portée dans toutes les scènes."
-          }
-        }
-      }
-    },
-    "story.creator.outfitPrevious": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Previous outfit"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tenue précédente"
-          }
-        }
-      }
-    },
-    "story.creator.save": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enregistrer"
-          }
-        }
-      }
-    },
     "story.creator.service": {
       "extractionState": "manual",
       "localizations": {
@@ -14212,6 +13821,23 @@
         }
       }
     },
+    "story.creator.sheetTitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Identity sheet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fiche d'identité"
+          }
+        }
+      }
+    },
     "story.creator.stamp": {
       "extractionState": "manual",
       "localizations": {
@@ -14225,23 +13851,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Identité confirmée"
-          }
-        }
-      }
-    },
-    "story.creator.step.appearance": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "APPEARANCE"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "APPARENCE"
           }
         }
       }
@@ -14276,23 +13885,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "IDENTITÉ"
-          }
-        }
-      }
-    },
-    "story.creator.step.outfit": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "OUTFIT"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "TENUE"
           }
         }
       }
@@ -14378,23 +13970,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chapitre %@ classé"
-          }
-        }
-      }
-    },
-    "story.history.photo": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "File photo updated"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Photo de dossier mise à jour"
           }
         }
       }
@@ -14565,6 +14140,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chargement impossible"
+          }
+        }
+      }
+    },
+    "story.hub.folderTab": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent file"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dossier d'agent"
           }
         }
       }
@@ -14824,19 +14416,19 @@
         }
       }
     },
-    "story.office.levelTag": {
+    "story.office.levelLabel": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "OFFICE_%02ld"
+            "value": "Level %ld / 4"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "OFFICE_%02ld"
+            "value": "Niveau %ld / 4"
           }
         }
       }
@@ -15174,23 +14766,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Résolues"
-          }
-        }
-      }
-    },
-    "story.profile.view3d": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "View in 3D"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Voir en 3D"
           }
         }
       }
@@ -15569,6 +15144,91 @@
         }
       }
     },
+    "story.scene.a11y.present": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Present: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Présents : %@"
+          }
+        }
+      }
+    },
+    "story.scene.notice.mail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Email received"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "E-mail reçu"
+          }
+        }
+      }
+    },
+    "story.scene.notice.message": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message received"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Message reçu"
+          }
+        }
+      }
+    },
+    "story.scene.pause": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silence"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silence"
+          }
+        }
+      }
+    },
+    "story.scene.report": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interview report"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte rendu d'entretien"
+          }
+        }
+      }
+    },
     "story.seniority.months": {
       "extractionState": "manual",
       "localizations": {
@@ -15719,23 +15379,6 @@
         }
       }
     },
-    "story.settings.appearance": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Change appearance"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modifier l'apparence"
-          }
-        }
-      }
-    },
     "story.settings.auto": {
       "extractionState": "manual",
       "localizations": {
@@ -15749,74 +15392,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Avance automatique"
-          }
-        }
-      }
-    },
-    "story.settings.camera": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reduce camera motion"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réduire les mouvements de caméra"
-          }
-        }
-      }
-    },
-    "story.settings.camera.off": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Off"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Non"
-          }
-        }
-      }
-    },
-    "story.settings.camera.on": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "On"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Oui"
-          }
-        }
-      }
-    },
-    "story.settings.camera.system": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "System"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Système"
           }
         }
       }
@@ -15855,40 +15430,6 @@
         }
       }
     },
-    "story.settings.depth": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Depth of field"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Profondeur de champ"
-          }
-        }
-      }
-    },
-    "story.settings.display": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "3D display"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Affichage 3D"
-          }
-        }
-      }
-    },
     "story.settings.kicker": {
       "extractionState": "manual",
       "localizations": {
@@ -15902,74 +15443,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Histoire"
-          }
-        }
-      }
-    },
-    "story.settings.quality": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quality"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qualité"
-          }
-        }
-      }
-    },
-    "story.settings.quality.auto": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Auto"
-          }
-        }
-      }
-    },
-    "story.settings.quality.economy": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Economy"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Économie"
-          }
-        }
-      }
-    },
-    "story.settings.quality.high": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "High"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Haute"
           }
         }
       }
@@ -16276,23 +15749,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Voix"
-          }
-        }
-      }
-    },
-    "story.studio.dragHint": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drag to turn the character."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faites glisser pour tourner le personnage."
           }
         }
       }

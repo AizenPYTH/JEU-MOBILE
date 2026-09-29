@@ -2,18 +2,36 @@
 
 Troisième mode du jeu, à côté d'ENQUÊTES (résoudre des dossiers) et d'ALIBI (vérifier des déclarations).
 Le joueur crée son enquêteur, entre au BEN (Bureau des Enquêtes Numériques) et vit sa carrière en chapitres :
-des scènes courtes en 3D au BEN, des affaires jouées dans le téléphone (les écrans d'ENQUÊTES, inchangés),
-des retours au BEN, un bureau qui évolue avec le rang.
+des scènes courtes au BEN, lues comme des comptes rendus d'entretien posés sur le bureau, des affaires jouées dans
+le téléphone (les écrans d'ENQUÊTES, inchangés), des retours au BEN, un bureau qui évolue avec le rang.
 
-Sources de design (lecture seule) : `docs/design_story/` (handoff « Mode Histoire », écrans h01 à h19).
+Sources de design (lecture seule) : `docs/design_story/` (handoff « Mode Histoire », écrans h01 à h19 : parcours,
+textes, règles) et `docs/design_v4/` (rendu « Dossier lisible » : bureau en bois, chemises kraft, feuilles ivoire,
+tampons).
+
+## Présentation : papier, pas de 3D
+
+Décision du porteur de projet : **plus de personnages ni de décors en 3D** (« c'est très moche, on laisse tomber
+ça »). L'histoire, les chapitres, les scènes, les dialogues, les choix, la progression, la sauvegarde, les
+récompenses et les règles ne changent pas (StoryEngine / StoryLibrary intacts) ; seule la présentation change :
+
+- **Une scène** = un compte rendu d'entretien sur le bureau : une bande de papier avec le lieu et l'heure
+  (« BEN · BUREAU 312 · 21:06 »), les personnes présentes en photos d'identité (initiales ; celle qui parle en pleine
+  opacité avec une punaise rouge, les autres à 55 %), la réplique sur une feuille (nom en Plex Mono, texte en
+  Newsreader, tapé à la vitesse choisie ; les répliques du joueur en italique), les réponses en fiches de papier.
+  Cartons de titre, notifications et silences : des fiches de papier. Les plans de caméra ne montrent rien.
+- **Le personnage** : un nom, un accord et une photo à initiales (aucun portrait, aucune apparence à choisir).
+- **Mon bureau** : vu de dessus, les objets du niveau posés sur un sous-main (fiches, carte BEN, chemise…).
+- Les champs de mise en scène 3D des données (ancres, caméras, gestes, décors, apparences) restent dans les
+  fichiers et sont toujours validés, mais l'interface ne les lit plus.
 
 ## Parcours
 
 ```
 Bureau (h01) ─ ENQUÊTES · ALIBI · HISTOIRE
-  HISTOIRE, la première fois : création (h05, 4 étapes) → maintien « Commencer ma carrière » → scène 01-01
+  HISTOIRE, la première fois : création (h05, 2 étapes) → maintien « Commencer ma carrière » → scène 01-01
   HISTOIRE, ensuite : Hub (h04)
-     CONTINUER → scène 3D (h11/h12) → nouveau dossier (h15) → briefing → téléphone → rapport
+     CONTINUER → scène (compte rendu, h11/h12) → nouveau dossier (h15) → briefing → téléphone → rapport
                → retour au BEN (scène) → … → fin de chapitre (h16) → état de service (h17) → récompense (h18)
      MON ENQUÊTEUR (h07) · CARRIÈRE (h08) · MON BUREAU (h09) · chapitre (h10) · ⚙ réglages (h19)
 ```
@@ -40,8 +58,8 @@ dans l'affaire Varin ouvre le chapitre 03 ; aucune conspiration mondiale, une hi
 
 ## Personnages
 
-- Le joueur : créé en 4 étapes (identité, apparence, tenue, confirmation). Élise Morel et Vincent Delmas sont les
-  deux modèles de départ (préremplis, modifiables).
+- Le joueur : créé en 2 étapes (identité : prénom, nom, accord des titres ; puis confirmation : la carte BEN,
+  maintien 1,2 s). Élise Morel et Vincent Delmas sont les deux modèles de départ (préremplis, modifiables).
 - Au BEN : Cdt. Bernard Lacaze (commandant), Inès Carvalho (analyste), Marc Aubrac (inspecteur senior), Colette Vidal
   (archiviste), un agent de l'open space.
 

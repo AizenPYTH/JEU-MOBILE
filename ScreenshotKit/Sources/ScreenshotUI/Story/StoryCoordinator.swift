@@ -9,15 +9,14 @@ import StoryLibrary
 enum StoryPreferences {
     enum SubtitleSize: String, CaseIterable { case small, medium, large }
     enum TextSpeed: String, CaseIterable { case slow, normal, instant }
-    enum Quality: String, CaseIterable { case auto, economy, high }
 
     static let subtitleKey = "story.subtitleSize"
     static let speedKey = "story.textSpeed"
     static let autoKey = "story.autoAdvance"
     static let voiceKey = "story.voice"
-    static let qualityKey = "story.quality"
-    static let depthKey = "story.depthOfField"
-    static let cameraMotionKey = "story.reduceCameraMotion"
+    /// Settings of the former 3D stage (quality, depth of field, camera motion): removed with the
+    /// 3D, still cleared by a reset.
+    private static let retiredKeys = ["story.quality", "story.depthOfField", "story.reduceCameraMotion"]
 
     static var subtitleSize: SubtitleSize {
         get { SubtitleSize(rawValue: UserDefaults.standard.string(forKey: subtitleKey) ?? "") ?? .medium }
@@ -35,19 +34,6 @@ enum StoryPreferences {
         get { UserDefaults.standard.object(forKey: voiceKey) as? Bool ?? true }
         set { UserDefaults.standard.set(newValue, forKey: voiceKey) }
     }
-    static var quality: Quality {
-        get { Quality(rawValue: UserDefaults.standard.string(forKey: qualityKey) ?? "") ?? .auto }
-        set { UserDefaults.standard.set(newValue.rawValue, forKey: qualityKey) }
-    }
-    static var depthOfField: Bool {
-        get { UserDefaults.standard.object(forKey: depthKey) as? Bool ?? true }
-        set { UserDefaults.standard.set(newValue, forKey: depthKey) }
-    }
-    /// nil: follows the system's « Réduire les animations ».
-    static var reduceCameraMotion: Bool? {
-        get { UserDefaults.standard.object(forKey: cameraMotionKey) as? Bool }
-        set { UserDefaults.standard.set(newValue, forKey: cameraMotionKey) }
-    }
 
     /// Seconds per character of the typewriter (0: instant).
     static var characterDelay: Double {
@@ -59,7 +45,7 @@ enum StoryPreferences {
     }
 
     static func reset() {
-        for key in [subtitleKey, speedKey, autoKey, voiceKey, qualityKey, depthKey, cameraMotionKey] {
+        for key in [subtitleKey, speedKey, autoKey, voiceKey] + retiredKeys {
             UserDefaults.standard.removeObject(forKey: key)
         }
     }
@@ -74,7 +60,8 @@ enum StorySaveStore {
     }
 
     static var saveURL: URL? { url("story-save.json") }
-    static var portraitURL: URL? { url("player_portrait.jpg") }
+    /// The portrait printed by the former 3D stage: no longer written, removed by a reset.
+    private static var portraitURL: URL? { url("player_portrait.jpg") }
 
     static func load() -> StorySave? {
         guard let url = saveURL, let data = try? Data(contentsOf: url) else { return nil }
@@ -104,13 +91,22 @@ struct JournalEntry: Identifiable, Hashable {
     let player: Bool
 }
 
+/// Someone in the scene: the player or one of the BEN's people (initials on their print, no
+/// portrait).
+struct StoryParticipant: Identifiable, Hashable {
+    let id: String
+    let name: String
+    let initials: String
+    let role: String?
+}
+
 /// What the story mode shows, above the director's own state.
 enum StoryScreen: Equatable {
     /// h04.
     case hub
-    /// h05 (all 4 steps) or only appearance + outfit (h19 « Modifier l'apparence »).
-    case creator(editing: Bool)
-    /// h11/h12: the director plays a scene.
+    /// h05: identity, then the confirmation (the BEN card).
+    case creator
+    /// h11/h12: the director plays a scene (an interview report on the desk).
     case scene
     /// h15: the new file, before the briefing and the phone.
     case caseFolder(String)
@@ -127,7 +123,8 @@ enum StoryScreen: Equatable {
 }
 
 /// The story's coordinator: owns the director and the save, turns the director's events into
-/// sound, haptics, transitions and screens, and persists after every action — quitting anywhere
+/// sound, haptics, transitions and screens (no 3D: the stage state only says who is present and
+/// what is said), and persists after every action — quitting anywhere
 /// resumes at the same place. Contains no story rule (StoryEngine does).
 @MainActor
 @Observable
@@ -138,10 +135,8 @@ final class StoryCoordinator {
     /// Bumped after every change of the director (views read through it).
     private(set) var revision = 0
     var screen: StoryScreen = .hub
-    /// Black over everything (fades between scenes and layers).
+    /// The darkest wood over everything (fades between scenes and layers).
     private(set) var blackout: Double = 0
-    /// « BEN · BUREAU 312 · 21:04 » on the opening wide shot.
-    private(set) var placeLabel: String?
     private(set) var journal: [JournalEntry] = []
     /// A scripted notification on the player's phone (3 s).
     private(set) var banner: StoryNotice?
@@ -153,14 +148,13 @@ final class StoryCoordinator {
     }
     /// The line on screen has been fully typed (the ▸ shows; AUTO may go on).
     private(set) var lineComplete = true
-    /// The player's portrait (S4 camera capture), regenerated when the appearance changes.
-    private(set) var portrait: UIImage?
     /// Cases solved in ENQUÊTES (the career counts every mode).
     @ObservationIgnored private var externalSolved: Set<String> = []
     @ObservationIgnored private var timer: Task<Void, Never>?
     @ObservationIgnored private var bannerTask: Task<Void, Never>?
-    @ObservationIgnored private var placeTask: Task<Void, Never>?
     @ObservationIgnored private var journalCounter = 0
+    /// A fade in from black is already on its way.
+    @ObservationIgnored private var revealing = false
     @ObservationIgnored private var pendingOfficeFocus: String?
     /// Called when the story needs the phone (RootView starts the investigation).
     @ObservationIgnored var onStartCase: (String) -> Void = { _ in }
@@ -178,7 +172,6 @@ final class StoryCoordinator {
             if let save = StorySaveStore.load() {
                 makeDirector(content: content, save: save)
             }
-            portrait = StorySaveStore.portraitURL.flatMap { try? Data(contentsOf: $0) }.flatMap(UIImage.init(data:))
         } catch {
             loadError = String(describing: error)
         }
@@ -243,6 +236,36 @@ final class StoryCoordinator {
 
     func resolve(_ text: String) -> String { director?.resolveText(text) ?? text }
 
+    /// « BEN · BUREAU 312 · 21:06 »: the header of the scene's interview report.
+    var scenePlace: String? {
+        _ = revision
+        guard let director, let id = director.stage.sceneID, let place = director.content.scene(id)?.place else { return nil }
+        return director.resolveText(place)
+    }
+
+    /// The people of the scene (the player, then the BEN's people), in the data's order.
+    var participants: [StoryParticipant] {
+        _ = revision
+        guard let director, let id = director.stage.sceneID, let scene = director.content.scene(id) else { return [] }
+        let player = director.save.player
+        return scene.participants.prefix(4).map { who in
+            if who == "player" {
+                return StoryParticipant(id: who, name: player.firstName + " " + player.lastName,
+                                        initials: Self.initials(player.firstName, player.lastName), role: rankTitle())
+            }
+            if let npc = director.content.npc(who) {
+                return StoryParticipant(id: who, name: npc.displayName, initials: Self.initials(npc.firstName, npc.lastName),
+                                        role: npc.role)
+            }
+            return StoryParticipant(id: who, name: who, initials: String(who.prefix(2)).uppercased(), role: nil)
+        }
+    }
+
+    /// « ÉM » from « Élise », « Morel ».
+    static func initials(_ first: String, _ last: String) -> String {
+        (String(first.prefix(1)) + String(last.prefix(1))).uppercased()
+    }
+
     func rankTitle(_ rank: StoryRank? = nil) -> String {
         guard let save else { return StoryText.rankTitle(rank ?? .enqueteur, form: .feminine) }
         return StoryText.rankTitle(rank ?? save.rank, form: StoryText.GrammaticalForm(save.player.agreement))
@@ -270,18 +293,8 @@ final class StoryCoordinator {
         makeDirector(content: content, save: save)
         director?.addHistory(L10n.t("story.history.assigned"), date: Self.day(now))
         persist()
-        renderPortrait()
         begin(fromBlack: 1.4)
         director.map { handle($0.startChapter(first.id)) }
-    }
-
-    /// h19 « Modifier l'apparence »: the portrait is printed again, a line in the history.
-    func updateAppearance(_ appearance: CharacterAppearance) {
-        guard let director else { return }
-        director.updateAppearance(appearance)
-        director.addHistory(L10n.t("story.history.photo"), date: Self.day(.now))
-        persist()
-        renderPortrait()
     }
 
     func updateAgreement(_ agreement: Agreement) {
@@ -296,7 +309,6 @@ final class StoryCoordinator {
         AudioDirector.shared.stopAmbience()
         StorySaveStore.clear()
         director = nil
-        portrait = nil
         journal = []
         screen = .hub
         bump()
@@ -440,10 +452,11 @@ final class StoryCoordinator {
         guard let director else { return }
         for event in events {
             switch event {
-            case .sceneStarted(let sceneID, _):
+            case .sceneStarted:
                 journal = []
                 screen = .scene
-                if let place = director.content.scene(sceneID)?.place { showPlace(director.resolveText(place)) }
+                // A scene that follows a fade in the same chapter comes back from black.
+                if blackout > 0 && !revealing { begin(fromBlack: 0.5) }
                 if let ambience = director.stage.ambience { loopAmbience(ambience) }
             case .ambience(let name):
                 if name == "none" { AudioDirector.shared.stopAmbience() } else { loopAmbience(name) }
@@ -536,9 +549,11 @@ final class StoryCoordinator {
     /// Starts on black and fades in (T-UI-2 / T-UI-3 / T-SIG-2).
     private func begin(fromBlack seconds: Double) {
         blackout = 1
+        revealing = true
         let reduce = UIAccessibility.isReduceMotionEnabled || UserDefaults.standard.bool(forKey: Preferences.reduceMotionKey)
         Task { [weak self] in
             try? await Task.sleep(for: .seconds(reduce ? 0.1 : 0.3))
+            self?.revealing = false
             withAnimation(.easeOut(duration: reduce ? 0.2 : seconds)) { self?.blackout = 0 }
         }
     }
@@ -546,16 +561,6 @@ final class StoryCoordinator {
     private func fade(seconds: Double) {
         let reduce = UIAccessibility.isReduceMotionEnabled || UserDefaults.standard.bool(forKey: Preferences.reduceMotionKey)
         withAnimation(.easeIn(duration: reduce ? 0.2 : min(0.4, seconds / 2))) { blackout = 1 }
-    }
-
-    private func showPlace(_ text: String) {
-        placeTask?.cancel()
-        withAnimation(.easeIn(duration: 0.5)) { placeLabel = text }
-        placeTask = Task { [weak self] in
-            try? await Task.sleep(for: .seconds(2.5))
-            guard !Task.isCancelled else { return }
-            withAnimation(.easeOut(duration: 0.5)) { self?.placeLabel = nil }
-        }
     }
 
     /// Ambience names of the story (« ben_hvac »…); a missing file is silently ignored.
@@ -591,17 +596,6 @@ final class StoryCoordinator {
     }
 
     private func bump() { revision &+= 1 }
-
-    /// The S4 portrait (85 mm, 1.55 m, #6F7A86 background), saved as player_portrait.jpg.
-    func renderPortrait() {
-        guard let player, let catalog else { return }
-        let image = PortraitRenderer.render(player.appearance, catalog: catalog, rank: save?.rank ?? .enqueteur)
-        portrait = image
-        if let image, let data = image.jpegData(compressionQuality: 0.85), let url = StorySaveStore.portraitURL {
-            try? data.write(to: url, options: .atomic)
-        }
-        bump()
-    }
 
     static func day(_ date: Date) -> String {
         let f = DateFormatter()

@@ -428,7 +428,7 @@ ANIMATIONS = {"stand", "sit", "nod", "gesture", "handover", "typing", "phone", "
               "cross_arms", "lean_forward"}
 SOUNDS = {"steps_lino", "door_glass", "door_close", "chair", "drawer", "page", "paper_slide", "plastic_bag", "neon_buzz",
           "phone_distant", "desk_phone_ring", "keyboard", "printer", "coffee_machine"}
-WALK = 1.1  # m/s, the stage's walk (StoryStageView)
+WALK = 1.1  # m/s, walking pace used to time the scenes
 rooms = {l["id"]: l for l in json.load(open(LOCATIONS))["locations"]}
 
 def texts(scene):

@@ -3,14 +3,14 @@ import SwiftUI
 import StoryEngine
 
 /// The story mode (HISTOIRE): routes between the hub, the creator, the scenes, the new file, the
-/// chapter's result, the office and the consultation screens (docs/design_story/STORY_UX_FLOW.md).
+/// chapter's result, the office and the consultation screens (docs/design_story/STORY_UX_FLOW.md),
+/// all laid on the V4 desk (docs/design_v4) — no 3D.
 /// The phone itself is played by `GameRoot` (the story's cases have their own save slot).
 struct StoryRootView: View {
     let story: StoryCoordinator
     /// Title, file label (« N° 001 », « N° C02-A ») and chapter number of a story case.
     let caseInfo: (String) -> (title: String, label: String, chapter: Int)?
     let onExit: () -> Void
-    @State private var viewer = false
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
     @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
 
@@ -20,13 +20,10 @@ struct StoryRootView: View {
 
     var body: some View {
         ZStack {
-            Trace.Story.sceneVoid.ignoresSafeArea()
+            ModeBackdrop()
             content
         }
         .animation(systemReduceMotion || appReduceMotion ? .easeInOut(duration: 0.2) : Trace.StoryMotion.paper, value: screenKey)
-        .fullScreenCover(isPresented: $viewer) {
-            StoryModelViewer(story: story, onClose: { viewer = false })
-        }
         .onAppear { story.load() }
     }
 
@@ -46,11 +43,11 @@ struct StoryRootView: View {
                     .transition(.opacity)
             } else {
                 // P1: the first time, the creator.
-                CharacterCreatorView(story: story, editing: false, onClose: onExit)
+                CharacterCreatorView(story: story, onClose: onExit)
                     .transition(.opacity)
             }
-        case .creator(let editing):
-            CharacterCreatorView(story: story, editing: editing, onClose: { story.screen = editing ? .settings : .hub })
+        case .creator:
+            CharacterCreatorView(story: story, onClose: { story.screen = .hub })
                 .transition(push)
         case .scene:
             StoryScenePlayer(story: story)
@@ -62,7 +59,7 @@ struct StoryRootView: View {
                                 onOpen: { story.openCaseFolder(id) })
                 .transition(.opacity)
         case .phone:
-            Trace.Story.sceneVoid.ignoresSafeArea()
+            Trace.Story.sceneVoid.ignoresSafeArea().accessibilityHidden(true)
         case .result:
             if case .result(let result) = story.mode {
                 StoryResultFlow(story: story, result: result,
@@ -70,13 +67,13 @@ struct StoryRootView: View {
                                 onOffice: { story.finishResult(officeFocus: $0) })
                     .transition(.opacity)
             } else {
-                Trace.Story.sceneVoid.ignoresSafeArea().onAppear { story.screen = .hub }
+                Trace.Story.sceneVoid.ignoresSafeArea().accessibilityHidden(true).onAppear { story.screen = .hub }
             }
         case .office(let focus):
             StoryOfficeView(story: story, focusUnlock: focus, onBack: { story.closeOffice() })
                 .transition(.opacity)
         case .profile:
-            StoryProfileView(story: story, onBack: { story.screen = .hub }, onView3D: { viewer = true })
+            StoryProfileView(story: story, onBack: { story.screen = .hub })
                 .transition(push)
         case .career:
             StoryCareerView(story: story, onBack: { story.screen = .hub })
@@ -87,7 +84,6 @@ struct StoryRootView: View {
                 .transition(push)
         case .settings:
             StorySettingsView(story: story, onBack: { story.screen = .hub },
-                              onEditAppearance: { story.screen = .creator(editing: true) },
                               onReplay: { story.replay($0) })
                 .transition(push)
         }
@@ -96,7 +92,7 @@ struct StoryRootView: View {
     private var screenKey: String {
         switch story.screen {
         case .hub: "hub"
-        case .creator(let e): "creator\(e)"
+        case .creator: "creator"
         case .scene: "scene"
         case .caseFolder(let id): "folder-\(id)"
         case .phone: "phone"

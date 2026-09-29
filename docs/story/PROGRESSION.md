@@ -27,9 +27,12 @@ débloque au même moment. Ancienneté affichée : 3 mois de jeu par chapitre te
   de pourcentage ni de bonus). Chapitre 01 : « Carte BEN » + ouverture de « Mon bureau » (`office_01`). Chapitre
   02 : le cadre du premier dossier résolu (`office_frame`).
 - Bureau (h09) : niveau = rang (1 à 4). Les accessoires portent `level` / `maxLevel` / `requires` ; un objet non
-  débloqué n'est pas visible du tout. Les points interactifs (TÉLÉPHONE, ORDINATEUR, DOSSIERS, puis ARCHIVES,
-  RÉCOMPENSES, TABLEAU, COFFRE, et les objets de récompense) gardent un anneau rouge tant qu'ils n'ont pas été ouverts.
-- Personnage : détails de rang (carte plastique → métal, écharpe ou gants, porte-document, insigne).
+  débloqué n'est pas visible du tout. « Mon bureau » est vu de dessus : chaque objet (TÉLÉPHONE, ORDINATEUR,
+  DOSSIERS, CARTE BEN, puis ARCHIVES, RÉCOMPENSES, TABLEAU, COFFRE, et les objets de récompense) est une fiche posée
+  sur le sous-main, avec une punaise rouge tant qu'elle n'a pas été ouverte ; un toucher ouvre sa feuille (nom,
+  provenance). Étiquette « Niveau n / 4 ».
+- Rang : tampon de rang sur la fiche d'enquêteur (PNG `stamp_<rang>_rouge` quand le mot imprimé est le titre
+  affiché, sinon tampon dessiné avec le titre accordé).
 
 ## Relations
 

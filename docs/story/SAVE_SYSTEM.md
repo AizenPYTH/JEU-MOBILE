@@ -6,7 +6,7 @@
 |---|---|
 | `story-save.json` | la sauvegarde de l'histoire (`StorySave`, versionnée) |
 | `story-investigation-in-progress.json` | l'affaire de l'histoire en cours dans le téléphone (`SaveSlot.story`) |
-| `player_portrait.jpg` | le portrait du joueur (caméra S4) |
+| `player_portrait.jpg` | ancien portrait 3D du joueur : plus écrit depuis le retrait de la 3D, effacé s'il existe |
 
 Séparés d'ENQUÊTES / ALIBI (`investigation-in-progress.json`, tentatives de `ProgressStore`) : jouer un mode ne
 remplace jamais la partie d'un autre. Exception voulue : une affaire d'ENQUÊTES jouée dans un chapitre (#001 au
@@ -14,7 +14,7 @@ chapitre 01) est enregistrée dans les tentatives d'ENQUÊTES, la carrière éta
 
 ## Ce qui est sauvegardé
 
-`StorySave` : version, joueur (nom, apparence, accord, matricule), position (chapitre, étape, scène, plan, réplique
+`StorySave` : version, joueur (nom, apparence — gardée pour le moteur, plus affichée —, accord, matricule), position (chapitre, étape, scène, plan, réplique
 à l'écran, silence en cours, affaire attendue, écran de résultat / bureau), rang, déblocages, faits, relations,
 affaires jouées (résolue, score, pièces, temps, ALIBI), chapitres terminés, résultat de la dernière affaire,
 statistiques, scènes vues, réponses données, phrases de décision, historique daté, points du bureau ouverts,
@@ -24,7 +24,7 @@ La sauvegarde est écrite **après chaque action** (réplique, choix, fin de pla
 
 ## Reprendre n'importe où
 
-- En pleine scène : le directeur rejoue en silence les plans déjà joués (placement, caméra, accessoires montrés) et
+- En pleine scène : le directeur rejoue en silence les plans déjà joués (présents, accessoires montrés) et
   réaffiche la même réplique, ou la suite d'un silence. Aucune conséquence n'est appliquée deux fois.
 - En pleine affaire : CONTINUER rouvre le téléphone au même écran, chrono en pause pendant l'absence.
 - Sur les écrans de fin de chapitre ou du bureau : ils se rouvrent tels quels (la récompense n'est pas redonnée).
@@ -44,4 +44,6 @@ test de migration dans `StoryEngineTests` (voir `version1SavesAreMigrated`).
 ## Nouvelle partie / réinitialisation
 
 Réglages › « Réinitialiser l'histoire » (maintien 1,6 s) supprime les trois fichiers ci-dessus et rien d'autre.
+Les anciens réglages 3D (`story.quality`, `story.depthOfField`, `story.reduceCameraMotion`) ne sont plus lus ;
+`StoryPreferences.reset()` (tests d'interface) les efface avec les autres réglages de l'histoire.
 Les tests d'interface repartent d'une histoire vide avec `-UITestReset YES`.
