@@ -1,0 +1,18 @@
+Test Case '-[ScreenshotUITests.MainFlowTests testAlibiModeFirstCheck]' passed (95.718 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testChallengeLevelsAndReplay]' passed (196.858 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testEveryNewCaseOpensItsOwnPhone]' passed (205.957 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testFirstLaunchToTheBureau]' passed (166.662 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testGlobalSearchAcrossApps]' passed (65.745 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testInteractiveMap]' passed (68.870 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testLockedNotesCode]' passed (60.955 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testMainPathSolvedEarly]' passed (253.291 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testQuitAndResume]' passed (117.204 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testResumeAfterQuittingTheApp]' passed (125.153 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testScrollStartsOnItems]' passed (80.860 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testSettingsRelaxedTime]' passed (79.932 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testStoryFirstChapter]' passed (252.870 seconds).
+Test Case '-[ScreenshotUITests.MainFlowTests testTimeUpWrongConclusionThenRetry]' passed (168.136 seconds).
+	 Executed 14 tests, with 0 failures (0 unexpected) in 1938.211 (1938.231) seconds
+	 Executed 14 tests, with 0 failures (0 unexpected) in 1938.211 (1938.234) seconds
+	 Executed 14 tests, with 0 failures (0 unexpected) in 1938.211 (1938.235) seconds
+commit 9035ce711ca6a1b491b34ee5d5b35966a255b32f
