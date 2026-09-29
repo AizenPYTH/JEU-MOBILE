@@ -127,6 +127,23 @@
         }
       }
     },
+    "a11y.holdHint": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press and hold to confirm. With VoiceOver, double-tap."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintenez le bouton pour confirmer. Avec VoiceOver, touchez deux fois."
+          }
+        }
+      }
+    },
     "a11y.home": {
       "extractionState": "manual",
       "localizations": {
@@ -3790,6 +3807,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Retour"
+          }
+        }
+      }
+    },
+    "common.cancel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuler"
+          }
+        }
+      }
+    },
+    "common.confirm": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirm"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confirmer"
           }
         }
       }
@@ -7584,6 +7635,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "RECHERCHE"
+          }
+        }
+      }
+    },
+    "piece.short": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piece %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pièce %@"
           }
         }
       }

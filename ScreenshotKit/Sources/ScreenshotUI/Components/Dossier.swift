@@ -19,6 +19,8 @@ enum PieceFormat {
 
     /// "PIÈCE 04"
     static func title(_ n: Int) -> String { L10n.f("piece.number", number(n)) }
+    /// « Pièce 03 » (sentence case, in badges).
+    static func shortTitle(_ n: Int) -> String { L10n.f("piece.short", number(n)) }
 
     /// "P.04"
     static func short(_ n: Int) -> String { "P." + number(n) }
@@ -210,7 +212,7 @@ struct ExhibitSupport: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(from.uppercased()).font(Trace.Fonts.monoSmall).foregroundStyle(Trace.Colors.inkSoft).lineLimit(1)
             Text(text)
-                .font(.custom(Theme.FontName.regular, size: 12.5, relativeTo: .footnote))
+                .font(.custom(Trace.FontName.sans, size: 13, relativeTo: .footnote))
                 .foregroundStyle(mine ? Theme.Colors.bubbleOutText : Theme.Colors.textPrimary)
                 .lineLimit(compact ? 4 : nil)
                 .padding(.horizontal, 10).padding(.vertical, 7)

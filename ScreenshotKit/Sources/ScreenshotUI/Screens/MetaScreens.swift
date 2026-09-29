@@ -92,7 +92,7 @@ struct ArchivedCaseView: View {
             Button(action: onClose) {
                 HStack(spacing: 4) {
                     Image(systemName: "chevron.backward").font(.system(size: 15, weight: .semibold))
-                    Text(L10n.t("tab.archives")).font(.custom(Theme.FontName.regular, size: 17))
+                    Text(L10n.t("tab.archives")).font(.custom(Trace.FontName.sans, size: 17, relativeTo: .body))
                 }
                 .foregroundStyle(Trace.Colors.bone).frame(minHeight: 44)
             }

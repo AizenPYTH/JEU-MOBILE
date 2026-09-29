@@ -79,7 +79,7 @@ struct PlacePin: View {
                 Circle().fill(step == nil ? Theme.Colors.mapPin : Theme.Colors.info)
                 Circle().strokeBorder(Theme.Colors.textPrimary, lineWidth: 2)
                 if let step {
-                    Text("\(step)").font(.custom(Theme.FontName.monoBold, fixedSize: 13)).foregroundStyle(Theme.Colors.textPrimary)
+                    Text("\(step)").font(Theme.font(Theme.FontName.monoBold, 13)).foregroundStyle(Theme.Colors.textPrimary)
                 } else {
                     Image(systemName: Self.symbol(kind)).font(.system(size: 13, weight: .bold)).foregroundStyle(Theme.Colors.textPrimary)
                 }

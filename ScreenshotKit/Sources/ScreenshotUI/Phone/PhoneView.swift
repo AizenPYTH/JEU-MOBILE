@@ -31,7 +31,7 @@ struct PhoneView: View {
                 .padding(.top, Theme.Spacing.s1)
                 .padding(.bottom, Theme.Spacing.s2)
         }
-        .environment(\.colorScheme, .dark)
+        .environment(\.colorScheme, .light)
         .statusBarHidden()
         .persistentSystemOverlays(.hidden)
         .defersSystemGestures(on: .bottom)
@@ -438,7 +438,7 @@ struct BatteryIndicator: View {
     var body: some View {
         HStack(spacing: 3) {
             Text("\(level)")
-                .font(.custom(Theme.FontName.semibold, fixedSize: 11))
+                .font(Theme.font(Theme.FontName.semibold, 11))
                 .monospacedDigit()
             Image(systemName: level <= 10 ? "battery.0" : level <= 35 ? "battery.25" : "battery.50")
                 .foregroundStyle(level <= 10 ? Theme.Colors.alertText : Theme.Colors.textPrimary)

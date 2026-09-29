@@ -20,6 +20,7 @@
   "lowTimeWarningSeconds": 60,
   "criticalTimeSeconds": 10,
   "bannerSeconds": 4.5,
+  "minPiecesToConclude": 3,
   "scoring": {
     "correctSuspect": 60,
     "found": 25,

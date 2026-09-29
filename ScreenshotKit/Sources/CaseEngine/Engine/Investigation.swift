@@ -58,6 +58,27 @@ public struct NotebookEntry: Codable, Hashable, Sendable, Identifiable {
     public var id: ItemRef { ref }
 }
 
+/// A chain the player draws in the Carnet (« Connexions », UX V3 §6-09): two or more elements —
+/// pieces of the file or people — and, between two neighbours, what links them. The player's own
+/// reasoning: the engine never says whether a connection is right, and it does not count in the score.
+public struct Connection: Codable, Hashable, Sendable, Identifiable {
+    /// What links two elements.
+    public enum Verb: String, Codable, CaseIterable, Hashable, Sendable {
+        case contradicts, confirms, samePlace, sameTime, implicates
+    }
+
+    /// An element of a chain: a filed piece, or a person of the case.
+    public enum Node: Codable, Hashable, Sendable {
+        case piece(ItemRef)
+        case person(SuspectID)
+    }
+
+    public var id: Int
+    public var nodes: [Node]
+    /// `verbs[i]` links `nodes[i]` and `nodes[i + 1]`.
+    public var verbs: [Verb]
+}
+
 /// Manual marks the player can tick on a suspect's file.
 public enum SuspectMark: String, Codable, CaseIterable, Hashable, Sendable {
     case nearTheScene, liedAboutAlibi, hasMotive, hasAlibi
@@ -104,6 +125,8 @@ public final class Investigation {
     /// The notebook, in pinning order.
     public private(set) var notebook: [NotebookEntry] = []
     public private(set) var marks: [SuspectID: Set<SuspectMark>] = [:]
+    /// The player's connections, in the order they were drawn.
+    public private(set) var connections: [Connection] = []
     public private(set) var usedHints: [Hint] = []
     public private(set) var searchCount = 0
     public private(set) var readNotifications: Set<String> = []
@@ -145,6 +168,7 @@ public final class Investigation {
         loadedPages = saved.loadedPages
         notebook = saved.notebook
         marks = saved.marks
+        connections = saved.connections ?? []
         usedHints = saved.usedHintIDs.compactMap { id in caseFile.hints.first { $0.id == id } }
         searchCount = saved.searchCount
         deliverDueEvents()
@@ -503,6 +527,8 @@ public final class Investigation {
     public func togglePin(_ ref: ItemRef) -> Bool {
         if let i = notebook.firstIndex(where: { $0.ref == ref }) {
             notebook.remove(at: i)
+            // A piece taken out of the file leaves the chains it was part of.
+            connections.removeAll { $0.nodes.contains(.piece(ref)) }
             return false
         }
         notebook.append(NotebookEntry(ref: ref, linkedTo: nil, pinnedAtElapsed: elapsedSeconds))
@@ -527,6 +553,51 @@ public final class Investigation {
     public func setStance(_ stance: NotebookEntry.Stance?, for ref: ItemRef) {
         guard let i = notebook.firstIndex(where: { $0.ref == ref }), notebook[i].linkedTo != nil else { return }
         notebook[i].stance = stance
+    }
+
+    // MARK: - Connections (free, like the rest of the notebook)
+
+    /// A filed piece or a person of the case.
+    public func isValid(_ node: Connection.Node) -> Bool {
+        switch node {
+        case .piece(let ref): isPinned(ref)
+        case .person(let id): index.suspect(id) != nil
+        }
+    }
+
+    /// Draws a new chain of two elements. Nil if an element is not in the file or both are the same.
+    @discardableResult
+    public func connect(_ first: Connection.Node, _ second: Connection.Node, verb: Connection.Verb) -> Connection? {
+        guard first != second, isValid(first), isValid(second) else { return nil }
+        let connection = Connection(id: (connections.map(\.id).max() ?? 0) + 1, nodes: [first, second], verbs: [verb])
+        connections.append(connection)
+        return connection
+    }
+
+    /// « + Ajouter un élément »: extends a chain from its last element. False if the element is
+    /// invalid or already in the chain.
+    @discardableResult
+    public func extend(_ connectionID: Int, with node: Connection.Node, verb: Connection.Verb) -> Bool {
+        guard let i = connections.firstIndex(where: { $0.id == connectionID }), isValid(node),
+              !connections[i].nodes.contains(node) else { return false }
+        connections[i].nodes.append(node)
+        connections[i].verbs.append(verb)
+        return true
+    }
+
+    public func removeConnection(_ connectionID: Int) {
+        connections.removeAll { $0.id == connectionID }
+    }
+
+    // MARK: - Concluding
+
+    /// Pieces the file needs before the conclusion is offered (`rules.json`, UX V3 §4: 3).
+    public var piecesNeededToConclude: Int { rules.minPiecesToConclude ?? 0 }
+
+    /// The conclusion is offered once the file holds enough pieces — or when the time is up,
+    /// whatever the file holds.
+    public var canConclude: Bool {
+        phase == .accusing || (phase == .investigating && notebook.count >= piecesNeededToConclude)
     }
 
     public func linkedEntries(for suspect: SuspectID) -> [NotebookEntry] {

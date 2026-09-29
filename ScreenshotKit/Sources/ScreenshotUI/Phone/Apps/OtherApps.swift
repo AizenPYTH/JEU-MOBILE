@@ -75,7 +75,7 @@ struct SiteBadge: View {
                 Image(systemName: "magnifyingglass").font(.system(size: 14, weight: .semibold))
             } else {
                 Text(String(entry.url.map(BrowserFormat.domain)?.first ?? "•").uppercased())
-                    .font(.custom(Theme.FontName.semibold, fixedSize: 15))
+                    .font(Theme.font(Theme.FontName.semibold, 15))
             }
         }
         .foregroundStyle(Theme.Colors.textPrimary)
@@ -255,7 +255,7 @@ struct MailView: View {
                     Text(mail.subject).font(Theme.Fonts.title).foregroundStyle(Theme.Colors.textPrimary)
                     HStack(alignment: .top, spacing: Theme.Spacing.s4) {
                         Text(String(mail.fromName.prefix(1)).uppercased())
-                            .font(.custom(Theme.FontName.semibold, fixedSize: 17))
+                            .font(Theme.font(Theme.FontName.semibold, 17))
                             .foregroundStyle(Theme.Colors.textPrimary)
                             .frame(width: Theme.Size.avatarS, height: Theme.Size.avatarS)
                             .background(Circle().fill(Theme.iconGradient(.mail).bottom))
@@ -305,7 +305,7 @@ struct SenderBadge: View {
         let hue = Double(name.unicodeScalars.reduce(0) { ($0 &* 31 &+ Int($1.value)) & 0xFFFF } % 360) / 360
         let colors = Theme.avatarColor(hue: hue)
         Text(String(name.first(where: { $0.isLetter }) ?? "•").uppercased())
-            .font(.custom(Theme.FontName.semibold, fixedSize: 15))
+            .font(Theme.font(Theme.FontName.semibold, 15))
             .foregroundStyle(Theme.Colors.textPrimary)
             .frame(width: 34, height: 34)
             .background(Circle().fill(LinearGradient(colors: [colors.top, colors.bottom], startPoint: .top, endPoint: .bottom)))
@@ -322,7 +322,7 @@ struct AttachmentChip: View {
     var body: some View {
         HStack(spacing: Theme.Spacing.s3) {
             Text(ext)
-                .font(.custom(Theme.FontName.monoBold, fixedSize: 9))
+                .font(Theme.font(Theme.FontName.monoBold, 9))
                 .foregroundStyle(Theme.Colors.textPrimary)
                 .frame(width: 34, height: 40)
                 .background(RoundedRectangle(cornerRadius: 5, style: .continuous)

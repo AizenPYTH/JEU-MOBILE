@@ -1,65 +1,64 @@
 #if os(iOS)
 import SwiftUI
 
-// Tokens of the story mode and of the three-mode Bureau (docs/design_story/DESIGN_SYSTEM_STORY.md).
-// Everything else (paper, ink, stamps, buttons) is the final design's: Trace.* and ConcludeKit.
+// Tokens of the story mode, re-skinned with the UX V3 tokens (docs/design_ux_v3 §0: the story
+// screens keep their flows and take the BEN's palette and type). The 3D stage keeps its own
+// render colours (sceneVoid, renderTop/Mid) and the dialogue text stays light on the scene.
 
 extension Trace {
     enum Story {
-        // §2 Colours.
-        static let alibiPaper = Color(hex: 0xDCDFE2)
-        static let alibiInk = Color(hex: 0x1F2530)
-        static let alibiInkSecondary = Color(hex: 0x4A5260)
-        static let folder = Color(hex: 0x2A3240)
-        static let folderLight = Color(hex: 0x333D4C)
-        static let ink = Color(hex: 0xE4E7EA)
-        static let inkSecondary = Color(hex: 0x9AA3AE)
+        static let alibiPaper = Trace.Colors.surface
+        static let alibiInk = Trace.Colors.text
+        static let alibiInkSecondary = Trace.Colors.text2
+        static let folder = Trace.Colors.surface
+        static let folderLight = Trace.Colors.surface2
+        static let ink = Trace.Colors.text
+        static let inkSecondary = Trace.Colors.text2
         static let sceneVoid = Color(hex: 0x0A0B0D)
-        static let scrim = Color(hex: 0x0A0908)
+        static let scrim = Color(hex: 0x07090C)
         static let renderTop = Color(hex: 0x2A313B)
         static let renderMid = Color(hex: 0x12151A)
-        /// Dialogue text, the player's own lines, the journal sheet, the settings rows.
-        static let dialogue = Color(hex: 0xEFEBE3)
-        static let playerLine = Color(hex: 0xC9C3B6)
-        static let journal = Color(hex: 0x141311)
-        static let settingsRow = Color(hex: 0x1A1816)
-        static let hud = Color(hex: 0x0A0908, opacity: 0.55)
-        static let hotspotLabel = Color(hex: 0x0A0908, opacity: 0.7)
-        static let selection = Color(hex: 0xECE5D3)
-        static let greyStamp = Color(hex: 0x5B5448)
-        /// ENQUÊTES folder (kraft) ink.
-        static let kraftInk = Color(hex: 0x2B2519)
+        /// Dialogue text on the scene, the player's own lines, the journal sheet, the settings rows.
+        static let dialogue = Trace.Colors.text
+        static let playerLine = Trace.Colors.text2
+        static let journal = Trace.Colors.surface
+        static let settingsRow = Trace.Colors.surface
+        static let hud = Color(hex: 0x07090C, opacity: 0.6)
+        static let hotspotLabel = Color(hex: 0x07090C, opacity: 0.75)
+        static let selection = Trace.Colors.surface3
+        static let greyStamp = Trace.Colors.text3
+        static let kraftInk = Trace.Colors.text
 
-        // Backdrops per mode (radial 90 % × 45 %).
-        static let deskInvestigations: [Color] = [Color(hex: 0x3A2D20), Color(hex: 0x15110D), Color(hex: 0x0B0A09)]
-        static let deskAlibi: [Color] = [Color(hex: 0x1D2229), Color(hex: 0x101215), Color(hex: 0x0A0A0B)]
-        static let deskStory: [Color] = [Color(hex: 0x20252D), Color(hex: 0x101215), Color(hex: 0x0A0A0B)]
-        static let deskMain: [Color] = [Color(hex: 0x2E261D), Color(hex: 0x12100E), Color(hex: 0x0A0908)]
+        // One flat background for every mode (V3: no lamp, no gradient).
+        static let deskInvestigations: [Color] = [Trace.Colors.bg, Trace.Colors.bg, Trace.Colors.bg]
+        static let deskAlibi: [Color] = [Trace.Colors.bg, Trace.Colors.bg, Trace.Colors.bg]
+        static let deskStory: [Color] = [Trace.Colors.bg, Trace.Colors.bg, Trace.Colors.bg]
+        static let deskMain: [Color] = [Trace.Colors.bg, Trace.Colors.bg, Trace.Colors.bg]
     }
 
-    // §3 Typography.
+    // Type (V3 §3 roles).
     enum StoryFonts {
-        static let h1 = Font.custom(FontName.serifMedium, size: 30, relativeTo: .largeTitle)
+        static let h1 = Font.custom(FontName.serifMedium, size: 31, relativeTo: .largeTitle)
         static let h1Hero = Font.custom(FontName.serifMedium, size: 34, relativeTo: .largeTitle)
-        static let h2 = Font.custom(FontName.serifSemibold, size: 26, relativeTo: .title)
-        static let h3 = Font.custom(FontName.serifMedium, size: 20.5, relativeTo: .title3)
-        static let label = Font.custom(FontName.monoBold, fixedSize: 10)
-        static let body = Font.custom(FontName.serif, size: 15.5, relativeTo: .body)
-        static let uiBody = Font.custom(Theme.FontName.regular, size: 15, relativeTo: .body)
-        static let caption = Font.custom(Theme.FontName.regular, size: 13, relativeTo: .footnote)
-        static let technical = Font.custom(FontName.monoMedium, fixedSize: 11)
+        static let h2 = Font.custom(FontName.serifMedium, size: 26, relativeTo: .title)
+        static let h3 = Font.custom(FontName.sansSemibold, size: 18, relativeTo: .title3)
+        static let label = Font.custom(FontName.sansSemibold, size: 12, relativeTo: .caption)
+        static let body = Font.custom(FontName.sans, size: 16, relativeTo: .body)
+        static let uiBody = Font.custom(FontName.sans, size: 15, relativeTo: .body)
+        static let caption = Font.custom(FontName.sans, size: 13, relativeTo: .footnote)
+        static let technical = Font.custom(FontName.monoMedium, size: 12, relativeTo: .caption)
         static let dialogue = Font.custom(FontName.serif, size: 22, relativeTo: .title2)
         static let dialogueQuestion = Font.custom(FontName.serif, size: 19, relativeTo: .title3)
-        static let dialogueName = Font.custom(FontName.monoBold, fixedSize: 11)
-        static let dialogueRole = Font.custom(FontName.mono, fixedSize: 10)
-        static let choice = Font.custom(FontName.serif, size: 16, relativeTo: .body)
+        static let dialogueName = Font.custom(FontName.sansSemibold, size: 13, relativeTo: .footnote)
+        static let dialogueRole = Font.custom(FontName.sans, size: 12, relativeTo: .caption)
+        static let choice = Font.custom(FontName.sans, size: 16, relativeTo: .body)
         static let choiceSilent = Font.custom(FontName.serifItalic, size: 16, relativeTo: .body)
-        static let choicePrefix = Font.custom(FontName.monoBold, fixedSize: 11)
-        static let note = Font.custom(FontName.hand, size: 21, relativeTo: .title3)
-        static let button = Font.custom(FontName.monoBold, fixedSize: 13)
-        static let number = Font.custom(FontName.serif, size: 28, relativeTo: .title)
-        static let next = Font.custom(FontName.mono, fixedSize: 12)
-        static let stamp = Font.custom(FontName.monoBold, fixedSize: 9)
+        static let choicePrefix = Font.custom(FontName.monoSemibold, size: 12, relativeTo: .caption)
+        static let note = Font.custom(FontName.sans, size: 16, relativeTo: .body)
+        static let button = Font.custom(FontName.sansSemibold, size: 17, relativeTo: .body)
+        static let number = Font.custom(FontName.monoMedium, size: 24, relativeTo: .title)
+        static let next = Font.custom(FontName.sans, size: 14, relativeTo: .callout)
+        static let stamp = Font.custom(FontName.sansSemibold, size: 12, relativeTo: .caption)
     }
 
     enum StoryMotion {
@@ -77,43 +76,30 @@ struct ModeBackdrop: View {
     let colors: [Color]
 
     var body: some View {
-        GeometryReader { geo in
-            EllipticalGradient(colors: colors, center: .init(x: 0.5, y: 0.08),
-                               startRadiusFraction: 0, endRadiusFraction: 0.9)
-                .frame(width: geo.size.width, height: geo.size.height)
-        }
-        .ignoresSafeArea()
-        .accessibilityHidden(true)
+        (colors.first ?? Trace.Colors.bg).ignoresSafeArea().accessibilityHidden(true)
     }
 }
 
-/// LABEL: Plex Mono 10/700, +16 %, caps.
+/// A section label: Plex Sans 12/600 caps +8 % (V3 §3 « section »).
 struct StoryLabel: View {
     let text: String
-    var color: Color = Trace.Colors.bone2
+    var color: Color = Trace.Colors.text2
 
     var body: some View {
         Text(text.uppercased())
             .font(Trace.StoryFonts.label)
-            .tracking(1.6)
+            .tracking(1)
             .foregroundStyle(color)
     }
 }
 
-/// A folder-state stamp (§6): rotation −7°, 2 pt border, Plex Mono 9/700.
+/// A folder state: a StatusBadge (V3: no rotated stamp).
 struct StateStamp: View {
     let text: String
-    var color: Color = Trace.Colors.stamp
+    var color: Color = Trace.Colors.benText
 
     var body: some View {
-        Text(text.uppercased())
-            .font(Trace.StoryFonts.stamp)
-            .tracking(1.4)
-            .foregroundStyle(color)
-            .padding(.horizontal, 6)
-            .padding(.vertical, 3)
-            .overlay(RoundedRectangle(cornerRadius: 2).strokeBorder(color, lineWidth: 2))
-            .rotationEffect(.degrees(-7))
+        StatusBadge(text: text, color: color)
             .accessibilityLabel(Text(L10n.f("a11y.stamp", text)))
     }
 }
@@ -145,9 +131,9 @@ struct ProgressBoxes: View {
         LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
             ForEach(0..<total, id: \.self) { i in
                 ZStack {
-                    Rectangle().strokeBorder(Trace.Colors.ink, lineWidth: 1.5)
+                    RoundedRectangle(cornerRadius: 6).fill(i < done ? Trace.Colors.tint(Trace.Colors.success) : Trace.Colors.surface2)
                     if i < done {
-                        Text("×").font(.custom(Trace.FontName.monoBold, fixedSize: 18)).foregroundStyle(Trace.Colors.stamp)
+                        Text(verbatim: "✓").font(.custom(Trace.FontName.sansSemibold, fixedSize: 14)).foregroundStyle(Trace.Colors.successText)
                     }
                 }
                 .frame(width: 26, height: 26)
@@ -168,7 +154,7 @@ struct SettingsGroup<Content: View>: View {
             StoryLabel(text: title)
                 .padding(.leading, 4)
             VStack(spacing: 0) { content }
-                .background(RoundedRectangle(cornerRadius: 10).fill(Trace.Story.settingsRow))
+                .background(RoundedRectangle(cornerRadius: Trace.Radius.card).fill(Trace.Story.settingsRow))
         }
     }
 }
@@ -184,23 +170,21 @@ struct StoryHoldButton: View {
     let action: () -> Void
     @State private var progress: CGFloat = 0
 
-    private var fill: Color { destructive ? Trace.Colors.stampOnDark : (onPaper ? Trace.Colors.ink : Trace.Story.dialogue) }
-    private var text: Color { destructive ? Trace.Colors.criticalText : (onPaper ? Trace.Colors.bone : Trace.Colors.ink) }
+    private var fill: Color { destructive ? Trace.Colors.critical : Trace.Colors.ben }
 
     var body: some View {
-        let shape = RoundedRectangle(cornerRadius: 6, style: .continuous)
+        let shape = RoundedRectangle(cornerRadius: Trace.Radius.button, style: .continuous)
         ZStack(alignment: .leading) {
-            shape.strokeBorder(fill, lineWidth: 1.5)
+            shape.fill(Trace.Colors.surface2)
             GeometryReader { geo in
                 shape.fill(fill).frame(width: geo.size.width * progress)
             }
-            Text(title.uppercased())
+            Text(title)
                 .font(Trace.StoryFonts.button)
-                .tracking(2)
-                .foregroundStyle(progress > 0.5 ? text : fill)
+                .foregroundStyle(Trace.Colors.text)
                 .frame(maxWidth: .infinity)
         }
-        .frame(height: 56)
+        .frame(height: Trace.Height.hold)
         .clipShape(shape)
         .contentShape(shape)
         .onLongPressGesture(minimumDuration: seconds, maximumDistance: 40) {
@@ -224,14 +208,14 @@ struct StoryHoldButton: View {
 /// A 44 pt back chevron « ‹ » with an optional label.
 struct BackChevron: View {
     var label: String? = nil
-    var color: Color = Trace.Colors.bone
+    var color: Color = Trace.Colors.benText
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 4) {
+            HStack(spacing: 3) {
                 Image(systemName: "chevron.left").font(.system(size: 17, weight: .semibold))
-                if let label { Text(label).font(Trace.StoryFonts.uiBody) }
+                if let label { Text(label).font(Trace.Fonts.link) }
             }
             .foregroundStyle(color)
             .frame(minWidth: 44, minHeight: 44, alignment: .leading)

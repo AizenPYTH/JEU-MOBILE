@@ -24,7 +24,7 @@ struct HomeScreen: View {
         VStack(spacing: 0) {
             VStack(spacing: Theme.Spacing.s1) {
                 Text(PhoneFormat.longDayCapitalized(now))
-                    .font(.custom(Theme.FontName.medium, fixedSize: 15))
+                    .font(Theme.font(Theme.FontName.medium, 15))
                     .foregroundStyle(Theme.Colors.textSecondary)
                 Text(PhoneFormat.time(now))
                     .accessibilityIdentifier("phone.clock")
@@ -186,7 +186,7 @@ struct HomeWidgets: View {
             }
             .frame(width: 58, height: 58)
             Spacer(minLength: 0)
-            Text("\(level) %").font(.custom(Theme.FontName.semibold, fixedSize: 22)).foregroundStyle(Theme.Colors.textPrimary)
+            Text("\(level) %").font(Theme.font(Theme.FontName.semibold, 22)).foregroundStyle(Theme.Colors.textPrimary)
             Text(L10n.t("widget.battery")).font(Theme.Fonts.caption).foregroundStyle(Theme.Colors.textSecondary)
         }
         .widgetCard()
@@ -196,7 +196,7 @@ struct HomeWidgets: View {
     private func upNext(_ event: CalendarEvent?, now: Moment) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             Text(PhoneFormat.weekdayShort(now) + " \(now.day)")
-                .font(.custom(Theme.FontName.semibold, fixedSize: 12))
+                .font(Theme.font(Theme.FontName.semibold, 12))
                 .foregroundStyle(Theme.appAccent(.calendar))
             Spacer(minLength: 0)
             if let event {
@@ -287,7 +287,7 @@ struct AppTile: View {
                     .overlay(alignment: .topTrailing) {
                         if badge > 0 {
                             Text("\(badge)")
-                                .font(.custom(Theme.FontName.monoSemibold, fixedSize: 12))
+                                .font(Theme.font(Theme.FontName.monoSemibold, 12))
                                 .foregroundStyle(Theme.Colors.textPrimary)
                                 .padding(.horizontal, 5)
                                 .frame(minWidth: Theme.Size.badge, minHeight: Theme.Size.badge)

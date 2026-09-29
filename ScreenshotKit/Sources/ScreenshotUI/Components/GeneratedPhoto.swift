@@ -838,7 +838,7 @@ enum PhotoPainter {
         } else {
             for (i, line) in lines.enumerated() {
                 let text = Text(line)
-                    .font(.custom(i == 0 ? Theme.FontName.semibold : Theme.FontName.regular, fixedSize: i == 0 ? fontSize * 1.3 : fontSize))
+                    .font(Theme.font(i == 0 ? Theme.FontName.semibold : Theme.FontName.regular, i == 0 ? fontSize * 1.3 : fontSize))
                     .foregroundColor(hex(0x1C1D20))
                 paper.draw(text, at: CGPoint(x: sheet.minX + 10, y: y), anchor: .leading)
                 y += fontSize * (i == 0 ? 2.2 : 1.6)
@@ -862,7 +862,7 @@ enum PhotoPainter {
         let fontSize = max(6, w * 0.028)
         var y = strip.minY + fontSize * 1.5
         for line in (lines.isEmpty ? ["TICKET", "—", "TOTAL"] : lines) {
-            ctx.draw(Text(line).font(.custom(Theme.FontName.mono, fixedSize: fontSize)).foregroundColor(hex(0x2A2A2A)),
+            ctx.draw(Text(line).font(Theme.font(Theme.FontName.mono, fontSize)).foregroundColor(hex(0x2A2A2A)),
                      at: CGPoint(x: strip.midX, y: y), anchor: .center)
             y += fontSize * 1.6
         }
@@ -876,20 +876,20 @@ enum PhotoPainter {
     static func screenshot(_ ctx: inout C, _ w: CGFloat, _ h: CGFloat, _ rng: inout SeededRandom, lines: [String]) {
         fill(&ctx, CGRect(x: 0, y: 0, width: w, height: h), [hex(0x111318), hex(0x0B0C0F)])
         let fontSize = max(6, w * 0.036)
-        ctx.draw(Text("9:41").font(.custom(Theme.FontName.semibold, fixedSize: fontSize)).foregroundColor(.white), at: CGPoint(x: w * 0.1, y: fontSize), anchor: .leading)
+        ctx.draw(Text("9:41").font(Theme.font(Theme.FontName.semibold, fontSize)).foregroundColor(.white), at: CGPoint(x: w * 0.1, y: fontSize), anchor: .leading)
         ctx.fill(Path(roundedRect: CGRect(x: w * 0.8, y: fontSize * 0.6, width: w * 0.1, height: fontSize * 0.8), cornerRadius: 2), with: .color(.white.opacity(0.8)))
         let accent: UInt32 = [0x4C9BFF, 0x4FD17F, 0xFFB547, 0xB28CFF][Int(rng.next() * 4) % 4]
         var y = fontSize * 3
         for (i, line) in (lines.isEmpty ? ["—"] : lines).enumerated() {
             if i == 0 {
-                ctx.draw(Text(line).font(.custom(Theme.FontName.semibold, fixedSize: fontSize * 1.6)).foregroundColor(.white),
+                ctx.draw(Text(line).font(Theme.font(Theme.FontName.semibold, fontSize * 1.6)).foregroundColor(.white),
                          at: CGPoint(x: w * 0.06, y: y), anchor: .leading)
                 y += fontSize * 2.4
             } else {
                 let row = CGRect(x: w * 0.05, y: y - fontSize * 0.95, width: w * 0.9, height: fontSize * 1.9)
                 ctx.fill(Path(roundedRect: row, cornerRadius: 5), with: .color(.white.opacity(0.07)))
                 ctx.fill(Path(ellipseIn: CGRect(x: row.minX + 5, y: row.midY - 3, width: 6, height: 6)), with: .color(hex(accent)))
-                ctx.draw(Text(line).font(.custom(Theme.FontName.regular, fixedSize: fontSize)).foregroundColor(.white.opacity(0.9)),
+                ctx.draw(Text(line).font(Theme.font(Theme.FontName.regular, fontSize)).foregroundColor(.white.opacity(0.9)),
                          at: CGPoint(x: row.minX + 16, y: row.midY), anchor: .leading)
                 y += fontSize * 2.3
             }

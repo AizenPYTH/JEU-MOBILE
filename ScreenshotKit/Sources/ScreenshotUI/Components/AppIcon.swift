@@ -82,7 +82,7 @@ private struct CalendarIconFace: View {
     var body: some View {
         VStack(spacing: 0) {
             Text(day.map { PhoneFormat.weekdayShort($0) } ?? "")
-                .font(.custom(Theme.FontName.semibold, fixedSize: size * 0.15))
+                .font(Theme.font(Theme.FontName.semibold, size * 0.15))
                 .foregroundStyle(Theme.Colors.textPrimary)
                 .frame(maxWidth: .infinity)
                 .frame(height: size * 0.28)
@@ -90,7 +90,7 @@ private struct CalendarIconFace: View {
             Group {
                 if let day {
                     Text("\(day.day)")
-                        .font(.custom(Theme.FontName.medium, fixedSize: size * 0.44))
+                        .font(Theme.font(Theme.FontName.medium, size * 0.44))
                         .foregroundStyle(Theme.iconGlyph(.calendar))
                 } else {
                     // Month grid: 3 rows of dots, one in red.

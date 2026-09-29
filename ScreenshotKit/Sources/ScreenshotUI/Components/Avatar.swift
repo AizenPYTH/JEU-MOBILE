@@ -32,7 +32,7 @@ struct Avatar: View {
             .overlay(Circle().strokeBorder(Theme.Colors.line2, lineWidth: 1))
             .overlay(
                 Text(contact?.initials ?? "?")
-                    .font(.custom(Theme.FontName.semibold, fixedSize: size * 0.36))
+                    .font(Theme.font(Theme.FontName.semibold, size * 0.36))
                     .foregroundStyle(Theme.Colors.textPrimary)
             )
             .frame(width: size, height: size)
@@ -49,7 +49,7 @@ struct GroupAvatar: View {
         Circle()
             .fill(Theme.Colors.bgElevated)
             .overlay(Circle().strokeBorder(Theme.Colors.line2, lineWidth: 1))
-            .overlay(Text("\(count)").font(.custom(Theme.FontName.mono, fixedSize: size * 0.32)).foregroundStyle(Theme.Colors.textSecondary))
+            .overlay(Text("\(count)").font(Theme.font(Theme.FontName.mono, size * 0.32)).foregroundStyle(Theme.Colors.textSecondary))
             .frame(width: size, height: size)
             .accessibilityHidden(true)
     }
@@ -85,7 +85,7 @@ struct Portrait: View {
             .overlay(StripedPattern().clipShape(RoundedRectangle(cornerRadius: Theme.Radius.md, style: .continuous)))
             .overlay(
                 Text(contact?.initials ?? "?")
-                    .font(.custom(Theme.FontName.semibold, fixedSize: min(width, height) * 0.3))
+                    .font(Theme.font(Theme.FontName.semibold, min(width, height) * 0.3))
                     .foregroundStyle(Theme.Colors.textPrimary)
             )
             .elevation0(Theme.Radius.md)

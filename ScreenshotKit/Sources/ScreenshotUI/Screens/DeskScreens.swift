@@ -510,7 +510,7 @@ struct ArchivesView: View {
             withAnimation(Trace.Motion.standard) { filter = value }
             Haptics.selection()
         } label: {
-            Text(title).font(.custom(Theme.FontName.medium, size: 13))
+            Text(title).font(.custom(Trace.FontName.sansMedium, size: 13, relativeTo: .footnote))
                 .foregroundStyle(on ? Trace.Colors.ink : Trace.Colors.bone)
                 .padding(.horizontal, 14).frame(minHeight: 32)
                 .background(Capsule().fill(on ? Trace.Colors.bone : .clear))

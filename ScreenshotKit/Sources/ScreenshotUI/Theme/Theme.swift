@@ -1,9 +1,11 @@
 #if os(iOS)
 import SwiftUI
+import UIKit
 import CaseEngine
 
-/// Design tokens from the SCREENSHOT handoff (docs/design/README.md §C, §D, §E, §I).
-/// « OS fictif conçu pour une enquête » : stepped blacks, white as action, amber as signal.
+/// Tokens of the seized phone. UX V3 (docs/design_ux_v3 §2–3): the phone is a real phone — light
+/// background, the system font (SF Pro), standard app colours, blue and grey bubbles — so that
+/// entering it reads as entering another device, the dark BEN bar always visible below.
 ///
 /// **Rule:** views never hard-code a colour, font, size, radius or duration — they read `Theme.*`.
 public enum Theme {
@@ -12,58 +14,58 @@ public enum Theme {
 
     public enum Colors {
         /// Narrative screens: intro, notebook, accusation, results.
-        public static let ink0 = Color(hex: 0x050607)
+        public static let ink0 = Color(hex: 0x0B0E13)
         /// Background of the phone's apps.
-        public static let bgBase = Color(hex: 0x08090B)
+        public static let bgBase = Color(hex: 0xFFFFFF)
         /// Cards, sheets.
-        public static let bgSurface = Color(hex: 0x0F1114)
+        public static let bgSurface = Color(hex: 0xF6F6F8)
         /// Fields, tiles, grouped cells.
-        public static let bgRaised = Color(hex: 0x16191D)
+        public static let bgRaised = Color(hex: 0xF2F2F7)
         /// Received bubbles, menus, toasts.
-        public static let bgBubbleIn = Color(hex: 0x1C1F24)
+        public static let bgBubbleIn = Color(hex: 0xE9E9EB)
         /// Avatars, inner chips.
-        public static let bgElevated = Color(hex: 0x1E2227)
+        public static let bgElevated = Color(hex: 0xE5E5EA)
         /// Active segment, pressed state.
-        public static let bgSelected = Color(hex: 0x2A2E34)
+        public static let bgSelected = Color(hex: 0xD1D1D6)
 
         /// Text, primary button, sent bubbles.
-        public static let textPrimary = Color(hex: 0xECEAE6)
-        public static let textSecondary = Color(hex: 0xA3A29D)
+        public static let textPrimary = Color(hex: 0x111111)
+        public static let textSecondary = Color(hex: 0x6C6C70)
         /// Timestamps, captions (≥ 11 pt, never critical text).
-        public static let textTertiary = Color(hex: 0x6B6B67)
-        public static let textOnLight = Color(hex: 0x0B0C0E)
+        public static let textTertiary = Color(hex: 0x8A8A8E)
+        public static let textOnLight = Color(hex: 0xFFFFFF)
 
         /// Pinned, unread, progress, timer ≤ 01:00.
-        public static let signal = Color(hex: 0xE3B158)
-        public static let signalTint = Color(hex: 0xE3B158, opacity: 0.14)
-        public static let signalLine = Color(hex: 0xE3B158, opacity: 0.45)
+        public static let signal = Color(hex: 0xB86E00)
+        public static let signalTint = Color(hex: 0xE8A03A, opacity: 0.16)
+        public static let signalLine = Color(hex: 0xE8A03A, opacity: 0.5)
         /// Timer ≤ 00:10, missed call, error, destructive.
-        public static let alert = Color(hex: 0xE5534B)
-        public static let alertText = Color(hex: 0xFF6B61)
-        public static let alertTint = Color(hex: 0xE5534B, opacity: 0.16)
+        public static let alert = Color(hex: 0xE5484D)
+        public static let alertText = Color(hex: 0xD1343A)
+        public static let alertTint = Color(hex: 0xE5484D, opacity: 0.14)
         /// Location, tappable addresses.
-        public static let trace = Color(hex: 0x7AB4DB)
+        public static let trace = Color(hex: 0x2F6FE4)
         /// Solved (end screens only).
-        public static let clear = Color(hex: 0x63C58E)
+        public static let clear = Color(hex: 0x1E8E5A)
 
-        public static let line1 = Color(hex: 0xECEAE6, opacity: 0.06)
-        public static let line2 = Color(hex: 0xECEAE6, opacity: 0.10)
-        public static let line3 = Color(hex: 0xECEAE6, opacity: 0.20)
-        public static let scrim = Color.black.opacity(0.55)
+        public static let line1 = Color(hex: 0x3C3C43, opacity: 0.12)
+        public static let line2 = Color(hex: 0x3C3C43, opacity: 0.18)
+        public static let line3 = Color(hex: 0x3C3C43, opacity: 0.30)
+        public static let scrim = Color.black.opacity(0.35)
 
         // Functional colours (polish pass): colour carries meaning, never decoration.
         /// Information, navigation, links, "you are here".
-        public static let info = Color(hex: 0x5AA9F5)
-        public static let infoTint = Color(hex: 0x5AA9F5, opacity: 0.16)
+        public static let info = Color(hex: 0x2F6FE4)
+        public static let infoTint = Color(hex: 0x2F6FE4, opacity: 0.12)
         /// Confirmed / found.
-        public static let clearTint = Color(hex: 0x63C58E, opacity: 0.16)
+        public static let clearTint = Color(hex: 0x3FB27F, opacity: 0.16)
         /// Investigation element: a link between an item and a suspect, the decision.
-        public static let special = Color(hex: 0xB39DFA)
-        public static let specialTint = Color(hex: 0xB39DFA, opacity: 0.16)
+        public static let special = Color(hex: 0x6E4FD8)
+        public static let specialTint = Color(hex: 0x6E4FD8, opacity: 0.12)
 
         /// Sent message bubbles (the familiar "my messages are coloured" convention).
-        public static let bubbleOut = Color(hex: 0x2F7CF6)
-        public static let bubbleOutText = Color(hex: 0xF5F7FA)
+        public static let bubbleOut = Color(hex: 0x2F6FE4)
+        public static let bubbleOutText = Color(hex: 0xFFFFFF)
 
         /// The seized phone's body: brushed dark metal, glass edge, camera island.
         public static let deviceFrameTop = Color(hex: 0x3A3E45)
@@ -73,7 +75,7 @@ public enum Theme {
         public static let deviceButton = Color(hex: 0x2C2F35)
         public static let deviceGlare = Color(hex: 0xFFFFFF, opacity: 0.06)
         /// Behind the phone (the "desk"): a faint cold glow so the device stands out.
-        public static let deskGlow = Color(hex: 0x1C2633)
+        public static let deskGlow = Color(hex: 0x0B0E13)
 
         /// Wallpaper: deep night gradient with two soft lights.
         public static let wallpaperTop = Color(hex: 0x141B2E)
@@ -82,12 +84,12 @@ public enum Theme {
         public static let wallpaperLightB = Color(hex: 0x7A3E6E, opacity: 0.40)
 
         /// Stylised map (reads as a map: land, blocks, main roads, water, parks).
-        public static let mapBackground = Color(hex: 0x1A1F24)
-        public static let mapBlock = Color(hex: 0x21272D)
-        public static let mapMainRoad = Color(hex: 0x6B6250)
-        public static let mapRiver = Color(hex: 0x1D3A55)
-        public static let mapPark = Color(hex: 0x1F3A2B)
-        public static let mapPin = Color(hex: 0xF0544A)
+        public static let mapBackground = Color(hex: 0xF2EFE9)
+        public static let mapBlock = Color(hex: 0xE4E0D8)
+        public static let mapMainRoad = Color(hex: 0xF6D58A)
+        public static let mapRiver = Color(hex: 0xAACBEB)
+        public static let mapPark = Color(hex: 0xCFE5C9)
+        public static let mapPin = Color(hex: 0xE5484D)
         /// App icons: glass sheen, hairline edge, and the little map drawn on the Maps icon.
         public static let iconSheen = Color(hex: 0xFFFFFF, opacity: 0.22)
         public static let iconEdge = Color(hex: 0xFFFFFF, opacity: 0.14)
@@ -95,12 +97,12 @@ public enum Theme {
         public static let iconMapRiver = Color(hex: 0x5FA8E8)
         public static let iconMapRoad = Color(hex: 0xF2C14E)
         public static let iconMapStreet = Color(hex: 0xF5F5F2, opacity: 0.55)
-        public static let mapLabelHalo = Color(hex: 0x0B0D10, opacity: 0.85)
+        public static let mapLabelHalo = Color(hex: 0xFFFFFF, opacity: 0.9)
         /// Primary button pressed.
-        public static let primaryPressed = Color(hex: 0xC9C7C2)
+        public static let primaryPressed = Color(hex: 0x3A3A3C)
     }
 
-    // MARK: Typography (§D) — three voices: Geist (UI), JetBrains Mono (data), Instrument Serif (narrative)
+    // MARK: Typography — the system font (UX V3: the phone is the only place it is used)
 
     /// Phone wallpapers: every seized phone looks like its owner's (the case picks one).
     public struct WallpaperPalette: Sendable {
@@ -131,52 +133,74 @@ public enum Theme {
                                                   lightA: Color(hex: 0xB0508A, opacity: 0.5), lightB: Color(hex: 0x5B4AB8, opacity: 0.4))
     }
 
+    /// The phone uses the system font (SF Pro) and its monospaced digits; these names are kept for
+    /// the few fixed-size uses, which go through `Theme.font(_:_:)`.
     public enum FontName {
-        public static let light = "Geist-Light"
-        public static let regular = "Geist-Regular"
-        public static let medium = "Geist-Medium"
-        public static let semibold = "Geist-SemiBold"
-        public static let mono = "JetBrainsMono-Regular"
-        public static let monoMedium = "JetBrainsMono-Medium"
-        public static let monoSemibold = "JetBrainsMono-SemiBold"
-        public static let monoBold = "JetBrainsMono-Bold"
-        public static let serifItalic = "InstrumentSerif-Italic"
-        public static let serif = "InstrumentSerif-Regular"
+        public static let light = "system.light"
+        public static let regular = "system.regular"
+        public static let medium = "system.medium"
+        public static let semibold = "system.semibold"
+        public static let mono = "system.mono"
+        public static let monoMedium = "system.monoMedium"
+        public static let monoSemibold = "system.monoSemibold"
+        public static let monoBold = "system.monoBold"
+        public static let serifItalic = "Newsreader-Italic"
+        public static let serif = "Newsreader-Regular"
+    }
+
+    /// The system font at a size that follows Dynamic Type from `style` (captured at launch).
+    static func sf(_ size: CGFloat, _ weight: Font.Weight = .regular, _ style: UIFont.TextStyle = .body,
+                   design: Font.Design = .default) -> Font {
+        .system(size: UIFontMetrics(forTextStyle: style).scaledValue(for: size), weight: weight, design: design)
+    }
+
+    /// A fixed-size system font from one of the `FontName` names.
+    static func font(_ name: String, _ size: CGFloat) -> Font {
+        switch name {
+        case FontName.light: .system(size: size, weight: .light)
+        case FontName.medium: .system(size: size, weight: .medium)
+        case FontName.semibold: .system(size: size, weight: .semibold)
+        case FontName.mono: .system(size: size, weight: .regular, design: .monospaced)
+        case FontName.monoMedium: .system(size: size, weight: .medium, design: .monospaced)
+        case FontName.monoSemibold: .system(size: size, weight: .semibold, design: .monospaced)
+        case FontName.monoBold: .system(size: size, weight: .bold, design: .monospaced)
+        case FontName.serif, FontName.serifItalic: .custom(name, fixedSize: size)
+        default: .system(size: size)
+        }
     }
 
     public enum Fonts {
-        public static let display = Font.custom(FontName.semibold, size: 40, relativeTo: .largeTitle)
-        public static let titleLarge = Font.custom(FontName.semibold, size: 34, relativeTo: .largeTitle)
-        public static let title2 = Font.custom(FontName.semibold, size: 30, relativeTo: .title)
-        public static let title = Font.custom(FontName.semibold, size: 22, relativeTo: .title2)
-        public static let headline = Font.custom(FontName.semibold, size: 17, relativeTo: .headline)
-        public static let body = Font.custom(FontName.regular, size: 15, relativeTo: .body)
-        public static let bodyLarge = Font.custom(FontName.regular, size: 17, relativeTo: .body)
-        public static let callout = Font.custom(FontName.regular, size: 14, relativeTo: .callout)
-        public static let calloutStrong = Font.custom(FontName.semibold, size: 14, relativeTo: .callout)
-        public static let caption = Font.custom(FontName.regular, size: 12, relativeTo: .caption)
-        public static let tabLabel = Font.custom(FontName.regular, fixedSize: 11)
-        /// "AFFAIRE 001" — mono caps, +14 % tracking (apply `.tracking(Theme.Tracking.overline)`).
-        public static let overline = Font.custom(FontName.monoSemibold, size: 11, relativeTo: .caption2)
-        public static let data = Font.custom(FontName.mono, size: 13, relativeTo: .footnote)
-        public static let dataStrong = Font.custom(FontName.monoSemibold, size: 13, relativeTo: .footnote)
-        public static let dataSmall = Font.custom(FontName.mono, size: 11, relativeTo: .caption2)
-        public static let timer = Font.custom(FontName.monoSemibold, fixedSize: 14)
-        public static let timerCritical = Font.custom(FontName.monoBold, fixedSize: 14)
-        public static let timerIntro = Font.custom(FontName.monoSemibold, fixedSize: 34)
-        public static let timerTimeUp = Font.custom(FontName.monoSemibold, fixedSize: 88)
-        public static let timerScore = Font.custom(FontName.monoSemibold, fixedSize: 108)
-        public static let narrative = Font.custom(FontName.serifItalic, size: 25, relativeTo: .title2)
-        public static let narrativeSmall = Font.custom(FontName.serifItalic, size: 20, relativeTo: .title3)
-        public static let homeClock = Font.custom(FontName.light, fixedSize: 64)
-        public static let appTile = Font.custom(FontName.medium, fixedSize: 21)
-        public static let notificationTitle = Font.custom(FontName.semibold, size: 14, relativeTo: .subheadline)
-        public static let notificationBody = Font.custom(FontName.regular, size: 14, relativeTo: .subheadline)
-        public static let logo = Font.custom(FontName.semibold, fixedSize: 30)
+        public static let display = sf(40, .semibold, .largeTitle)
+        public static let titleLarge = sf(34, .bold, .largeTitle)
+        public static let title2 = sf(28, .bold, .title1)
+        public static let title = sf(22, .bold, .title2)
+        public static let headline = sf(17, .semibold, .headline)
+        public static let body = sf(16, .regular, .body)
+        public static let bodyLarge = sf(17, .regular, .body)
+        public static let callout = sf(15, .regular, .callout)
+        public static let calloutStrong = sf(15, .semibold, .callout)
+        public static let caption = sf(12.5, .regular, .caption1)
+        public static let tabLabel = Font.system(size: 11)
+        public static let overline = sf(12, .semibold, .caption1)
+        public static let data = sf(13, .regular, .footnote).monospacedDigit()
+        public static let dataStrong = sf(13, .semibold, .footnote).monospacedDigit()
+        public static let dataSmall = sf(11, .regular, .caption2).monospacedDigit()
+        public static let timer = Font.system(size: 14, weight: .semibold).monospacedDigit()
+        public static let timerCritical = Font.system(size: 14, weight: .bold).monospacedDigit()
+        public static let timerIntro = Font.system(size: 34, weight: .semibold).monospacedDigit()
+        public static let timerTimeUp = Font.system(size: 88, weight: .semibold).monospacedDigit()
+        public static let timerScore = Font.system(size: 108, weight: .semibold).monospacedDigit()
+        public static let narrative = Font.custom("Newsreader-Italic", size: 25, relativeTo: .title2)
+        public static let narrativeSmall = Font.custom("Newsreader-Italic", size: 20, relativeTo: .title3)
+        public static let homeClock = Font.system(size: 64, weight: .light)
+        public static let appTile = Font.system(size: 21, weight: .medium)
+        public static let notificationTitle = sf(15, .semibold, .subheadline)
+        public static let notificationBody = sf(15, .regular, .subheadline)
+        public static let logo = Font.system(size: 30, weight: .semibold)
     }
 
     public enum Tracking {
-        public static let overline: CGFloat = 1.5
+        public static let overline: CGFloat = 0.4
         public static let logo: CGFloat = 12
         public static let timeUp: CGFloat = 4
         public static let display: CGFloat = -1.4
@@ -318,21 +342,21 @@ public enum Theme {
         }
     }
 
-    /// Accent of an app, readable on the dark screens (headers, section titles, selected states).
+    /// Accent of an app, readable on the light screens (headers, section titles, selected states).
     public static func appAccent(_ app: AppKind) -> Color {
         switch app {
-        case .messages: Color(hex: 0x5AA9F5)
-        case .phone: Color(hex: 0x5BD48A)
-        case .photos: Color(hex: 0xFFB05C)
-        case .location: Color(hex: 0x6FD3A8)
-        case .calendar: Color(hex: 0xFF6B61)
-        case .notes: Color(hex: 0xE3B158)
-        case .browser: Color(hex: 0x4FD0E0)
-        case .mail: Color(hex: 0x9AA6FF)
-        case .contacts: Color(hex: 0xB9BEC6)
-        case .trash: Color(hex: 0xFF6B61)
-        case .settings: Color(hex: 0xB9BEC6)
-        case .notifications: Color(hex: 0xB39DFA)
+        case .messages: Color(hex: 0x2F6FE4)
+        case .phone: Color(hex: 0x1E8E4A)
+        case .photos: Color(hex: 0xC25E00)
+        case .location: Color(hex: 0x1F7A58)
+        case .calendar: Color(hex: 0xD1343A)
+        case .notes: Color(hex: 0xA86B00)
+        case .browser: Color(hex: 0x0F7A93)
+        case .mail: Color(hex: 0x3D46C9)
+        case .contacts: Color(hex: 0x5E636C)
+        case .trash: Color(hex: 0xD1343A)
+        case .settings: Color(hex: 0x5E636C)
+        case .notifications: Color(hex: 0x6E4FD8)
         }
     }
 
@@ -352,11 +376,11 @@ public enum Theme {
     /// message is attributed at a glance — the name (in that colour), a thin bar and a tinted bubble.
     public static func groupSenderColor(index: Int) -> Color {
         let hues: [Double] = [0.58, 0.08, 0.36, 0.86, 0.15, 0.50, 0.99, 0.72]
-        return Color(hue: hues[((index % hues.count) + hues.count) % hues.count], saturation: 0.55, brightness: 0.95)
+        return Color(hue: hues[((index % hues.count) + hues.count) % hues.count], saturation: 0.7, brightness: 0.62)
     }
 
-    /// The tint laid over a received bubble in a group chat (dark UI: subtle, text stays legible).
-    public static let groupBubbleTintOpacity: Double = 0.22
+    /// The tint laid over a received bubble in a group chat (subtle, text stays legible).
+    public static let groupBubbleTintOpacity: Double = 0.14
 }
 
 // MARK: - Elevation & state modifiers (§E)
@@ -383,12 +407,12 @@ public extension View {
         overlay {
             if pinned {
                 RoundedRectangle(cornerRadius: radius, style: .continuous)
-                    .strokeBorder(Theme.Colors.signal, lineWidth: 2)
+                    .strokeBorder(Theme.Colors.clear, lineWidth: 2)
             }
         }
         .overlay(alignment: .topTrailing) {
             if pinned {
-                Circle().fill(Theme.Colors.signal)
+                Circle().fill(Theme.Colors.clear)
                     .frame(width: Theme.Size.pinnedDot, height: Theme.Size.pinnedDot)
                     .offset(x: 3, y: -3)
                     .accessibilityLabel(Text(L10n.t("a11y.pinned")))
@@ -396,7 +420,7 @@ public extension View {
         }
     }
 
-    /// Overline style: mono caps with +14 % tracking.
+    /// Overline style: small caps header, like a system grouped-list header.
     func overline(_ color: Color = Theme.Colors.textSecondary) -> some View {
         font(Theme.Fonts.overline).tracking(Theme.Tracking.overline).foregroundStyle(color).textCase(.uppercase)
     }

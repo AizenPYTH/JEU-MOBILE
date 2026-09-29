@@ -2,7 +2,7 @@
 import CoreText
 import Foundation
 
-/// Registers the bundled OFL fonts (Geist, JetBrains Mono, Instrument Serif) at launch.
+/// Registers the bundled OFL fonts (Newsreader, IBM Plex Sans, IBM Plex Mono) at launch.
 /// Swift packages cannot declare fonts in Info.plist; if registration fails, SwiftUI falls back
 /// to the system font.
 enum AppFonts {
