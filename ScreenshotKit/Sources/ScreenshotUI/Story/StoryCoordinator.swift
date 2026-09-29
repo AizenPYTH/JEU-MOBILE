@@ -262,7 +262,7 @@ final class StoryCoordinator {
     }
 
     /// « ÉM » from « Élise », « Morel ».
-    static func initials(_ first: String, _ last: String) -> String {
+    nonisolated static func initials(_ first: String, _ last: String) -> String {
         (String(first.prefix(1)) + String(last.prefix(1))).uppercased()
     }
 
