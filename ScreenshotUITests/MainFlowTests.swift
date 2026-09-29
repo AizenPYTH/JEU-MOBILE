@@ -136,10 +136,13 @@ final class MainFlowTests: XCTestCase {
     private func fileWithBadge(_ target: XCUIElement, _ name: String) {
         dismissUrgentBanner()
         let badge = element("evidence.file")
-        tapWhenReady(target, "élément à verser")
-        if !badge.waitForExistence(timeout: 3) {
+        // Tap the text of the message (its photo, if any, opens the photo).
+        wait(target, 10, "élément à verser")
+        usleep(700_000)
+        target.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.93)).tap()
+        if !badge.waitForExistence(timeout: 3), target.exists {
             snap("retry-selection-\(name)")
-            target.tap()
+            target.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.93)).tap()
         }
         wait(badge, 5, "« + Verser au dossier »")
         snap(name + "-badge")
@@ -266,9 +269,15 @@ final class MainFlowTests: XCTestCase {
             scrollTo(row)
             if let shot { snap(shot) }
             tap(row, "dossier \(id)", expecting: start)
-        } else {
-            // The featured folder of the Bureau (the next case to open).
+        } else if element("home.start").waitForExistence(timeout: 3) {
+            // The featured case card of the Bureau (the next case to open).
             tap(element("home.start"), "Ouvrir le dossier", expecting: start)
+        } else {
+            // A case just classified stays on the Bureau's card (« ✓ Résolue »): its file is in the Archives.
+            tap(element("menu.cases"), "Archives", expecting: element("case.\(id)"))
+            let card = element("case.\(id)")
+            scrollTo(card)
+            tap(card, "dossier \(id) (Archives)", expecting: start)
         }
     }
 
@@ -941,9 +950,9 @@ final class MainFlowTests: XCTestCase {
     private func playScene(until target: XCUIElement, _ what: String, maxSteps: Int = 90) {
         for step in 0..<maxSteps {
             if target.waitForExistence(timeout: 0.6) { return }
-            let scene = element("story.scene")
-            if scene.exists {
-                scene.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45)).tap()
+            // The scene may end between the check and the tap: tap the screen, not the element.
+            if element("story.scene").exists {
+                app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.45)).tap()
             }
             if step == 30 { snap("scene-\(what)") }
         }
