@@ -45,7 +45,9 @@ docs/TESTFLIGHT_SETUP.md  Signature et TestFlight sans Mac
 docs/CASE_AUTHORING.md    Écrire une nouvelle affaire (JSON)
 docs/archive/             ARCHIVÉ / LEGACY — anciens prompts de cinématiques, ancien audit (hors production)
 docs/CASE_PRESENTATION.md Présentation d'une affaire par son dossier (aucune cinématique)
-docs/design_final/        Handoff FINAL V3.0 (NE PAS MODIFIER) — parcours, écrans 01–15, tutoriel, états, critères
+docs/appstore/            Fiche App Store (brouillon) et politique de confidentialité (à publier)
+docs/design_ux_v3/        Handoff UX V3 « Digital Investigation Interface » (NE PAS MODIFIER) — design en vigueur
+docs/design_final/        Handoff FINAL V3.0 (NE PAS MODIFIER) — parcours, écrans 01–15 (visuel remplacé par UX V3)
 docs/design/              Handoff design SCREENSHOT v1.0 (NE PAS MODIFIER) — tokens du téléphone
 docs/brand/               Logo CONCLUDE : ENQUÊTES (source de l'icône)
 docs/design_trace/        Handoff TRACE v2 « dossier d'enquête » (NE PAS MODIFIER) — tout ce qui est hors du téléphone
@@ -76,16 +78,15 @@ ScreenshotKit/            Package Swift contenant tout le jeu
                           pause, versement), InvestigationView (Carnet + Indice), EndScreens (09 conclusion, 10
                           vérification, 11 rapport, 12 affectation), DeskScreens (Bureau, Archives, Enquêteur),
                           MetaScreens (niveaux, archive, Paramètres)
-    Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (appui long 0,4 s → FilingSheet « Verser au
-                          dossier »), CoachBubble (bulles du tutoriel),
-                          Dossier (pièces à conviction, fiches suspects, chronologie), Controls (boutons,
-                          maintien pour confirmer, segments, en-têtes, état vide)
+    Components/           Avatar/Portrait, GeneratedPhoto, Pinnable (toucher → « + Verser au dossier », appui long =
+                          raccourci), FilingSheet (pièce versée), CoachBubble (conseils),
+                          Dossier (cartes pièce / suspect, connexions, chronologie), Controls (contrôles du téléphone)
     Story/                Mode Histoire (SceneKit) : StoryCoordinator, StageKit (décors, personnages, caméras),
                           StoryStageView, scène (sous-titres, choix), écrans h01–h19, StoryRootView
-    Theme/, Support/      Tokens du téléphone (Theme.swift), design papier (TraceDesign.swift + ConcludeKit.swift : boutons,
-                          logo, tampons PNG, post-it), polices, L10n, dates, ArtLibrary (images livrées)
-    Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py, sons du mode Histoire : gen_story_sounds.py), Fonts/ (Geist, JetBrains Mono,
-                          Instrument Serif, Newsreader, IBM Plex Mono, Caveat — OFL)
+    Theme/, Support/      Tokens du téléphone (Theme.swift), du BEN (TraceDesign.swift + ConcludeKit.swift : couleurs,
+                          polices, boutons, badges, segments ; StoryDesign.swift), L10n, dates, ArtLibrary (images livrées)
+    Resources/            Localizable.xcstrings (fr + en), Sounds/ (générés : scripts/audio/gen_sounds.py, sons du mode
+                          Histoire : gen_story_sounds.py), Fonts/ (Newsreader, IBM Plex Sans, IBM Plex Mono — OFL)
   Sources/StoryEngine/    Mode Histoire, moteur en Swift pur (Foundation) : personnage, décors, scènes, campagne,
                           StoryDirector (déterministe), validateur, sauvegarde versionnée + migrations
   Sources/StoryLibrary/   Données de l'histoire : Resources/Story/{characters,npcs,locations,campaign}.json + scenes/
@@ -123,35 +124,39 @@ scripts/                  test.sh, setup-linux-swift.sh, cases/ (générateurs d
    affaire est écrit dans la langue du téléphone saisi.
 9. Pas de dépendance tierce sans accord du porteur de projet.
 
-## Design — « papier dehors, verre dedans » (handoff final V3)
+## Design — « Digital Investigation Interface » (handoff UX V3)
 
-- Sources de vérité : `docs/design_final/` (V3.0 : parcours, écrans 01–15, tutoriel, états ; prime sur
-  les parcours des handoffs précédents), `docs/design_trace/` (matières : bureau, dossiers, pièces, carnet,
-  tampons) et `docs/design/` (le téléphone saisi). Lecture seule.
-- Premier lancement : Lancement → Titre → Qui enquête ? (Élise Morel / Vincent Delmas) → Dossier #001 →
-  téléphone, avec 3 bulles (EXPLORER · VERSER AU DOSSIER · RELIER) au #001 seulement. La couche carrière
-  (matricule, rang ENQUÊTEUR → INSPECTEUR → SENIOR → EXPÉRIMENTÉ, profil) n'apparaît qu'après l'écran 12
-  « Affectation » (après #001). Lancements suivants : Bureau, ou Titre-reprise si une enquête est en cours.
+- Source de vérité : `docs/design_ux_v3/HANDOFF_UX_V3.md` (lecture seule ; les maquettes HTML citées n'ont pas été
+  livrées). Elle remplace les règles VISUELLES de `docs/design_final` §G, `docs/design_story` DESIGN_SYSTEM §2–4 et de
+  `docs/design_trace` / `docs/design` (papier, kraft, rotations, textures, Caveat, Geist). Flux, données, vocabulaire et
+  contenu du téléphone sont conservés. État et écarts : `DESIGN_INTEGRATION.md`.
+- **Le redesign ne change aucune règle de jeu** (décision du porteur de projet) : présentation et compréhension
+  seulement. Conclure reste possible à tout moment (aucun minimum de pièces ; dossier vide → confirmation) ; les
+  Connexions sont une aide (jamais requises, jamais notées ni jugées). Toute règle demandée par une maquette est
+  vérifiée contre `rules.json`, le moteur, les affaires, CaseLint et les tests, puis signalée, jamais imposée.
+- Le BEN (hors téléphone) : `Trace.*` (TraceDesign.swift, ConcludeKit.swift) — fond bleu-graphite plat (`bg`,
+  `surface…`, `line`, `text/text2/text3`, `ben`, `benText`, `critical`, `success`, `warning`), aucune texture, rotation
+  ni ombre. Trois familles : Newsreader (titres), IBM Plex Sans (interface), IBM Plex Mono (données : heures, numéros,
+  chrono). Capitales seulement pour les en-têtes de section. Un seul bouton principal (ben) par écran.
+- Le téléphone : `Theme.*` (Theme.swift) — clair, police système, couleurs d'app standard. La barre d'enquête sombre
+  (« ‹ Dossier » · chrono · Carnet) reste visible en bas pendant toute l'enquête.
+- Premier lancement : Lancement → Première impression → Qui enquête ? (Élise Morel / Vincent Delmas) → Dossier #001 →
+  téléphone, avec 2 conseils (« Commencez par les messages. », « Touchez un message pour le verser au dossier. ») et
+  « Retrouvez-la dans le Carnet. » à la 1ʳᵉ pièce, une fois chacun (réinitialisables dans Paramètres). La couche
+  carrière (matricule, rang) n'apparaît qu'après l'écran « Affectation » (après #001). Lancements suivants : Bureau
+  ([Enquêtes | Alibi | Histoire], carte de l'affaire en cours ou suivante ; Alibi/Histoire après l'affectation).
 - **Aucune cinématique, aucune vidéo, jamais** (décision définitive du porteur de projet) : l'affaire est
   présentée par son dossier (docs/CASE_PRESENTATION.md : contexte, mission, personnes, `firstLead`) et une
-  courte ouverture (< 2 s, passable). `introScene` et le champ `video` des scènes n'existent plus ;
+  courte ouverture (< 1 s, passable). `introScene` et le champ `video` des scènes n'existent plus ;
   `NoCinematicTests` refuse tout fichier vidéo, lecteur vidéo ou clé de données qui en demanderait.
-- Trois verbes partout : EXPLORER · VERSER AU DOSSIER · CONCLURE (jamais « Épingler », « Accuser »,
-  « Recrue », « Stagiaire » : `LocalizationTests.bannedWordsAreGone`). Un seul bouton plein par écran.
-  Le logo n'apparaît que sur 01, 02, 02b et À propos.
-  État et conflits : `DESIGN_INTEGRATION.md` (à tenir à jour). Si la maquette contredit le brief ou
-  le moteur : noter le conflit et demander.
-- Hors du téléphone : `Trace.*` (TraceDesign.swift) — bureau sombre, papiers, kraft, encre, tampon
-  rouge, stylo bleu ; Newsreader (texte), IBM Plex Mono (champs, pièces, chrono), Caveat (manuscrit du
-  joueur uniquement). Le jeu n'écrit jamais à la main à la place du joueur : seuls les tampons
-  administratifs sont imprimés.
-- Dans le téléphone : tokens v1.0 `Theme.*` (6 noirs étagés, `textPrimary`, `signal`, `alert`,
-  `trace`, `clear`), Geist / JetBrains Mono, aucune texture papier. Deux objets papier seulement sur
-  le téléphone : l'étiquette du chrono et l'onglet kraft du Carnet.
-- Vocabulaire : Verser au dossier, L'accuse / Le disculpe, Conclure l'enquête, « Qui est responsable ? »,
-  Rapport de clôture, Classer le dossier, Bureau, Archives, Enquêteur. Pièce n° = ordre de versement.
-- Conclure = maintenir 1,2 s « MAINTENIR : {PRÉNOM} EST RESPONSABLE » ; vérification tapée 1,4 s puis
-  tampon PNG RÉSOLU / NON RÉSOLU. Non résolu : « Reprendre l'enquête » (chrono plein, pièces gardées).
+- Verser au dossier : un toucher sur n'importe quel élément du téléphone propose « + Verser au dossier » (proposé
+  partout, jamais un indice) ; l'appui long verse directement. Carnet en 4 onglets : Pièces · Suspects · Chronologie ·
+  Connexions. Jamais « Épingler », « Accuser », « Recrue », « Stagiaire » (`LocalizationTests.bannedWordsAreGone`).
+- Vocabulaire : Verser au dossier, L'accuse / Le disculpe, Relier, Conclure l'enquête, « Qui est responsable ? »,
+  Rapport, Classer le dossier, Bureau, Archives, Enquêteur. Pièce n° = ordre de versement.
+- Conclure = maintenir 1,6 s « Maintenir : {Prénom} est responsable » (VoiceOver : confirmation) ; vérification
+  1,8 s ; rapport. Non résolu : « Reprendre l'enquête » (chrono plein, pièces gardées) ; la solution n'est montrée que
+  sur demande. Le seul tampon de l'interface : RÉSOLU sur la carte de l'affaire au Bureau.
   Note finale = 60 · bon suspect + 25 · trouvées/total + 10 · temps restant/durée + 5 · pièces
   pertinentes/pièces − coût des indices (valeurs dans `rules.json` et l'affaire).
 
@@ -225,6 +230,9 @@ L'interface (ScreenshotUI) ne compile qu'avec Xcode : c'est `ios-build.yml` (mac
 - [x] Mode ALIBI (vérifications courtes) et photos réelles (Wikimedia Commons / Openverse)
 - [x] Mode HISTOIRE (handoff docs/design_story) : Bureau à 3 modes, création de l'enquêteur, scènes 3D SceneKit,
       chapitres 01–02 jouables (03–05 annoncés), carrière commune, bureau à 4 niveaux, sauvegarde séparée versionnée
+- [x] Handoff UX V3 (docs/design_ux_v3) : BEN plat sombre, téléphone clair, barre d'enquête, « + Verser au dossier »,
+      Carnet 4 onglets + Connexions, Bureau à segments, dossier, conclusion / vérification / rapport, première
+      impression ; cinématiques supprimées définitivement ; aucune règle de jeu modifiée
 - [ ] Mode HISTOIRE : modèles 3D / animations / voix (docs/story/SCENE_SYSTEM.md), chapitres 03–05
 - [ ] Affaires #006–#015 (6 suspects, 8–10 min), vérifications ALIBI #004+
 - [ ] Plusieurs téléphones par affaire (le modèle `devices` le permet déjà ; UI de bascule à faire)

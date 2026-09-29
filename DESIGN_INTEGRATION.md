@@ -1,7 +1,50 @@
-# Intégration des handoffs design (v1.0 → TRACE v2 → final V3)
+# Intégration des handoffs design (v1.0 → TRACE v2 → final V3 → UX V3)
 
 Sources : `docs/design_final/` (V3, parcours), `docs/design_trace/`, `docs/design/` (non modifiés). Ce document dit ce qui est intégré, ce qui reste à faire, et
 les points où le handoff contredit le brief ou le moteur — **à trancher par le porteur de projet**.
+
+## Handoff UX V3 « Digital Investigation Interface » (29 septembre 2026) — design en vigueur
+
+Source : `docs/design_ux_v3/HANDOFF_UX_V3.md`. **Les maquettes HTML citées (« CONCLUDE - Refonte UX V3.dc.html »,
+écrans 00–13) n'étaient pas dans l'archive** : l'intégration suit le texte. Elle remplace le visuel papier (V3 final
+§G, Histoire §2–4) ; flux, données, vocabulaire et contenu du téléphone sont conservés.
+
+### Intégré
+- Tokens §3 (couleurs, 3 familles, rayons, hauteurs) dans `TraceDesign.swift` / `ConcludeKit.swift` ; les anciens noms
+  (paper, ink, kraft, stamp…) sont des alias ; Geist, Caveat, JetBrains Mono et Instrument Serif supprimés, IBM Plex
+  Sans ajouté (OFL). Téléphone clair (`Theme.*`), police système.
+- Composants §5 : ActionButton, StatusBadge, segmenté (NotebookTab), BackLink « ‹ … », SectionHeader, ReportCard,
+  maintien, CaseCard, ModeCard, SuspectCard, EvidenceCard, EvidenceBadge, EvidenceSheet, ConnectionChain,
+  ConclusionCard, InvestigationBar, PhoneAppIcon (SF Symbols).
+- Écrans §6 : 00 Première impression, 01 Bureau [Enquêtes | Alibi | Histoire] + 01b, 02 Dossier, 03 téléphone
+  (barre d'enquête), 04 sélection + « + Verser au dossier », 05 pièce versée (fermeture 2,5 s, vol vers le Carnet),
+  06–09 Carnet (poussé, 4 onglets), 10 Conclusion, 11 Vérification, 12 Rapport (tampon RÉSOLU sur la carte au Bureau),
+  13 états vides / erreur / verrouillé. Re-skin : Alibi, Histoire (hors rendu 3D), Profil, Archives, Paramètres.
+- §7 conseils une seule fois (drapeaux `tip_*`), « Réinitialiser les conseils » dans Paramètres.
+
+### Écarts assumés (décisions)
+- **Aucune règle de jeu modifiée (décision du porteur de projet)** : §4 « Conclure visible à partir de 3 pièces,
+  désactivé sinon » **refusé** — cette règle n'existait ni dans `rules.json`, ni dans le moteur, ni dans les affaires,
+  CaseLint ou les tests ; le design précédent n'utilisait 3 que pour l'aspect du bouton (« en contour si moins de 3
+  pièces sont reliées, plein à partir de 3. Toujours actif. »). Conclure reste toujours possible ; dossier vide →
+  confirmation. La phrase « Vous pouvez maintenant conclure depuis le Carnet » (3ᵉ pièce) est retirée.
+- Connexions (§6-09) : nouvelle donnée de la partie (chaînes + verbe), sauvegardée ; jamais requise, jamais notée,
+  jamais jugée ; le verdict ne la lit pas (test `connectionsNeverGateTheConclusion`).
+- §6-12 « en cas d'échec, la vraie réponse » **non appliqué** : la solution reste montrée sur demande seulement
+  (principe du brief), sinon « Reprendre l'enquête » deviendrait trivial. Le bouton garde « Reprendre l'enquête »
+  (§6-12 dit « Rejouer ») : chrono plein, pièces gardées.
+- « Maintenir pour accuser {Prénom} » → « Maintenir : {Prénom} est responsable » (mot « accuser » banni) ; VoiceOver :
+  « {Prénom} est responsable ? ».
+- Alibi / Histoire verrouillés au Bureau avec la condition existante (joueur affecté après le rapport de #001), pas
+  « #001 résolu ». Aucune affaire n'est verrouillée (comme avant).
+- Carnet : ordre des onglets Pièces · Suspects · Chronologie · Connexions (identifiants des tests), le Carnet s'ouvre
+  sur Pièces. L'alibi « innocent » d'un suspect n'est jamais affiché (il dévoilerait la réponse).
+- Tutoriel #001 : l'anneau de la bulle « Touchez un message… » vise la première vraie pièce de la conversation, comme
+  l'ancien tutoriel (à trancher si l'on préfère un message neutre).
+- **À trancher** : durées de présentation — maintien 1,6 s (handoff) au lieu de 1,2 s, vérification 1,8 s au lieu de
+  2,4 s. Appliquées pour l'instant (ce ne sont pas des règles de résolution).
+- Appui long : verse directement (§6-04) au lieu d'ouvrir une feuille de confirmation ; retirer une pièce se fait
+  depuis le Carnet.
 
 ## Mode Histoire — handoff « Mode Histoire » (27 septembre 2026)
 
