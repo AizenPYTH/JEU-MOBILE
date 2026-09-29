@@ -2,41 +2,38 @@
 import SwiftUI
 import UIKit
 
-// Shared pieces of the UX V3 design (docs/design_ux_v3): the call-to-action buttons (ActionButton),
-// the logo, the RÉSOLU stamp, portraits, the confirmation sheet and the error card. Every screen
-// outside the phone builds on these and on TraceDesign.swift.
+// Shared pieces of the V4 design (docs/design_v4) on the V3 UX: buttons (ivory on the desk, ink on
+// paper), the back link, section labels, the hold, report cards, the logo, the PNG stamps, prints,
+// the confirmation sheet and the post-it. Every screen outside the phone builds on these and on
+// TraceDesign.swift.
 
 extension Trace.Colors {
-    /// A selected card.
-    static let paperSelected = surface2
-    /// The former white border of a print.
-    static let printWhite = surface2
-    /// Secondary text (the former secondary ink).
-    static let inkMid = text2
-    /// Secondary text on the desk, links.
-    static let boneMid = text2
-    /// Fallback avatar background.
-    static let benBlue = surface3
-    /// Initials on a missing portrait.
-    static let portraitInitials = text
-    /// The player's own words.
-    static let handInk = benText
-    /// Text on a critical fill.
-    static let criticalText = onFill
-    /// Hold-to-confirm track.
-    static let holdTrack = surface2
-    static let deskWarm = bg
-    static let deskDeep = bg
+    /// A selected paper card.
+    static let paperSelected = Color(hex: 0xF0E9D8)
+    /// The white border of a print.
+    static let printWhite = photoBorder
+    /// Secondary ink on paper.
+    static let inkMid = Color(hex: 0x3A3631)
+    /// Secondary text on the desk.
+    static let boneMid = ivoryMid
+    /// Background of an identity photo and of its initials.
+    static let benBlue = photoBg
+    /// The player's handwriting.
+    static let handInk = pen
+    /// Text on a red fill.
+    static let criticalText = ivory
+    static let deskWarm = Color(hex: 0x3A2D20)
+    static let deskDeep = Color(hex: 0x100D0A)
 }
 
 extension Trace.Fonts {
-    /// Button label: Plex Sans 17/600, sentence case.
-    static let cta = Font.custom(Trace.FontName.sansSemibold, size: 17, relativeTo: .body)
-    /// A section header (caps are applied by the view): Plex Sans 12/600.
-    static let kicker = Font.custom(Trace.FontName.sansSemibold, size: 12, relativeTo: .caption)
-    /// Screen title: Newsreader 31/500.
-    static let monoTitle = Font.custom(Trace.FontName.serifMedium, size: 31, relativeTo: .title)
-    /// Plex Sans 15/600: names, verbs, values in a row.
+    /// Button label: Plex Sans 16/600, sentence case.
+    static let cta = Font.custom(Trace.FontName.sansSemibold, size: 16, relativeTo: .body)
+    /// A short capital label: Plex Mono 11/700.
+    static let kicker = Font.custom(Trace.FontName.monoBold, size: 11, relativeTo: .caption)
+    /// Screen title: Newsreader 30/600.
+    static let monoTitle = Font.custom(Trace.FontName.serifSemibold, size: 30, relativeTo: .title)
+    /// Plex Sans 15/600: names in a row, verbs, values.
     static let monoStrong = Font.custom(Trace.FontName.sansSemibold, size: 15, relativeTo: .subheadline)
     /// Links: Plex Sans 15.
     static let link = Font.custom(Trace.FontName.sans, size: 15, relativeTo: .body)
@@ -45,24 +42,31 @@ extension Trace.Fonts {
     /// A line in Newsreader 26.
     static let tagline = Font.custom(Trace.FontName.serif, size: 26, relativeTo: .title)
     /// Newsreader titles.
-    static func serifTitle(_ size: CGFloat) -> Font { .custom(Trace.FontName.serifMedium, size: size, relativeTo: .title2) }
+    static func serifTitle(_ size: CGFloat) -> Font { .custom(Trace.FontName.serifSemibold, size: size, relativeTo: .title2) }
 }
 
 // MARK: - Backgrounds
 
-/// The BEN background: flat `bg` (V3: no lamp, no wood).
+/// The desk with the lamp's pool (V4 `deskLamp`).
 struct DeskBackdrop: View {
+    var body: some View { TraceDesk() }
+}
+
+/// The accusation's desk (V4 `deskDeep`).
+struct DeepDeskBackdrop: View {
     var body: some View {
-        Trace.Colors.bg.ignoresSafeArea().accessibilityHidden(true)
+        RadialGradient(colors: Trace.Colors.deskDeepGradient, center: .init(x: 0.5, y: 0.15), startRadius: 0, endRadius: 700)
+            .ignoresSafeArea()
+            .accessibilityHidden(true)
     }
 }
 
-// MARK: - Buttons (ActionButton, §5)
+// MARK: - Buttons (§3 « Boutons »)
 
-/// ActionButton (§5): 56 pt, radius 14, Plex Sans 17/600. One primary (ben, white text) per
-/// screen; secondary on `surface2`; tertiary outlined at 20 %; destructive on `critical`.
-/// Pressed: scale 0.98 + darker (90 ms). Disabled: `surface2` + `text3`.
-/// `onPaper` is kept for callers and no longer changes anything.
+/// The main action of a screen, and its variants: 56 pt, radius 9, Plex Sans 16/600.
+/// Primary on the desk: ivory with ink text; on paper or kraft (`onPaper`): ink with ivory text.
+/// Secondary (`.outline`): 1.5 pt outline (ink on paper, ivory on the desk). Tertiary: text only.
+/// Destructive: red with ivory text. Pressed: scale 0.98, 90 ms. Disabled: 40 %.
 struct CTAButtonStyle: ButtonStyle {
     enum Kind { case primary, outline, tertiary, destructive }
     var kind: Kind = .primary
@@ -70,15 +74,16 @@ struct CTAButtonStyle: ButtonStyle {
     var height: CGFloat = 56
 
     func makeBody(configuration: Configuration) -> some View {
-        ActionButtonBody(label: configuration.label, pressed: configuration.isPressed, kind: kind, height: height)
+        ActionButtonBody(label: configuration.label, pressed: configuration.isPressed, kind: kind, onPaper: onPaper, height: height)
     }
 }
 
-/// The body of an ActionButton (reads `isEnabled` itself).
+/// The body of a V4 button (reads `isEnabled` itself).
 struct ActionButtonBody<Label: View>: View {
     let label: Label
     let pressed: Bool
     let kind: CTAButtonStyle.Kind
+    var onPaper = false
     let height: CGFloat
     @Environment(\.isEnabled) private var isEnabled
 
@@ -89,41 +94,47 @@ struct ActionButtonBody<Label: View>: View {
             .multilineTextAlignment(.center)
             .lineLimit(2)
             .minimumScaleFactor(0.8)
-            .foregroundStyle(isEnabled ? textColor : Trace.Colors.text3)
+            .foregroundStyle(textColor)
             .padding(.horizontal, 16)
             .frame(maxWidth: .infinity, minHeight: height)
-            .background(shape.fill(isEnabled ? fillColor : Trace.Colors.surface2))
-            .overlay(shape.strokeBorder(Trace.Colors.text.opacity(kind == .tertiary && isEnabled ? 0.2 : 0), lineWidth: 1.5))
+            .background(shape.fill(fillColor))
+            .overlay(shape.strokeBorder(strokeColor, lineWidth: kind == .outline ? 1.5 : 0))
             .contentShape(shape)
+            .opacity(isEnabled ? 1 : 0.4)
             .scaleEffect(pressed ? 0.98 : 1)
             .animation(.easeOut(duration: 0.09), value: pressed)
     }
 
+    private var ink: Color { onPaper ? Trace.Colors.ink : Trace.Colors.ivory }
+
     private var fillColor: Color {
         switch kind {
-        case .primary: pressed ? Trace.Colors.benPressed : Trace.Colors.ben
-        case .outline: pressed ? Trace.Colors.surface3 : Trace.Colors.surface2
-        case .tertiary: .clear
-        case .destructive: pressed ? Trace.Colors.critical.opacity(0.85) : Trace.Colors.critical
+        case .primary: onPaper ? Trace.Colors.ink : Trace.Colors.ivory
+        case .outline, .tertiary: .clear
+        case .destructive: onPaper ? Trace.Colors.red : Trace.Colors.redOnDesk
         }
     }
 
     private var textColor: Color {
         switch kind {
-        case .primary, .destructive: Trace.Colors.onFill
-        case .outline, .tertiary: Trace.Colors.text
+        case .primary: onPaper ? Trace.Colors.ivory : Trace.Colors.ink
+        case .outline, .tertiary: ink
+        case .destructive: Trace.Colors.ivory
         }
     }
+
+    private var strokeColor: Color { kind == .outline ? ink : .clear }
 }
 
-/// A text link: Plex Sans 15 in `benText`, at least 44 pt tall.
+/// A text link: Plex Sans 15 — ink2 underlined on paper, ivory2 on the desk; 44 pt tall.
 struct TextLinkStyle: ButtonStyle {
     var onPaper = false
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(Trace.Fonts.link)
-            .foregroundStyle(Trace.Colors.benText)
+            .foregroundStyle(onPaper ? Trace.Colors.ink2 : Trace.Colors.ivoryMid)
+            .underline(onPaper)
             .frame(minHeight: 44)
             .contentShape(Rectangle())
             .opacity(configuration.isPressed ? 0.6 : 1)
@@ -134,6 +145,8 @@ struct TextLinkStyle: ButtonStyle {
 struct BackLink: View {
     let title: String
     var identifier = "nav.back"
+    /// Ink on paper or kraft; ivory on the desk.
+    var onPaper = false
     let action: () -> Void
 
     var body: some View {
@@ -142,7 +155,7 @@ struct BackLink: View {
                 Image(systemName: "chevron.left").font(.system(size: 17, weight: .semibold))
                 Text(title).font(Trace.Fonts.link)
             }
-            .foregroundStyle(Trace.Colors.benText)
+            .foregroundStyle(onPaper ? Trace.Colors.ink : Trace.Colors.ivoryMid)
             .frame(minHeight: Trace.Height.hit, alignment: .leading)
             .contentShape(Rectangle())
         }
@@ -152,10 +165,10 @@ struct BackLink: View {
     }
 }
 
-/// SectionHeader (§5): Plex Sans 12/600 caps in `text2`, 10 pt below.
+/// A section label: Plex Mono 11/700 caps (V4), 10 pt below; ink2 on paper, ivory2 on the desk.
 struct SectionHeader: View {
     let title: String
-    var color: Color = Trace.Colors.text2
+    var color: Color = Trace.Colors.ivory2
 
     var body: some View {
         Text(title)
@@ -166,7 +179,7 @@ struct SectionHeader: View {
     }
 }
 
-/// Hold to confirm (§5 ActionButton « maintien »): `surface2`, filled in `ben` from left to right
+/// Hold to confirm (V4 « maintien »): track #2A2522, filled in red from left to right
 /// while held (linear); let go early and it empties in 250 ms. Light haptic at the start, rigid at
 /// the end. VoiceOver: a double tap asks for confirmation instead (`accessibilityConfirm`).
 struct BenHoldButton: View {
@@ -186,7 +199,7 @@ struct BenHoldButton: View {
         // it — a GeometryReader in a ZStack would take the whole screen.
         Text(title)
             .font(Trace.Fonts.cta)
-            .foregroundStyle(enabled ? Trace.Colors.text : Trace.Colors.text3)
+            .foregroundStyle(enabled ? Trace.Colors.ivory : Trace.Colors.ivory2)
             .multilineTextAlignment(.center)
             .lineLimit(2)
             .minimumScaleFactor(0.8)
@@ -195,9 +208,9 @@ struct BenHoldButton: View {
             .frame(maxWidth: .infinity, minHeight: Trace.Height.hold)
             .background {
                 ZStack(alignment: .leading) {
-                    shape.fill(Trace.Colors.surface2)
+                    shape.fill(Trace.Colors.holdTrack)
                     GeometryReader { geo in
-                        shape.fill(Trace.Colors.ben).frame(width: geo.size.width * progress)
+                        shape.fill(Trace.Colors.redOnDesk).frame(width: geo.size.width * progress)
                     }
                 }
             }
@@ -293,12 +306,12 @@ struct LogoWordmark: View {
 
 /// « CONCLUDE : ENQUÊTES » in Plex Mono 15/600 (§6-00): the logo mention.
 struct LogoText: View {
-    var color: Color = Trace.Colors.text
+    var color: Color = Trace.Colors.ivory
 
     var body: some View {
         HStack(spacing: 0) {
             Text(verbatim: Brand.name + " : ").font(Trace.Fonts.wordmark).tracking(1.5)
-            Text(verbatim: Brand.tagline).font(Trace.Fonts.wordmark).tracking(1.5).foregroundStyle(Trace.Colors.benText)
+            Text(verbatim: Brand.tagline).font(Trace.Fonts.wordmark).tracking(1.5).foregroundStyle(Trace.Colors.kraft)
         }
         .foregroundStyle(color)
         .accessibilityElement(children: .ignore)
@@ -308,8 +321,9 @@ struct LogoText: View {
 
 // MARK: - Stamps and seals (PNG, §G « Tampons »)
 
-/// An inked stamp from `Art.xcassets/Stamps`: multiply on paper, normal on the desk. Falls back to
-/// the drawn `StampMark` if the image is missing.
+/// An inked stamp PNG from `Art.xcassets/Stamps` (V4 §2: CONFIDENTIEL, ÉLÉMENT CLÉ, RÉSOLU / NON
+/// RÉSOLU): multiply on paper, normal on the desk; no rotation with « Augmenter le contraste ».
+/// Falls back to the drawn `StampMark` if the image is missing.
 struct StampImage: View {
     let asset: String
     /// Text of the drawn fallback (and the VoiceOver label).
@@ -326,7 +340,8 @@ struct StampImage: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: width)
-                    .rotationEffect(.degrees(angle))
+                    .blendMode(onPaper ? .multiply : .normal)
+                    .modifier(TiltModifier(degrees: angle))
             } else {
                 StampMark(text: label, color: color, size: max(10, width / 7), angle: angle)
             }
@@ -370,7 +385,7 @@ struct FallingStampImage: View {
                     withAnimation(.easeOut(duration: 0.06)) { phase = 2 }
                 }
                 if sound { AudioDirector.shared.play(.stamp, volume: 0.9) }
-                if success { Haptics.success() } else { Haptics.warning() }
+                Haptics.rigid()
                 onLanded()
             }
     }
@@ -378,16 +393,17 @@ struct FallingStampImage: View {
 
 // MARK: - Prints
 
-/// The investigator's photo (4:5): the chosen appearance, or initials on `surface3`.
+/// The investigator's print (4:5): the chosen portrait, or initials on `photoBg`, white border.
 struct PlayerPrint: View {
     let identity: PlayerIdentity
     var width: CGFloat = 150
     var border: CGFloat = 6
 
     var body: some View {
-        PortraitOrInitials(image: ArtLibrary.image(identity.portraitName), initials: identity.id.initials,
-                           width: width, height: width * 1.25)
-            .clipShape(RoundedRectangle(cornerRadius: Trace.Radius.card, style: .continuous))
+        PhotoPrint(border: border) {
+            PortraitOrInitials(image: ArtLibrary.image(identity.portraitName), initials: identity.id.initials,
+                               width: width, height: width * 1.25)
+        }
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(Text(identity.id.fullName))
             .accessibilityAddTraits(.isImage)
@@ -417,30 +433,30 @@ struct PortraitOrInitials: View {
     }
 }
 
-/// « ✓ Pièce 03 » (§5 EvidenceBadge « déjà versée »): what an element keeps once filed.
+/// « PIÈCE 03 »: the paper label an element keeps once filed (Plex Mono 9/700 ink on a label,
+/// slightly tilted).
 struct PieceBadge: View {
     let number: Int
 
     var body: some View {
-        HStack(spacing: 4) {
-            Text(verbatim: "✓")
-            Text(PieceFormat.shortTitle(number))
-        }
-        .font(.custom(Trace.FontName.sansSemibold, fixedSize: 12))
-        .foregroundStyle(Trace.Colors.successText)
-        .padding(.horizontal, 8)
-        .frame(height: 22)
-        .background(Capsule().fill(Trace.Colors.bg))
-        .background(Capsule().fill(Trace.Colors.tint(Trace.Colors.success)))
-        .accessibilityIdentifier("piece.badge")
-        .accessibilityLabel(Text(PieceFormat.title(number)))
+        Text(PieceFormat.title(number))
+            .font(.custom(Trace.FontName.monoBold, fixedSize: 9))
+            .tracking(0.9)
+            .foregroundStyle(Trace.Colors.ink)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 2)
+            .background(Rectangle().fill(Trace.Colors.label))
+            .shadow(color: .black.opacity(0.35), radius: 2, y: 1)
+            .modifier(TiltModifier(degrees: -1.5))
+            .accessibilityIdentifier("piece.badge")
+            .accessibilityLabel(Text(PieceFormat.title(number)))
     }
 }
 
 // MARK: - Sheets and errors
 
-/// A confirmation sheet (pause…): a title, one line, one main button, one link. `surface`, radius
-/// 20; used with `.presentationDetents` by the caller.
+/// A confirmation sheet on paper (pause…): a title, one line, one ink button, one link. Used with
+/// `.presentationDetents` by the caller.
 struct PaperConfirmSheet: View {
     let title: String
     var message: String? = nil
@@ -454,27 +470,27 @@ struct PaperConfirmSheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Capsule().fill(Trace.Colors.surface3).frame(width: 36, height: 4)
+            Capsule().fill(Trace.Colors.ink2.opacity(0.35)).frame(width: 36, height: 4)
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, 6)
                 .accessibilityHidden(true)
             Text(title)
                 .font(Trace.Fonts.serifTitle(24))
-                .foregroundStyle(Trace.Colors.text)
+                .foregroundStyle(Trace.Colors.ink)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
             if let message {
                 Text(message)
                     .font(Trace.Fonts.body)
-                    .foregroundStyle(Trace.Colors.text2)
+                    .foregroundStyle(Trace.Colors.ink2)
                     .fixedSize(horizontal: false, vertical: true)
             }
             Spacer(minLength: 8)
             Button(confirm, action: onConfirm)
-                .buttonStyle(CTAButtonStyle(kind: destructive ? .destructive : .primary))
+                .buttonStyle(CTAButtonStyle(kind: destructive ? .destructive : .primary, onPaper: true))
                 .accessibilityIdentifier(confirmID)
             Button(cancel, action: onCancel)
-                .buttonStyle(TextLinkStyle())
+                .buttonStyle(TextLinkStyle(onPaper: true))
                 .frame(maxWidth: .infinity)
                 .accessibilityIdentifier(cancelID)
         }
@@ -482,11 +498,11 @@ struct PaperConfirmSheet: View {
         .padding(.top, 10)
         .padding(.bottom, 10)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .background(Trace.Colors.surface.ignoresSafeArea())
+        .background(Trace.Colors.paper.overlay(PaperGrain()).ignoresSafeArea())
     }
 }
 
-/// An error or notice card (§6-13): a title, a line, an optional action. Never a system alert.
+/// An error, inside the fiction (V4 §4): a yellow post-it tilted −1°, title, text, [Réessayer].
 struct PostItNote: View {
     let title: String
     let message: String
@@ -496,19 +512,20 @@ struct PostItNote: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(title).font(Trace.Fonts.headline).foregroundStyle(Trace.Colors.text)
-            Text(message).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.text2)
+            Text(title).font(Trace.Fonts.headline).foregroundStyle(Trace.Colors.ink)
+            Text(message).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.ink2)
                 .fixedSize(horizontal: false, vertical: true)
             if let action {
                 Button(action, action: onAction)
-                    .buttonStyle(CTAButtonStyle(kind: .outline, height: 48))
+                    .buttonStyle(CTAButtonStyle(kind: .primary, onPaper: true, height: 48))
                     .accessibilityIdentifier(actionID)
                     .padding(.top, 4)
             }
         }
         .padding(18)
         .frame(maxWidth: 340, alignment: .leading)
-        .benCard(Trace.Colors.surface2)
+        .background(Trace.Colors.postIt.shadow(.drop(color: .black.opacity(0.4), radius: 10, y: 8)))
+        .modifier(TiltModifier(degrees: -1))
         .accessibilityElement(children: .contain)
     }
 }

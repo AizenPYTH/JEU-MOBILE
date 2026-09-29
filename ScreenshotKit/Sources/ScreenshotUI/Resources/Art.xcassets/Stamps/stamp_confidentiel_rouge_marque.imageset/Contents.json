@@ -1,0 +1,13 @@
+{
+  "images": [
+    {
+      "filename": "stamp_confidentiel_rouge_marque.png",
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}

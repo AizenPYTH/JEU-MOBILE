@@ -20,6 +20,8 @@ struct ArtAssetsTests {
         "logo_tile": ("Brand", "png", (564, 564)),
         "logo_wordmark": ("Brand", "png", (990, 444)),
         "stamp_resolu_rouge_marque": ("Stamps", "png", (558, 184)),
+        "stamp_confidentiel_rouge_marque": ("Stamps", "png", (996, 184)),
+        "stamp_element_cle_rouge_marque": ("Stamps", "png", (923, 184)),
         "stamp_non_resolu_noir_marque": ("Stamps", "png", (850, 184)),
         "stamp_enqueteur_rouge": ("Stamps", "png", (777, 184)),
         "stamp_inspecteur_rouge": ("Stamps", "png", (850, 184)),

@@ -3,94 +3,135 @@ import SwiftUI
 import UIKit
 import CaseEngine
 
-/// CONCLUDE design — handoff UX V3 « Digital Investigation Interface » (docs/design_ux_v3).
-/// The BEN is professional investigation software: dark blue-graphite, flat surfaces, Newsreader
-/// for titles, IBM Plex Sans for the interface, IBM Plex Mono for data only (times, numbers, timer).
-/// No texture, no rotation, no drop shadow on dark. The seized phone is the only light thing (the
-/// `Theme` tokens). Paper survives only as content: a document of the case shown in a piece.
+/// CONCLUDE design — handoff V4 « Dossier lisible » (docs/design_v4), on the UX of V3
+/// (docs/design_ux_v3). The physical case file is the interface, laid flat and readable: kraft
+/// folders, ivory sheets, stapled prints, evidence labels, the seal, red thread and pins, stamps,
+/// handwritten notes, on a dark wooden desk. The seized phone alone is a real, light phone (the
+/// `Theme` tokens). Rotations stay under 1.5° and only on prints, piece slips and the « pièce
+/// versée » slip; reading sheets, buttons and long text are never tilted nor textured.
 ///
-/// The former « paper » names (paper, kraft, ink, bone, stamp…) are kept as aliases of the V3
-/// tokens so every screen reads the same palette; new code uses the V3 names (`bg`, `surface`,
-/// `text`, `ben`…).
+/// The V3 names (`bg`, `surface`, `text`, `ben`…) still exist: they now give the dark wooden desk
+/// (text in ivory), so a screen not yet laid out on paper stays readable. New code uses the V4 names
+/// (`desk`, `paper`, `ink`, `kraft`, `red`, `pen`…).
 enum Trace {
     enum Colors {
-        // MARK: V3 tokens (§3)
-        /// Background of the BEN screens.
-        static let bg = Color(hex: 0x0B0E13)
-        /// Conclusion, verification: the solemn moment.
-        static let bgDeep = Color(hex: 0x07090C)
-        /// Cards.
-        static let surface = Color(hex: 0x141A22)
-        /// Controls, secondary buttons, fields.
-        static let surface2 = Color(hex: 0x1C242F)
-        /// Active segment, fallback avatars.
-        static let surface3 = Color(hex: 0x2A3442)
-        /// Rules and card borders (1 pt, inset).
-        static let line = Color(hex: 0xD6E0EC, opacity: 0.08)
-        /// Main text.
-        static let text = Color(hex: 0xEEF1F4)
-        /// Secondary text (7.6:1 on bg).
-        static let text2 = Color(hex: 0x9AA6B4)
-        /// Disabled, tertiary meta (≥ 14 pt only).
-        static let text3 = Color(hex: 0x6F7C8C)
-        /// Main action (white text, 4.9:1), selection.
-        static let ben = Color(hex: 0x3F6FC2)
-        static let benPressed = Color(hex: 0x345EA8)
-        /// Links, file and piece numbers, « ‹ Retour ».
-        static let benText = Color(hex: 0x8FB2EE)
-        /// Accusation, failure, error, the phone's unread badge.
-        static let critical = Color(hex: 0xE5484D)
-        static let criticalOnDark = Color(hex: 0xF07B7F)
-        /// Filed, solved.
-        static let success = Color(hex: 0x3FB27F)
-        static let successText = Color(hex: 0x6FD3A4)
-        /// Contradiction, missed clue, the timer under 01:00.
-        static let warning = Color(hex: 0xE8A03A)
-        /// White text on a filled button.
-        static let onFill = Color(hex: 0xFFFFFF)
+        // MARK: V4 tokens (§2)
+        /// Screens: the dark wooden desk.
+        static let desk = Color(hex: 0x1A140F)
+        /// The lamp's pool on the Bureau and the seal (radial, centre → edge).
+        static let deskLamp: [Color] = [Color(hex: 0x3A2D20), Color(hex: 0x1A140F), Color(hex: 0x0C0A08)]
+        /// The accusation.
+        static let deskDeepGradient: [Color] = [Color(hex: 0x2A2119), Color(hex: 0x100D0A), Color(hex: 0x080706)]
+        /// Bottom bars outside the phone.
+        static let bar = Color(hex: 0x110E0B)
+        /// Folders, the investigation rim, the « Verser » label.
+        static let kraft = Color(hex: 0xC3AC80)
+        /// The red-thread board.
+        static let kraftDark = Color(hex: 0x8C7456)
+        /// The evidence board.
+        static let kraftBoard = Color(hex: 0x3A2F24)
+        /// Reading sheets.
+        static let paper = Color(hex: 0xECE5D3)
+        /// Piece slips, suspect sheets.
+        static let paperCard = Color(hex: 0xF4F0E6)
+        static let paperCardLight = Color(hex: 0xF8F4EA)
+        /// Border of a print.
+        static let photoBorder = Color(hex: 0xFBF9F4)
+        /// Behind an identity photo, and behind its initials.
+        static let photoBg = Color(hex: 0x6F7A86)
+        static let portraitInitials = Color(hex: 0xE4E7EA)
+        /// Text on paper (13:1).
+        static let ink = Color(hex: 0x1C1A17)
+        /// Secondary text on paper (≥ 5.5:1).
+        static let ink2 = Color(hex: 0x5B5448)
+        /// Text on the desk; the main button on the desk.
+        static let ivory = Color(hex: 0xEFEBE3)
+        static let ivory2 = Color(hex: 0xA9A397)
+        static let ivoryMid = Color(hex: 0xC9C3B6)
+        /// Thread, pins, stamps, the mission, the accusation, « contre » — on paper…
+        static let red = Color(hex: 0xA3261E)
+        /// … and on the desk.
+        static let redOnDesk = Color(hex: 0xD0493C)
+        /// « En faveur ».
+        static let green = Color(hex: 0x2E6B4A)
+        /// Handwritten notes (the player's, Lacaze's, the thread's words).
+        static let pen = Color(hex: 0x2B3A5A)
+        /// Staples, neutral pins.
+        static let staple = Color(hex: 0x8E8B84)
+        /// Inactive Carnet dividers.
+        static let tabs: [Color] = [Color(hex: 0xB9B2A1), Color(hex: 0xAFA897), Color(hex: 0xA59E8D), Color(hex: 0x9B9483)]
+        /// Inactive folder tab on the Bureau.
+        static let tabInactive = Color(hex: 0x3A332B)
+        /// Folders of the other cases (stubs at the bottom of the Bureau).
+        static let stubGrey = Color(hex: 0x9A9A94)
+        static let stubKraft = Color(hex: 0xB8A57E)
+        static let stubAlibi = Color(hex: 0xDCDFE2)
+        /// Error post-it.
+        static let postIt = Color(hex: 0xFBF3C8)
+        static let tapeColor = Color(red: 235 / 255, green: 225 / 255, blue: 190 / 255, opacity: 0.8)
+        /// Hold-to-confirm track (filled in red).
+        static let holdTrack = Color(hex: 0x2A2522)
+        /// Ruled page lines, every 28 pt.
+        static let ruledLine = Color(red: 52 / 255, green: 66 / 255, blue: 84 / 255, opacity: 0.12)
+        /// The seal's clear bag.
+        static let sealBag = Color(red: 220 / 255, green: 225 / 255, blue: 230 / 255, opacity: 0.18)
 
-        /// Background of a semantic badge: the colour at 16 %.
+        /// Background of a small semantic label: the colour at 16 %.
         static func tint(_ color: Color) -> Color { color.opacity(0.16) }
 
-        // MARK: Former names (aliases of the V3 tokens)
-        static let desk = bg
-        static let launch = bg
-        static let deskLight = surface
-        static let graphite = surface2
-        static let tabBar = bg
-        static let paper = surface
-        static let paperAged = surface
-        static let print = surface2
-        static let notebook = surface
-        static let noteYellow = surface2
-        static let label = surface2
-        static let kraft = surface
-        static let kraftDark = surface
-        static let kraftLight = surface2
-        static let kraftMid = surface2
-        static let kraftSealed = surface3
-        static let kraftInk = text
-        static let kraftLabel = text2
-        static let ink = text
-        static let inkSoft = text2
-        static let inkFaint = text3
-        static let bone = text
-        static let bone2 = text2
-        static let bone3 = text3
-        /// The former red accent: now the BEN's accent (links, numbers, kickers). Real failure
-        /// and accusation use `critical`.
-        static let stamp = benText
-        static let stampOnDark = criticalOnDark
-        static let stampDeep = surface2
-        static let stampText = onFill
-        static let pen = benText
-        static let metal = text3
-        static let tape = Color.clear
-        static let ruled = line
-        static let notebookRule = Color.clear
-        static let marginRed = Color.clear
-        static let highlight = ben.opacity(0.16)
-        static let shadow = Color.clear
+        // MARK: V3 names — the dark wooden desk (ivory text), for screens not laid on paper
+        static let bg = desk
+        static let bgDeep = Color(hex: 0x0C0A08)
+        static let surface = Color(hex: 0x241C15)
+        static let surface2 = Color(hex: 0x2E251C)
+        static let surface3 = kraftBoard
+        static let line = Color(hex: 0xEFEBE3, opacity: 0.10)
+        static let text = ivory
+        static let text2 = ivoryMid
+        static let text3 = ivory2
+        /// The former blue accent: the red of stamps and thread, with ivory text on it.
+        static let ben = red
+        static let benPressed = Color(hex: 0x8A1F18)
+        /// Links and numbers on the desk.
+        static let benText = kraft
+        static let critical = redOnDesk
+        static let criticalOnDark = redOnDesk
+        static let success = green
+        static let successText = Color(hex: 0x86C09C)
+        static let warning = Color(hex: 0xD9A441)
+        static let onFill = ivory
+
+        // MARK: Older names (TRACE v2 / final V3 paper), on the V4 palette
+        static let launch = desk
+        static let deskLight = Color(hex: 0x2A2119)
+        static let graphite = Color(hex: 0x2A2825)
+        static let tabBar = bar
+        static let paperAged = Color(hex: 0xE3DAC4)
+        static let print = photoBorder
+        static let notebook = Color(hex: 0xEFE9DA)
+        static let noteYellow = postIt
+        static let label = Color(hex: 0xF7F3E8)
+        static let kraftLight = Color(hex: 0xC9B387)
+        static let kraftMid = Color(hex: 0xBEA67B)
+        static let kraftSealed = Color(hex: 0x8E7D5C)
+        static let kraftInk = Color(hex: 0x2B2519)
+        static let kraftLabel = Color(hex: 0x5A4C33)
+        static let inkSoft = ink2
+        static let inkFaint = Color(hex: 0x8A8174)
+        static let bone = ivory
+        static let bone2 = ivory2
+        static let bone3 = Color(hex: 0x6F6A61)
+        static let stamp = red
+        static let stampOnDark = redOnDesk
+        static let stampDeep = Color(hex: 0x3A1512)
+        static let stampText = ivory
+        static let metal = staple
+        static let tape = tapeColor
+        static let ruled = Color(hex: 0x1C1A17, opacity: 0.065)
+        static let notebookRule = ruledLine
+        static let marginRed = Color(hex: 0xA3261E, opacity: 0.45)
+        static let highlight = Color(hex: 0xC8573F, opacity: 0.16)
+        static let shadow = Color.black.opacity(0.4)
     }
 
     enum FontName {
@@ -106,209 +147,363 @@ enum Trace {
         static let monoMedium = "IBMPlexMono-Medium"
         static let monoSemibold = "IBMPlexMono-SemiBold"
         static let monoBold = "IBMPlexMono-Bold"
-        /// Handwriting is gone (V3): the player's own words are Plex Sans.
-        static let hand = sans
+        /// Caveat: ONLY the player's notes, Lacaze's, and the words on the thread — never
+        /// information the player needs (§2 « Typographie »).
+        static let hand = "Caveat-Medium"
     }
 
-    /// Type roles (§3 « Typographie »). Three families; the system font is the phone's.
+    /// Type roles (§2). IBM Plex Sans for interface and reading, Newsreader for titles, names and
+    /// quotes, IBM Plex Mono for numbers, times, the timer and short capital labels, Caveat for
+    /// handwritten notes only.
     enum Fonts {
-        // V3 roles
-        /// Newsreader 36/500: the conclusion's question.
+        /// Newsreader 36/500: « Qui est responsable ? ».
         static let display = Font.custom(FontName.serifMedium, size: 36, relativeTo: .largeTitle)
-        /// Newsreader 31/500: screen and case titles.
-        static let title = Font.custom(FontName.serifMedium, size: 31, relativeTo: .title)
-        /// Plex Sans 18/600: a suspect's name, a card title.
-        static let headline = Font.custom(FontName.sansSemibold, size: 18, relativeTo: .headline)
-        /// Plex Sans 16: context, mission.
+        /// Newsreader 30/600: screen and case titles.
+        static let title = Font.custom(FontName.serifSemibold, size: 30, relativeTo: .title)
+        /// Plex Sans 17/600: card titles, buttons.
+        static let headline = Font.custom(FontName.sansSemibold, size: 17, relativeTo: .headline)
+        /// Newsreader 20/600: a suspect's name.
+        static let personName = Font.custom(FontName.serifSemibold, size: 20, relativeTo: .title3)
+        /// Plex Sans 16: context, mission, reading.
         static let body = Font.custom(FontName.sans, size: 16, relativeTo: .body)
-        /// Plex Sans 15: card content.
-        static let callout = Font.custom(FontName.sans, size: 15, relativeTo: .callout)
-        /// Plex Sans 12/600 caps +8 %: section headers — the only capitals.
-        static let section = Font.custom(FontName.sansSemibold, size: 12, relativeTo: .caption)
+        /// Plex Sans 14: card content.
+        static let callout = Font.custom(FontName.sans, size: 14, relativeTo: .callout)
+        /// Plex Mono 11/700 caps +10 %: short labels (CONTEXTE, VOTRE MISSION…).
+        static let section = Font.custom(FontName.monoBold, size: 11, relativeTo: .caption)
         /// Plex Sans 13: meta.
         static let caption = Font.custom(FontName.sans, size: 13, relativeTo: .footnote)
-        /// Plex Mono 12/600: PIÈCE 03, #001.
-        static let data = Font.custom(FontName.monoSemibold, size: 12, relativeTo: .caption)
-        /// Plex Mono 20/500: the timer, big figures.
-        static let dataLarge = Font.custom(FontName.monoMedium, size: 20, relativeTo: .title3)
+        /// Plex Mono 13/700: DOSSIER #001, PIÈCE 03.
+        static let data = Font.custom(FontName.monoBold, size: 13, relativeTo: .footnote)
+        /// Plex Mono 19/600: the timer.
+        static let dataLarge = Font.custom(FontName.monoSemibold, size: 19, relativeTo: .title3)
+        /// Caveat 20/500: notes.
+        static let note = Font.custom(FontName.hand, size: 20, relativeTo: .title3)
 
-        // Former names, mapped on the V3 roles
-        static let wordmark = Font.custom(FontName.monoSemibold, fixedSize: 15)
-        static let caseTitle = title
+        // Older names, mapped on the V4 roles
+        static let wordmark = Font.custom(FontName.monoBold, fixedSize: 15)
+        static let caseTitle = Font.custom(FontName.serifSemibold, size: 32, relativeTo: .largeTitle)
         static let screenTitle = title
-        static let name = headline
-        static let nameLarge = Font.custom(FontName.serifMedium, size: 26, relativeTo: .title2)
+        static let name = personName
+        static let nameLarge = Font.custom(FontName.serifSemibold, size: 24, relativeTo: .title2)
         static let prose = body
-        static let proseSmall = Font.custom(FontName.sans, size: 14, relativeTo: .callout)
+        static let proseSmall = callout
         static let quote = Font.custom(FontName.serif, size: 19, relativeTo: .body)
         static let quoteLarge = Font.custom(FontName.serif, size: 22, relativeTo: .title3)
         static let fieldLabel = section
-        static let fieldValue = data
+        static let fieldValue = Font.custom(FontName.monoSemibold, size: 12, relativeTo: .caption)
         static let fieldValueLarge = Font.custom(FontName.monoSemibold, size: 14, relativeTo: .callout)
-        static let pieceNumber = Font.custom(FontName.monoSemibold, size: 11, relativeTo: .caption2)
-        static let pieceTitle = Font.custom(FontName.monoMedium, size: 19, relativeTo: .title3)
-        static let button = Font.custom(FontName.sansSemibold, size: 17, relativeTo: .body)
+        static let pieceNumber = Font.custom(FontName.monoBold, size: 11, relativeTo: .caption2)
+        static let pieceTitle = Font.custom(FontName.monoBold, size: 15, relativeTo: .callout)
+        static let button = Font.custom(FontName.sansSemibold, size: 16, relativeTo: .body)
         static let mono = Font.custom(FontName.mono, size: 12, relativeTo: .caption)
         static let monoSmall = Font.custom(FontName.mono, size: 11, relativeTo: .caption2)
-        static let hand = Font.custom(FontName.sans, size: 17, relativeTo: .body)
-        static let handSmall = Font.custom(FontName.sans, size: 15, relativeTo: .callout)
-        static let ui = Font.custom(FontName.sans, size: 14, relativeTo: .callout)
+        static let hand = note
+        static let handSmall = Font.custom(FontName.hand, size: 18, relativeTo: .body)
+        static let ui = callout
         static let uiSmall = Font.custom(FontName.sansMedium, size: 11, relativeTo: .caption2)
-        static let score = Font.custom(FontName.monoMedium, fixedSize: 64)
-        static func stamp(_ size: CGFloat) -> Font { .custom(FontName.sansSemibold, fixedSize: max(11, size)) }
+        static let score = Font.custom(FontName.serifSemibold, fixedSize: 40)
+        static func stamp(_ size: CGFloat) -> Font { .custom(FontName.monoBold, fixedSize: max(9, size)) }
     }
 
-    /// Radii (§3): badge 13 (pill) · segmented 12 (segment 9) · button 14 · card 16 · large card 20 · sheet 20.
+    /// Shapes (§2 « Formes »).
     enum Radius {
+        /// Sheets have square corners.
+        static let sheet: CGFloat = 0
+        /// Folder bottom corners (0 0 12 12); its tabs 8 8 0 0.
+        static let folder: CGFloat = 12
+        static let folderTab: CGFloat = 8
+        static let button: CGFloat = 9
+        /// Cards on the desk (V3 names).
+        static let card: CGFloat = 12
+        static let largeCard: CGFloat = 12
         static let badge: CGFloat = 13
-        static let segmented: CGFloat = 12
-        static let segment: CGFloat = 9
-        static let button: CGFloat = 14
-        static let card: CGFloat = 16
-        static let largeCard: CGFloat = 20
-        static let sheet: CGFloat = 20
-        static let node: CGFloat = 12
+        static let segmented: CGFloat = 8
+        static let segment: CGFloat = 8
+        static let node: CGFloat = 2
     }
 
-    /// Heights (§3).
+    /// Heights.
     enum Height {
         static let button: CGFloat = 56
         static let hold: CGFloat = 60
         static let row: CGFloat = 50
         static let segment: CGFloat = 40
+        static let folderTab: CGFloat = 40
         static let tabBar: CGFloat = 82
-        static let investigationBar: CGFloat = 92
+        /// The kraft investigation rim.
+        static let investigationBar: CGFloat = 96
         static let badge: CGFloat = 26
+        static let evidenceTag: CGFloat = 32
         static let hit: CGFloat = 44
+    }
+
+    /// Drop shadows (§2 « Ombres »).
+    enum Shadow {
+        static let folder = (color: Color.black.opacity(0.6), radius: CGFloat(25), y: CGFloat(26))
+        static let slip = (color: Color.black.opacity(0.42), radius: CGFloat(6), y: CGFloat(5))
+        static let print = (color: Color.black.opacity(0.25), radius: CGFloat(5), y: CGFloat(4))
+        static let modal = (color: Color.black.opacity(0.55), radius: CGFloat(25), y: CGFloat(24))
     }
 
     enum Motion {
         static let standard = Animation.timingCurve(0.32, 0.72, 0, 1, duration: 0.3)
         static let emphasized = Animation.timingCurve(0.2, 0.8, 0.2, 1, duration: 0.42)
         static let dramatic = Animation.timingCurve(0.65, 0, 0.35, 1, duration: 0.6)
+        /// A stamp falling: 180 ms, then a 60 ms settle.
         static let stamp = Animation.easeIn(duration: 0.18)
-        /// Carnet tab: 250 ms spring.
         static let tab = Animation.spring(response: 0.25, dampingFraction: 0.85)
         static let sheet = Animation.spring(response: 0.26, dampingFraction: 0.86)
-        /// Screen content and cards: spring(0.35, 0.9).
-        static let paper = Animation.spring(response: 0.35, dampingFraction: 0.9)
-        /// Hold to conclude: 1.6 s (§8).
+        /// The V4 spring « paper »: response 0.42, damping 0.86.
+        static let paper = Animation.spring(response: 0.42, dampingFraction: 0.86)
+        /// Hold to conclude: 1.6 s (owner's decision).
         static let holdToClose: Double = 1.6
-        /// Verification: 1.8 s, three lines every 0.5 s.
+        /// Verification: 1.8 s (owner's decision); typed at 22 ms per character.
         static let verification: Double = 1.8
+        static let typewriterCharacter: Double = 0.022
     }
 
-    /// Items no longer lie crooked (V3: no rotation). Kept for callers: always 0.
-    static func tilt(_ seed: String, range: Double = 2) -> Double { 0 }
+    /// Deterministic small rotation from an id (the same print always lies the same way), at most
+    /// ±1.5° (§2). Use the `.tilt(_:)` modifier: it drops the rotation when « Augmenter le contraste »
+    /// is on.
+    static func tilt(_ seed: String, range: Double = 1.5) -> Double {
+        var hash: UInt64 = 1469598103934665603
+        for byte in seed.utf8 { hash = (hash ^ UInt64(byte)) &* 1099511628211 }
+        return (Double(hash % 1000) / 1000 * 2 - 1) * min(range, 1.5)
+    }
 }
 
-// MARK: - Surfaces
+// MARK: - Materials
 
 extension View {
-    /// A card (V3 §3 « Profondeur »): flat fill, 1 pt `line` border inset, no shadow. The former
-    /// paper sheet: `radius` under 8 means « the default card radius ».
-    func paper(_ color: Color = Trace.Colors.surface, radius: CGFloat = 2, lifted: Bool = false) -> some View {
-        let r = radius < 8 ? Trace.Radius.card : radius
-        return background(
-            RoundedRectangle(cornerRadius: r, style: .continuous)
+    /// A sheet of paper: square corners, grain in multiply (none with « Augmenter le contraste »),
+    /// the slip shadow. `radius` is ignored (sheets have square corners), kept for callers.
+    func paper(_ color: Color = Trace.Colors.paper, radius: CGFloat = 0, lifted: Bool = false) -> some View {
+        modifier(PaperSurface(color: color, lifted: lifted))
+    }
+
+    /// A card on the dark desk (V3 layouts): flat wood-dark fill, thin ivory rule.
+    func benCard(_ color: Color = Trace.Colors.surface, radius: CGFloat = Trace.Radius.card) -> some View {
+        background(
+            RoundedRectangle(cornerRadius: radius, style: .continuous)
                 .fill(color)
-                .overlay(RoundedRectangle(cornerRadius: r, style: .continuous).strokeBorder(Trace.Colors.line, lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: radius, style: .continuous).strokeBorder(Trace.Colors.line, lineWidth: 1))
         )
     }
 
-    /// A card: `surface` with its inset rule.
-    func benCard(_ color: Color = Trace.Colors.surface, radius: CGFloat = Trace.Radius.card) -> some View {
-        paper(color, radius: radius)
+    /// A kraft folder body: corners 0 0 12 12, fibres in multiply, the folder shadow.
+    func kraft(radius: CGFloat = Trace.Radius.folder, color: Color = Trace.Colors.kraft) -> some View {
+        modifier(KraftSurface(color: color, radius: radius))
     }
 
-    /// The former kraft folder: a large card.
-    func kraft(radius: CGFloat = 10, color: Color = Trace.Colors.surface) -> some View {
-        paper(color, radius: Trace.Radius.largeCard)
+    /// A small deterministic rotation (±1.5° max) — prints, piece slips, the « pièce versée » slip
+    /// only; none with « Augmenter le contraste » or reduced motion.
+    func tilt(_ seed: String, range: Double = 1.5) -> some View {
+        modifier(TiltModifier(degrees: Trace.tilt(seed, range: range)))
     }
 
-    /// No rotation any more (V3); kept for callers.
-    func tilt(_ seed: String, range: Double = 2) -> some View { self }
-
-    /// Section header style: Plex Sans 12/600, caps, +8 %.
-    func fieldLabel(_ color: Color = Trace.Colors.text2) -> some View {
-        font(Trace.Fonts.section).tracking(1).foregroundStyle(color).textCase(.uppercase)
+    /// A short capital label: Plex Mono 11/700, caps, +10 %.
+    func fieldLabel(_ color: Color = Trace.Colors.ink2) -> some View {
+        font(Trace.Fonts.section).tracking(1.1).foregroundStyle(color).textCase(.uppercase)
     }
 
-    /// Pressed state of a tappable card: scale 0.98 + darker, 90 ms.
+    /// Pressed state of a tappable card: scale 0.98 + slightly darker, 90 ms.
     func pressable() -> some View { buttonStyle(PressableStyle()) }
 }
 
-/// Paper grain is gone (V3: no texture on the interface). Kept as an empty layer for callers.
+struct PaperSurface: ViewModifier {
+    let color: Color
+    var lifted = false
+    @Environment(\.colorSchemeContrast) private var contrast
+
+    func body(content: Content) -> some View {
+        content.background(
+            Rectangle()
+                .fill(color)
+                .overlay { if contrast != .increased { PaperGrain() } }
+                .shadow(color: .black.opacity(lifted ? 0.55 : 0.42), radius: lifted ? 25 : 6, y: lifted ? 24 : 5)
+        )
+    }
+}
+
+struct KraftSurface: ViewModifier {
+    let color: Color
+    let radius: CGFloat
+    @Environment(\.colorSchemeContrast) private var contrast
+
+    func body(content: Content) -> some View {
+        let shape = UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: radius,
+                                           bottomTrailingRadius: radius, topTrailingRadius: 0)
+        content.background(
+            shape
+                .fill(color)
+                .overlay { if contrast != .increased { PaperGrain(intensity: 0.04, texture: "tex_kraft_fibers").clipShape(shape) } }
+                .shadow(color: Trace.Shadow.folder.color, radius: Trace.Shadow.folder.radius, y: Trace.Shadow.folder.y)
+        )
+    }
+}
+
+struct TiltModifier: ViewModifier {
+    let degrees: Double
+    @Environment(\.colorSchemeContrast) private var contrast
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    func body(content: Content) -> some View {
+        content.rotationEffect(.degrees(contrast == .increased ? 0 : degrees))
+    }
+}
+
+/// Paper grain: the delivered texture (`tex_paper_grain`, or `tex_kraft_fibers` on kraft), tiled in
+/// multiply. Purely decorative: hidden from VoiceOver.
 struct PaperGrain: View {
-    var intensity: Double = 0.035
+    var intensity: Double = 0.06
     var texture = "tex_paper_grain"
 
     var body: some View {
-        Color.clear.allowsHitTesting(false).accessibilityHidden(true)
+        Group {
+            if let image = ArtLibrary.image(texture) {
+                Image(uiImage: image.cgImage.map { UIImage(cgImage: $0, scale: 3, orientation: .up) } ?? image)
+                    .resizable(resizingMode: .tile)
+                    .blendMode(.multiply)
+                    .opacity(texture == "tex_kraft_fibers" ? 0.45 : min(1, intensity * 14))
+            } else {
+                Color.clear
+            }
+        }
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
     }
 }
 
-/// The BEN background: flat `bg`.
+/// The dark wooden desk with the lamp's pool (§2 `deskLamp`).
 struct TraceDesk: View {
     var body: some View {
-        Trace.Colors.bg.ignoresSafeArea().accessibilityHidden(true)
+        RadialGradient(colors: Trace.Colors.deskLamp, center: .init(x: 0.5, y: 0.12), startRadius: 0, endRadius: 720)
+            .ignoresSafeArea()
+            .accessibilityHidden(true)
     }
 }
 
-/// Ruled lines are gone (V3). Kept as an empty layer for callers.
+/// A ruled page: lines every 28 pt, an optional red margin rule (the chronology's, at 56 pt).
 struct RuledLines: View {
     var spacing: CGFloat = 28
-    var color: Color = Trace.Colors.ruled
+    var color: Color = Trace.Colors.ruledLine
     var margin: CGFloat? = nil
 
     var body: some View {
-        Color.clear.allowsHitTesting(false).accessibilityHidden(true)
+        Canvas { context, size in
+            var y = spacing
+            while y < size.height {
+                context.fill(Path(CGRect(x: 0, y: y, width: size.width, height: 1)), with: .color(color))
+                y += spacing
+            }
+            if let margin {
+                context.fill(Path(CGRect(x: margin, y: 0, width: 1, height: size.height)), with: .color(Trace.Colors.marginRed))
+            }
+        }
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
     }
 }
 
-// MARK: - Office objects (gone in V3: no staple, tape or clip on the interface)
+// MARK: - Office objects (§2 « Accessoires »)
 
+/// A staple: 26 × 9 pt, `staple` grey.
 struct Staple: View {
-    var body: some View { EmptyView() }
+    var width: CGFloat = 26
+    var body: some View {
+        RoundedRectangle(cornerRadius: 1.5)
+            .fill(LinearGradient(colors: [Trace.Colors.staple, Trace.Colors.staple.opacity(0.65)], startPoint: .top, endPoint: .bottom))
+            .frame(width: width, height: 4)
+            .overlay(RoundedRectangle(cornerRadius: 1.5).strokeBorder(Color.black.opacity(0.18), lineWidth: 0.5))
+            .shadow(color: .black.opacity(0.3), radius: 1, y: 1)
+            .frame(height: 9)
+            .accessibilityHidden(true)
+    }
 }
 
+/// A piece of tape: 44 × 16 pt.
 struct Tape: View {
-    var width: CGFloat = 54
-    var body: some View { EmptyView() }
+    var width: CGFloat = 44
+    var body: some View {
+        Rectangle()
+            .fill(Trace.Colors.tapeColor)
+            .frame(width: width, height: 16)
+            .rotationEffect(.degrees(-3))
+            .accessibilityHidden(true)
+    }
 }
 
+/// A pin: 13 pt head (red, or `staple` when neutral) with a highlight.
+struct Pin: View {
+    var color: Color = Trace.Colors.red
+    var size: CGFloat = 13
+
+    var body: some View {
+        Circle()
+            .fill(RadialGradient(colors: [color.opacity(0.75), color], center: .init(x: 0.35, y: 0.3), startRadius: 0, endRadius: size * 0.6))
+            .frame(width: size, height: size)
+            .overlay(Circle().fill(Color.white.opacity(0.5)).frame(width: size * 0.25, height: size * 0.25).offset(x: -size * 0.15, y: -size * 0.15))
+            .shadow(color: .black.opacity(0.4), radius: 1.5, y: 1.5)
+            .accessibilityHidden(true)
+    }
+}
+
+/// A paperclip (outline).
 struct Paperclip: View {
-    var body: some View { EmptyView() }
+    var body: some View {
+        Canvas { context, size in
+            var p = Path()
+            let w = size.width, h = size.height
+            p.move(to: CGPoint(x: w * 0.3, y: h * 0.25))
+            p.addLine(to: CGPoint(x: w * 0.3, y: h * 0.8))
+            p.addArc(center: CGPoint(x: w * 0.5, y: h * 0.8), radius: w * 0.2, startAngle: .degrees(180), endAngle: .degrees(0), clockwise: true)
+            p.addLine(to: CGPoint(x: w * 0.7, y: h * 0.15))
+            p.addArc(center: CGPoint(x: w * 0.5, y: h * 0.15), radius: w * 0.2, startAngle: .degrees(0), endAngle: .degrees(180), clockwise: true)
+            p.addLine(to: CGPoint(x: w * 0.3, y: h * 0.65))
+            context.stroke(p, with: .color(Trace.Colors.staple), style: StrokeStyle(lineWidth: 2, lineCap: .round))
+        }
+        .frame(width: 16, height: 40)
+        .accessibilityHidden(true)
+    }
 }
 
-/// A photo in a card: rounded 12 pt corners, an optional caption under it (no white border).
+/// A print: `photoBorder` edge (`border` pt, three times more at the bottom for a caption), the
+/// print shadow; an optional handwritten caption in the bottom margin.
 struct PhotoPrint<Content: View>: View {
     var caption: String? = nil
     var border: CGFloat = 5
     @ViewBuilder let content: Content
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            content
-                .clipShape(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous))
+        VStack(alignment: .leading, spacing: 2) {
+            content.clipped()
             if let caption {
-                Text(caption).font(Trace.Fonts.caption).foregroundStyle(Trace.Colors.text2).lineLimit(1)
+                Text(caption).font(Trace.Fonts.handSmall).foregroundStyle(Trace.Colors.pen).lineLimit(1)
             }
         }
+        .padding(border)
+        .padding(.bottom, caption == nil ? border * 2 : 0)
+        .background(Trace.Colors.photoBorder)
+        .shadow(color: Trace.Shadow.print.color, radius: Trace.Shadow.print.radius, y: Trace.Shadow.print.y)
     }
 }
 
-/// An identity photo: the delivered photo, or the initials on `surface3` (never a drawn face).
+/// IdPhoto (§3): a print on `photoBg`; the delivered portrait, else the initials in Plex Sans 600.
 struct IDPhoto: View {
     let contact: Contact?
     var width: CGFloat = 70
     var height: CGFloat = 84
+    var stapled = false
     @Environment(\.caseNumber) private var caseNumber
 
     var body: some View {
         let image = ArtLibrary.portrait(case: caseNumber, contact: contact)
-        PortraitOrInitials(image: image, initials: Self.initials(of: contact?.name ?? ""), width: width, height: height)
-            .clipShape(RoundedRectangle(cornerRadius: Trace.Radius.node, style: .continuous))
+        PhotoPrint(border: 4) {
+            PortraitOrInitials(image: image, initials: Self.initials(of: contact?.name ?? ""), width: width, height: height)
+        }
+        .overlay(alignment: .top) { if stapled { Staple().offset(y: -4) } }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(contact?.name ?? ""))
     }
 
     /// « Emma Roussel » → « ER »
@@ -317,68 +512,84 @@ struct IDPhoto: View {
     }
 }
 
-// MARK: - Status badges (the former stamps)
+// MARK: - Stamps
 
-/// StatusBadge (§5): a 26 pt pill, symbol + label, the colour at 16 % behind — never the colour
-/// alone. The former administrative stamp: same call, no rotation, no ink. The only real stamp
-/// left is the RÉSOLU PNG on a case card (`StampImage`).
+/// A stamp rendered in code (§2 « Tampons » : VERSÉE, OUVERT…): a red 2 pt frame, Plex Mono 700
+/// caps, rotation −8° (none with « Augmenter le contraste »).
 struct StampMark: View {
     let text: String
-    var color: Color = Trace.Colors.benText
+    var color: Color = Trace.Colors.red
     var size: CGFloat = 12
     var dashed = false
-    var angle: Double = -6
+    var angle: Double = -8
     var filled = false
-    /// A leading symbol (● ◐ # ✓ ✕ ↑ ↓ ≠); by default from the colour's meaning.
     var symbol: String? = nil
 
     var body: some View {
-        StatusBadge(text: text, color: color, symbol: symbol)
+        Text(text.uppercased())
+            .font(Trace.Fonts.stamp(size))
+            .tracking(size * 0.12)
+            .foregroundStyle(filled ? Trace.Colors.ivory : color)
+            .padding(.horizontal, size * 0.55)
+            .padding(.vertical, size * 0.28)
+            .background(filled ? color : .clear)
+            .overlay(RoundedRectangle(cornerRadius: 2)
+                .strokeBorder(color, style: StrokeStyle(lineWidth: max(1.5, min(2.5, size * 0.15)), dash: dashed ? [size * 0.4, size * 0.25] : [])))
+            .opacity(0.9)
+            .modifier(TiltModifier(degrees: angle))
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text(L10n.f("a11y.stamp", text)))
     }
 }
 
+/// A small state label (V3 layouts on the desk): symbol + text in a tinted capsule.
 struct StatusBadge: View {
     let text: String
-    var color: Color = Trace.Colors.benText
+    var color: Color = Trace.Colors.kraft
     var symbol: String? = nil
 
     var body: some View {
         HStack(spacing: 5) {
-            if let symbol {
-                Text(verbatim: symbol).font(Trace.Fonts.section)
-            }
-            Text(text)
-                .font(Trace.Fonts.section)
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
+            if let symbol { Text(verbatim: symbol) }
+            Text(text).lineLimit(1).minimumScaleFactor(0.8)
         }
+        .font(.custom(Trace.FontName.sansSemibold, size: 12, relativeTo: .caption))
         .foregroundStyle(color)
         .padding(.horizontal, 10)
         .frame(minHeight: Trace.Height.badge)
-        .background(Capsule().fill(Trace.Colors.tint(color)))
+        .background(Capsule().fill(color.opacity(0.16)))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(text))
     }
 }
 
-/// A badge that appears (fade + 6 pt rise, 200 ms). The former falling stamp.
+/// A stamp that falls (§5): scale 1.35 → 1 in 180 ms, then a 60 ms settle; rigid haptic. With
+/// reduced motion it just appears.
 struct FallingStamp: View {
     let text: String
-    var color: Color = Trace.Colors.benText
+    var color: Color = Trace.Colors.red
     var size: CGFloat = 40
     var dashed = false
     var delay: Double = 0.2
     var sound = true
-    @State private var shown = false
+    @State private var phase = 0
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
-        StatusBadge(text: text, color: color)
-            .offset(y: shown || reduceMotion ? 0 : 6)
-            .opacity(shown ? 1 : 0)
+        StampMark(text: text, color: color, size: size, dashed: dashed)
+            .scaleEffect(reduceMotion ? 1 : (phase == 0 ? 1.35 : phase == 1 ? 0.98 : 1))
+            .opacity(phase > 0 ? 1 : 0)
             .task {
                 try? await Task.sleep(for: .seconds(delay))
-                withAnimation(.easeOut(duration: 0.2)) { shown = true }
+                if reduceMotion {
+                    withAnimation(.easeOut(duration: 0.2)) { phase = 2 }
+                } else {
+                    withAnimation(Trace.Motion.stamp) { phase = 1 }
+                    try? await Task.sleep(for: .milliseconds(180))
+                    withAnimation(.easeOut(duration: 0.06)) { phase = 2 }
+                }
+                if sound { AudioDirector.shared.play(.stamp, volume: 0.9) }
+                Haptics.rigid()
             }
     }
 }
@@ -442,33 +653,39 @@ struct DifficultyMeter: View {
     }
 }
 
-/// A small data label (« P.04 Golf 22:08 »): Plex Mono on `surface2`.
+/// A small paper label glued on a piece (« P.04 Golf 22:08 »): Plex Mono on `label` paper, ink,
+/// a slight tilt.
 struct EvidenceLabel: View {
     let text: String
     var seed: String = ""
 
     var body: some View {
         Text(text)
-            .font(Trace.Fonts.data)
-            .foregroundStyle(Trace.Colors.benText)
+            .font(Trace.Fonts.pieceNumber)
+            .foregroundStyle(Trace.Colors.ink)
             .lineLimit(1)
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 6)
             .padding(.vertical, 3)
-            .background(RoundedRectangle(cornerRadius: 6).fill(Trace.Colors.surface2))
+            .background(Trace.Colors.label)
+            .shadow(color: .black.opacity(0.2), radius: 1.5, y: 1)
+            .tilt(seed.isEmpty ? text : seed)
     }
 }
 
-/// The player's own words (notes, marks): Plex Sans in the accent blue. Handwriting is gone in V3.
+/// A handwritten note (Caveat, `pen` blue) — only the player's notes, Lacaze's and the thread's
+/// words, never information the player needs; its words are also in the VoiceOver label.
 struct Handwritten: View {
     let text: String
-    var color: Color = Trace.Colors.benText
-    var size: CGFloat = 22
-    var angle: Double = -2
+    var color: Color = Trace.Colors.pen
+    var size: CGFloat = 20
+    var angle: Double = 0
 
     var body: some View {
         Text(text)
-            .font(.custom(Trace.FontName.sans, size: max(14, size * 0.75), relativeTo: .body))
+            .font(.custom(Trace.FontName.hand, size: size, relativeTo: .title3))
             .foregroundStyle(color)
+            .modifier(TiltModifier(degrees: max(-1.5, min(1.5, angle))))
+            .accessibilityLabel(Text(text))
     }
 }
 
@@ -578,7 +795,7 @@ struct DeskTabBar: View {
         }
         .padding(.top, 8)
         .frame(maxWidth: .infinity)
-        .background(Trace.Colors.bg.ignoresSafeArea(edges: .bottom))
+        .background(Trace.Colors.bar.ignoresSafeArea(edges: .bottom))
         .overlay(alignment: .top) { Rectangle().fill(Trace.Colors.line).frame(height: 1) }
     }
 
@@ -589,7 +806,7 @@ struct DeskTabBar: View {
                 Image(systemName: on ? symbol + ".fill" : symbol).font(.system(size: 20, weight: on ? .semibold : .regular))
                 Text(title).font(Trace.Fonts.uiSmall)
             }
-            .foregroundStyle(on ? Trace.Colors.benText : Trace.Colors.text2)
+            .foregroundStyle(on ? Trace.Colors.ivory : Trace.Colors.ivory2)
             .frame(maxWidth: .infinity, minHeight: 49)
             .contentShape(Rectangle())
         }
@@ -601,18 +818,25 @@ struct DeskTabBar: View {
 
 // MARK: - Empty states (§6-13)
 
-/// An empty state: a title, one line of help (the former handwritten tip).
+/// An empty state (V4 §4): the V3 text, written in Caveat (`pen`) on a ruled page, centred — or,
+/// on the desk (`onPaper: false`), ivory title and a Caveat line in kraft.
 struct EmptyPage: View {
     let title: String
     let tip: String
+    var onPaper = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(title).font(Trace.Fonts.headline).foregroundStyle(Trace.Colors.text)
-            Text(tip).font(Trace.Fonts.callout).foregroundStyle(Trace.Colors.text2)
+        VStack(spacing: 6) {
+            Text(title)
+                .font(.custom(Trace.FontName.hand, size: 22, relativeTo: .title3))
+                .foregroundStyle(onPaper ? Trace.Colors.pen : Trace.Colors.ivory)
+            Text(tip)
+                .font(.custom(Trace.FontName.hand, size: 19, relativeTo: .body))
+                .foregroundStyle(onPaper ? Trace.Colors.pen.opacity(0.85) : Trace.Colors.kraft)
+                .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity)
         .padding(.vertical, 24)
         .accessibilityElement(children: .combine)
     }
