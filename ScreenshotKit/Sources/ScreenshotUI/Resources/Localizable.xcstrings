@@ -555,13 +555,13 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "FILE #%@ · CONCLUSION"
+            "value": "FILE #%@ · FINAL CHECK"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "DOSSIER #%@ · CONCLUSION"
+            "value": "DOSSIER #%@ · VÉRIFICATION FINALE"
           }
         }
       }
@@ -10587,6 +10587,23 @@
         }
       }
     },
+    "result.closingReport": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLOSING REPORT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RAPPORT DE CLÔTURE"
+          }
+        }
+      }
+    },
     "result.cluesFound": {
       "extractionState": "manual",
       "localizations": {
@@ -10685,6 +10702,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ était responsable."
+          }
+        }
+      }
+    },
+    "result.figures": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summary"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilan"
           }
         }
       }

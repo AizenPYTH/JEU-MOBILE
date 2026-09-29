@@ -2,12 +2,13 @@
 import SwiftUI
 import UIKit
 
-/// Official assignment to the BEN, once, after case #001 (V3 flat re-skin of the former screen
-/// 12): « Affectation officielle », « Bon travail, {Prénom Nom}. Vous êtes affectée au BEN. »
-/// (« Dossier classé, … » if not solved), the cases waiting at the Bureau, then a card with the
-/// investigator, the service number, the rank obtained and the signatory. One primary button:
-/// [Aller au Bureau]. No paper, no stamp, no rotation. From here on the career layer (service
-/// number, rank, profile) is visible.
+/// Official assignment to the BEN, once, after case #001 (V4 « Dossier lisible »): an official
+/// letter on paper, laid on the desk. Letterhead « BUREAU DES ENQUÊTES NUMÉRIQUES », « Affectation
+/// officielle », « Bon travail, {Prénom Nom}. Vous êtes affectée au BEN. » (« Dossier classé, … »
+/// if not solved), the cases waiting at the Bureau; the investigator's print stapled to the letter,
+/// name, service number and rank in Plex Mono; the BEN seal and Lacaze's signature. One primary
+/// button on the desk: [Aller au Bureau]. From here on the career layer (service number, rank,
+/// profile) is visible.
 struct AssignmentView: View {
     let identity: PlayerIdentity
     let rank: Rank
@@ -19,19 +20,21 @@ struct AssignmentView: View {
     @Environment(\.accessibilityReduceMotion) private var systemReduceMotion
     @AppStorage(Preferences.reduceMotionKey) private var appReduceMotion = false
 
-    /// The investigator's photo in the card (56 × 70 pt, 4:5).
-    private static let photoWidth: CGFloat = 56
+    /// The investigator's print on the letter (4:5).
+    private static let photoWidth: CGFloat = 84
+    /// The BEN seal, stamped in blue next to the signature.
+    private static let sealWidth: CGFloat = 88
 
     private var still: Bool { systemReduceMotion || appReduceMotion }
 
     var body: some View {
         ScrollView {
-            content
-                .padding(.horizontal, Trace.Spacing.xl)
-                .padding(.top, Trace.Spacing.xxl + Trace.Spacing.s)
+            letter
+                .padding(.horizontal, Trace.Spacing.l)
+                .padding(.top, Trace.Spacing.xxl)
                 .padding(.bottom, Trace.Spacing.xxl)
                 .opacity(shown ? 1 : 0)
-                .offset(y: shown || still ? 0 : Trace.Spacing.s)
+                .offset(y: shown || still ? 0 : Trace.Spacing.xxl)
         }
         .scrollBounceBehavior(.basedOnSize)
         .safeAreaInset(edge: .bottom, spacing: 0) {
@@ -41,99 +44,130 @@ struct AssignmentView: View {
                 .padding(.horizontal, Trace.Spacing.l)
                 .padding(.top, Trace.Spacing.m)
                 .padding(.bottom, Trace.Spacing.s)
-                .background(Trace.Colors.bg.ignoresSafeArea(edges: .bottom))
+                .background(Trace.Colors.bar.ignoresSafeArea(edges: .bottom))
                 .overlay(alignment: .top) { Rectangle().fill(Trace.Colors.line).frame(height: 1) }
         }
-        .background(Trace.Colors.bg.ignoresSafeArea())
+        .background(DeskBackdrop())
         .task {
+            AudioDirector.shared.play(.paper, volume: 0.7)
             withAnimation(still ? .easeInOut(duration: 0.2) : Trace.Motion.paper) { shown = true }
             Haptics.success()
         }
     }
 
-    private var content: some View {
+    // MARK: Letter
+
+    /// The letter: a paper sheet, never tilted; only the stapled print leans (≤ 1.5°).
+    private var letter: some View {
         VStack(alignment: .leading, spacing: Trace.Spacing.xxl) {
+            letterhead
             VStack(alignment: .leading, spacing: Trace.Spacing.m) {
-                SectionHeader(title: L10n.t("assignment.kicker"), color: Trace.Colors.benText)
-                    .padding(.bottom, -Trace.Spacing.xs)
                 Text(title)
-                    .font(Trace.Fonts.title)
-                    .foregroundStyle(Trace.Colors.text)
+                    .font(Trace.Fonts.serifTitle(26))
+                    .foregroundStyle(Trace.Colors.ink)
                     .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityAddTraits(.isHeader)
                 Text(message)
                     .font(Trace.Fonts.body)
-                    .foregroundStyle(Trace.Colors.text2)
+                    .foregroundStyle(Trace.Colors.ink)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            card
+            agent
+            signatures
         }
+        .padding(.horizontal, Trace.Spacing.sheet)
+        .padding(.top, Trace.Spacing.xxl)
+        .padding(.bottom, Trace.Spacing.xl)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .paper(Trace.Colors.paper)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("assignment.view")
     }
 
-    /// The investigator, service number, rank, and the bureau with its signatory.
-    private var card: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            HStack(alignment: .center, spacing: Trace.Spacing.l) {
-                PlayerPrint(identity: identity, width: Self.photoWidth)
-                VStack(alignment: .leading, spacing: Trace.Spacing.xs) {
+    /// « BUREAU DES ENQUÊTES NUMÉRIQUES », a 1.5 pt ink rule, « AFFECTATION OFFICIELLE » in red.
+    private var letterhead: some View {
+        VStack(alignment: .leading, spacing: Trace.Spacing.s) {
+            Text(L10n.t("assignment.bureau"))
+                .font(Trace.Fonts.data)
+                .tracking(1.2)
+                .textCase(.uppercase)
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
+            Rectangle()
+                .fill(Trace.Colors.ink)
+                .frame(height: 1.5)
+                .accessibilityHidden(true)
+            Text(L10n.t("assignment.kicker"))
+                .fieldLabel(Trace.Colors.red)
+                .padding(.top, Trace.Spacing.xs)
+                .accessibilityAddTraits(.isHeader)
+        }
+    }
+
+    /// The investigator's print, stapled, with the name, the title, the service number and the rank.
+    private var agent: some View {
+        HStack(alignment: .top, spacing: Trace.Spacing.l) {
+            PlayerPrint(identity: identity, width: Self.photoWidth, border: 5)
+                .overlay(alignment: .top) { Staple().offset(y: -4) }
+                .tilt(identity.id.fullName)
+                .padding(.top, Trace.Spacing.xs)
+            VStack(alignment: .leading, spacing: Trace.Spacing.m) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(identity.id.fullName)
-                        .font(Trace.Fonts.headline)
-                        .foregroundStyle(Trace.Colors.text)
+                        .font(Trace.Fonts.personName)
+                        .foregroundStyle(Trace.Colors.ink)
                         .fixedSize(horizontal: false, vertical: true)
                     Text(identity.id.title)
-                        .font(Trace.Fonts.caption)
-                        .foregroundStyle(Trace.Colors.text2)
+                        .fieldLabel(Trace.Colors.ink2)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                Spacer(minLength: 0)
+                .accessibilityElement(children: .combine)
+                field(label: L10n.t("assignment.serviceNumber"), value: identity.id.serviceNumber)
+                field(label: L10n.t("profile.rank"), value: rank.title.uppercased())
             }
-            .padding(.bottom, Trace.Spacing.m)
-            .accessibilityElement(children: .combine)
-            divider
-            row(label: L10n.t("assignment.serviceNumber")) {
-                Text(identity.id.serviceNumber)
-                    .font(Trace.Fonts.data)
-                    .foregroundStyle(Trace.Colors.benText)
-            }
-            divider
-            row(label: L10n.t("profile.rank")) {
-                StatusBadge(text: rank.title, color: Trace.Colors.benText, symbol: "●")
-            }
-            divider
-            VStack(alignment: .leading, spacing: Trace.Spacing.xs) {
-                Text(L10n.t("assignment.bureau"))
-                    .font(Trace.Fonts.callout)
-                    .foregroundStyle(Trace.Colors.text)
-                    .fixedSize(horizontal: false, vertical: true)
-                Text(L10n.t("assignment.signatory"))
-                    .font(Trace.Fonts.caption)
-                    .foregroundStyle(Trace.Colors.text2)
-            }
-            .padding(.top, Trace.Spacing.m)
-            .accessibilityElement(children: .combine)
+            Spacer(minLength: 0)
         }
-        .padding(Trace.Spacing.l)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .benCard()
     }
 
-    private var divider: some View {
-        Rectangle().fill(Trace.Colors.line).frame(height: 1)
-    }
-
-    /// Label (section style) on the left, value on the right; 50 pt rows.
-    private func row<Value: View>(label: String, @ViewBuilder value: () -> Value) -> some View {
-        HStack(alignment: .center, spacing: Trace.Spacing.m) {
-            Text(label).fieldLabel()
-            Spacer(minLength: Trace.Spacing.s)
-            value()
+    /// LABEL over a Plex Mono value.
+    private func field(label: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(label).fieldLabel(Trace.Colors.ink2)
+            Text(value)
+                .font(Trace.Fonts.data)
+                .foregroundStyle(Trace.Colors.ink)
+                .fixedSize(horizontal: false, vertical: true)
         }
-        .frame(minHeight: Trace.Height.row)
         .accessibilityElement(children: .combine)
+    }
+
+    /// A dashed rule, then the BEN seal (blue, multiply) and Lacaze's visa; stacked when they do not
+    /// fit side by side.
+    private var signatures: some View {
+        VStack(alignment: .leading, spacing: Trace.Spacing.l) {
+            Rectangle()
+                .fill(Trace.Colors.ink2.opacity(0.25))
+                .frame(height: 1)
+                .accessibilityHidden(true)
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .center, spacing: Trace.Spacing.l) {
+                    seal
+                    Spacer(minLength: Trace.Spacing.l)
+                    ClosingVisa()
+                }
+                VStack(alignment: .leading, spacing: Trace.Spacing.l) {
+                    seal
+                    ClosingVisa(alignment: .leading)
+                }
+            }
+        }
+    }
+
+    private var seal: some View {
+        StampImage(asset: "seal_ben_bleu", label: L10n.t("assignment.bureau"), width: Self.sealWidth,
+                   onPaper: true, angle: -8, color: Trace.Colors.pen)
+            .padding(Trace.Spacing.xs)
     }
 
     /// « Bon travail, Élise Morel. Vous êtes affectée au BEN. »
